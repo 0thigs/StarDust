@@ -8,8 +8,8 @@ export const Container = styled.KeyboardAvoidingView`
   align-items: center;
 `
 export const Header = styled.View`
-  width: 300px;
-  height: 88px;
+  width: 350px; //Largura Padão
+  height: auto;
   justify-content: space-between;
   margin: 30px;
 `
@@ -25,12 +25,13 @@ export const ImageLoad = styled.Image`
   height: 31px;
   width: 31px;
   margin-right: 10px;
+  margin-bottom: 5px;
 `
 
 export const HeaderTitle = styled.Text`
   font-size: 30px;
-  font-weight: bold;
   color: ${(props) => props.theme.colors.green};
+  font-family: ${(props) => props.theme.fonts.bold};
 `
 
 export const Subtitle = styled.Text`
@@ -40,7 +41,7 @@ export const Subtitle = styled.Text`
 `
 
 export const Form = styled.View`
-  width: 300px;
+  width: 350px;
   height: 116px;
   background-color: #fff;
 `

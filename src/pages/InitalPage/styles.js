@@ -13,7 +13,6 @@ export const Title = styled(Animatable.Text)`
   color: #20925D;
   font-size: 60px;
   font-weight: bold;
-  //font-family: ${({theme}) => theme.fonts.medium};
 `;
 
 export const TitleSpan = styled.Text`
