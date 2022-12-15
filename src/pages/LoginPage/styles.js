@@ -49,7 +49,7 @@ export const Subtitle = styled.Text`
 export const Form = styled.View`
   width: 350px;
   height: auto;
-  margin: 20px;
+  margin: 50px;
 `;
 
 export const Form_Email_Container = styled.View`
@@ -116,17 +116,9 @@ export const Form_Input_Password_Container = styled.View`
 
 export const Submit = styled.View`
   width: 350px;
-  height: 120px;
+  height: 150px;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const ForgotPassword = styled.TouchableOpacity``;
-
-export const ForgotPasswordText = styled.Text`
-  font-size: 13px;
-  font-family: ${(props) => props.theme.fonts.semibold};
-  color: ${(props) => props.theme.colors.gray};
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -142,6 +134,20 @@ export const ButtonText = styled.Text`
   font-size: 20px;
   font-family: ${(props) => props.theme.fonts.bold};
   color: ${(props) => props.theme.colors.darkGreen};
+`;
+
+export const ForgotSignUpCont = styled.View`
+height: 50px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ForgotPassword = styled.TouchableOpacity``;
+
+export const ForgotPasswordText = styled.Text`
+  font-size: 13px;
+  font-family: ${(props) => props.theme.fonts.semibold};
+  color: ${(props) => props.theme.colors.gray};
 `;
 
 export const SignUp = styled.TouchableOpacity``;

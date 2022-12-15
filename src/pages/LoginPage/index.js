@@ -23,7 +23,8 @@ import {
   ButtonText,
   SignUp,
   SignUpText,
-  Span
+  Span,
+  ForgotSignUpCont
 } from "./styles";
 
 const LoginPage = () => {
@@ -77,15 +78,17 @@ const LoginPage = () => {
         </Form_Password_Container>
       </Form>
       <Submit>
-        <ForgotPassword>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
         <Button>
           <ButtonText>ENTRAR</ButtonText>
         </Button>
-        <SignUp>
-          <SignUpText>Não tem uma conta? <Span>Registre-se</Span></SignUpText>
-        </SignUp>
+        <ForgotSignUpCont>
+          <ForgotPassword>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+          </ForgotPassword>
+          <SignUp>
+            <SignUpText>Registre-se</SignUpText>
+          </SignUp>
+        </ForgotSignUpCont>
       </Submit>
     </Container>
   );
