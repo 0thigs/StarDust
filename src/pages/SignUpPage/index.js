@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import * as Icon from "react-native-feather";
-import { useNavigation } from "@react-navigation/native";
 import {
   Container,
   Header,
@@ -25,12 +24,11 @@ import {
   SignUp,
   SignUpText,
   Span,
-  ForgotSignUpCont
+  ForgotSignUpCont,
 } from "./styles";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const navigation = useNavigation();
 
   const toggleSecureTextEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -43,9 +41,9 @@ const LoginPage = () => {
           <ImageLoad
             source={require("../../assets/LoginPageAssets/SignIn.png")}
           />
-          <HeaderTitle animation={"fadeInRight"} duration={1500}>Faça seu Login</HeaderTitle>
+          <HeaderTitle animation={"fadeInRight"} duration={1500}>Faça seu Cadastro</HeaderTitle>
         </HeaderAdjust>
-        <Subtitle>Entre com suas informações de cadastro</Subtitle>
+        <Subtitle>Insira suas credenciais para cadastrar</Subtitle>
       </Header>
       <Form>
         <Form_Email_Container>
@@ -87,7 +85,7 @@ const LoginPage = () => {
           <ForgotPassword>  
             <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
           </ForgotPassword>
-          <SignUp onPress={() => navigation.navigate("SignUpPage")}>
+          <SignUp>
             <SignUpText>Registre-se</SignUpText>
           </SignUp>
         </ForgotSignUpCont>
@@ -96,4 +94,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
