@@ -1,32 +1,10 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { StackRoutes } from "./stack.routes";
 
-//------Pages------
-import InitalPage from "../pages/InitalPage/index";
-import LoginPage from "../pages/LoginPage/index";
-import SignUpPage from "../pages/SignUpPage/index";
-
-const Stack = createNativeStackNavigator();
-
-export default function Routes() {
+export function Routes() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="InitialPage"
-        component={InitalPage}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="LoginPage"
-        component={LoginPage}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="SignUpPage"
-        component={SignUpPage}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <StackRoutes />
+    </NavigationContainer>
   );
 }
