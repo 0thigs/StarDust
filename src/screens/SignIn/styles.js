@@ -1,16 +1,16 @@
+import { Children } from 'react';
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
+import { css } from 'styled-components';
 
-//LARGURA PADRAO DO CONTAINER: 350px
+export const Container = styled.TouchableWithoutFeedback``;
 
-export const Container = styled.KeyboardAvoidingView`
+export const Content = styled.View`
   flex: 1;
   background-color: ${props => props.theme.colors.background};
   justify-content: center;
   padding: 0 40px;
 `;
-
-//----------HEADER----------
 
 export const Header = styled.View`
   justify-content: space-between;
@@ -20,7 +20,7 @@ export const Heading = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 `;
 
 export const HeaderTitle = styled(Animatable.Text)`
@@ -36,19 +36,16 @@ export const HeaderSubtitle = styled.Text`
   font-family: ${props => props.theme.fonts.regular};
 `;
 
-//----------FORM----------
-
 export const Form = styled.View`
   width: 100%;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
-
-//----------SUBMIT----------
 
 export const SubmitButton = styled.TouchableOpacity`
   width: 100%;
   height: 50px;
-  margin-top: 28px;
+  margin-top: 18px;
 
   justify-content: center;
   align-items: center;
@@ -64,9 +61,10 @@ export const SubmitButtonText = styled.Text`
 
 export const AccountButtons = styled.View`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 18px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props =>
+    Children.toArray(props.children).length < 2 ? 'center' : 'space-between'};
 `;
 
 export const AccountButton = styled.TouchableOpacity`

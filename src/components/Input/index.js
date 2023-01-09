@@ -20,29 +20,32 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
   };
 
   return (
-    <C.Container>
+    <C.Container animation={'fadeInLeft'} duration={1000}>
       <C.Label>{label}</C.Label>
-      {type === 'password' ? (
-        <C.FormControl
-          style={{
-            borderColor: error
-              ? theme.colors.red_700
-              : isFocus
-              ? theme.colors.green_300
-              : theme.colors.gray_700,
-          }}
+      <C.FormControl
+        style={{
+          borderColor: error
+            ? theme.colors.red_700
+            : isFocus
+            ? theme.colors.green_300
+            : theme.colors.gray_700,
+        }}
+        error={error}
+      >
+        {icon}
+        <C.Input
+          placeholder={placeholder}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          value={value}
+          onChangeText={onChangeText}
+          keyboardType={type}
+          autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
+          secureTextEntry={secureTextEntry}
           error={error}
-        >
-          {icon}
-          <C.Input
-            placeholder={placeholder}
-            secureTextEntry={secureTextEntry}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            value={value}
-            onChangeText={onChangeText}
-          />
-          {secureTextEntry ? (
+        />
+        {type === 'password' ? (
+          secureTextEntry ? (
             <Icon.Eye
               color={theme.colors.green_300}
               style={{ marginHorizontal: 10 }}
@@ -54,30 +57,11 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
               style={{ marginHorizontal: 10 }}
               onPress={toggleSecureTextEntry}
             />
-          )}
-        </C.FormControl>
-      ) : (
-        <C.FormControl
-          style={{
-            borderColor: error
-              ? theme.colors.red_700
-              : isFocus
-              ? theme.colors.green_300
-              : theme.colors.gray_700,
-          }}
-        >
-          {icon}
-          <C.Input
-            placeholder={placeholder}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            value={value}
-            onChangeText={onChangeText}
-            error={error}
-          />
+          )
+        ) : (
           <C.Right />
-        </C.FormControl>
-      )}
+        )}
+      </C.FormControl>
     </C.Container>
   );
 }

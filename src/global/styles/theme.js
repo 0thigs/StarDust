@@ -14,7 +14,7 @@ export default {
     gray_700: '#868686',
     gray_500: '#AFB6C2',
 
-    red_700: '#F02323',
+    red_700: '#FF3737',
 
     purple_700: '#514869',
 
