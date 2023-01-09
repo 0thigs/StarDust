@@ -12,7 +12,7 @@ import SignInIcon from '../../assets/SignInAssets/signin.svg';
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
 import { Keyboard } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 
 const schema = yup.object({
@@ -41,6 +41,7 @@ export function SignIn() {
   const navigation = useNavigation();
 
   const [isSignUpForm, setIsSignUpForm] = useState(false);
+  const [isShowHeader, setIsShowHeader] = useState(true);
 
   function handleSignUpForm() {
     setIsSignUpForm(true);
@@ -54,15 +55,32 @@ export function SignIn() {
     console.log(data);
   }
 
+  function hideHeader() {
+    setIsShowHeader(true);
+  }
+
+  function showHeader() {
+    setIsShowHeader(false);
+  }
+
+  useEffect(() => {
+    KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', hideHeader);
+    KeyboardDidShowListener = Keyboard.addListener('keyboardDidHide', showHeader);
+  }, []);
+
   return (
     <C.Container onPress={Keyboard.dismiss}>
       <C.Content bevavior={'position'} enabled>
         <C.Header>
           <C.Heading>
             <SignInIcon />
-            <C.HeaderTitle>Faça seu Login</C.HeaderTitle>
+            <C.HeaderTitle>Faça seu {isSignUpForm ? 'cadastro' : 'login'}</C.HeaderTitle>
           </C.Heading>
-          <C.HeaderSubtitle>Entre com suas informações de cadastro</C.HeaderSubtitle>
+          <C.HeaderSubtitle>
+            {isSignUpForm
+              ? 'Insira suas credenciais para cadastrar'
+              : 'Entre com suas informações de cadastro'}
+          </C.HeaderSubtitle>
         </C.Header>
         <C.Form>
           {isSignUpForm && (
