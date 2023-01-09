@@ -1,7 +1,7 @@
 import * as C from './styles.js';
 
-import CoinIcon from '../../assets/coin.svg';
-import HeartIcon from '../../assets/heart.svg';
+import CoinIcon from '../../assets/GlobalAssets/coin.svg';
+import HeartIcon from '../../assets/GlobalAssets/heart.svg';
 
 export function HeaderStatus() {
   return (

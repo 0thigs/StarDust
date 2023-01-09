@@ -1,9 +1,9 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CustomDrawer } from '../components/CustomDrawer';
+import { TabRoutes } from './tabs.routes';
 
 const Drawer = createDrawerNavigator();
 
-import { TabRoutes } from './tab.routes';
 
 export function DrawerRoutes() {
   return (

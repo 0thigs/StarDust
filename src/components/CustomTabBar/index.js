@@ -1,8 +1,8 @@
 import * as C from './styles';
 
-import HomeIcon from '../../assets/home-tab-icon';
-import ShopIcon from '../../assets/shop-tab-icon';
-import ProfileIcon from '../../assets/profile-tab-icon';
+import HomeIcon from '../../assets/TabAssets/home-tab-icon.svg';
+import ShopIcon from '../../assets/TabAssets/shop-tab-icon.svg';
+import ProfileIcon from '../../assets/TabAssets/profile-tab-icon.svg';
 
 export function CustomTabBar({ state, navigation }) {
   function goTo(screenName) {

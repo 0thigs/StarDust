@@ -32,9 +32,7 @@ export function TabRoutes({ navigation }) {
         headerRight: () => <HeaderStatus />,
       }}
     >
-      <Tab.Screen name="Home" component={Home} options={{
-        tabBarLabel: "Aprender"
-      }} />
+      <Tab.Screen name="Home" component={Home} />
       {/* <Tab.Screen name="Shop" component={Shop} />
       <Tab.Screen name="Profile" component={Profile} /> */}
     </Tab.Navigator>
