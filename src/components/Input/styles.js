@@ -14,6 +14,7 @@ export const FormControl = styled.View`
   align-items: center;
   justify-content: space-between;
   border: solid 1px ${props => props.theme.colors.gray_700};
+
   padding: 8px 12px;
   border-radius: 4px;
   margin-top: 12px;
@@ -31,5 +32,5 @@ export const Input = styled.TextInput.attrs(props => ({
 `;
 
 export const Right = styled.View`
-    width: 45px;
+  width: 45px;
 `;
