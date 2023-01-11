@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import * as Animatable from 'react-native-animatable'
+import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,32 +10,28 @@ export const Container = styled.View`
 `;
 
 export const Title = styled(Animatable.Text)`
-  color: #20925D;
+  color: #20925d;
   font-size: 60px;
   font-weight: bold;
 `;
 
 export const TitleSpan = styled.Text`
-  color: #00FF88;
+  color: #00ff88;
 `;
 
-export const Subtitle = styled.Text`
-  color: #C3C7BB;
-`
+export const Subtitle = styled(Animatable.Text)`
+  color: #c3c7bb;
+`;
 
-export const Button = styled.TouchableOpacity`
-  width: 45px;
-  height: 40px;
-  background-color: #00FF88;
-  border-radius: 100px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-`
+export const ButtonContainer = styled(Animatable.View)`
+
+`;
+
+export const PlayButton = styled.TouchableOpacity``;
 export const Image = styled.Image`
   justify-content: center;
   align-items: center;
   width: 15px;
   height: 15px;
   margin-left: 3px;
-`
+`;

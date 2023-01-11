@@ -55,6 +55,7 @@ export function SignIn() {
 
   const [isSignUpForm, setIsSignUpForm] = useState(false);
   const [isToShowHeader, setIsToShowHeader] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { signUp, signIn, user } = useAuth();
 
@@ -75,26 +76,37 @@ export function SignIn() {
   }
 
   async function HandleSignIn(data) {
+    setIsLoading(true);
     const response = await signIn(data);
     if (response === 'Invalid login credentials') {
-        Toast.error('Usuário não encontrado');
-        return;
-      }
-  }
-
-  async function HandleSignUp(data) {
-    const response = await signUp(data);
-    console.log(response);
-    if (response === 'User already registered') {
-      Toast.error('Usuário já cadastrado');
+      Toast.error('Usuário não encontrado');
+      setIsLoading(false);
       return;
     }
 
-    // if (user?.id) {
-    //   navigation.reset({
-    //     routes: [{ name: 'DrawerRoutes' }],
-    //   });
-    // }
+    if (user?.id) {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }
+
+    alert("ok")
+  }
+
+  async function HandleSignUp(data) {
+    setIsLoading(true);
+    const response = await signUp(data);
+    if (response === 'User already registered') {
+      Toast.error('Usuário já cadastrado');
+      setIsLoading(false);
+      return;
+    }
+
+    if (user?.id) {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }
   }
 
   useEffect(() => {
@@ -232,6 +244,7 @@ export function SignIn() {
         <Button
           onPress={isSignUpForm ? handleSubmit(HandleSignUp) : handleSubmit(HandleSignIn)}
           title={isSignUpForm ? 'Cadastrar' : 'Entrar'}
+          isLoading={isLoading}
         />
 
         {isSignUpForm ? (

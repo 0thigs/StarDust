@@ -11,6 +11,8 @@ export const Container = styled.TouchableOpacity`
   background-color: ${props => props.theme.colors.green_300};
 `;
 
+export const Loader = styled.ActivityIndicator``;
+
 export const Title = styled.Text`
   font-size: 18px;
   font-family: ${props => props.theme.fonts.bold};
