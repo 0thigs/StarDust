@@ -1,22 +1,32 @@
+import { useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
 import * as C from './styles';
 
 import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
+
+import SignInIcon from '../../assets/SignInAssets/signin.svg';
+import theme from '../../global/styles/theme';
+
+import { useAuth } from '../../hooks/useAuth';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import SignInIcon from '../../assets/SignInAssets/signin.svg';
-import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
-import { Keyboard } from 'react-native';
-import { useEffect, useState } from 'react';
-import { Button } from '../../components/Button';
 
-const schema = yup.object({
-  username: yup
+const SingnInSchema = yup.object({
+  email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
+  password: yup
+    .string()
+    .min(6, 'senha deve ter pelo menos 6 dígitos!')
+    .required('Senha não pode estar vazia!'),
+});
+
+const SingnUpSchema = yup.object({
+  name: yup
     .string()
     .min(2, 'Nome de usuário deve ter pelo menos 2 dígitos!')
     .required('Nome de usuário não pode estar vazio!'),
@@ -35,13 +45,16 @@ export function SignIn() {
   const {
     control,
     handleSubmit,
+    resetField,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(isSignUpForm ? SingnUpSchema : SingnInSchema) });
 
   const navigation = useNavigation();
 
   const [isSignUpForm, setIsSignUpForm] = useState(false);
   const [isShowHeader, setIsShowHeader] = useState(true);
+
+  const { signUp, signIn, user } = useAuth();
 
   function handleSignUpForm() {
     setIsSignUpForm(true);
@@ -51,60 +64,79 @@ export function SignIn() {
     setIsSignUpForm(false);
   }
 
-  function handleSignIn(data) {
-    console.log(data);
-  }
-
   function hideHeader() {
-    setIsShowHeader(true);
-  }
-
-  function showHeader() {
     setIsShowHeader(false);
   }
 
+  function showHeader() {
+    setIsShowHeader(true);
+  }
+
+  function test(data) {
+    console.log(data);
+  }
+
   useEffect(() => {
-    KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', hideHeader);
-    KeyboardDidShowListener = Keyboard.addListener('keyboardDidHide', showHeader);
+    Keyboard.addListener('keyboardDidShow', hideHeader);
+    Keyboard.addListener('keyboardDidHide', showHeader);
   }, []);
+
+  useEffect(() => {
+    resetField('name');
+    resetField('email');
+    resetField('password');
+    resetField('passwordConfirm');
+  }, [isSignUpForm]);
+
+  useEffect(() => {
+    // if (user?.id) {
+    //   navigation.reset({
+    //     routes: [{ name: 'DrawerRoutes' }],
+    //   });
+    // }
+  }, [user]);
 
   return (
     <C.Container onPress={Keyboard.dismiss}>
       <C.Content bevavior={'position'} enabled>
-        <C.Header>
-          <C.Heading>
-            <SignInIcon />
-            <C.HeaderTitle>Faça seu {isSignUpForm ? 'cadastro' : 'login'}</C.HeaderTitle>
-          </C.Heading>
-          <C.HeaderSubtitle>
-            {isSignUpForm
-              ? 'Insira suas credenciais para cadastrar'
-              : 'Entre com suas informações de cadastro'}
-          </C.HeaderSubtitle>
-        </C.Header>
+        {isShowHeader ? (
+          <C.Header>
+            <C.Heading>
+              <SignInIcon />
+              <C.HeaderTitle>Faça seu {isSignUpForm ? 'cadastro' : 'login'}</C.HeaderTitle>
+            </C.Heading>
+            <C.HeaderSubtitle>
+              {isSignUpForm
+                ? 'Insira suas credenciais para cadastrar'
+                : 'Entre com suas informações de cadastro'}
+            </C.HeaderSubtitle>
+          </C.Header>
+        ) : (
+          <C.Top />
+        )}
         <C.Form>
           {isSignUpForm && (
             <>
               <Controller
                 control={control}
-                name="username"
+                name="name"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     label={'Nome de usuário'}
                     placeholder={'Digite seu nome de usuário'}
                     icon={
                       <Icon.User
-                        color={errors.username ? theme.colors.red_700 : theme.colors.green_300}
+                        color={errors.name ? theme.colors.red_700 : theme.colors.green_300}
                       />
                     }
                     type={'text'}
                     value={value}
                     onChangeText={onChange}
-                    error={errors.username}
+                    error={errors.name}
                   />
                 )}
               />
-              {errors.username && <C.ErrorMessage>{errors.username?.message}</C.ErrorMessage>}
+              {errors.name && <C.ErrorMessage>{errors.name?.message}</C.ErrorMessage>}
             </>
           )}
 
@@ -130,7 +162,7 @@ export function SignIn() {
           <Controller
             control={control}
             name="password"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label={'Senha'}
                 placeholder={'Digite sua senha'}
@@ -139,6 +171,7 @@ export function SignIn() {
                     color={errors.password ? theme.colors.red_700 : theme.colors.green_300}
                   />
                 }
+                value={value}
                 type={'password'}
                 onChangeText={onChange}
                 error={errors.password}
@@ -152,7 +185,7 @@ export function SignIn() {
               <Controller
                 control={control}
                 name="passwordConfirm"
-                render={({ field: { onChange } }) => (
+                render={({ field: { onChange, value } }) => (
                   <Input
                     label={'Confirmar senha'}
                     placeholder={'Digite sua senha novamente'}
@@ -163,6 +196,7 @@ export function SignIn() {
                         }
                       />
                     }
+                    value={value}
                     type={'password'}
                     onChangeText={onChange}
                     error={errors.passwordConfirm}
@@ -175,7 +209,10 @@ export function SignIn() {
             </>
           )}
         </C.Form>
-        <Button onPress={handleSubmit(handleSignIn)} title={'Entrar'} />
+        <Button
+          onPress={isSignUpForm ? handleSubmit(signUp) : handleSubmit(signIn)}
+          title={isSignUpForm ? 'Cadastrar' : 'Entrar'}
+        />
 
         {isSignUpForm ? (
           <C.AccountButtons>

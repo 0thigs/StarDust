@@ -4,7 +4,6 @@ import { TabRoutes } from './tabs.routes';
 
 const Drawer = createDrawerNavigator();
 
-
 export function DrawerRoutes() {
   return (
     <Drawer.Navigator

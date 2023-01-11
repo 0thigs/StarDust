@@ -1,9 +1,10 @@
 import { Children } from 'react';
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
-import { css } from 'styled-components';
 
-export const Container = styled.TouchableWithoutFeedback``;
+export const Container = styled.TouchableWithoutFeedback`
+
+`;
 
 export const Content = styled.View`
   flex: 1;
@@ -34,6 +35,11 @@ export const HeaderSubtitle = styled.Text`
   font-size: 18px;
   color: #fff;
   font-family: ${props => props.theme.fonts.regular};
+`;
+
+export const Top = styled.View`
+  width: 100%;
+  height: 75px;
 `;
 
 export const Form = styled.View`

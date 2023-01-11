@@ -6,6 +6,7 @@ import theme from '../../global/styles/theme';
 export function Input({ label, placeholder, icon = null, type, value, onChangeText, error }) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
   const toggleSecureTextEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -17,16 +18,19 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
 
   const handleInputBlur = () => {
     setIsFocus(false);
+    setIsFilled(!!value);
   };
 
   return (
     <C.Container animation={'fadeInLeft'} duration={1000}>
-      <C.Label>{label}</C.Label>
+      <C.Label style={{ color: error ? theme.colors.red_700 : theme.colors.green_300 }}>
+        {label}
+      </C.Label>
       <C.FormControl
         style={{
           borderColor: error
             ? theme.colors.red_700
-            : isFocus
+            : isFocus || isFilled
             ? theme.colors.green_300
             : theme.colors.gray_700,
         }}
@@ -41,19 +45,19 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
           onChangeText={onChangeText}
           keyboardType={type}
           autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
-          secureTextEntry={secureTextEntry}
+          secureTextEntry={type === 'password' && secureTextEntry}
           error={error}
         />
         {type === 'password' ? (
           secureTextEntry ? (
             <Icon.Eye
-              color={theme.colors.green_300}
+              color={error ? theme.colors.red_700 : theme.colors.green_300}
               style={{ marginHorizontal: 10 }}
               onPress={toggleSecureTextEntry}
             />
           ) : (
             <Icon.EyeOff
-              color={theme.colors.green_300}
+              color={error ? theme.colors.red_700 : theme.colors.green_300}
               style={{ marginHorizontal: 10 }}
               onPress={toggleSecureTextEntry}
             />

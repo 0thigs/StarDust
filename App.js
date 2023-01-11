@@ -10,6 +10,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import { AuthContextProvider } from './src/contexts/AuthContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,8 +22,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style={'light'} backgroundColor={'transparent'} />
-      {fontsLoaded && <Routes />}
+      <AuthContextProvider>
+        <StatusBar style={'light'} backgroundColor={'transparent'} />
+        {fontsLoaded && <Routes />}
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

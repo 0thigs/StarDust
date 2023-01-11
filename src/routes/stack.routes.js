@@ -14,8 +14,8 @@ export function StackRoutes() {
       }}
     >
       <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       {/* <Stack.Screen name="Splash" component={Splash} /> */}
-      {/* <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} /> */}
     </Stack.Navigator>
   );
 }
