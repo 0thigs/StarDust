@@ -16,16 +16,14 @@ export function AuthContextProvider({ children }) {
       email,
       password,
     });
-
     if (error) {
-      console.log(error);
-      return;
+      return error.message;
     }
 
-    const newUser = { id: user.id, email, name, password };
+    const newUser = { id: user.id, email, name };
     setUser(newUser);
-    console.log(newUser);
-    api.addUser(newUser);
+    const response = api.addUser(newUser);
+    return response;
   }
 
   async function signIn({ email, password }) {
@@ -35,11 +33,10 @@ export function AuthContextProvider({ children }) {
     });
 
     if (error) {
-      console.log(error);
-      return;
+      return error.message;
     }
 
-    console.log(data);
+    return data;
   }
 
   return <AuthContext.Provider value={{ signUp, signIn, user }}>{children}</AuthContext.Provider>;

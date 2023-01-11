@@ -17,6 +17,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import * as Icon from 'react-native-feather';
 
+import ToastMenager, { Toast } from 'toastify-react-native';
+
 const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
   password: yup
@@ -52,7 +54,7 @@ export function SignIn() {
   const navigation = useNavigation();
 
   const [isSignUpForm, setIsSignUpForm] = useState(false);
-  const [isShowHeader, setIsShowHeader] = useState(true);
+  const [isToShowHeader, setIsToShowHeader] = useState(true);
 
   const { signUp, signIn, user } = useAuth();
 
@@ -65,15 +67,34 @@ export function SignIn() {
   }
 
   function hideHeader() {
-    setIsShowHeader(false);
+    setIsToShowHeader(false);
   }
 
   function showHeader() {
-    setIsShowHeader(true);
+    setIsToShowHeader(true);
   }
 
-  function test(data) {
-    console.log(data);
+  async function HandleSignIn(data) {
+    const response = await signIn(data);
+    if (response === 'Invalid login credentials') {
+        Toast.error('Usuário não encontrado');
+        return;
+      }
+  }
+
+  async function HandleSignUp(data) {
+    const response = await signUp(data);
+    console.log(response);
+    if (response === 'User already registered') {
+      Toast.error('Usuário já cadastrado');
+      return;
+    }
+
+    // if (user?.id) {
+    //   navigation.reset({
+    //     routes: [{ name: 'DrawerRoutes' }],
+    //   });
+    // }
   }
 
   useEffect(() => {
@@ -88,18 +109,17 @@ export function SignIn() {
     resetField('passwordConfirm');
   }, [isSignUpForm]);
 
-  useEffect(() => {
-    // if (user?.id) {
-    //   navigation.reset({
-    //     routes: [{ name: 'DrawerRoutes' }],
-    //   });
-    // }
-  }, [user]);
-
   return (
     <C.Container onPress={Keyboard.dismiss}>
       <C.Content bevavior={'position'} enabled>
-        {isShowHeader ? (
+        <ToastMenager
+          animationInTiming={700}
+          animationOutTiming={1000}
+          animationStyle={'rightInOut'}
+          width={300}
+          position="top"
+        />
+        {isToShowHeader ? (
           <C.Header>
             <C.Heading>
               <SignInIcon />
@@ -210,7 +230,7 @@ export function SignIn() {
           )}
         </C.Form>
         <Button
-          onPress={isSignUpForm ? handleSubmit(signUp) : handleSubmit(signIn)}
+          onPress={isSignUpForm ? handleSubmit(HandleSignUp) : handleSubmit(HandleSignIn)}
           title={isSignUpForm ? 'Cadastrar' : 'Entrar'}
         />
 
