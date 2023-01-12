@@ -41,7 +41,6 @@ export function AuthContextProvider({ children }) {
       return error.message;
     }
 
-    console.log(user);
     const currentUser = await api.getUser(user.id);
     setUser(currentUser)
     // return data;

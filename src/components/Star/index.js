@@ -10,7 +10,7 @@ export function Star({ name, number, isDisabled }) {
   return (
     <C.Container>
       <C.StarDust>{isDisabled ? <DisabledStarDust /> : <EnabledStarDust />}</C.StarDust>
-      <C.StarButton isDisabled={isDisabled}>
+      <C.StarButton disabled={isDisabled}>
         {isDisabled ? <DisabledStar /> : <EnabledStar />}
         <C.StarNumber isDisabled={isDisabled}>{number}</C.StarNumber>
         <C.StarSign isDisabled={isDisabled}>

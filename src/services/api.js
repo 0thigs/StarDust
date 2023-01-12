@@ -12,7 +12,7 @@ export default {
   getUser: async userId => {
     const { data, error, status } = await supabase
       .from('users')
-      .select('name, email, unlocked_stars_ids')
+      .select('name, email, unlockedStarsIds, coins, lives')
       .eq('id', userId)
       .limit(1);
     if (error) {

@@ -35,7 +35,7 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
         data={currentPlanetStars}
         keyExtractor={star => star.id}
         renderItem={({ item }) => (
-          <Star name={item.title} number={item.number} isDisabled={false} />
+          <Star name={item.title} number={item.number} isDisabled={!item.isUnlocked} />
         )}
       />
     </C.Container>

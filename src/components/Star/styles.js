@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const StarDust = styled.View`
   width: 100%;
-  padding-left: 40px;
+  padding-left: 42px;
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
 `;
 
