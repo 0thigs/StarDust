@@ -1,5 +1,8 @@
 import styled from 'styled-components/native';
 
+export const Container = styled.View``;
+
+
 export const Background = styled.View`
   position: absolute;
   top: 0;
@@ -8,7 +11,7 @@ export const Background = styled.View`
   bottom: 0;
 `;
 
-export const Container = styled.ScrollView.attrs({
+export const PlanetsList = styled.FlatList.attrs({
     contentContainerStyle: {
     paddingTop: 32,
     alignItems: 'center',

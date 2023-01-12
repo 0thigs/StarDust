@@ -2,9 +2,7 @@ import { Children } from 'react';
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
 
-export const Container = styled.TouchableWithoutFeedback`
-
-`;
+export const Container = styled.TouchableWithoutFeedback``;
 
 export const Content = styled.View`
   flex: 1;

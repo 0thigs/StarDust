@@ -84,13 +84,9 @@ export function SignIn() {
       return;
     }
 
-    if (user?.id) {
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
-    }
-
-    alert("ok")
+    navigation.reset({
+      routes: [{ name: 'DrawerRoutes' }],
+    });
   }
 
   async function HandleSignUp(data) {
@@ -102,11 +98,9 @@ export function SignIn() {
       return;
     }
 
-    if (user?.id) {
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
-    }
+    navigation.reset({
+      routes: [{ name: 'DrawerRoutes' }],
+    });
   }
 
   useEffect(() => {

@@ -1,14 +1,36 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { Toast } from 'toastify-react-native';
+import { useAuth } from '../../hooks/useAuth';
+import { supabase } from '../../services/supabase';
 import { Achievement } from '../Achievement';
 import * as C from './styles';
+import { useNavigation } from '@react-navigation/native';
+import api from '../../services/api';
+
+import { userId } from '../../contexts/AuthContext';
 
 export function CustomDrawer() {
+  const { signOut, user } = useAuth();
+  const navigation = useNavigation();
+
+  async function handleSignOut() {
+    const response = await signOut();
+    if (response?.error) {
+      Toast.error('Falha ao tentar sair da conta');
+      return;
+    }
+
+    navigation.reset({
+      routes: [{ name: 'SignIn' }],
+    });
+  }
+
   return (
     <C.Container>
       <C.UserAvatar source={{ uri: 'https://github.com/JohnPetros.png' }} />
-      <C.UserName>João Pedro Carvalho</C.UserName>
-      <C.UserEmail>JohnPetros@gmail.com</C.UserEmail>
-      <C.LogOutButton>
+      <C.UserName>{user.name}</C.UserName>
+      <C.UserEmail>{user.email}</C.UserEmail>
+      <C.LogOutButton onPress={handleSignOut}>
         <C.LogOutButtonText>Sair</C.LogOutButtonText>
       </C.LogOutButton>
 
@@ -47,7 +69,7 @@ export function CustomDrawer() {
         id={4}
         isGotten={false}
       />
-       <Achievement
+      <Achievement
         title={'Caçador de estrelas'}
         description={'Complete 20 fases'}
         goal={20}

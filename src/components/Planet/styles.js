@@ -22,14 +22,15 @@ export const PlanetSign = styled.View`
   height: 64px;
 `;
 
-export const PlanetName = styled.Text`
+export const PlanetTitle = styled.Text`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 14px;
   margin-left: 4px;
 `;
 
-export const StarDust = styled.View`
-  width: 100%;
-  padding-left: 40px;
+export const StarsList = styled.FlatList`
+ 
 `;
+
+
