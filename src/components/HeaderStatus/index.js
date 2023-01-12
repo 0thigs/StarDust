@@ -10,9 +10,9 @@ const { signOut, user } = useAuth();
   return (
     <C.Container>
         <CoinIcon />
-        <C.CoinsCount>20</C.CoinsCount>
+        <C.CoinsCount>{user.coins}</C.CoinsCount>
         <HeartIcon />
-        <C.HeartsCount>5</C.HeartsCount>
+        <C.HeartsCount>{user.lives}</C.HeartsCount>
     </C.Container>
   );
 }
