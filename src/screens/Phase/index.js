@@ -6,6 +6,10 @@ import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 import Rocket from '../../assets/GlobalAssets/rocket.png';
 import { Button } from '../../components/Button';
 
+function handlePracticeButton() {
+
+}
+
 export function Phase() {
   return (
     <C.Container>
@@ -56,8 +60,24 @@ export function Phase() {
               uma cadeia de outras ações menores que nos levaram até uma atitude final.
             </C.ExempleText>
           </C.ExampleTextContainer>
+          <C.TextContainer>
+            <AlertIcon />
+            <C.AlertText>
+              Não estamos acostumados a pensar desta maneira sobre nossas atividades cotidianas,
+              mas, quando falamos de programação, estipular uma sequência de etapas é um
+              procedimento muito importante e necessário, uma vez que, diferente de nós, seres
+              humanos, os computadores não são capazes de prever nenhum comportamento.
+            </C.AlertText>
+          </C.TextContainer>
+          <C.TextContainer>
+            <C.DefaultText>
+              À maneira de pensar logicamente para estipular sequências de passos para a resolução
+              de um problema, damos o nome de lógica de programação; à sequência narrativa desses
+              eventos, damos o nome de algoritmo.
+            </C.DefaultText>
+          </C.TextContainer>
         </C.Theories>
-        <Button title={'Praticar'} />
+        <Button title={'Praticar'} onPress={handlePracticeButton} />
       </C.Content>
     </C.Container>
   );

@@ -76,6 +76,7 @@ export const DefaultText = styled.Text`
   background-color: ${props => props.theme.colors.purple_700};
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
+  font-size: 14px;
   width: 100%;
   border-radius: 10px;
   padding: 16px;
