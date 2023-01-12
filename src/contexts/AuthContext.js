@@ -42,7 +42,7 @@ export function AuthContextProvider({ children }) {
     }
 
     const currentUser = await api.getUser(user.id);
-    setUser(currentUser)
+    setUser(currentUser);
     // return data;
   }
 
@@ -52,10 +52,11 @@ export function AuthContextProvider({ children }) {
     if (error) {
       return error.message;
     }
-
   }
 
-
-
-  return <AuthContext.Provider value={{ signUp, signIn, signOut, setUser, user }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ signUp, signIn, signOut, setUser, user }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
