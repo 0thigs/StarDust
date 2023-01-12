@@ -8,7 +8,7 @@ import DisabledStarDust from '../../assets/PlanetAssets/disabled-stardust.svg';
 
 export function Star({ name, number, isDisabled }) {
   return (
-    <C.Container>
+    <C.Container animation={'bounceIn'}>
       <C.StarDust>{isDisabled ? <DisabledStarDust /> : <EnabledStarDust />}</C.StarDust>
       <C.StarButton disabled={isDisabled}>
         {isDisabled ? <DisabledStar /> : <EnabledStar />}
