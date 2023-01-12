@@ -2,7 +2,7 @@ export default {
   colors: {
     background: '#141a1b',
 
-    green_900: '#202B2C',
+    green_900: '#07303B',
     green_700: '#027558',
     green_500: '#0FE983',
     green_300: '#00FF88',
@@ -19,6 +19,7 @@ export default {
     purple_700: '#514869',
 
     white: '#EBEBEB',
+    black: '#141A1B',
   },
 
   fonts: {
