@@ -1,9 +1,9 @@
 import * as C from './styles';
 
-export function Quiz() {
+export function End() {
   return (
     <C.Container>
-     
+        
     </C.Container>
   );
 }

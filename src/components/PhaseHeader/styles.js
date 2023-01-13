@@ -26,7 +26,7 @@ export const ProgressBar = styled.View`
   background-color: ${props => props.theme.colors.purple_700};
   width: 100%;
   height: 20px;
-  margin-top: 12px;
+  margin-top: 24px;
   border-radius: 4px;
 `;
 

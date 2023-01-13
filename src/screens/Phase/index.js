@@ -3,10 +3,15 @@ import { usePhase } from '../../hooks/usePhase';
 import { Theory } from '../../components/Theory';
 import { PhaseHeader } from '../../components/PhaseHeader';
 import { Quiz } from '../../components/Quiz';
+import { useEffect } from 'react';
 
 export function Phase() {
   const [state, dispatch] = usePhase();
 
+  useEffect(() => {
+    dispatch({type: "reorderQuestions"})
+  }, [])
+  
   return (
     <C.Container>
       <PhaseHeader />
