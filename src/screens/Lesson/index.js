@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
 import { Theory } from '../../components/Theory';
-import { LessonHeader } from '../../components/LessonHeader';
 import { Quiz } from '../../components/Quiz';
-import { useEffect } from 'react';
+import { End } from '../../components/End';
 
 export function Lesson() {
   const [state, dispatch] = useLesson();
