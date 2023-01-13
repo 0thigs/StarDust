@@ -8,7 +8,7 @@ export function SelectOptionForm({ options, answer }) {
   const [isVerified, setIsVerified] = useState(false);
 
   function reorderOptions() {
-    const reorderedOptions = options.sort(() => {
+    options = options.sort(() => {
       return Math.random() - 0.5;
     });
   }

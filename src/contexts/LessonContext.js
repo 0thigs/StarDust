@@ -6,9 +6,9 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[0],
+  currentStage: stages[1],
   questions,
-  currentQuestion: 0,
+  currentQuestion: 1,
   wrongsCount: 0,
 };
 

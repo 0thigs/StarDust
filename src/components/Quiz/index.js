@@ -4,6 +4,7 @@ import { LessonHeader } from '../LessonHeader';
 import { SelectOptionForm } from '../SelectOptionForm';
 import { useNavigation } from '@react-navigation/native';
 import * as C from './styles';
+import { OpenForm } from '../OpenForm';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
@@ -25,7 +26,9 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
       <C.QuestionStem>{question.stem}</C.QuestionStem>
-      <SelectOptionForm options={question.options} answer={question.answer} />
+      <OpenForm answer={question.answer} />
+      {/* <SelectOptionForm options={question.options} answer={question.answer} /> */}
+
       {/* {question.type === 'select-option' ? (
         <SelectOptionForm options={question.options} />
       ) : question.type === 'open' ? (

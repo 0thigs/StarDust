@@ -10,7 +10,7 @@ export const questions = [
     starId: 1,
     type: 'open',
     stem: 'O nome que se dá a uma sequencia lógica de instruções é',
-    answer: 'alroritmo',
+    answer: 'algoritmo',
   },
   {
     starId: 1,

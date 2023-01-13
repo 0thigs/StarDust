@@ -20,7 +20,7 @@ export const Feedback = styled.View`
 
 export const Message = styled.Text`
   color: ${props =>
-    props.isAnswerWrong ? props.theme.colors.white : props.theme.colors.green_300};
+    props.isAnswerWrong ? props.theme.colors.red_700 : props.theme.colors.green_300};
   font-family: ${props => props.theme.fonts.bold};
   text-align: center;
   font-size: 18px;
