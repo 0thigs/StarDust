@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-export const PhaseHeader = styled.View`
+export const Main = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -26,7 +26,7 @@ export const ProgressBar = styled.View`
   background-color: ${props => props.theme.colors.purple_700};
   width: 100%;
   height: 20px;
-  margin-top: 24px;
+  margin: 24px 0;
   border-radius: 4px;
 `;
 

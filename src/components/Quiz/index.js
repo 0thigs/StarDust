@@ -1,8 +1,9 @@
-import { usePhase } from '../../hooks/usePhase';
+import { useLesson } from '../../hooks/useLesson';
+import { LessonHeader } from '../LessonHeader';
 import * as C from './styles';
 
 export function Quiz() {
-  const [state, dispatch] = usePhase();
+  const [state, dispatch] = useLesson();
   const question = state.questions[state.currentQuestion];
 
   console.log({ question });

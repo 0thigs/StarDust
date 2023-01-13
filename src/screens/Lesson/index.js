@@ -1,20 +1,19 @@
 import * as C from './styles';
-import { usePhase } from '../../hooks/usePhase';
+import { useLesson } from '../../hooks/useLesson';
 import { Theory } from '../../components/Theory';
-import { PhaseHeader } from '../../components/PhaseHeader';
+import { LessonHeader } from '../../components/LessonHeader';
 import { Quiz } from '../../components/Quiz';
 import { useEffect } from 'react';
 
-export function Phase() {
-  const [state, dispatch] = usePhase();
+export function Lesson() {
+  const [state, dispatch] = useLesson();
 
   useEffect(() => {
-    dispatch({type: "reorderQuestions"})
-  }, [])
-  
+    dispatch({ type: 'reorderQuestions' });
+  }, []);
+
   return (
     <C.Container>
-      <PhaseHeader />
       {state.currentStage === 'theory' && <Theory />}
       {state.currentStage === 'quiz' && <Quiz />}
       {state.currentStage === 'end' && <End />}

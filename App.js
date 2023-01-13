@@ -11,7 +11,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import { AuthContextProvider } from './src/contexts/AuthContext';
-import { PhaseProvider } from './src/contexts/PhaseContext';
+import { LessonProvider } from './src/contexts/LessonContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,10 +24,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
-        <PhaseProvider>
+        <LessonProvider>
           <StatusBar style={'light'} backgroundColor={'transparent'} />
           {fontsLoaded && <Routes />}
-        </PhaseProvider>
+        </LessonProvider>
       </AuthContextProvider>
     </ThemeProvider>
   );

@@ -1,18 +1,18 @@
 import { createContext, useReducer } from 'react';
 import { questions } from '../utils/questions';
 
-export const PhaseContext = createContext();
+export const LessonContext = createContext();
 
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[1],
+  currentStage: stages[0],
   questions,
   currentQuestion: 0,
   wrongs: 0,
 };
 
-const PhaseReducer = (state, action) => {
+const LessonReducer = (state, action) => {
   switch (action.type) {
     case 'changeState':
       return {
@@ -43,8 +43,8 @@ const PhaseReducer = (state, action) => {
   }
 };
 
-export const PhaseProvider = ({ children }) => {
-  const value = useReducer(PhaseReducer, initialState);
+export const LessonProvider = ({ children }) => {
+  const value = useReducer(LessonReducer, initialState);
 
-  return <PhaseContext.Provider value={value}>{children}</PhaseContext.Provider>;
+  return <LessonContext.Provider value={value}>{children}</LessonContext.Provider>;
 };
