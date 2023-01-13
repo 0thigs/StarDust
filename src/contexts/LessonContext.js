@@ -6,15 +6,15 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[2],
+  currentStage: stages[0],
   questions,
   currentQuestion: 0,
-  wrongs: 0,
+  wrongsCount: 0,
 };
 
 const LessonReducer = (state, action) => {
   switch (action.type) {
-    case 'changeState':
+    case 'changeStage':
       return {
         ...state,
         currentStage: stages[1],
@@ -29,14 +29,19 @@ const LessonReducer = (state, action) => {
       };
     case 'changeQuestion':
       const nextQuestion = state.currentQuestion + 1;
-      let isEndQuiz = false;
+      let isEnd = false;
       if (!questions[nextQuestion]) {
-        isEndQuiz = true;
+        isEnd = true;
       }
       return {
         ...state,
         currentQuestion: nextQuestion,
-        currentStage: isEndQuiz ? stages[2] : state.currentStage,
+        currentStage: isEnd ? stages[2] : state.currentStage,
+      };
+    case 'setWrongsCount':
+      return {
+        ...state,
+        wrongsCount: state.wrongsCount + 1,
       };
     default:
       return state;

@@ -11,6 +11,9 @@ export default {
     yellow_500: '#B08C18',
     yellow_300: '#FFCE31',
 
+    blue_700: '#022F43',
+    blue_300: '#00D1FF',
+
     gray_700: '#868686',
     gray_500: '#AFB6C2',
 

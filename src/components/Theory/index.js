@@ -3,13 +3,19 @@ import * as C from './styles';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
-
-function handlePracticeButton() {}
+import { useLesson } from '../../hooks/useLesson';
 
 export function Theory() {
+  const [state, dispatch] = useLesson();
+
+  function handlePracticeButton() {
+    dispatch({ type: 'changeStage' });
+    console.log(state.currentStage);
+  }
+
   return (
     <C.Container>
-        <LessonHeader />
+      <LessonHeader />
       <C.PhaseTitle>Introdução</C.PhaseTitle>
       <C.Theories showsVerticalScrollIndicator={false}>
         <C.TextContainer>
@@ -58,8 +64,8 @@ export function Theory() {
             eventos, damos o nome de algoritmo.
           </C.DefaultText>
         </C.TextContainer>
-      </C.Theories>
       <Button title={'Praticar'} onPress={handlePracticeButton} />
+      </C.Theories>
     </C.Container>
   );
 }

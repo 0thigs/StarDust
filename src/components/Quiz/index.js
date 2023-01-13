@@ -1,22 +1,33 @@
+import { useEffect } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { LessonHeader } from '../LessonHeader';
+import { SelectOptionForm } from '../SelectOptionForm';
+import { useNavigation } from '@react-navigation/native';
 import * as C from './styles';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
   const question = state.questions[state.currentQuestion];
+  const wrongsCount = state.wrongsCount;
 
-  console.log({ question });
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    console.log(wrongsCount);
+    if (wrongsCount === 5) {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }
+  }, [wrongsCount]);
 
   return (
     <C.Container>
+      <LessonHeader />
       <C.QuestionStem>{question.stem}</C.QuestionStem>
-      {question.type === 'select-option' ? (
-        <C.OptionsList
-          data={question.options}
-          keyExtractor={option => option.id}
-          renderItem={({ item }) => <C.Option>{item.label}</C.Option>}
-        />
+      <SelectOptionForm options={question.options} answer={question.answer} />
+      {/* {question.type === 'select-option' ? (
+        <SelectOptionForm options={question.options} />
       ) : question.type === 'open' ? (
         <C.Input />
       ) : question.type === 'drag-and-drop-list' ? (
@@ -25,7 +36,7 @@ export function Quiz() {
           keyExtractor={item => item.id}
           renderItem={({ item }) => <C.Item>{item.label}</C.Item>}
         />
-      ) : null}
+      ) : null} */}
     </C.Container>
   );
 }

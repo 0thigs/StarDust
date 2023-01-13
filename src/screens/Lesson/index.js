@@ -8,9 +8,9 @@ import { End } from '../../components/End';
 export function Lesson() {
   const [state, dispatch] = useLesson();
 
-  useEffect(() => {
-    dispatch({ type: 'reorderQuestions' });
-  }, []);
+//   useEffect(() => {
+//     dispatch({ type: 'reorderQuestions' });
+//   }, []);
 
   return (
     <C.Container>

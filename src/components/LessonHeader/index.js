@@ -1,15 +1,24 @@
-import React from 'react';
 import * as C from './styles';
 
 import CloseButtonIcon from '../../assets/GlobalAssets/close-button-icon.svg';
 import LiveIcon from '../../assets/GlobalAssets/heart.svg';
 import Rocket from '../../assets/GlobalAssets/rocket.png';
 
+import { useNavigation } from '@react-navigation/native';
+
 export function LessonHeader() {
+  const navigation = useNavigation();
+
+  function handleCloseButton() {
+    navigation.reset({
+      routes: [{ name: 'DrawerRoutes' }],
+    });
+  }
+
   return (
-    <>
+    <C.Container>
       <C.Main>
-        <C.CloseButton>
+        <C.CloseButton onPress={handleCloseButton}>
           <CloseButtonIcon width={35} height={35} />
         </C.CloseButton>
         <C.Lives>
@@ -22,6 +31,6 @@ export function LessonHeader() {
           <C.Rocket source={Rocket} />
         </C.Bar>
       </C.ProgressBar>
-    </>
+    </C.Container>
   );
 }

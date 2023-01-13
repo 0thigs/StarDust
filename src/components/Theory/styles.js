@@ -1,11 +1,9 @@
 import styled from 'styled-components/native';
 
-
-
 export const Container = styled.View`
   flex: 1;
-  width: 100%;
-  margin-top: 20px;
+  width: 350px;
+  margin-top: 40px;
 `;
 
 export const PhaseTitle = styled.Text`
@@ -22,7 +20,7 @@ export const TextContainer = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  margin-top: 14px;
+  margin: 16px 0;
 `;
 
 export const DefaultText = styled.Text`
@@ -47,7 +45,7 @@ export const AlertText = styled.Text`
 
 export const ExampleTextContainer = styled.View`
   width: 100%;
-  margin-top: 14px;
+  margin: 16px 0;
   justify-content: center;
 `;
 
