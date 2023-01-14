@@ -10,6 +10,7 @@ export const Container = styled.TouchableOpacity`
   border-radius: 5px;
   background-color: ${props =>
     props.color === 'red' ? props.theme.colors.red_700 : props.theme.colors.green_300};
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
 `;
 
 export const Loader = styled.ActivityIndicator``;

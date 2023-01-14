@@ -1,3 +1,4 @@
+import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -36,16 +37,16 @@ export const ProgressBar = styled.View`
   height: 20px;
   margin: 24px 0;
   border-radius: 4px;
+  flex-direction: row;
 `;
 
-export const Bar = styled.View`
-  width: 40%;
+export const Bar = styled(Animated.View)`
   height: 100%;
   align-items: flex-end;
   background-color: ${props => props.theme.colors.green_500};
 `;
 
 export const Rocket = styled.Image`
-  width: 40%;
   height: 100%;
+  margin-left: -18px;
 `;

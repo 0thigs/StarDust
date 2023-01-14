@@ -4,7 +4,7 @@ import * as C from './styles';
 import TransitionAnimation from '../../assets/GlobalAssets/transition-animation.json';
 import LottieView from 'lottie-react-native';
 
-export function TransitionScreen() {
+export function TransitionScreenAnimation() {
   return (
     <C.Container>
       <LottieView

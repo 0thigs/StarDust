@@ -1,12 +1,12 @@
 import * as C from './styles';
 
-import Astronaut from '../../assets/AstronautAssets/astronaut.json';
+import Astronaut from '../../assets/LessonAssets/astrounaut.json';
 import LottieView from 'lottie-react-native';
 
 export function End() {
   return (
     <C.Container>
-      <C.Message>Fase completada</C.Message>
+      <C.Message>Fase completada!</C.Message>
       <LottieView
         source={Astronaut}
         autoPlay={true}

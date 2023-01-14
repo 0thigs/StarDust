@@ -6,14 +6,16 @@ import { useLesson } from '../../hooks/useLesson';
 export function SelectOptionForm({ options, answer }) {
   const [, dispatch] = useLesson();
 
+  const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   function reorderOptions() {
-    options = options.sort(() => {
+    const reorderedOptions = options.sort(() => {
       return Math.random() - 0.5;
     });
+    setReorderedOptions(reorderedOptions);
   }
 
   function resetAnswer() {
@@ -45,12 +47,15 @@ export function SelectOptionForm({ options, answer }) {
 
   useEffect(() => {
     reorderOptions();
+    console.log("renderizou");
   }, []);
+
+  
 
   return (
     <C.Container>
       <C.Options>
-        {options.map((option, index) => (
+        {reorderedOptions.map((option, index) => (
           <C.Option
             key={index}
             currentOption={option}

@@ -30,7 +30,6 @@ export const Label = styled.Text`
   text-align: center;
 `;
 
-
 export const Decorator = styled.Text`
   color: ${props =>
     props.isAnswerWrong

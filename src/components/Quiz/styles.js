@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   margin-top: 40px;
-  width: 100%
+  width: 100%;
 `;
 
 export const QuestionStem = styled.Text`
@@ -17,7 +17,6 @@ export const QuestionStem = styled.Text`
 
 export const Content = styled.View`
 flex: 1;
-background-color: red;
 align-items: center;
 
 `;

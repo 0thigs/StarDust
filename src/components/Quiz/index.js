@@ -15,11 +15,12 @@ export function Quiz() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (wrongsCount === 5) {
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
-    }
+    // if (wrongsCount === 5) {
+    //   navigation.reset({
+    //     routes: [{ name: 'DrawerRoutes' }],
+    //   });
+    // }
+    console.log(wrongsCount);
   }, [wrongsCount]);
 
   return (

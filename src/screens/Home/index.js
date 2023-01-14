@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as C from './styles';
 
 import { Planet } from '../../components/Planet';
-import { TransitionScreen } from '../../components/TransitionScreen';
+import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 
@@ -13,6 +13,7 @@ export function Home() {
   const [stars, setStars] = useState([]);
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
+  
   const user = {
     unlockedStarsIds: [1],
   };
@@ -47,7 +48,7 @@ export function Home() {
         <BackgroundImage />
       </C.Background>
       {!isEndTrasition ? (
-        <TransitionScreen />
+        <TransitionScreenAnimation />
       ) : (
         <C.PlanetsList
           data={planets}

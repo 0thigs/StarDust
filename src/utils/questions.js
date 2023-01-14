@@ -22,7 +22,7 @@ export const questions = [
       'maneira de pensar um algoritmo',
       'criar problemas computacionais',
     ],
-    answer: 'aleatoriedade',
+    answer: 'sequência lógica de instruções',
   },
   {
     starId: 1,
