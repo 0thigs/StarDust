@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import * as C from './styles';
+import { VerificationButton } from '../VerificationButton';
+import { useLesson } from '../../hooks/useLesson';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
@@ -7,9 +9,10 @@ import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
 } from 'react-native-draggable-flatlist';
-import { VerificationButton } from '../VerificationButton';
 
 export function DragAndDropListForm({ items, correctItemsSequence }) {
+  const [, dispatch] = useLesson();
+
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [currentItems, setCurrentItems] = useState(items);

@@ -5,6 +5,7 @@ import { Star } from '../Star';
 import { planetImages } from '../../utils/PlanetsImages';
 import { planetIcons } from '../../utils/PlanetIcons';
 
+import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 import * as Animatable from 'react-native-animatable';
 
 export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
@@ -18,7 +19,15 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
     setCurrentPlanetStars(planetStars);
   }
 
+  const PlanetSignAnimation = useSharedValue(-15);
+  const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: PlanetSignAnimation.value }],
+    };
+  });
+
   useEffect(() => {
+    PlanetSignAnimation.value = withRepeat(withTiming(10, { duration: 1500 }), -1, true);
     getCurrentPlanetStars();
   }, []);
 
@@ -26,7 +35,7 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
     <C.Container>
       <C.PlanetInfo>
         <PlanetImage width={100} height={100} />
-        <C.PlanetSign>
+        <C.PlanetSign style={PlanetSignAnimatedStyle}>
           <PlanetIcon />
           <C.PlanetTitle>{title}</C.PlanetTitle>
         </C.PlanetSign>

@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
 
 export const Container = styled.View`
-    width: 300px;
-    margin-bottom: 40px;
+  width: 300px;
+  margin-bottom: 40px;
 `;
 
 export const PlanetInfo = styled.View`
@@ -11,7 +12,7 @@ export const PlanetInfo = styled.View`
   align-items: center;
 `;
 
-export const PlanetSign = styled.View`
+export const PlanetSign = styled(Animated.View)`
   background-color: ${props => props.theme.colors.green_700};
   border-radius: 10px;
   padding: 0 12px;
@@ -20,6 +21,7 @@ export const PlanetSign = styled.View`
   flex-direction: row;
   margin-left: 8px;
   height: 64px;
+  
 `;
 
 export const PlanetTitle = styled.Text`
@@ -29,8 +31,4 @@ export const PlanetTitle = styled.Text`
   margin-left: 4px;
 `;
 
-export const StarsList = styled.FlatList`
- 
-`;
-
-
+export const StarsList = styled.FlatList``;

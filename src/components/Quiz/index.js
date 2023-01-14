@@ -26,24 +26,16 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
       <C.QuestionStem>{question.stem}</C.QuestionStem>
-      {/* <SelectOptionForm options={question.options} answer={question.answer} /> */}
-      {/* <OpenForm answer={question.answer} /> */}
-      <DragAndDropListForm
-        items={question.items}
-        correctItemsSequence={question.correctItemsSequence}
-      />
-
-      {/* {question.type === 'select-option' ? (
-        <SelectOptionForm options={question.options} />
-      ) : question.type === 'open' ? (
-        <C.Input />
-      ) : question.type === 'drag-and-drop-list' ? (
-        <C.ItemsList
-          data={question.items}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => <C.Item>{item.label}</C.Item>}
+      {question.type === 'select-option' && (
+        <SelectOptionForm options={question.options} answer={question.answer} />
+      )}
+      {question.type === 'open' && <OpenForm answer={question.answer} />}
+      {question.type === 'drag-and-drop-list' && (
+        <DragAndDropListForm
+          items={question.items}
+          correctItemsSequence={question.correctItemsSequence}
         />
-      ) : null} */}
+      )}
     </C.Container>
   );
 }

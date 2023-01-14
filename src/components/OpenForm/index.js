@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
+import { useLesson } from '../../hooks/useLesson';
 
 export function OpenForm({ answer }) {
   const [, dispatch] = useLesson();

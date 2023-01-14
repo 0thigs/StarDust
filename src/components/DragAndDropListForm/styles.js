@@ -30,7 +30,6 @@ export const Label = styled.Text`
   text-align: center;
 `;
 
-// isVerified && isAnswerWrong ? 'Tentar novamente' : isVerified ? 'Continuar' : 'Verificar'
 
 export const Decorator = styled.Text`
   color: ${props =>
