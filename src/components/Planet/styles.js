@@ -6,7 +6,7 @@ export const Container = styled.View`
   margin-bottom: 40px;
 `;
 
-export const PlanetInfo = styled.View`
+export const PlanetInfo = styled(Animated.View)`
   flex-direction: row;
   padding: 0 4px;
   align-items: center;
@@ -21,7 +21,6 @@ export const PlanetSign = styled(Animated.View)`
   flex-direction: row;
   margin-left: 8px;
   height: 64px;
-  
 `;
 
 export const PlanetTitle = styled.Text`

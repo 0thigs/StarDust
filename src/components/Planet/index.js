@@ -5,8 +5,13 @@ import { Star } from '../Star';
 import { planetImages } from '../../utils/PlanetsImages';
 import { planetIcons } from '../../utils/PlanetIcons';
 
-import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
-import * as Animatable from 'react-native-animatable';
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 
 export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
   const [currentPlanetStars, setCurrentPlanetStars] = useState([]);
@@ -14,26 +19,35 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
   const PlanetImage = planetImages['planet' + id];
   const PlanetIcon = planetIcons['planet' + id];
 
+  const PlanetSignPosition = useSharedValue(-5);
+  const PlanetInfoScale = useSharedValue(0);
+
   function getCurrentPlanetStars() {
     const planetStars = stars.filter(star => CurrentPlanetStarsIds.includes(star.id));
     setCurrentPlanetStars(planetStars);
   }
 
-  const PlanetSignAnimation = useSharedValue(-15);
+  const PlanetInfoAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: PlanetInfoScale.value }],
+    };
+  });
+
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: PlanetSignAnimation.value }],
+      transform: [{ translateY: PlanetSignPosition.value }],
     };
   });
 
   useEffect(() => {
-    PlanetSignAnimation.value = withRepeat(withTiming(10, { duration: 1500 }), -1, true);
+    PlanetSignPosition.value = withRepeat(withTiming(5, { duration: 1000 }), -1, true);
+    PlanetInfoScale.value = withTiming(1, { duration: 800, easing: Easing.bounce });
     getCurrentPlanetStars();
   }, []);
 
   return (
     <C.Container>
-      <C.PlanetInfo>
+      <C.PlanetInfo style={PlanetInfoAnimatedStyle}>
         <PlanetImage width={100} height={100} />
         <C.PlanetSign style={PlanetSignAnimatedStyle}>
           <PlanetIcon />

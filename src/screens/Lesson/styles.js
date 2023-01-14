@@ -5,3 +5,5 @@ export const Container = styled.SafeAreaView`
   background-color: ${props => props.theme.colors.background};
   align-items: center;
 `;
+
+export const Lesson = styled.View``;
