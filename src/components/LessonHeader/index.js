@@ -1,13 +1,13 @@
+import { useEffect } from 'react';
 import * as C from './styles';
 
 import CloseButtonIcon from '../../assets/GlobalAssets/close-button-icon.svg';
-import LiveIcon from '../../assets/GlobalAssets/heart.svg';
+import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
 import Rocket from '../../assets/GlobalAssets/rocket.png';
 
 import { useLesson } from '../../hooks/useLesson';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
 
 export function LessonHeader() {
   const [state] = useLesson();
@@ -39,8 +39,8 @@ export function LessonHeader() {
           <CloseButtonIcon width={35} height={35} />
         </C.CloseButton>
         <C.Lives>
-          <LiveIcon width={30} height={30} />
-          <C.LivesCount>5</C.LivesCount>
+          <LifeIcon width={30} height={30} />
+          <C.LivesCount>{state.livesCount}</C.LivesCount>
         </C.Lives>
       </C.Main>
       <C.ProgressBar>

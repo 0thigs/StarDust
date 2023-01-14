@@ -1,9 +1,12 @@
 import styled from 'styled-components/native';
+import { css } from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
   width: 350px;
   margin-top: 40px;
+  background-color: red;
+
 `;
 
 export const PhaseTitle = styled.Text`
@@ -12,9 +15,12 @@ export const PhaseTitle = styled.Text`
   font-size: 20px;
 `;
 
-export const Theories = styled.ScrollView`
-  width: 100%;
-`;
+export const Theories = styled.FlatList.attrs({
+  contentContainerStyle: () => css`
+    width: 100%;
+    background-color: red;
+  `,
+})``;
 
 export const TextContainer = styled.View`
   width: 100%;

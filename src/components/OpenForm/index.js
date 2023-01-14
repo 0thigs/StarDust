@@ -31,7 +31,10 @@ export function OpenForm({ answer }) {
     }
 
     setIsAnswerWrong(true);
-    dispatch({ type: 'setWrongsCount' });
+    if (isVerified) {
+        dispatch({ type: 'incrementWrongsCount' });
+        dispatch({ type: 'decrementLivesCount' });
+      }
   }
 
   return (

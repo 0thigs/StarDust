@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import * as C from './styles';
 
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
+
 import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
 import { useLesson } from '../../hooks/useLesson';
+import { theories } from '../../utils/theories';
 
 export function Theory() {
   const [state, dispatch] = useLesson();
+  const [currentTheories, setCurrentTheories] = useState(theories[0].texts);
+
+  console.log({ currentTheories });
 
   function handlePracticeButton() {
     dispatch({ type: 'changeStage' });
@@ -17,8 +23,28 @@ export function Theory() {
     <C.Container>
       <LessonHeader />
       <C.PhaseTitle>Introdução</C.PhaseTitle>
-      <C.Theories showsVerticalScrollIndicator={false}>
-        <C.TextContainer>
+      <C.Theories
+        data={currentTheories}
+        keyExtractor={thoery => thoery.body}
+        renderItem={({ item }) => (
+          <>
+            {item.type === 'default' && (
+              <C.TextContainer>
+                <C.DefaultText>{item.body}</C.DefaultText>
+              </C.TextContainer>
+            )}
+            {item.type === 'alert' && (
+              <C.TextContainer>
+                <AlertIcon />
+                <C.AlertText>{item.body}</C.AlertText>
+              </C.TextContainer>
+            )}
+            {console.log(item)}
+          </>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+      {/* <C.TextContainer>
           <C.DefaultText>
             Sempre que decidimos fazer qualquer atividade em nosso dia a dia, acabamos seguindo uma
             sequência lógica. Na maior parte do tempo, fazemos isso de maneira tão natural que nem
@@ -64,8 +90,7 @@ export function Theory() {
             eventos, damos o nome de algoritmo.
           </C.DefaultText>
         </C.TextContainer>
-      <Button title={'Praticar'} onPress={handlePracticeButton} />
-      </C.Theories>
+        <Button title={'Praticar'} onPress={handlePracticeButton} /> */}
     </C.Container>
   );
 }

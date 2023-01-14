@@ -1,79 +1,96 @@
-//  {
-//     "session":  {
-//       "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdG
-//   VkIiwiZXhwIjoxNjczMzg0Mjg2LCJzdWIiOiJiMzliOWRmOC1iMzlhLTQ5OWUtYjdhOS1hMjRiNDZlZGU1Mj
-//   UiLCJlbWFpbCI6Im9ub3JhaC5uY0BnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm
-//   92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZS
-//   I6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbW
-//   VzdGFtcCI6MTY3MzM4MDY4Nn1dLCJzZXNzaW9uX2lkIjoiYWNjZTlhMzctMzYxYy00MzUxLTk2NjItMzhjNG
-//   RmNjg0ZTE2In0.BhnFZZTFLvMp5pZpo9Kb8j-p9EPLwEdStKsxpXJL6uk",
-//       "expires_at": 1673384285,
-//       "expires_in": 3600,
-//       "refresh_token": "JjnSTnc_2yvwpfgoH45ipw",
-//       "token_type": "bearer",
-//       "user":  {
-//         "app_metadata":  {
-//           "provider": "email",
-//           "providers":  [
-//             "email",
-//           ],
-//         },
-//         "aud": "authenticated",
-//         "created_at": "2023-01-10T19:58:06.05978Z",
-//         "email": "onorah.nc@gmail.com",
-//         "email_confirmed_at": "2023-01-10T19:58:06.06450152Z",
-//         "id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//         "identities":  [
-//            {
-//             "created_at": "2023-01-10T19:58:06.062716Z",
-//             "id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//             "identity_data":  {
-//               "email": "onorah.nc@gmail.com",
-//               "sub": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//             },
-//             "last_sign_in_at": "2023-01-10T19:58:06.062672983Z",
-//             "provider": "email",
-//             "updated_at": "2023-01-10T19:58:06.062716Z",
-//             "user_id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//           },
-//         ],
-//         "last_sign_in_at": "2023-01-10T19:58:06.067707998Z",
-//         "phone": "",
-//         "role": "authenticated",
-//         "updated_at": "2023-01-10T19:58:06.069718Z",
-//         "user_metadata":  {},
-//       },
-//     },
-//     "user":  {
-//       "app_metadata":  {
-//         "provider": "email",
-//         "providers":  [
-//           "email",
-//         ],
-//       },
-//       "aud": "authenticated",
-//       "created_at": "2023-01-10T19:58:06.05978Z",
-//       "email": "onorah.nc@gmail.com",
-//       "email_confirmed_at": "2023-01-10T19:58:06.06450152Z",
-//       "id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//       "identities":  [
-//          {
-//           "created_at": "2023-01-10T19:58:06.062716Z",
-//           "id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//           "identity_data":  {
-//             "email": "onorah.nc@gmail.com",
-//             "sub": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//           },
-//           "last_sign_in_at": "2023-01-10T19:58:06.062672983Z",
-//           "provider": "email",
-//           "updated_at": "2023-01-10T19:58:06.062716Z",
-//           "user_id": "b39b9df8-b39a-499e-b7a9-a24b46ede525",
-//         },
-//       ],
-//       "last_sign_in_at": "2023-01-10T19:58:06.067707998Z",
-//       "phone": "",
-//       "role": "authenticated",
-//       "updated_at": "2023-01-10T19:58:06.069718Z",
-//       "user_metadata":  {},
-//     },
-//   }
+import { useState } from 'react';
+import * as C from './styles';
+
+import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
+
+import { Button } from '../../components/Button';
+import { LessonHeader } from '../LessonHeader';
+import { useLesson } from '../../hooks/useLesson';
+import { theories } from '../../utils/theories';
+
+export function Theory() {
+  const [state, dispatch] = useLesson();
+  const [currentTheories, setCurrentTheories] = useState(theories[0].texts);
+
+  console.log({ currentTheories });
+
+  function handlePracticeButton() {
+    dispatch({ type: 'changeStage' });
+    console.log(state.currentStage);
+  }
+
+  return (
+    <C.Container>
+      <LessonHeader />
+      <C.PhaseTitle>Introdução</C.PhaseTitle>
+      <C.Theories
+        data={currentTheories}
+        keyExtractor={thoery => thoery.body}
+        renderItem={({ item }) => (
+          <>
+            {item.type === 'default' && (
+              <C.TextContainer>
+                <C.DefaultText>{item.body}</C.DefaultText>
+              </C.TextContainer>
+            )}
+            {item.type === 'alert' && (
+              <C.TextContainer>
+                <AlertIcon />
+                <C.AlertText>{item.body}</C.AlertText>
+              </C.TextContainer>
+            )}
+            {console.log(item)}
+          </>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+      {/* <C.TextContainer>
+          <C.DefaultText>
+            Sempre que decidimos fazer qualquer atividade em nosso dia a dia, acabamos seguindo uma
+            sequência lógica. Na maior parte do tempo, fazemos isso de maneira tão natural que nem
+            nos damos conta, mas, quando percebemos, conseguimos enxergar passos que levaram ao
+            resultado final.
+          </C.DefaultText>
+        </C.TextContainer>
+        <C.TextContainer>
+          <AlertIcon />
+          <C.AlertText>
+            Logo, uma sequência Lógica são passos executados até atingir um objetivo ou solução de
+            um problema.
+          </C.AlertText>
+        </C.TextContainer>
+        <C.TextContainer>
+          <C.DefaultText>
+            Na grande maioria das vezes, não nos damos conta disso, mas ao fazer uma análise do
+            nosso cotidiano, podemos compreender como todas as nossas ações são consequência de uma
+            cadeia de outras ações menores que nos levaram até uma atitude final.
+          </C.DefaultText>
+        </C.TextContainer>
+        <C.ExampleTextContainer>
+          <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
+          <C.ExempleText>
+            Na grande maioria das vezes, não nos damos conta disso, mas ao fazer uma análise do
+            nosso cotidiano, podemos compreender como todas as nossas ações são consequência de uma
+            cadeia de outras ações menores que nos levaram até uma atitude final.
+          </C.ExempleText>
+        </C.ExampleTextContainer>
+        <C.TextContainer>
+          <AlertIcon />
+          <C.AlertText>
+            Não estamos acostumados a pensar desta maneira sobre nossas atividades cotidianas, mas,
+            quando falamos de programação, estipular uma sequência de etapas é um procedimento muito
+            importante e necessário, uma vez que, diferente de nós, seres humanos, os computadores
+            não são capazes de prever nenhum comportamento.
+          </C.AlertText>
+        </C.TextContainer>
+        <C.TextContainer>
+          <C.DefaultText>
+            À maneira de pensar logicamente para estipular sequências de passos para a resolução de
+            um problema, damos o nome de lógica de programação; à sequência narrativa desses
+            eventos, damos o nome de algoritmo.
+          </C.DefaultText>
+        </C.TextContainer>
+        <Button title={'Praticar'} onPress={handlePracticeButton} /> */}
+    </C.Container>
+  );
+}

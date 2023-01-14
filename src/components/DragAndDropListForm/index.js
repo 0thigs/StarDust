@@ -37,7 +37,10 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
     }
 
     setIsAnswerWrong(true);
-    dispatch({ type: 'setWrongsCount' });
+    if (isVerified) {
+      dispatch({ type: 'incrementWrongsCount' });
+      dispatch({ type: 'decrementLivesCount' });
+    }
   }
 
   function renderItem({ item, drag }) {
@@ -47,13 +50,9 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
           <ShadowDecorator>
             <C.ItemContainer onLongPress={drag} disabled={isVerified}>
               <C.Item isAnswerWrong={isAnswerWrong} isVerified={isVerified}>
-                <C.Decorator isAnswerWrong={isAnswerWrong} isVerified={isVerified}>
-                  :
-                </C.Decorator>
+                <C.Decorator>:</C.Decorator>
                 <C.Label>{item.label}</C.Label>
-                <C.Decorator isAnswerWrong={isAnswerWrong} isVerified={isVerified}>
-                  :
-                </C.Decorator>
+                <C.Decorator>:</C.Decorator>
               </C.Item>
             </C.ItemContainer>
           </ShadowDecorator>

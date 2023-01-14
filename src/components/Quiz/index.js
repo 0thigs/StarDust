@@ -8,11 +8,16 @@ import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
 
 export function Quiz() {
-  const [state] = useLesson();
+  const [state, dispatch] = useLesson();
   const question = state.questions[state.currentQuestion];
   const wrongsCount = state.wrongsCount;
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    setTimeout(dispatch({ type: 'incrementSecondsCount', payload: state.secondsCount + 1 }), 1000);
+    console.log(state.secondsCount);
+  }, [state.secondsCount]);
 
   useEffect(() => {
     // if (wrongsCount === 5) {
@@ -20,7 +25,6 @@ export function Quiz() {
     //     routes: [{ name: 'DrawerRoutes' }],
     //   });
     // }
-    console.log(wrongsCount);
   }, [wrongsCount]);
 
   return (

@@ -38,7 +38,8 @@ export function SelectOptionForm({ options, answer }) {
       return;
     }
     setIsAnswerWrong(true);
-    dispatch({ type: 'setWrongsCount' });
+    dispatch({ type: 'incrementWrongsCount' });
+    dispatch({ type: 'decrementLivesCount' });
   }
 
   function handleSelectOption(index) {
@@ -62,6 +63,7 @@ export function SelectOptionForm({ options, answer }) {
             onPress={() => handleSelectOption(option)}
             selectedOption={selectedOption}
             disabled={isVerified}
+            isAnswerWrong={isVerified && isAnswerWrong}
           >
             <C.Label currentOption={option} selectedOption={selectedOption}>
               {option}
