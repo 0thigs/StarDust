@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 
 export function OpenForm({ answer }) {
+  const [, dispatch] = useLesson();
+
   const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -14,7 +16,7 @@ export function OpenForm({ answer }) {
     }
   }
 
-  function handleVeriryAnswer() {
+  function handleVerifyAnswer() {
     setIsVerified(!isVerified);
     resetAnswer();
 
@@ -40,7 +42,7 @@ export function OpenForm({ answer }) {
         isAnswerWrong={isVerified && isAnswerWrong}
       />
       <VerificationButton
-        verifyAnswer={handleVeriryAnswer}
+        verifyAnswer={handleVerifyAnswer}
         isVerified={isVerified}
         isAnswerWrong={isAnswerWrong}
         isAnswered={userAnswer}

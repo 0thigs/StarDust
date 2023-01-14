@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   width: 100%;
-  height: 50px;
+  height: 48px;
   margin: 18px 0;
 
   justify-content: center;
@@ -15,7 +15,7 @@ export const Container = styled.TouchableOpacity`
 export const Loader = styled.ActivityIndicator``;
 
 export const Title = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-family: ${props => props.theme.fonts.bold};
   color: ${props =>
     props.color === 'red' ? props.theme.colors.white : props.theme.colors.green_900};

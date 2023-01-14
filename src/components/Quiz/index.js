@@ -5,16 +5,16 @@ import { SelectOptionForm } from '../SelectOptionForm';
 import { useNavigation } from '@react-navigation/native';
 import * as C from './styles';
 import { OpenForm } from '../OpenForm';
+import { DragAndDropListForm } from '../DragAndDropListForm';
 
 export function Quiz() {
-  const [state, dispatch] = useLesson();
+  const [state] = useLesson();
   const question = state.questions[state.currentQuestion];
   const wrongsCount = state.wrongsCount;
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log(wrongsCount);
     if (wrongsCount === 5) {
       navigation.reset({
         routes: [{ name: 'DrawerRoutes' }],
@@ -26,8 +26,12 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
       <C.QuestionStem>{question.stem}</C.QuestionStem>
-      <OpenForm answer={question.answer} />
       {/* <SelectOptionForm options={question.options} answer={question.answer} /> */}
+      {/* <OpenForm answer={question.answer} /> */}
+      <DragAndDropListForm
+        items={question.items}
+        correctItemsSequence={question.correctItemsSequence}
+      />
 
       {/* {question.type === 'select-option' ? (
         <SelectOptionForm options={question.options} />

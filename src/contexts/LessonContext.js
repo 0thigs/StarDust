@@ -8,7 +8,7 @@ const stages = ['theory', 'quiz', 'end'];
 const initialState = {
   currentStage: stages[1],
   questions,
-  currentQuestion: 1,
+  currentQuestion: 3,
   wrongsCount: 0,
 };
 

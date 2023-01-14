@@ -27,8 +27,8 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Coloque o algoritmo na ordem, de modo que fique logicamente correto',
-    options: [
+    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
+    items: [
       {
         id: 1,
         label: 'mascar o chiclete',
@@ -51,8 +51,8 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Coloque os elementos na sequência correta para formar um algoritmo',
-    options: [
+    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
+    items: [
       {
         id: 1,
         label: 'ir para o trabalho',

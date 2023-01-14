@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
+import { useLesson } from '../../hooks/useLesson';
 
 export function SelectOptionForm({ options, answer }) {
+  const [, dispatch] = useLesson();
+
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -16,10 +19,11 @@ export function SelectOptionForm({ options, answer }) {
   function resetAnswer() {
     if (isVerified && !!selectedOption) {
       setSelectedOption('');
+      setIsAnswerWrong(false);
     }
   }
 
-  function handleVeriryAnswer() {
+  function handleVerifyAnswer() {
     setIsVerified(!isVerified);
     resetAnswer();
 
@@ -61,7 +65,7 @@ export function SelectOptionForm({ options, answer }) {
         ))}
       </C.Options>
       <VerificationButton
-        verifyAnswer={handleVeriryAnswer}
+        verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
         isVerified={isVerified}
         isAnswered={!!selectedOption}

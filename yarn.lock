@@ -1004,7 +1004,7 @@
     "@babel/types" "^7.4.4"
     "esutils" "^2.0.2"
 
-"@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7":
+"@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7", "@babel/preset-typescript@^7.17.12":
   "integrity" "sha512-s9ik86kXBAnD760aybBucdpnLsAt0jK1xqJn2juOn9lkOvSHV60os5hxoVJsPzMQxvnUJFAlkont2DvvaYEBtQ=="
   "resolved" "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.18.6.tgz"
   "version" "7.18.6"
@@ -6998,12 +6998,19 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
+"react-native-draggable-flatlist@^4.0.0":
+  "integrity" "sha512-3DVzZsCXNlK29UyIkx4Uh5+2TAHwHC9Q45i1lbuqEOcuSmZ8jHcqbE8VkLot2bVfWZGO5WFgihStmxkI0gBHRQ=="
+  "resolved" "https://registry.npmjs.org/react-native-draggable-flatlist/-/react-native-draggable-flatlist-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "@babel/preset-typescript" "^7.17.12"
+
 "react-native-feather@^1.1.2":
   "integrity" "sha512-qBc0+XegKkX4JV6ykgScasguEV3RdlbYp9IrCMnbozngOgJ7vi76pyRpb+dnZ1AZVkYsbYnpdA9JXeP7EJbMCA=="
   "resolved" "https://registry.npmjs.org/react-native-feather/-/react-native-feather-1.1.2.tgz"
   "version" "1.1.2"
 
-"react-native-gesture-handler@>= 1.0.0", "react-native-gesture-handler@~2.8.0":
+"react-native-gesture-handler@>= 1.0.0", "react-native-gesture-handler@>=2.0.0", "react-native-gesture-handler@~2.8.0":
   "integrity" "sha512-poOSfz/w0IyD6Qwq7aaIRRfEaVTl1ecQFoyiIbpOpfNTjm2B1niY2FLrdVQIOtIOe+K9nH55Qal04nr4jGkHdQ=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz"
   "version" "2.8.0"
@@ -7032,7 +7039,7 @@
     "prop-types" "^15.6.2"
     "react-native-animatable" "1.3.3"
 
-"react-native-reanimated@>= 1.0.0", "react-native-reanimated@~2.12.0":
+"react-native-reanimated@>= 1.0.0", "react-native-reanimated@>=2.8.0", "react-native-reanimated@~2.12.0":
   "integrity" "sha512-nrlPyw+Hx9u4iJhZk9PoTvDo/QmVAd+bo7OK9Tv3hveNEF9++5oig/g3Uv9V93shy9avTYGsUprUvAEt/xdzeQ=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.12.0.tgz"
   "version" "2.12.0"
@@ -7109,7 +7116,7 @@
     "postcss-value-parser" "^4.2.0"
     "styleq" "^0.1.2"
 
-"react-native@*", "react-native@>=0.42.0", "react-native@>=0.46", "react-native@>=0.59.0", "react-native@>=0.65.0", "react-native@0.70.5":
+"react-native@*", "react-native@>=0.42.0", "react-native@>=0.46", "react-native@>=0.59.0", "react-native@>=0.64.0", "react-native@>=0.65.0", "react-native@0.70.5":
   "integrity" "sha512-5NZM80LC3L+TIgQX/09yiyy48S73wMgpIgN5cCv3XTMR394+KpDI3rBZGH4aIgWWuwijz31YYVF5504+9n2Zfw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.5.tgz"
   "version" "0.70.5"

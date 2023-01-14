@@ -12,6 +12,8 @@ export function Lesson() {
 //     dispatch({ type: 'reorderQuestions' });
 //   }, []);
 
+console.log(state.currentStage);
+
   return (
     <C.Container>
       {state.currentStage === 'theory' && <Theory />}
