@@ -34,8 +34,6 @@ export function End() {
 
   function getAccurance() {
     const accurance = (state.wrongsCount / state.questions.length) * 100;
-    console.log(state.wrongsCount / state.questions.length);
-
     return accurance === 0 ? '100%' : accurance + '%';
   }
 
@@ -71,7 +69,7 @@ export function End() {
 
   return (
     <C.Container>
-      <C.Message>Fase completada!</C.Message>
+      <C.Message animation={'fadeInDown'}>Fase completada!</C.Message>
       <LottieView
         ref={starsRef}
         loop={false}
@@ -99,6 +97,7 @@ export function End() {
           count={coins}
           color={theme.colors.yellow_300}
           icon={<Coin width={35} height={35} />}
+          delay={250}
           large
         />
         <Metric
@@ -106,18 +105,21 @@ export function End() {
           color={theme.colors.green_500}
           icon={<XP width={35} height={35} />}
           count={xp}
+          delay={500}
         />
         <Metric
           title={'Tempo'}
           color={theme.colors.blue_300}
           icon={<Time width={35} height={35} />}
           count={time}
+          delay={750}
         />
         <Metric
           title={'Precisão'}
           color={theme.colors.red_300}
           icon={<Accurance width={35} height={35} />}
           count={accurance}
+          delay={1000}
         />
       </C.Metrics>
       <Button title={'Continuar'} />

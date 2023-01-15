@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   width: 100%;
@@ -8,7 +9,7 @@ export const Container = styled.View`
   padding: 40px;
 `;
 
-export const Message = styled.Text`
+export const Message = styled(Animatable.Text)`
   font-family: ${props => props.theme.fonts.bold};
   color: ${props => props.theme.colors.white};
   font-size: 24px;

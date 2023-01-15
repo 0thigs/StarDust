@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
-export const Container = styled.View`
+export const Container = styled(Animatable.View)`
   border-width: 1px;
   border-color: ${props => props.color};
   border-radius: 8px;
