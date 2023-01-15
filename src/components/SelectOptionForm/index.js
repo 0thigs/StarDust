@@ -12,6 +12,7 @@ export function SelectOptionForm() {
   const [isIncremented, setIsncremented] = useState(false);
   const options = state.questions[state.currentQuestion].options;
   const answer = state.questions[state.currentQuestion].answer;
+  const delay = 100;
 
   function reorderOptions() {
     const reorderedOptions = options.sort(() => {
@@ -42,9 +43,9 @@ export function SelectOptionForm() {
     setIsAnswerWrong(true);
     if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
-      dispatch({ type: 'decrementLivesCount' });
       setIsncremented(true);
     }
+    if (isVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   function handleSelectOption(index) {
@@ -60,18 +61,19 @@ export function SelectOptionForm() {
     <C.Container>
       <C.Options>
         {reorderedOptions.map((option, index) => (
-          <C.Option
-            key={index}
-            currentOption={option}
-            onPress={() => handleSelectOption(option)}
-            selectedOption={selectedOption}
-            disabled={isVerified}
-            isAnswerWrong={isVerified && isAnswerWrong}
-          >
-            <C.Label currentOption={option} selectedOption={selectedOption}>
-              {option}
-            </C.Label>
-          </C.Option>
+          <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
+            <C.Option
+              currentOption={option}
+              onPress={() => handleSelectOption(option)}
+              selectedOption={selectedOption}
+              disabled={isVerified}
+              isAnswerWrong={isVerified && isAnswerWrong}
+            >
+              <C.Label currentOption={option} selectedOption={selectedOption}>
+                {option}
+              </C.Label>
+            </C.Option>
+          </C.OptionContainer>
         ))}
       </C.Options>
       <VerificationButton

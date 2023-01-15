@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   flex: 1;
@@ -6,6 +7,10 @@ export const Container = styled.View`
 `;
 
 export const Options = styled.View`
+  align-items: center;
+`;
+
+export const OptionContainer = styled(Animatable.View)`
   align-items: center;
 `;
 

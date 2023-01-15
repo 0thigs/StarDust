@@ -11,7 +11,7 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isVerified, is
       {isVerified && (
         <C.Feedback>
           {isAnswerWrong ? <X /> : <Check />}
-          <C.Message isAnswerWrong={isAnswerWrong}>
+          <C.Message animation={'bounceInUp'} isAnswerWrong={isAnswerWrong}>
             {isAnswerWrong ? 'Oops, tente denovo!' : 'Correto, parabéns!'}
           </C.Message>
         </C.Feedback>

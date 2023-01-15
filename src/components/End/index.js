@@ -56,7 +56,7 @@ export function End() {
   }
 
   function setStarsAnimation() {
-    const AnimationUnitInSeconds = 16;
+    const AnimationUnitInSeconds = 15.5;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
   }

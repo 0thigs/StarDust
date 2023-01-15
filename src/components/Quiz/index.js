@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
 import { LessonHeader } from '../LessonHeader';
 import { SelectOptionForm } from '../SelectOptionForm';
 import { useNavigation } from '@react-navigation/native';
-import * as C from './styles';
 import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
-import { useState } from 'react';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
@@ -33,17 +32,10 @@ export function Quiz() {
   return (
     <C.Container>
       <LessonHeader />
-      <C.QuestionStem>{question.stem}</C.QuestionStem>
-      {question.type === 'select-option' && (
-        <SelectOptionForm />
-      )}
-      {question.type === 'open' && <OpenForm answer={question.answer} />}
-      {question.type === 'drag-and-drop-list' && (
-        <DragAndDropListForm
-          items={question.items}
-          correctItemsSequence={question.correctItemsSequence}
-        />
-      )}
+      <C.QuestionStem animation={'fadeInDown'}>{question.stem}</C.QuestionStem>
+      {question.type === 'select-option' && <SelectOptionForm />}
+      {question.type === 'open' && <OpenForm />}
+      {question.type === 'drag-and-drop-list' && <DragAndDropListForm />}
     </C.Container>
   );
 }

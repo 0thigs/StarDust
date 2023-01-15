@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import DraggableFlatList, {
   OpacityDecorator,
   ScaleDecorator,
   ShadowDecorator,
 } from 'react-native-draggable-flatlist';
-import { useEffect } from 'react';
 
 export function DragAndDropListForm() {
   const [state, dispatch] = useLesson();
@@ -17,6 +17,7 @@ export function DragAndDropListForm() {
   const [isVerified, setIsVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
   const [items, setItems] = useState(state.questions[state.currentQuestion].items);
+  const ItemScale = useSharedValue(0.5);
   const correctItemsSequence = state.questions[state.currentQuestion].correctItemsSequence;
 
   function compareSequences(sequence1, sequence2) {
@@ -41,15 +42,25 @@ export function DragAndDropListForm() {
     setIsAnswerWrong(true);
     if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
-      dispatch({ type: 'decrementLivesCount' });
       setIsncremented(true);
     }
+    if (isVerified) dispatch({ type: 'decrementLivesCount' });
   }
+
+  const ItemAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: ItemScale.value }],
+    };
+  });
 
   useEffect(() => {
     const currentItems = state.questions[state.currentQuestion].items;
     if (currentItems) setItems(currentItems);
   }, [state.currentQuestion]);
+
+  useEffect(() => {
+    ItemScale.value = withTiming(1, { duration: 500, easing: Easing.bounce });
+  }, []);
 
   function renderItem({ item, drag }) {
     return (
@@ -57,7 +68,11 @@ export function DragAndDropListForm() {
         <OpacityDecorator>
           <ShadowDecorator>
             <C.ItemContainer onLongPress={drag} disabled={isVerified}>
-              <C.Item isAnswerWrong={isAnswerWrong} isVerified={isVerified}>
+              <C.Item
+                style={ItemAnimatedStyle}
+                isAnswerWrong={isAnswerWrong}
+                isVerified={isVerified}
+              >
                 <C.Decorator>:</C.Decorator>
                 <C.Label>{item.label}</C.Label>
                 <C.Decorator>:</C.Decorator>

@@ -34,9 +34,9 @@ export function OpenForm() {
     setIsAnswerWrong(true);
     if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
-      dispatch({ type: 'decrementLivesCount' });
       setIsncremented(true);
     }
+    if (isVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   return (

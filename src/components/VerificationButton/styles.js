@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   background-color: ${props => props.theme.colors.blue_700};
   border-top-width: 1px;
-  border-color:${props =>
+  border-color: ${props =>
     props.isAnswerWrong ? props.theme.colors.red_700 : props.theme.colors.green_300};
   align-items: center;
   padding: 12px;
@@ -18,7 +19,7 @@ export const Feedback = styled.View`
   align-items: center;
 `;
 
-export const Message = styled.Text`
+export const Message = styled(Animatable.Text)`
   color: ${props =>
     props.isAnswerWrong ? props.theme.colors.red_700 : props.theme.colors.green_300};
   font-family: ${props => props.theme.fonts.bold};
