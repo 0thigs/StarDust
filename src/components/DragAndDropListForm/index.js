@@ -9,13 +9,14 @@ import DraggableFlatList, {
   ScaleDecorator,
   ShadowDecorator,
 } from 'react-native-draggable-flatlist';
+import { useEffect } from 'react';
 
-export function DragAndDropListForm({ items, correctItemsSequence }) {
-  const [, dispatch] = useLesson();
-
+export function DragAndDropListForm() {
+  const [state, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [currentItems, setCurrentItems] = useState(items);
+  const [items, setItems] = useState(state.questions[state.currentQuestion].items);
+  const correctItemsSequence = state.questions[state.currentQuestion].correctItemsSequence;
 
   function compareSequences(sequence1, sequence2) {
     return JSON.stringify(sequence1) === JSON.stringify(sequence2);
@@ -24,7 +25,7 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
   function handleVerifyAnswer() {
     setIsVerified(!isVerified);
 
-    const userItemsSequence = currentItems.map(item => item.id);
+    const userItemsSequence = items.map(item => item.id);
     const areTheTwoSequencesEqual = compareSequences(userItemsSequence, correctItemsSequence);
 
     if (areTheTwoSequencesEqual) {
@@ -42,6 +43,11 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
       dispatch({ type: 'decrementLivesCount' });
     }
   }
+
+  useEffect(() => {
+    const currentItems = state.questions[state.currentQuestion].items;
+    if (currentItems) setItems(currentItems);
+  }, [state.currentQuestion]);
 
   function renderItem({ item, drag }) {
     return (
@@ -65,9 +71,9 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
     <C.Container>
       <GestureHandlerRootView>
         <DraggableFlatList
-          data={currentItems}
+          data={items}
           keyExtractor={item => item.id}
-          onDragEnd={({ data }) => setCurrentItems(data)}
+          onDragEnd={({ data }) => setItems(data)}
           renderItem={renderItem}
           containerStyle={{ alignItems: 'center' }}
         />
@@ -77,7 +83,7 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
         verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
         isVerified={isVerified}
-        isAnswered={!!currentItems}
+        isAnswered={!!items}
       />
     </C.Container>
   );

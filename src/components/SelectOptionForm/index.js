@@ -3,13 +3,14 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function SelectOptionForm({ options, answer }) {
-  const [, dispatch] = useLesson();
-
+export function SelectOptionForm() {
+  const [state, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const options = state.questions[state.currentQuestion].options;
+  const answer = state.questions[state.currentQuestion].answer;
 
   function reorderOptions() {
     const reorderedOptions = options.sort(() => {
@@ -38,8 +39,10 @@ export function SelectOptionForm({ options, answer }) {
       return;
     }
     setIsAnswerWrong(true);
-    dispatch({ type: 'incrementWrongsCount' });
-    dispatch({ type: 'decrementLivesCount' });
+    if (isVerified) {
+      dispatch({ type: 'incrementWrongsCount' });
+      dispatch({ type: 'decrementLivesCount' });
+    }
   }
 
   function handleSelectOption(index) {
@@ -47,11 +50,9 @@ export function SelectOptionForm({ options, answer }) {
   }
 
   useEffect(() => {
-    reorderOptions();
-    console.log("renderizou");
-  }, []);
-
-  
+    const currentOptions = state.questions[state.currentQuestion].options;
+    if (currentOptions) reorderOptions();
+  }, [state.currentQuestion]);
 
   return (
     <C.Container>

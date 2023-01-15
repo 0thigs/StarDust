@@ -12,7 +12,7 @@ const initialState = {
   wrongsCount: 0,
   livesCount: 5,
   secondsCount: 0,
-  time: ''
+  time: '',
 };
 
 const LessonReducer = (state, action) => {
@@ -46,16 +46,21 @@ const LessonReducer = (state, action) => {
         ...state,
         wrongsCount: state.wrongsCount + 1,
       };
-      case 'decrementLivesCount':
+    case 'decrementLivesCount':
       return {
         ...state,
         livesCount: state.livesCount - 1,
       };
-      case 'incrementSecondsCount':
-        return {
-          ...state,
-          secondsCount: state.secondsCount + 1,
-        };
+    case 'incrementSecondsCount':
+      return {
+        ...state,
+        secondsCount: state.secondsCount + 1,
+      };
+    case 'setTime':
+      return {
+        ...state,
+        time: action.payload,
+      };
     default:
       return state;
   }

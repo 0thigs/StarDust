@@ -3,12 +3,12 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function OpenForm({ answer }) {
-  const [, dispatch] = useLesson();
-
+export function OpenForm() {
+  const [state, dispatch] = useLesson();
   const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const answer = state.questions[state.currentQuestion].answer;
 
   function resetAnswer() {
     if (isVerified && userAnswer) {
@@ -32,9 +32,9 @@ export function OpenForm({ answer }) {
 
     setIsAnswerWrong(true);
     if (isVerified) {
-        dispatch({ type: 'incrementWrongsCount' });
-        dispatch({ type: 'decrementLivesCount' });
-      }
+      dispatch({ type: 'incrementWrongsCount' });
+      dispatch({ type: 'decrementLivesCount' });
+    }
   }
 
   return (

@@ -6,37 +6,36 @@ import { useNavigation } from '@react-navigation/native';
 import * as C from './styles';
 import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
+import { useState } from 'react';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
-  const question = state.questions[state.currentQuestion];
-  const wrongsCount = state.wrongsCount;
+  const [question, setQuestion] = useState(state.questions[state.currentQuestion]);
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (state.currentStage === 'end') {
-        
-        return
-    }
-    setTimeout(() => dispatch({ type: 'incrementSecondsCount', payload: state.secondsCount + 1 }), 1000);
-    console.log(state.secondsCount);
-  }, [state.secondsCount]);
+    setTimeout(() => dispatch({ type: 'incrementSecondsCount' }), 1000);
+  }, [state.currentStage, state.secondsCount]);
 
   useEffect(() => {
-    // if (wrongsCount === 5) {
-    //   navigation.reset({
-    //     routes: [{ name: 'DrawerRoutes' }],
-    //   });
-    // }
-  }, [wrongsCount]);
+    if (state.wrongsCount === 5) {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }
+  }, [state.wrongsCount]);
+
+  useEffect(() => {
+    setQuestion(state.questions[state.currentQuestion]);
+  }, [state.currentQuestion]);
 
   return (
     <C.Container>
       <LessonHeader />
       <C.QuestionStem>{question.stem}</C.QuestionStem>
       {question.type === 'select-option' && (
-        <SelectOptionForm options={question.options} answer={question.answer} />
+        <SelectOptionForm />
       )}
       {question.type === 'open' && <OpenForm answer={question.answer} />}
       {question.type === 'drag-and-drop-list' && (

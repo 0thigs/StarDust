@@ -1,7 +1,10 @@
+import { useState, useEffect, useRef } from 'react';
 import * as C from './styles';
 
 import { Metric } from '../Metric';
 import { Button } from '../Button';
+
+import { useLesson } from '../../hooks/useLesson';
 
 import theme from '../../global/styles/theme';
 
@@ -11,26 +14,77 @@ import Accurance from '../../assets/GlobalAssets/accurance-icon.svg';
 import Time from '../../assets/GlobalAssets/time-icon.svg';
 
 import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
-import Stars from '../../assets/LessonAssets/stars-animation.json'
+import Stars from '../../assets/LessonAssets/stars-animation.json';
 import LottieView from 'lottie-react-native';
 
 export function End() {
+  const [state] = useLesson();
+  const starsRef = useRef();
+
+  let coins = 0;
+  let xp = 0;
+  let time = '';
+  let accurance = '';
+
+  function convertSecondsToTime(seconds) {
+    const date = new Date(0);
+    date.setSeconds(seconds);
+    const time = date.toISOString().substring(14, 19);
+    return time;
+  }
+
+  function getAccurance() {
+    const accurance = (state.wrongsCount / state.questions.length) * 100;
+    return accurance === 0 ? '100%' : accurance + '%';
+  }
+
+  function getCoins() {
+    let maxCoins = 50;
+    for (let i = 0; i < state.wrongsCount; i++) {
+      maxCoins -= 5;
+    }
+    return maxCoins;
+  }
+
+  function getXp() {
+    let maxXp = 100;
+    for (let i = 0; i < state.wrongsCount; i++) {
+      maxXp -= 5;
+    }
+    return maxXp;
+  }
+
+  function setStarsAnimation() {
+    const AnimationUnitInSeconds = 16;
+    const totalStars = parseInt(accurance) * 5 / 100;
+    starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
+  }
+
+  useEffect(() => {
+    coins = getCoins();
+    xp = getXp();
+    time = convertSecondsToTime(state.secondsCount);
+    accurance = getAccurance();
+    setStarsAnimation();
+  }, []);
+
   return (
     <C.Container>
       <C.Message>Fase completada!</C.Message>
       <LottieView
+        ref={starsRef}
+        loop={false}
+        duration={2500}
         source={Stars}
-        autoPlay={true}
-        loop={true}
         style={{ width: 50, height: 50 }}
         colorFilters={[
-            { keypath: 'Branco Sólido 1', color: theme.colors.background },
-            { keypath: 'star1', color: theme.colors.yellow_300 },
-            { keypath: 'star2', color: theme.colors.yellow_300 },
-            { keypath: 'star3', color: theme.colors.yellow_300 },
-            { keypath: 'star4', color: theme.colors.yellow_300 },
-            { keypath: 'star5', color: theme.colors.yellow_300 },
-          ]}
+          { keypath: 'Branco Sólido 1', color: theme.colors.background },
+          { keypath: 'star1', color: theme.colors.yellow_300 },
+          { keypath: 'star2', color: theme.colors.yellow_300 },
+          { keypath: 'star3', color: theme.colors.yellow_300 },
+          { keypath: 'star4', color: theme.colors.yellow_300 },
+          { keypath: 'star5', color: theme.colors.yellow_300 },
+        ]}
       />
       <LottieView
         source={Astronaut}
@@ -41,28 +95,28 @@ export function End() {
       <C.Metrics>
         <Metric
           title={'Poeira estelar'}
-          count={'40'}
+          count={coins}
           color={theme.colors.yellow_300}
           icon={<Coin width={35} height={35} />}
           large
         />
         <Metric
           title={'Total XP'}
-          color={theme.colors.blue_300}
+          color={theme.colors.green_500}
           icon={<XP width={35} height={35} />}
-          count={'20'}
+          count={xp}
         />
         <Metric
           title={'Tempo'}
-          color={theme.colors.green_500}
+          color={theme.colors.blue_300}
           icon={<Time width={35} height={35} />}
-          count={'1:45'}
+          count={time}
         />
         <Metric
           title={'Precisão'}
           color={theme.colors.red_300}
           icon={<Accurance width={35} height={35} />}
-          count={'87%'}
+          count={accurance}
         />
       </C.Metrics>
       <Button title={'Continuar'} />
