@@ -9,6 +9,7 @@ export function SelectOptionForm() {
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isIncremented, setIsncremented] = useState(false);
   const options = state.questions[state.currentQuestion].options;
   const answer = state.questions[state.currentQuestion].answer;
 
@@ -39,9 +40,10 @@ export function SelectOptionForm() {
       return;
     }
     setIsAnswerWrong(true);
-    if (isVerified) {
+    if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       dispatch({ type: 'decrementLivesCount' });
+      setIsncremented(true);
     }
   }
 

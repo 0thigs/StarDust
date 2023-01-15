@@ -8,6 +8,7 @@ export function OpenForm() {
   const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isIncremented, setIsncremented] = useState(false);
   const answer = state.questions[state.currentQuestion].answer;
 
   function resetAnswer() {
@@ -31,9 +32,10 @@ export function OpenForm() {
     }
 
     setIsAnswerWrong(true);
-    if (isVerified) {
+    if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       dispatch({ type: 'decrementLivesCount' });
+      setIsncremented(true);
     }
   }
 

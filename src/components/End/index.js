@@ -19,12 +19,11 @@ import LottieView from 'lottie-react-native';
 
 export function End() {
   const [state] = useLesson();
+  const [coins, setCoins] = useState();
+  const [xp, setXp] = useState();
+  const [time, setTime] = useState();
+  const [accurance, setAccurance] = useState();
   const starsRef = useRef();
-
-  let coins = 0;
-  let xp = 0;
-  let time = '';
-  let accurance = '';
 
   function convertSecondsToTime(seconds) {
     const date = new Date(0);
@@ -35,6 +34,8 @@ export function End() {
 
   function getAccurance() {
     const accurance = (state.wrongsCount / state.questions.length) * 100;
+    console.log(state.wrongsCount / state.questions.length);
+
     return accurance === 0 ? '100%' : accurance + '%';
   }
 
@@ -56,15 +57,15 @@ export function End() {
 
   function setStarsAnimation() {
     const AnimationUnitInSeconds = 16;
-    const totalStars = parseInt(accurance) * 5 / 100;
+    const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
   }
 
   useEffect(() => {
-    coins = getCoins();
-    xp = getXp();
-    time = convertSecondsToTime(state.secondsCount);
-    accurance = getAccurance();
+    setCoins(getCoins());
+    setXp(getXp());
+    setTime(convertSecondsToTime(state.secondsCount));
+    setAccurance(getAccurance());
     setStarsAnimation();
   }, []);
 

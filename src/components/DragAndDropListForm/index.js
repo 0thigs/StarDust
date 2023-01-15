@@ -15,6 +15,7 @@ export function DragAndDropListForm() {
   const [state, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isIncremented, setIsncremented] = useState(false);
   const [items, setItems] = useState(state.questions[state.currentQuestion].items);
   const correctItemsSequence = state.questions[state.currentQuestion].correctItemsSequence;
 
@@ -38,9 +39,10 @@ export function DragAndDropListForm() {
     }
 
     setIsAnswerWrong(true);
-    if (isVerified) {
+    if (isVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       dispatch({ type: 'decrementLivesCount' });
+      setIsncremented(true);
     }
   }
 
