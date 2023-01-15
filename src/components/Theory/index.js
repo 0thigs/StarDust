@@ -20,26 +20,30 @@ export function Theory() {
     dispatch({ type: 'changeStage' });
   }
 
+  function getAnimation(index) {
+    return index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight';
+  }
+
   return (
     <C.Container>
       <LessonHeader />
-      <C.PhaseTitle>Introdução</C.PhaseTitle>
+      <C.Title animation={'fadeInDown'}>Introdução</C.Title>
       <C.Theories showsVerticalScrollIndicator={false}>
         {currentTheories.map((theory, index) => (
           <C.Theory key={index}>
             {theory.type === 'default' && (
-              <C.TextContainer>
+              <C.TextContainer animation={getAnimation(index)}>
                 <C.DefaultText>{theory.body}</C.DefaultText>
               </C.TextContainer>
             )}
             {theory.type === 'alert' && (
-              <C.TextContainer>
+              <C.TextContainer animation={getAnimation(index)}>
                 <AlertIcon />
                 <C.AlertText>{theory.body}</C.AlertText>
               </C.TextContainer>
             )}
             {theory.type === 'example' && (
-              <C.ExampleTextContainer>
+              <C.ExampleTextContainer animation={getAnimation(index)}>
                 <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
                 <C.ExempleText>
                   <RenderHTML

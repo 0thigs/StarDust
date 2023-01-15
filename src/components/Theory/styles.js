@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   flex: 1;
@@ -6,7 +7,7 @@ export const Container = styled.View`
   margin-top: 40px;
 `;
 
-export const PhaseTitle = styled.Text`
+export const Title = styled(Animatable.Text)`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 20px;
@@ -18,7 +19,7 @@ export const Theories = styled.ScrollView`
 
 export const Theory = styled.View``;
 
-export const TextContainer = styled.View`
+export const TextContainer = styled(Animatable.View)`
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -45,7 +46,7 @@ export const AlertText = styled.Text`
   margin-left: 18px;
 `;
 
-export const ExampleTextContainer = styled.View`
+export const ExampleTextContainer = styled(Animatable.View)`
   width: 100%;
   margin: 16px 0;
   justify-content: center;
