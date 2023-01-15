@@ -1,12 +1,9 @@
 import styled from 'styled-components/native';
-import { css } from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
   width: 350px;
   margin-top: 40px;
-  background-color: red;
-
 `;
 
 export const PhaseTitle = styled.Text`
@@ -15,12 +12,11 @@ export const PhaseTitle = styled.Text`
   font-size: 20px;
 `;
 
-export const Theories = styled.FlatList.attrs({
-  contentContainerStyle: () => css`
-    width: 100%;
-    background-color: red;
-  `,
-})``;
+export const Theories = styled.ScrollView`
+  width: 100%;
+`;
+
+export const Theory = styled.View``;
 
 export const TextContainer = styled.View`
   width: 100%;
@@ -62,10 +58,5 @@ export const ExempleTextTitle = styled.Text`
 
 export const ExempleText = styled.Text`
   background-color: ${props => props.theme.colors.green_900};
-  color: ${props => props.theme.colors.green_500};
-  font-family: ${props => props.theme.fonts.regular};
   border-radius: 10px;
-  padding: 16px;
-  margin-left: 18px;
-  margin-top: 4px;
 `;

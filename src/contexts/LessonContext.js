@@ -6,12 +6,13 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[0],
+  currentStage: stages[1],
   questions,
   currentQuestion: 0,
   wrongsCount: 0,
   livesCount: 5,
   secondsCount: 0,
+  time: ''
 };
 
 const LessonReducer = (state, action) => {
@@ -19,7 +20,7 @@ const LessonReducer = (state, action) => {
     case 'changeStage':
       return {
         ...state,
-        currentStage: stages[0],
+        currentStage: stages[1],
       };
     case 'reorderQuestions':
       const reorderedQuestions = questions.sort(() => {
@@ -53,7 +54,7 @@ const LessonReducer = (state, action) => {
       case 'incrementSecondsCount':
         return {
           ...state,
-          secondsCount: state.secondsCount - 1,
+          secondsCount: state.secondsCount + 1,
         };
     default:
       return state;

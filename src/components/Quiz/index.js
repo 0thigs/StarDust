@@ -15,7 +15,11 @@ export function Quiz() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    setTimeout(dispatch({ type: 'incrementSecondsCount', payload: state.secondsCount + 1 }), 1000);
+    if (state.currentStage === 'end') {
+        
+        return
+    }
+    setTimeout(() => dispatch({ type: 'incrementSecondsCount', payload: state.secondsCount + 1 }), 1000);
     console.log(state.secondsCount);
   }, [state.secondsCount]);
 
