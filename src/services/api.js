@@ -41,7 +41,7 @@ export default {
   },
 
   updateLives: async (lives, userId) => {
-    const { data, error } = await supabase.from('users').update({ lives }).eq('id', userId);
+    const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
     if (error) {
         console.log(error);
       return error.message;
@@ -49,15 +49,21 @@ export default {
   },
 
   updateCoins: async (coins, userId) => {
-    const { data, error } = await supabase.from('users').update({ coins }).eq('id', userId);
+    const { error } = await supabase.from('users').update({ coins }).eq('id', userId);
     if (error) {
       return error.message;
     }
-    console.log(userId);
   },
 
   updateXp: async (xp, userId) => {
-    const { data, error } = await supabase.from('users').update({ xp }).eq('id', userId);
+    const { error } = await supabase.from('users').update({ xp }).eq('id', userId);
+    if (error) {
+      return error.message;
+    }
+  },
+
+  updateUnlockedStarsIds: async (unlockedStarsIds, userId) => {
+    const { error } = await supabase.from('users').update({ unlockedStarsIds }).eq('id', userId);
     if (error) {
       return error.message;
     }

@@ -11,6 +11,7 @@ const fakeUser = {
   coins: 20,
   lives: 5,
   xp: 0,
+  unlockedStarsIds: [1, 2],
 };
 
 export function AuthContextProvider({ children }) {
@@ -33,7 +34,7 @@ export function AuthContextProvider({ children }) {
     if (error) {
       return error.message;
     }
-    const newUser = { name, email, coins: 20, lives: 5, xp: 0 };
+    const newUser = { name, email, coins: 20, lives: 5, xp: 0, unlockedStarsIds: [1] };
     const response = await api.addUser(newUser);
     return response;
   }

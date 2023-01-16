@@ -3,15 +3,13 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function SelectOptionForm() {
-  const [state, dispatch] = useLesson();
+export function SelectOptionForm({options, answer}) {
+  const [, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
-  const options = state.questions[state.currentQuestion].options;
-  const answer = state.questions[state.currentQuestion].answer;
   const delay = 100;
 
   function reorderOptions() {
@@ -49,13 +47,12 @@ export function SelectOptionForm() {
   }
 
   function handleSelectOption(index) {
-    setSelectedOption(index);
+    setSelectedOption(index)
   }
 
   useEffect(() => {
-    const currentOptions = state.questions[state.currentQuestion].options;
-    if (currentOptions) reorderOptions();
-  }, [state.currentQuestion]);
+   reorderOptions();
+  }, [options]);
 
   return (
     <C.Container>

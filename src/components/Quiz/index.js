@@ -6,11 +6,11 @@ import { SelectOptionForm } from '../SelectOptionForm';
 import { useNavigation } from '@react-navigation/native';
 import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
+import { questions } from '../../utils/questions';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
-  const [question, setQuestion] = useState(state.questions[state.currentQuestion]);
-
+  const [currentQuestion, setCurrentQuestion] = useState([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -26,16 +26,25 @@ export function Quiz() {
   }, [state.wrongsCount]);
 
   useEffect(() => {
-    setQuestion(state.questions[state.currentQuestion]);
+    setCurrentQuestion(state.questions[state.currentQuestion]);
   }, [state.currentQuestion]);
 
   return (
     <C.Container>
       <LessonHeader />
-      <C.QuestionStem animation={'fadeInDown'}>{question.stem}</C.QuestionStem>
-      {question.type === 'select-option' && <SelectOptionForm />}
-      {question.type === 'open' && <OpenForm />}
-      {question.type === 'drag-and-drop-list' && <DragAndDropListForm />}
+      <C.QuestionStem animation={'fadeInDown'}>{currentQuestion.stem}</C.QuestionStem>
+      {currentQuestion.type === 'select-option' && (
+        <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
+      )}
+      {currentQuestion.type === 'open' && (
+        <OpenForm answer={currentQuestion.answer} />
+      ) }
+      {currentQuestion.type === 'drag-and-drop-list' && (
+        <DragAndDropListForm
+          items={currentQuestion.items}
+          correctItemsSequence={currentQuestion.correctItemsSequence}
+        />
+      )}
     </C.Container>
   );
 }

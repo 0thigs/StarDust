@@ -6,17 +6,15 @@ import { TransitionScreenAnimation } from '../../components/TransitionScreenAnim
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 
+import { useAuth } from '../../hooks/useAuth';
 import api from '../../services/api';
 
 export function Home() {
+  const { user } = useAuth();
+
   const [planets, setPlanets] = useState([]);
   const [stars, setStars] = useState([]);
   const [isEndTrasition, setIsEndTransition] = useState(false);
-
-  
-  const user = {
-    unlockedStarsIds: [1],
-  };
 
   function verifyIfIsStarUnlocked(star) {
     if (user.unlockedStarsIds.includes(star.id)) {
@@ -40,6 +38,7 @@ export function Home() {
     getPlanets();
     getStars();
     setTimeout(() => setIsEndTransition(true), 3000);
+    console.log(user);
   }, []);
 
   return (

@@ -40,7 +40,7 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
   });
 
   useEffect(() => {
-    PlanetSignPosition.value = withRepeat(withTiming(5, { duration: 1000 }), -1, true);
+    PlanetSignPosition.value = withRepeat(withTiming(5, { duration: 500 }), -1, true);
     PlanetInfoScale.value = withTiming(1, { duration: 800, easing: Easing.bounce });
     getCurrentPlanetStars();
   }, []);
@@ -58,7 +58,12 @@ export function Planet({ title, id, CurrentPlanetStarsIds, stars }) {
         data={currentPlanetStars}
         keyExtractor={star => star.id}
         renderItem={({ item }) => (
-          <Star name={item.title} number={item.number} isDisabled={!item.isUnlocked} />
+          <Star
+            id={item.id}
+            name={item.title}
+            number={item.number}
+            isDisabled={!item.isUnlocked}
+          />
         )}
       />
     </C.Container>

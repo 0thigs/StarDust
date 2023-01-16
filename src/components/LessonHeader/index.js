@@ -17,6 +17,7 @@ export function LessonHeader() {
   const { user, setUser } = useAuth();
   const [state] = useLesson();
   const navigation = useNavigation();
+  
 
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);

@@ -1,11 +1,25 @@
+import { useEffect } from 'react';
 import * as C from './styles.js';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
 import { useAuth } from '../../hooks/useAuth.js';
+import { useLesson } from '../../hooks/useLesson.js';
 
 export function HeaderStatus() {
   const { user } = useAuth();
+  const [state] = useLesson();
+
+  async function updateStatus() {
+    if (state.livesCount < user.lives) {
+      await api.updateLives(state.livesCount, user.id);
+      setUser({ ...user, lives: state.livesCount });
+    }
+  }
+
+  useEffect(() => {
+    updateStatus();
+  }, []);
 
   return (
     <C.Container>

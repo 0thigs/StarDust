@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
@@ -9,12 +9,14 @@ import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
 import { useLesson } from '../../hooks/useLesson';
 import { theories } from '../../utils/theories';
+
 import RenderHTML from 'react-native-render-html';
 
-export function Theory() {
-  const [state, dispatch] = useLesson();
-  const [currentTheories, setCurrentTheories] = useState(theories[0].texts);
+export function Theory({ starId }) {
+  const [, dispatch] = useLesson();
+  const [texts, setTexts] = useState([]);
   const { width } = useWindowDimensions();
+
 
   function handlePracticeButton() {
     dispatch({ type: 'changeStage' });
@@ -24,12 +26,16 @@ export function Theory() {
     return index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight';
   }
 
+  useEffect(() => {
+    setTexts(theories.filter(theory => theory.starId === starId)[0].texts);
+  }, []);
+
   return (
     <C.Container>
       <LessonHeader />
       <C.Title animation={'fadeInDown'}>Introdução</C.Title>
       <C.Theories showsVerticalScrollIndicator={false}>
-        {currentTheories.map((theory, index) => (
+        {texts.map((theory, index) => (
           <C.Theory key={index}>
             {theory.type === 'default' && (
               <C.TextContainer animation={getAnimation(index)}>
@@ -59,7 +65,6 @@ export function Theory() {
                 </C.ExempleText>
               </C.ExampleTextContainer>
             )}
-            {console.log(theory)}
           </C.Theory>
         ))}
         <Button title={'Praticar'} onPress={handlePracticeButton} />

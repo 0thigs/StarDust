@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 
 import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
@@ -13,17 +14,16 @@ import { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-
 import { useNavigation } from '@react-navigation/core';
 
 export function Star({ id, name, number, isDisabled }) {
+  const { user, setUser } = useAuth();
   const starAnimation = useRef(null);
-
   const navigation = useNavigation();
 
   function HandleStarClick() {
     starAnimation.current.play(10, 50);
+
+    setUser({...user, starId: id})
     setTimeout(() => {
-      navigation.reset({
-        routes: [{ name: 'Lesson' }],
-        params: [{ starId: id}]
-      });
+      navigation.navigate('Lesson');
     }, 500);
   }
 

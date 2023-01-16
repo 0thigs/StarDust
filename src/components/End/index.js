@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import * as C from './styles';
-
-import { Metric } from '../Metric';
-import { Button } from '../Button';
+import theme from '../../global/styles/theme';
 
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
 
-import theme from '../../global/styles/theme';
+import { Metric } from '../Metric';
+import { Button } from '../Button';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
@@ -24,7 +23,7 @@ import { useNavigation } from '@react-navigation/core';
 
 export function End({ starId }) {
   const { user, setUser } = useAuth();
-  const [state] = useLesson();
+  const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
   const [time, setTime] = useState('');
@@ -38,15 +37,32 @@ export function End({ starId }) {
 
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
-    setUser({ ...user, coins: updatedCoins, xp: updatedXp, lives: state.livesCount });
+    const updatedUnlockedStarsIds = [...user.unlockedStarsIds, starId + 1];
+    console.log({
+      ...user,
+      coins: updatedCoins,
+      xp: updatedXp,
+      lives: state.livesCount,
+      unlockedStarsIds: updatedUnlockedStarsIds,
+    });
+    setUser({
+      ...user,
+      coins: updatedCoins,
+      xp: updatedXp,
+      lives: state.livesCount,
+      unlockedStarsIds: updatedUnlockedStarsIds,
+    });
+
     await api.updateCoins(updatedCoins, user.id);
     await api.updateXp(updatedXp, user.id);
+    await api.updateUnlockedStarsIds(updatedUnlockedStarsIds, user.id);
     if (state.livesCount < user.lives) {
       await api.updateLives(state.livesCount, user.id);
       setUser({ ...user, lives: state.livesCount });
     }
 
     setTimeout(() => {
+      dispatch({ type: 'resetState' });
       navigation.reset({
         routes: [{ name: 'DrawerRoutes' }],
       });
@@ -61,12 +77,11 @@ export function End({ starId }) {
   }
 
   function getAccurance() {
-    const accurance = (state.wrongsCount / state.questions.length) * 100;
+    const accurance = ((state.questions.length - state.wrongsCount) / state.questions.length) * 100;
     return accurance === 0 ? '100%' : accurance + '%';
   }
 
   function getCoins() {
-    console.log(state.wrongsCount);
     let maxCoins = 50;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxCoins -= 5;
@@ -83,7 +98,8 @@ export function End({ starId }) {
   }
 
   function setStarsAnimation() {
-    const AnimationUnitInSeconds = 22;
+    console.log(getAccurance());
+    const AnimationUnitInSeconds = 15.4;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
   }

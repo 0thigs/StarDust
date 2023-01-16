@@ -6,20 +6,22 @@ export const LessonContext = createContext();
 
 const stages = ['theory', 'quiz', 'end'];
 
+const initialState = {
+    currentStage: stages[0],
+    questions: [],
+    currentQuestion: 0,
+    wrongsCount: 0,
+    livesCount: 0,
+    secondsCount: 0,
+    time: '',
+  };
+
 const LessonReducer = (state, action) => {
   switch (action.type) {
     case 'changeStage':
       return {
         ...state,
         currentStage: stages[1],
-      };
-    case 'reorderQuestions':
-      const reorderedQuestions = questions.sort(() => {
-        return Math.random() - 0.5;
-      });
-      return {
-        ...state,
-        questions: reorderedQuestions,
       };
     case 'changeQuestion':
       const nextQuestion = state.currentQuestion + 1;
@@ -52,6 +54,8 @@ const LessonReducer = (state, action) => {
         ...state,
         time: action.payload,
       };
+    case 'resetState':
+      return initialState;
     default:
       return state;
   }
@@ -59,16 +63,10 @@ const LessonReducer = (state, action) => {
 
 export const LessonProvider = ({ children }) => {
   const { user } = useAuth();
+  const currentQuestions = questions.filter(question => question.starId === user.starId);
 
-  const initialState = {
-    currentStage: stages[1],
-    questions,
-    currentQuestion: 0,
-    wrongsCount: 0,
-    livesCount: user.lives,
-    secondsCount: 0,
-    time: '',
-  };
+   initialState.livesCount = user.lives;
+   initialState.questions = currentQuestions;
 
   const value = useReducer(LessonReducer, initialState);
 
