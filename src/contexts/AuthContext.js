@@ -1,13 +1,25 @@
 import { createContext, useEffect, useState } from 'react';
 import api from '../services/api';
-import { supabase } from '../services/supabase';
 
 export const AuthContext = createContext();
 
-export const userId = '327211d0-1e4b-4ee3-92d9-5dbda4ab9422';
+const fakeUser = {
+  id: '327211d0-1e4b-4ee3-92d9-5dbda4ab9422',
+  name: 'John Petros',
+  email: 'joaopcarvalho.cds@gmail.com',
+  avatar: 'https://github.com/JohnPetros.png',
+  coins: 20,
+  lives: 5,
+  xp: 0,
+};
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(fakeUser);
+
+  async function getUser(id) {
+    const user = await api.getUser(id);
+    return user;
+  }
 
   async function signUp({ name, email, password }) {
     const {
@@ -21,9 +33,7 @@ export function AuthContextProvider({ children }) {
     if (error) {
       return error.message;
     }
-
-    const newUser = { id: user.id, email, name };
-    setUser(newUser);
+    const newUser = { name, email, coins: 20, lives: 5, xp: 0 };
     const response = await api.addUser(newUser);
     return response;
   }
@@ -40,10 +50,8 @@ export function AuthContextProvider({ children }) {
     if (error) {
       return error.message;
     }
-
-    const currentUser = await api.getUser(user.id);
-    setUser(currentUser);
-    // return data;
+    const signedUser = await api.getUser(user.id);
+    return user;
   }
 
   async function signOut() {

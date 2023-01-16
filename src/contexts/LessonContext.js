@@ -1,19 +1,10 @@
 import { createContext, useReducer } from 'react';
+import { useAuth } from '../hooks/useAuth';
 import { questions } from '../utils/questions';
 
 export const LessonContext = createContext();
 
 const stages = ['theory', 'quiz', 'end'];
-
-const initialState = {
-  currentStage: stages[2],
-  questions,
-  currentQuestion: 0,
-  wrongsCount: 0,
-  livesCount: 5,
-  secondsCount: 0,
-  time: '',
-};
 
 const LessonReducer = (state, action) => {
   switch (action.type) {
@@ -67,6 +58,18 @@ const LessonReducer = (state, action) => {
 };
 
 export const LessonProvider = ({ children }) => {
+  const { user } = useAuth();
+
+  const initialState = {
+    currentStage: stages[1],
+    questions,
+    currentQuestion: 0,
+    wrongsCount: 0,
+    livesCount: user.lives,
+    secondsCount: 0,
+    time: '',
+  };
+
   const value = useReducer(LessonReducer, initialState);
 
   return <LessonContext.Provider value={value}>{children}</LessonContext.Provider>;

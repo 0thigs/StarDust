@@ -5,11 +5,16 @@ import CloseButtonIcon from '../../assets/GlobalAssets/close-button-icon.svg';
 import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
 import Rocket from '../../assets/GlobalAssets/rocket.png';
 
+import api from '../../services/api';
+
 import { useLesson } from '../../hooks/useLesson';
+import { useAuth } from '../../hooks/useAuth';
+
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
 export function LessonHeader() {
+  const { user, setUser } = useAuth();
   const [state] = useLesson();
   const navigation = useNavigation();
 
@@ -22,7 +27,11 @@ export function LessonHeader() {
     };
   });
 
-  function handleCloseButton() {
+  async function handleCloseButton() {
+    if (state.livesCount < user.lives) {
+      await api.updateLives(state.livesCount, user.id);
+      setUser({ ...user, lives: state.livesCount });
+    }
     navigation.reset({
       routes: [{ name: 'DrawerRoutes' }],
     });

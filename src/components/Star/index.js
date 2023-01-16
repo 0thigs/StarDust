@@ -12,7 +12,7 @@ import LottieView from 'lottie-react-native';
 import { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/core';
 
-export function Star({ name, number, isDisabled }) {
+export function Star({ id, name, number, isDisabled }) {
   const starAnimation = useRef(null);
 
   const navigation = useNavigation();
@@ -22,6 +22,7 @@ export function Star({ name, number, isDisabled }) {
     setTimeout(() => {
       navigation.reset({
         routes: [{ name: 'Lesson' }],
+        params: [{ starId: id}]
       });
     }, 500);
   }

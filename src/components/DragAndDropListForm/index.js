@@ -6,9 +6,8 @@ import { useLesson } from '../../hooks/useLesson';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import DraggableFlatList, {
-  OpacityDecorator,
-  ScaleDecorator,
   ShadowDecorator,
+  useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
 
 export function DragAndDropListForm() {
@@ -63,24 +62,22 @@ export function DragAndDropListForm() {
   }, []);
 
   function renderItem({ item, drag }) {
+    const { isActive } = useOnCellActiveAnimation();
     return (
-      <ScaleDecorator>
-        <OpacityDecorator>
-          <ShadowDecorator>
-            <C.ItemContainer onLongPress={drag} disabled={isVerified}>
-              <C.Item
-                style={ItemAnimatedStyle}
-                isAnswerWrong={isAnswerWrong}
-                isVerified={isVerified}
-              >
-                <C.Decorator>:</C.Decorator>
-                <C.Label>{item.label}</C.Label>
-                <C.Decorator>:</C.Decorator>
-              </C.Item>
-            </C.ItemContainer>
-          </ShadowDecorator>
-        </OpacityDecorator>
-      </ScaleDecorator>
+      <ShadowDecorator>
+        <C.ItemContainer onLongPress={drag} disabled={isVerified}>
+          <C.Item
+            style={ItemAnimatedStyle}
+            isActive={isActive}
+            isAnswerWrong={isAnswerWrong}
+            isVerified={isVerified}
+          >
+            <C.Decorator>:</C.Decorator>
+            <C.Label>{item.label}</C.Label>
+            <C.Decorator>:</C.Decorator>
+          </C.Item>
+        </C.ItemContainer>
+      </ShadowDecorator>
     );
   }
 

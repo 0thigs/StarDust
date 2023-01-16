@@ -35,4 +35,38 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 2,
+    texts: [
+      {
+        type: 'default',
+        body: 'Os programas de computadores nada mais são do que algoritmos escritos numa linguagem de programação (PHP, Python, JavaScript, entre outras) e que são interpretados e executados por uma máquina, no caso um computador.',
+      },
+      {
+        type: 'default',
+        body: 'Os algoritmos são descritos em uma linguagem chamada pseudocódigo. Este nome é uma alusão à posterior implementação em uma linguagem de programação, ou seja, quando formos programar em uma linguagem, por exemplo Javascript, estaremos gerando código em Javascript. Por isso os algoritmos são independentes das linguagens de  programação.',
+      },
+      {
+        type: 'alert',
+        body: 'Para escrever um algoritmo precisamos descrever a sequencia de instruções, de maneira simples e objetiva. Para isso utilizaremos algumas técnicas',
+      },
+      {
+        type: 'example',
+        body: `
+       <ol>
+        <li>Usar somente um verbo por frase</li>
+        <li>
+          Imaginar que você está desenvolvendo um algoritmo para pessoas que não trabalham com informática
+        </li>
+        <li>Usar frases curtas e simples Ser objetivo</li>
+        <li>Procurar usar palavras que não tenham sentido dúbio</li>
+      </ol>      
+        `,
+      },
+      {
+        type: 'alert',
+        body: 'O algoritmo deve ser fácil de se interpretar e fácil de codificar. Ou seja, ele deve ser o intermediário entre a linguagem falada e a linguagem de programação.',
+      },
+    ],
+  },
 ];

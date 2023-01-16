@@ -5,14 +5,14 @@ import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
 import { useAuth } from '../../hooks/useAuth.js';
 
 export function HeaderStatus() {
-const { user } = useAuth();
+  const { user } = useAuth();
 
   return (
     <C.Container>
-        <CoinIcon />
-        <C.CoinsCount>{user.coins}</C.CoinsCount>
-        <LifeIcon />
-        <C.HeartsCount>{user.lives}</C.HeartsCount>
+      <CoinIcon width={30} height={30} />
+      <C.CoinsCount>{user.coins}</C.CoinsCount>
+      <LifeIcon width={28} height={28} />
+      <C.HeartsCount>{user.lives}</C.HeartsCount>
     </C.Container>
   );
 }

@@ -39,4 +39,27 @@ export default {
     }
     return stars;
   },
+
+  updateLives: async (lives, userId) => {
+    const { data, error } = await supabase.from('users').update({ lives }).eq('id', userId);
+    if (error) {
+        console.log(error);
+      return error.message;
+    }
+  },
+
+  updateCoins: async (coins, userId) => {
+    const { data, error } = await supabase.from('users').update({ coins }).eq('id', userId);
+    if (error) {
+      return error.message;
+    }
+    console.log(userId);
+  },
+
+  updateXp: async (xp, userId) => {
+    const { data, error } = await supabase.from('users').update({ xp }).eq('id', userId);
+    if (error) {
+      return error.message;
+    }
+  },
 };

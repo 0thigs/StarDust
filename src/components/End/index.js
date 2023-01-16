@@ -5,6 +5,7 @@ import { Metric } from '../Metric';
 import { Button } from '../Button';
 
 import { useLesson } from '../../hooks/useLesson';
+import { useAuth } from '../../hooks/useAuth';
 
 import theme from '../../global/styles/theme';
 
@@ -17,13 +18,40 @@ import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
 import Stars from '../../assets/LessonAssets/stars-animation.json';
 import LottieView from 'lottie-react-native';
 
-export function End() {
+import api from '../../services/api';
+
+import { useNavigation } from '@react-navigation/core';
+
+export function End({ starId }) {
+  const { user, setUser } = useAuth();
   const [state] = useLesson();
-  const [coins, setCoins] = useState();
-  const [xp, setXp] = useState();
-  const [time, setTime] = useState();
-  const [accurance, setAccurance] = useState();
+  const [coins, setCoins] = useState(0);
+  const [xp, setXp] = useState(0);
+  const [time, setTime] = useState('');
+  const [accurance, setAccurance] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const starsRef = useRef();
+  const navigation = useNavigation();
+
+  async function handleButtonClick() {
+    setIsLoading(true);
+
+    const updatedCoins = coins + user.coins;
+    const updatedXp = xp + user.xp;
+    setUser({ ...user, coins: updatedCoins, xp: updatedXp, lives: state.livesCount });
+    await api.updateCoins(updatedCoins, user.id);
+    await api.updateXp(updatedXp, user.id);
+    if (state.livesCount < user.lives) {
+      await api.updateLives(state.livesCount, user.id);
+      setUser({ ...user, lives: state.livesCount });
+    }
+
+    setTimeout(() => {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }, 1000);
+  }
 
   function convertSecondsToTime(seconds) {
     const date = new Date(0);
@@ -38,6 +66,7 @@ export function End() {
   }
 
   function getCoins() {
+    console.log(state.wrongsCount);
     let maxCoins = 50;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxCoins -= 5;
@@ -54,7 +83,7 @@ export function End() {
   }
 
   function setStarsAnimation() {
-    const AnimationUnitInSeconds = 15.5;
+    const AnimationUnitInSeconds = 22;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
   }
@@ -122,7 +151,7 @@ export function End() {
           delay={1000}
         />
       </C.Metrics>
-      <Button title={'Continuar'} />
+      <Button title={'Continuar'} onPress={handleButtonClick} isLoading={isLoading} />
     </C.Container>
   );
 }

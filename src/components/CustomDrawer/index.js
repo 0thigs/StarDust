@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
-import { Toast } from 'toastify-react-native';
-import { useAuth } from '../../hooks/useAuth';
-import { supabase } from '../../services/supabase';
-import { Achievement } from '../Achievement';
 import * as C from './styles';
+import { useAuth } from '../../hooks/useAuth';
+import { Achievement } from '../Achievement';
 import { useNavigation } from '@react-navigation/native';
-import api from '../../services/api';
-
-import { userId } from '../../contexts/AuthContext';
+import { Toast } from 'toastify-react-native';
 
 export function CustomDrawer() {
   const { signOut, user } = useAuth();
@@ -27,7 +22,7 @@ export function CustomDrawer() {
 
   return (
     <C.Container>
-      <C.UserAvatar source={{ uri: 'https://github.com/JohnPetros.png' }} />
+      <C.UserAvatar source={{ uri: user.avatar }} />
       <C.UserName>{user.name}</C.UserName>
       <C.UserEmail>{user.email}</C.UserEmail>
       <C.LogOutButton onPress={handleSignOut}>
