@@ -1,65 +1,73 @@
+import { useEffect, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 import * as C from './styles';
+import theme from '../../global/styles/theme';
 
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
+
 import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
+import { useLesson } from '../../hooks/useLesson';
+import { theories } from '../../utils/theories';
 
-function handlePracticeButton() {}
+import RenderHTML from 'react-native-render-html';
 
-export function Theory() {
+export function Theory({ starId }) {
+  const [, dispatch] = useLesson();
+  const [texts, setTexts] = useState([]);
+  const { width } = useWindowDimensions();
+
+  function handlePracticeButton() {
+    dispatch({ type: 'changeStage' });
+  }
+
+  function getAnimation(index) {
+    return index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight';
+  }
+
+  useEffect(() => {
+    setTexts(theories.filter(theory => theory.starId === starId)[0].texts);
+  }, []);
+
   return (
     <C.Container>
-        <LessonHeader />
-      <C.PhaseTitle>Introdução</C.PhaseTitle>
+      <LessonHeader />
+      <C.Title animation={'fadeInDown'}>Introdução</C.Title>
       <C.Theories showsVerticalScrollIndicator={false}>
-        <C.TextContainer>
-          <C.DefaultText>
-            Sempre que decidimos fazer qualquer atividade em nosso dia a dia, acabamos seguindo uma
-            sequência lógica. Na maior parte do tempo, fazemos isso de maneira tão natural que nem
-            nos damos conta, mas, quando percebemos, conseguimos enxergar passos que levaram ao
-            resultado final.
-          </C.DefaultText>
-        </C.TextContainer>
-        <C.TextContainer>
-          <AlertIcon />
-          <C.AlertText>
-            Logo, uma sequência Lógica são passos executados até atingir um objetivo ou solução de
-            um problema.
-          </C.AlertText>
-        </C.TextContainer>
-        <C.TextContainer>
-          <C.DefaultText>
-            Na grande maioria das vezes, não nos damos conta disso, mas ao fazer uma análise do
-            nosso cotidiano, podemos compreender como todas as nossas ações são consequência de uma
-            cadeia de outras ações menores que nos levaram até uma atitude final.
-          </C.DefaultText>
-        </C.TextContainer>
-        <C.ExampleTextContainer>
-          <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
-          <C.ExempleText>
-            Na grande maioria das vezes, não nos damos conta disso, mas ao fazer uma análise do
-            nosso cotidiano, podemos compreender como todas as nossas ações são consequência de uma
-            cadeia de outras ações menores que nos levaram até uma atitude final.
-          </C.ExempleText>
-        </C.ExampleTextContainer>
-        <C.TextContainer>
-          <AlertIcon />
-          <C.AlertText>
-            Não estamos acostumados a pensar desta maneira sobre nossas atividades cotidianas, mas,
-            quando falamos de programação, estipular uma sequência de etapas é um procedimento muito
-            importante e necessário, uma vez que, diferente de nós, seres humanos, os computadores
-            não são capazes de prever nenhum comportamento.
-          </C.AlertText>
-        </C.TextContainer>
-        <C.TextContainer>
-          <C.DefaultText>
-            À maneira de pensar logicamente para estipular sequências de passos para a resolução de
-            um problema, damos o nome de lógica de programação; à sequência narrativa desses
-            eventos, damos o nome de algoritmo.
-          </C.DefaultText>
-        </C.TextContainer>
+        {texts.map((theory, index) => (
+          <C.Theory key={index}>
+            {theory.type === 'default' && (
+              <C.TextContainer animation={getAnimation(index)}>
+                <C.DefaultText>{theory.body}</C.DefaultText>
+              </C.TextContainer>
+            )}
+            {theory.type === 'alert' && (
+              <C.TextContainer animation={getAnimation(index)}>
+                <AlertIcon />
+                <C.AlertText>{theory.body}</C.AlertText>
+              </C.TextContainer>
+            )}
+            {theory.type === 'example' && (
+              <C.ExampleTextContainer animation={getAnimation(index)}>
+                <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
+                <C.ExempleText>
+                  <RenderHTML
+                    contentWidth={width}
+                    source={{
+                      html: `
+                        <pre style='; color: ${theme.colors.green_500};'>
+                        ${theory.body}
+                        </pre>
+                    `,
+                    }}
+                  />
+                </C.ExempleText>
+              </C.ExampleTextContainer>
+            )}
+          </C.Theory>
+        ))}
+        <Button title={'Praticar'} onPress={handlePracticeButton} />
       </C.Theories>
-      <Button title={'Praticar'} onPress={handlePracticeButton} />
     </C.Container>
   );
 }
