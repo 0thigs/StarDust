@@ -1,13 +1,15 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
+import * as Animatable from 'react-native-animatable';
 
-export const Container = styled.View`
+export const Container = styled(Animatable.View)`
   align-items: center;
   position: relative;
 `;
 
 export const StarDust = styled.View`
   width: 100%;
-  padding-left: 40px;
+  padding-left: 42px;
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
 `;
 
@@ -15,17 +17,19 @@ export const StarButton = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  padding-left: 15px;
+  padding-left: 3px;
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
 `;
+
+export const StarContainer = styled(Animated.View)``;
 
 export const StarNumber = styled.Text`
   font-size: 16px;
   color: ${props => (props.isDisabled ? props.theme.colors.white : props.theme.colors.yellow_500)};
   font-family: ${props => props.theme.fonts.bold};
   position: absolute;
-  top: 36%;
-  left: 18%;
+  top: 40%;
+  left: ${props => (props.isDisabled ? 16.5: 17.5)}%;
 `;
 
 export const StarSign = styled.View`
@@ -35,6 +39,7 @@ export const StarSign = styled.View`
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
+  margin-top: 10px;
   margin-left: 10px;
   max-width: 180px;
 `;
