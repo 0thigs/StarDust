@@ -1,31 +1,50 @@
+import { useState, useEffect } from 'react';
+import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
 import { LessonHeader } from '../LessonHeader';
-import * as C from './styles';
+import { SelectOptionForm } from '../SelectOptionForm';
+import { useNavigation } from '@react-navigation/native';
+import { OpenForm } from '../OpenForm';
+import { DragAndDropListForm } from '../DragAndDropListForm';
+import { questions } from '../../utils/questions';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
-  const question = state.questions[state.currentQuestion];
+  const [currentQuestion, setCurrentQuestion] = useState([]);
+  const navigation = useNavigation();
 
-  console.log({ question });
+  useEffect(() => {
+    setTimeout(() => dispatch({ type: 'incrementSecondsCount' }), 1000);
+  }, [state.currentStage, state.secondsCount]);
+
+  useEffect(() => {
+    if (state.wrongsCount === 5) {
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }
+  }, [state.wrongsCount]);
+
+  useEffect(() => {
+    setCurrentQuestion(state.questions[state.currentQuestion]);
+  }, [state.currentQuestion]);
 
   return (
     <C.Container>
-      <C.QuestionStem>{question.stem}</C.QuestionStem>
-      {question.type === 'select-option' ? (
-        <C.OptionsList
-          data={question.options}
-          keyExtractor={option => option.id}
-          renderItem={({ item }) => <C.Option>{item.label}</C.Option>}
+      <LessonHeader />
+      <C.QuestionStem animation={'fadeInDown'}>{currentQuestion.stem}</C.QuestionStem>
+      {currentQuestion.type === 'select-option' && (
+        <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
+      )}
+      {currentQuestion.type === 'open' && (
+        <OpenForm answer={currentQuestion.answer} />
+      ) }
+      {currentQuestion.type === 'drag-and-drop-list' && (
+        <DragAndDropListForm
+          items={currentQuestion.items}
+          correctItemsSequence={currentQuestion.correctItemsSequence}
         />
-      ) : question.type === 'open' ? (
-        <C.Input />
-      ) : question.type === 'drag-and-drop-list' ? (
-        <C.ItemsList
-          data={question.items}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => <C.Item>{item.label}</C.Item>}
-        />
-      ) : null}
+      )}
     </C.Container>
   );
 }
