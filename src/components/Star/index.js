@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 
-import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
+//import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
 import EnabledStarDust from '../../assets/StarAssets/enabled-stardust.svg';
 import DisabledStarDust from '../../assets/StarAssets/disabled-stardust.svg';
 
