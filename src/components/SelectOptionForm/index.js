@@ -3,17 +3,20 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function SelectOptionForm({ options, answer }) {
+export function SelectOptionForm({options, answer}) {
   const [, dispatch] = useLesson();
-
+  const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isIncremented, setIsncremented] = useState(false);
+  const delay = 100;
 
   function reorderOptions() {
-    options = options.sort(() => {
+    const reorderedOptions = options.sort(() => {
       return Math.random() - 0.5;
     });
+    setReorderedOptions(reorderedOptions);
   }
 
   function resetAnswer() {
@@ -36,32 +39,38 @@ export function SelectOptionForm({ options, answer }) {
       return;
     }
     setIsAnswerWrong(true);
-    dispatch({ type: 'setWrongsCount' });
+    if (isVerified && !isIncremented) {
+      dispatch({ type: 'incrementWrongsCount' });
+      setIsncremented(true);
+    }
+    if (isVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   function handleSelectOption(index) {
-    setSelectedOption(index);
+    setSelectedOption(index)
   }
 
   useEffect(() => {
-    reorderOptions();
-  }, []);
+   reorderOptions();
+  }, [options]);
 
   return (
     <C.Container>
       <C.Options>
-        {options.map((option, index) => (
-          <C.Option
-            key={index}
-            currentOption={option}
-            onPress={() => handleSelectOption(option)}
-            selectedOption={selectedOption}
-            disabled={isVerified}
-          >
-            <C.Label currentOption={option} selectedOption={selectedOption}>
-              {option}
-            </C.Label>
-          </C.Option>
+        {reorderedOptions.map((option, index) => (
+          <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
+            <C.Option
+              currentOption={option}
+              onPress={() => handleSelectOption(option)}
+              selectedOption={selectedOption}
+              disabled={isVerified}
+              isAnswerWrong={isVerified && isAnswerWrong}
+            >
+              <C.Label currentOption={option} selectedOption={selectedOption}>
+                {option}
+              </C.Label>
+            </C.Option>
+          </C.OptionContainer>
         ))}
       </C.Options>
       <VerificationButton
