@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react';
+import { useAuth } from '../hooks/useAuth';
 import { questions } from '../utils/questions';
 
 export const LessonContext = createContext();
@@ -6,44 +7,67 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[0],
-  questions,
-  currentQuestion: 0,
-  wrongs: 0,
-};
+    currentStage: stages[0],
+    questions: [],
+    currentQuestion: 0,
+    wrongsCount: 0,
+    livesCount: 0,
+    secondsCount: 0,
+    time: '',
+  };
 
 const LessonReducer = (state, action) => {
   switch (action.type) {
-    case 'changeState':
+    case 'changeStage':
       return {
         ...state,
         currentStage: stages[1],
       };
-    case 'reorderQuestions':
-      const reorderedQuestions = questions.sort(() => {
-        return Math.random() - 0.5;
-      });
-      return {
-        ...state,
-        questions: reorderedQuestions,
-      };
     case 'changeQuestion':
       const nextQuestion = state.currentQuestion + 1;
-      let isEndQuiz = false;
+      let isEnd = false;
       if (!questions[nextQuestion]) {
-        isEndQuiz = true;
+        isEnd = true;
       }
       return {
         ...state,
         currentQuestion: nextQuestion,
-        currentStage: isEndQuiz ? stages[2] : state.currentStage,
+        currentStage: isEnd ? stages[2] : state.currentStage,
       };
+    case 'incrementWrongsCount':
+      return {
+        ...state,
+        wrongsCount: state.wrongsCount + 1,
+      };
+    case 'decrementLivesCount':
+      return {
+        ...state,
+        livesCount: state.livesCount - 1,
+      };
+    case 'incrementSecondsCount':
+      return {
+        ...state,
+        secondsCount: state.secondsCount + 1,
+      };
+    case 'setTime':
+      return {
+        ...state,
+        time: action.payload,
+      };
+    case 'resetState':
+      return initialState;
     default:
       return state;
   }
 };
 
 export const LessonProvider = ({ children }) => {
+  const { user } = useAuth();
+  const currentQuestions = questions.filter(question => question.starId === user.starId);
+
+   initialState.livesCount = user.lives;
+   initialState.questions = currentQuestions;
+
   const value = useReducer(LessonReducer, initialState);
 
   return <LessonContext.Provider value={value}>{children}</LessonContext.Provider>;
