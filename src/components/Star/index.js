@@ -13,7 +13,7 @@ import LottieView from 'lottie-react-native';
 import { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/core';
 
-export function Star({ id, name, number, isDisabled }) {
+export function Star({ id, name, number, isDisabled, isTheLastStarEnabled }) {
   const { user, setUser } = useAuth();
   const starAnimation = useRef(null);
   const navigation = useNavigation();
@@ -21,8 +21,8 @@ export function Star({ id, name, number, isDisabled }) {
   function HandleStarClick() {
     starAnimation.current.play(10, 50);
 
-    setUser({...user, starId: id})
     setTimeout(() => {
+      setUser({ ...user, starId: id });
       navigation.navigate('Lesson');
     }, 500);
   }
@@ -35,7 +35,7 @@ export function Star({ id, name, number, isDisabled }) {
   });
 
   useEffect(() => {
-    StarScale.value = withRepeat(withSpring(1.1), -1, true);
+    StarScale.value = withRepeat(withSpring(1.15), isTheLastStarEnabled ? -1 : 1, true);
   }, []);
 
   return (

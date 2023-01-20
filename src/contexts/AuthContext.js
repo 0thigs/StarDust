@@ -11,7 +11,8 @@ const fakeUser = {
   coins: 20,
   lives: 5,
   xp: 0,
-  unlockedStarsIds: [1, 2],
+  unlockedStarsIds: [1],
+  starId: 1
 };
 
 export function AuthContextProvider({ children }) {

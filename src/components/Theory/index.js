@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import * as C from './styles';
-import theme from '../../global/styles/theme';
 
+import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
 import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
 import { useLesson } from '../../hooks/useLesson';
 import { theories } from '../../utils/theories';
+
+import { Volume2 } from 'react-native-feather';
 
 import RenderHTML from 'react-native-render-html';
 
@@ -17,15 +19,18 @@ export function Theory({ starId }) {
   const [texts, setTexts] = useState([]);
   const { width } = useWindowDimensions();
 
+  function getAnimation(index) {
+    return index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight';
+  }
 
   function handlePracticeButton() {
     dispatch({ type: 'changeStage' });
   }
 
-  function getAnimation(index) {
-    return index % 2 === 0 ? 'fadeInLeft' : 'fadeInRight';
+  function handleSpeechButton(text) {
+    
   }
-
+  
   useEffect(() => {
     setTexts(theories.filter(theory => theory.starId === starId)[0].texts);
   }, []);
@@ -39,7 +44,11 @@ export function Theory({ starId }) {
           <C.Theory key={index}>
             {theory.type === 'default' && (
               <C.TextContainer animation={getAnimation(index)}>
-                <C.DefaultText>{theory.body}</C.DefaultText>
+                <C.DefaultText>
+                <C.SpeechButton>
+                    <Volume2 width={25} height={25} color={theme.colors.green_300} />
+                </C.SpeechButton>
+                    {theory.body}</C.DefaultText>
               </C.TextContainer>
             )}
             {theory.type === 'alert' && (

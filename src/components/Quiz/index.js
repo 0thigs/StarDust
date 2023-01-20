@@ -6,12 +6,12 @@ import { SelectOptionForm } from '../SelectOptionForm';
 import { useNavigation } from '@react-navigation/native';
 import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
-import { questions } from '../../utils/questions';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
   const [currentQuestion, setCurrentQuestion] = useState([]);
   const navigation = useNavigation();
+  console.log(currentQuestion);
 
   useEffect(() => {
     setTimeout(() => dispatch({ type: 'incrementSecondsCount' }), 1000);

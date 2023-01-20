@@ -59,5 +59,9 @@ export const ExempleTextTitle = styled.Text`
 
 export const ExempleText = styled.Text`
   background-color: ${props => props.theme.colors.green_900};
-  border-radius: 10px;
+  border-radius: 8px;
+`;
+
+export const SpeechButton = styled.TouchableOpacity`
+  padding-bottom: 24px;
 `;

@@ -10,13 +10,15 @@ import DraggableFlatList, {
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
 
-export function DragAndDropListForm({items, correctItemsSequence}) {
+export function DragAndDropListForm({ items, correctItemsSequence }) {
   const [, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const ItemScale = useSharedValue(0.5);
+
+  
 
   function compareSequences(sequence1, sequence2) {
     return JSON.stringify(sequence1) === JSON.stringify(sequence2);
@@ -26,8 +28,8 @@ export function DragAndDropListForm({items, correctItemsSequence}) {
     setIsVerified(!isVerified);
 
     const userItemsSequence = currentItems.map(item => item.id);
-    console.log(userItemsSequence)
-    console.log(correctItemsSequence)
+    console.log(userItemsSequence);
+    console.log(correctItemsSequence);
 
     const areTheTwoSequencesEqual = compareSequences(userItemsSequence, correctItemsSequence);
 
@@ -55,7 +57,7 @@ export function DragAndDropListForm({items, correctItemsSequence}) {
   });
 
   useEffect(() => {
-    setCurrentItems(items)
+    setCurrentItems(items);
   }, [items]);
 
   useEffect(() => {

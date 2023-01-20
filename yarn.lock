@@ -7172,7 +7172,7 @@
     "stringify-entities" "^3.1.0"
     "urijs" "^1.19.6"
 
-"react-native-responsive-fontsize@*":
+"react-native-responsive-fontsize@*", "react-native-responsive-fontsize@^0.5.1":
   "integrity" "sha512-G77iPzrf3BHxMxVm6G3Mw3vPImIdq+jLLXhYoOjWei6i9J3/jzUNUhNdRWvp49Csb5prhbVBLPM+pYZz+b3ESQ=="
   "resolved" "https://registry.npmjs.org/react-native-responsive-fontsize/-/react-native-responsive-fontsize-0.5.1.tgz"
   "version" "0.5.1"

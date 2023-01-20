@@ -5,12 +5,10 @@ import { Theory } from '../../components/Theory';
 import { Quiz } from '../../components/Quiz';
 import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
-import { useRoute } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 
 export function Lesson() {
   const { user } = useAuth();
-  const route = useRoute();
   const [state, dispatch] = useLesson();
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
