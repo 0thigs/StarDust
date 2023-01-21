@@ -1,12 +1,8 @@
 import styled from 'styled-components/native';
 
+export const containerWidth = 300;
+
 export const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: ${prop => prop.theme.colors.background};
+  background-color: ${props => props.theme.colors.background};
 `;
-
-export const ProfileArea = styled.View`
-  background-color: ${prop => prop.theme.colors.blue_700};
-`;
-
-

@@ -22,9 +22,9 @@ export function CustomDrawer() {
 
   return (
     <C.Container>
-      <C.UserAvatar source={{ uri: user.avatar }} />
-      <C.UserName>{user.name}</C.UserName>
-      <C.UserEmail>{user.email}</C.UserEmail>
+      <C.Avatar source={{ uri: user.avatar }} />
+      <C.Name>{user.name}</C.Name>
+      <C.Email>{user.email}</C.Email>
       <C.LogOutButton onPress={handleSignOut}>
         <C.LogOutButtonText>Sair</C.LogOutButtonText>
       </C.LogOutButton>

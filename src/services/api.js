@@ -48,6 +48,14 @@ export default {
     return rockets;
   },
 
+  getRocket: async (selectedRocketId) => {
+    const { data: rocket, error } = await supabase.from('rockets').select('*').eq('id', selectedRocketId);
+    if (error) {
+      return error.message;
+    }
+    return rocket;
+  },
+
   updateLives: async (lives, userId) => {
     const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
     if (error) {
@@ -100,4 +108,6 @@ export default {
       return error;
     }
   },
+
+  
 };

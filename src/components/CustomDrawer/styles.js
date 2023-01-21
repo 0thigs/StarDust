@@ -7,7 +7,7 @@ export const Container = styled.View`
   background-color: ${props => props.theme.colors.background};
 `;
 
-export const UserAvatar = styled.Image`
+export const Avatar = styled.Image`
   width: 100px;
   height: 100px;
   border-radius: 50px;
@@ -15,13 +15,13 @@ export const UserAvatar = styled.Image`
 
 `;
 
-export const UserName = styled.Text`
+export const Name = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
   font-size: 14px;
   color: ${props => props.theme.colors.white};
 `;
 
-export const UserEmail = styled.Text`
+export const Email = styled.Text`
   font-family: ${props => props.theme.fonts.regular};
   font-size: 12px;
   color: ${props => props.theme.colors.white};

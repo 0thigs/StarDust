@@ -11,6 +11,7 @@ const fakeUser = {
   coins: 20,
   lives: 1,
   xp: 0,
+  level: 1,
   unlocked_stars_ids: [1],
   acquired_rockets_ids: [1],
   selected_rocket_id: 1,
