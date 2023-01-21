@@ -37,20 +37,17 @@ export function End({ starId }) {
 
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
-    const updatedUnlockedStarsIds = [...user.unlockedStarsIds, starId + 1];
-    console.log({
-      ...user,
-      coins: updatedCoins,
-      xp: updatedXp,
-      lives: state.livesCount,
-      unlockedStarsIds: updatedUnlockedStarsIds,
-    });
+
+    const planets = await api.getPlanets();
+    const nextStarId = planets.find(planet => planet.starsIds.includes())
+    const updatedUnlockedStarsIds = [...user.unlocked_stars_ids, starId];
+
     setUser({
       ...user,
       coins: updatedCoins,
       xp: updatedXp,
       lives: state.livesCount,
-      unlockedStarsIds: updatedUnlockedStarsIds,
+      unlocked_stars_ids: updatedUnlockedStarsIds,
     });
 
     await api.updateCoins(updatedCoins, user.id);

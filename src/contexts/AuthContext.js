@@ -9,9 +9,12 @@ const fakeUser = {
   email: 'joaopcarvalho.cds@gmail.com',
   avatar: 'https://github.com/JohnPetros.png',
   coins: 20,
-  lives: 5,
+  lives: 1,
   xp: 0,
-  unlockedStarsIds: [1],
+  unlocked_stars_ids: [1],
+  acquired_rockets_ids: [1],
+  selected_rocket_id: 1,
+  ranking_id: 1,
   starId: 1
 };
 

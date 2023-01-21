@@ -47,9 +47,7 @@ export const AlertText = styled.Text`
 `;
 
 export const ExampleTextContainer = styled(Animatable.View)`
-  width: 100%;
   margin: 16px 0;
-  justify-content: center;
 `;
 
 export const ExempleTextTitle = styled.Text`
@@ -57,7 +55,7 @@ export const ExempleTextTitle = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
 `;
 
-export const ExempleText = styled.Text`
+export const ExempleText = styled.View`
   background-color: ${props => props.theme.colors.green_900};
   border-radius: 8px;
 `;

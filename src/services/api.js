@@ -12,7 +12,7 @@ export default {
   getUser: async userId => {
     const { data, error, status } = await supabase
       .from('users')
-      .select('name, email, unlockedStarsIds, coins, lives')
+      .select('name, email, unlocked_stars_Ids, coins, lives')
       .eq('id', userId)
       .limit(1);
     if (error) {
@@ -40,10 +40,18 @@ export default {
     return stars;
   },
 
+  getRockets: async () => {
+    const { data: rockets, error } = await supabase.from('rockets').select('*');
+    if (error) {
+      return error.message;
+    }
+    return rockets;
+  },
+
   updateLives: async (lives, userId) => {
     const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
     if (error) {
-        console.log(error);
+      console.log(error);
       return error.message;
     }
   },
@@ -62,10 +70,34 @@ export default {
     }
   },
 
-  updateUnlockedStarsIds: async (unlockedStarsIds, userId) => {
-    const { error } = await supabase.from('users').update({ unlockedStarsIds }).eq('id', userId);
+  updateUnlockedStarsIds: async (unlocked_stars_ids, userId) => {
+    const { error } = await supabase.from('users').update({ unlocked_stars_ids }).eq('id', userId);
     if (error) {
       return error.message;
+    }
+  },
+
+  updateAcquiredRocketsIds: async (acquired_rockets_ids, userId) => {
+    const { error } = await supabase
+      .from('users')
+      .update({ acquired_rockets_ids })
+      .eq('id', userId);
+    if (error) {
+        return error.message;
+    }
+  },
+
+  updateSelectedRocketId: async (selected_rocket_id, userId) => {
+    const { error } = await supabase.from('users').update({ selected_rocket_id }).eq('id', userId);
+    if (error) {
+      return error.message;
+    }
+  },
+
+  buyLives: async (lives, userId) => {
+    const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
+    if (error) {
+      return error;
     }
   },
 };

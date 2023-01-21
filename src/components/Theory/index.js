@@ -14,6 +14,8 @@ import { Volume2 } from 'react-native-feather';
 
 import RenderHTML from 'react-native-render-html';
 
+import * as Speech from 'expo-speech';
+
 export function Theory({ starId }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
@@ -27,10 +29,14 @@ export function Theory({ starId }) {
     dispatch({ type: 'changeStage' });
   }
 
-  function handleSpeechButton(text) {
-    
+  async function handleSpeechButton(text) {
+    const voices = await Speech.getAvailableVoicesAsync();
+    console.log(voices);
+    Speech.speak(text, {
+      language: 'pt-BR',
+    });
   }
-  
+
   useEffect(() => {
     setTexts(theories.filter(theory => theory.starId === starId)[0].texts);
   }, []);
@@ -45,22 +51,29 @@ export function Theory({ starId }) {
             {theory.type === 'default' && (
               <C.TextContainer animation={getAnimation(index)}>
                 <C.DefaultText>
-                <C.SpeechButton>
-                    <Volume2 width={25} height={25} color={theme.colors.green_300} />
-                </C.SpeechButton>
-                    {theory.body}</C.DefaultText>
+                  <C.SpeechButton onPress={() => handleSpeechButton(theory.body)}>
+                    <Volume2 width={25} height={25} color={theme.colors.white} />
+                  </C.SpeechButton>
+                  {theory.body}
+                </C.DefaultText>
               </C.TextContainer>
             )}
             {theory.type === 'alert' && (
               <C.TextContainer animation={getAnimation(index)}>
                 <AlertIcon />
-                <C.AlertText>{theory.body}</C.AlertText>
+                <C.AlertText>
+                  <C.SpeechButton onPress={() => handleSpeechButton(theory.body)}>
+                    <Volume2 width={25} height={25} color={theme.colors.black} />
+                  </C.SpeechButton>
+                  {theory.body}
+                </C.AlertText>
               </C.TextContainer>
             )}
             {theory.type === 'example' && (
               <C.ExampleTextContainer animation={getAnimation(index)}>
                 <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
                 <C.ExempleText>
+                
                   <RenderHTML
                     contentWidth={width}
                     source={{

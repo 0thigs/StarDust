@@ -9,6 +9,7 @@ export const theories = [
 
       {
         type: 'alert',
+        title: '',
         body: 'Sequência Lógica são passos executados até atingir um objetivo ou solução de um problema.',
       },
       {
@@ -22,11 +23,21 @@ export const theories = [
       {
         type: 'example',
         body: `
-        Por exemplo, para chupar uma bala você
-         • Pegar a bala
-         • Retirar o papel
-         • Chupar a bala
-         • Jogar o papel no lixo
+    ALGORITMO “declaracao” 
+
+    VAR 
+        varInteiro: inteiro 
+        varReal: real
+        varCaractere: caractere 
+        varLogico: Logico 
+    INICIO 
+        varInteiro <- 1 
+        varReal <- 1.5 
+        varCaractere <- “teste” 
+        varLogico <- VERDADEIRO 
+        ESCREVAL(varInteiro, varReal, varCaractere, varLogico)
+
+    FIMALGORITMO
         `,
       },
       {
@@ -54,12 +65,12 @@ export const theories = [
         type: 'example',
         body: `
        <ol>
-        <li>Usar somente um verbo por frase</li>
-        <li>
-          Imaginar que você está desenvolvendo um algoritmo para pessoas que não trabalham com informática
-        </li>
-        <li>Usar frases curtas e simples Ser objetivo</li>
-        <li>Procurar usar palavras que não tenham sentido dúbio</li>
+            <li>Usar somente um verbo por frase</li>
+            <li>
+            Imaginar que você está desenvolvendo um algoritmo para pessoas que não trabalham com informática
+            </li>
+            <li>Usar frases curtas e simples Ser objetivo</li>
+            <li>Procurar usar palavras que não tenham sentido dúbio</li>
       </ol>      
         `,
       },

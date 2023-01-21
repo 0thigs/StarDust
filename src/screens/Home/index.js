@@ -17,7 +17,7 @@ export function Home() {
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
   function verifyIfIsStarUnlocked(star) {
-    if (user.unlockedStarsIds.includes(star.id)) {
+    if (user.unlocked_stars_ids.includes(star.id)) {
       return { ...star, isUnlocked: true };
     }
     return star;
@@ -38,7 +38,6 @@ export function Home() {
     getPlanets();
     getStars();
     setTimeout(() => setIsEndTransition(true), 3000);
-    console.log(user);
   }, []);
 
   return (
@@ -56,7 +55,7 @@ export function Home() {
             <Planet
               id={item.id}
               title={item.title}
-              CurrentPlanetStarsIds={item.stars_ids}
+              currentPlanetStarsIds={item.stars_ids}
               stars={stars}
             />
           )}

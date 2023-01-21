@@ -57,7 +57,7 @@ export function SignIn() {
   const [isToShowHeader, setIsToShowHeader] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { signUp, signIn, user } = useAuth();
+  const { signUp, signIn } = useAuth();
 
   function handleSignUpForm() {
     setIsSignUpForm(true);
@@ -239,6 +239,7 @@ export function SignIn() {
           onPress={isSignUpForm ? handleSubmit(HandleSignUp) : handleSubmit(HandleSignIn)}
           title={isSignUpForm ? 'Cadastrar' : 'Entrar'}
           isLoading={isLoading}
+          isDisabled={isLoading}
         />
 
         {isSignUpForm ? (
