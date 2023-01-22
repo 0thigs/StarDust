@@ -17,9 +17,9 @@ const fakeUser = {
   selected_rocket_id: 1,
   ranking_id: 1,
   streak: 12,
-  completed_days: [],
+  completed_days: [1],
   completed_planets: 0,
-  completed_achievements_ids: [],
+  completed_achievements_ids: [1],
   created_at: new Date(),
   starId: 1,
 };

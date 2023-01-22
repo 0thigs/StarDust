@@ -45,7 +45,7 @@ export const ProgressBar = styled.View`
 `;
 
 export const Bar = styled.View`
-  width: 70%;
+  width: ${props => props.barWidth};
   height: 4px;
   background-color: ${props => props.theme.colors.green_500};
 `;

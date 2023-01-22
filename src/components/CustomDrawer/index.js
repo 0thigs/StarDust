@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import * as C from './styles';
+import { achievements as achievementsFromDatabase } from '../../utils/achivements';
 import { useAuth } from '../../hooks/useAuth';
 import { Achievement } from '../Achievement';
 import { useNavigation } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
+import { useEffect } from 'react';
 
 export function CustomDrawer() {
   const { signOut, user } = useAuth();
+  const [achievements, setAchievements] = useState([]);
   const navigation = useNavigation();
 
   async function handleSignOut() {
@@ -20,6 +24,10 @@ export function CustomDrawer() {
     });
   }
 
+  useEffect(() => {
+    setAchievements(achievementsFromDatabase);
+  }, [user]);
+
   return (
     <C.Container>
       <C.Avatar source={{ uri: user.avatar }} />
@@ -29,47 +37,19 @@ export function CustomDrawer() {
         <C.LogOutButtonText>Sair</C.LogOutButtonText>
       </C.LogOutButton>
 
-      <Achievement
-        title={'Começando a viagem'}
-        description={'Termine a primeira fase do StarDust'}
-        goal={1}
-        id={1}
-        isGotten={true}
-      />
-      <Achievement
-        title={'Início da exploração'}
-        description={'Completo o primeiro planeta do StarDust'}
-        goal={1}
-        id={2}
-        isGotten={true}
-      />
-      <Achievement
-        title={'100 XP'}
-        description={'Ganhe 100 XP'}
-        goal={100}
-        id={3}
-        isGotten={true}
-      />
-      <Achievement
-        title={'Coletor de estrelas'}
-        description={'Complete 5 fases'}
-        goal={5}
-        id={4}
-        isGotten={true}
-      />
-      <Achievement
-        title={'Colecionador de estrelas'}
-        description={'Complete 10 fases'}
-        goal={10}
-        id={4}
-        isGotten={false}
-      />
-      <Achievement
-        title={'Caçador de estrelas'}
-        description={'Complete 20 fases'}
-        goal={20}
-        id={4}
-        isGotten={false}
+      <C.AchievementList
+        data={achievements}
+        keyExtractor={achievement => achievement.id}
+        renderItem={({ item: { id, title, description, icon, goal, metric } }) => (
+          <Achievement
+            id={id}
+            title={title}
+            description={description}
+            icon={icon}
+            goal={goal}
+            metric={user[metric]}
+          />
+        )}
       />
     </C.Container>
   );

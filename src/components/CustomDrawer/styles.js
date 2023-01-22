@@ -40,5 +40,8 @@ export const LogOutButton = styled.TouchableOpacity`
 export const LogOutButtonText = styled.Text`
   font-size: 14px;
   font-family: ${props => props.theme.fonts.bold};
+`;
+
+export const AchievementList = styled.FlatList`
 
 `;

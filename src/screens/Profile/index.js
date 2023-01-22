@@ -5,7 +5,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { ProfileArea } from '../../components/ProfileArea';
 import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
-import { Achievement } from '../../components/Achievement';
 
 export function Profile() {
   const { user } = useAuth();
@@ -18,7 +17,7 @@ export function Profile() {
         <Streak user={user} />
 
         <C.Title>Conquistas</C.Title>
-        <C.Achievements>
+        {/* <C.Achievements>
           <Achievement
             id={1}
             title={'Começando a viagem'}
@@ -43,7 +42,7 @@ export function Profile() {
             description={'Complete 5 fases'}
             isGotten={true}
           />
-        </C.Achievements>
+        </C.Achievements> */}
       </C.Content>
     </C.Container>
   );

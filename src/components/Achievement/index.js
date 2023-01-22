@@ -1,24 +1,25 @@
 import React from 'react';
 import * as C from './styles';
-import { achievementIcons } from '../../utils/AchievementIcons';
 
 import Lock from '../../assets/AchievementAssets/lock.svg';
 
-export function Achievement({ id, title, description, goal, isGotten }) {
-  const AchievementIcon = achievementIcons['achievement' + id];
-
+export function Achievement({ title, icon: Icon, description, goal, metric, isGotten = true }) {
+  const barWidth = metric / goal + '%';
   return (
     <C.Container>
-      {isGotten ? <AchievementIcon /> : <Lock />}
+      {/* {isGotten ? <AchievementIcon /> : <Lock />} */}
+      <Icon width={45} height={45} />
       <C.AchievementsInfo>
         <C.AchievementsTitle>{title}</C.AchievementsTitle>
         <C.AchievementsDescription>{description}</C.AchievementsDescription>
         {goal && (
           <C.ProgressBarInfo>
             <C.ProgressBar>
-              <C.Bar />
+              <C.Bar barWidth={barWidth} />
             </C.ProgressBar>
-            <C.ProgressBarGoal>1/{goal}</C.ProgressBarGoal>
+            <C.ProgressBarGoal>
+              {Array.isArray(metric) ? metric.length - 1 : metric}/{goal}
+            </C.ProgressBarGoal>
           </C.ProgressBarInfo>
         )}
       </C.AchievementsInfo>

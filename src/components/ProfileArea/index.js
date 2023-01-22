@@ -4,11 +4,17 @@ import { rocketImages } from '../../utils/rocketImages';
 import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
 
 import * as C from './styles';
+import dayjs from 'dayjs';
+import ptBR from 'dayjs/locale/pt-br';
 
-export function ProfileArea({ user: { ranking_id, selected_rocket_id, avatar, name, level, xp } }) {
+export function ProfileArea({
+  user: { ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
+}) {
   const RankingImage = getRankingImage(ranking_id);
   const rankingName = getRankingName(ranking_id);
   const RocketImage = rocketImages['rocket' + selected_rocket_id];
+
+  const createdAt = dayjs(created_at).locale(ptBR).format('DD MMMM [de] YYYY');
 
   function handleSettingsButton() {}
 
@@ -22,7 +28,7 @@ export function ProfileArea({ user: { ranking_id, selected_rocket_id, avatar, na
       <C.Level>
         Nível {level} - {xp} XP
       </C.Level>
-      <C.Created_at>Por aqui desde 20 de janeiro de 2023</C.Created_at>
+      <C.Created_at>Por aqui desde {createdAt}</C.Created_at>
       <C.StatusContainer>
         <C.Status>
           <C.Title>Ranking atual</C.Title>
