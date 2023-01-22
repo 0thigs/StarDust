@@ -23,4 +23,13 @@ export const Title = styled.Text`
 export const Achievements = styled.View`
   width: ${containerWidth}px;
   align-self: center;
+  align-items: center;
+`;
+
+export const NoAchievements = styled.Text`
+  margin-top: 16px;
+  color: ${props => props.theme.colors.white};
+  text-align: center;
+  font-family: ${props => props.theme.fonts.regular};
+  font-size: 14px;
 `;

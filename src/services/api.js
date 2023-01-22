@@ -10,7 +10,7 @@ export default {
   },
 
   getUser: async userId => {
-    const { data, error, status } = await supabase
+    const { data, error } = await supabase
       .from('users')
       .select('name, email, unlocked_stars_Ids, coins, lives')
       .eq('id', userId)
@@ -48,8 +48,11 @@ export default {
     return rockets;
   },
 
-  getRocket: async (selectedRocketId) => {
-    const { data: rocket, error } = await supabase.from('rockets').select('*').eq('id', selectedRocketId);
+  getRocket: async selectedRocketId => {
+    const { data: rocket, error } = await supabase
+      .from('rockets')
+      .select('*')
+      .eq('id', selectedRocketId);
     if (error) {
       return error.message;
     }
@@ -91,7 +94,7 @@ export default {
       .update({ acquired_rockets_ids })
       .eq('id', userId);
     if (error) {
-        return error.message;
+      return error.message;
     }
   },
 
@@ -102,12 +105,10 @@ export default {
     }
   },
 
-  buyLives: async (lives, userId) => {
-    const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
+  updateUnlockedAchievementsIds: async (unlocked_achievements_ids, userId) => {
+    const { error } = await supabase.from('users').update({ unlocked_achievements_ids }).eq('id', userId);
     if (error) {
-      return error;
+      return error.message;
     }
   },
-
-  
 };

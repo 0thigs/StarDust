@@ -11,8 +11,10 @@ export const Background = styled.View`
 `;
 
 export const PlanetsList = styled.FlatList.attrs({
-    contentContainerStyle: {
+  contentContainerStyle: {
     paddingTop: 32,
     alignItems: 'center',
   },
 })``;
+
+export const Achievements = styled.ScrollView``;

@@ -13,7 +13,7 @@ export function LifeBox({ lives, price, user, setUser }) {
   const [showModal, setShowModal] = useState(false);
 
   async function buyLives() {
-    await api.buyLives(lives, user.id);
+    await api.updateLives(lives, user.id);
 
     setUser({ ...user, lives: user.lives + lives });
   }

@@ -145,4 +145,23 @@ export const achievements = [
   },
 ];
 
+function checkAchievement(achievement, user) {
+  if (user.unlocked_achievements_ids.includes(achievement.id)) {
+    return;
+  }
 
+  const userMetricCount = Array.isArray(user[achievement.metric])
+    ? user[achievement.metric].length - 1
+    : user[achievement.metric];
+
+  const isAchievementUnlocked = userMetricCount === achievement.goal;
+  if (isAchievementUnlocked) {
+    return { ...achievement, isUnlocked: true };
+  }
+}
+
+export function getUnlockedAchievements(user) {
+  return achievements
+    .map(achievement => checkAchievement(achievement, user))
+    .filter(achievement => achievement !== undefined);
+}

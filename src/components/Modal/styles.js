@@ -31,7 +31,7 @@ export const Title = styled.Text`
 export const Body = styled.View`
   justify-content: center;
   align-items: center;
-  padding: 54px 0 24px;
+  padding: 8px 0 8px;
   background-color: ${props => props.theme.colors.black};
 `;
 

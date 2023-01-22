@@ -3,7 +3,7 @@ import * as C from './styles';
 
 import Lock from '../../assets/AchievementAssets/lock.svg';
 
-export function Achievement({ title, icon: Icon, description, goal, metric, isGotten = true }) {
+export function Achievement({ title, icon: Icon, description, goal, metric, isUnlocked }) {
   const barWidth = metric / goal + '%';
   return (
     <C.Container>
@@ -12,7 +12,7 @@ export function Achievement({ title, icon: Icon, description, goal, metric, isGo
       <C.AchievementsInfo>
         <C.AchievementsTitle>{title}</C.AchievementsTitle>
         <C.AchievementsDescription>{description}</C.AchievementsDescription>
-        {goal && (
+        {!isUnlocked && (
           <C.ProgressBarInfo>
             <C.ProgressBar>
               <C.Bar barWidth={barWidth} />

@@ -2,12 +2,14 @@ import * as C from './styles';
 
 import Wailing from '../../assets/GlobalAssets/wailing-animation.json';
 import Denying from '../../assets/GlobalAssets/denying-animation.json';
+import Earning from '../../assets/GlobalAssets/earning-animation.json';
 import LottieView from 'lottie-react-native';
 
 export function Modal({ show, type = 'wailing', title, body, footer }) {
   const animations = [
     { id: 'wailing', animation: Wailing },
     { id: 'denying', animation: Denying },
+    { id: 'earning', animation: Earning },
   ];
 
   function getAnimation() {
@@ -30,7 +32,6 @@ export function Modal({ show, type = 'wailing', title, body, footer }) {
               }}
             />
           </C.Header>
-
           <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
