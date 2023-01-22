@@ -38,3 +38,7 @@ export function getRankingName(id) {
 export function getRankingImage(id) {
   return rankings.filter(ranking => ranking.id === id)[0].image;
 }
+
+export function calculateRanking(xp) {
+
+}

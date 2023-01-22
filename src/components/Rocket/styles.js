@@ -31,7 +31,7 @@ export const Price = styled.View`
   justify-content: flex-end;
   align-items: center;
   align-self: flex-end;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 `;
 
 export const Coins = styled.Text`
@@ -56,4 +56,11 @@ export const Name = styled.Text`
   text-align: center;
   font-size: 16px;
   margin: 8px 0 0;
+`;
+
+export const Text = styled.Text`
+  font-family: ${props => props.theme.fonts.regular};
+  color: ${props => props.theme.colors.white};
+  font-size: 14px;
+  text-align: center;
 `;

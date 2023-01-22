@@ -3,12 +3,17 @@ import { containerWidth } from '../../screens/Profile/styles';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
- align-items: center;
+  align-items: center;
   justify-content: center;
   padding: 24px 0 12px;
   border-width: ${StyleSheet.hairlineWidth}px;
   border-bottom-color: ${props => props.theme.colors.green_500};
-  
+`;
+
+export const SettingsButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 48px;
+  right: 24px;
 `;
 
 export const Avatar = styled.Image`

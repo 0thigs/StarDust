@@ -2,11 +2,11 @@ import React from 'react';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function Button({ title, onPress, isLoading, color, isDisabled, small }) {
+export function Button({ title, onPress, isLoading, color, background, isDisabled, small }) {
   return (
     <C.Container
       onPress={onPress}
-      color={color}
+      background={background}
       disabled={isDisabled}
       isSmall={small}
       activeOpacity={0.7}

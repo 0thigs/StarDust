@@ -4,16 +4,21 @@ import * as C from './styles';
 import { rocketImages } from '../../utils/rocketImages';
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
+import theme from '../../global/styles/theme';
 
 import { Button } from '../Button';
+import { Modal } from '../Modal';
 
 import api from '../../services/api';
+
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
 export function Rocket({ id, name, price, user, setUser }) {
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const RocketImage = rocketImages['rocket' + id];
 
   const RocketPosition = useSharedValue(-5);
@@ -27,16 +32,15 @@ export function Rocket({ id, name, price, user, setUser }) {
   async function buyRocket() {
     if (user.coins < price) {
       setIsRequesting(false);
+      setShowModal(true);
       return;
     }
     const updatedAcquiredRocketsIds = [...user.acquired_rockets_ids, id];
-
     setUser(user => {
       return { ...user, acquired_rockets_ids: updatedAcquiredRocketsIds };
     });
 
     await api.updateAcquiredRocketsIds(updatedAcquiredRocketsIds, user.id);
-
     selectRocket();
   }
 
@@ -46,7 +50,6 @@ export function Rocket({ id, name, price, user, setUser }) {
     });
 
     await api.updateSelectedRocketId(id, user.id);
-
     setIsRequesting(false);
   }
 
@@ -78,7 +81,7 @@ export function Rocket({ id, name, price, user, setUser }) {
             <C.Coins>{price}</C.Coins>
           </C.Price>
         )}
-        <C.RocketImageContainer style={isSelected && RocketAnimatedStyle}>
+        <C.RocketImageContainer style={isSelected ? RocketAnimatedStyle : null}>
           <RocketImage width={125} height={125} />
         </C.RocketImageContainer>
       </C.RocketBackground>
@@ -86,12 +89,28 @@ export function Rocket({ id, name, price, user, setUser }) {
         <C.Name isSelected={isSelected}>{name}</C.Name>
         <Button
           title={isSelected && isAcquired ? 'Selecionado' : isAcquired ? 'Selecionar' : 'Comprar'}
-          color={'yellow'}
           isDisabled={(isSelected && isAcquired) || isRequesting}
           onPress={handleButton}
           isLoading={isRequesting}
+          color={theme.colors.black}
+          background={theme.colors.yellow_300}
         />
       </C.Info>
+
+      <Modal
+        show={showModal}
+        type={'denying'}
+        title={'Parece que você não tem poeira estelar o suficiente'}
+        body={<C.Text>Você pode adquirir mais completando estrelas</C.Text>}
+        footer={
+          <Button
+            title={'Entendido'}
+            onPress={() => setShowModal(false)}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+          />
+        }
+      />
     </C.Container>
   );
 }

@@ -7,7 +7,7 @@ export const Container = styled.View`
   border-radius: 4px;
   border-width: 2px;
   border-color: ${props => props.theme.colors.gray_500};
-  margin-top: 24px;
+  margin-top: 40px;
   padding: 12px 0;
 `;
 
@@ -28,5 +28,12 @@ export const WeekDay = styled.View``;
 
 export const WeekDayName = styled.Text`
   color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.regular};
+`;
+
+export const StreakCount = styled.Text`
+  margin-top: 12px;
+  text-align: center;
+  color: ${props => props.theme.colors.green_500};
   font-family: ${props => props.theme.fonts.regular};
 `;

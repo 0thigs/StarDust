@@ -16,6 +16,7 @@ export function Shop() {
 
   useEffect(() => {
     getRockets();
+    console.log(user);
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 import React from 'react';
 import { getRankingImage, getRankingName } from '../../utils/rankings';
 import { rocketImages } from '../../utils/rocketImages';
+import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
+
 import * as C from './styles';
 
 export function ProfileArea({ user: { ranking_id, selected_rocket_id, avatar, name, level, xp } }) {
@@ -8,8 +10,13 @@ export function ProfileArea({ user: { ranking_id, selected_rocket_id, avatar, na
   const rankingName = getRankingName(ranking_id);
   const RocketImage = rocketImages['rocket' + selected_rocket_id];
 
+  function handleSettingsButton() {}
+
   return (
     <C.Container>
+      <C.SettingsButton activeOpacity={0.7} onPress={handleSettingsButton}>
+        <SettingsIcon width={40} height={40} />
+      </C.SettingsButton>
       <C.Avatar source={{ uri: avatar }} />
       <C.Name>{name}</C.Name>
       <C.Level>

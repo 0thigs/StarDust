@@ -43,3 +43,10 @@ export const Lives = styled.Text`
   font-size: 18px;
   margin-left: 4px;
 `;
+
+export const Text = styled.Text`
+  font-family: ${props => props.theme.fonts.regular};
+  color: ${props => props.theme.colors.white};
+  font-size: 14px;
+  text-align: center;
+`;

@@ -8,12 +8,7 @@ export const Container = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background-color: ${props =>
-    props.color === 'red'
-      ? props.theme.colors.red_700
-      : props.color === 'yellow'
-      ? props.theme.colors.yellow_300
-      : props.theme.colors.green_300};
+  background-color: ${props => props.background};
   opacity: ${props => (props.disabled ? 0.5 : 1)};
 `;
 
@@ -22,6 +17,5 @@ export const Loader = styled.ActivityIndicator``;
 export const Title = styled.Text`
   font-size: 16px;
   font-family: ${props => props.theme.fonts.bold};
-  color: ${props =>
-    props.color === 'red' ? props.theme.colors.white : props.theme.colors.green_900};
+  color: ${props => props.color};
 `;

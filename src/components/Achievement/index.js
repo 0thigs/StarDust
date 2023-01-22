@@ -4,7 +4,7 @@ import { achievementIcons } from '../../utils/AchievementIcons';
 
 import Lock from '../../assets/AchievementAssets/lock.svg';
 
-export function Achievement({ title, description, goal, id, isGotten }) {
+export function Achievement({ id, title, description, goal, isGotten }) {
   const AchievementIcon = achievementIcons['achievement' + id];
 
   return (
@@ -13,12 +13,14 @@ export function Achievement({ title, description, goal, id, isGotten }) {
       <C.AchievementsInfo>
         <C.AchievementsTitle>{title}</C.AchievementsTitle>
         <C.AchievementsDescription>{description}</C.AchievementsDescription>
-        <C.ProgressBarInfo>
-          <C.ProgressBar>
-            <C.Bar />
-          </C.ProgressBar>
-          <C.ProgressBarGoal>1/{goal}</C.ProgressBarGoal>
-        </C.ProgressBarInfo>
+        {goal && (
+          <C.ProgressBarInfo>
+            <C.ProgressBar>
+              <C.Bar />
+            </C.ProgressBar>
+            <C.ProgressBarGoal>1/{goal}</C.ProgressBarGoal>
+          </C.ProgressBarInfo>
+        )}
       </C.AchievementsInfo>
     </C.Container>
   );

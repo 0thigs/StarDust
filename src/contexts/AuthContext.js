@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import api from '../services/api';
 
 export const AuthContext = createContext();
@@ -16,7 +16,12 @@ const fakeUser = {
   acquired_rockets_ids: [1],
   selected_rocket_id: 1,
   ranking_id: 1,
-  starId: 1
+  streak: 12,
+  completed_days: [],
+  completed_planets: 0,
+  completed_achievements_ids: [],
+  created_at: new Date(),
+  starId: 1,
 };
 
 export function AuthContextProvider({ children }) {
