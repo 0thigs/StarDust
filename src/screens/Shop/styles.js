@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import LottieView from 'lottie-react-native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -24,4 +25,24 @@ export const RocketList = styled.View`
 
 export const LifeList = styled.ScrollView`
   flex-direction: row;
+`;
+
+export const Achievements = styled.ScrollView.attrs({
+    contentContainerStyle: {
+      alignItems: 'center',
+    },
+  })``;
+
+export const AchievementContainer = styled.View`
+  position: relative;
+`;
+
+export const Animation = styled(LottieView)`
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  opacity: 0.7;
+  z-index: -5;
 `;

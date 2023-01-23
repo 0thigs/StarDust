@@ -21,13 +21,12 @@ export default {
     return data[0];
   },
 
-  updateUserData: async (column, data, userId) => {
+  updateUser: async (column, data, userId) => {
     const { error } = await supabase
       .from('users')
       .update({ [column]: data })
       .eq('id', userId);
     if (error) {
-      console.log(error);
       return error.message;
     }
   },

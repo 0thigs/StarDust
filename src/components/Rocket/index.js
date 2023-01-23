@@ -32,12 +32,16 @@ export function Rocket({ id, name, image: RocketImage, price, user, setUser }) {
       setShowModal(true);
       return;
     }
-    const updatedAcquiredRocketsIds = [...user.acquired_rockets_ids, id];
-    setUser(user => {
-      return { ...user, acquired_rockets_ids: updatedAcquiredRocketsIds };
-    });
 
-    await api.updateUserData('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
+    const updatedCoins = user.coins - price;
+    const updatedAcquiredRocketsIds = [...user.acquired_rockets_ids, id];
+
+    setUser(user => {
+      return { ...user, coins: updatedCoins, acquired_rockets_ids: updatedAcquiredRocketsIds };
+    });
+    await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
+    await api.updateUser('coins', updatedCoins, user.id);
+
     selectRocket();
   }
 
@@ -46,7 +50,7 @@ export function Rocket({ id, name, image: RocketImage, price, user, setUser }) {
       return { ...user, selected_rocket_id: id };
     });
 
-    await api.updateSelectedRocketId(id, user.id);
+    await api.updateUser('selected_rocket_id', id, user.id);
     setIsRequesting(false);
   }
 

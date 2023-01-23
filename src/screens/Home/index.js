@@ -5,7 +5,7 @@ import { Planet } from '../../components/Planet';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
-import { planets as planetsFromJSON } from '../../utils/planets';
+import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 
@@ -21,7 +21,6 @@ import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 export function Home() {
   const { user, setUser } = useAuth();
 
-  const [planets, setPlanets] = useState([]);
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -34,15 +33,16 @@ export function Home() {
   }
 
   async function updateUnlockedAchievementsIds() {
-    const unlockedAchievementsIds = unlockedAchievements.map(achievement => achievement.id);
+    const unlockedAchievementsIds = unlockedAchievements.map(
+      unlockedAchievement => unlockedAchievement.id
+    );
     setUser(user => {
       return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
     });
-    await api.updateUserData('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
+    await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
   }
 
   useEffect(() => {
-    setPlanets(planetsFromJSON)
     setUnlockedAchievements(getUnlockedAchievements(user));
     setTimeout(() => setIsEndTransition(true), 3000);
   }, []);

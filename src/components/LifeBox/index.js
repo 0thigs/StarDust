@@ -3,8 +3,10 @@ import * as C from './styles';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
+
 import { Button } from '../Button';
 import { Modal } from '../Modal';
+
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
@@ -13,10 +15,14 @@ export function LifeBox({ lives, price, user, setUser }) {
   const [showModal, setShowModal] = useState(false);
 
   async function buyLives() {
-    const newLives = user.lives + lives;
-    await api.updateUserData('lives', newLives, user.id);
+    const updatedLives = user.lives + lives;
+    const updatedCoins = user.coins - price;
+
+    await api.updateUser('lives', updatedLives, user.id);
+    await api.updateUser('coins', updatedCoins, user.id);
+
     setUser(user => {
-      return { ...user, lives: newLives };
+      return { ...user, lives: updatedLives, coins: updatedCoins };
     });
     setIsBuying(false);
   }

@@ -75,7 +75,7 @@ export function End({ starId }) {
     });
 
     for (data of Object.keys(newData)) {
-      await api.updateUserData(data, newData[data], user.id);
+      await api.updateUser(data, newData[data], user.id);
     }
 
     setTimeout(() => {

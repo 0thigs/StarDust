@@ -23,19 +23,9 @@ export function Modal({ show, type = 'crying', title, body, footer }) {
         <C.Content animation={'flipInX'} duration={10}>
           <C.Header>
             <C.Title>{title}</C.Title>
-            <LottieView
-              source={getAnimation()}
-              autoPlay={true}
-              loop={true}
-              style={{
-                width: 170,
-                height: 170,
-              }}
-            />
+            <C.Animation source={getAnimation()} autoPlay={true} loop={true} />
           </C.Header>
-          <C.Body>
-            {body}
-          </C.Body>
+          <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
       </C.Fade>

@@ -30,7 +30,7 @@ export function LessonHeader() {
 
   async function handleCloseButton() {
     if (state.livesCount < user.lives) {
-      await api.updateLives(state.livesCount, user.id);
+      await api.updateUser('lives', state.livesCount, user.id);
       setUser({ ...user, lives: state.livesCount });
     }
     navigation.reset({

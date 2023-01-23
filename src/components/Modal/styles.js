@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.Modal``;
@@ -20,6 +21,11 @@ export const Header = styled.View`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 16px 0 0;
+`;
+
+export const Animation = styled(LottieView)`
+  width: 170px;
+  height: 170px;
 `;
 
 export const Title = styled.Text`

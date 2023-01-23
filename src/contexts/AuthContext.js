@@ -14,7 +14,7 @@ const fakeUser = {
   level: 1,
   unlocked_achievements_ids: [],
   unlocked_stars_ids: [1, 2],
-  acquired_rockets_ids: [1],
+  acquired_rockets_ids: [1, 2, 3, 4],
   selected_rocket_id: 1,
   ranking_id: 1,
   streak: 12,
@@ -26,6 +26,8 @@ const fakeUser = {
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(fakeUser);
+
+
 
   async function getUser(id) {
     const user = await api.getUser(id);
