@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
-
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.View`
   flex: 1;
-  width: 100%;
-  margin-top: 20px;
+  width: 350px;
+  margin-top: 40px;
 `;
 
-export const PhaseTitle = styled.Text`
+export const Title = styled(Animatable.Text)`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 20px;
@@ -17,11 +17,13 @@ export const Theories = styled.ScrollView`
   width: 100%;
 `;
 
-export const TextContainer = styled.View`
+export const Theory = styled.View``;
+
+export const TextContainer = styled(Animatable.View)`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  margin-top: 14px;
+  margin: 16px 0;
 `;
 
 export const DefaultText = styled.Text`
@@ -44,10 +46,8 @@ export const AlertText = styled.Text`
   margin-left: 18px;
 `;
 
-export const ExampleTextContainer = styled.View`
-  width: 100%;
-  margin-top: 14px;
-  justify-content: center;
+export const ExampleTextContainer = styled(Animatable.View)`
+  margin: 16px 0;
 `;
 
 export const ExempleTextTitle = styled.Text`
@@ -55,12 +55,11 @@ export const ExempleTextTitle = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
 `;
 
-export const ExempleText = styled.Text`
+export const ExempleText = styled.View`
   background-color: ${props => props.theme.colors.green_900};
-  color: ${props => props.theme.colors.green_500};
-  font-family: ${props => props.theme.fonts.regular};
-  border-radius: 10px;
-  padding: 16px;
-  margin-left: 18px;
-  margin-top: 4px;
+  border-radius: 8px;
+`;
+
+export const SpeechButton = styled.TouchableOpacity`
+  padding-bottom: 24px;
 `;
