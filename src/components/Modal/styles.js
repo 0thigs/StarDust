@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled.Modal``;
 
@@ -9,7 +10,7 @@ export const Fade = styled.View`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-export const Content = styled.View`
+export const Content = styled(Animatable.View)`
   width: 90%;
 `;
 
@@ -18,7 +19,7 @@ export const Header = styled.View`
   background-color: ${props => props.theme.colors.blue_700};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  padding: 16px 0;
+  padding: 16px 0 0;
 `;
 
 export const Title = styled.Text`

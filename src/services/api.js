@@ -21,44 +21,6 @@ export default {
     return data[0];
   },
 
-  getPlanets: async () => {
-    const { data: planets, error } = await supabase
-      .from('planets')
-      .select('*')
-      .order('id', { ascending: true });
-    if (error) {
-      return error.message;
-    }
-    return planets;
-  },
-
-  getStars: async () => {
-    const { data: stars, error } = await supabase.from('stars').select('*');
-    if (error) {
-      return error.message;
-    }
-    return stars;
-  },
-
-  getRockets: async () => {
-    const { data: rockets, error } = await supabase.from('rockets').select('*');
-    if (error) {
-      return error.message;
-    }
-    return rockets;
-  },
-
-  getRocket: async selectedRocketId => {
-    const { data: rocket, error } = await supabase
-      .from('rockets')
-      .select('*')
-      .eq('id', selectedRocketId);
-    if (error) {
-      return error.message;
-    }
-    return rocket;
-  },
-
   updateLives: async (lives, userId) => {
     const { error } = await supabase.from('users').update({ lives }).eq('id', userId);
     if (error) {

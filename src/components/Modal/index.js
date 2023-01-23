@@ -1,13 +1,15 @@
 import * as C from './styles';
 
-import Wailing from '../../assets/GlobalAssets/wailing-animation.json';
-import Denying from '../../assets/GlobalAssets/denying-animation.json';
-import Earning from '../../assets/GlobalAssets/earning-animation.json';
+import Crying from '../../assets/ModalAssets/crying-animation.json';
+import Denying from '../../assets/ModalAssets/denying-animation.json';
+import Earning from '../../assets/ModalAssets/earning-animation.json';
+import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+
 import LottieView from 'lottie-react-native';
 
-export function Modal({ show, type = 'wailing', title, body, footer }) {
+export function Modal({ show, type = 'crying', title, body, footer }) {
   const animations = [
-    { id: 'wailing', animation: Wailing },
+    { id: 'crying', animation: Crying },
     { id: 'denying', animation: Denying },
     { id: 'earning', animation: Earning },
   ];
@@ -19,7 +21,7 @@ export function Modal({ show, type = 'wailing', title, body, footer }) {
   return (
     <C.Container transparent visible={show} animationType={'fadeIn'}>
       <C.Fade>
-        <C.Content>
+        <C.Content animation={'flipInX'} duration={10}>
           <C.Header>
             <C.Title>{title}</C.Title>
             <LottieView
@@ -27,12 +29,28 @@ export function Modal({ show, type = 'wailing', title, body, footer }) {
               autoPlay={true}
               loop={true}
               style={{
-                width: 220,
-                height: 220,
+                width: 170,
+                height: 170,
               }}
             />
           </C.Header>
-          <C.Body>{body}</C.Body>
+          <C.Body>
+            {type === 'earning' && (
+              <LottieView
+                source={RewardLight}
+                autoPlay={true}
+                loop={true}
+                style={{
+                  width: 220,
+                  height: 220,
+                  position: 'absolute',
+                  opacity: 0.7,
+                  zIndex: -5,
+                }}
+              />
+            )}
+            {body}
+          </C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
       </C.Fade>

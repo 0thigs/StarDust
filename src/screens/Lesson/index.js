@@ -20,11 +20,11 @@ export function Lesson() {
   return (
     <C.Container>
       {!isEndTrasition ? (
-        <TransitionScreenAnimation />
+        <TransitionScreenAnimation screen={'home'} />
       ) : (
         <>
+          {state.currentStage === 'quiz' && <Quiz coins={user.coins} />}
           {state.currentStage === 'theory' && <Theory starId={user.starId} />}
-          {state.currentStage === 'quiz' && <Quiz />}
           {state.currentStage === 'end' && <End starId={user.starId} />}
         </>
       )}

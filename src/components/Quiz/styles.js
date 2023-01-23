@@ -15,3 +15,13 @@ export const QuestionStem = styled(Animatable.Text)`
   margin: 20px;
   text-align: center;
 `;
+
+export const Text = styled.Text`
+  text-align: center;
+  color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.regular};
+  font-size: 16px;
+`;
+
+export const Buttons = styled.View`
+`;

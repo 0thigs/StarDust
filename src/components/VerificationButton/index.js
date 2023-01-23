@@ -4,6 +4,7 @@ import * as C from './styles';
 
 import Check from '../../assets/LessonAssets/correct-answer-icon.svg';
 import X from '../../assets/LessonAssets/incorrect-answer-icon.svg';
+import theme from '../../global/styles/theme';
 
 export function VerificationButton({ verifyAnswer, isAnswerWrong, isVerified, isAnswered }) {
   return (
@@ -21,7 +22,8 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isVerified, is
           isVerified && isAnswerWrong ? 'Tentar novamente' : isVerified ? 'Continuar' : 'Verificar'
         }
         onPress={verifyAnswer}
-        color={isVerified && isAnswerWrong ? 'red' : 'green'}
+        background={isVerified && isAnswerWrong ? theme.colors.red_700 : theme.colors.green_500}
+        color={isVerified && isAnswerWrong ? theme.colors.white :  theme.colors.black}
         isDisabled={!isAnswered}
       />
     </C.Container>

@@ -11,6 +11,7 @@ export const Container = styled.View`
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-bottom-color: ${props => props.theme.colors.green_500};
   margin-top: 12px;
+  z-index: 10;
 `;
 
 export const AchievementsInfo = styled.View`
