@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LifeBox } from '../../components/LifeBox';
 import { Rocket } from '../../components/Rocket';
+import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 import { useAuth } from '../../hooks/useAuth';
+import { rockets as rocketsFromJSON } from '../../utils/rockets';
 import api from '../../services/api';
 import * as C from './styles';
 
 export function Shop() {
   const { user, setUser } = useAuth();
-  const [rockets, setRockets] = useState([]);
-
-  async function getRockets() {
-    const rockets = await api.getRockets();
-    setRockets(rockets);
-  }
-
-  useEffect(() => {
-    getRockets();
-    console.log(user);
-  }, []);
+  const [rockets, setRockets] = useState(rocketsFromJSON);
 
   return (
     <C.Container>

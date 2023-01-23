@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as C from './styles';
-import { achievements as achievementsFromDatabase } from '../../utils/achivements';
+import { achievements as achievementsFromJSON } from '../../utils/achivements';
 import { useAuth } from '../../hooks/useAuth';
 import { Achievement } from '../Achievement';
 import { useNavigation } from '@react-navigation/native';
@@ -25,7 +25,7 @@ export function CustomDrawer() {
   }
 
   useEffect(() => {
-    setAchievements(achievementsFromDatabase);
+    setAchievements(achievementsFromJSON);
   }, [user]);
 
   return (

@@ -5,6 +5,7 @@ import { Planet } from '../../components/Planet';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
+import { planets as planetsFromJSON } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 
@@ -18,8 +19,7 @@ import theme from '../../global/styles/theme';
 export function Home() {
   const { user, setUser } = useAuth();
 
-  const [planets, setPlanets] = useState([]);
-  const [stars, setStars] = useState([]);
+  const [planets, setPlanets] = useState(planetsFromJSON);
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -31,29 +31,15 @@ export function Home() {
     return star;
   }
 
-  async function getPlanets() {
-    const planets = await api.getPlanets();
-    setPlanets(planets);
-  }
-
-  async function getStars() {
-    const stars = await api.getStars();
-    const updatedStars = stars.map(verifyIfIsStarUnlocked);
-    setStars(updatedStars);
-  }
-
   async function updateUnlockedAchievementsIds() {
     const unlockedAchievementsIds = unlockedAchievements.map(achievement => achievement.id);
     setUser(user => {
       return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
     });
-  console.log(unlockedAchievementsIds);
     await api.updateUnlockedAchievementsIds(unlockedAchievementsIds, user.id);
   }
 
   useEffect(() => {
-    getPlanets();
-    getStars();
     setUnlockedAchievements(getUnlockedAchievements(user));
     setTimeout(() => setIsEndTransition(true), 3000);
   }, []);
@@ -68,7 +54,7 @@ export function Home() {
         <BackgroundImage />
       </C.Background>
       {!isEndTrasition ? (
-        <TransitionScreenAnimation />
+        <TransitionScreenAnimation screen={'home'} />
       ) : (
         <C.PlanetsList
           data={planets}
@@ -76,9 +62,10 @@ export function Home() {
           renderItem={({ item }) => (
             <Planet
               id={item.id}
-              title={item.title}
-              currentPlanetStarsIds={item.stars_ids}
-              stars={stars}
+              name={item.name}
+              image={item.image}
+              icon={item.icon}
+              stars={item.stars.map(verifyIfIsStarUnlocked)}
             />
           )}
         />

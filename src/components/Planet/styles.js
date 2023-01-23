@@ -23,7 +23,7 @@ export const PlanetSign = styled(Animated.View)`
   height: 64px;
 `;
 
-export const PlanetTitle = styled.Text`
+export const PlanetName = styled.Text`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 14px;
