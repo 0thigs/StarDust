@@ -16,10 +16,12 @@ import api from '../../services/api';
 import { Button } from '../../components/Button';
 import theme from '../../global/styles/theme';
 
+import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+
 export function Home() {
   const { user, setUser } = useAuth();
 
-  const [planets, setPlanets] = useState(planetsFromJSON);
+  const [planets, setPlanets] = useState([]);
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -36,10 +38,11 @@ export function Home() {
     setUser(user => {
       return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
     });
-    await api.updateUnlockedAchievementsIds(unlockedAchievementsIds, user.id);
+    await api.updateUserData('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
   }
 
   useEffect(() => {
+    setPlanets(planetsFromJSON)
     setUnlockedAchievements(getUnlockedAchievements(user));
     setTimeout(() => setIsEndTransition(true), 3000);
   }, []);
@@ -79,15 +82,18 @@ export function Home() {
           body={
             <C.Achievements>
               {unlockedAchievements.map(({ id, title, icon, description, goal, metric }) => (
-                <Achievement
-                  key={id}
-                  title={title}
-                  description={description}
-                  icon={icon}
-                  goal={goal}
-                  metric={user[metric]}
-                  isUnlocked={true}
-                />
+                <C.AchievementContainer key={id}>
+                  <C.Animation source={RewardLight} autoPlay={true} loop={true} />
+                  <Achievement
+                    key={id}
+                    title={title}
+                    description={description}
+                    icon={icon}
+                    goal={goal}
+                    metric={user[metric]}
+                    isUnlocked={true}
+                  />
+                </C.AchievementContainer>
               ))}
             </C.Achievements>
           }

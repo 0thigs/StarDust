@@ -13,12 +13,16 @@ export function LifeBox({ lives, price, user, setUser }) {
   const [showModal, setShowModal] = useState(false);
 
   async function buyLives() {
-    await api.updateLives(lives, user.id);
-
-    setUser({ ...user, lives: user.lives + lives });
+    const newLives = user.lives + lives;
+    await api.updateUserData('lives', newLives, user.id);
+    setUser(user => {
+      return { ...user, lives: newLives };
+    });
+    setIsBuying(false);
   }
 
   function handleButton() {
+    setIsBuying(true);
     if (user.coins < price) {
       setShowModal(true);
       return;
@@ -55,6 +59,7 @@ export function LifeBox({ lives, price, user, setUser }) {
             onPress={() => setShowModal(false)}
             color={theme.colors.black}
             background={theme.colors.green_500}
+            isLoading={isBuying}
           />
         }
       />

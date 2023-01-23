@@ -3,7 +3,6 @@ import * as C from './styles';
 import Crying from '../../assets/ModalAssets/crying-animation.json';
 import Denying from '../../assets/ModalAssets/denying-animation.json';
 import Earning from '../../assets/ModalAssets/earning-animation.json';
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 
 import LottieView from 'lottie-react-native';
 
@@ -35,20 +34,6 @@ export function Modal({ show, type = 'crying', title, body, footer }) {
             />
           </C.Header>
           <C.Body>
-            {type === 'earning' && (
-              <LottieView
-                source={RewardLight}
-                autoPlay={true}
-                loop={true}
-                style={{
-                  width: 220,
-                  height: 220,
-                  position: 'absolute',
-                  opacity: 0.7,
-                  zIndex: -5,
-                }}
-              />
-            )}
             {body}
           </C.Body>
           <C.Footer>{footer}</C.Footer>

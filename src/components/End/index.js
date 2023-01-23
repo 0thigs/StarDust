@@ -17,6 +17,8 @@ import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
 import Stars from '../../assets/LessonAssets/stars-animation.json';
 import LottieView from 'lottie-react-native';
 
+import { planets } from '../../utils/planets';
+
 import api from '../../services/api';
 
 import { useNavigation } from '@react-navigation/core';
@@ -38,24 +40,42 @@ export function End({ starId }) {
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
 
-    const planets = await api.getPlanets();
-    const nextStarId = planets.find(planet => planet.starsIds.includes())
-    const updatedUnlockedStarsIds = [...user.unlocked_stars_ids, starId];
+    let completedPlanets = user.completed_planets;
+    let updatedUnlockedStarsIds = user.unlocked_stars_ids;
+    let nextPlanet = null;
+    let nextStar = {};
 
-    setUser({
-      ...user,
+    const currentPlanet = planets.find(planet => planet.stars.some(star => star.id === starId));
+    const currentStar = currentPlanet.stars.find(star => star.id === starId);
+    nextStar = currentPlanet.stars.find(star => star.number === currentStar.number + 1);
+
+    if (!nextStar) {
+      completedPlanets += 1;
+      nextPlanet = planets.find(planet => planet.id === currentPlanet.id + 1);
+      nextStar = nextPlanet.stars[0];
+    }
+
+    updatedUnlockedStarsIds.push(nextStar.id);
+
+    const newData = {
       coins: updatedCoins,
       xp: updatedXp,
       lives: state.livesCount,
       unlocked_stars_ids: updatedUnlockedStarsIds,
+      completed_planets: completedPlanets,
+    };
+
+    console.log(newData);
+
+    setUser(user => {
+      return {
+        ...user,
+        ...newData,
+      };
     });
 
-    await api.updateCoins(updatedCoins, user.id);
-    await api.updateXp(updatedXp, user.id);
-    await api.updateUnlockedStarsIds(updatedUnlockedStarsIds, user.id);
-    if (state.livesCount < user.lives) {
-      await api.updateLives(state.livesCount, user.id);
-      setUser({ ...user, lives: state.livesCount });
+    for (data of Object.keys(newData)) {
+      await api.updateUserData(data, newData[data], user.id);
     }
 
     setTimeout(() => {
@@ -95,7 +115,6 @@ export function End({ starId }) {
   }
 
   function setStarsAnimation() {
-    console.log(getAccurance());
     const AnimationUnitInSeconds = 15.4;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
@@ -164,7 +183,13 @@ export function End({ starId }) {
           delay={1000}
         />
       </C.Metrics>
-      <Button title={'Continuar'} onPress={handleButtonClick} isLoading={isLoading} />
+      <Button
+        title={'Continuar'}
+        onPress={handleButtonClick}
+        isLoading={isLoading}
+        color={theme.colors.black}
+        background={theme.colors.green_500}
+      />
     </C.Container>
   );
 }

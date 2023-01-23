@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 
-import { rocketImages } from '../../utils/rocketImages';
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
 import theme from '../../global/styles/theme';
@@ -13,13 +12,11 @@ import api from '../../services/api';
 
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
-export function Rocket({ id, name, price, user, setUser }) {
+export function Rocket({ id, name, image: RocketImage, price, user, setUser }) {
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
-  const RocketImage = rocketImages['rocket' + id];
 
   const RocketPosition = useSharedValue(-5);
 
@@ -40,7 +37,7 @@ export function Rocket({ id, name, price, user, setUser }) {
       return { ...user, acquired_rockets_ids: updatedAcquiredRocketsIds };
     });
 
-    await api.updateAcquiredRocketsIds(updatedAcquiredRocketsIds, user.id);
+    await api.updateUserData('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
     selectRocket();
   }
 
