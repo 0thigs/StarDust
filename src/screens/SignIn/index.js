@@ -240,7 +240,8 @@ export function SignIn() {
           title={isSignUpForm ? 'Cadastrar' : 'Entrar'}
           isLoading={isLoading}
           isDisabled={isLoading}
-          color={theme.colors.green_300}
+          color={theme.colors.black}
+          background={theme.colors.green_500}
         />
 
         {isSignUpForm ? (

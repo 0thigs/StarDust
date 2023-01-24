@@ -1,5 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import api from '../services/api';
+import { supabase } from '../services/supabase';
 
 export const AuthContext = createContext();
 
@@ -27,10 +28,18 @@ const fakeUser = {
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(fakeUser);
 
+  //   useEffect(() => {
+  //     const signedUser = getSignedUser()
+  //     setUser(signedUser);
+  //   }, []);
 
-
-  async function getUser(id) {
-    const user = await api.getUser(id);
+  async function getUserInSession() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const { user } = session;
+    // const signedUser = await api.getUser(user.id);
+    // setUser(user);
     return user;
   }
 
@@ -46,8 +55,14 @@ export function AuthContextProvider({ children }) {
     if (error) {
       return error.message;
     }
-    const newUser = { name, email, coins: 20, lives: 5, xp: 0, unlockedStarsIds: [1] };
+    const newUser = {
+      id: user.id,
+      name,
+      email,
+    };
     const response = await api.addUser(newUser);
+    const signedUser = await api.getUser(user.id);
+    console.log(signedUser);
     return response;
   }
 
@@ -64,7 +79,8 @@ export function AuthContextProvider({ children }) {
       return error.message;
     }
     const signedUser = await api.getUser(user.id);
-    return user;
+    setUser(signedUser);
+    console.log(signedUser);
   }
 
   async function signOut() {
@@ -76,8 +92,23 @@ export function AuthContextProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, signOut, setUser, user }}>
+    <AuthContext.Provider value={{ signUp, signIn, signOut, getUserInSession, setUser, user }}>
       {children}
     </AuthContext.Provider>
   );
 }
+
+// const newUser = {
+//     name,
+//     email,
+//     coins: 20,
+//     lives: 5,
+//     xp: 0,
+//     unlocked_achievements_ids: [],
+//     acquired_rockets_ids: [1],
+//     unlockedStarsIds: [1],
+//     selected_rocket_id: 1,
+//     ranking_id: 1,
+//     streak: 0,
+//     created_at: user.created_at,
+//   };

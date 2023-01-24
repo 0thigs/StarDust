@@ -36,6 +36,18 @@ export const DefaultText = styled.Text`
   padding: 16px;
 `;
 
+export const EmphasisText = styled.Text`
+  background-color: ${props => props.theme.colors.blue_700};
+  color: ${props => props.theme.colors.blue_300};
+  font-family: ${props => props.theme.fonts.regular};
+  font-size: 14px;
+  border-radius: 10px;
+  border-width: 2px;
+  border-left-color: ${props => props.theme.colors.blue_300};
+  padding: 16px;
+  width: 100%;
+`;
+
 export const AlertText = styled.Text`
   background-color: ${props => props.theme.colors.yellow_300};
   color: ${props => props.theme.colors.black};

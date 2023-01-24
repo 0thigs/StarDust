@@ -29,7 +29,7 @@ export function Shop() {
     setUser(user => {
       return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
     });
-    await api.updateUserData('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
+    await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
 
     unlockedAchievements.length > 0 && setShowModal(true)
   }

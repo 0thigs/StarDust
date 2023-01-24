@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as C from './styles';
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 
 import PlayButton from '../../assets/SplashAssets/play-button.json';
@@ -8,8 +9,8 @@ import Rocket from '../../assets/SplashAssets/rocket.json';
 import theme from '../../global/styles/theme';
 import LottieView from 'lottie-react-native';
 
-
 export function Splash() {
+  const { getUserInSession } = useAuth();
   const [rocket, setRocket] = useState(false);
   const navigation = useNavigation();
 
@@ -24,6 +25,11 @@ export function Splash() {
       3000
     );
   }
+
+//   useEffect(() => {
+//    const user = getUserInSession()
+//    console.log(user);
+//   }, []);
 
   return (
     <C.Container>

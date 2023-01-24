@@ -1,18 +1,18 @@
 import React from 'react';
 import { getRankingImage, getRankingName } from '../../utils/rankings';
-import { rocketImages } from '../../utils/rocketImages';
 import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
 
 import * as C from './styles';
 import dayjs from 'dayjs';
 import ptBR from 'dayjs/locale/pt-br';
+import { rockets } from '../../utils/rockets';
 
 export function ProfileArea({
   user: { ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
 }) {
   const RankingImage = getRankingImage(ranking_id);
   const rankingName = getRankingName(ranking_id);
-  const RocketImage = rocketImages['rocket' + selected_rocket_id];
+  const RocketImage = rockets.find(rocket => rocket.id === selected_rocket_id).image
 
   const createdAt = dayjs(created_at).locale(ptBR).format('DD MMMM [de] YYYY');
 

@@ -50,12 +50,22 @@ export function Theory({ starId }) {
           <C.Theory key={index}>
             {theory.type === 'default' && (
               <C.TextContainer animation={getAnimation(index)}>
-                <C.DefaultText>
+                <C.EmphasisText>
                   <C.SpeechButton onPress={() => handleSpeechButton(theory.body)}>
-                    <Volume2 width={25} height={25} color={theme.colors.white} />
+                    <Volume2 width={25} height={25} color={theme.colors.blue_300} />
                   </C.SpeechButton>
                   {theory.body}
-                </C.DefaultText>
+                </C.EmphasisText>
+              </C.TextContainer>
+            )}
+            {theory.type === 'default' && (
+              <C.TextContainer animation={getAnimation(index)}>
+                <C.EmphasisText>
+                  <C.SpeechButton onPress={() => handleSpeechButton(theory.body)}>
+                    <Volume2 width={25} height={25} color={theme.colors.blue_300} />
+                  </C.SpeechButton>
+                  {theory.body}
+                </C.EmphasisText>
               </C.TextContainer>
             )}
             {theory.type === 'alert' && (
@@ -73,7 +83,6 @@ export function Theory({ starId }) {
               <C.ExampleTextContainer animation={getAnimation(index)}>
                 <C.ExempleTextTitle>Exemplo</C.ExempleTextTitle>
                 <C.ExempleText>
-                
                   <RenderHTML
                     contentWidth={width}
                     source={{
@@ -89,7 +98,12 @@ export function Theory({ starId }) {
             )}
           </C.Theory>
         ))}
-        <Button title={'Praticar'} onPress={handlePracticeButton} />
+        <Button
+          title={'Praticar'}
+          onPress={handlePracticeButton}
+          color={theme.colors.black}
+          background={theme.colors.green_500}
+        />
       </C.Theories>
     </C.Container>
   );

@@ -2,7 +2,7 @@ import { supabase } from './supabase';
 
 export default {
   addUser: async ({ id, name, email }) => {
-    const { data, error } = await supabase.from('user').insert([{ id, name, email }]);
+    const { data, error } = await supabase.from('users').insert([{ id, name, email }]);
     if (error) {
       return error.message;
     }
@@ -12,7 +12,7 @@ export default {
   getUser: async userId => {
     const { data, error } = await supabase
       .from('users')
-      .select('name, email, unlocked_stars_Ids, coins, lives')
+      .select('*')
       .eq('id', userId)
       .limit(1);
     if (error) {

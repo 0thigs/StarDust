@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.2",
     "@hookform/resolvers": "^2.9.10",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/bottom-tabs": "^6.5.2",
     "@react-navigation/drawer": "^6.5.6",
     "@react-navigation/native": "^6.1.1",
