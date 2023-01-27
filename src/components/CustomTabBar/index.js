@@ -20,7 +20,7 @@ export function CustomTabBar({ state, navigation }) {
         <C.TabLabel isActive={state.index === 1}>Loja</C.TabLabel>
       </C.TabButton>
       <C.TabButton onPress={() => goTo('Profile')}>
-        <ProfileIcon style={{ opacity: state.index === 1 ? 1 : 0.8 }} width="50" height="50" />
+        <ProfileIcon style={{ opacity: state.index === 2 ? 1 : 0.8 }} width="50" height="50" />
         <C.TabLabel isActive={state.index === 2}>Perfil</C.TabLabel>
       </C.TabButton>
     </C.Container>

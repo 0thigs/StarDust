@@ -31,8 +31,8 @@ export function TabRoutes({ navigation }) {
         headerRight: () => <HeaderStatus />,
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Shop" component={Shop} />
     </Tab.Navigator>
   );

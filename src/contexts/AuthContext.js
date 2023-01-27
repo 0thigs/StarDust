@@ -14,14 +14,14 @@ const fakeUser = {
   xp: 0,
   level: 1,
   unlocked_achievements_ids: [],
-  unlocked_stars_ids: [1, 2],
-  acquired_rockets_ids: [1, 2, 3, 4],
+  unlocked_stars_ids: [1],
+  acquired_rockets_ids: [1, 2, 3],
   selected_rocket_id: 1,
   ranking_id: 1,
-  streak: 12,
-  completed_days: [1],
+  streak: 0,
+  week_status: ["toDo", "toDo", "toDo", "undone", "done", "done", "toDo"],
   completed_planets: 0,
-  created_at: new Date(),
+  created_at: new Date("2023-01-23T03:01:00.000Z"),
   starId: 1,
 };
 
@@ -62,7 +62,7 @@ export function AuthContextProvider({ children }) {
     };
     const response = await api.addUser(newUser);
     const signedUser = await api.getUser(user.id);
-    setUser(signedUser)
+    setUser(signedUser);
     return response;
   }
 
