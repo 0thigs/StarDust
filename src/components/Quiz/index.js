@@ -13,12 +13,10 @@ import theme from '../../global/styles/theme';
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();
   const [currentQuestion, setCurrentQuestion] = useState([]);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
 
-  function buyLives() {
-   
-  }
+//   function buyLives() {}
 
   function LeaveLesson() {
     navigation.reset({

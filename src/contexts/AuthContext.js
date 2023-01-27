@@ -10,7 +10,7 @@ const fakeUser = {
   email: 'joaopcarvalho.cds@gmail.com',
   avatar: 'https://github.com/JohnPetros.png',
   coins: 20,
-  lives: 1,
+  lives: 5,
   xp: 0,
   level: 1,
   unlocked_achievements_ids: [],
@@ -62,7 +62,7 @@ export function AuthContextProvider({ children }) {
     };
     const response = await api.addUser(newUser);
     const signedUser = await api.getUser(user.id);
-    console.log(signedUser);
+    setUser(signedUser)
     return response;
   }
 

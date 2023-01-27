@@ -1,6 +1,6 @@
 import React from 'react';
 import * as C from './styles';
-
+ 
 import Lock from '../../assets/AchievementAssets/lock.svg';
 
 export function Achievement({ title, icon: Icon, description, goal, metric, isUnlocked }) {

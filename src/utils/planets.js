@@ -17,7 +17,7 @@ export const planets = [
       },
       {
         id: 3,
-        name: 'Entrada e processamento de dados',
+        name: 'Entrada, processamento e saída',
         number: 3,
       },
     ],
@@ -30,18 +30,28 @@ export const planets = [
     stars: [
       {
         id: 4,
-        name: 'Conceito de variáveis',
+        name: 'Conceito de dados',
         number: 1,
       },
       {
         id: 5,
-        name: 'Conceito de variáveis 2',
+        name: 'Caracteres',
         number: 2,
       },
       {
         id: 6,
-        name: 'Conceito de variáveis 3',
+        name: 'Inteiros',
         number: 3,
+      },
+      {
+        id: 7,
+        name: 'Reais',
+        number: 4,
+      },
+      {
+        id: 8,
+        name: 'Lógicos',
+        number: 5,
       },
     ],
   },

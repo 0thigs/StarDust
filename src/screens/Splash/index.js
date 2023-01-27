@@ -47,7 +47,7 @@ export function Splash() {
           </C.Title>
           <C.Subtitle animation={'fadeInUp'}>Aprenda Enquanto Se Diverte!</C.Subtitle>
 
-          <C.ButtonContainer animation={'pulse'} iterationCount={'infinite'}>
+          <C.ButtonContainer animation={'pulse'} duration={500} iterationCount={'infinite'}>
             <C.PlayButton onPress={handlePlayButton}>
               <LottieView
                 source={PlayButton}

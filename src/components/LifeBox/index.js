@@ -23,12 +23,12 @@ export function LifeBox({ lives, price, user, setUser }) {
 
     setUser(user => {
       return { ...user, lives: updatedLives, coins: updatedCoins };
-    });
+    }); 
     setIsBuying(false);
   }
 
   function handleButton() {
-    setIsBuying(true);
+    setIsBuying(true); 
     if (user.coins < price) {
       setShowModal(true);
       return;

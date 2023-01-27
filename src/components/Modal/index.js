@@ -4,7 +4,6 @@ import Crying from '../../assets/ModalAssets/crying-animation.json';
 import Denying from '../../assets/ModalAssets/denying-animation.json';
 import Earning from '../../assets/ModalAssets/earning-animation.json';
 
-import LottieView from 'lottie-react-native';
 
 export function Modal({ show, type = 'crying', title, body, footer }) {
   const animations = [
