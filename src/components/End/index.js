@@ -7,6 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 import { Metric } from '../Metric';
 import { Button } from '../Button';
+import { Streak } from '../Streak';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
@@ -15,6 +16,7 @@ import Time from '../../assets/GlobalAssets/time-icon.svg';
 
 import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
 import Stars from '../../assets/LessonAssets/stars-animation.json';
+import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
 import LottieView from 'lottie-react-native';
 
 import { planets } from '../../utils/planets';
@@ -31,12 +33,11 @@ export function End({ starId }) {
   const [time, setTime] = useState('');
   const [accurance, setAccurance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isStreakShown, setIsStreakShown] = useState(false);
   const starsRef = useRef();
   const navigation = useNavigation();
 
-  async function handleButtonClick() {
-    setIsLoading(true);
-
+ async function updateUserData() {
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
 
@@ -65,8 +66,6 @@ export function End({ starId }) {
       completed_planets: completedPlanets,
     };
 
-    console.log(newData);
-
     setUser(user => {
       return {
         ...user,
@@ -77,13 +76,19 @@ export function End({ starId }) {
     for (data of Object.keys(newData)) {
       await api.updateUser(data, newData[data], user.id);
     }
+  }
 
+   function handleButtonClick() {
+    setIsLoading(true);
+    setIsStreakShown(true);
+    updateUserData()
+    
     setTimeout(() => {
       dispatch({ type: 'resetState' });
       navigation.reset({
         routes: [{ name: 'DrawerRoutes' }],
       });
-    }, 1000);
+    }, 1500);
   }
 
   function convertSecondsToTime(seconds) {
@@ -130,59 +135,76 @@ export function End({ starId }) {
 
   return (
     <C.Container>
-      <C.Message animation={'fadeInDown'}>Fase completada!</C.Message>
-      <LottieView
-        ref={starsRef}
-        loop={false}
-        duration={2500}
-        source={Stars}
-        style={{ width: 50, height: 50 }}
-        colorFilters={[
-          { keypath: 'Branco Sólido 1', color: theme.colors.background },
-          { keypath: 'star1', color: theme.colors.yellow_300 },
-          { keypath: 'star2', color: theme.colors.yellow_300 },
-          { keypath: 'star3', color: theme.colors.yellow_300 },
-          { keypath: 'star4', color: theme.colors.yellow_300 },
-          { keypath: 'star5', color: theme.colors.yellow_300 },
-        ]}
-      />
-      <LottieView
-        source={Astronaut}
-        autoPlay={true}
-        loop={true}
-        style={{ width: 350, height: 350 }}
-      />
-      <C.Metrics>
-        <Metric
-          title={'Poeira estelar'}
-          count={coins}
-          color={theme.colors.yellow_300}
-          icon={<Coin width={35} height={35} />}
-          delay={250}
-          large
-        />
-        <Metric
-          title={'Total XP'}
-          color={theme.colors.green_500}
-          icon={<XP width={35} height={35} />}
-          count={xp}
-          delay={500}
-        />
-        <Metric
-          title={'Tempo'}
-          color={theme.colors.blue_300}
-          icon={<Time width={35} height={35} />}
-          count={time}
-          delay={750}
-        />
-        <Metric
-          title={'Precisão'}
-          color={theme.colors.red_300}
-          icon={<Accurance width={35} height={35} />}
-          count={accurance}
-          delay={1000}
-        />
-      </C.Metrics>
+      {isStreakShown ? (
+        <>
+          <LottieView
+            source={StreakAnimation}
+            autoPlay={true}
+            duration={3500}
+            loop={false}
+            style={{ width: 250, height: 250 }}
+            colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
+          />
+          <Streak user={user} setUser={setUser} isUpdateStreak={true} />
+        </>
+      ) : (
+        <>
+          <C.Message animation={'fadeInDown'}>Fase completada!</C.Message>
+          <LottieView
+            ref={starsRef}
+            loop={false}
+            duration={2500}
+            source={Stars}
+            style={{ width: 50, height: 50 }}
+            colorFilters={[
+              { keypath: 'Branco Sólido 1', color: theme.colors.background },
+              { keypath: 'star1', color: theme.colors.yellow_300 },
+              { keypath: 'star2', color: theme.colors.yellow_300 },
+              { keypath: 'star3', color: theme.colors.yellow_300 },
+              { keypath: 'star4', color: theme.colors.yellow_300 },
+              { keypath: 'star5', color: theme.colors.yellow_300 },
+            ]}
+          />
+          <LottieView
+            source={Astronaut}
+            autoPlay={true}
+            loop={true}
+            style={{ width: 350, height: 350 }}
+          />
+          <C.Metrics>
+            <Metric
+              title={'Poeira estelar'}
+              count={coins}
+              color={theme.colors.yellow_300}
+              icon={<Coin width={35} height={35} />}
+              delay={250}
+              large
+            />
+            <Metric
+              title={'Total XP'}
+              color={theme.colors.green_500}
+              icon={<XP width={35} height={35} />}
+              count={xp}
+              delay={500}
+            />
+            <Metric
+              title={'Tempo'}
+              color={theme.colors.blue_300}
+              icon={<Time width={35} height={35} />}
+              count={time}
+              delay={750}
+            />
+            <Metric
+              title={'Precisão'}
+              color={theme.colors.red_300}
+              icon={<Accurance width={35} height={35} />}
+              count={accurance}
+              delay={1000}
+            />
+          </C.Metrics>
+        </>
+      )}
+
       <Button
         title={'Continuar'}
         onPress={handleButtonClick}

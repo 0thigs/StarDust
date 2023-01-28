@@ -27,6 +27,7 @@ export default {
       .update({ [column]: data })
       .eq('id', userId);
     if (error) {
+        console.log(error.message);
       return error.message;
     }
   },

@@ -3,17 +3,16 @@ import { useAuth } from '../../hooks/useAuth';
 
 import { LifeBox } from '../../components/LifeBox';
 import { Rocket } from '../../components/Rocket';
-
-import { getUnlockedAchievements } from '../../utils/achivements';
-import { rockets } from '../../utils/rockets';
-
-import api from '../../services/api';
-
-import * as C from './styles';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 
+import { rockets } from '../../utils/rockets';
+import { getUnlockedAchievements } from '../../utils/achivements';
+
+import * as C from './styles';
+
+import api from '../../services/api';
 import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
@@ -35,7 +34,6 @@ export function Shop() {
   }
 
   useEffect(() => {
-    console.log(user);
     setUnlockedAchievements(getUnlockedAchievements(user));
     updateUnlockedAchievementsIds();
   }, [user.acquired_rockets_ids]);

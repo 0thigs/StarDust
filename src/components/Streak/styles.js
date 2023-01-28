@@ -9,6 +9,7 @@ export const Container = styled.View`
   border-width: 2px;
   border-color: ${props => props.theme.colors.gray_500};
   margin-top: 40px;
+  margin-bottom: 20px;
   padding: 12px 0;
 `;
 

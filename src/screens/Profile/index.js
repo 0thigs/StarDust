@@ -3,7 +3,7 @@ import * as C from './styles';
 
 import { useAuth } from '../../hooks/useAuth';
 
-import { ProfileArea } from '../../components/ProfileArea';
+import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
 
@@ -32,7 +32,7 @@ export function Profile() {
   return (
     <C.Container>
       <C.Content>
-        <ProfileArea user={user} />
+        <ProfileStatus user={user} />
         <Statistic user={user} />
         <Streak user={user} />
         <C.Title>Conquistas</C.Title>
