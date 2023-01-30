@@ -14,13 +14,14 @@ export function Lesson() {
 
   useEffect(() => {
     dispatch({ type: 'reorderQuestions' });
-    setTimeout(() => setIsEndTransition(true), 3000);
+    const timer = setTimeout(() => setIsEndTransition(true), 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <C.Container>
       {!isEndTrasition ? (
-        <TransitionScreenAnimation screen={'home'} />
+        <TransitionScreenAnimation />
       ) : (
         <>
           {state.currentStage === 'quiz' && <Quiz coins={user.coins} />}

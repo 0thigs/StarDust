@@ -78,7 +78,8 @@ export function SignIn() {
   async function HandleSignIn(data) {
     setIsLoading(true);
     const response = await signIn(data);
-    if (response === 'Invalid login credentials') {
+    console.log({response});
+    if (response === 'Error: Invalid login credentials') {
       Toast.error('Usuário não encontrado');
       setIsLoading(false);
       return;
@@ -92,7 +93,7 @@ export function SignIn() {
   async function HandleSignUp(data) {
     setIsLoading(true);
     const response = await signUp(data);
-    if (response === 'User already registered') {
+    if (response === 'Error: User already registered') {
       Toast.error('Usuário já cadastrado');
       setIsLoading(false);
       return;

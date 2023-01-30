@@ -19,75 +19,88 @@ const fakeUser = {
   selected_rocket_id: 1,
   ranking_id: 1,
   streak: 0,
-  week_status: ["toDo", "toDo", "toDo", "toDo", "toDo", "toDo", "toDo"],
+  week_status: ['toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo'],
   completed_planets: 0,
-  created_at: new Date("2023-01-23T03:01:00.000Z"),
+  created_at: new Date('2023-01-23T03:01:00.000Z'),
   starId: 1,
 };
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(fakeUser);
 
-  //   useEffect(() => {
-  //     const signedUser = getSignedUser()
-  //     setUser(signedUser);
-  //   }, []);
-
   async function getUserInSession() {
     const {
       data: { session },
     } = await supabase.auth.getSession();
     const { user } = session;
-    // const signedUser = await api.getUser(user.id);
-    // setUser(user);
-    return user;
+    const signedUser = await api.getUser(user.id);
+    setUser(signedUser);
+    return signedUser;
   }
 
   async function signUp({ name, email, password }) {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.signUp({
-      name,
-      email,
-      password,
-    });
-    if (error) {
-      return error.message;
+    try {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.signUp({
+        name,
+        email,
+        password,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      const newUser = {
+        id: user.id,
+        name,
+        email,
+      };
+
+      await api.addUser(newUser);
+      const signedUser = await api.getUser(user.id);
+      setUser(signedUser);
+      return signedUser;
+    } catch (error) {
+      console.log(error);
+      return error.toString();
     }
-    const newUser = {
-      id: user.id,
-      name,
-      email,
-    };
-    const response = await api.addUser(newUser);
-    const signedUser = await api.getUser(user.id);
-    setUser(signedUser);
-    return response;
   }
 
   async function signIn({ email, password }) {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      return error.message;
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      const signedUser = await api.getUser(user.id);
+      setUser(signedUser);
+    } catch (error) {
+      console.log(error);
+      return error.toString();
     }
-    const signedUser = await api.getUser(user.id);
-    setUser(signedUser);
-    console.log(signedUser);
   }
 
   async function signOut() {
-    const { error } = await supabase.auth.signOut();
+    try {
+      const { error } = await supabase.auth.signOut();
 
-    if (error) {
-      return error.message;
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.log(error);
+      return error.toString();
     }
   }
 

@@ -44,7 +44,7 @@ export function Home() {
 
   useEffect(() => {
     setUnlockedAchievements(getUnlockedAchievements(user));
-    let timer = setTimeout(() => setIsEndTransition(true), 3000);
+    const timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 

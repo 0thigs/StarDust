@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
@@ -7,22 +7,31 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const inputRef = useRef();
 
-  const toggleSecureTextEntry = () => {
+  function toggleSecureTextEntry() {
     setSecureTextEntry(!secureTextEntry);
-  };
+  }
 
-  const handleInputFocus = () => {
+  function handleInputClick() {
+    // inputRef.current.focus();
+  }
+
+  function handleInputFocus() {
     setIsFocus(true);
-  };
+  }
 
-  const handleInputBlur = () => {
+  function handleInputBlur() {
     setIsFocus(false);
     setIsFilled(!!value);
-  };
+  }
 
   return (
-    <C.Container animation={'fadeInLeft'} duration={1000}>
+    <C.Container
+      animation={'fadeInLeft'}
+      duration={1000}
+      onStartShouldSetResponder={handleInputClick}
+    >
       <C.Label style={{ color: error ? theme.colors.red_700 : theme.colors.green_300 }}>
         {label}
       </C.Label>
@@ -38,6 +47,7 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
       >
         {icon}
         <C.Input
+          ref={inputRef}
           placeholder={placeholder}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}

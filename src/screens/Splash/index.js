@@ -11,11 +11,11 @@ import LottieView from 'lottie-react-native';
 
 export function Splash() {
   const { getUserInSession } = useAuth();
-  const [rocket, setRocket] = useState(false);
+  const [isRocketLauched, setIsRocketLauched] = useState(false);
   const navigation = useNavigation();
 
   function handlePlayButton() {
-    setRocket(true);
+    setIsRocketLauched(true);
 
     setTimeout(
       () =>
@@ -26,14 +26,14 @@ export function Splash() {
     );
   }
 
-//   useEffect(() => {
-//    const user = getUserInSession()
-//    console.log(user);
-//   }, []);
+  useEffect(() => {
+   const user = getUserInSession()
+   console.log(user);
+  }, []);
 
   return (
     <C.Container>
-      {rocket ? (
+      {isRocketLauched ? (
         <LottieView
           source={Rocket}
           autoPlay={true}
