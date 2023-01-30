@@ -34,5 +34,6 @@ export const Label = styled.Text`
     props.currentOption === props.selectedOption
       ? props.theme.colors.blue_300
       : props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
 `;

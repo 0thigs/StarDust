@@ -25,7 +25,6 @@ export const Item = styled(Animated.View)`
 `;
 
 
-
 export const Label = styled.Text`
   color: ${props =>
     props.isAnswerWrong

@@ -9,14 +9,13 @@ import { DragAndDropListForm } from '../DragAndDropListForm';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import theme from '../../global/styles/theme';
+import { DragAndDropClickForm } from '../DragAndDropClickForm';
 
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();
   const [currentQuestion, setCurrentQuestion] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
-
-//   function buyLives() {}
 
   function LeaveLesson() {
     navigation.reset({
@@ -50,6 +49,13 @@ export function Quiz({ coins }) {
       {currentQuestion.type === 'drag-and-drop-list' && (
         <DragAndDropListForm
           items={currentQuestion.items}
+          correctItemsSequence={currentQuestion.correctItemsSequence}
+        />
+      )}
+      {currentQuestion.type === 'drag-and-drop-click' && (
+        <DragAndDropClickForm
+          lines={currentQuestion.lines}
+          dropItems={currentQuestion.dropItems}
           correctItemsSequence={currentQuestion.correctItemsSequence}
         />
       )}
