@@ -33,7 +33,7 @@ export const Body = styled.View`
 export const Count = styled.Text`
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.white};
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 4px;
   margin-bottom: -8px;
 `;

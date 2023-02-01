@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import Animated from 'react-native-reanimated';
 import { css } from 'styled-components';
+import Animated from 'react-native-reanimated';
 
 const defaultIdent = 12;
 export const itemHeight = 40;
@@ -13,7 +13,7 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const Lines = styled.View`
+export const Lines = styled(Animated.View)`
   width: 350px;
 `;
 
@@ -45,7 +45,6 @@ export const DropItems = styled.View`
   width: 350px;
   height: ${itemHeight}px;
   justify-content: center;
-  background-color: red;
 `;
 
 export const DropItem = styled(Animated.View)`

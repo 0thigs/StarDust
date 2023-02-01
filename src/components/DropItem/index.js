@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withTiming, FadeInDown } from 'react-native-reanimated';
 
 export function DropItem({ id, label, zones, setZones, isAnswerVerified }) {
   const [isItemInZone, setIsItemInZone] = useState(false);
@@ -78,7 +78,6 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified }) {
         event.target.measure((x, y, width, height, pageX, pageY) => {
           setItemWidth(width);
           if (!isFirstRendering) {
-            console.log(id, { pageX, pageY });
             initialPosition.x.value = pageX;
             initialPosition.y.value = pageY;
             setisFirstRendering(true);

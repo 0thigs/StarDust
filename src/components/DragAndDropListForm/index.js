@@ -11,35 +11,37 @@ import DraggableFlatList, {
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
 
-export function DragAndDropListForm({ items, correctItemsSequence }) {
+export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
   const [, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const ItemScale = useSharedValue(0.5);
 
   function handleVerifyAnswer() {
-    setIsVerified(!isVerified);
+    setIsAnswerVerified(!isAnswerVerified);
 
-    const userItemsSequence = currentItems.map(item => item.id);
-    const areTheTwoSequencesEqual = compareSequences(userItemsSequence, correctItemsSequence);
+    const userItemsIdSequence = currentItems.map(item => item.id);
+    console.log({userItemsIdSequence});
+    console.log({correctItemsIdsSequence});
+    const areTheTwoSequencesEqual = compareSequences(userItemsIdSequence, correctItemsIdsSequence);
 
     if (areTheTwoSequencesEqual) {
       setIsAnswerWrong(false);
 
-      if (isVerified) {
+      if (isAnswerVerified) {
         dispatch({ type: 'changeQuestion' });
       }
       return;
     }
 
     setIsAnswerWrong(true);
-    if (isVerified && !isWrongCountAlreadyIncremented) {
+    if (isAnswerVerified && !isWrongCountAlreadyIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       setIsWrongCountAlreadyIncremented(true);
     }
-    if (isVerified) dispatch({ type: 'decrementLivesCount' });
+    if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   const ItemAnimatedStyle = useAnimatedStyle(() => {
@@ -60,12 +62,12 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
     const { isActive } = useOnCellActiveAnimation();
     return (
       <ShadowDecorator>
-        <C.ItemContainer onLongPress={drag} disabled={isVerified}>
+        <C.ItemContainer onLongPress={drag} disabled={isAnswerVerified}>
           <C.Item
             style={ItemAnimatedStyle}
             isActive={isActive}
             isAnswerWrong={isAnswerWrong}
-            isVerified={isVerified}
+            isAnswerVerified={isAnswerVerified}
           >
             <C.Decorator>:</C.Decorator>
             <C.Label>{item.label}</C.Label>
@@ -91,7 +93,7 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
       <VerificationButton
         verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
-        isVerified={isVerified}
+        isAnswerVerified={isAnswerVerified}
         isAnswered={!!items}
       />
     </C.Container>

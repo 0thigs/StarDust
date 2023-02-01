@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
+import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 export function DropZone({ id, zones, setZones, totalDropZones }) {
   const [zoneWidth, setZoneWidth] = useState(minZoneWidth);
 
+ 
   useEffect(() => {
     if (zones.length > 0) {
       const targetZone = zones.find(zone => zone && zone.id === id);

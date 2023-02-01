@@ -8,7 +8,7 @@ export function SelectOptionForm({options, answer}) {
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
   const delay = 100;
 
@@ -20,30 +20,30 @@ export function SelectOptionForm({options, answer}) {
   }
 
   function resetAnswer() {
-    if (isVerified && !!selectedOption) {
+    if (isAnswerVerified && !!selectedOption) {
       setSelectedOption('');
       setIsAnswerWrong(false);
     }
   }
 
   function handleVerifyAnswer() {
-    setIsVerified(!isVerified);
+    setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
     if (selectedOption === answer) {
       setIsAnswerWrong(false);
 
-      if (isVerified) {
+      if (isAnswerVerified) {
         dispatch({ type: 'changeQuestion' });
       }
       return;
     }
     setIsAnswerWrong(true);
-    if (isVerified && !isIncremented) {
+    if (isAnswerVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       setIsncremented(true);
     }
-    if (isVerified) dispatch({ type: 'decrementLivesCount' });
+    if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   function handleSelectOption(index) {
@@ -63,8 +63,8 @@ export function SelectOptionForm({options, answer}) {
               currentOption={option}
               onPress={() => handleSelectOption(option)}
               selectedOption={selectedOption}
-              disabled={isVerified}
-              isAnswerWrong={isVerified && isAnswerWrong}
+              disabled={isAnswerVerified}
+              isAnswerWrong={isAnswerVerified && isAnswerWrong}
             >
               <C.Label currentOption={option} selectedOption={selectedOption}>
                 {option}
@@ -76,7 +76,7 @@ export function SelectOptionForm({options, answer}) {
       <VerificationButton
         verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
-        isVerified={isVerified}
+        isAnswerVerified={isAnswerVerified}
         isAnswered={!!selectedOption}
       />
     </C.Container>

@@ -6,6 +6,7 @@ import { DropItem } from '../DropItem';
 import { DropZone } from '../DropZone';
 import { VerificationButton } from '../VerificationButton';
 import { compareSequences } from '../../utils/compareSequences';
+import { FadeInLeft } from 'react-native-reanimated';
 
 export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence }) {
   const [, dispatch] = useLesson();
@@ -48,7 +49,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
 
   return (
     <C.Container>
-      <C.Lines>
+      <C.Lines >
         {lines.map(({ id, text, indentLevel, dropZone }) => (
           <C.Line key={id} indentLevel={indentLevel}>
             {dropZone && !dropZone.isEndLine && (

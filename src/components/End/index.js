@@ -34,10 +34,11 @@ export function End({ starId }) {
   const [accurance, setAccurance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isStreakShown, setIsStreakShown] = useState(false);
+  const [isFirstClick, setIsFirstClick] = useState(true);
   const starsRef = useRef();
   const navigation = useNavigation();
 
- async function updateUserData() {
+  async function updateUserData() {
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
 
@@ -78,19 +79,6 @@ export function End({ starId }) {
     }
   }
 
-   function handleButtonClick() {
-    setIsLoading(true);
-    setIsStreakShown(true);
-    updateUserData()
-    
-    setTimeout(() => {
-      dispatch({ type: 'resetState' });
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
-    }, 1500);
-  }
-
   function convertSecondsToTime(seconds) {
     const date = new Date(0);
     date.setSeconds(seconds);
@@ -100,7 +88,7 @@ export function End({ starId }) {
 
   function getAccurance() {
     const accurance = ((state.questions.length - state.wrongsCount) / state.questions.length) * 100;
-    return accurance === 0 ? '100%' : accurance + '%';
+    return accurance === 0 ? '100%' : accurance.toFixed(1) + '%';
   }
 
   function getCoins() {
@@ -123,6 +111,23 @@ export function End({ starId }) {
     const AnimationUnitInSeconds = 15.4;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
+  }
+
+  function handleButtonClick() {
+    if (isFirstClick) {
+      setIsStreakShown(true);
+      setIsFirstClick(false);
+      updateUserData();
+      return;
+    }
+
+    setIsLoading(true);
+    setTimeout(() => {
+      dispatch({ type: 'resetState' });
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    }, 1500);
   }
 
   useEffect(() => {

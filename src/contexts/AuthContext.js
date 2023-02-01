@@ -64,7 +64,6 @@ export function AuthContextProvider({ children }) {
       setUser(signedUser);
       return signedUser;
     } catch (error) {
-      console.log(error);
       return error.toString();
     }
   }
