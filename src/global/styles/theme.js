@@ -31,6 +31,6 @@ export default {
     medium: 'Poppins_500Medium',
     bold: 'Poppins_700Bold',
     semibold: 'Poppins_600SemiBold',
+    code: 'Roboto_400Regular',
   },
-
 };

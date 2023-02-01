@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
+import { compareSequences } from '../../utils/compareSequences';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -14,23 +15,14 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
   const [, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [isIncremented, setIsncremented] = useState(false);
+  const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const ItemScale = useSharedValue(0.5);
-
-  
-
-  function compareSequences(sequence1, sequence2) {
-    return JSON.stringify(sequence1) === JSON.stringify(sequence2);
-  }
 
   function handleVerifyAnswer() {
     setIsVerified(!isVerified);
 
     const userItemsSequence = currentItems.map(item => item.id);
-    console.log(userItemsSequence);
-    console.log(correctItemsSequence);
-
     const areTheTwoSequencesEqual = compareSequences(userItemsSequence, correctItemsSequence);
 
     if (areTheTwoSequencesEqual) {
@@ -43,9 +35,9 @@ export function DragAndDropListForm({ items, correctItemsSequence }) {
     }
 
     setIsAnswerWrong(true);
-    if (isVerified && !isIncremented) {
+    if (isVerified && !isWrongCountAlreadyIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
-      setIsncremented(true);
+      setIsWrongCountAlreadyIncremented(true);
     }
     if (isVerified) dispatch({ type: 'decrementLivesCount' });
   }

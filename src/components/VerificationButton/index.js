@@ -6,10 +6,10 @@ import Check from '../../assets/LessonAssets/correct-answer-icon.svg';
 import X from '../../assets/LessonAssets/incorrect-answer-icon.svg';
 import theme from '../../global/styles/theme';
 
-export function VerificationButton({ verifyAnswer, isAnswerWrong, isVerified, isAnswered }) {
+export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered }) {
   return (
-    <C.Container isAnswerWrong={isVerified && isAnswerWrong}>
-      {isVerified && (
+    <C.Container isAnswerWrong={isAnswerVerified && isAnswerWrong}>
+      {isAnswerVerified && (
         <C.Feedback>
           {isAnswerWrong ? <X /> : <Check />}
           <C.Message animation={'bounceInUp'} isAnswerWrong={isAnswerWrong}>
@@ -19,11 +19,17 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isVerified, is
       )}
       <Button
         title={
-          isVerified && isAnswerWrong ? 'Tentar novamente' : isVerified ? 'Continuar' : 'Verificar'
+          isAnswerVerified && isAnswerWrong
+            ? 'Tentar novamente'
+            : isAnswerVerified
+            ? 'Continuar'
+            : 'Verificar'
         }
         onPress={verifyAnswer}
-        background={isVerified && isAnswerWrong ? theme.colors.red_700 : theme.colors.green_500}
-        color={isVerified && isAnswerWrong ? theme.colors.white :  theme.colors.black}
+        background={
+          isAnswerVerified && isAnswerWrong ? theme.colors.red_700 : theme.colors.green_500
+        }
+        color={isAnswerVerified && isAnswerWrong ? theme.colors.white : theme.colors.black}
         isDisabled={!isAnswered}
       />
     </C.Container>

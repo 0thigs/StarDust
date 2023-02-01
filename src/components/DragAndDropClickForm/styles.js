@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
+import { css } from 'styled-components';
 
 const defaultIdent = 12;
+export const itemHeight = 40;
+export const itemPadding = 8;
+export const itemBorderWidth = 1;
 
 export const Container = styled.View`
   flex: 1;
@@ -21,17 +26,16 @@ export const Line = styled.View`
 
 export const Text = styled.Text`
   color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  font-family: ${props => props.theme.fonts.code};
   font-size: 16px;
 `;
 
 export const DropZone = styled.View`
-  min-width: 25px;
+  width: ${props => props.width}px;
   border-width: 1px;
   border-bottom-color: ${props => props.theme.colors.green_500};
   color: ${props => props.theme.colors.green_500};
-  margin-top: -12px;
-  margin-left: 8px;
+  margin: 12px 8px 0;
 `;
 
 export const DropItems = styled.View`
@@ -39,21 +43,32 @@ export const DropItems = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   width: 350px;
+  height: ${itemHeight}px;
   justify-content: center;
+  background-color: red;
 `;
 
-export const DropItem = styled.TouchableOpacity`
-  background-color: ${props => props.theme.colors.purple_700};
-  border-color: ${props => props.theme.colors.white};
-  border-width: 1px;
-  border-radius: 4px;
-  padding: 8px;
+export const DropItem = styled(Animated.View)`
   margin-left: 12px;
   min-width: 40px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 ${itemPadding}px;
+  border-width: ${itemBorderWidth}px;
+  border-color: transparent;
+  height: ${itemHeight}px;
+
+  ${props =>
+    !props.isItemInZone &&
+    css`
+      background-color: ${props => props.theme.colors.purple_700};
+      border-color: ${props => props.theme.colors.white};
+      border-radius: 4px;
+    `}
 `;
 
 export const Label = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${props => (props.isItemInZone ? props.theme.colors.green_500 : props.theme.colors.white)};
+  font-family: ${props => props.theme.fonts.code};
   font-size: 16px;
 `;

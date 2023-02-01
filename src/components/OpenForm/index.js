@@ -4,39 +4,39 @@ import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
 export function OpenForm({answer}) {
-  const [state, dispatch] = useLesson();
+  const [, dispatch] = useLesson();
   const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
 //   const answer = state.questions[state.currentQuestion].answer;
 
   function resetAnswer() {
-    if (isVerified && userAnswer) {
+    if (isAnswerVerified && userAnswer) {
       setUserAnswer('');
       setIsAnswerWrong(false);
     }
   }
 
   function handleVerifyAnswer() {
-    setIsVerified(!isVerified);
+    setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
     if (userAnswer.trim().toLowerCase() === answer) {
       setIsAnswerWrong(false);
 
-      if (isVerified) {
+      if (isAnswerVerified) {
         dispatch({ type: 'changeQuestion' });
       }
       return;
     }
 
     setIsAnswerWrong(true);
-    if (isVerified && !isIncremented) {
+    if (isAnswerVerified && !isIncremented) {
       dispatch({ type: 'incrementWrongsCount' });
       setIsncremented(true);
     }
-    if (isVerified) dispatch({ type: 'decrementLivesCount' });
+    if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
   return (
@@ -45,11 +45,11 @@ export function OpenForm({answer}) {
         autoFocus
         value={userAnswer}
         onChangeText={setUserAnswer}
-        isAnswerWrong={isVerified && isAnswerWrong}
+        isAnswerWrong={isAnswerVerified && isAnswerWrong}
       />
       <VerificationButton
         verifyAnswer={handleVerifyAnswer}
-        isVerified={isVerified}
+        isAnswerVerified={isAnswerVerified}
         isAnswerWrong={isAnswerWrong}
         isAnswered={userAnswer}
       />

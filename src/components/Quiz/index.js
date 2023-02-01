@@ -49,14 +49,14 @@ export function Quiz({ coins }) {
       {currentQuestion.type === 'drag-and-drop-list' && (
         <DragAndDropListForm
           items={currentQuestion.items}
-          correctItemsSequence={currentQuestion.correctItemsSequence}
+          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
         />
       )}
       {currentQuestion.type === 'drag-and-drop-click' && (
         <DragAndDropClickForm
           lines={currentQuestion.lines}
           dropItems={currentQuestion.dropItems}
-          correctItemsSequence={currentQuestion.correctItemsSequence}
+          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
         />
       )}
       <Modal

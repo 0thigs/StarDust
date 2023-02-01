@@ -1,71 +1,67 @@
-import { useEffect, useState } from 'react';
-import * as C from './styles';
+import { useEffect, useRef, useState } from 'react';
+import * as C from '../DragAndDropClickForm/styles';
+import {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  withSpring,
+} from 'react-native-reanimated';
 
-import { useAuth } from '../../hooks/useAuth';
-import { Planet } from '../../components/Planet';
-import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
+export function DropItem({ id, label, zones }) {
+  const [isClicked, setIsClicked] = useState(false);
+  const itemRef = useRef();
 
-import BackgroundImage from '../../assets/HomeAssets/background.svg';
+  const originalPositions = {
+    x: useSharedValue(0),
+    y: useSharedValue(0),
+  };
 
-import api from '../../services/api';
+  const positionX = useSharedValue(originalPositions.x.value);
+  const positionY = useSharedValue(originalPositions.y.value);
 
-export function Home() {
-  const { user, setUser } = useAuth();
-  const [planets, setPlanets] = useState([]);
-  const [stars, setStars] = useState([]);
-  const [isEndTrasition, setIsEndTransition] = useState(false);
+  const ItemAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      position: 'absolute',
+      top: positionY.value,
+      left: positionX.value,
+    };
+  });
 
-  function verifyIfIsStarUnlocked(star) {
-    if (user.unlockedStarsIds.includes(star.id)) {
-      return { ...star, isUnlocked: true };
+  function HandleItemClick(id) {
+    console.log(zones);
+    for (let zone of zones) {
+      if (isClicked) {
+        // positionX.value = withTiming(originalPositions.x.value, { duration: 300 });
+        positionY.value = withTiming(20, { duration: 300 });
+        setIsClicked(false);
+        return;
+      }
+
+      if (!zone.itemId) {
+        // positionX.value = withTiming(10, { duration: 300 });
+        positionY.value = withTiming(10, { duration: 300 });
+        setIsClicked(true);
+      }
     }
-    return star;
   }
-
-  async function getUser() {
-    const user = await api.getUser(user.id);
-    return user;
-  }
-
-  async function getPlanets() {
-    const planets = await api.getPlanets();
-    return planets;
-  }
-
-  async function getStars() {
-    const stars = await api.getStars();
-    const updatedStars = stars.map(verifyIfIsStarUnlocked);
-    return updatedStars;
-  }
-
-  useEffect(() => {
-    setUser(getUser());
-    // setPlanets(getPlanets());
-    // setStars(getStars());
-    setTimeout(() => setIsEndTransition(true), 3000);
-  }, []);
 
   return (
-    <C.Container>
-      <C.Background>
-        <BackgroundImage />
-      </C.Background>
-      {!isEndTrasition ? (
-        <TransitionScreenAnimation />
-      ) : (
-        <C.PlanetsList
-          data={planets}
-          keyExtractor={planet => planet.id}
-          renderItem={({ item }) => (
-            <Planet
-              id={item.id}
-              title={item.title}
-              CurrentPlanetStarsIds={item.stars_ids}
-              stars={stars}
-            />
-          )}
-        />
-      )}
-    </C.Container>
+    <C.DropItem
+      key={id}
+      ref={itemRef}
+      activeOpacity={0.7}
+      onLayout={event => {
+        event.target.measure((x, y, width, height, pageX, pageY) => {
+          console.log({ pageX, pageY });
+          originalPositions.x.value = pageX;
+          originalPositions.y.value = pageY;
+        });
+      }}
+      onStartShouldSetResponder={() => HandleItemClick(id)}
+      style={ItemAnimatedStyle}
+    >
+      <C.Label>{label}</C.Label>
+    </C.DropItem>
   );
 }

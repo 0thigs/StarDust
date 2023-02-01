@@ -8,7 +8,6 @@ export const questions = [
         id: 1,
         text: 'if (5 > 2) {',
         indentLevel: 0,
-        dropZone: null,
       },
       {
         id: 2,
@@ -25,7 +24,7 @@ export const questions = [
         indentLevel: 2,
         dropZone: {
           id: 2,
-          isEndLine: true,
+          isEndLine: false,
         },
       },
       {
@@ -41,24 +40,23 @@ export const questions = [
         id: 5,
         text: '}',
         indentLevel: 1,
-        dropZone: null,
       },
     ],
     dropItems: [
       {
         id: 1,
-        label: '20',
+        label: '10',
       },
       {
         id: 2,
-        label: '40',
+        label: '20000000000',
       },
       {
         id: 3,
-        label: '60',
+        label: '3000',
       },
     ],
-    correctItemsSequence: [3, 2, 1],
+    correctItemsIdsSequence: [3, 2, 1],
   },
 //   {
 //     starId: 1,

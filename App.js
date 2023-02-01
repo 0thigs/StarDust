@@ -9,12 +9,16 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import {
+    Roboto_400Regular
+  } from '@expo-google-fonts/roboto';
 import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
 import './src/libs/dayjs'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_600SemiBold,
