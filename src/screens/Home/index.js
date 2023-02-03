@@ -1,35 +1,59 @@
-import { useEffect, useState } from 'react';
-import * as C from './styles';
+import { useEffect, useState, useRef } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { useScroll } from '../../hooks/useScroll';
+import { useWindowDimensions } from 'react-native';
 
 import { Planet } from '../../components/Planet';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
+import { Button } from '../../components/Button';
+import { starHeight } from '../../components/Star';
+
+import { getUnlockedAchievements } from '../../utils/achivements';
 import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
-
-import { useAuth } from '../../hooks/useAuth';
-import { getUnlockedAchievements } from '../../utils/achivements';
+import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 
 import api from '../../services/api';
-import { Button } from '../../components/Button';
 import theme from '../../global/styles/theme';
-
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+import * as C from './styles';
 
 export function Home() {
   const { user, setUser } = useAuth();
+  const { lastUnlockedStarYPosition } = useScroll();
 
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
-  const [showModal, setShowModal] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isFabButtonShown, setisFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
+  const scrollRef = useRef(null);
+  const dimensions = useWindowDimensions();
 
   function verifyIfIsStarUnlocked(star) {
     if (user.unlocked_stars_ids.includes(star.id)) {
       return { ...star, isUnlocked: true };
     }
     return star;
+  }
+
+  function scrollToLastUnlockedStar() {
+    scrollRef.current.scrollTo({
+      x: 0,
+      y: lastUnlockedStarYPosition - dimensions.height / 2,
+      animated: true,
+    });
+  }
+
+  function showFabButton({ contentOffset, layoutMeasurement }) {
+    const isLastUnlockedStarOffScreen =
+      (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height ||
+      (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
+
+    if (isLastUnlockedStarOffScreen) {
+      setisFabButtonShown(true);
+    }
   }
 
   async function updateUnlockedAchievementsIds() {
@@ -52,32 +76,39 @@ export function Home() {
     updateUnlockedAchievementsIds();
   }, [unlockedAchievements]);
 
+  useEffect(() => {
+    if (lastUnlockedStarYPosition) {
+      scrollToLastUnlockedStar();
+    }
+  }, [lastUnlockedStarYPosition]);
+
   return (
-    <C.Container>
+    <C.Container
+      ref={scrollRef}
+      onScroll={event => showFabButton(event.nativeEvent)}
+      scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
+    >
       <C.Background>
         <BackgroundImage />
       </C.Background>
       {!isEndTrasition ? (
-        <TransitionScreenAnimation screen={'home'} />
+        <TransitionScreenAnimation />
       ) : (
-        <C.PlanetsList
-          data={planets}
-          keyExtractor={planet => planet.id}
-          renderItem={({ item }) => (
-            <Planet
-              id={item.id}
-              name={item.name}
-              image={item.image}
-              icon={item.icon}
-              stars={item.stars.map(verifyIfIsStarUnlocked)}
-            />
-          )}
-        />
+        planets.map(({ id, name, icon, image, stars }) => (
+          <Planet
+            key={id}
+            name={name}
+            icon={icon}
+            image={image}
+            stars={stars.map(verifyIfIsStarUnlocked)}
+          />
+        ))
       )}
 
       {unlockedAchievements.length > 0 && (
         <Modal
-          show={showModal}
+          isOpen={isModalOpen}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
@@ -103,7 +134,7 @@ export function Home() {
               title={'Entendido'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setShowModal(false)}
+              onPress={() => setIsModalOpen(false)}
             />
           }
         />

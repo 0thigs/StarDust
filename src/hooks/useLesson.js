@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-
 import { LessonContext } from '../contexts/LessonContext';
 
 export function useLesson() {

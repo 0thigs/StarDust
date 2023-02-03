@@ -16,9 +16,19 @@ export const planets = [
         number: 2,
       },
       {
-        id: 3,
+        id: 4,
         name: 'Entrada, processamento e saída',
-        number: 3,
+        number: 4,
+      },
+      {
+        id: 5,
+        name: 'Entrada, processamento e saída',
+        number: 5,
+      },
+      {
+        id: 6,
+        name: 'Entrada, processamento e saída',
+        number: 6,
       },
     ],
   },
@@ -29,27 +39,27 @@ export const planets = [
     icon: require('../assets/PlanetAssets/planet-icon-2.svg').default,
     stars: [
       {
-        id: 4,
+        id: 14,
         name: 'Conceito de dados',
         number: 1,
       },
       {
-        id: 5,
+        id: 15,
         name: 'Caracteres',
         number: 2,
       },
       {
-        id: 6,
+        id: 16,
         name: 'Inteiros',
         number: 3,
       },
       {
-        id: 7,
+        id: 17,
         name: 'Reais',
         number: 4,
       },
       {
-        id: 8,
+        id: 18,
         name: 'Lógicos',
         number: 5,
       },

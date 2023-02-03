@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as C from './styles';
 
 import { Star } from '../Star';
@@ -11,7 +11,8 @@ import {
   withDelay,
 } from 'react-native-reanimated';
 
-export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
+export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars, lastUnlockedStarId }) {
+  const [lastUnlockedStarYPosition, setLastUnlockedStarYPosition] = useState(null);
   const enabledStars = stars.filter(star => star.isUnlocked);
 
   const PlanetSignPosition = useSharedValue(-5);
@@ -37,22 +38,17 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
           <C.PlanetName>{name}</C.PlanetName>
         </C.PlanetSign>
       </C.PlanetInfo>
-      <C.StarsList
-        data={stars}
-        keyExtractor={star => star.id}
-        renderItem={({ item, index }) => {
-          const isTheLastStarEnabled = index === enabledStars.length - 1;
-          return (
-            <Star
-              id={item.id}
-              name={item.name}
-              number={item.number}
-              isDisabled={!item.isUnlocked}
-              isTheLastStarEnabled={isTheLastStarEnabled}
-            />
-          );
-        }}
-      />
+      {stars.map(({ id, name, number, isUnlocked }) => {
+        return (
+          <Star
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            isDisabled={!isUnlocked}
+          />
+        );
+      })}
     </C.Container>
   );
 }

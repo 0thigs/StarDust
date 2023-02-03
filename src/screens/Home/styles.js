@@ -1,7 +1,14 @@
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 
-export const Container = styled.View``;
+export const paddingTop = 32;
+
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+    paddingTop: paddingTop,
+  },
+})``;
 
 export const Background = styled.View`
   position: absolute;
@@ -10,13 +17,6 @@ export const Background = styled.View`
   right: 0;
   bottom: 0;
 `;
-
-export const PlanetsList = styled.FlatList.attrs({
-  contentContainerStyle: {
-    paddingTop: 32,
-    alignItems: 'center',
-  },
-})``;
 
 export const Achievements = styled.ScrollView.attrs({
   contentContainerStyle: {

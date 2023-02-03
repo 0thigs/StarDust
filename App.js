@@ -9,12 +9,11 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
-import {
-    Roboto_400Regular
-  } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
-import './src/libs/dayjs'
+import './src/libs/dayjs';
+import { ScrollProvider } from './src/contexts/ScrollContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,8 +28,10 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
         <LessonProvider>
-          <StatusBar style={'light'} backgroundColor={'transparent'} />
-          {fontsLoaded && <Routes />}
+          <ScrollProvider>
+            <StatusBar style={'light'} backgroundColor={'transparent'} />
+            {fontsLoaded && <Routes />}
+          </ScrollProvider>
         </LessonProvider>
       </AuthContextProvider>
     </ThemeProvider>

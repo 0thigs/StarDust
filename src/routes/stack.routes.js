@@ -14,9 +14,9 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Splash" component={Splash} />
     </Stack.Navigator>
   );

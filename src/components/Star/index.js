@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useScroll } from '../../hooks/useScroll';
 import * as C from './styles';
 
 import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
@@ -9,14 +10,25 @@ import DisabledStarDust from '../../assets/StarAssets/disabled-stardust.svg';
 import EnabledStar from '../../assets/StarAssets/enabled-star.json';
 
 import LottieView from 'lottie-react-native';
-
 import { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/core';
 
-export function Star({ id, name, number, isDisabled, isTheLastStarEnabled }) {
+export const starHeight = 100;
+
+export function Star({ id, name, number, isDisabled }) {
   const { user, setUser } = useAuth();
+  const { lastUnlockedStarId, setLastUnlockedStarYPosition } = useScroll();
+  const isLastStarUnlocked = lastUnlockedStarId === id
+
   const starAnimation = useRef(null);
   const navigation = useNavigation();
+
+  const StarScale = useSharedValue(1);
+  const StarAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: StarScale.value }],
+    };
+  });
 
   function HandleStarClick() {
     starAnimation.current.play(10, 50);
@@ -27,19 +39,22 @@ export function Star({ id, name, number, isDisabled, isTheLastStarEnabled }) {
     }, 500);
   }
 
-  const StarScale = useSharedValue(1);
-  const StarAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: StarScale.value }],
-    };
-  });
-
   useEffect(() => {
-    StarScale.value = withRepeat(withSpring(1.15), isTheLastStarEnabled ? -1 : 1, true);
+    StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
   }, []);
 
   return (
-    <C.Container animation={'bounceIn'}>
+    <C.Container
+      animation={'bounceIn'}
+      onLayout={event => {
+        if (isLastStarUnlocked) {
+          event.target.measure((x, y, width, height, pageX, pageY) => {
+            console.log(id, { x, y, pageX, pageY, height });
+            setLastUnlockedStarYPosition(pageY);
+          });
+        }
+      }}
+    >
       <C.StarDust>{isDisabled ? <DisabledStarDust /> : <EnabledStarDust />}</C.StarDust>
       <C.StarButton onPress={HandleStarClick} disabled={isDisabled}>
         <C.StarContainer style={!isDisabled && StarAnimatedStyle}>
@@ -52,7 +67,7 @@ export function Star({ id, name, number, isDisabled, isTheLastStarEnabled }) {
               autoPlay={true}
               loop={false}
               duration={2500}
-              style={{ width: 100, height: 100 }}
+              style={{ width: 100, height: starHeight }}
               colorFilters={[{ keypath: 'Star 1', color: 'red' }]}
             />
           )}

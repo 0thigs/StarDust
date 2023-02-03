@@ -5,7 +5,7 @@ import Denying from '../../assets/ModalAssets/denying-animation.json';
 import Earning from '../../assets/ModalAssets/earning-animation.json';
 
 
-export function Modal({ show, type = 'crying', title, body, footer }) {
+export function Modal({ isOpen, type = 'crying', title, body, footer }) {
   const animations = [
     { id: 'crying', animation: Crying },
     { id: 'denying', animation: Denying },
@@ -17,7 +17,7 @@ export function Modal({ show, type = 'crying', title, body, footer }) {
   }
 
   return (
-    <C.Container transparent visible={show} animationType={'fadeIn'}>
+    <C.Container transparent visible={isOpen} animationType={'fadeIn'}>
       <C.Fade>
         <C.Content animation={'flipInX'} duration={10}>
           <C.Header>
