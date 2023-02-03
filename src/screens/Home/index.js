@@ -9,6 +9,7 @@ import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
+import { FabButton } from '../../components/FabButton';
 
 import { getUnlockedAchievements } from '../../utils/achivements';
 import { planets } from '../../utils/planets';
@@ -18,6 +19,7 @@ import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 
 import api from '../../services/api';
 import theme from '../../global/styles/theme';
+import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
 export function Home() {
@@ -26,8 +28,10 @@ export function Home() {
 
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [isFabButtonShown, setisFabButtonShown] = useState(false);
+  const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
+  const [direction, setDirection] = useState('');
+
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
@@ -47,13 +51,13 @@ export function Home() {
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
-    const isLastUnlockedStarOffScreen =
-      (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height ||
+    const isLastUnlockedStarAboveLayout =
+      (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height;
+    const isLastUnlockedStarBellowLayout =
       (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
 
-    if (isLastUnlockedStarOffScreen) {
-      setisFabButtonShown(true);
-    }
+    setDirection(isLastUnlockedStarAboveLayout ? 'down' : 'up');
+    setIsFabButtonShown(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
   }
 
   async function updateUnlockedAchievementsIds() {
@@ -83,27 +87,41 @@ export function Home() {
   }, [lastUnlockedStarYPosition]);
 
   return (
-    <C.Container
-      ref={scrollRef}
-      onScroll={event => showFabButton(event.nativeEvent)}
-      scrollEventThrottle={16}
-      showsVerticalScrollIndicator={false}
-    >
-      <C.Background>
-        <BackgroundImage />
-      </C.Background>
-      {!isEndTrasition ? (
-        <TransitionScreenAnimation />
-      ) : (
-        planets.map(({ id, name, icon, image, stars }) => (
-          <Planet
-            key={id}
-            name={name}
-            icon={icon}
-            image={image}
-            stars={stars.map(verifyIfIsStarUnlocked)}
-          />
-        ))
+    <>
+      <C.Container
+        ref={scrollRef}
+        onScroll={event => showFabButton(event.nativeEvent)}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+      >
+        <C.Background>
+          <BackgroundImage />
+        </C.Background>
+        {!isEndTrasition ? (
+          <TransitionScreenAnimation />
+        ) : (
+          planets.map(({ id, name, icon, image, stars }) => (
+            <Planet
+              key={id}
+              name={name}
+              icon={icon}
+              image={image}
+              stars={stars.map(verifyIfIsStarUnlocked)}
+            />
+          ))
+        )}
+      </C.Container>
+      {isFabButtonShown && (
+        <FabButton
+          onPress={scrollToLastUnlockedStar}
+          icon={
+            direction === 'up' ? (
+              <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
+            ) : (
+              <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
+            )
+          }
+        />
       )}
 
       {unlockedAchievements.length > 0 && (
@@ -139,6 +157,6 @@ export function Home() {
           }
         />
       )}
-    </C.Container>
+    </>
   );
 }
