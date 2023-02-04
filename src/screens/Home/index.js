@@ -28,6 +28,7 @@ export function Home() {
 
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isfirstScroll, setIsfirstScroll] = useState(true);
   const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [direction, setDirection] = useState('');
@@ -51,6 +52,11 @@ export function Home() {
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
+    if (isfirstScroll) {
+      setIsfirstScroll(false);
+      return;
+    }
+
     const isLastUnlockedStarAboveLayout =
       (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height;
     const isLastUnlockedStarBellowLayout =
@@ -93,22 +99,31 @@ export function Home() {
         onScroll={event => showFabButton(event.nativeEvent)}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
+        isEndTrasition={isEndTrasition}
+        contentContainerStyle={{
+          flex: isEndTrasition ? 0 : 1,
+          alignItems: 'center',
+          paddingTop: 32,
+          backgroundColor: theme.colors.background,
+        }}
       >
-        <C.Background>
-          <BackgroundImage />
-        </C.Background>
         {!isEndTrasition ? (
           <TransitionScreenAnimation />
         ) : (
-          planets.map(({ id, name, icon, image, stars }) => (
-            <Planet
-              key={id}
-              name={name}
-              icon={icon}
-              image={image}
-              stars={stars.map(verifyIfIsStarUnlocked)}
-            />
-          ))
+          <>
+            <C.Background>
+              <BackgroundImage />
+            </C.Background>
+            {planets.map(({ id, name, icon, image, stars }) => (
+              <Planet
+                key={id}
+                name={name}
+                icon={icon}
+                image={image}
+                stars={stars.map(verifyIfIsStarUnlocked)}
+              />
+            ))}
+          </>
         )}
       </C.Container>
       {isFabButtonShown && (

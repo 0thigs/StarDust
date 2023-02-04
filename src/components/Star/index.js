@@ -10,17 +10,29 @@ import DisabledStarDust from '../../assets/StarAssets/disabled-stardust.svg';
 import EnabledStar from '../../assets/StarAssets/enabled-star.json';
 
 import LottieView from 'lottie-react-native';
-import { useAnimatedStyle, useSharedValue, withRepeat, withSpring } from 'react-native-reanimated';
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSpring,
+  withDelay,
+  withTiming,
+  withSequence,
+} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/core';
+import { rockets } from '../../utils/rockets';
 
 export const starHeight = 100;
 
 export function Star({ id, name, number, isDisabled }) {
   const { user, setUser } = useAuth();
-  const { lastUnlockedStarId, setLastUnlockedStarYPosition } = useScroll();
-  const isLastStarUnlocked = lastUnlockedStarId === id
-
+  const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
+    useScroll();
+  const isLastStarUnlocked = lastUnlockedStarId === id;
   const starAnimation = useRef(null);
+  const delay = 300;
+  const RocketImage = rockets.find(rocket => rocket.id === user.selected_rocket_id).image;
+
   const navigation = useNavigation();
 
   const StarScale = useSharedValue(1);
@@ -39,8 +51,31 @@ export function Star({ id, name, number, isDisabled }) {
     }, 500);
   }
 
+  const RocketRotate = useSharedValue(180);
+  const RocketScale = useSharedValue(1);
+  const RocketTranslateY = useSharedValue(-1000);
+  const RocketAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { rotate: `${RocketRotate.value}deg` },
+        { scale: RocketScale.value },
+        { translateY: -RocketTranslateY.value },
+      ],
+    };
+  });
+
   useEffect(() => {
     StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
+    RocketTranslateY.value = withSpring(lastUnlockedStarYPosition, { duration: 800 });
+
+    const timer = setTimeout(() => {
+      RocketRotate.value = withTiming(540, { duration: 800 });
+      RocketScale.value = withDelay(
+        delay,
+        withSequence(withTiming(1.25, { duration: 800 }), withTiming(1, { duration: 800 }))
+      );
+    }, delay);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -49,7 +84,6 @@ export function Star({ id, name, number, isDisabled }) {
       onLayout={event => {
         if (isLastStarUnlocked) {
           event.target.measure((x, y, width, height, pageX, pageY) => {
-            console.log(id, { x, y, pageX, pageY, height });
             setLastUnlockedStarYPosition(pageY);
           });
         }
@@ -73,9 +107,16 @@ export function Star({ id, name, number, isDisabled }) {
           )}
         </C.StarContainer>
         <C.StarNumber isDisabled={isDisabled}>{number}</C.StarNumber>
-        <C.StarSign isDisabled={isDisabled}>
-          <C.StarName isDisabled={isDisabled}>{name}</C.StarName>
-        </C.StarSign>
+        <>
+          <C.StarSign isDisabled={isDisabled}>
+            <C.StarName isDisabled={isDisabled}>{name}</C.StarName>
+          </C.StarSign>
+          {isLastStarUnlocked && (
+            <C.Rocket style={RocketAnimatedStyle}>
+              <RocketImage width={75} height={75} />
+            </C.Rocket>
+          )}
+        </>
       </C.StarButton>
     </C.Container>
   );

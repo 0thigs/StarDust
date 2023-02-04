@@ -1,13 +1,10 @@
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
+import theme from '../../global/styles/theme';
 
-export const paddingTop = 32;
 
 export const Container = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-    paddingTop: paddingTop,
-  },
+
 })``;
 
 export const Background = styled.View`

@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import * as C from './styles';
 
 import { Star } from '../Star';
-
 import {
   useAnimatedStyle,
   useSharedValue,
@@ -11,10 +10,7 @@ import {
   withDelay,
 } from 'react-native-reanimated';
 
-export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars, lastUnlockedStarId }) {
-  const [lastUnlockedStarYPosition, setLastUnlockedStarYPosition] = useState(null);
-  const enabledStars = stars.filter(star => star.isUnlocked);
-
+export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
   const PlanetSignPosition = useSharedValue(-5);
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -25,7 +21,7 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars, last
   useEffect(() => {
     PlanetSignPosition.value = withDelay(
       800,
-      withRepeat(withTiming(5, { duration: 1000 }), -1, true)
+      withRepeat(withTiming(5, { duration: 1500 }), -1, true)
     );
   }, []);
 

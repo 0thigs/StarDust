@@ -13,6 +13,8 @@ export const StarDust = styled.View`
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
 `;
 
+export const StarContainer = styled(Animated.View)``;
+
 export const StarButton = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
@@ -21,7 +23,8 @@ export const StarButton = styled.TouchableOpacity`
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
 `;
 
-export const StarContainer = styled(Animated.View)``;
+export const Rocket = styled(Animated.View)`
+`;
 
 export const StarNumber = styled.Text`
   font-size: 16px;
@@ -29,7 +32,7 @@ export const StarNumber = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
   position: absolute;
   top: 40%;
-  left: ${props => (props.isDisabled ? 16.5: 17.5)}%;
+  left: ${props => (props.isDisabled ? 16 : 17.5)}%;
 `;
 
 export const StarSign = styled.View`
