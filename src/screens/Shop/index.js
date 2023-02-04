@@ -30,7 +30,7 @@ export function Shop() {
     });
     await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
 
-    unlockedAchievements.length > 0 && setShowModal(true)
+    unlockedAchievements.length > 0 && setShowModal(true);
   }
 
   useEffect(() => {
@@ -70,20 +70,22 @@ export function Shop() {
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
             <C.Achievements>
-              {unlockedAchievements.map(({ id, title, icon, description, goal, metric }) => (
-                <C.AchievementContainer key={id}>
-                  <C.Animation source={RewardLight} autoPlay={true} loop={true} />
-                  <Achievement
-                    key={id}
-                    title={title}
-                    description={description}
-                    icon={icon}
-                    goal={goal}
-                    metric={user[metric]}
-                    isUnlocked={true}
-                  />
-                </C.AchievementContainer>
-              ))}
+              {unlockedAchievements.map(
+                ({ id, title, icon, description, requiredCount, metric }) => (
+                  <C.AchievementContainer key={id}>
+                    <C.Animation source={RewardLight} autoPlay={true} loop={true} />
+                    <Achievement
+                      key={id}
+                      title={title}
+                      description={description}
+                      icon={icon}
+                      requiredCount={requiredCount}
+                      metric={user[metric]}
+                      isUnlocked={true}
+                    />
+                  </C.AchievementContainer>
+                )
+              )}
             </C.Achievements>
           }
           footer={

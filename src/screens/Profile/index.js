@@ -38,14 +38,14 @@ export function Profile() {
         <C.Title>Conquistas</C.Title>
         <C.Achievements>
           {unlockedAchievements.length > 0 ? (
-            unlockedAchievements.map(({ id, title, description, icon, goal, metric }) => (
+            unlockedAchievements.map(({ id, title, description, icon, requiredCount, metric }) => (
               <Achievement
                 key={id}
                 title={title}
                 description={description}
                 icon={icon}
-                goal={goal}
-                metric={user[metric]}
+                requiredCount={requiredCount}
+                currentCount={user[metric]}
                 isUnlocked={true}
               />
             ))

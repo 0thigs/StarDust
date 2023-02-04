@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 import { achievements as achievementsFromJSON } from '../../utils/achivements';
-import { useAuth } from '../../hooks/useAuth';
 import { Achievement } from '../Achievement';
 import { useNavigation } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
-import { useEffect } from 'react';
 
 export function CustomDrawer() {
   const { signOut, user } = useAuth();
   const [achievements, setAchievements] = useState([]);
+    console.log(achievements);
   const navigation = useNavigation();
 
   async function handleSignOut() {
@@ -25,8 +25,18 @@ export function CustomDrawer() {
   }
 
   useEffect(() => {
-    setAchievements(achievementsFromJSON);
-  }, [user]);
+    const sortedAchievements = achievementsFromJSON;
+    sortedAchievements.sort((a, b) => {
+      const aPriority = user.unlocked_achievements_ids.includes(a.id) ? 0 : 1;
+      const bPriority = user.unlocked_achievements_ids.includes(b.id) ? 0 : 1;
+
+      if (aPriority !== bPriority) {
+        return aPriority - bPriority;
+      }
+      return a.id - b.id;
+    });
+    setAchievements(sortedAchievements);
+  }, [user.unlocked_achievements_ids]);
 
   return (
     <C.Container>
@@ -40,14 +50,14 @@ export function CustomDrawer() {
       <C.AchievementList
         data={achievements}
         keyExtractor={achievement => achievement.id}
-        renderItem={({ item: { id, title, description, icon, goal, metric } }) => (
+        renderItem={({ item: { id, title, description, icon, requiredCount, metric } }) => (
           <Achievement
             id={id}
             title={title}
             description={description}
             icon={icon}
-            goal={goal}
-            metric={user[metric]}
+            requiredCount={requiredCount}
+            currentCount={user[metric]}
           />
         )}
       />

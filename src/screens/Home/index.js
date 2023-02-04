@@ -67,6 +67,10 @@ export function Home() {
   }
 
   async function updateUnlockedAchievementsIds() {
+    if (unlockedAchievements.length === 0) {
+      return;
+    }
+
     const unlockedAchievementsIds = unlockedAchievements.map(
       unlockedAchievement => unlockedAchievement.id
     );
@@ -146,20 +150,22 @@ export function Home() {
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
             <C.Achievements>
-              {unlockedAchievements.map(({ id, title, icon, description, goal, metric }) => (
-                <C.AchievementContainer key={id}>
-                  <C.Animation source={RewardLight} autoPlay={true} loop={true} />
-                  <Achievement
-                    key={id}
-                    title={title}
-                    description={description}
-                    icon={icon}
-                    goal={goal}
-                    metric={user[metric]}
-                    isUnlocked={true}
-                  />
-                </C.AchievementContainer>
-              ))}
+              {unlockedAchievements.map(
+                ({ id, title, icon, description, requiredCount, metric }) => (
+                  <C.AchievementContainer key={id}>
+                    <C.Animation source={RewardLight} autoPlay={true} loop={true} />
+                    <Achievement
+                      key={id}
+                      title={title}
+                      description={description}
+                      icon={icon}
+                      requiredCount={requiredCount}
+                      metric={user[metric]}
+                      isUnlocked={true}
+                    />
+                  </C.AchievementContainer>
+                )
+              )}
             </C.Achievements>
           }
           footer={
