@@ -1,16 +1,19 @@
 import { getRankingImage, getRankingName } from '../../utils/rankings';
+import { rockets } from '../../utils/rockets';
+
 import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
 
 import * as C from './styles';
 import dayjs from 'dayjs';
-import { rockets } from '../../utils/rockets';
 
 export function ProfileStatus({
   user: { ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
 }) {
   const RankingImage = getRankingImage(ranking_id);
   const rankingName = getRankingName(ranking_id);
-  const RocketImage = rockets.find(rocket => rocket.id === selected_rocket_id).image
+  const rocket = rockets.find(rocket => rocket.id === selected_rocket_id);
+  const RocketImage = rocket.image;
+  const rocketName = rocket.name;
 
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
 
@@ -36,11 +39,13 @@ export function ProfileStatus({
         <C.Status>
           <C.Title>Foguete atual</C.Title>
           <RocketImage
+            width={60}
+            height={60}
             style={{
               transform: [{ rotate: '90deg' }],
             }}
           />
-          <C.StatusName>Nova Explorer</C.StatusName>
+          <C.StatusName>{rocketName}</C.StatusName>
         </C.Status>
       </C.StatusContainer>
     </C.Container>

@@ -40,6 +40,7 @@ export const Body = styled.View`
   align-items: center;
   padding: 8px 0 8px;
   background-color: ${props => props.theme.colors.black};
+  max-height: 300px;
 `;
 
 export const Footer = styled.View`

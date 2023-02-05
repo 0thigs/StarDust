@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
@@ -17,7 +18,7 @@ export function Rocket({ id, name, image: RocketImage, price }) {
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const RocketPosition = useSharedValue(-5);
 
@@ -30,7 +31,7 @@ export function Rocket({ id, name, image: RocketImage, price }) {
   async function buyRocket() {
     if (user.coins < price) {
       setIsRequesting(false);
-      setShowModal(true);
+      setIsModalOpen(true);
       return;
     }
 
@@ -105,14 +106,14 @@ export function Rocket({ id, name, image: RocketImage, price }) {
       </C.Info>
 
       <Modal
-        show={showModal}
+        isOpen={isModalOpen}
         type={'denying'}
         title={'Parece que você não tem poeira estelar o suficiente'}
         body={<C.Text>Você pode adquirir mais completando estrelas</C.Text>}
         footer={
           <Button
             title={'Entendido'}
-            onPress={() => setShowModal(false)}
+            onPress={() => setIsModalOpen(false)}
             color={theme.colors.black}
             background={theme.colors.green_500}
           />

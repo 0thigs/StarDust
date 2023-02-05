@@ -61,7 +61,7 @@ export const achievements = [
     description: 'Complete 5 estrelas',
     requiredCount: 5,
     icon: require('../assets/AchievementAssets/achievement-4.svg').default,
-    metric: 'xp',
+    metric: 'unlocked_stars_ids',
   },
   {
     id: 9,
@@ -154,7 +154,7 @@ function checkAchievement(achievement, user) {
     ? user[achievement.metric].length - 1
     : user[achievement.metric];
 
-  const isAchievementUnlocked = userCurrentCount === achievement.requiredCount;
+  const isAchievementUnlocked = userCurrentCount >= achievement.requiredCount;
   if (isAchievementUnlocked) {
     return { ...achievement, isUnlocked: true };
   }

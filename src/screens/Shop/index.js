@@ -27,12 +27,13 @@ export function Shop() {
             <Rocket key={id} id={id} name={name} price={price} image={image} />
           ))}
         </C.RocketList>
-        <C.Title>Vidas</C.Title>
+
+        {/* <C.Title>Vidas</C.Title>
         <C.LifeList horizontal showsHorizontalScrollIndicator={false}>
-          <LifeBox lives={1} price={100} user={user} setUser={setUser} />
-          <LifeBox lives={3} price={250} user={user} setUser={setUser} />
-          <LifeBox lives={5} price={500} user={user} setUser={setUser} />
-        </C.LifeList>
+          <LifeBox lives={1} price={100} />
+          <LifeBox lives={3} price={250} />
+          <LifeBox lives={5} price={500} />
+        </C.LifeList> */}
       </C.Content>
 
       {unlockedAchievements.length > 0 && (
