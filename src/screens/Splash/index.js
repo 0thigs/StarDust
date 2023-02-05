@@ -26,9 +26,12 @@ export function Splash() {
     );
   }
 
-  useEffect(() => {
+  async function setUser() {
     const user = getUserInSession();
-    console.log(user);
+  }
+
+  useEffect(() => {
+    // console.log(user);
   }, []);
 
   return (
