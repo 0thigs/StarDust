@@ -39,8 +39,13 @@ export function Rocket({ id, name, image: RocketImage, price, user, setUser }) {
     setUser(user => {
       return { ...user, coins: updatedCoins, acquired_rockets_ids: updatedAcquiredRocketsIds };
     });
-    await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
-    await api.updateUser('coins', updatedCoins, user.id);
+
+    try {
+      await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
+      await api.updateUser('coins', updatedCoins, user.id);
+    } catch (error) {
+      console.log(error);
+    }
 
     selectRocket();
   }

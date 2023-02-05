@@ -77,7 +77,12 @@ export function Home() {
     setUser(user => {
       return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
     });
-    await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
+
+    try {
+      await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {

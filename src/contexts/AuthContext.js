@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import api from '../services/api';
 import { supabase } from '../services/supabase';
 
@@ -39,88 +39,75 @@ export function AuthContextProvider({ children }) {
   }
 
   async function signUp({ name, email, password }) {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.signUp({
+      name,
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const newUser = {
+      id: user.id,
+      name,
+      email,
+    };
     try {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.signUp({
-        name,
-        email,
-        password,
-      });
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      const newUser = {
-        id: user.id,
-        name,
-        email,
-      };
-
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
       setUser(signedUser);
-      return signedUser;
     } catch (error) {
-      return error.toString();
+      throw new Error(error);
     }
   }
 
   async function signIn({ email, password }) {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
     try {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
       const signedUser = await api.getUser(user.id);
       setUser(signedUser);
+      return signedUser;
     } catch (error) {
-      console.log(error);
-      return error.toString();
+      return error;
     }
   }
 
   async function signOut() {
-    try {
-      const { error } = await supabase.auth.signOut();
+    const { success, error } = await supabase.auth.signOut();
 
-      if (error) {
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      console.log(error);
-      return error.toString();
+    if (error) {
+      throw new Error(error.message);
     }
+    return success;
+  }
+
+  async function resetPassword(email) {
+    const { success, error } = await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
   }
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, signOut, getUserInSession, setUser, user }}>
+    <AuthContext.Provider
+      value={{ signUp, signIn, signOut, resetPassword, getUserInSession, setUser, user }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
-
-// const newUser = {
-//     name,
-//     email,
-//     coins: 20,
-//     lives: 5,
-//     xp: 0,
-//     unlocked_achievements_ids: [],
-//     acquired_rockets_ids: [1],
-//     unlockedStarsIds: [1],
-//     selected_rocket_id: 1,
-//     ranking_id: 1,
-//     streak: 0,
-//     created_at: user.created_at,
-//   };

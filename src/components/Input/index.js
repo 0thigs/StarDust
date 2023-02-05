@@ -36,7 +36,7 @@ export function Input({
   }
 
   function handleInputClick() {
-    inputRef.current.focus();
+    // inputRef.current.focus();
 
     showUpdatingPasswordForm();
   }

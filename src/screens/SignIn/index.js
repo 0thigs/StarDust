@@ -77,30 +77,34 @@ export function SignIn() {
 
   async function HandleSignIn(data) {
     setIsLoading(true);
-    const response = await signIn(data);
-    if (response === 'Error: Invalid login credentials') {
-      Toast.error('Usuário não encontrado');
-      setIsLoading(false);
-      return;
-    }
+    try {
+      await signIn(data);
 
-    navigation.reset({
-      routes: [{ name: 'DrawerRoutes' }],
-    });
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    } catch (error) {
+      Toast.error('Usuário não encontrado');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function HandleSignUp(data) {
     setIsLoading(true);
-    const response = await signUp(data);
-    if (response === 'Error: User already registered') {
+    try {
+      await signUp(data);
+
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
+    } catch (error) {
       Toast.error('Usuário já cadastrado');
       setIsLoading(false);
       return;
+    } finally {
+      setIsLoading(false);
     }
-
-    navigation.reset({
-      routes: [{ name: 'DrawerRoutes' }],
-    });
   }
 
   useEffect(() => {

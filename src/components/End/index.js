@@ -38,7 +38,7 @@ export function End({ starId }) {
   const starsRef = useRef();
   const navigation = useNavigation();
 
-  async function updateUserData() {
+  function getNewData() {
     const updatedCoins = coins + user.coins;
     const updatedXp = xp + user.xp;
 
@@ -53,29 +53,36 @@ export function End({ starId }) {
 
     if (!nextStar) {
       completedPlanets += 1;
-      nextPlanet = planets.find(planet => planet.id === currentPlanet.id + 1);
+      nextPlanet = planets[planets.indexOf(currentPlanet) + 1];
       nextStar = nextPlanet.stars[0];
     }
 
     updatedUnlockedStarsIds.push(nextStar.id);
 
-    const newData = {
+    return {
       coins: updatedCoins,
       xp: updatedXp,
       lives: state.livesCount,
       unlocked_stars_ids: updatedUnlockedStarsIds,
       completed_planets: completedPlanets,
     };
+  }
 
-    setUser(user => {
+  async function updateUserData() {
+    const newData = getNewData();
+    setUser(currentData => {
       return {
-        ...user,
+        ...currentData,
         ...newData,
       };
     });
 
     for (data of Object.keys(newData)) {
-      await api.updateUser(data, newData[data], user.id);
+      try {
+        await api.updateUser(data, newData[data], user.id);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
