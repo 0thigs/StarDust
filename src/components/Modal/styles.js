@@ -30,7 +30,7 @@ export const Animation = styled(LottieView)`
 
 export const Title = styled.Text`
   color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.bold};
+  font-family: ${props => props.theme.fonts.semibold};
   font-size: 16px;
   text-align: center;
 `;

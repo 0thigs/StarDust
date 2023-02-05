@@ -4,21 +4,24 @@ import * as C from './styles';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
+import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
 import { Button } from '../Button';
 import { Modal } from '../Modal';
+import { Animation } from '../Animation';
 
 import api from '../../services/api';
 
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
-export function Rocket({ id, name, image: RocketImage, price }) {
+export function Rocket({ id, name, image: Image, price }) {
   const { user, setUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('denying');
 
   const RocketPosition = useSharedValue(-5);
 
@@ -28,7 +31,20 @@ export function Rocket({ id, name, image: RocketImage, price }) {
     };
   });
 
-  async function buyRocket() {
+  async function updateUserData(updatedCoins, updatedAcquiredRocketsIds) {
+    setUser(user => {
+      return { ...user, coins: updatedCoins, acquired_rockets_ids: updatedAcquiredRocketsIds };
+    });
+
+    try {
+      await api.updateUser('coins', updatedCoins, user.id);
+      await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function buyRocket() {
     if (user.coins < price) {
       setIsRequesting(false);
       setIsModalOpen(true);
@@ -38,18 +54,10 @@ export function Rocket({ id, name, image: RocketImage, price }) {
     const updatedCoins = user.coins - price;
     const updatedAcquiredRocketsIds = [...user.acquired_rockets_ids, id];
 
-    setUser(user => {
-      return { ...user, coins: updatedCoins, acquired_rockets_ids: updatedAcquiredRocketsIds };
-    });
-
-    try {
-      await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
-      await api.updateUser('coins', updatedCoins, user.id);
-    } catch (error) {
-      console.log(error);
-    }
-
+    updateUserData(updatedCoins, updatedAcquiredRocketsIds);
     selectRocket();
+    setModalType('earning');
+    setIsModalOpen(true);
   }
 
   async function selectRocket() {
@@ -82,17 +90,17 @@ export function Rocket({ id, name, image: RocketImage, price }) {
 
   return (
     <C.Container isSelected={isSelected} isAcquired={isAcquired}>
-      <C.RocketBackground source={RocketBackground}>
+      <C.Background source={RocketBackground}>
         {!isAcquired && (
           <C.Price>
             <CoinIcon width={30} height={30} />
             <C.Coins>{price}</C.Coins>
           </C.Price>
         )}
-        <C.RocketImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <RocketImage width={125} height={125} />
-        </C.RocketImageContainer>
-      </C.RocketBackground>
+        <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
+          <Image width={125} height={125} />
+        </C.ImageContainer>
+      </C.Background>
       <C.Info>
         <C.Name isSelected={isSelected}>{name}</C.Name>
         <Button
@@ -107,9 +115,31 @@ export function Rocket({ id, name, image: RocketImage, price }) {
 
       <Modal
         isOpen={isModalOpen}
-        type={'denying'}
-        title={'Parece que você não tem poeira estelar o suficiente'}
-        body={<C.Text>Você pode adquirir mais completando estrelas</C.Text>}
+        type={modalType}
+        title={
+          modalType === 'denying'
+            ? 'Parece que você não tem poeira estelar o suficiente'
+            : 'Parabéns, você acabou de adquiriu um novo foguete!'
+        }
+        body={
+          modalType === 'denying' ? (
+            <C.Text>Você pode adquirir mais completando estrelas</C.Text>
+          ) : (
+            <C.AcquiredRocket>
+              <Animation
+                source={RewardLight}
+                autoPlay={true}
+                loop={true}
+                size={220}
+                isAbsolute={true}
+                top={-15}
+                left={-8}
+              />
+              <Image width={100} height={100} />
+              <C.Name>{name}</C.Name>
+            </C.AcquiredRocket>
+          )
+        }
         footer={
           <Button
             title={'Entendido'}

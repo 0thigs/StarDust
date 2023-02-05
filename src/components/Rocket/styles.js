@@ -18,7 +18,7 @@ export const Container = styled.SafeAreaView`
   opacity: ${props => (props.isAcquired ? 1 : 0.7)};
 `;
 
-export const RocketBackground = styled.ImageBackground`
+export const Background = styled.ImageBackground`
   height: 200px;
   justify-content: center;
   align-items: center;
@@ -42,7 +42,7 @@ export const Coins = styled.Text`
   margin-left: 4px;
 `;
 
-export const RocketImageContainer = styled(Animated.View)``;
+export const ImageContainer = styled(Animated.View)``;
 
 export const Info = styled.ImageBackground`
   padding: 12px;
@@ -63,4 +63,10 @@ export const Text = styled.Text`
   color: ${props => props.theme.colors.white};
   font-size: 14px;
   text-align: center;
+`;
+
+export const AcquiredRocket = styled.View`
+  position: relative;
+  justify-content: center;
+  align-items: center;
 `;

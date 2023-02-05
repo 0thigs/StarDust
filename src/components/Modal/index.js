@@ -3,6 +3,8 @@ import * as C from './styles';
 import Crying from '../../assets/ModalAssets/crying-animation.json';
 import Denying from '../../assets/ModalAssets/denying-animation.json';
 import Earning from '../../assets/ModalAssets/earning-animation.json';
+
+import { Animation } from '../Animation';
 import { ZoomIn, ZoomOut } from 'react-native-reanimated';
 
 const animations = [
@@ -22,7 +24,12 @@ export function Modal({ isOpen, type = 'crying', title, body, footer }) {
         <C.Content entering={ZoomIn.duration(500)} exiting={ZoomOut.duration(500)}>
           <C.Header>
             <C.Title>{title}</C.Title>
-            <C.Animation source={getAnimation()} autoPlay={true} loop={true} />
+            <Animation
+              source={getAnimation()}
+              autoPlay={true}
+              loop={true}
+              size={200}
+            />
           </C.Header>
           <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>

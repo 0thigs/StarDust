@@ -1,29 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
-import * as C from './styles';
-import theme from '../../global/styles/theme';
-
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/core';
 
 import { Metric } from '../Metric';
 import { Button } from '../Button';
 import { Streak } from '../Streak';
+import { Animation } from '../Animation';
+import { planets } from '../../utils/planets';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
 import Accurance from '../../assets/GlobalAssets/accurance-icon.svg';
 import Time from '../../assets/GlobalAssets/time-icon.svg';
-
 import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
 import Stars from '../../assets/LessonAssets/stars-animation.json';
 import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
-import LottieView from 'lottie-react-native';
 
-import { planets } from '../../utils/planets';
-
+import * as C from './styles';
+import theme from '../../global/styles/theme';
 import api from '../../services/api';
-
-import { useNavigation } from '@react-navigation/core';
 
 export function End({ starId }) {
   const { user, setUser } = useAuth();
@@ -149,12 +145,12 @@ export function End({ starId }) {
     <C.Container>
       {isStreakShown ? (
         <>
-          <LottieView
+          <Animation
             source={StreakAnimation}
             autoPlay={true}
             duration={3500}
             loop={false}
-            style={{ width: 250, height: 250 }}
+            size={250}
             colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
           />
           <Streak user={user} setUser={setUser} isUpdateStreak={true} />
@@ -162,12 +158,12 @@ export function End({ starId }) {
       ) : (
         <>
           <C.Message animation={'fadeInDown'}>Fase completada!</C.Message>
-          <LottieView
+          <Animation
             ref={starsRef}
             loop={false}
             duration={2500}
             source={Stars}
-            style={{ width: 50, height: 50 }}
+            size={50}
             colorFilters={[
               { keypath: 'Branco Sólido 1', color: theme.colors.background },
               { keypath: 'star1', color: theme.colors.yellow_300 },
@@ -177,12 +173,7 @@ export function End({ starId }) {
               { keypath: 'star5', color: theme.colors.yellow_300 },
             ]}
           />
-          <LottieView
-            source={Astronaut}
-            autoPlay={true}
-            loop={true}
-            style={{ width: 350, height: 350 }}
-          />
+          <Animation source={Astronaut} autoPlay={true} loop={true} size={350} />
           <C.Metrics>
             <Metric
               title={'Poeira estelar'}
@@ -190,7 +181,7 @@ export function End({ starId }) {
               color={theme.colors.yellow_300}
               icon={<Coin width={35} height={35} />}
               delay={250}
-              large
+              isLarge={true}
             />
             <Metric
               title={'Total XP'}

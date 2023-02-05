@@ -11,7 +11,7 @@ import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
-
+import { Animation } from '../../components/Animation';
 import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
@@ -134,7 +134,15 @@ export function Home() {
               {unlockedAchievements.map(
                 ({ id, title, icon, description, requiredCount, metric }) => (
                   <C.AchievementContainer key={id}>
-                    <C.Animation source={RewardLight} autoPlay={true} loop={true} />
+                    <Animation
+                      source={RewardLight}
+                      autoPlay={true}
+                      loop={true}
+                      size={220}
+                      isAbsolute={true}
+                      top={-15}
+                      left={-10}
+                    />
                     <Achievement
                       key={id}
                       title={title}

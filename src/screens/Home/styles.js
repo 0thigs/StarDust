@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
-import theme from '../../global/styles/theme';
 
-
-export const Container = styled.ScrollView.attrs({
-
-})``;
+export const Container = styled.ScrollView.attrs({})``;
 
 export const Background = styled.View`
   position: absolute;
@@ -23,14 +19,4 @@ export const Achievements = styled.ScrollView.attrs({
 
 export const AchievementContainer = styled.View`
   position: relative;
-`;
-
-export const Animation = styled(LottieView)`
-  width: 220px;
-  height: 220px;
-  position: absolute;
-  top: -15%;
-  left: -10%;
-  opacity: 0.7;
-  z-index: -5;
 `;

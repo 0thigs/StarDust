@@ -11,7 +11,6 @@ import { achievements } from '../../utils/achivements';
 import { Achievement } from '../../components/Achievement';
 
 import Missing from '../../assets/GlobalAssets/missing-animation.json';
-import LottieView from 'lottie-react-native';
 
 export function Profile() {
   const { user } = useAuth();
@@ -54,14 +53,11 @@ export function Profile() {
               <C.NoAchievements>
                 Parace que você não desbloqueou nenhuma conquista ainda 😢
               </C.NoAchievements>
-              <LottieView
+              <Animation
                 source={Missing}
                 autoPlay={true}
                 loop={true}
-                style={{
-                  width: 220,
-                  height: 220,
-                }}
+                size={220}
               />
             </>
           )}
