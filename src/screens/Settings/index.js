@@ -19,6 +19,7 @@ export function Settings() {
 
   const {
     control,
+    setValue,
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
@@ -36,6 +37,10 @@ export function Settings() {
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
+
+    setValue("name", user.name);
+    setValue("email", user.email);
+    setValue("password", "fakePassword");
 
     return () => backHandler.remove();
   }, []);

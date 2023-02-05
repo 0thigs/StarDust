@@ -31,7 +31,7 @@ export const HeaderTitle = styled(Animatable.Text)`
 
 export const HeaderSubtitle = styled.Text`
   font-size: 18px;
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
 `;
 
@@ -79,10 +79,4 @@ export const AccountButtonText = styled.Text`
   font-size: 14px;
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.white};
-`;
-
-export const ErrorMessage = styled.Text`
-  font-size: 15px;
-  font-family: ${props => props.theme.fonts.regular};
-  color: ${props => props.theme.colors.red_700};
 `;

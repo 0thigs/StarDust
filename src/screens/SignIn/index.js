@@ -4,6 +4,7 @@ import * as C from './styles';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 import SignInIcon from '../../assets/SignInAssets/signin.svg';
 import theme from '../../global/styles/theme';
@@ -77,7 +78,6 @@ export function SignIn() {
   async function HandleSignIn(data) {
     setIsLoading(true);
     const response = await signIn(data);
-    console.log({response});
     if (response === 'Error: Invalid login credentials') {
       Toast.error('Usuário não encontrado');
       setIsLoading(false);
@@ -122,7 +122,7 @@ export function SignIn() {
           animationInTiming={700}
           animationOutTiming={1000}
           animationStyle={'rightInOut'}
-          width={300}
+          width={320}
           position="top"
         />
         {isToShowHeader ? (
@@ -162,7 +162,7 @@ export function SignIn() {
                   />
                 )}
               />
-              {errors.name && <C.ErrorMessage>{errors.name?.message}</C.ErrorMessage>}
+              {errors.name && <ErrorMessage message={errors.name?.message} />}
             </>
           )}
 
@@ -183,7 +183,7 @@ export function SignIn() {
               />
             )}
           />
-          {errors.email && <C.ErrorMessage>{errors.email?.message}</C.ErrorMessage>}
+          {errors.email && <ErrorMessage message={errors.email?.message} />}
 
           <Controller
             control={control}
@@ -204,7 +204,7 @@ export function SignIn() {
               />
             )}
           />
-          {errors.password && <C.ErrorMessage>{errors.password?.message}</C.ErrorMessage>}
+          {errors.password && <ErrorMessage message={errors.password?.message} />}
 
           {isSignUpForm && (
             <>
@@ -229,9 +229,7 @@ export function SignIn() {
                   />
                 )}
               />
-              {errors.passwordConfirm && (
-                <C.ErrorMessage>{errors.passwordConfirm?.message}</C.ErrorMessage>
-              )}
+              {errors.passwordConfirm && <ErrorMessage message={errors.passwordConfirm?.message} />}
             </>
           )}
         </C.Form>

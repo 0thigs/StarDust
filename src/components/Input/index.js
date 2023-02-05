@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
@@ -22,7 +23,7 @@ export function Input({
   const [isFilled, setIsFilled] = useState(false);
   const inputRef = useRef();
   const route = useRoute();
-  const { reset, register } = useForm();
+
 
   function toggleSecureTextEntry() {
     setSecureTextEntry(!secureTextEntry);
@@ -53,13 +54,11 @@ export function Input({
 
   useEffect(() => {
     if (!isUpdatingPasswordForm) {
-      inputRef.current.blur();
+      // inputRef.current.blur()
     }
   }, [isUpdatingPasswordForm]);
 
-  useEffect(() => {
-    reset({ userData });
-  }, []);
+ 
 
   return (
     <C.Container
@@ -92,7 +91,6 @@ export function Input({
           autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
           secureTextEntry={type === 'password' && secureTextEntry}
           error={error}
-        //   {...register('userData')}
           />
         {type === 'password' ? (
           secureTextEntry ? (
