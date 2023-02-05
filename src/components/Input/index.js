@@ -1,30 +1,65 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
 
-export function Input({ label, placeholder, icon = null, type, value, onChangeText, error }) {
+export function Input({
+  label,
+  placeholder,
+  icon = null,
+  type,
+  value,
+  onChangeText,
+  error,
+  userData,
+  isUpdatingPasswordForm,
+  setIsUpdatingPasswordForm,
+}) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const inputRef = useRef();
+  const route = useRoute();
+  const { reset, register } = useForm();
 
   function toggleSecureTextEntry() {
     setSecureTextEntry(!secureTextEntry);
   }
 
+  function showUpdatingPasswordForm() {
+    if (route.name === 'Settings' && type === 'password') {
+      setIsUpdatingPasswordForm(true);
+    }
+  }
+
   function handleInputClick() {
-    // inputRef.current.focus();
+    inputRef.current.focus();
+
+    showUpdatingPasswordForm();
   }
 
   function handleInputFocus() {
     setIsFocus(true);
+
+    showUpdatingPasswordForm();
   }
 
   function handleInputBlur() {
     setIsFocus(false);
     setIsFilled(!!value);
   }
+
+  useEffect(() => {
+    if (!isUpdatingPasswordForm) {
+      inputRef.current.blur();
+    }
+  }, [isUpdatingPasswordForm]);
+
+  useEffect(() => {
+    reset({ userData });
+  }, []);
 
   return (
     <C.Container
@@ -57,7 +92,8 @@ export function Input({ label, placeholder, icon = null, type, value, onChangeTe
           autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
           secureTextEntry={type === 'password' && secureTextEntry}
           error={error}
-        />
+        //   {...register('userData')}
+          />
         {type === 'password' ? (
           secureTextEntry ? (
             <Icon.Eye

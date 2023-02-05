@@ -6,7 +6,7 @@ export const Container = styled(Animatable.View)``;
 export const Label = styled.Text`
   margin-top: 18px;
   font-size: 16px;
-  font-family: ${props => props.theme.fonts.semibold};
+  font-family: ${props => props.theme.fonts.medium};
   color: ${props => props.theme.colors.green_500};
 `;
 

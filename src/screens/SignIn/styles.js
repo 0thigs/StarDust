@@ -8,7 +8,7 @@ export const Content = styled.View`
   flex: 1;
   background-color: ${props => props.theme.colors.background};
   justify-content: center;
-  padding: 0 40px;
+  padding: 0 32px;
 `;
 
 export const Header = styled.View`

@@ -26,7 +26,7 @@ const SingnInSchema = yup.object({
     .required('Senha não pode estar vazia!'),
 });
 
-const SingnUpSchema = yup.object({
+export const SingnUpSchema = yup.object({
   name: yup
     .string()
     .min(2, 'Nome de usuário deve ter pelo menos 2 dígitos!')

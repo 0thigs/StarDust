@@ -4,6 +4,7 @@ import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
 import { DrawerRoutes } from './drawer.routes';
 import { Lesson } from '../screens/Lesson';
+import { Settings } from '../screens/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="SignIn" component={SignIn} />
