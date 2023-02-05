@@ -11,7 +11,7 @@ const fakeUser = {
   avatar: 'https://github.com/JohnPetros.png',
   coins: 20,
   lives: 5,
-  xp: 0,
+  xp: 500,
   level: 1,
   unlocked_achievements_ids: [1],
   unlocked_stars_ids: [1, 2, 3, 4, 5, 6, 14],

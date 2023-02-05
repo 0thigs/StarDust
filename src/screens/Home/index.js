@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
+import { useAchievement } from '../../hooks/useAchievement';
 import { useWindowDimensions } from 'react-native';
 
 import { Planet } from '../../components/Planet';
@@ -11,28 +12,24 @@ import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
 
-import { getUnlockedAchievements } from '../../utils/achivements';
 import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 
-import api from '../../services/api';
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
 export function Home() {
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
+  const { unlockedAchievements } = useAchievement();
   const { lastUnlockedStarYPosition } = useScroll();
-
-  const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
   const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [direction, setDirection] = useState('');
-
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
@@ -66,34 +63,10 @@ export function Home() {
     setIsFabButtonShown(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
   }
 
-  async function updateUnlockedAchievementsIds() {
-    if (unlockedAchievements.length === 0) {
-      return;
-    }
-
-    const unlockedAchievementsIds = unlockedAchievements.map(
-      unlockedAchievement => unlockedAchievement.id
-    );
-    setUser(user => {
-      return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
-    });
-
-    try {
-      await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    setUnlockedAchievements(getUnlockedAchievements(user));
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    updateUnlockedAchievementsIds();
-  }, [unlockedAchievements]);
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {

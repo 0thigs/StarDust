@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useState } from 'react';
+import { useAchievement } from '../../hooks/useAchievement';
 
 import { LifeBox } from '../../components/LifeBox';
 import { Rocket } from '../../components/Rocket';
@@ -8,35 +8,15 @@ import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 
 import { rockets } from '../../utils/rockets';
-import { getUnlockedAchievements } from '../../utils/achivements';
 
 import * as C from './styles';
 
-import api from '../../services/api';
 import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
 export function Shop() {
-  const { user, setUser } = useAuth();
-  const [unlockedAchievements, setUnlockedAchievements] = useState([]);
-  const [showModal, setShowModal] = useState(true);
-
-  async function updateUnlockedAchievementsIds() {
-    const unlockedAchievementsIds = unlockedAchievements.map(
-      unlockedAchievement => unlockedAchievement.id
-    );
-    setUser(user => {
-      return { ...user, unlocked_achievements_ids: unlockedAchievementsIds };
-    });
-    await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
-
-    unlockedAchievements.length > 0 && setShowModal(true);
-  }
-
-  useEffect(() => {
-    setUnlockedAchievements(getUnlockedAchievements(user));
-    updateUnlockedAchievementsIds();
-  }, [user.acquired_rockets_ids]);
+  const { unlockedAchievements } = useAchievement();
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
     <C.Container>
@@ -44,15 +24,7 @@ export function Shop() {
         <C.Title>Foguetes</C.Title>
         <C.RocketList>
           {rockets.map(({ id, name, image, price }) => (
-            <Rocket
-              key={id}
-              id={id}
-              name={name}
-              price={price}
-              image={image}
-              user={user}
-              setUser={setUser}
-            />
+            <Rocket key={id} id={id} name={name} price={price} image={image} />
           ))}
         </C.RocketList>
         <C.Title>Vidas</C.Title>
@@ -65,7 +37,7 @@ export function Shop() {
 
       {unlockedAchievements.length > 0 && (
         <Modal
-          show={showModal}
+          isOpen={isModalOpen}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
@@ -93,7 +65,7 @@ export function Shop() {
               title={'Entendido'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setShowModal(false)}
+              onPress={() => setIsModalOpen(false)}
             />
           }
         />

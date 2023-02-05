@@ -12,7 +12,8 @@ import api from '../../services/api';
 
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
-export function Rocket({ id, name, image: RocketImage, price, user, setUser }) {
+export function Rocket({ id, name, image: RocketImage, price }) {
+  const { user, setUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
