@@ -25,7 +25,7 @@ export function Home() {
   const { user } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const { lastUnlockedStarYPosition } = useScroll();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
   const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -64,7 +64,10 @@ export function Home() {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsEndTransition(true), 3000);
+    const timer = setTimeout(() => {
+      setIsEndTransition(true);
+      setIsModalOpen(true);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 

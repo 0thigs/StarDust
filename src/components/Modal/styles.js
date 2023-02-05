@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
-import * as Animatable from 'react-native-animatable';
+import Animated from 'react-native-reanimated';
 
 export const Container = styled.Modal``;
 
@@ -11,7 +11,7 @@ export const Fade = styled.View`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-export const Content = styled(Animatable.View)`
+export const Content = styled(Animated.View)`
   width: 90%;
 `;
 
