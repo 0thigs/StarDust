@@ -52,7 +52,7 @@ export function Profile() {
           ) : (
             <>
               <C.NoAchievements>
-                Parace que você não desbloqueou nenhum conquista ainda 😢
+                Parace que você não desbloqueou nenhuma conquista ainda 😢
               </C.NoAchievements>
               <LottieView
                 source={Missing}

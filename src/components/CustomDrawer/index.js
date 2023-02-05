@@ -9,7 +9,7 @@ import { Toast } from 'toastify-react-native';
 export function CustomDrawer() {
   const { signOut, user } = useAuth();
   const [achievements, setAchievements] = useState([]);
-    // console.log(achievements);
+  // console.log(achievements);
   const navigation = useNavigation();
 
   async function handleSignOut() {
@@ -26,15 +26,16 @@ export function CustomDrawer() {
 
   useEffect(() => {
     const sortedAchievements = achievementsFromJSON;
-    console.log(user);
+    const { unlocked_achievements_ids } = user;
+    console.log(unlocked_achievements_ids);
     sortedAchievements.sort((a, b) => {
-      const aPriority = user.unlocked_achievements_ids.includes(a.id) ? 0 : 1;
-      const bPriority = user.unlocked_achievements_ids.includes(b.id) ? 0 : 1;
-
-      if (aPriority !== bPriority) {
-        return aPriority - bPriority;
+      if (unlocked_achievements_ids.includes(a.id) && !unlocked_achievements_ids.includes(b.id)) {
+        return 1;
       }
-      return a.id - b.id;
+      if (!unlocked_achievements_ids.includes(a.id) && unlocked_achievements_ids.includes(b.id)) {
+        return -1;
+      }
+      return 0;
     });
     setAchievements(sortedAchievements);
   }, [user.unlocked_achievements_ids]);
