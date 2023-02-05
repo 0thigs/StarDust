@@ -78,7 +78,8 @@ export function SignIn() {
   async function HandleSignIn(data) {
     setIsLoading(true);
     try {
-      await signIn(data);
+     const user = await signIn(data);
+     console.log({user});
 
       navigation.reset({
         routes: [{ name: 'DrawerRoutes' }],

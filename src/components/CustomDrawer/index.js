@@ -9,25 +9,23 @@ import { Toast } from 'toastify-react-native';
 export function CustomDrawer() {
   const { signOut, user } = useAuth();
   const [achievements, setAchievements] = useState([]);
-  // console.log(achievements);
   const navigation = useNavigation();
 
   async function handleSignOut() {
-    const response = await signOut();
-    if (response?.error) {
+    try {
+      await signOut();
+      
+      navigation.reset({
+        routes: [{ name: 'SignIn' }],
+      });
+    } catch (error) {
       Toast.error('Falha ao tentar sair da conta');
-      return;
     }
-
-    navigation.reset({
-      routes: [{ name: 'SignIn' }],
-    });
   }
 
   useEffect(() => {
     const sortedAchievements = achievementsFromJSON;
     const { unlocked_achievements_ids } = user;
-    console.log(unlocked_achievements_ids);
     sortedAchievements.sort((a, b) => {
       if (unlocked_achievements_ids.includes(a.id) && !unlocked_achievements_ids.includes(b.id)) {
         return 1;

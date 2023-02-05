@@ -28,14 +28,23 @@ const fakeUser = {
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(fakeUser);
 
-  async function getUserInSession() {
+  async function setUserInSession() {
     const {
       data: { session },
+      error,
     } = await supabase.auth.getSession();
+
+    if (error) {
+      throw new Error(error.message);
+    }
     const { user } = session;
-    const signedUser = await api.getUser(user.id);
-    setUser(signedUser);
-    return signedUser;
+
+    try {
+      const userInSession = await api.getUser(user.id);
+      setUser(userInSession);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async function signUp({ name, email, password }) {
@@ -67,7 +76,10 @@ export function AuthContextProvider({ children }) {
   }
 
   async function signIn({ email, password }) {
-    const { error } = await supabase.auth.signInWithPassword({
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -79,7 +91,7 @@ export function AuthContextProvider({ children }) {
     try {
       const signedUser = await api.getUser(user.id);
       setUser(signedUser);
-      return signedUser;
+      return user;
     } catch (error) {
       return error;
     }
@@ -105,7 +117,7 @@ export function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, signOut, resetPassword, getUserInSession, setUser, user }}
+      value={{ signUp, signIn, signOut, resetPassword, setUserInSession, setUser, user }}
     >
       {children}
     </AuthContext.Provider>

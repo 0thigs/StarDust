@@ -10,28 +10,32 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function Splash() {
-  const { getUserInSession } = useAuth();
+  const { setUserInSession } = useAuth();
   const [isRocketLauched, setIsRocketLauched] = useState(false);
   const navigation = useNavigation();
 
-  function handlePlayButton() {
-    setIsRocketLauched(true);
-
-    setTimeout(
-      () =>
-        navigation.reset({
-          routes: [{ name: 'SignIn' }],
-        }),
-      3000
-    );
+  function goTo(routeName) {
+    navigation.reset({
+      routes: [{ name: routeName }],
+    });
   }
 
-  async function setUser() {
-    const user = getUserInSession();
+  function handlePlayButton() {
+    setIsRocketLauched(true);
+    setTimeout(() => goTo('SignIn'), 3000);
+  }
+
+  async function verifySession() {
+    try {
+      await setUserInSession();
+      goTo('DrawerRoutes');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    // console.log(user);
+    verifySession();
   }, []);
 
   return (
