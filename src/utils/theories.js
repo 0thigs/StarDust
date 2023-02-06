@@ -70,29 +70,76 @@ export const theories = [
         body: 'Os programas de computadores nada mais são do que algoritmos escritos numa linguagem de programação (PHP, Python, JavaScript, entre outras) e que são interpretados e executados por uma máquina, no caso um computador.',
       },
       {
+        type: 'alert',
+        body: 'Uma linguagem de programação normalmente possui uma sintaxe própria, que é o conjunto de regras que determina quais combinações de símbolos e palavras-chaves podem ser utilizadas para escrever o código.',
+      },
+      {
         type: 'default',
-        body: 'Os algoritmos são descritos em uma linguagem chamada pseudocódigo. Este nome é uma alusão à posterior implementação em uma linguagem de programação, ou seja, quando formos programar em uma linguagem, por exemplo Javascript, estaremos gerando código em Javascript. Por isso os algoritmos são independentes das linguagens de  programação.',
+        body: 'Os algoritmos, por sua vez, são descritos em uma linguagem chamada pseudocódigo.',
       },
       {
-        type: 'alert',
-        body: 'Para escrever um algoritmo precisamos descrever a sequencia de instruções, de maneira simples e objetiva. Para isso utilizaremos algumas técnicas',
+        type: 'default',
+        body: 'O pseudocódigo é uma representação informal de um algoritmo, que permite a comunicação clara e eficiente de uma ideia de programação sem se preocupar com a sintaxe específica de uma linguagem de programação.',
       },
       {
-        type: 'example',
+        type: 'default',
+        body: 'Por esse motivo o pseudocódigo acaba sendo uma ferramenta valiosa para ajudar a planejar e projetar a lógica de um programa antes de escrever o código de verdade.',
+      },
+      {
+        type: 'default',
+        body: 'Mas então por que usar pseudocódigo? Oras, usar pseudocódigo possui muitas vantagens, incluindo:',
+      },
+      {
+        type: 'emphasis',
+        body: '1 - Permite uma representação clara e compreensível do algoritmo, o que facilita a comunicação da ideia que você quer implementar com outras pessoas',
+      },
+      {
+        type: 'emphasis',
+        body: '2 - Ajuda a identificar e corrigir problemas de lógica antes de escrever o código de verdade',
+      },
+      {
+        type: 'emphasis',
+        body: '3 - Facilita a manutenção e atualização do código existente',
+      },
+      {
+        type: 'emphasis',
+        body: '4 - Não requer conhecimento avançado de sintaxe, o que facilita o aprendizado da lógica de programação',
+      },
+      {
+        type: 'default',
+        body: 'Existem algumas convenções gerais que ajudam a escrever pseudocódigo de forma clara e eficiente.',
+      },
+      {
+        type: 'default',
         body: `
-         <ol>
-              <li>Usar somente um verbo por frase</li>
-              <li>
-              Imaginar que você está desenvolvendo um algoritmo para pessoas que não trabalham com informática
-              </li>
-              <li>Usar frases curtas e simples Ser objetivo</li>
-              <li>Procurar usar palavras que não tenham sentido dúbio</li>
-        </ol>      
-          `,
+    . Use comandos claros e fáceis de entender
+    . Indente (fazer recuo) o código de forma apropriada para indicar a estrutura do algoritmo
+    . Use comentários para explicar o que o código está fazendo em termos gerais
+    . Mantenha o pseudocódigo o mais simples possível, evitando detalhes desnecessários.`,
       },
       {
         type: 'alert',
-        body: 'O algoritmo deve ser fácil de se interpretar e fácil de codificar. Ou seja, ele deve ser o intermediário entre a linguagem falada e a linguagem de programação.',
+        body: 'A pseudolinguagem que iremos utilizar será o portugol, pois ela possui a sintaxe (maneira de escrever um código) em português, o que facilita bastante para iniciantes o aprendizado de lógica de programação.',
+      },
+      {
+        type: 'default',
+        body: 'Veja um exemplo de pseudocódigo escrito em portugol:',
+      },
+      {
+        type: 'default',
+        body: `
+        Início
+        Leia número1
+        Leia número2
+        Se número1 > número2
+          Escreva "número1 é maior"
+        Senão
+          Escreva "número2 é maior"
+        Fim`,
+      },
+      {
+        type: 'emphasis',
+        body: 'Agora que você um pouco mais sobre programas e pseudocódigos tá na hora revisar tudo isso, preparado(a)?.',
       },
     ],
   },

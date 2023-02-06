@@ -18,15 +18,20 @@ export function useAchievement() {
     const unlockedAchievementsIds = unlockedAchievements.map(
       unlockedAchievement => unlockedAchievement.id
     );
+    
+    const updatedUnlockedAchievementsIds = [
+      ...user.unlocked_achievements_ids,
+      ...unlockedAchievementsIds,
+    ];
     setUser(user => {
       return {
         ...user,
-        unlocked_achievements_ids: [...user.unlocked_achievements_ids, ...unlockedAchievementsIds],
+        unlocked_achievements_ids: updatedUnlockedAchievementsIds,
       };
     });
 
     try {
-      await api.updateUser('unlocked_achievements_ids', unlockedAchievementsIds, user.id);
+      await api.updateUser('unlocked_achievements_ids', updatedUnlockedAchievementsIds, user.id);
     } catch (error) {
       console.log(error);
     }

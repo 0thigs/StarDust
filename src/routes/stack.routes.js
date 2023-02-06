@@ -16,12 +16,12 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Lesson" component={Lesson} />
     </Stack.Navigator>
   );
 }

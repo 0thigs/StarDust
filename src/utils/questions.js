@@ -1,63 +1,63 @@
 export const questions = [
-//   {
-//     starId: 1,
-//     type: 'drag-and-drop-click',
-//     stem: 'Clique nos elementos abaixo para completar o algoritmo',
-//     lines: [
-//       {
-//         id: 1,
-//         text: 'if (5 > 2) {',
-//         indentLevel: 0,
-//       },
-//       {
-//         id: 2,
-//         text: 'num1 <- ',
-//         indentLevel: 2,
-//         dropZone: {
-//           id: 1,
-//           isEndLine: true,
-//         },
-//       },
-//       {
-//         id: 3,
-//         text: 'numero2 <- ',
-//         indentLevel: 2,
-//         dropZone: {
-//           id: 2,
-//           isEndLine: false,
-//         },
-//       },
-//       {
-//         id: 4,
-//         text: 'num3 <- ',
-//         indentLevel: 2,
-//         dropZone: {
-//           id: 3,
-//           isEndLine: true,
-//         },
-//       },
-//       {
-//         id: 5,
-//         text: '}',
-//         indentLevel: 1,
-//       },
-//     ],
-//     dropItems: [
-//       {
-//         id: 1,
-//         label: '10',
-//       },
-//       {
-//         id: 2,
-//         label: '20000000000',
-//       },
-//       {
-//         id: 3,
-//         label: '3000',
-//       },
-//     ],
-//     correctItemsIdsSequence: [3, 2, 1],
-//   },
+  //   {
+  //     starId: 1,
+  //     type: 'drag-and-drop-click',
+  //     stem: 'Clique nos elementos abaixo para completar o algoritmo',
+  //     lines: [
+  //       {
+  //         id: 1,
+  //         text: 'if (5 > 2) {',
+  //         indentLevel: 0,
+  //       },
+  //       {
+  //         id: 2,
+  //         text: 'num1 <- ',
+  //         indentLevel: 2,
+  //         dropZone: {
+  //           id: 1,
+  //           isEndLine: true,
+  //         },
+  //       },
+  //       {
+  //         id: 3,
+  //         text: 'numero2 <- ',
+  //         indentLevel: 2,
+  //         dropZone: {
+  //           id: 2,
+  //           isEndLine: false,
+  //         },
+  //       },
+  //       {
+  //         id: 4,
+  //         text: 'num3 <- ',
+  //         indentLevel: 2,
+  //         dropZone: {
+  //           id: 3,
+  //           isEndLine: true,
+  //         },
+  //       },
+  //       {
+  //         id: 5,
+  //         text: '}',
+  //         indentLevel: 1,
+  //       },
+  //     ],
+  //     dropItems: [
+  //       {
+  //         id: 1,
+  //         label: '10',
+  //       },
+  //       {
+  //         id: 2,
+  //         label: '20000000000',
+  //       },
+  //       {
+  //         id: 3,
+  //         label: '3000',
+  //       },
+  //     ],
+  //     correctItemsIdsSequence: [3, 2, 1],
+  //   },
   {
     starId: 1,
     type: 'select-option',
@@ -137,16 +137,20 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'select-option',
-    stem: 'Qual das opções não é uma linguagem de programação?',
-    options: ['Java', 'PHP', 'Python', 'Pseudocódigo'],
+    type: 'open',
+    stem: 'O nome que se dá para a representação informal de um algoritmo é',
     answer: 'Pseudocódigo',
   },
   {
     starId: 2,
     type: 'select-option',
-    stem: 'Qual das opções pode ser considerada uma técnica para construção de algoritmos?',
-    options: ['raciocínio lógico', 'aleatoriedade', 'análise crítica', 'encadeamento de passos'],
+    stem: 'Qual é a principal vantagem de se usar pseudocódigo?',
+    options: [
+      'escrever código de verdade',
+      'representar o algoritmo sem se preocupar com uma sintaxe específica',
+      'acessar a recursos avançados de uma linguagem',
+      'facilitar a manutenção do código',
+    ],
     answer: 'aleatoriedade',
   },
   {
@@ -162,5 +166,3 @@ export const questions = [
     answer: 'Instruções para o computador',
   },
 ];
-
-
