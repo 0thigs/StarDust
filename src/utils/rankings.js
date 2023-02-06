@@ -39,6 +39,7 @@ export function getRankingImage(id) {
   return rankings.filter(ranking => ranking.id === id)[0].image;
 }
 
-export function calculateRanking(xp) {
+// Working in Progress
+// export function calculateRanking(xp) {
 
-}
+// }
