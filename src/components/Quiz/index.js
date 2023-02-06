@@ -14,7 +14,7 @@ import { DragAndDropClickForm } from '../DragAndDropClickForm';
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();
   const [currentQuestion, setCurrentQuestion] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigation = useNavigation();
 
   function LeaveLesson() {
@@ -29,7 +29,7 @@ export function Quiz({ coins }) {
 
   useEffect(() => {
     if (state.wrongsCount === 5) {
-      setShowModal(true);
+      setIsModalOpen(true);
       LeaveLesson();
     }
   }, [state.wrongsCount]);
@@ -62,7 +62,7 @@ export function Quiz({ coins }) {
       <Modal
         type={'crying'}
         title={'Puxa, parece que você não tem mais vidas'}
-        show={showModal}
+        isOpen={isModalOpen}
         body={
           <C.Text>
             {coins > 500

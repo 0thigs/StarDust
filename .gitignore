@@ -57,4 +57,4 @@ dist/
 
 # Source 
 
-.env
+.env.local

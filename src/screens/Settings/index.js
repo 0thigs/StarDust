@@ -13,7 +13,7 @@ import { SingnUpSchema as SettingsSchema } from '../SignIn';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-export function Settings() {
+export function Settings({ navigation: { goBack } }) {
   const { user, setUser } = useAuth();
   const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
 
@@ -28,6 +28,7 @@ export function Settings() {
       setIsUpdatingPasswordForm(false);
       return;
     }
+    goBack()
   }
 
   function handleBackEvent() {

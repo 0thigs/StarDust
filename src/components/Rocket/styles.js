@@ -70,3 +70,4 @@ export const AcquiredRocket = styled.View`
   justify-content: center;
   align-items: center;
 `;
+

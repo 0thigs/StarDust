@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import * as C from './styles';
-
 import { useAuth } from '../../hooks/useAuth';
 
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
-
-import { achievements } from '../../utils/achivements';
+import { Animation } from '../../components/Animation';
 import { Achievement } from '../../components/Achievement';
+import { achievements } from '../../utils/achivements';
 
 import Missing from '../../assets/GlobalAssets/missing-animation.json';
+import * as C from './styles';
 
 export function Profile() {
   const { user } = useAuth();

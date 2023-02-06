@@ -36,10 +36,13 @@ export function Streak({
       return;
     }
 
-    const updatedStreak = streak + 1;
-    setStreakCount(updatedStreak);
-    setUser(user => ({ ...user, streak: updatedStreak }));
-    await api.updateUser('streak', updatedStreak, id);
+    const yesterday = week_status[todayIndex - 1];
+    if (yesterday === 'done') {
+      const updatedStreak = streak + 1;
+      setStreakCount(updatedStreak);
+      setUser(user => ({ ...user, streak: updatedStreak }));
+      await api.updateUser('streak', updatedStreak, id);
+    }
 
     updateWeekStatus(todayIndex);
   }

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import { getRankingImage, getRankingName } from '../../utils/rankings';
 import { rockets } from '../../utils/rockets';
 
@@ -9,6 +10,7 @@ import dayjs from 'dayjs';
 export function ProfileStatus({
   user: { ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
 }) {
+  const navigation = useNavigation();
   const RankingImage = getRankingImage(ranking_id);
   const rankingName = getRankingName(ranking_id);
   const rocket = rockets.find(rocket => rocket.id === selected_rocket_id);
@@ -17,7 +19,9 @@ export function ProfileStatus({
 
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
 
-  function handleSettingsButton() {}
+  function handleSettingsButton() {
+    navigation.navigate('Settings');
+  }
 
   return (
     <C.Container>

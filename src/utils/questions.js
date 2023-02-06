@@ -1,63 +1,63 @@
 export const questions = [
-  {
-    starId: 1,
-    type: 'drag-and-drop-click',
-    stem: 'Clique nos elementos abaixo para completar o algoritmo',
-    lines: [
-      {
-        id: 1,
-        text: 'if (5 > 2) {',
-        indentLevel: 0,
-      },
-      {
-        id: 2,
-        text: 'num1 <- ',
-        indentLevel: 2,
-        dropZone: {
-          id: 1,
-          isEndLine: true,
-        },
-      },
-      {
-        id: 3,
-        text: 'numero2 <- ',
-        indentLevel: 2,
-        dropZone: {
-          id: 2,
-          isEndLine: false,
-        },
-      },
-      {
-        id: 4,
-        text: 'num3 <- ',
-        indentLevel: 2,
-        dropZone: {
-          id: 3,
-          isEndLine: true,
-        },
-      },
-      {
-        id: 5,
-        text: '}',
-        indentLevel: 1,
-      },
-    ],
-    dropItems: [
-      {
-        id: 1,
-        label: '10',
-      },
-      {
-        id: 2,
-        label: '20000000000',
-      },
-      {
-        id: 3,
-        label: '3000',
-      },
-    ],
-    correctItemsIdsSequence: [3, 2, 1],
-  },
+//   {
+//     starId: 1,
+//     type: 'drag-and-drop-click',
+//     stem: 'Clique nos elementos abaixo para completar o algoritmo',
+//     lines: [
+//       {
+//         id: 1,
+//         text: 'if (5 > 2) {',
+//         indentLevel: 0,
+//       },
+//       {
+//         id: 2,
+//         text: 'num1 <- ',
+//         indentLevel: 2,
+//         dropZone: {
+//           id: 1,
+//           isEndLine: true,
+//         },
+//       },
+//       {
+//         id: 3,
+//         text: 'numero2 <- ',
+//         indentLevel: 2,
+//         dropZone: {
+//           id: 2,
+//           isEndLine: false,
+//         },
+//       },
+//       {
+//         id: 4,
+//         text: 'num3 <- ',
+//         indentLevel: 2,
+//         dropZone: {
+//           id: 3,
+//           isEndLine: true,
+//         },
+//       },
+//       {
+//         id: 5,
+//         text: '}',
+//         indentLevel: 1,
+//       },
+//     ],
+//     dropItems: [
+//       {
+//         id: 1,
+//         label: '10',
+//       },
+//       {
+//         id: 2,
+//         label: '20000000000',
+//       },
+//       {
+//         id: 3,
+//         label: '3000',
+//       },
+//     ],
+//     correctItemsIdsSequence: [3, 2, 1],
+//   },
   {
     starId: 1,
     type: 'select-option',
@@ -162,3 +162,5 @@ export const questions = [
     answer: 'Instruções para o computador',
   },
 ];
+
+
