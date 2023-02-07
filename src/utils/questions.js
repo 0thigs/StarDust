@@ -144,7 +144,7 @@ export const questions = [
   {
     starId: 2,
     type: 'select-option',
-    stem: 'Qual é a finalidade de se usar pseudocódigo?',
+    stem: 'Qual é a vantagem de se usar pseudocódigo?',
     options: [
       'Facilitar a compreensão de um algoritmo',
       'Melhorar a performance de um código',
@@ -163,7 +163,7 @@ export const questions = [
       'Para programar jogos',
       'Para programar aplicativos mobile',
     ],
-    answer: 'Facilitar a compreensão de um algoritmo',
+    answer: 'Para descrever algoritmos',
   },
   {
     starId: 2,
@@ -175,15 +175,16 @@ export const questions = [
   {
     starId: 2,
     type: 'checkbox',
-    stem: 'Marque as opções que são momentos em que se é recomendável usar pseudocódigo',
+    stem: 'Marque as opções que são momentos nas quais é recomendável usar pseudocódigo',
     options: [
-      'No planejando do algoritmo antes de codificá-lo',
-      'Aprender lógica de programação',
-      'Programar um sistema complexo',
+      'planejar um algoritmo',
+      'aprender lógica de programação',
+      'programar um sistema complexo',
+      'detectar hackers',
     ],
     correctOptions: [
-      'No planejando do algoritmo antes de codificá-lo',
-      'Aprender lógica de programação',
+      'planejar o algoritmo antes de codificá-lo',
+      'aprender lógica de programação',
     ],
   },
 ];

@@ -3,13 +3,12 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function OpenForm({answer}) {
+export function OpenForm({ answer }) {
   const [, dispatch] = useLesson();
   const [userAnswer, setUserAnswer] = useState('');
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
-//   const answer = state.questions[state.currentQuestion].answer;
 
   function resetAnswer() {
     if (isAnswerVerified && userAnswer) {
@@ -22,12 +21,11 @@ export function OpenForm({answer}) {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
-    if (userAnswer.trim().toLowerCase() === answer) {
+    if (userAnswer.trim().toLowerCase() === answer.trim().toLowerCase()) {
       setIsAnswerWrong(false);
 
-      if (isAnswerVerified) {
-        dispatch({ type: 'changeQuestion' });
-      }
+      if (isAnswerVerified) dispatch({ type: 'changeQuestion' });
+
       return;
     }
 

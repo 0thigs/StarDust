@@ -33,6 +33,7 @@ export function End({ starId }) {
   const [isFirstClick, setIsFirstClick] = useState(true);
   const starsRef = useRef();
   const navigation = useNavigation();
+  const iconSize = 30;
 
   function getNewData() {
     const updatedCoins = coins + user.coins;
@@ -179,28 +180,28 @@ export function End({ starId }) {
               title={'Poeira estelar'}
               count={coins}
               color={theme.colors.yellow_300}
-              icon={<Coin width={35} height={35} />}
+              icon={<Coin width={iconSize} height={iconSize} />}
               delay={250}
               isLarge={true}
             />
             <Metric
               title={'Total XP'}
               color={theme.colors.green_500}
-              icon={<XP width={35} height={35} />}
+              icon={<XP width={iconSize} height={iconSize} />}
               count={xp}
               delay={500}
             />
             <Metric
               title={'Tempo'}
               color={theme.colors.blue_300}
-              icon={<Time width={35} height={35} />}
+              icon={<Time width={iconSize} height={iconSize} />}
               count={time}
               delay={750}
             />
             <Metric
               title={'Precisão'}
               color={theme.colors.red_300}
-              icon={<Accurance width={35} height={35} />}
+              icon={<Accurance width={iconSize} height={iconSize} />}
               count={accurance}
               delay={1000}
             />

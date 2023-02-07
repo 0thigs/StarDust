@@ -3,7 +3,7 @@ import * as C from './styles';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 
-export function SelectOptionForm({options, answer}) {
+export function SelectOptionForm({ options, answer }) {
   const [, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
@@ -46,12 +46,12 @@ export function SelectOptionForm({options, answer}) {
     if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
-  function handleSelectOption(index) {
-    setSelectedOption(index)
+  function handleSelectOption(option) {
+    setSelectedOption(option);
   }
 
   useEffect(() => {
-   reorderOptions();
+    reorderOptions();
   }, [options]);
 
   return (

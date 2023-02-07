@@ -10,6 +10,7 @@ import { Modal } from '../Modal';
 import { Button } from '../Button';
 import theme from '../../global/styles/theme';
 import { DragAndDropClickForm } from '../DragAndDropClickForm';
+import { CheckboxForm } from '../checkboxForm';
 
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();
@@ -46,6 +47,12 @@ export function Quiz({ coins }) {
         <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
       )}
       {currentQuestion.type === 'open' && <OpenForm answer={currentQuestion.answer} />}
+      {currentQuestion.type === 'checkbox' && (
+        <CheckboxForm
+          options={currentQuestion.options}
+          correctOptions={currentQuestion.correctOptions}
+        />
+      )}
       {currentQuestion.type === 'drag-and-drop-list' && (
         <DragAndDropListForm
           items={currentQuestion.items}
@@ -59,6 +66,7 @@ export function Quiz({ coins }) {
           correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
         />
       )}
+
       <Modal
         type={'crying'}
         title={'Puxa, parece que você não tem mais vidas'}

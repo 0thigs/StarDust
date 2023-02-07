@@ -89,7 +89,11 @@ export const theories = [
       {
         type: 'default',
         title: 'O que é pseudocódigo ?',
-        body: 'O pseudocódigo é uma representação informal de um algoritmo, que permite a comunicação clara e eficiente de uma ideia de programação sem se preocupar com a sintaxe específica de uma linguagem de programação.',
+        body: 'O pseudocódigo é uma representação informal de um algoritmo, que permite a comunicação clara e eficiente de uma ideia de programação sem se preocupar com a sintaxe específica de uma linguagem de programação',
+      },
+      {
+        type: 'alert',
+        body: 'Colocando dessa maneira, o pseudocódigo não é uma linguagem de programação, pois ele é uma descrição genérica de um algoritmo e tampou pode ser executado ou compilado por nenhum compilador ou interpretador.',
       },
       {
         type: 'default',
@@ -161,7 +165,7 @@ export const theories = [
       },
       {
         type: 'alert',
-        body: 'Você não precisa enteder toda essa estrutura por agora, pois entraremos a cada detalhe ao decorrer da jornada.',
+        body: 'Você não precisa enteder toda essa estrutura por agora, pois entraremos em cada detalhe ao decorrer da jornada.',
       },
       {
         type: 'default',

@@ -46,8 +46,8 @@ export function Star({ id, name, number, isDisabled }) {
     starAnimation.current.play(10, 50);
 
     setTimeout(() => {
-    //   setUser({ ...user, starId: id });
-      navigation.navigate('Lesson', { starId: id });
+      setUser({ ...user, starId: id });
+      navigation.navigate('Lesson');
     }, 500);
   }
 

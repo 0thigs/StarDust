@@ -5,8 +5,7 @@ import { useLesson } from '../../hooks/useLesson';
 import { DropItem } from '../DropItem';
 import { DropZone } from '../DropZone';
 import { VerificationButton } from '../VerificationButton';
-import { compareSequences } from '../../utils/compareSequences';
-import { FadeInLeft } from 'react-native-reanimated';
+import { compareSenquences } from '../../utils/compareSenquences';
 
 export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence }) {
   const [, dispatch] = useLesson();
@@ -21,7 +20,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
     setIsAnswerVerified(!isAnswerVerified);
 
     const userItemsIdsSequence = zones.map(zone => zone.itemId);
-    const areTheTwoSequencesEqual = compareSequences(userItemsIdsSequence, correctItemsIdsSequence);
+    const areTheTwoSequencesEqual = compareSenquences(userItemsIdsSequence, correctItemsIdsSequence);
 
     if (areTheTwoSequencesEqual) {
       setIsAnswerWrong(false);
@@ -49,7 +48,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
 
   return (
     <C.Container>
-      <C.Lines >
+      <C.Lines>
         {lines.map(({ id, text, indentLevel, dropZone }) => (
           <C.Line key={id} indentLevel={indentLevel}>
             {dropZone && !dropZone.isEndLine && (

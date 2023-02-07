@@ -69,5 +69,4 @@ export const DropItem = styled(Animated.View)`
 export const Label = styled.Text`
   color: ${props => (props.isItemInZone ? props.theme.colors.green_500 : props.theme.colors.white)};
   font-family: ${props => props.theme.fonts.code};
-  font-size: 16px;
 `;

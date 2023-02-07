@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import * as C from './styles';
-import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
-import { compareSequences } from '../../utils/compareSequences';
 
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { VerificationButton } from '../VerificationButton';
+import { compareSenquences } from '../../utils/compareSenquences';
+
+import * as C from './styles';
+
 import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ShadowDecorator,
   useOnCellActiveAnimation,
@@ -23,9 +25,9 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
     setIsAnswerVerified(!isAnswerVerified);
 
     const userItemsIdSequence = currentItems.map(item => item.id);
-    console.log({userItemsIdSequence});
-    console.log({correctItemsIdsSequence});
-    const areTheTwoSequencesEqual = compareSequences(userItemsIdSequence, correctItemsIdsSequence);
+    console.log({ userItemsIdSequence });
+    console.log({ correctItemsIdsSequence });
+    const areTheTwoSequencesEqual = compareSenquences(userItemsIdSequence, correctItemsIdsSequence);
 
     if (areTheTwoSequencesEqual) {
       setIsAnswerWrong(false);

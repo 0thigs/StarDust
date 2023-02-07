@@ -34,7 +34,6 @@ export const Label = styled.Text`
       : props.isVerified
       ? props.theme.colors.green_500
       : props.theme.colors.blue_300};
-  font-size: 16px;
   text-align: center;
 `;
 
