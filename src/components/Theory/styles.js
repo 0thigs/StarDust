@@ -11,6 +11,7 @@ export const Title = styled(Animatable.Text)`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 20px;
+  align-self: center;
 `;
 
 export const Theories = styled.ScrollView`
@@ -21,9 +22,17 @@ export const Theory = styled.View``;
 
 export const TextContainer = styled(Animatable.View)`
   width: 100%;
-  flex-direction: row;
+  flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
   align-items: center;
   margin: 16px 0;
+`;
+
+export const DefaultTextTitle = styled.Text`
+  color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.semibold};
+  font-size: 16px;
+  margin-bottom: 4px;
+  align-self: flex-start;
 `;
 
 export const DefaultText = styled.Text`
@@ -56,15 +65,6 @@ export const AlertText = styled.Text`
   padding: 16px;
   width: 85%;
   margin-left: 18px;
-`;
-
-export const ExampleTextContainer = styled(Animatable.View)`
-  margin: 16px 0;
-`;
-
-export const ExempleTextTitle = styled.Text`
-  color: ${props => props.theme.colors.green_500};
-  font-family: ${props => props.theme.fonts.bold};
 `;
 
 export const ExempleText = styled.View`

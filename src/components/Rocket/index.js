@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import * as C from './styles';
+import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
 import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
-import theme from '../../global/styles/theme';
 
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 
 import api from '../../services/api';
+import theme from '../../global/styles/theme';
+import * as C from './styles';
 
-import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
-
-export function Rocket({ id, name, image: Image, price }) {
+export function Rocket_({ id, name, image: Image, price }) {
   const { user, setUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);

@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useAchievement } from '../../hooks/useAchievement';
 
-import { LifeBox } from '../../components/LifeBox';
-import { Rocket } from '../../components/Rocket';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
+import { Rocket_ } from '../../components/Rocket';
 
 import { rockets } from '../../utils/rockets';
 
@@ -24,7 +23,7 @@ export function Shop() {
         <C.Title>Foguetes</C.Title>
         <C.RocketList>
           {rockets.map(({ id, name, image, price }) => (
-            <Rocket key={id} id={id} name={name} price={price} image={image} />
+            <Rocket_ key={id} id={id} name={name} price={price} image={image} />
           ))}
         </C.RocketList>
 

@@ -14,24 +14,21 @@ import { Volume2 } from 'react-native-feather';
 
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/styles/prism';
-import { tomorrow } from 'react-syntax-highlighter/styles/prism';
+
 import TypeWriter from 'react-native-typewriter';
 import RenderHTML from 'react-native-render-html';
 
 import * as Speech from 'expo-speech';
-import { planets } from '../../utils/planets';
 
-export function Theory({ starId = 2 }) {
+export function Theory({ starId }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
   const [index, setIndex] = useState(1);
+  const { width } = useWindowDimensions();
   const scrollRef = useRef();
   const maxDelay = 10;
   const typing = 1;
   const textsFromJSON = theories.filter(theory => theory.starId === starId)[0].texts;
-  const starName = planets
-    .find(planet => planet.stars.some(star => star.id === starId))
-    .stars.find(star => star.id === starId).name;
 
   function handlePracticeButton() {
     dispatch({ type: 'changeStage' });
@@ -62,7 +59,7 @@ export function Theory({ starId = 2 }) {
   return (
     <C.Container>
       <LessonHeader />
-      <C.Title animation={'fadeInDown'}>{starName}</C.Title>
+      <C.Title animation={'fadeInDown'}>Introdução</C.Title>
       <C.Theories
         showsVerticalScrollIndicator={false}
         ref={scrollRef}
@@ -70,25 +67,8 @@ export function Theory({ starId = 2 }) {
       >
         {texts.map((text, index) => (
           <C.Theory key={index}>
-            {text.type === 'default' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
-                {text.title && <C.DefaultTextTitle>{text.title}</C.DefaultTextTitle>}
-                <C.DefaultText>
-                  <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
-                    <Volume2 width={25} height={25} color={theme.colors.white} />
-                  </C.SpeechButton>
-                  {!text.isRendered ? (
-                    <TypeWriter typing={typing} maxDelay={maxDelay}>
-                      {text.body}
-                    </TypeWriter>
-                  ) : (
-                    text.body
-                  )}
-                </C.DefaultText>
-              </C.TextContainer>
-            )}
-            {text.type === 'list' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
+            {text.type === 'emphasis' && (
+              <C.TextContainer animation={!text.isRendered ? 'fadeInLeft' : null}>
                 <C.EmphasisText>
                   <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
                     <Volume2 width={25} height={25} color={theme.colors.blue_300} />
@@ -103,8 +83,24 @@ export function Theory({ starId = 2 }) {
                 </C.EmphasisText>
               </C.TextContainer>
             )}
+            {text.type === 'default' && (
+              <C.TextContainer animation={!text.isRendered ? 'fadeInLeft' : null}>
+                <C.DefaultText>
+                  <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
+                    <Volume2 width={25} height={25} color={theme.colors.white} />
+                  </C.SpeechButton>
+                  {!text.isRendered ? (
+                    <TypeWriter typing={typing} maxDelay={maxDelay}>
+                      {text.body}
+                    </TypeWriter>
+                  ) : (
+                    text.body
+                  )}
+                </C.DefaultText>
+              </C.TextContainer>
+            )}
             {text.type === 'alert' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
+              <C.TextContainer animation={!text.isRendered ? 'fadeInLeft' : null}>
                 <AlertIcon />
                 <C.AlertText>
                   <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
@@ -121,7 +117,7 @@ export function Theory({ starId = 2 }) {
               </C.TextContainer>
             )}
             {text.type === 'code' && (
-              <SyntaxHighlighter language="javascript" style={tomorrow} highlighter={'prism'}>
+              <SyntaxHighlighter language="javascript" style={docco} highlighter={'darcula'}>
                 {text.body}
               </SyntaxHighlighter>
             )}
