@@ -187,4 +187,75 @@ export const questions = [
       'aprender lógica de programação',
     ],
   },
+  {
+    starId: 3,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene os elementos (de cima pra baixo), de modo que fique coerente com os conceitos de entrada processamento e saída',
+    items: [
+      {
+        id: 1,
+        label: 'manipulação dos dados',
+      },
+      {
+        id: 2,
+        label: 'exibir os resultados',
+      },
+      {
+        id: 3,
+        label: 'armazenar os dados',
+      },
+    ],
+    correctItemsIdsSequence: [3, 1, 2],
+  },
+  {
+    starId: 3,
+    type: 'select-option',
+    stem: 'Em que momento ocorre a entrada de dados em um programa',
+    options: [
+        'Quando o programa é finalizado',
+        'Antes do processamento de dados',
+        'Durante o processamento de dados',
+        'Depois do processamento de dados',
+      ],
+      answer: 'Para descrever algoritmos',
+  },
+  {
+    starId: 3,
+    type: 'drag-and-drop-list',
+    stem: 'Reorganize o algoritmo, de modo que fique coerente com os conceitos de entrada processamento e saída',
+    items: [
+      {
+        id: 1,
+        label: 'LEIA idade',
+      },
+      {
+        id: 2,
+        label: 'idade <- 2022 - idade',
+      },
+      {
+        id: 3,
+        label: 'ESCREVA "A sua idade é: ", idade',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2, 3],
+  },
+  {
+    starId: 3,
+    type: 'open',
+    stem: 'Complete a frase: a etapa na qual é exibido as informações de um programa é __________ de dados',
+    answer: 'Saída',
+  },
+  {
+    starId: 3,
+    type: 'select-option',
+    stem: 'Dentre os comandos abaixo que pode ser usado para saída de dados é',
+    options: [
+        'ESCREVA',
+        'LEIA',
+        'FACA',
+        'SENTE',
+      ],
+      answer: 'ESCREVA',
+  },
 ];
+

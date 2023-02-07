@@ -178,6 +178,74 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 3,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Nesta aula, você aprenderá sobre os três elementos básicos de qualquer programa de computador utilizando a pseudo-linguagem Portugol: entrada, processamento e saída. Estes três elementos são importantes para compreender a lógica por trás de qualquer programa de computador, independentemente da linguagem de programação ou do sistema operacional utilizado.',
+      },
+      {
+        type: 'default',
+        title: 'Entrada',
+        body: 'A entrada é o processo de ler ou receber informações do usuário ou de outra fonte externa. Em Portugol, a entrada de dados pode ser feita através do comando "LEIA". Por exemplo:',
+      },
+      {
+        type: 'code',
+        body: `
+        LEIA nome
+        `,
+      },
+      {
+        type: 'default',
+        title: 'Processamento',
+        body: 'O processamento é o processo de transformar as informações de entrada em resultados úteis. Em Portugol, isso pode ser feito através de comandos matemáticos, condicionais e de loop. Por exemplo, para calcular a média de duas notas:',
+      },
+      {
+        type: 'code',
+        body: `
+        LEIA nota1
+        LEIA nota2
+        media <- (nota1 + nota2) / 2
+        `,
+      },
+      {
+        type: 'Saída',
+        title: 'Processamento',
+        body: 'A saída é o processo de apresentar os resultados do processamento para o usuário ou para outra fonte externa. Em Portugol, a saída pode ser feita através do comando "ESCREVA". Por exemplo, para exibir a média calculada:',
+      },
+      {
+        type: 'code',
+        body: `
+        ESCREVA "A média é: ", media
+        `,
+      },
+      {
+        type: 'default',
+        title: 'Exemplo completo',
+        body: 'Aqui está um exemplo completo de cálculo da média de duas notas em Portugol:',
+      },
+      {
+        type: 'code',
+        body: `
+        LEIA nota1
+        LEIA nota2
+        media <- (nota1 + nota2) / 2
+        ESCREVA "A média é: ", media
+        `,
+      },
+      {
+        type: 'default',
+        title: 'Conclusão',
+        body: 'Em resumo, entrada, processamento e saída são os três elementos básicos de qualquer programa de computador e em Portugol eles podem ser implementados através dos comandos "LEIA", "ESCREVA" e comandos matemáticos, condicionais e de loop, conceitos que abordaremos mais para frente.',
+      },
+      {
+        type: 'alert',
+        body: ' A compreensão desses elementos é fundamental para a construção de qualquer programa eficaz e funcional em Portugol. Agora, qua tal verificar o que você acabou de ver sobre entrada, processamento e saída respondendo algumas questões?',
+      },
+    ],
+  },
 ];
 
 // body: `
