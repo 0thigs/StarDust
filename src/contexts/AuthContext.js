@@ -22,7 +22,7 @@ const fakeUser = {
   week_status: ['toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  starId: 2,
+  starId: 4,
 };
 
 export function AuthContextProvider({ children }) {

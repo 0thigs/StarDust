@@ -4,7 +4,7 @@ import { useAchievement } from '../../hooks/useAchievement';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
-import { Rocket_ } from '../../components/Rocket';
+import { Rocket_ } from '../../components/Rocket_';
 
 import { rockets } from '../../utils/rockets';
 

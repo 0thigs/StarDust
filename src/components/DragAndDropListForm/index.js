@@ -18,15 +18,13 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
-  const [currentItems, setCurrentItems] = useState([]);
+  const [reorderedItems, setReorderedItems] = useState([]);
   const ItemScale = useSharedValue(0.5);
 
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const userItemsIdSequence = currentItems.map(item => item.id);
-    console.log({ userItemsIdSequence });
-    console.log({ correctItemsIdsSequence });
+    const userItemsIdSequence = reorderedItems.map(item => item.id);
     const areTheTwoSequencesEqual = compareSenquences(userItemsIdSequence, correctItemsIdsSequence);
 
     if (areTheTwoSequencesEqual) {
@@ -53,7 +51,7 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
   });
 
   useEffect(() => {
-    setCurrentItems(items);
+    setreorderedItems(items);
   }, [items]);
 
   useEffect(() => {
@@ -84,9 +82,9 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
     <C.Container>
       <GestureHandlerRootView>
         <DraggableFlatList
-          data={currentItems}
+          data={reorderedItems}
           keyExtractor={item => item.id}
-          onDragEnd={({ data }) => setCurrentItems(data)}
+          onDragEnd={({ data }) => setreorderedItems(data)}
           renderItem={renderItem}
           containerStyle={{ alignItems: 'center' }}
         />

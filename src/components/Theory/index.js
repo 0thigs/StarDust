@@ -9,17 +9,15 @@ import { Button } from '../../components/Button';
 import { LessonHeader } from '../LessonHeader';
 import { useLesson } from '../../hooks/useLesson';
 import { theories } from '../../utils/theories';
+import { planets } from '../../utils/planets';
 
 import { Volume2 } from 'react-native-feather';
 
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/styles/prism';
-import { tomorrow } from 'react-syntax-highlighter/styles/prism';
+import { okaidia } from 'react-syntax-highlighter/styles/prism';
 import TypeWriter from 'react-native-typewriter';
-import RenderHTML from 'react-native-render-html';
 
 import * as Speech from 'expo-speech';
-import { planets } from '../../utils/planets';
 
 export function Theory({ starId = 2 }) {
   const [, dispatch] = useLesson();
@@ -121,7 +119,7 @@ export function Theory({ starId = 2 }) {
               </C.TextContainer>
             )}
             {text.type === 'code' && (
-              <SyntaxHighlighter language="javascript" style={tomorrow} highlighter={'prism'}>
+              <SyntaxHighlighter language="javascript" style={okaidia} highlighter={'prism'}>
                 {text.body}
               </SyntaxHighlighter>
             )}

@@ -10,7 +10,7 @@ import { Modal } from '../Modal';
 import { Button } from '../Button';
 import theme from '../../global/styles/theme';
 import { DragAndDropClickForm } from '../DragAndDropClickForm';
-import { CheckboxForm } from '../checkboxForm';
+import { CheckboxForm } from '../CheckboxForm';
 
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();

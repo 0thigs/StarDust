@@ -1,63 +1,4 @@
 export const questions = [
-  //   {
-  //     starId: 1,
-  //     type: 'drag-and-drop-click',
-  //     stem: 'Clique nos elementos abaixo para completar o algoritmo',
-  //     lines: [
-  //       {
-  //         id: 1,
-  //         text: 'if (5 > 2) {',
-  //         indentLevel: 0,
-  //       },
-  //       {
-  //         id: 2,
-  //         text: 'num1 <- ',
-  //         indentLevel: 2,
-  //         dropZone: {
-  //           id: 1,
-  //           isEndLine: true,
-  //         },
-  //       },
-  //       {
-  //         id: 3,
-  //         text: 'numero2 <- ',
-  //         indentLevel: 2,
-  //         dropZone: {
-  //           id: 2,
-  //           isEndLine: false,
-  //         },
-  //       },
-  //       {
-  //         id: 4,
-  //         text: 'num3 <- ',
-  //         indentLevel: 2,
-  //         dropZone: {
-  //           id: 3,
-  //           isEndLine: true,
-  //         },
-  //       },
-  //       {
-  //         id: 5,
-  //         text: '}',
-  //         indentLevel: 1,
-  //       },
-  //     ],
-  //     dropItems: [
-  //       {
-  //         id: 1,
-  //         label: '10',
-  //       },
-  //       {
-  //         id: 2,
-  //         label: '20000000000',
-  //       },
-  //       {
-  //         id: 3,
-  //         label: '3000',
-  //       },
-  //     ],
-  //     correctItemsIdsSequence: [3, 2, 1],
-  //   },
   {
     starId: 1,
     type: 'select-option',
@@ -182,10 +123,7 @@ export const questions = [
       'programar um sistema complexo',
       'detectar hackers',
     ],
-    correctOptions: [
-      'planejar o algoritmo antes de codificá-lo',
-      'aprender lógica de programação',
-    ],
+    correctOptions: ['planejar o algoritmo antes de codificá-lo', 'aprender lógica de programação'],
   },
   {
     starId: 3,
@@ -212,12 +150,12 @@ export const questions = [
     type: 'select-option',
     stem: 'Em que momento ocorre a entrada de dados em um programa',
     options: [
-        'Quando o programa é finalizado',
-        'Antes do processamento de dados',
-        'Durante o processamento de dados',
-        'Depois do processamento de dados',
-      ],
-      answer: 'Para descrever algoritmos',
+      'Quando o programa é finalizado',
+      'Antes do processamento de dados',
+      'Durante o processamento de dados',
+      'Depois do processamento de dados',
+    ],
+    answer: 'Antes do processamento de dados',
   },
   {
     starId: 3,
@@ -242,20 +180,60 @@ export const questions = [
   {
     starId: 3,
     type: 'open',
-    stem: 'Complete a frase: a etapa na qual é exibido as informações de um programa é __________ de dados',
+    stem: 'Complete a frase: a etapa na qual é exibido as informações de um programa é ______ de dados',
     answer: 'Saída',
   },
   {
     starId: 3,
     type: 'select-option',
     stem: 'Dentre os comandos abaixo que pode ser usado para saída de dados é',
-    options: [
-        'ESCREVA',
-        'LEIA',
-        'FACA',
-        'SENTE',
-      ],
-      answer: 'ESCREVA',
+    options: ['ESCREVA', 'LEIA', 'FACA', 'CORRA'],
+    answer: 'ESCREVA',
+  },
+//   {
+//     starId: 4,
+//     type: 'select-option',
+//     stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta no Portugol?',
+//     options: [
+//       'nome_da_variavel <- valor',
+//       'nome_da_variavel = valor',
+//       'nome_da_variavel > valor',
+//       'nome_da_variavel == valor',
+//     ],
+//     answer: 'nome_da_variavel <- valor',
+//   },
+//   {
+//     starId: 4,
+//     type: 'checkbox',
+//     stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
+//     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
+//     correctOptions: ['_idade', 'peso em kg'],
+//   },
+  {
+    starId: 4,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos elementos abaixo para completar o algoritmo',
+    lines: [
+      {
+        id: 1,
+        texts: ['variavel_qualquer', 'dropZone'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'ESCREVA',
+      },
+      {
+        id: 2,
+        label: '"John Petros"',
+      },
+      {
+        id: 3,
+        label: 'Portugol',
+      },
+    ],
+    correctItemsIdsSequence: [3, 2, 1],
   },
 ];
-

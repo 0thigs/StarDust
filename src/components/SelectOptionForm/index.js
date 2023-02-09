@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import * as C from './styles';
-import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
+import { VerificationButton } from '../VerificationButton';
+import { reorderItems } from '../../utils/reorderItems';
+import * as C from './styles';
 
 export function SelectOptionForm({ options, answer }) {
   const [, dispatch] = useLesson();
@@ -11,13 +12,6 @@ export function SelectOptionForm({ options, answer }) {
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
   const delay = 100;
-
-  function reorderOptions() {
-    const reorderedOptions = options.sort(() => {
-      return Math.random() - 0.5;
-    });
-    setReorderedOptions(reorderedOptions);
-  }
 
   function resetAnswer() {
     if (isAnswerVerified && !!selectedOption) {
@@ -51,7 +45,7 @@ export function SelectOptionForm({ options, answer }) {
   }
 
   useEffect(() => {
-    reorderOptions();
+    reorderItems(options, setReorderedOptions);
   }, [options]);
 
   return (

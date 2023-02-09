@@ -236,13 +236,134 @@ export const theories = [
         `,
       },
       {
+        type: 'alert',
+        body: 'Note que quando queremos escrever alguma mensagem na tela (letra, frase, número etc.) literalmente, devemos utilizar aspas para identificar o que será escrito, pois o que estiver entre aspas no algoritmo, será exatamente o que aparecerá na tela do computador. Diferente de quando queremos escrever conteúdo de uma variável, pois neste caso não utiliza-se aspas.',
+      },
+      {
         type: 'default',
         title: 'Conclusão',
         body: 'Em resumo, entrada, processamento e saída são os três elementos básicos de qualquer programa de computador e em Portugol eles podem ser implementados através dos comandos "LEIA", "ESCREVA" e comandos matemáticos, condicionais e de loop, conceitos que abordaremos mais para frente.',
       },
       {
-        type: 'alert',
+        type: 'default',
         body: ' A compreensão desses elementos é fundamental para a construção de qualquer programa eficaz e funcional em Portugol. Agora, qua tal verificar o que você acabou de ver sobre entrada, processamento e saída respondendo algumas questões?',
+      },
+    ],
+  },
+  {
+    starId: 4,
+    texts: [
+      {
+        type: 'default',
+        title: 'Introdução',
+        body: 'Olá, parabéns por conseguir chegar nessa nova etapa! Vamos começar a falar agora sobre variáveis.',
+      },
+      {
+        type: 'default',
+        title: 'O que são variáveis?',
+        body: 'Antes de aprender a atribuir valores a variáveis, precisamos entender o que são variáveis. Em programação, uma variável é uma localização na memória do computador onde é possível armazenar um valor. Cada variável tem um nome único que a identifica e um tipo de dado que determina o tipo de informações que ela pode armazenar.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por esse motivo, eles são usados para armazenar dados que podem ser modificados ao longo do tempo, como nomes de pessoas, idades, preços de produtos e outros.',
+      },
+      {
+        type: 'default',
+        title: 'O que é atribuição?',
+        body: 'A atribuição é a maneira utilizada para atribuir um valor a uma variável, ou seja, para armazenar um determinado conteúdo em uma variável.',
+      },
+      {
+        type: 'default',
+        title: null,
+        title: 'Sintaxe de atribuição de variáveis em Portugol',
+        body: 'A sintaxe básica para atribuir valores a variáveis em Portugol é a seguinte.',
+      },
+      {
+        type: 'code',
+        body: `
+        nome_da_variavel <- valor;
+        `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Perceba que a operação de atribuição, normalmente, é representada por uma seta apontando para a esquerda, mas existem outros símbolos para representar a atribuição dependendo da forma de representação do algoritmo mas aqui vamos nos contentar apenas com setas',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja um exemplo.',
+      },
+      {
+        type: 'code',
+        body: `
+        nome = "João";
+        idade = 30;
+        `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste exemplo, estamos criando duas variáveis, uma chamada "NOME" que armazenará o valor "João" e outra chamada "IDADE" que armazenará o valor 30.',
+      },
+      {
+        type: 'alert',
+        body: 'Além disso, você também pode atribuir o valor de uma variável a outra, utilizando o seguinte formato:.',
+      },
+      {
+        type: 'code',
+        body: `
+        nome_da_variável_destino <- nome_da_variável_origem
+        `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja um exemplo.',
+      },
+      {
+        type: 'code',
+        body: `
+        nome_completo <- "Lucas Silva"
+        nome_para_uso <- nome_completo
+        `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste exemplo, estamos atribuindo o valor da variável "nome_completo" à variável "nome_para_uso". Agora, ambas as variáveis possuem o mesmo valor.',
+      },
+      {
+        type: 'default',
+        title: 'Regras para nomes de variáveis',
+        body: 'Ao nomear suas variáveis em Portugol, é importante seguir algumas regras básicas:',
+      },
+      {
+        type: 'list',
+        body: '. O nome da variável deve iniciar com uma letra ou sublinhado (_).',
+      },
+      {
+        type: 'list',
+        body: '. O nome da variável não pode conter espaços.',
+      },
+      {
+        type: 'list',
+        body: '. O nome da variável não pode ser uma palavra reservada do Portugol, ou seja, um nome de um comando por exemplo.',
+      },
+      {
+        type: 'list',
+        body: '. O nome da variável deve ser descritivo e fácil de entender.',
+      },
+      {
+        type: 'default',
+        title: 'Conclusão',
+        body: 'A atribuição de variáveis é uma parte fundamental da programação, pois permite armazenar valores e acessá-los ao longo do código. Ao seguir as regras e a sintaxe corretas, você poderá atribuir valores a suas variáveis sem problemas em Portugol.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que tal testa seus conhecimentos?.',
       },
     ],
   },
@@ -265,3 +386,44 @@ export const theories = [
 
 // FIMALGORITMO
 //     `,
+
+// TIPOS DE DADOS
+/*
+Olá! Vamos começar uma aula introdutória sobre tipos de dados usando Portugol.
+
+O que são tipos de dados?
+Tipos de dados são categorias que são atribuídas a variáveis em um programa de computador. Isso ajuda a identificar o tipo de informação que uma variável armazena, permitindo ao computador tomar decisões sobre como tratar esses dados.
+
+Quais são os tipos de dados básicos no Portugol?
+
+INTEIRO: Armazena números inteiros, sem casas decimais. Exemplo: -10, 0, 5, 100.
+REAL: Armazena números reais, com casas decimais. Exemplo: -10,5, 0,25, 5,7.
+CARACTERE: Armazena um único caractere, entre aspas simples. Exemplo: 'a', 'Z', '#'.
+CADEIA: Armazena uma cadeia de caracteres, entre aspas duplas. Exemplo: "Olá mundo!", "12345".
+
+Olá! Vamos começar uma aula introdutória sobre tipos de dados usando Portugol.
+
+O que são tipos de dados?
+Tipos de dados são categorias que são atribuídas a variáveis em um programa de computador. Isso ajuda a identificar o tipo de informação que uma variável armazena, permitindo ao computador tomar decisões sobre como tratar esses dados.
+
+Quais são os tipos de dados básicos no Portugol?
+
+INTEIRO: Armazena números inteiros, sem casas decimais. Exemplo: -10, 0, 5, 100.
+REAL: Armazena números reais, com casas decimais. Exemplo: -10,5, 0,25, 5,7.
+CARACTERE: Armazena um único caractere, entre aspas simples. Exemplo: 'a', 'Z', '#'.
+CADEIA: Armazena uma cadeia de caracteres, entre aspas duplas. Exemplo: "Olá mundo!", "12345".
+Por que é importante identificar o tipo de dado de uma variável?
+Identificar o tipo de dado de uma variável é importante porque permite ao computador saber como tratar esses dados. Por exemplo, se você está trabalhando com uma variável INTEIRO, o computador sabe que essa variável armazena apenas números inteiros, então ele só permitirá que você execute operações matemáticas válidas para números inteiros. Se você tentar fazer uma operação inválida, como dividir um número inteiro por outro número inteiro e obter um resultado com casas decimais, o computador apresentará um erro.
+
+Como declarar variáveis com tipos de dados no Portugol?
+Para declarar uma variável com um tipo de dado específico, você precisa usar a seguinte sintaxe:
+TIPO NOME_DA_VARIAVEL;
+Exemplos:
+INTEIRO idade;
+REAL altura;
+CARACTERE primeiraLetra;
+CADEIA nomeCompleto;
+
+Em resumo, os tipos de dados são importantes porque permitem que o computador saiba como tratar as informações armazenadas em variáveis. No Portugol, existem 4 tipos de dados básicos: INTEIRO, REAL, CARACTERE e CADEIA. É importante declarar as variáveis corretamente para garantir que o programa funcione de maneira correta.
+
+*/

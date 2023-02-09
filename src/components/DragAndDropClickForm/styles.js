@@ -24,6 +24,9 @@ export const Line = styled.View`
   margin-bottom: 4px;
 `;
 
+export const Content = styled.View`
+`;
+
 export const Text = styled.Text`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.code};
@@ -35,7 +38,7 @@ export const DropZone = styled.View`
   border-width: 1px;
   border-bottom-color: ${props => props.theme.colors.green_500};
   color: ${props => props.theme.colors.green_500};
-  margin: 12px 8px 0;
+  margin: 2px 8px 0;
 `;
 
 export const DropItems = styled.View`

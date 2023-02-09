@@ -6,9 +6,8 @@ import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 export function DropZone({ id, zones, setZones, totalDropZones }) {
   const [zoneWidth, setZoneWidth] = useState(minZoneWidth);
 
- 
   useEffect(() => {
-    if (zones.length > 0) {
+      if (zones.length > 0) {
       const targetZone = zones.find(zone => zone && zone.id === id);
       if (targetZone) setZoneWidth(targetZone.width);
     }
@@ -25,7 +24,7 @@ export function DropZone({ id, zones, setZones, totalDropZones }) {
             width,
             itemId: null,
           };
-
+          console.log({ height });
           if (zones.length < totalDropZones) {
             setZones(zones => [...zones, zone]);
           }

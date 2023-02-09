@@ -6,6 +6,7 @@ import { DropItem } from '../DropItem';
 import { DropZone } from '../DropZone';
 import { VerificationButton } from '../VerificationButton';
 import { compareSenquences } from '../../utils/compareSenquences';
+import { reorderItems } from '../../utils/reorderItems';
 
 export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence }) {
   const [, dispatch] = useLesson();
@@ -13,14 +14,21 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [reorderedItems, setReorderedItems] = useState([]);
   const [zones, setZones] = useState([]);
-  const totalDropZones = lines.reduce((total, line) => (total += line.dropZone ? 1 : 0), 0);
+  const totalDropZones = lines.reduce(
+    (total, line) => (total += line.texts.includes('dropZone') ? 1 : 0),
+    0
+  );
 
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
 
     const userItemsIdsSequence = zones.map(zone => zone.itemId);
-    const areTheTwoSequencesEqual = compareSenquences(userItemsIdsSequence, correctItemsIdsSequence);
+    const areTheTwoSequencesEqual = compareSenquences(
+      userItemsIdsSequence,
+      correctItemsIdsSequence
+    );
 
     if (areTheTwoSequencesEqual) {
       setIsAnswerWrong(false);
@@ -46,34 +54,34 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
     }
   }, [zones]);
 
+  useEffect(() => {
+    reorderItems(dropItems, setReorderedItems);
+  }, []);
+
   return (
     <C.Container>
       <C.Lines>
-        {lines.map(({ id, text, indentLevel, dropZone }) => (
+        {lines.map(({ id, texts, indentLevel }) => (
           <C.Line key={id} indentLevel={indentLevel}>
-            {dropZone && !dropZone.isEndLine && (
-              <DropZone
-                id={dropZone.id}
-                zones={zones}
-                setZones={setZones}
-                totalDropZones={totalDropZones}
-              />
-            )}
-            <C.Text>{text}</C.Text>
-            {dropZone && dropZone.isEndLine && (
-              <DropZone
-                id={dropZone.id}
-                zones={zones}
-                setZones={setZones}
-                totalDropZones={totalDropZones}
-              />
-            )}
+            {texts.map((text, index) => (
+              <C.Content key={index}>
+                <C.Text>{text !== 'dropZone' && text}</C.Text>
+                {text === 'dropZone' && (
+                  <DropZone
+                    id={id}
+                    zones={zones}
+                    setZones={setZones}
+                    totalDropZones={totalDropZones}
+                  />
+                )}
+              </C.Content>
+            ))}
           </C.Line>
         ))}
       </C.Lines>
 
       <C.DropItems>
-        {dropItems.map(({ id, label }) => (
+        {reorderedItems.map(({ id, label }) => (
           <DropItem
             key={id}
             id={id}
