@@ -6,6 +6,7 @@ import Animated, { RotateInDownRight, RotateOutDownRight } from 'react-native-re
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
+import { reorderItems } from '../../utils/reorderItems';
 
 export function CheckboxForm({ options, correctOptions }) {
   const [, dispatch] = useLesson();
@@ -15,13 +16,6 @@ export function CheckboxForm({ options, correctOptions }) {
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
   const delay = 100;
-
-  function reorderOptions() {
-    const reorderedOptions = options.sort(() => {
-      return Math.random() - 0.5;
-    });
-    setReorderedOptions(reorderedOptions);
-  }
 
   function resetAnswer() {
     if (isAnswerVerified && !!userOptions) {
@@ -58,7 +52,7 @@ export function CheckboxForm({ options, correctOptions }) {
   }
 
   useEffect(() => {
-    reorderOptions();
+    reorderItems(options, setReorderedOptions);
   }, [options]);
 
   return (

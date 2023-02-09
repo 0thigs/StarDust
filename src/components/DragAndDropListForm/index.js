@@ -3,6 +3,7 @@ import { useLesson } from '../../hooks/useLesson';
 
 import { VerificationButton } from '../VerificationButton';
 import { compareSenquences } from '../../utils/compareSenquences';
+import { reorderItems } from '../../utils/reorderItems';
 
 import * as C from './styles';
 
@@ -51,7 +52,7 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
   });
 
   useEffect(() => {
-    setreorderedItems(items);
+    reorderItems(items, setReorderedItems);
   }, [items]);
 
   useEffect(() => {

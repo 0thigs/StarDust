@@ -1,7 +1,7 @@
 export const questions = [
   {
     starId: 1,
-    type: 'select-option',
+    type: 'select',
     stem: 'Dentro das opções que não se enquadra na formação de algoritmos é',
     options: ['raciocínio lógico', 'aleatoriedade', 'análise crítica', 'encadeamento de passos'],
     answer: 'aleatoriedade',
@@ -14,7 +14,7 @@ export const questions = [
   },
   {
     starId: 1,
-    type: 'select-option',
+    type: 'select',
     stem: 'O que é lógica de programação?',
     options: [
       'sequência lógica de instruções',
@@ -84,7 +84,7 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'select-option',
+    type: 'select',
     stem: 'Qual é a vantagem de se usar pseudocódigo?',
     options: [
       'Facilitar a compreensão de um algoritmo',
@@ -96,7 +96,7 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'select-option',
+    type: 'select',
     stem: 'Para que o Portugol é utilizado?',
     options: [
       'Para programar sistemas operacionais',
@@ -147,7 +147,7 @@ export const questions = [
   },
   {
     starId: 3,
-    type: 'select-option',
+    type: 'select',
     stem: 'Em que momento ocorre a entrada de dados em um programa',
     options: [
       'Quando o programa é finalizado',
@@ -185,14 +185,14 @@ export const questions = [
   },
   {
     starId: 3,
-    type: 'select-option',
+    type: 'select',
     stem: 'Dentre os comandos abaixo que pode ser usado para saída de dados é',
     options: ['ESCREVA', 'LEIA', 'FACA', 'CORRA'],
     answer: 'ESCREVA',
   },
 //   {
 //     starId: 4,
-//     type: 'select-option',
+//     type: 'select',
 //     stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta no Portugol?',
 //     options: [
 //       'nome_da_variavel <- valor',
