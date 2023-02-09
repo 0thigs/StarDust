@@ -52,6 +52,7 @@ export const DropItems = styled.View`
 
 export const DropItem = styled(Animated.View)`
   margin-left: 12px;
+  margin-bottom: 12px;
   min-width: 40px;
   justify-content: center;
   align-items: center;

@@ -14,12 +14,13 @@ import DraggableFlatList, {
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
 
-export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
+export function DragAndDropListForm({ items }) {
   const [, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
+  const correctItemsIdsSequence = items.map(item => item.id);
   const ItemScale = useSharedValue(0.5);
 
   function handleVerifyAnswer() {
@@ -85,7 +86,7 @@ export function DragAndDropListForm({ items, correctItemsIdsSequence }) {
         <DraggableFlatList
           data={reorderedItems}
           keyExtractor={item => item.id}
-          onDragEnd={({ data }) => setreorderedItems(data)}
+          onDragEnd={({ data }) => setReorderedItems(data)}
           renderItem={renderItem}
           containerStyle={{ alignItems: 'center' }}
         />

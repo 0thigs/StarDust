@@ -49,32 +49,27 @@ export const questions = [
     correctItemsIdsSequence: [2, 4, 1, 3],
   },
   {
-    starId: 1,
+    starId: 4,
     type: 'drag-and-drop-list',
     stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
     items: [
       {
         id: 1,
-        label: 'ir para o trabalho',
-      },
-      {
-        id: 2,
-        label: 'tomar banho',
-      },
-      {
-        id: 3,
         label: 'acordar',
       },
       {
-        id: 4,
-        label: 'tomar café',
+        id: 2,
+        label: 'vestir-se',
       },
       {
-        id: 5,
+        id: 3,
         label: 'tirar o carro da garagem',
       },
+      {
+        id: 4,
+        label: 'ir para o trabalho',
+      },
     ],
-    correctItemsIdsSequence: [3, 2, 4, 5, 1],
   },
   {
     starId: 2,
@@ -132,18 +127,17 @@ export const questions = [
     items: [
       {
         id: 1,
-        label: 'manipulação dos dados',
+        label: 'armazenar os dados',
       },
       {
         id: 2,
-        label: 'exibir os resultados',
+        label: 'manipulação dos dados',
       },
       {
         id: 3,
-        label: 'armazenar os dados',
+        label: 'exibir os resultados',
       },
     ],
-    correctItemsIdsSequence: [3, 1, 2],
   },
   {
     starId: 3,
@@ -175,7 +169,6 @@ export const questions = [
         label: 'ESCREVA "A sua idade é: ", idade',
       },
     ],
-    correctItemsIdsSequence: [1, 2, 3],
   },
   {
     starId: 3,
@@ -209,31 +202,31 @@ export const questions = [
 //     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
 //     correctOptions: ['_idade', 'peso em kg'],
 //   },
-  {
-    starId: 4,
-    type: 'drag-and-drop-click',
-    stem: 'Clique nos elementos abaixo para completar o algoritmo',
-    lines: [
-      {
-        id: 1,
-        texts: ['variavel_qualquer', 'dropZone'],
-        indentLevel: 0,
-      },
-    ],
-    dropItems: [
-      {
-        id: 1,
-        label: 'ESCREVA',
-      },
-      {
-        id: 2,
-        label: '"John Petros"',
-      },
-      {
-        id: 3,
-        label: 'Portugol',
-      },
-    ],
-    correctItemsIdsSequence: [3, 2, 1],
-  },
+//   {
+//     starId: 4,
+//     type: 'drag-and-drop-click',
+//     stem: 'Clique nos elementos abaixo para completar o algoritmo',
+//     lines: [
+//       {
+//         id: 1,
+//         texts: ['variavel_qualquer', 'dropZone'],
+//         indentLevel: 0,
+//       },
+//     ],
+//     dropItems: [
+//       {
+//         id: 1,
+//         label: 'ESCREVA',
+//       },
+//       {
+//         id: 2,
+//         label: '"John Petros"',
+//       },
+//       {
+//         id: 3,
+//         label: 'Portugol',
+//       },
+//     ],
+//     correctItemsIdsSequence: [2],
+//   },
 ];
