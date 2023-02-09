@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import * as C from './styles';
+import { useNavigation } from '@react-navigation/native';
 import { useLesson } from '../../hooks/useLesson';
+
 import { LessonHeader } from '../LessonHeader';
 import { SelectOptionForm } from '../SelectOptionForm';
-import { useNavigation } from '@react-navigation/native';
 import { OpenForm } from '../OpenForm';
 import { DragAndDropListForm } from '../DragAndDropListForm';
+import { DragAndDropClickForm } from '../DragAndDropClickForm';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
-import theme from '../../global/styles/theme';
-import { DragAndDropClickForm } from '../DragAndDropClickForm';
 import { CheckboxForm } from '../CheckboxForm';
+
+import * as C from './styles';
+import theme from '../../global/styles/theme';
 
 export function Quiz({ coins }) {
   const [state, dispatch] = useLesson();
@@ -43,7 +45,7 @@ export function Quiz({ coins }) {
     <C.Container>
       <LessonHeader />
       <C.QuestionStem animation={'fadeInDown'}>{currentQuestion.stem}</C.QuestionStem>
-      {currentQuestion.type === 'select-option' && (
+      {currentQuestion.type === 'selection' && (
         <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
       )}
       {currentQuestion.type === 'open' && <OpenForm answer={currentQuestion.answer} />}

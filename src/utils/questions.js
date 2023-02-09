@@ -1,7 +1,7 @@
 export const questions = [
   {
     starId: 1,
-    type: 'select',
+    type: 'selection',
     stem: 'Dentro das opções que não se enquadra na formação de algoritmos é',
     options: ['raciocínio lógico', 'aleatoriedade', 'análise crítica', 'encadeamento de passos'],
     answer: 'aleatoriedade',
@@ -14,7 +14,7 @@ export const questions = [
   },
   {
     starId: 1,
-    type: 'select',
+    type: 'selection',
     stem: 'O que é lógica de programação?',
     options: [
       'sequência lógica de instruções',
@@ -49,7 +49,7 @@ export const questions = [
     correctItemsIdsSequence: [2, 4, 1, 3],
   },
   {
-    starId: 4,
+    starId: 2,
     type: 'drag-and-drop-list',
     stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
     items: [
@@ -79,7 +79,7 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'select',
+    type: 'selection',
     stem: 'Qual é a vantagem de se usar pseudocódigo?',
     options: [
       'Facilitar a compreensão de um algoritmo',
@@ -91,7 +91,7 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'select',
+    type: 'selection',
     stem: 'Para que o Portugol é utilizado?',
     options: [
       'Para programar sistemas operacionais',
@@ -141,7 +141,7 @@ export const questions = [
   },
   {
     starId: 3,
-    type: 'select',
+    type: 'selection',
     stem: 'Em que momento ocorre a entrada de dados em um programa',
     options: [
       'Quando o programa é finalizado',
@@ -178,55 +178,92 @@ export const questions = [
   },
   {
     starId: 3,
-    type: 'select',
+    type: 'selection',
     stem: 'Dentre os comandos abaixo que pode ser usado para saída de dados é',
     options: ['ESCREVA', 'LEIA', 'FACA', 'CORRA'],
     answer: 'ESCREVA',
   },
-//   {
-//     starId: 4,
-//     type: 'select',
-//     stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta no Portugol?',
-//     options: [
-//       'nome_da_variavel <- valor',
-//       'nome_da_variavel = valor',
-//       'nome_da_variavel > valor',
-//       'nome_da_variavel == valor',
-//     ],
-//     answer: 'nome_da_variavel <- valor',
-//   },
-//   {
-//     starId: 4,
-//     type: 'checkbox',
-//     stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
-//     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
-//     correctOptions: ['_idade', 'peso em kg'],
-//   },
-//   {
-//     starId: 4,
-//     type: 'drag-and-drop-click',
-//     stem: 'Clique nos elementos abaixo para completar o algoritmo',
-//     lines: [
-//       {
-//         id: 1,
-//         texts: ['variavel_qualquer', 'dropZone'],
-//         indentLevel: 0,
-//       },
-//     ],
-//     dropItems: [
-//       {
-//         id: 1,
-//         label: 'ESCREVA',
-//       },
-//       {
-//         id: 2,
-//         label: '"John Petros"',
-//       },
-//       {
-//         id: 3,
-//         label: 'Portugol',
-//       },
-//     ],
-//     correctItemsIdsSequence: [2],
-//   },
+  {
+    starId: 4,
+    type: 'selection',
+    stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta no Portugol?',
+    options: [
+      'nome_da_variavel <- valor',
+      'nome_da_variavel = valor',
+      'nome_da_variavel > valor',
+      'nome_da_variavel == valor',
+    ],
+    answer: 'nome_da_variavel <- valor',
+  },
+  {
+    starId: 4,
+    type: 'checkbox',
+    stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
+    options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
+    correctOptions: ['_idade', 'peso em kg'],
+  },
+  {
+    starId: 4,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos elementos abaixo para completar o algoritmo',
+    lines: [
+      {
+        id: 1,
+        texts: ['variavel_qualquer', 'dropZone'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'ESCREVA',
+      },
+      {
+        id: 2,
+        label: '"John Petros"',
+      },
+      {
+        id: 3,
+        label: 'Portugol',
+      },
+    ],
+    correctItemsIdsSequence: [2],
+  },
+  {
+    starId: 4,
+    type: 'drag-and-drop-list',
+    stem: 'Organize o código na ordem como ele deve ser lido (de cima para baixo)',
+    items: [
+      {
+        id: 1,
+        label: 'var altura: inteiro',
+      },
+      {
+        id: 2,
+        label: 'inicio',
+      },
+      {
+        id: 3,
+        label: 'escreva ("Entre com sua altura: ")',
+      },
+      {
+        id: 4,
+        label: 'leia (altura)',
+      },
+      {
+        id: 5,
+        label: 'escreva ("Sua altura é: ", altura)',
+      },
+      {
+        id: 6,
+        label: 'fimalgoritmo',
+      },
+    ],
+  },
+  {
+    starId: 4,
+    type: 'open',
+    stem: 'O nome do comando para declarar variáveis é',
+    answer: 'VAR',
+  },
 ];

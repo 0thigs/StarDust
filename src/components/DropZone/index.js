@@ -24,7 +24,6 @@ export function DropZone({ id, zones, setZones, totalDropZones }) {
             width,
             itemId: null,
           };
-          console.log({ height });
           if (zones.length < totalDropZones) {
             setZones(zones => [...zones, zone]);
           }

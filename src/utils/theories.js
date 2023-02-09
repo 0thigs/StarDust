@@ -161,7 +161,7 @@ export const theories = [
           Escreva "número1 é maior"
         Senão
           Escreva "número2 é maior"
-        Fim`,
+        Fimalgoritmo`,
       },
       {
         type: 'alert',
@@ -194,7 +194,7 @@ export const theories = [
       {
         type: 'code',
         body: `
-        LEIA nome
+        leia nome
         `,
       },
       {
@@ -205,8 +205,8 @@ export const theories = [
       {
         type: 'code',
         body: `
-        LEIA nota1
-        LEIA nota2
+        leia nota1
+        leia nota2
         media <- (nota1 + nota2) / 2
         `,
       },
@@ -255,18 +255,58 @@ export const theories = [
     texts: [
       {
         type: 'default',
-        title: 'Introdução',
+        title: null,
         body: 'Olá, parabéns por conseguir chegar nessa nova etapa! Vamos começar a falar agora sobre variáveis.',
       },
       {
         type: 'default',
         title: 'O que são variáveis?',
-        body: 'Antes de aprender a atribuir valores a variáveis, precisamos entender o que são variáveis. Em programação, uma variável é uma localização na memória do computador onde é possível armazenar um valor. Cada variável tem um nome único que a identifica e um tipo de dado que determina o tipo de informações que ela pode armazenar.',
+        body: 'Antes de aprender a atribuir valores a variáveis, precisamos entender o que são variáveis. Em programação, uma variável é uma localização na memória do computador onde é possível armazenar um valor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada variável tem um nome único que a identifica e um tipo de dado que determina o tipo de informações que ela pode armazenar.',
       },
       {
         type: 'default',
         title: null,
         body: 'Por esse motivo, eles são usados para armazenar dados que podem ser modificados ao longo do tempo, como nomes de pessoas, idades, preços de produtos e outros.',
+      },
+      {
+        type: 'default',
+        title: 'O que é declaração de variáveis?',
+        body: 'Antes de começarmos a utilizar variáveis em nosso código, é preciso que as declaremos. A declaração de uma variável em Portugol é simples e consiste na definição do tipo da variável e do seu nome.',
+      },
+      {
+        type: 'code',
+        body: `
+        nome_da_variavel: tipo;
+        `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ok, se eu quiser declarar uma variável inteira chamada "idade", escreveremos:',
+      },
+      {
+        type: 'code',
+        body: `
+        var
+            idade: inteiro;
+        `,
+      },
+      {
+        type: 'alert',
+        body: 'Observe que deve ser usado o comando "VAR" para informar que estamos declarando variáveis. Em seguida, informamos o nome da variável e o tipo de dado que será armazenado nela.',
+      },
+      {
+        type: 'list',
+        body: 'Os tipos de variáveis disponíveis em Portugol são: inteiro, real, caractere e lógico',
+      },
+      {
+        type: 'alert',
+        body: 'Não se preocupe, vamos falar sobre cada um dos tipos ao decorrer desse mundo.',
       },
       {
         type: 'default',
@@ -276,7 +316,7 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        title: 'Sintaxe de atribuição de variáveis em Portugol',
+        title: 'Como fazer atribuição?',
         body: 'A sintaxe básica para atribuir valores a variáveis em Portugol é a seguinte.',
       },
       {
@@ -286,8 +326,7 @@ export const theories = [
         `,
       },
       {
-        type: 'default',
-        title: null,
+        type: 'alert',
         body: 'Perceba que a operação de atribuição, normalmente, é representada por uma seta apontando para a esquerda, mas existem outros símbolos para representar a atribuição dependendo da forma de representação do algoritmo mas aqui vamos nos contentar apenas com setas',
       },
       {
@@ -298,8 +337,8 @@ export const theories = [
       {
         type: 'code',
         body: `
-        nome = "João";
-        idade = 30;
+        nome <- "João";
+        idade <- 30;
         `,
       },
       {
@@ -314,7 +353,7 @@ export const theories = [
       {
         type: 'code',
         body: `
-        nome_da_variável_destino <- nome_da_variável_origem
+        uma_variavel <- outra_variavel
         `,
       },
       {
@@ -341,19 +380,37 @@ export const theories = [
       },
       {
         type: 'list',
-        body: '. O nome da variável deve iniciar com uma letra ou sublinhado (_).',
+        body: '1 - O nome da variável deve iniciar com uma letra ou sublinhado (_).',
       },
       {
         type: 'list',
-        body: '. O nome da variável não pode conter espaços.',
+        body: '2 - O nome da variável não pode conter espaços.',
       },
       {
         type: 'list',
-        body: '. O nome da variável não pode ser uma palavra reservada do Portugol, ou seja, um nome de um comando por exemplo.',
+        body: '3 - O nome da variável não pode ser uma palavra reservada do Portugol, ou seja, um nome de um comando por exemplo.',
       },
       {
         type: 'list',
-        body: '. O nome da variável deve ser descritivo e fácil de entender.',
+        body: '4 - O nome da variável deve ser descritivo e fácil de entender.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora observe um exemplo completo utilizando tudo que aprendemos até agora.',
+      },
+      {
+        type: 'code',
+        body: `
+        algoritmo "Exemplo"
+        var
+            nome: caractere
+            idade: inteiro
+        inicio
+            escreva("Seu nome é: ", nome)
+            escreva("Sua idade é: ", idade)
+        fimalgoritmo
+        `,
       },
       {
         type: 'default',
@@ -363,7 +420,7 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        body: 'Agora que tal testa seus conhecimentos?.',
+        body: 'Agora que tal testar seus conhecimentos?.',
       },
     ],
   },
