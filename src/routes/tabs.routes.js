@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../screens/Home';
 import { Profile } from "../screens/Profile";
 import { Shop } from "../screens/Shop";
+import { Ranking } from '../screens/Ranking';
 
 import { MenuHamburguer } from '../components/MenuHamburguer';
 import { HeaderStatus } from '../components/HeaderStatus';
@@ -34,6 +35,7 @@ export function TabRoutes({ navigation }) {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Shop" component={Shop} />
       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Ranking" component={Ranking} />
     </Tab.Navigator>
   );
 }
