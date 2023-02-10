@@ -33,7 +33,6 @@ export function Quiz({ coins }) {
   useEffect(() => {
     if (state.wrongsCount === 5) {
       setIsModalOpen(true);
-      LeaveLesson();
     }
   }, [state.wrongsCount]);
 
@@ -73,22 +72,16 @@ export function Quiz({ coins }) {
         type={'crying'}
         title={'Puxa, parece que você não tem mais vidas'}
         isOpen={isModalOpen}
-        body={
-          <C.Text>
-            {coins > 500
-              ? `Você pode escolher de duas uma, restaurar todas suas vidas com 500 de poeira estelar ou voltar para tela principal e esperar 1 hora para restaurar cada vida (sua poeira estelar disponível: ${coins})`
-              : 'Não se precupe, pois cada é restaurada a cada 1 hora.'}
-          </C.Text>
-        }
+        body={<C.Text>Mais sorte da próxima vez</C.Text>}
         footer={
           <C.Buttons>
-            {!coins > 500 && (
+            {/* {!coins > 500 && (
               <Button
                 title={'Comprar 5 vidas 💖'}
                 background={theme.colors.green_500}
                 color={theme.colors.black}
               />
-            )}
+            )} */}
             <Button
               title={'Sair'}
               background={theme.colors.red_700}

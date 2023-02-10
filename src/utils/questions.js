@@ -2,14 +2,14 @@ export const questions = [
   {
     starId: 1,
     type: 'selection',
-    stem: 'Dentro das opções que não se enquadra na formação de algoritmos é',
-    options: ['raciocínio lógico', 'aleatoriedade', 'análise crítica', 'encadeamento de passos'],
+    stem: 'Dentro das opções que não se enquadra na hora de criar um algoritmo é',
+    options: ['raciocínio lógico', 'aleatoriedade', 'análise', 'encadeamento de passos'],
     answer: 'aleatoriedade',
   },
   {
     starId: 1,
     type: 'open',
-    stem: 'O nome que se dá a uma sequencia lógica de instruções é',
+    stem: 'O nome que se pode dar a uma sequencia lógica de instruções qualquer é',
     answer: 'algoritmo',
   },
   {
@@ -19,8 +19,8 @@ export const questions = [
     options: [
       'sequência lógica de instruções',
       'fazer programa',
-      'maneira de pensar um algoritmo',
-      'criar problemas computacionais',
+      'uma linguagem de programação',
+      'algoritmo sofisticado',
     ],
     answer: 'sequência lógica de instruções',
   },
@@ -39,14 +39,13 @@ export const questions = [
       },
       {
         id: 3,
-        label: 'jogar o chiclete no lixo',
+        label: 'jogar o chiclete fora',
       },
       {
         id: 4,
         label: 'colocar chiclete na boca',
       },
     ],
-    correctItemsIdsSequence: [2, 4, 1, 3],
   },
   {
     starId: 2,
