@@ -2,7 +2,6 @@ import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 350px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +20,7 @@ export const CloseButton = styled.TouchableOpacity``;
 export const Lives = styled.View`
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  margin-left: auto;
 `;
 
 export const LivesCount = styled.Text`

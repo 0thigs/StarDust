@@ -424,6 +424,10 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 5,
+
+  }
 ];
 
 // body: `

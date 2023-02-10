@@ -19,7 +19,7 @@ const fakeUser = {
   selected_rocket_id: 1,
   ranking_id: 1,
   streak: 0,
-  week_status: ['toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo', 'toDo'],
+  week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
   starId: 4,

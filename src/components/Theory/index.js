@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { useWindowDimensions } from 'react-native';
-import * as C from './styles';
 
 import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
 import { Button } from '../../components/Button';
+import { FabButton } from '../FabButton';
 import { LessonHeader } from '../LessonHeader';
 import { useLesson } from '../../hooks/useLesson';
 import { theories } from '../../utils/theories';
@@ -15,14 +14,18 @@ import { Volume2 } from 'react-native-feather';
 
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/styles/prism';
+
 import TypeWriter from 'react-native-typewriter';
 
 import * as Speech from 'expo-speech';
+import * as Icon from 'react-native-feather';
+import * as C from './styles';
 
 export function Theory({ starId = 2 }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
   const [index, setIndex] = useState(1);
+  const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const scrollRef = useRef();
   const maxDelay = 10;
   const typing = 1;
@@ -30,6 +33,15 @@ export function Theory({ starId = 2 }) {
   const starName = planets
     .find(planet => planet.stars.some(star => star.id === starId))
     .stars.find(star => star.id === starId).name;
+
+  function fixValue(value) {
+    console.log(value.toFixed(0));
+    return Math.floor(value);
+  }
+
+  function scrollToEnd() {
+    scrollRef.current.scrollToEnd();
+  }
 
   function handlePracticeButton() {
     dispatch({ type: 'changeStage' });
@@ -49,6 +61,14 @@ export function Theory({ starId = 2 }) {
     });
   }
 
+  function handleScroll({ contentOffset, contentSize, layoutMeasurement }) {
+    const isScrollEnd =
+      fixValue(contentOffset.y) + fixValue(layoutMeasurement.height) >=
+      fixValue(contentSize.height) - C.minHeightText;
+
+    setIsFabButtonShown(!isScrollEnd);
+  }
+
   async function handleSpeechButton(text) {
     Speech.speak(text);
   }
@@ -64,7 +84,8 @@ export function Theory({ starId = 2 }) {
       <C.Theories
         showsVerticalScrollIndicator={false}
         ref={scrollRef}
-        onContentSizeChange={() => scrollRef.current.scrollToEnd()}
+        onScroll={event => handleScroll(event.nativeEvent)}
+        onContentSizeChange={scrollToEnd}
       >
         {texts.map((text, index) => (
           <C.Theory key={index}>
@@ -132,6 +153,12 @@ export function Theory({ starId = 2 }) {
           background={theme.colors.green_500}
         />
       </C.Theories>
+      {isFabButtonShown && (
+        <FabButton
+          onPress={scrollToEnd}
+          icon={<Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />}
+        />
+      )}
     </C.Container>
   );
 }

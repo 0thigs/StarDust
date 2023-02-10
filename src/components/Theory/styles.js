@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
 
+export const minHeightText = 150;
+
 export const Container = styled.View`
   flex: 1;
-  width: 350px;
   margin-top: 40px;
 `;
 
@@ -15,16 +16,15 @@ export const Title = styled(Animatable.Text)`
 `;
 
 export const Theories = styled.ScrollView`
-  width: 100%;
 `;
 
 export const Theory = styled.View``;
 
 export const TextContainer = styled(Animatable.View)`
-  width: 100%;
   flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
   align-items: center;
   margin: 16px 0;
+  min-height: ${minHeightText}px;
 `;
 
 export const DefaultTextTitle = styled.Text`
