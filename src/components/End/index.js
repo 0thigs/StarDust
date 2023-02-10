@@ -7,6 +7,7 @@ import { Metric } from '../Metric';
 import { Button } from '../Button';
 import { Streak } from '../Streak';
 import { Animation } from '../Animation';
+import { Sound } from '../Sound';
 import { planets } from '../../utils/planets';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
@@ -32,6 +33,7 @@ export function End({ starId }) {
   const [isStreakShown, setIsStreakShown] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
   const starsRef = useRef();
+  const soundRef = useRef();
   const navigation = useNavigation();
   const iconSize = 30;
 
@@ -140,6 +142,7 @@ export function End({ starId }) {
     setTime(convertSecondsToTime(state.secondsCount));
     setAccurance(getAccurance());
     setStarsAnimation();
+    soundRef.current.playSound();
   }, []);
 
   return (
@@ -216,6 +219,8 @@ export function End({ starId }) {
         color={theme.colors.black}
         background={theme.colors.green_500}
       />
+
+      <Sound ref={soundRef} soundFile={require('../../assets/LessonAssets/end-sound.mp3')} />
     </C.Container>
   );
 }

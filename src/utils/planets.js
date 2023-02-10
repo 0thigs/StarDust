@@ -7,12 +7,12 @@ export const planets = [
     stars: [
       {
         id: 1,
-        name: 'Lógica',
+        name: 'Conceito de lógica',
         number: 1,
       },
       {
         id: 2,
-        name: 'Pseudocódigo',
+        name: 'O que é um programa',
         number: 2,
       },
       {

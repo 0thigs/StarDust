@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
@@ -9,6 +9,7 @@ import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
+import { Sound } from '../Sound';
 
 import api from '../../services/api';
 import theme from '../../global/styles/theme';
@@ -21,6 +22,7 @@ export function Rocket_({ id, name, image: Image, price }) {
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
+  const soundRef = useRef();
 
   const RocketPosition = useSharedValue(-5);
 
@@ -66,6 +68,7 @@ export function Rocket_({ id, name, image: Image, price }) {
 
     await api.updateUser('selected_rocket_id', id, user.id);
     setIsRequesting(false);
+    soundRef.current.playSound();
   }
 
   function handleButton() {
@@ -148,6 +151,8 @@ export function Rocket_({ id, name, image: Image, price }) {
           />
         }
       />
+
+      <Sound ref={soundRef} soundFile={require('../../assets/RocketAssets/switch.sound.wav')} />
     </C.Container>
   );
 }

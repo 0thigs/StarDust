@@ -200,7 +200,7 @@ export const questions = [
     type: 'checkbox',
     stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
-    correctOptions: ['_idade', 'peso em kg'],
+    correctOptions: ['_idade', 'altura_em_cm'],
   },
   {
     starId: 4,

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
+import { useAuth } from '../../hooks/useAuth';
+
 import { Theory } from '../../components/Theory';
 import { Quiz } from '../../components/Quiz';
 import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
-import { useAuth } from '../../hooks/useAuth';
+import * as C from './styles';
 
 export function Lesson() {
   const { user } = useAuth();

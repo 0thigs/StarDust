@@ -32,7 +32,7 @@ export function Streak({
     const todayIndex = dayjs().day();
     let today = week_status[todayIndex];
 
-    if (today !== 'toDo') {
+    if (today !== 'todo') {
       return;
     }
 
@@ -65,7 +65,7 @@ export function Streak({
             <C.WeekDayName>{weekDay}</C.WeekDayName>
             {weekStatus[index] === 'done' && <SuccessIcon />}
             {weekStatus[index] === 'undone' && <FailIcon />}
-            {weekStatus[index] === 'toDo' && <PlaceholderIcon />}
+            {weekStatus[index] === 'todo' && <PlaceholderIcon />}
           </C.WeekDay>
         ))}
       </C.WeekStatus>

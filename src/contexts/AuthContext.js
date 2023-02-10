@@ -9,7 +9,7 @@ const fakeUser = {
   name: 'John Petros',
   email: 'joaopcarvalho.cds@gmail.com',
   avatar: 'https://github.com/JohnPetros.png',
-  coins: 2000,
+  coins: 100,
   lives: 5,
   xp: 1500,
   level: 1,

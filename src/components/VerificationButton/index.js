@@ -1,12 +1,26 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from '../Button';
 import * as C from './styles';
 
 import Check from '../../assets/LessonAssets/correct-answer-icon.svg';
 import X from '../../assets/LessonAssets/incorrect-answer-icon.svg';
 import theme from '../../global/styles/theme';
+import { Sound } from '../Sound';
+
+const sounds = {
+  success: require('../../assets/LessonAssets/success-sound.wav'),
+  fail: require('../../assets/LessonAssets/fail-sound.wav'),
+};
 
 export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered }) {
+  const soundRef = useRef();
+
+  useEffect(() => {
+    if (isAnswerVerified) {
+      soundRef.current.playSound();
+    }
+  }, [isAnswerVerified]);
+
   return (
     <C.Container isAnswerWrong={isAnswerVerified && isAnswerWrong}>
       {isAnswerVerified && (
@@ -32,6 +46,7 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerifi
         color={isAnswerVerified && isAnswerWrong ? theme.colors.white : theme.colors.black}
         isDisabled={!isAnswered}
       />
+      <Sound ref={soundRef} soundFile={sounds[isAnswerWrong ? 'fail' : 'success']} />
     </C.Container>
   );
 }
