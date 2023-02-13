@@ -22,6 +22,8 @@ export const Line = styled.View`
   align-items: center;
   margin-left: ${props => defaultIdent * props.indentLevel}px;
   margin-bottom: 4px;
+  align-self: flex-start;
+  margin-bottom: 8px;
 `;
 
 export const Content = styled.View`
@@ -38,7 +40,7 @@ export const DropZone = styled.View`
   border-width: 1px;
   border-bottom-color: ${props => props.theme.colors.green_500};
   color: ${props => props.theme.colors.green_500};
-  margin: 2px 8px 0;
+  margin: 0 4px 0;
 `;
 
 export const DropItems = styled.View`

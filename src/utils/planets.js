@@ -24,13 +24,13 @@ export const planets = [
   },
   {
     id: 2,
-    name: 'Tipos de dados',
+    name: 'Variáveis',
     image: require('../assets/PlanetAssets/planet-image-2.svg').default,
     icon: require('../assets/PlanetAssets/planet-icon-2.svg').default,
     stars: [
       {
         id: 4,
-        name: 'Conceito de dados',
+        name: 'Declaração e atribuição',
         number: 1,
       },
       {

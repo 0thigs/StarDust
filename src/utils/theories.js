@@ -432,6 +432,107 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 5,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Olá, agora que você aprendeu mais sobre variáveis para armazenar dados, vamos nos aprofundar nos tipos de dados',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Na programação, os tipos de dados são importantes para identificarmos o tipo de informação que estamos lidando, e, com isso, agir de maneira adequada na manipulação dos dados.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'como você já sabe, existem 4 tipos de dados básicos',
+      },
+      {
+        type: 'list',
+        body: `
+        1 - Caractere 
+        2 - Inteiro 
+        3 - Real 
+        4 - Lógico
+        `,
+      },
+      {
+        type: 'alert',
+        body: 'Por agora, vamos falar sobre o tipo que caracter, que nada mais do que um tipo para lidar com textos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então, o tipo caracter é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então, o tipo caracter é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
+      },
+      {
+        type: 'default',
+        title: 'Declaração de caractere',
+        body: 'Para declarar uma variável do tipo caractere em Portugol, você deve escrever o seguinte:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        nome: caractere
+          `,
+      },
+      {
+        type: 'default',
+        title: 'Declaração de caractere',
+        body: 'Agora Você pode atribuir valores a variáveis do tipo caracter da seguinte forma:',
+      },
+      {
+        type: 'code',
+        body: `
+    nomeDaVarivael <- "algum texto"
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se sempre de colocar as aspas para indicar que é uma string.',
+      },
+      {
+        type: 'alert',
+        body: 'É importante notar também que, na hora de atribuir um valor à uma variável, o tipo de dado da variável seja compatível com o tipo de dado da informação que estamos atribuindo, ou seja, uma variável do tipo caractere apenas aceitas valores que são string',
+      },
+      {
+        type: 'default',
+        title: 'Declaração de caractere',
+        body: 'Aqui estão alguns exemplos de como você pode declarar e atribuir valores a variáveis do tipo caractere em Portugol:',
+      },
+      {
+        type: 'code',
+        body: `
+        algoritmo "aprendendoSobreStrings"
+
+        var
+          nome: caractere
+          sobrenome: caractere
+          frase: caractere 
+
+        inicio
+            nome <- "João"
+            sobrenome <- "Santos"
+            frase <- "Olá, mundo!" 
+        fimalgoritmo 
+          `,
+      },
+      {
+        type: 'default',
+        title: 'Declaração de caractere',
+        body: 'Agora que você conchece mais sobre strings, que tal reforçar isso com algumas questões?.',
+      },
+    ],
+  },
 ];
 
 // body: `

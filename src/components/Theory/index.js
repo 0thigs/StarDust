@@ -64,7 +64,7 @@ export function Theory({ starId = 2 }) {
   function handleScroll({ contentOffset, contentSize, layoutMeasurement }) {
     const isScrollEnd =
       fixValue(contentOffset.y) + fixValue(layoutMeasurement.height) >=
-      fixValue(contentSize.height) - C.minHeightText;
+      fixValue(contentSize.height) - C.minHeightText + 50;
 
     setIsFabButtonShown(!isScrollEnd);
   }

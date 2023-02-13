@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming, FadeInDown } from 'react-native-reanimated';
@@ -41,6 +41,7 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified }) {
     targetZone.itemId = null;
     targetZone.width = minZoneWidth;
     updateZone(targetZone);
+    setIsItemInZone(false);
   }
 
   function addItemInZone(id) {
@@ -53,6 +54,7 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified }) {
         zone.itemId = id;
         zone.width = itemWidth - 20;
         updateZone(zone);
+        setIsItemInZone(true);
         break;
       }
     }
@@ -60,13 +62,11 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified }) {
 
   function HandleItemClick(id) {
     if (isItemInZone) {
-      setIsItemInZone(false);
       removeItemInZone(id);
       return;
     }
 
     addItemInZone(id);
-    setIsItemInZone(true);
   }
 
   return (

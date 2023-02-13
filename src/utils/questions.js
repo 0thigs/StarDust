@@ -265,4 +265,77 @@ export const questions = [
     stem: 'O nome do comando para declarar variáveis é',
     answer: 'VAR',
   },
+  {
+    starId: 5,
+    type: 'open',
+    stem: 'Um nome em inglês que se pode dar para valores do tipo caracter é ',
+    answer: 'string',
+  },
+  {
+    starId: 5,
+    type: 'open',
+    stem: 'O nome do tipo para valores que são texto é',
+    answer: 'caractere',
+  },
+  {
+    starId: 5,
+    type: 'checkbox',
+    stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
+    options: ['letra', '"não é uma string"', '"100"', '2.5'],
+    correctOptions: ['"não é uma string"', 'altura_em_cm'],
+  },
+  {
+    starId: 5,
+    type: 'selection',
+    stem: 'Como declarar uma variável do tipo caractere?',
+    options: ['var nome : inteiro', 'var nome : caractere', 'var nome : real', ' var nome : logico'],
+    answer: 'var nome : caractere',
+  },
+  {
+    starId: 5,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos valores para completar as variáveis corretamente',
+    lines: [
+      {
+        id: 1,
+        texts: ['var'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['fruta: ', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['inicio'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['fruta <- ', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: ['fimalgoritmo'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '"maçã"',
+      },
+      {
+        id: 2,
+        label: 'caractere',
+      },
+      {
+        id: 3,
+        label: 'inteiro',
+      },
+    ],
+    correctItemsIdsSequence: [2, 1],
+  },
 ];

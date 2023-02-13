@@ -6,6 +6,7 @@ export const minHeightText = 150;
 export const Container = styled.View`
   flex: 1;
   margin-top: 40px;
+  width: 350px;
 `;
 
 export const Title = styled(Animatable.Text)`
@@ -18,7 +19,8 @@ export const Title = styled(Animatable.Text)`
 export const Theories = styled.ScrollView`
 `;
 
-export const Theory = styled.View``;
+export const Theory = styled.View`
+`;
 
 export const TextContainer = styled(Animatable.View)`
   flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};

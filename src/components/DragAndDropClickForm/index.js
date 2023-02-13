@@ -68,6 +68,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
                 <C.Text>{text !== 'dropZone' && text}</C.Text>
                 {text === 'dropZone' && (
                   <DropZone
+                    key={id}
                     id={id}
                     zones={zones}
                     setZones={setZones}
