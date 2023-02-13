@@ -288,7 +288,12 @@ export const questions = [
     starId: 5,
     type: 'selection',
     stem: 'Como declarar uma variável do tipo caractere?',
-    options: ['var nome : inteiro', 'var nome : caractere', 'var nome : real', ' var nome : logico'],
+    options: [
+      'var nome : inteiro',
+      'var nome : caractere',
+      'var nome : real',
+      ' var nome : logico',
+    ],
     answer: 'var nome : caractere',
   },
   {
@@ -334,6 +339,114 @@ export const questions = [
       {
         id: 3,
         label: 'inteiro',
+      },
+    ],
+    correctItemsIdsSequence: [2, 1],
+  },
+  {
+    starId: 6,
+    type: 'open',
+    stem: 'Qual o nome do tipo mais apropriado para 3.3333?',
+    answer: 'real',
+  },
+  {
+    starId: 6,
+    type: 'checkbox',
+    stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
+    options: ['Inteiro', 'Real', 'Texto', 'Boolean'],
+    correctOptions: ['Inteiro', 'Real'],
+  },
+  {
+    starId: 6,
+    type: 'checkbox',
+    stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
+    options: ['"10"', '10', '2.5', '-10'],
+    correctOptions: ['10', '-10'],
+  },
+  {
+    starId: 6,
+    type: 'selection',
+    stem: 'Qual será o tipo do resultado da expressão 5 / 2',
+    options: ['inteiro', '2.5', 'real', 'caractere'],
+    answer: 'real',
+  },
+  {
+    starId: 6,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos tipos para que o algoritmo esteja correto',
+    lines: [
+      {
+        id: 1,
+        texts: ['var'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['peso: ', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['altura: ', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: ['inicio'],
+        indentLevel: 0,
+      },
+      {
+        id: 6,
+        texts: ['Escreva("Peso (Kg): ")'],
+        indentLevel: 1,
+      },
+      {
+        id: 7,
+        texts: ['Leia(peso)'],
+        indentLevel: 1,
+      },
+      {
+        id: 8,
+        texts: ['Escreva("Altura (cm): ")'],
+        indentLevel: 1,
+      },
+      {
+        id: 9,
+        texts: ['Leia(altura)'],
+        indentLevel: 1,
+      },
+      {
+        id: 12,
+        texts: ['Escreva("Eu peso ", peso ", kilos")'],
+        indentLevel: 1,
+      },
+      {
+        id: 13,
+        texts: ['Escreva("Eu meço ", altura ", centímetros")'],
+        indentLevel: 1,
+      },
+      {
+        id: 15,
+        texts: ['Fimalgoritmo'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'Inteiro',
+      },
+      {
+        id: 2,
+        label: 'Real',
+      },
+      {
+        id: 3,
+        label: 'Lógico',
+      },
+      {
+        id: 4,
+        label: 'Caractere',
       },
     ],
     correctItemsIdsSequence: [2, 1],

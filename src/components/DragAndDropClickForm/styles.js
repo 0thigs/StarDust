@@ -32,7 +32,6 @@ export const Content = styled.View`
 export const Text = styled.Text`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.code};
-  font-size: 16px;
 `;
 
 export const DropZone = styled.View`
@@ -44,7 +43,7 @@ export const DropZone = styled.View`
 `;
 
 export const DropItems = styled.View`
-  margin-top: 70%;
+  margin-top: 32px;
   flex-direction: row;
   flex-wrap: wrap;
   width: 350px;

@@ -5,7 +5,7 @@ export const Container = styled(Animatable.View)`
   border-width: 1px;
   border-color: ${props => props.color};
   border-radius: 8px;
-  width: ${props => (props.isLarge ? 250 : 100)}px;
+  width: ${props => (props.isLarge ? 80 : 30)}%;
   overflow: hidden;
   margin: 0 auto 12px;
 `;

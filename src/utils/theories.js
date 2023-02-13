@@ -533,6 +533,109 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 6,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Muito bom, agora vamos falar sobre o tipos que representam os numéricos.',
+      },
+      {
+        type: 'default',
+        title: 'Tipo inteiro',
+        body: 'Primeiramente, vamos falar o tipo inteiro. Ele diz respeito aos números sem parte decimal ou fracionária, como -5, 0, 1, 2, 3, entre outros.',
+      },
+      {
+        type: 'default',
+        title: 'Declarando inteiros',
+        body: 'No Portugol, declaramos uma variável inteira da seguinte forma:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        numero: inteiro
+          `,
+      },
+      {
+        type: 'default',
+        title: 'Declarando inteiros',
+        body: 'Em seguida, podemos atribuir um valor a ela, por exemplo:',
+      },
+      {
+        type: 'code',
+        body: `
+        numero <- 5
+          `,
+      },
+      {
+        type: 'default',
+        title: 'Operações Matemáticas com Inteiros',
+        body: 'Podemos realizar operações matemáticas com inteiros, como adição, subtração, multiplicação e divisão e atribuir a variáveis. Aqui estão alguns exemplos:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        a = 10;
+        b = 5;
+    inicio
+        soma = a + b;
+        subtracao = a - b;
+        multiplicacao = a * b;
+        divisao = a / b;
+    fimalgoritmo
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Cuidade, ao dividir inteiros, o resultado será sempre inteiro. Por exemplo, 10 dividido por 3 é 3, e não 3,3333...',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Falaremos mais sobre esses operadores futuramente. Agora como lidar com números reais',
+      },
+      {
+        type: 'default',
+        title: 'Tipo real',
+        body: 'Tipo real é um tipo de dado que armazena números com parte decimal ou fracionária, como 3.14, -0.5, 0.0, entre outros.',
+      },
+      {
+        type: 'default',
+        title: 'Declaração de real',
+        body: 'No Portugol, declaramos uma variável real da seguinte forma:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        pi: real
+          `,
+      },
+      {
+        type: 'default',
+        title: 'Declaração de real',
+        body: 'Em seguida, podemos atribuir um valor a ela, por exemplo:',
+      },
+      {
+        type: 'code',
+        body: `
+        pi <- 3.14;
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Em outras palavras, um tipo inteiro sempre vai ser um número inteiro, enquanto um tipo real sempre vai ser um número real dã.',
+      },
+      {
+        type: 'default',
+        title: 'Declaração de real',
+        body: 'Agora vamos testar o que você aprendeu sobre numéricos',
+      },
+    ],
+  },
 ];
 
 // body: `

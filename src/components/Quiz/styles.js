@@ -12,7 +12,8 @@ export const QuestionStem = styled(Animatable.Text)`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
-  margin: 20px;
+  max-width: 350px;
+  margin: 8px 0;
   text-align: center;
 `;
 
