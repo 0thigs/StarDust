@@ -18,6 +18,13 @@ export const QuestionStem = styled(Animatable.Text)`
   text-align: center;
 `;
 
+export const QuestionCode = styled(Animatable.Text)`
+  color: ${props => props.theme.colors.white};
+  font-family: ${props => props.theme.fonts.regular};
+  font-size: 16px;
+  max-width: ${lessonContainerWidth};
+`;
+
 export const Text = styled.Text`
   text-align: center;
   color: ${props => props.theme.colors.white};

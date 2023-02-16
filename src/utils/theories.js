@@ -663,13 +663,79 @@ Os jogadores Pedro e Matheus vão treinar na quadra hoje!
       },
       {
         type: 'alert',
-        title: null,
         body: 'Em outras palavras, um tipo inteiro sempre vai ser um número inteiro, enquanto um tipo real sempre vai ser um número real dã.',
       },
       {
         type: 'default',
         title: null,
         body: 'Agora vamos testar o que você aprendeu sobre numéricos',
+      },
+    ],
+  },
+  {
+    starId: 7,
+    texts: [
+      {
+        type: 'default',
+        title: 'introdução',
+        body: 'Os dados do tipo lógico são valores que armazenam uma única opção entre duas possibilidades possíveis: Verdadeiro ou Falso.',
+      },
+      {
+        type: 'alert',
+        body: 'O tipo lógico também é conhecido por booleano ou em inglês boolean em homenagem ao matemático George Boole.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'O tipo lógico representa a linguagem que um computador verdadeiramente entende, ou seja, o binário, já que verdadeiro e falso representam 1 e 0 respectivamente:',
+      },
+      {
+        type: 'alert',
+        body: 'Dessa forma, é possível usar esse valores para trabalhar com operações lógicas, como "e" e "ou", como também com estruturas condicionais, mas vamos deixar isso para outra hora.',
+      },
+      {
+        type: 'default',
+        title: 'Declaração do tipo lógico',
+        body: 'Em Portugol, o tipo de dado lógico é representado pela palavra reservada logico. Logo, para declarar uma variável do tipo lógico, podemos usar a seguinte sintaxe:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        nomeDaVariavel: logico
+          `,
+      },
+      {
+        type: 'default',
+        title: 'declaração do tipo lógico',
+        body: 'Por exemplo, para declarar uma variável que armazena se uma pessoa é maior de idade, podemos fazer:',
+      },
+      {
+        type: 'code',
+        body: `
+    var
+        eMaiorDeIdade: logico
+          `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora, podemos inicializar a variável com um valor lógico (verdadeiro ou falso):',
+      },
+      {
+        type: 'code',
+        body: `
+        eMaiorDeIdade <- verdadeiro
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Quando não iniciamos uma variável do tipo lógico ela recebe o valor padrão de falso',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que você aprendeu um pouco mais sobre valores lógicos que tal praticar um pouco mais?',
       },
     ],
   },

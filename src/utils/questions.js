@@ -281,19 +281,14 @@ export const questions = [
     starId: 5,
     type: 'checkbox',
     stem: 'quais dos itens abaixo pode ser um tipo de text válido',
-    options: ['letra', '\"não é uma string\"', '"100"', '2.5'],
-    correctOptions: ['\"não é uma string\"', '"100"'],
+    options: ['letra', '"não é uma string"', '"100"', '2.5'],
+    correctOptions: ['"não é uma string"', '"100"'],
   },
   {
     starId: 5,
     type: 'selection',
     stem: 'Como declarar uma variável do tipo texto?',
-    options: [
-      'var nome : inteiro',
-      'var nome : caractere',
-      'var nome : real',
-      'var nome : logico',
-    ],
+    options: ['var nome : inteiro', 'var nome : caractere', 'var nome : real', 'var nome : logico'],
     answer: 'var nome : caractere',
   },
   {
@@ -343,12 +338,12 @@ export const questions = [
     ],
     correctItemsIdsSequence: [2, 1],
   },
-//   {
-//     starId: 6,
-//     type: 'open',
-//     stem: 'Qual o nome do tipo mais apropriado para 3.3333?',
-//     answer: 'real',
-//   },
+  {
+    starId: 6,
+    type: 'open',
+    stem: 'Qual o nome do tipo mais apropriado para 3.3333?',
+    answer: 'real',
+  },
   {
     starId: 6,
     type: 'checkbox',
@@ -360,7 +355,7 @@ export const questions = [
     starId: 6,
     type: 'checkbox',
     stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
-    options: ['\"10\"', '10', '2.5', '-10'],
+    options: ['"10"', '10', '2.5', '-10'],
     correctOptions: ['10', '-10'],
   },
   {
@@ -447,6 +442,110 @@ export const questions = [
       {
         id: 4,
         label: 'caractere',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 6,
+    type: 'open',
+    stem: 'Qual seria o valor lógico para a pergunta "10 é maior que 5?"',
+    answer: 'verdadeiro',
+  },
+  {
+    starId: 7,
+    type: 'selection',
+    stem: 'Qual o valor padrão de uma variável do tipo lógico',
+    options: ['falso', 'verdadeiro', 'não há valor padrão', 'verdadeiro e falso'],
+    answer: 'falso',
+  },
+  {
+    starId: 7,
+    type: 'checkbox',
+    stem: 'Quais os valores possíveis para uma variável do tipo lógico',
+    options: ['falso', 'verdadeiro', 'boolean', '"verdadeiro"'],
+    correctOptions: ['falso', 'verdadeiro'],
+  },
+  {
+    starId: 7,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código?',
+    code: `
+var
+  vaga: logico  
+inicio
+    vaga <- verdadeiro
+    vaga <- falso
+
+    escreva("Tem vaga hoje? ")
+    escreva(vaga)
+fimalgoritmo
+    `,
+    options: ['Tem vaga hoje? falso', 'Tem vaga hoje? verdadeiro', 'falso', 'verdadeiro'],
+    answer: 'Tem vaga hoje? falso',
+  },
+  {
+    starId: 7,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos itens para que o algoritmo esteja logicamente correto',
+    lines: [
+      {
+        id: 1,
+        texts: ['var'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['resposta: ', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['inicio'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['resposta <-', 'dropZone'],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: ['Escreva("A terra é plana e não redonda: ")'],
+        indentLevel: 1,
+      },
+      {
+        id: 6,
+        texts: ['Escreva("Resposta: ")'],
+        indentLevel: 1,
+      },
+      {
+        id: 7,
+        texts: ['Escreva(resposta)'],
+        indentLevel: 1,
+      },
+      {
+        id: 8,
+        texts: ['Fimalgoritmo'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'logico',
+      },
+      {
+        id: 2,
+        label: 'falso',
+      },
+      {
+        id: 3,
+        label: 'verdadeiro',
+      },
+      {
+        id: 4,
+        label: 'real',
       },
     ],
     correctItemsIdsSequence: [1, 2],

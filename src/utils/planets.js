@@ -40,18 +40,13 @@ export const planets = [
       },
       {
         id: 6,
-        name: 'Inteiros',
+        name: 'Inteiros e Reais',
         number: 3,
       },
       {
         id: 7,
-        name: 'Reais',
-        number: 4,
-      },
-      {
-        id: 8,
         name: 'Lógicos',
-        number: 5,
+        number: 4,
       },
     ],
   },

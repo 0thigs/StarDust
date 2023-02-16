@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import * as C from './styles.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { useLesson } from '../../hooks/useLesson.js';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
-import { useAuth } from '../../hooks/useAuth.js';
-import { useLesson } from '../../hooks/useLesson.js';
+import * as C from './styles.js';
 
 export function HeaderStatus() {
   const { user } = useAuth();

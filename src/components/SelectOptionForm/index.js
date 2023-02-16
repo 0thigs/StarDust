@@ -59,6 +59,7 @@ export function SelectOptionForm({ options, answer }) {
               selectedOption={selectedOption}
               disabled={isAnswerVerified}
               isAnswerWrong={isAnswerVerified && isAnswerWrong}
+              activeOpacity={0.7}
             >
               <C.Label currentOption={option} selectedOption={selectedOption}>
                 {option}

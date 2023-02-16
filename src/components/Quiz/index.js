@@ -44,6 +44,9 @@ export function Quiz({ coins }) {
     <C.Container>
       <LessonHeader />
       <C.QuestionStem animation={'fadeInDown'}>{currentQuestion.stem}</C.QuestionStem>
+      {currentQuestion.code && (
+        <C.QuestionCode animation={'fadeInLeft'}>{currentQuestion.code}</C.QuestionCode>
+      )}
       {currentQuestion.type === 'selection' && (
         <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
       )}
