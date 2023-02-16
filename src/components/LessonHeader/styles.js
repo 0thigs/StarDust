@@ -6,7 +6,7 @@ export const Container = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: ${lessonContainerWidth};
+  width: 90%;
 `;
 
 export const Main = styled.View`

@@ -14,7 +14,7 @@ export const QuestionStem = styled(Animatable.Text)`
   font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
   max-width: ${lessonContainerWidth};
-  margin: 8px 0;
+  margin: 8px 0 24px;
   text-align: center;
 `;
 

@@ -45,6 +45,7 @@ export const DefaultText = styled.Text`
   width: 100%;
   border-radius: 10px;
   padding: 16px;
+  
 `;
 
 export const EmphasisText = styled.Text`

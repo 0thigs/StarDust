@@ -31,19 +31,19 @@ export const questions = [
     items: [
       {
         id: 1,
-        label: 'mascar o chiclete',
-      },
-      {
-        id: 2,
         label: 'retirar embalagem do chiclete',
       },
       {
+        id: 2,
+        label: 'colocar chiclete na boca',
+      },
+      {
         id: 3,
-        label: 'jogar o chiclete fora',
+        label: 'mascar o chiclete',
       },
       {
         id: 4,
-        label: 'colocar chiclete na boca',
+        label: 'jogar o chiclete fora',
       },
     ],
   },

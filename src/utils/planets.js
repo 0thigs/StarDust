@@ -12,7 +12,7 @@ export const planets = [
       },
       {
         id: 2,
-        name: 'O que é um programa',
+        name: 'O que é pseudocódigo',
         number: 2,
       },
       {

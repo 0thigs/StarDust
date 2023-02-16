@@ -5,12 +5,17 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        body: 'Olá, seja bem-vindo. Primeiramente para começarmos essa jornada, é necessário deixar claro o conceito de lógica e algoritmos, pois esse conceito será de vital importância para o entendido de assuntos mais avançados, então vamos lá!.',
+        body: 'Olá, seja bem-vindo. Primeiramente para começarmos essa jornada, é necessário deixar claro o conceito de lógica e algoritmos, pois esse conceito será de vital importância para o entendimento de assuntos mais avançados, então vamos lá!.',
       },
       {
         type: 'default',
         title: 'Introdução',
-        body: 'Sempre que decidimos fazer qualquer atividade em nosso dia a dia, acabamos seguindo uma sequência lógica. Na maior parte do tempo, fazemos isso de maneira tão natural que nem nos damos conta, mas quando percebemos, conseguimos enxergar passos que levaram ao resultado final.',
+        body: 'Sempre que decidimos fazer qualquer atividade em nosso dia a dia, acabamos seguindo uma sequência lógica.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Na maior parte do tempo, fazemos isso de maneira tão natural que nem nos damos conta, mas quando percebemos, conseguimos enxergar passos que levaram ao resultado final.',
       },
       {
         type: 'default',
@@ -34,24 +39,24 @@ export const theories = [
       {
         type: 'code',
         body: `
-     algorimto Tomar Banho
-  
-      Início
-    
-        Pegar a toalha e roupas;
-        Entrar no banheiro e fechar a porta;
-        Tirar a roupa que está usando;
-        Ligar o chuveiro e esperar a água esquentar;
-        Entrar no box do banho;
-        Se molhar, ensaboar, enxaguar = banho;
-        Fechar o chuveiro;
-        Pegar a toalha e se secar;
-        Sair do box;
-        Se vestir com a roupa limpa;
-        Sair do banheiro.
-    
-      Fim
-            `,
+algorimto Tomar Banho
+
+Início
+
+    Pegar a toalha e roupas;
+    Entrar no banheiro e fechar a porta;
+    Tirar a roupa que está usando;
+    Ligar o chuveiro e esperar a água esquentar;
+    Entrar no box do banho;
+    Se molhar, ensaboar, enxaguar = banho;
+    Fechar o chuveiro;
+    Pegar a toalha e se secar;
+    Sair do box;
+    Se vestir com a roupa limpa;
+    Sair do banheiro.
+
+Fim
+`,
       },
       {
         type: 'default',
@@ -59,7 +64,7 @@ export const theories = [
       },
       {
         type: 'alert',
-        body: 'A diferença é que qualquer sequência lógica de passos pode ser considerado um algorimto, já em programação, os algoritmos são escritos de tal forma que sempre deve obedecer uma série de regras estabelecidas por cada linguagem de programação, o que a gente chama de sintaxe.',
+        body: 'A diferença é que qualquer sequência lógica de passos pode ser considerado um algorimto, já em programação, os algoritmos são escritos de tal forma que sempre devem obedecer uma série de regras estabelecidas por cada linguagem de programação, o que a gente chama de sintaxe.',
       },
       {
         type: 'default',

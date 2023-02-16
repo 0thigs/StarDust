@@ -18,6 +18,7 @@ export function Streak({
 }) {
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
+  console.log(week_status);
 
   async function updateWeekStatus(todayIndex) {
     const updatedWeekStatus = week_status.map((status, index) =>

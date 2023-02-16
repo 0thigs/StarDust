@@ -68,6 +68,10 @@ export function Theory({ starId = 2 }) {
   }
 
   async function handleSpeechButton(text) {
+    if (await Speech.isSpeakingAsync()) {
+      Speech.stop();
+      return;
+    }
     Speech.speak(text);
   }
 
