@@ -5,15 +5,13 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 0;
+  padding: 2px 24px;
   background-color: ${props => props.theme.colors.background};
   border-top-color: ${props => props.theme.colors.green_500};
   border-top-width: ${StyleSheet.hairlineWidth}px;
 `;
 
 export const TabButton = styled.TouchableOpacity`
-  /* background-color: red; */
-  flex: 1;
   justify-content: center;
   align-items: center;
 `;

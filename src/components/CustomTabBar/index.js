@@ -26,7 +26,7 @@ export function CustomTabBar({ state, navigation }) {
       </C.TabButton>
       <C.TabButton onPress={() => goTo('Ranking')}>
         <RankingIcon style={{ opacity: state.index === 3 ? 1 : 0.8 }} width="50" height="50" />
-        <C.TabLabel isActive={state.index === 2}>Ranking</C.TabLabel>
+        <C.TabLabel isActive={state.index === 3}>Ranking</C.TabLabel>
       </C.TabButton>
     </C.Container>
   );
