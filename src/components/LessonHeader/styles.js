@@ -27,7 +27,7 @@ export const Lives = styled.View`
 export const LivesCount = styled.Text`
   color: ${props => props.theme.colors.red_700};
   font-family: ${props => props.theme.fonts.regular};
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 4px;
 `;
 

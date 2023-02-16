@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
-import * as C from './styles';
-
-import CloseButtonIcon from '../../assets/GlobalAssets/close-button-icon.svg';
-import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
-import Rocket from '../../assets/GlobalAssets/rocket.png';
-
-import api from '../../services/api';
-
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
-
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+
+import { rockets } from '../../utils/rockets';
+
+import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
+
+import * as Icon from 'react-native-feather';
+import * as C from './styles';
+import theme from '../../global/styles/theme';
+import api from '../../services/api';
 
 export function LessonHeader() {
   const { user, setUser } = useAuth();
   const [state] = useLesson();
   const navigation = useNavigation();
-  
+  const Rocket = rockets.find(rocket => rocket.id === user.selected_rocket_id).image;
 
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
@@ -46,7 +46,7 @@ export function LessonHeader() {
     <C.Container>
       <C.Main>
         <C.CloseButton onPress={handleCloseButton}>
-          <CloseButtonIcon width={35} height={35} />
+          <Icon.X color={theme.colors.red_700} width={35} height={35} />
         </C.CloseButton>
         <C.Lives>
           <LifeIcon width={30} height={30} />
@@ -55,7 +55,13 @@ export function LessonHeader() {
       </C.Main>
       <C.ProgressBar>
         <C.Bar style={barAnimatedStyle}></C.Bar>
-        <C.Rocket source={Rocket} />
+        <Rocket
+          width={50}
+          height={50}
+          style={{
+            transform: [{ rotate: '90deg' }, { translateX: -15 }, { translateY: 15 }],
+          }}
+        />
       </C.ProgressBar>
     </C.Container>
   );
