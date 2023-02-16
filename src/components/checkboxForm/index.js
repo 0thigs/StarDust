@@ -28,7 +28,11 @@ export function CheckboxForm({ options, correctOptions }) {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
-    if (correctOptions.includes(...userOptions)) {
+    console.log({ correctOptions });
+    console.log({ userOptions });
+
+    const isAnswerCorrect = userOptions.every(userOption => correctOptions.includes(userOption));
+    if (isAnswerCorrect) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) dispatch({ type: 'changeQuestion' });

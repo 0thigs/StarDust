@@ -16,13 +16,13 @@ const fakeUser = {
   unlocked_achievements_ids: [1],
   unlocked_stars_ids: [1, 2],
   acquired_rockets_ids: [1, 2, 3],
-  selected_rocket_id: 1,
+  selected_rocket_id: 2,
   ranking_id: 1,
   streak: 0,
   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  starId: 5,
+  starId: 6,
 };
 
 export function AuthContextProvider({ children }) {

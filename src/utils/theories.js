@@ -542,13 +542,13 @@ fimalgoritmo
       {
         type: 'code',
         body: `
-jogador1 = "Pedro Santos"
-jogador2 = "Matheus Almeida"
+jogador1 = "Pedro"
+jogador2 = "Matheus"
 escreva("Os jogadores: " + jogador1 + "e" + jogador2)
 escreva("vão estreiar na quadra hoje!")
 
 Resultado:
-    Os jogadores Pedro Santos e Matheus Almeida vão estreinar na quadra hoje!
+Os jogadores Pedro e Matheus vão treinar na quadra hoje!
           `,
       },
       {
@@ -602,16 +602,27 @@ Resultado:
       {
         type: 'code',
         body: `
-    var
-        a = 10;
-        b = 5;
-    inicio
-        soma = a + b;
-        subtracao = a - b;
-        multiplicacao = a * b;
-        divisao = a / b;
-    fimalgoritmo
-          `,
+        var
+            a = 10;
+            b = 5;
+        inicio
+            soma = a + b;
+            subtracao = a - b;
+            multiplicacao = a * b;
+            divisao = a / b;
+
+            escreval(soma)
+            escreval(subtracao)
+            escreval(multiplicacao)
+            escreva(divisao)
+        fimalgoritmo
+
+        resultado:
+        15
+        5
+        50
+        2
+ `,
       },
       {
         type: 'alert',
@@ -620,7 +631,7 @@ Resultado:
       {
         type: 'default',
         title: null,
-        body: 'Falaremos mais sobre esses operadores futuramente. Agora como lidar com números reais',
+        body: 'Falaremos mais sobre esses operadores futuramente. Agora como lidar com números reais?',
       },
       {
         type: 'default',
