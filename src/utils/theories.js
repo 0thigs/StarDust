@@ -289,7 +289,7 @@ export const theories = [
       {
         type: 'code',
         body: `
-          nome_da_variavel: tipo;
+    nome_da_variavel: tipo;
           `,
       },
       {
@@ -330,7 +330,7 @@ export const theories = [
       {
         type: 'code',
         body: `
-          nome_da_variavel <- valor;
+    nome_da_variavel <- valor;
           `,
       },
       {
@@ -345,8 +345,8 @@ export const theories = [
       {
         type: 'code',
         body: `
-          nome <- "João";
-          idade <- 30;
+    nome <- "João";
+    idade <- 30;
           `,
       },
       {
@@ -372,8 +372,8 @@ export const theories = [
       {
         type: 'code',
         body: `
-          nome_completo <- "Lucas Silva"
-          nome_para_uso <- nome_completo
+    nome_completo <- "Lucas Silva"
+    nome_para_uso <- nome_completo
           `,
       },
       {
@@ -410,14 +410,14 @@ export const theories = [
       {
         type: 'code',
         body: `
-          algoritmo "Exemplo"
-          var
-              nome: caractere
-              idade: inteiro
-          inicio
-              escreva("Seu nome é: ", nome)
-              escreva("Sua idade é: ", idade)
-          fimalgoritmo
+algoritmo "Exemplo"
+var
+    nome: caractere
+    idade: inteiro
+inicio
+    escreva("Seu nome é: ", nome)
+    escreva("Sua idade é: ", idade)
+fimalgoritmo
           `,
       },
       {
@@ -466,12 +466,7 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        body: 'Então, o tipo caracter é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
-      },
-      {
-        type: 'default',
-        title: null,
-        body: 'Então, o tipo caracter é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
+        body: 'Então, o tipo caractere é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
       },
       {
         type: 'default',
@@ -488,7 +483,7 @@ export const theories = [
       {
         type: 'default',
         title: 'Declaração de caractere',
-        body: 'Agora Você pode atribuir valores a variáveis do tipo caracter da seguinte forma:',
+        body: 'Agora você pode atribuir valores a variáveis do tipo caractere da seguinte forma:',
       },
       {
         type: 'code',
@@ -512,24 +507,54 @@ export const theories = [
       {
         type: 'code',
         body: `
-        algoritmo "aprendendoSobreStrings"
+algoritmo "aprendendoSobreStrings"
 
-        var
-          nome: caractere
-          sobrenome: caractere
-          frase: caractere 
+var
+    nome: caractere
+    sobrenome: caractere
+    frase: caractere 
 
-        inicio
-            nome <- "João"
-            sobrenome <- "Santos"
-            frase <- "Olá, mundo!" 
-        fimalgoritmo 
+inicio
+    nome <- "João"
+    sobrenome <- "Santos"
+    frase <- "Olá, mundo!" 
+fimalgoritmo 
           `,
       },
       {
         type: 'default',
-        title: 'Declaração de caractere',
-        body: 'Agora que você conchece mais sobre strings, que tal reforçar isso com algumas questões?.',
+        title: 'Concatenação',
+        body: 'É possível também unir textos por meio do operador +, ação que chamamos de concatenação:',
+      },
+      {
+        type: 'code',
+        body: `
+    escreva('Hoje fui para' + 'padaria')
+
+    Resultado:
+        Hoje fui para padaria
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Você também pode concatenar conteúdos de texto que estão em variáveis. Veja o exemplo',
+      },
+      {
+        type: 'code',
+        body: `
+jogador1 = "Pedro Santos"
+jogador2 = "Matheus Almeida"
+escreva("Os jogadores: " + jogador1 + "e" + jogador2)
+escreva("vão estreiar na quadra hoje!")
+
+Resultado:
+    Os jogadores Pedro Santos e Matheus Almeida vão estreinar na quadra hoje!
+          `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que você conchece mais sobre tipo caractere, que tal reforçar isso com algumas questões?.',
       },
     ],
   },
@@ -622,16 +647,17 @@ export const theories = [
       {
         type: 'code',
         body: `
-        pi <- 3.14;
+    pi <- 3.14;
           `,
       },
       {
         type: 'alert',
+        title: null,
         body: 'Em outras palavras, um tipo inteiro sempre vai ser um número inteiro, enquanto um tipo real sempre vai ser um número real dã.',
       },
       {
         type: 'default',
-        title: 'Declaração de real',
+        title: null,
         body: 'Agora vamos testar o que você aprendeu sobre numéricos',
       },
     ],

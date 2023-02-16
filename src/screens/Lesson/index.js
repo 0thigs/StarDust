@@ -8,6 +8,7 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 import * as C from './styles';
 
+
 export function Lesson() {
   const { user } = useAuth();
   const [state, dispatch] = useLesson();

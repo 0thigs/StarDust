@@ -4,6 +4,7 @@ import * as C from './styles';
 import Crying from '../../assets/ModalAssets/crying-animation.json';
 import Denying from '../../assets/ModalAssets/denying-animation.json';
 import Earning from '../../assets/ModalAssets/earning-animation.json';
+import Asking from '../../assets/ModalAssets/asking-animation.json';
 
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
@@ -24,6 +25,12 @@ const effects = [
     id: 'denying',
     animation: Denying,
     sound: require('../../assets/ModalAssets/denying-sound.wav'),
+  },
+  {
+    id: 'asking',
+    animation: Asking,
+    sound: require('../../assets/ModalAssets/asking-sound.wav'),
+
   },
 ];
 

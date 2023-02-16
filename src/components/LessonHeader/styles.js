@@ -1,11 +1,12 @@
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
+import { lessonContainerWidth } from '../../screens/Lesson/styles';
 
 export const Container = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 350px;
+  width: ${lessonContainerWidth};
 `;
 
 export const Main = styled.View`

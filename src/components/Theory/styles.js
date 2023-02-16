@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
+import { lessonContainerWidth } from '../../screens/Lesson/styles';
 
-export const minHeightText = 150;
+export const minHeightText = 250;
 
 export const Container = styled.View`
   flex: 1;
   margin-top: 40px;
-  width: 350px;
+  width: ${lessonContainerWidth};
 `;
 
 export const Title = styled(Animatable.Text)`
@@ -26,7 +27,6 @@ export const TextContainer = styled(Animatable.View)`
   flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
   align-items: center;
   margin: 16px 0;
-  min-height: ${minHeightText}px;
 `;
 
 export const DefaultTextTitle = styled.Text`

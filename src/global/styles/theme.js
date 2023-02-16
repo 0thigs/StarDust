@@ -3,7 +3,8 @@ export default {
     background: '#141a1b',
 
     green_900: '#07303B',
-    green_700: '#027558',
+    green_800: '#027558',
+    green_700: '#20925d',
     green_500: '#0FE983',
     green_300: '#00FF88',
 
