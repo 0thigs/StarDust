@@ -31,10 +31,11 @@ export function Quiz({ coins }) {
   }, [state.currentStage, state.secondsCount]);
 
   useEffect(() => {
-    if (state.wrongsCount === 5) {
+      console.log(state.livesCount);
+    if (state.livesCount === 0) {
       setIsModalOpen(true);
     }
-  }, [state.wrongsCount]);
+  }, [state.livesCount]);
 
   useEffect(() => {
     setCurrentQuestion(state.questions[state.currentQuestion]);

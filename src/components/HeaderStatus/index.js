@@ -18,7 +18,7 @@ export function HeaderStatus() {
   }
 
   useEffect(() => {
-    updateStatus();
+    // updateStatus();
   }, []);
 
   return (
