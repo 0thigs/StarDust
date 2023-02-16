@@ -33,7 +33,7 @@ export function Ranking() {
           data={rankings}
           keyExtractor={achievement => achievement.id}
           renderItem={({ item: { id, name, image } }) => (
-            <Badge id={id} name={name} image={image} isCurrentRanking={currentRanking.id === id} />
+            <Badge id={id} name={name} image={image} currentRanking={currentRanking} />
           )}
           horizontal
           onScrollToIndexFailed={() => {
@@ -42,6 +42,9 @@ export function Ranking() {
           }}
         />
       </C.Badges>
+      <C.Users>
+
+      </C.Users>
     </C.Container>
   );
 }

@@ -13,4 +13,6 @@ export const Badges = styled.ImageBackground`
 
 export const BadgesList = styled.FlatList``;
 
+export const Users = styled.View``;
+
 

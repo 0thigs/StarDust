@@ -17,7 +17,7 @@ const fakeUser = {
   unlocked_stars_ids: [1],
   acquired_rockets_ids: [1],
   selected_rocket_id: 2,
-  ranking_id: 3,
+  ranking_id: 1,
   streak: 0,
   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
   completed_planets: 0,

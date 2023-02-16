@@ -6,7 +6,12 @@ export const Container = styled.View`
   justify-content: center;
   margin: 0 8px;
   padding: 12px 0;
+  position: relative;
+`;
 
+export const Lock = styled.View`
+  position: absolute;
+  top: 35%;
 `;
 
 export const Name = styled.Text`

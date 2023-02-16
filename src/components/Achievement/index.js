@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import * as C from './styles';
 
-import Lock from '../../assets/AchievementAssets/lock.svg';
-
 export function Achievement({
   title,
   icon: Icon,
