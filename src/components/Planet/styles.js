@@ -13,21 +13,22 @@ export const PlanetInfo = styled(Animated.View)`
 `;
 
 export const PlanetSign = styled(Animated.View)`
-  background-color: ${props => props.theme.colors.green_700};
+  background-color: ${props => props.theme.colors.green_800};
   border-radius: 10px;
-  padding: 0 12px;
+  padding: 0 16px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   margin-left: 8px;
   height: 64px;
+  max-width: 175px;
 `;
 
 export const PlanetName = styled.Text`
   color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.bold};
+  font-family: ${props => props.theme.fonts.semibold};
   font-size: 14px;
-  margin-left: 4px;
+  margin-left: 12px;
 `;
 
 export const StarsList = styled.FlatList``;

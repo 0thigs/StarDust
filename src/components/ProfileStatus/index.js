@@ -26,7 +26,7 @@ export function ProfileStatus({
   return (
     <C.Container>
       <C.SettingsButton activeOpacity={0.7} onPress={handleSettingsButton}>
-        <SettingsIcon width={40} height={40} />
+        <SettingsIcon width={35} height={35} />
       </C.SettingsButton>
       <C.Avatar source={{ uri: avatar }} />
       <C.Name>{name}</C.Name>
