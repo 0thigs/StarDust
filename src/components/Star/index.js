@@ -48,7 +48,7 @@ export function Star({ id, name, number, isDisabled }) {
     setTimeout(() => {
       setUser({ ...user, starId: id });
       navigation.navigate('Lesson');
-    }, 500);
+    }, delay);
   }
 
   const RocketRotate = useSharedValue(180);

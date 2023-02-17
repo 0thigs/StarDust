@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLesson } from '../../hooks/useLesson';
 
 import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
-import { Button } from '../../components/Button';
+import { Button } from '../Button';
 import { FabButton } from '../FabButton';
+import { Modal } from '../Modal';
 import { LessonHeader } from '../LessonHeader';
-import { useLesson } from '../../hooks/useLesson';
 import { theories } from '../../utils/theories';
 import { planets } from '../../utils/planets';
 
 import { Volume2 } from 'react-native-feather';
-
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/styles/prism';
 
@@ -20,7 +20,6 @@ import TypeWriter from 'react-native-typewriter';
 import * as Speech from 'expo-speech';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
-import { Modal } from '../Modal';
 
 export function Theory({ starId = 2 }) {
   const [, dispatch] = useLesson();

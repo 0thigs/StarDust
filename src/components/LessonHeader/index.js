@@ -10,12 +10,13 @@ import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
 
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
+import * as Speech from 'expo-speech';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
 export function LessonHeader() {
   const { user, setUser } = useAuth();
-  const [state] = useLesson();
+  const [state, dispatch] = useLesson();
   const navigation = useNavigation();
   const Rocket = rockets.find(rocket => rocket.id === user.selected_rocket_id).image;
 
@@ -33,6 +34,13 @@ export function LessonHeader() {
       await api.updateUser('lives', state.livesCount, user.id);
       setUser({ ...user, lives: state.livesCount });
     }
+
+    dispatch({ type: 'resetState' });
+
+    if (await Speech.isSpeakingAsync()) {
+      Speech.stop();
+    }
+
     navigation.reset({
       routes: [{ name: 'DrawerRoutes' }],
     });

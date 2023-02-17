@@ -7,7 +7,8 @@ export const minHeightText = 250;
 export const Container = styled.View`
   flex: 1;
   margin-top: 40px;
-  width: ${lessonContainerWidth};
+  align-items: center;
+  width: 100%;
 `;
 
 export const Title = styled(Animatable.Text)`
@@ -18,10 +19,10 @@ export const Title = styled(Animatable.Text)`
 `;
 
 export const Theories = styled.ScrollView`
+  width: ${lessonContainerWidth};
 `;
 
-export const Theory = styled.View`
-`;
+export const Theory = styled.View``;
 
 export const TextContainer = styled(Animatable.View)`
   flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
@@ -45,7 +46,6 @@ export const DefaultText = styled.Text`
   width: 100%;
   border-radius: 10px;
   padding: 16px;
-  
 `;
 
 export const EmphasisText = styled.Text`
