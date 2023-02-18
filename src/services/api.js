@@ -18,13 +18,12 @@ export default {
     return user;
   },
 
-  getUsersByRanking: async rankingId => {
-    const { data, error } = await supabase.from('users').select('*').eq('ranking_id', rankingId);
+  getUsersByCurrentRanking: async rankingId => {
+    const { data, error, status } = await supabase.from('users').select('*').eq('ranking_id', rankingId);
     if (error) {
       throw new Error(error.message);
     }
-    const user = data[0];
-    return user;
+    return data;
   },
 
   updateUser: async (column, data, userId) => {

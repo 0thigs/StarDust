@@ -1,39 +1,52 @@
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+
 import { rankings } from '../../utils/rankings';
 import { Badge } from '../../components/Badge';
-7;
+import { User } from '../../components/User';
 
-import { useEffect, useRef } from 'react';
-
-import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
+import Background from '../../assets/GlobalAssets/background.png';
 import * as C from './styles';
+import api from '../../services/api';
 
 export function Ranking() {
   const { user } = useAuth();
-  const badgeListRef = useRef(null);
-  const currentRanking = rankings.find(ranking => ranking.id === user.ranking_id);
+  const [users, setUsers] = useState([]);
+  const badgesListRef = useRef(null);
+  const currentRankingId = rankings.find(ranking => ranking.id === user.ranking_id).id;
 
   function scrollToCurrentRanking() {
-    badgeListRef.current.scrollToIndex({
-      index: currentRanking.id - 1,
+    badgesListRef.current.scrollToIndex({
+      index: currentRankingId - 1,
       viewPosition: 0.5,
     });
   }
 
+  async function getUsersByCurrentRanking() {
+    try {
+     const users = await api.getUsersByCurrentRanking(currentRankingId);
+     console.log(Array.isArray(users))
+     setUsers(users);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     scrollToCurrentRanking();
+    getUsersByCurrentRanking()
+
   }, []);
 
   return (
     <C.Container>
-      <C.Badges source={RocketBackground}>
+      <C.Badges source={Background}>
         <C.BadgesList
-          ref={badgeListRef}
-          initialScrollIndex={0}
+          ref={badgesListRef}
           data={rankings}
           keyExtractor={achievement => achievement.id}
           renderItem={({ item: { id, name, image } }) => (
-            <Badge id={id} name={name} image={image} currentRanking={currentRanking} />
+            <Badge id={id} name={name} image={image} currentRankingId={currentRankingId} />
           )}
           horizontal
           onScrollToIndexFailed={() => {
@@ -42,9 +55,15 @@ export function Ranking() {
           }}
         />
       </C.Badges>
-      <C.Users>
-
-      </C.Users>
+      <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
+      
+      <C.UsersList
+        data={users}
+        keyExtractor={user => user.id}
+        renderItem={({ item: { id, name, avatar, xp } }, index) => (
+          <User position={index} id={id} name={name} avatar={avatar} xp={xp} />
+        )}
+      />
     </C.Container>
   );
 }
