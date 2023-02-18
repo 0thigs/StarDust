@@ -4,10 +4,11 @@ import { challenges } from '../../utils/challenges';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
+import { Code } from '../../components/Code';
 const iconSize = 25;
 
 export function Challenge({ id = 1 }) {
-  const { title, texts } = challenges.find(challenge => challenge.id === id);
+  const { title, texts, code } = challenges.find(challenge => challenge.id === id);
 
   return (
     <C.Container>
@@ -34,7 +35,8 @@ export function Challenge({ id = 1 }) {
         </C.Navigation>
       </C.Header>
 
-      <Problem title={title} texts={texts} />
+      {/* <Problem title={title} texts={texts} /> */}
+      <Code code={code} />
     </C.Container>
   );
 }
