@@ -4,6 +4,8 @@ import { useLesson } from '../../hooks/useLesson';
 import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
+import { Text } from '../Text';
+
 import { Button } from '../Button';
 import { FabButton } from '../FabButton';
 import { Modal } from '../Modal';
@@ -48,9 +50,6 @@ export function Theory({ starId = 2 }) {
     if (!textsFromJSON[index]) return;
 
     setIndex(index => index + 1);
-
-    const previousText = texts.slice(-1);
-    previousText.isRendered = true;
     setTexts(texts => {
       const previousTexts = texts.map(text => ({ ...text, isRendered: true }));
       const nextText = textsFromJSON[index];
@@ -88,65 +87,12 @@ export function Theory({ starId = 2 }) {
         onScroll={event => handleScroll(event.nativeEvent)}
         onContentSizeChange={isScrollEnd && scrollToEnd}
       >
-        {texts.map((text, index) => (
+        {texts.map(({ type, title, body, isRendered }, index) => (
           <C.Theory key={index}>
-            {text.type === 'default' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
-                {text.title && <C.DefaultTextTitle>{text.title}</C.DefaultTextTitle>}
-                <C.DefaultText>
-                  <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
-                    <Volume2 width={25} height={25} color={theme.colors.white} />
-                  </C.SpeechButton>
-                  {!text.isRendered ? (
-                    <TypeWriter typing={typing} maxDelay={maxDelay}>
-                      {text.body}
-                    </TypeWriter>
-                  ) : (
-                    text.body
-                  )}
-                </C.DefaultText>
-              </C.TextContainer>
-            )}
-            {text.type === 'list' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
-                <C.EmphasisText>
-                  <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
-                    <Volume2 width={25} height={25} color={theme.colors.blue_300} />
-                  </C.SpeechButton>
-                  {!text.isRendered ? (
-                    <TypeWriter typing={typing} maxDelay={maxDelay}>
-                      {text.body}
-                    </TypeWriter>
-                  ) : (
-                    text.body
-                  )}
-                </C.EmphasisText>
-              </C.TextContainer>
-            )}
-            {text.type === 'alert' && (
-              <C.TextContainer type={text.type} animation={!text.isRendered ? 'fadeInLeft' : null}>
-                <AlertIcon />
-                <C.AlertText>
-                  <C.SpeechButton onPress={() => handleSpeechButton(text.body)}>
-                    <Volume2 width={25} height={25} color={theme.colors.black} />
-                  </C.SpeechButton>
-                  {!text.isRendered ? (
-                    <TypeWriter typing={typing} maxDelay={maxDelay}>
-                      {text.body}
-                    </TypeWriter>
-                  ) : (
-                    text.body
-                  )}
-                </C.AlertText>
-              </C.TextContainer>
-            )}
-            {text.type === 'code' && (
-              <SyntaxHighlighter language="javascript" style={okaidia} highlighter={'prism'}>
-                {text.body}
-              </SyntaxHighlighter>
-            )}
+            <Text type={type} title={title} body={body} isRendered={isRendered} />
           </C.Theory>
         ))}
+        
         <Button
           title={index >= textsFromJSON.length ? 'Praticar' : 'Continuar'}
           onPress={
