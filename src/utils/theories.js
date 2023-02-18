@@ -745,7 +745,8 @@ export const theories = [
       ],
     },
   ];
-  
+
+  // Work in Progress
   // body: `
   // ALGORITMO “declaracao”
   
