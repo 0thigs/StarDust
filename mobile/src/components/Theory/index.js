@@ -2,22 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 
 import theme from '../../global/styles/theme';
-import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
 import { Text } from '../Text';
-
 import { Button } from '../Button';
 import { FabButton } from '../FabButton';
 import { Modal } from '../Modal';
 import { LessonHeader } from '../LessonHeader';
 import { theories } from '../../utils/theories';
 import { planets } from '../../utils/planets';
-
-import { Volume2 } from 'react-native-feather';
-import SyntaxHighlighter from 'react-native-syntax-highlighter';
-import { okaidia } from 'react-syntax-highlighter/styles/prism';
-
-import TypeWriter from 'react-native-typewriter';
 
 import * as Speech from 'expo-speech';
 import * as Icon from 'react-native-feather';
@@ -31,8 +23,6 @@ export function Theory({ starId = 2 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrollEnd, setIsScrollEnd] = useState(false);
   const scrollRef = useRef();
-  const maxDelay = 10;
-  const typing = 1;
   const textsFromJSON = theories.filter(theory => theory.starId === starId)[0].texts;
   const starName = planets
     .find(planet => planet.stars.some(star => star.id === starId))
@@ -88,11 +78,15 @@ export function Theory({ starId = 2 }) {
         onContentSizeChange={isScrollEnd && scrollToEnd}
       >
         {texts.map(({ type, title, body, isRendered }, index) => (
-          <C.Theory key={index}>
-            <Text type={type} title={title} body={body} isRendered={isRendered} />
-          </C.Theory>
+          <Text
+            key={`text-${index}`}
+            type={type}
+            title={title}
+            body={body}
+            isRendered={isRendered}
+          />
         ))}
-        
+
         <Button
           title={index >= textsFromJSON.length ? 'Praticar' : 'Continuar'}
           onPress={

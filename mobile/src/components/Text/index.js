@@ -17,9 +17,12 @@ export function Text({ type, title, body, isRendered }) {
       {type === 'alert' && <AlertIcon />}
       {title && <C.Title>{title}</C.Title>}
       {type === 'code' ? (
-        <SyntaxHighlighter language="javascript" style={okaidia} highlighter={'prism'}>
-          {body}
-        </SyntaxHighlighter>
+        <>
+          <C.Title>Exemplo</C.Title>
+          <SyntaxHighlighter language="javascript" style={okaidia} highlighter={'prism'}>
+            {body}
+          </SyntaxHighlighter>
+        </>
       ) : (
         <C.Body type={type}>
           <C.SpeechButton onPress={() => handleSpeechButton(body)}>
@@ -32,9 +35,9 @@ export function Text({ type, title, body, isRendered }) {
             />
           </C.SpeechButton>
           {!isRendered ? (
-            <TypeWriter typing={typing} maxDelay={maxDelay}>
-              {body}
-            </TypeWriter>
+              <TypeWriter typing={typing} maxDelay={maxDelay}>
+                {body}
+              </TypeWriter>
           ) : (
             body
           )}

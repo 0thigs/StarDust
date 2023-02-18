@@ -1,11 +1,15 @@
 import React from 'react';
 import * as C from './styles';
 
-export function Problem() {
+import { Text } from '../Text';
+
+export function Problem({ title, texts }) {
   return (
     <C.Container>
-        <C.Title>Somar dois números</C.Title>
-        
+      <C.Title>{title}</C.Title>
+      {texts.map(({ type, body }, index) => (
+        <Text key={`text-${index}`} type={type} body={body} isRendered={false} />
+      ))}
     </C.Container>
   );
 }
