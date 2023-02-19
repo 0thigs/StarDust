@@ -1,40 +1,37 @@
-import * as C from './styles';
-import { Problem } from '../../components/Problem';
-import { Code } from '../../components/Code';
-import { Result } from '../../components/Result';
+import { useCallback, useRef, useState } from 'react';
+import { useChallenge } from '../../hooks/useChallenge';
 import { ChallengeHeader } from '../../components/ChallengeHeader';
-import { challenges } from '../../utils/challenges';
 import { Onboarding } from '../../components/Onboarding';
-import { useAnimatedScrollHandler } from 'react-native-reanimated';
+import * as C from './styles';
 
-export function Challenge({ id = 1 }) {
-  const { title, texts, code, testCases } = challenges.find(challenge => challenge.id === id);
+export function Challenge() {
+  const [state] = useChallenge();
+  const [indicatorPositionX, setIndicatorPositionX] = useState(0);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const sliderRef = useRef(null);
 
-  const slides = [
-    {
-      id: 1,
-      component: <Problem title={title} texts={texts} />,
-    },
-    {
-      id: 2,
-      component: <Code code={code} />,
-    },
-    {
-      id: 3,
-      component: <Result testCases={testCases} />,
-    },
-  ];
+  const handleSliderSwipe = useCallback(({ viewableItems }) => {
+    console.log({ viewableItems });
+  }, []);
 
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    console.log(event.contentOffset.x);
+  function handleSliderScroll({ contentOffset, layoutMeasurement }) {
+    setIndicatorPositionX(contentOffset.x);
+    setSlideWidth(layoutMeasurement.width);
+  }
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+    waitForInteraction: true,
+    minimumViewTime: 5,
   });
 
   return (
     <C.Container>
-      <ChallengeHeader />
+      <ChallengeHeader indicatorPositionX={indicatorPositionX} slideWidth={slideWidth} sliderRef={sliderRef} />
 
       <C.Slider
-        data={slides}
+        ref={sliderRef}
+        data={state.slides}
         keyExtractor={slide => slide.id}
         renderItem={({ item: { component } }) => <Onboarding component={component} />}
         horizontal
@@ -42,7 +39,7 @@ export function Challenge({ id = 1 }) {
         pagingEnabled
         bounces={false}
         scrollEventThrottle={32}
-        onScroll={scrollHandler}
+        onScroll={event => handleSliderScroll(event.nativeEvent)}
       />
     </C.Container>
   );

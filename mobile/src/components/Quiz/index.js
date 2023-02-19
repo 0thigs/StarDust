@@ -31,7 +31,6 @@ export function Quiz({ coins }) {
   }, [state.currentStage, state.secondsCount]);
 
   useEffect(() => {
-      console.log(state.livesCount);
     if (state.livesCount === 0) {
       setIsModalOpen(true);
     }

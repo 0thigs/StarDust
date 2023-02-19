@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import {
+  Extrapolate,
   interpolate,
   Transition,
   useAnimatedStyle,
@@ -23,17 +24,26 @@ const transition = (
 export function TestCase({ number, input, expectedOutput }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
-  const ButtonRotation = useSharedValue(false);
+  const ButtonRotation = useSharedValue(true);
 
   const ButtonAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ rotate: `${interpolate(ButtonRotation.value, [false, true], [1, 180])}deg` }],
+      transform: [
+        {
+          rotate: `${interpolate(
+            ButtonRotation.value,
+            [true, false],
+            [1, 180],
+            Extrapolate.CLAMP
+          )}deg`,
+        },
+      ],
     };
   });
 
   function handlePressButton() {
     containerRef.current.animateNextTransition();
-    setIsOpen(!isOpen);
+    setIsOpen(isOpen => !isOpen);
     ButtonRotation.value = withTiming(isOpen, { duration: 500 });
   }
 
@@ -44,12 +54,12 @@ export function TestCase({ number, input, expectedOutput }) {
           <Check width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.Icon>
         <C.Heading>Teste de Caso #{number}</C.Heading>
-        <C.Button onStartShouldSetResponder={handlePressButton} style={ButtonAnimatedStyle} activeOpacity={1}>
-          <ArrowDown
-            width={arrowSize}
-            height={arrowSize}
-            color={theme.colors.gray_500}
-          />
+        <C.Button
+          onStartShouldSetResponder={handlePressButton}
+          style={ButtonAnimatedStyle}
+          activeOpacity={1}
+        >
+          <ArrowDown width={arrowSize} height={arrowSize} color={theme.colors.gray_500} />
         </C.Button>
       </C.Header>
       {isOpen && (

@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
-import api from '../services/api';
 import { supabase } from '../services/supabase';
+import api from '../services/api';
 
 export const AuthContext = createContext();
 
@@ -23,6 +23,7 @@ const fakeUser = {
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
   starId: 7,
+  challengeId: 1,
 };
 
 export function AuthContextProvider({ children }) {

@@ -8,4 +8,4 @@ export const Container = styled.SafeAreaView`
   padding: 32px 0 0;
 `;
 
-export const Slider = styled(Animated.FlatList)``;
+export const Slider = styled.FlatList``;
