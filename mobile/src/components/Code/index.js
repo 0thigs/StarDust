@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import * as C from './styles';
-import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
-import { keys } from '../../utils/keys';
 import { Keyboard } from 'react-native';
+import { keys } from '../../utils/keys';
+import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
+import * as C from './styles';
 
 export function Code({ code }) {
   const [posicaoCursor, setPosicaoCursor] = useState(0);
@@ -11,7 +11,6 @@ export function Code({ code }) {
 
   function handleCodeChange(code) {
     console.log(posicaoCursor);
-    
   }
 
   function handleKeyPress() {
@@ -58,7 +57,6 @@ export function Code({ code }) {
             </C.CodeButton>
           )}
           horizontal
-          showsHorizontalScrollIndicator={false}
         />
         <C.CodeButton onPress={handleRunPress}>
           <C.Title isRunButton={true}>executar</C.Title>

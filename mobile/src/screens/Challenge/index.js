@@ -5,10 +5,11 @@ import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import { Code } from '../../components/Code';
+import { Result } from '../../components/Result';
 const iconSize = 25;
 
 export function Challenge({ id = 1 }) {
-  const { title, texts, code } = challenges.find(challenge => challenge.id === id);
+  const { title, texts, code, testCases } = challenges.find(challenge => challenge.id === id);
 
   return (
     <C.Container>
@@ -35,8 +36,9 @@ export function Challenge({ id = 1 }) {
         </C.Navigation>
       </C.Header>
 
-      {/* <Problem title={title} texts={texts} /> */}
-      <Code code={code} />
+      {/* <Problem title={title} texts={texts} />
+      <Code code={code} /> */}
+      <Result testCases={testCases} />
     </C.Container>
   );
 }

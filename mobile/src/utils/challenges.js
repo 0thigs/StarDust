@@ -19,14 +19,21 @@ Saída: 12
         body: 'Lembre-se de usar o comando leia para pegar os dados de entrada',
       },
     ],
-    cases: {
-      input: [
-        [2, 2],
-        [4, 4],
-        [8, 8],
-      ],
-      output: ['4', '8', '16'],
-    },
+    testCases: [
+      {
+        input: [2, 2],
+        expectedOutput: '4',
+      },
+      {
+        input: [4, 4],
+        expectedOutput: '8',
+      },
+      {
+        input: [6, 6],
+        expectedOutput: '12',
+      },
+    ],
+
     code: `
 Algoritmo "Calculoimc"
 
