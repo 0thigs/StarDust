@@ -15,9 +15,6 @@ export function Code({ code, setUserCode, verifyUserCode }) {
     verifyUserCode();
   }
 
-  useEffect(() => {
-  }, []);
-
   return (
     <C.Container>
       <CodeEditor
@@ -35,8 +32,8 @@ export function Code({ code, setUserCode, verifyUserCode }) {
         maxLength={40}
         onSelectionChange={({ nativeEvent }) => setPosicaoCursor(nativeEvent.selection.start)}
       />
-      {/* <C.CodeButtons>
-        <C.KeysList
+      <C.CodeButtons>
+        {/* <C.KeysList
           data={keys}
           keyExtractor={key => key}
           renderItem={({ item: key }) => (
@@ -45,11 +42,11 @@ export function Code({ code, setUserCode, verifyUserCode }) {
             </C.CodeButton>
           )}
           horizontal
-        />
+        /> */}
         <C.CodeButton onPress={handleRunPress}>
           <C.Title isRunButton={true}>executar</C.Title>
         </C.CodeButton>
-      </C.CodeButtons> */}
+      </C.CodeButtons>
     </C.Container>
   );
 }
