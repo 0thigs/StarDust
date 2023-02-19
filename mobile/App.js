@@ -10,12 +10,10 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
-
 import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
-import { ChallengeProvider } from './src/contexts/ChallengeContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
-
+import { ChallengeProvider } from './src/contexts/ChallengeContext';
 import './src/libs/dayjs';
 
 export default function App() {

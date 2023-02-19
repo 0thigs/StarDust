@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 100%;
   flex: 1;
+  width: 100%;
+  position: relative;
 `;
 
 export const CodeButtons = styled.View`
-  width: 100%;
-  flex-direction: row;
   position: absolute;
+  left: 0;
   bottom: 0;
   background-color: ${props => props.theme.colors.gray_900};
 `;

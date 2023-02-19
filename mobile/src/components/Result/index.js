@@ -3,7 +3,6 @@ import { TestCase } from '../TestCase';
 import * as C from './styles';
 
 export function Result({ testCases }) {
-  console.log(testCases);
   return (
     <C.Container>
       {testCases.map(({ input, expectedOutput }, index) => (

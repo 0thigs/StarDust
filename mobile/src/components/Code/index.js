@@ -1,32 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
-import { Keyboard } from 'react-native';
+import { useEffect, useRef } from 'react';
 import { keys } from '../../utils/keys';
 import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
 import * as C from './styles';
 
-export function Code({ code }) {
-  const [posicaoCursor, setPosicaoCursor] = useState(0);
-
+export function Code({ code, setUserCode, verifyUserCode }) {
   const codeEditorRef = useRef(null);
 
-  function handleCodeChange(code) {
-    console.log(posicaoCursor);
-  }
-
-  function handleKeyPress() {
-    console.log('Press');
+  function handleCodeChange(userCode) {
+    setUserCode(userCode);
   }
 
   function handleRunPress() {
     console.log('Press');
-  }
-
-  function keepKeyboard() {
-    console.log(codeEditorRef.current);
+    verifyUserCode();
   }
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidHide', keepKeyboard);
   }, []);
 
   return (
@@ -41,7 +30,6 @@ export function Code({ code }) {
         language="python"
         syntaxStyle={CodeEditorSyntaxStyles.atomOneDark}
         showLineNumbers
-        autoFocus
         initialValue={code}
         onChange={handleCodeChange}
         maxLength={40}

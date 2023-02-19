@@ -1,26 +1,34 @@
-import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
-import { Audio } from 'expo-av';
+import { useState } from 'react';
+import { Problem } from '../components/Problem';
+import { Code } from '../components/Code';
+import { Result } from '../components/Result';
+import { challenges } from '../utils/challenges';
 
-export const Sound = forwardRef(({ audio }, ref) => {
-  const [sound, setSound] = useState();
+export function useChallenge(id) {
+  const { title, texts, code, testCases } = challenges.find(challenge => challenge.id === id);
+  const [userCode, setUserCode] = useState('');
 
-  async function playSound() {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(require(audio));
-    setSound(sound);
+  const slides = [
+    {
+      id: 1,
+      component: <Problem title={title} texts={texts} />,
+    },
+    {
+      id: 2,
+      component: <Code code={code} setUserCode={setUserCode} />,
+    },
+    {
+      id: 3,
+      component: <Result testCases={testCases} />,
+    },
+  ];
 
-    console.log('Playing Sound');
-    await sound.playAsync();
+  function verifyUserCode() {
+    console.log(userCode);
   }
 
-  useImperativeHandle(ref, () => playSound);
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
-});
+  return {
+    slides,
+    setUserCode,
+  };
+}

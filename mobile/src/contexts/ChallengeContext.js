@@ -15,6 +15,11 @@ const ChallengeReducer = (state, action) => {
         ...state,
         indicatorPositionX: action.payload,
       };
+    case 'setUserCode':
+      return {
+        ...state,
+        indicatorPositionX: action.payload,
+      };
   }
 };
 
