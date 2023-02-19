@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -7,4 +8,4 @@ export const Container = styled.SafeAreaView`
   padding: 32px 0 0;
 `;
 
-
+export const Slider = styled(Animated.FlatList)``;

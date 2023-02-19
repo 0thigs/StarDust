@@ -47,7 +47,7 @@ export function Code({ code }) {
         maxLength={40}
         onSelectionChange={({ nativeEvent }) => setPosicaoCursor(nativeEvent.selection.start)}
       />
-      <C.CodeButtons>
+      {/* <C.CodeButtons>
         <C.KeysList
           data={keys}
           keyExtractor={key => key}
@@ -61,7 +61,7 @@ export function Code({ code }) {
         <C.CodeButton onPress={handleRunPress}>
           <C.Title isRunButton={true}>executar</C.Title>
         </C.CodeButton>
-      </C.CodeButtons>
+      </C.CodeButtons> */}
     </C.Container>
   );
 }

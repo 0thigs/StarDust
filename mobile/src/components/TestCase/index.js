@@ -25,8 +25,6 @@ export function TestCase({ number, input, expectedOutput }) {
   const containerRef = useRef(null);
   const ButtonRotation = useSharedValue(false);
 
-  console.log(input)
-
   const ButtonAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ rotate: `${interpolate(ButtonRotation.value, [false, true], [1, 180])}deg` }],

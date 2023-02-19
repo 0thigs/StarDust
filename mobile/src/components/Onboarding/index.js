@@ -1,10 +1,8 @@
-import React from 'react';
+import { useWindowDimensions } from 'react-native';
 import * as C from './styles';
 
-export function Onboarding() {
-  return (
-    <C.Container>
-        
-    </C.Container>
-  );
+export function Onboarding({ component }) {
+  const { width } = useWindowDimensions();
+
+  return <C.Container style={{ width }}>{component}</C.Container>;
 }
