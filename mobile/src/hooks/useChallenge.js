@@ -64,7 +64,6 @@ export function useChallenge(id) {
 
   return {
     slides,
-    setUserCode,
     userOutputs,
   };
 }

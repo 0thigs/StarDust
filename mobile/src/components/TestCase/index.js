@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import {
-  Extrapolate,
   interpolate,
   Transition,
   useAnimatedStyle,
@@ -22,9 +21,8 @@ const transition = (
   </Transition.Together>
 );
 
-export function TestCase({ number, input, expectedOutput, userOutput }) {
+export function TestCase({ number, input, expectedOutput, isCorrect }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
   const containerRef = useRef(null);
   const ButtonRotation = useSharedValue(true);
 
@@ -43,12 +41,6 @@ export function TestCase({ number, input, expectedOutput, userOutput }) {
     setIsOpen(isOpen => !isOpen);
     ButtonRotation.value = withTiming(isOpen, { duration: 500 });
   }
-
-  useEffect(() => {
-    if (userOutput) {
-      setIsCorrect(expectedOutput.toString().trim() === userOutput.toString().trim());
-    }
-  }, [userOutput]);
 
   return (
     <C.Container ref={containerRef} transition={transition}>

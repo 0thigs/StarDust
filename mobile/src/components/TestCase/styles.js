@@ -4,9 +4,10 @@ import Animated, { Transitioning } from 'react-native-reanimated';
 export const Container = styled(Transitioning.View)`
   background-color: ${props => props.theme.colors.gray_900};
   padding: 12px;
-  width: 100%;
+  width: 90%;
   border-radius: 4px;
   margin-bottom: 12px;
+  align-self: center;
 `;
 
 export const Header = styled.View`
