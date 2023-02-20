@@ -26,8 +26,8 @@ export const Icon = styled.View`
 
 export const Heading = styled.Text`
   font-size: 16px;
-  font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.green_500};
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme, isCorrect }) => theme.colors[isCorrect ? 'green_500' : 'red_700']};
   margin-left: 12px;
 `;
 
@@ -53,10 +53,9 @@ export const Label = styled.Text`
 
 export const Value = styled.Text`
   font-family: ${props => props.theme.fonts.medium};
-  color: ${props =>
-    props.from === 'user' ? props.theme.colors.black : props.theme.colors.gray_700};
-  background-color: ${props =>
-    props.from === 'user' ? props.theme.colors.gray_700 : props.theme.colors.black};
+  color: ${({ from, theme }) => (from === 'user' ? theme.colors.black : theme.colors.gray_700)};
+  background-color: ${({ from, theme }) =>
+    from === 'user' ? theme.colors.gray_700 : theme.colors.black};
   padding: 4px 8px;
   border-radius: 4px;
 `;

@@ -21,39 +21,23 @@ Saída: 12
     ],
     testCases: [
       {
-        input: [2, 2],
-        expectedOutput: '4',
+        input: [5, 5],
+        expectedOutput: '25',
       },
       {
-        input: [4, 4],
+        input: [2, 4],
         expectedOutput: '8',
       },
       {
-        input: [6, 6],
+        input: [3, 4],
         expectedOutput: '12',
       },
     ],
 
     code: `
-Algoritmo "Calculoimc"
-
-Var
-    M , A, IMC: Real
-
-Inicio
-    Escreva("Massa(Kg): ")
-    Leia(M)
-    Escreva("Altura (m): ")
-    Leia(A)
-    IMC <- M / (A ^ 2)
-    Escreval("IMC: ", IMC:5:2)
-    Se (IMC >= 18.5) e (IMC < 25) entao
-        Escreva("Você está no seu peso ideal")
-    senao
-        Escreva("Você não está no peso ideal")
-    Fimse
-
-Fimalgoritmo
+    var x = leia()
+    var y = leia()
+    escreva(x * y)
     `,
   },
 ];

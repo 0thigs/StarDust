@@ -1,31 +1,25 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
-import { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useEffect } from 'react';
-import { useState } from 'react';
 const iconSize = 25;
 
 export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
-  const TitleColor = useSharedValue('');
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 100 }) }],
+      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 150 }) }],
     };
   });
 
   function handleButtonPress(index) {
     sliderRef.current.scrollToIndex({ index });
-    setCurrentIndex(index);
   }
 
   useEffect(() => {
     CurrentIndicatorPositionX.value = indicatorPositionX / 3;
-    // console.log(indicatorPositionX);
   }, [indicatorPositionX]);
 
   return (

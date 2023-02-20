@@ -3,7 +3,7 @@ import { keys } from '../../utils/keys';
 import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
 import * as C from './styles';
 
-export function Code({ code, setUserCode, verifyUserCode }) {
+export function Code({ code, setUserCode, handleUserCode }) {
   const codeEditorRef = useRef(null);
 
   function handleCodeChange(userCode) {
@@ -11,8 +11,7 @@ export function Code({ code, setUserCode, verifyUserCode }) {
   }
 
   function handleRunPress() {
-    console.log('Press');
-    verifyUserCode();
+    handleUserCode();
   }
 
   return (
@@ -27,10 +26,10 @@ export function Code({ code, setUserCode, verifyUserCode }) {
         language="python"
         syntaxStyle={CodeEditorSyntaxStyles.atomOneDark}
         showLineNumbers
-        initialValue={code}
+        autoFocus={false}
         onChange={handleCodeChange}
         maxLength={40}
-        onSelectionChange={({ nativeEvent }) => setPosicaoCursor(nativeEvent.selection.start)}
+        initialValue={code}
       />
       <C.CodeButtons>
         {/* <C.KeysList
