@@ -30,18 +30,19 @@ export function Challenge({ id = 1 }) {
   const { title, texts, code, testCases, difficulty, starId } = challenges.find(
     challenge => challenge.id === id
   );
-  const [userCode, setUserCode] = useState('');
   const [userOutputs, setUserOutputs] = useState([]);
   const [isExecuted, setIsExecuted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  const [seconds, setSeconds] = useState(0);
+  const sliderRef = useRef(null);
   const [indicatorPositionX, setIndicatorPositionX] = useState(0);
-  const [slideWidth, setSlideWidth] = useState(0);
-  const sliderRef = useRef();
+
+  const slideWidth = useRef({ value: 0 });
+  const seconds = useRef({ value: 0 });
+  const userCode = useRef({ value: '' });
 
   function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
     setIndicatorPositionX(contentOffset.x);
-    setSlideWidth(layoutMeasurement.width);
+    slideWidth.current.value = layoutMeasurement.width;
   }
 
   function backToCode() {
@@ -76,9 +77,9 @@ export function Challenge({ id = 1 }) {
   }
 
   async function verifyCase({ input }) {
-    let code = userCode;
+    let code = userCode.current.value;
     if (input) {
-      code = formatCode(userCode, input);
+      code = formatCode(code, input);
     }
 
     try {
@@ -110,9 +111,9 @@ export function Challenge({ id = 1 }) {
       component: (
         <Code
           code={code}
-          setUserCode={setUserCode}
           handleUserCode={handleUserCode}
           isExecuted={isExecuted}
+          userCode={userCode}
         />
       ),
     },
@@ -132,15 +133,14 @@ export function Challenge({ id = 1 }) {
   useEffect(() => {
     if (userOutputs.length > 0) {
       sliderRef.current.scrollToEnd();
-
     }
   }, [userOutputs]);
 
   useEffect(() => {
     if (!isEnd) {
-      //   setTimeout(() => setSeconds(currentSeconds => currentSeconds + 1), 1000);
+      setTimeout(() => seconds.current.value++, 1000);
     }
-  }, [seconds]);
+  }, [seconds.current.value]);
 
   return (
     <C.Container>
@@ -156,7 +156,7 @@ export function Challenge({ id = 1 }) {
         <>
           <ChallengeHeader
             indicatorPositionX={indicatorPositionX}
-            slideWidth={slideWidth}
+            slideWidth={slideWidth.current.value}
             sliderRef={sliderRef}
           />
 
@@ -168,7 +168,7 @@ export function Challenge({ id = 1 }) {
           isChallenge={true}
           coins_={earningsByDifficulty[difficulty].coins}
           xp_={earningsByDifficulty[difficulty].xp}
-          seconds_={seconds}
+          seconds_={seconds.current.value}
         />
       )}
     </C.Container>

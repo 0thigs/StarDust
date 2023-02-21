@@ -6,11 +6,11 @@ import theme from '../../global/styles/theme';
 const iconSize = 25;
 
 export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
-  const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
+  const CurrentIndicatorPositionX = useSharedValue(0);
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 150 }) }],
+      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 250 }) }],
     };
   });
 

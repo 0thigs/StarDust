@@ -39,6 +39,10 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
   }
 
   function handlePressButton() {
+    if (isLocked) {
+      return;
+    }
+    
     containerRef.current.animateNextTransition();
     setIsOpen(isOpen => !isOpen);
     rotateButton();
@@ -66,7 +70,6 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           onStartShouldSetResponder={handlePressButton}
           style={ButtonAnimatedStyle}
           activeOpacity={1}
-          disabled={isLocked}
         >
           {isLocked ? (
             <Lock width={iconSize} height={iconSize} color={theme.colors.gray_500} />

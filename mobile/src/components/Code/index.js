@@ -4,9 +4,10 @@ import { Editor } from '../Editor';
 import { Loading } from '../Loading';
 import * as C from './styles';
 
-export function Code({ code, setUserCode, handleUserCode, isExecuting }) {
-  function handleCodeChange(userCode) {
-    setUserCode(userCode);
+export function Code({ code, setUserCode, handleUserCode, isExecuting, userCode }) {
+  function handleCodeChange(code) {
+    // setUserCode(userCode);
+    userCode.current.value = code;
   }
 
   function handleRunPress() {
