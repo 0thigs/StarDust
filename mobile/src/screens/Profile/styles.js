@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const containerWidth = 300;
+export const containerWidth = 330;
 
 export const Container = styled.SafeAreaView`
   flex: 1;

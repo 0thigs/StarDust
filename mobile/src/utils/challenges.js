@@ -12,7 +12,7 @@ export const challenges = [
         type: 'code',
         body: `
 Entrada: num1 = 5, num2 = 7
-Saída: 12
+Saida: 12
         `,
       },
       {
@@ -36,9 +36,19 @@ Saída: 12
     ],
 
     code: `
-    var x = leia()
-    var y = leia()
-    escreva(x * y)
+    classe Animal {
+        correr() {
+          escreva("Correndo Loucamente");
+        }
+      }
+      classe Cachorro herda Animal {
+        latir() {
+          escreva("Au Au Au Au");
+        }
+      }
+      var nomeDoCachorro = Cachorro();
+      nomeDoCachorro.correr();
+      nomeDoCachorro.latir();
     `,
     difficulty: 'easy',
   },

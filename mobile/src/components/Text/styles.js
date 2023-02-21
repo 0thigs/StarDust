@@ -15,6 +15,10 @@ export const Title = styled.Text`
   align-self: flex-start;
 `;
 
+export const Code = styled.ScrollView`
+  max-height: 400px;
+`;
+
 const DefaultStyle = css`
   background-color: ${props => props.theme.colors.purple_700};
   color: ${props => props.theme.colors.white};

@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { keys } from '../../utils/keys';
-import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
+import { Editor } from '../Editor';
 import * as C from './styles';
 
 export function Code({ code, setUserCode, handleUserCode }) {
-  const codeEditorRef = useRef(null);
-
   function handleCodeChange(userCode) {
     setUserCode(userCode);
   }
@@ -16,21 +14,7 @@ export function Code({ code, setUserCode, handleUserCode }) {
 
   return (
     <C.Container>
-      <CodeEditor
-        ref={codeEditorRef}
-        style={{
-          fontSize: 12,
-          inputLineHeight: 26,
-          highlighterLineHeight: 26,
-        }}
-        language="python"
-        syntaxStyle={CodeEditorSyntaxStyles.atomOneDark}
-        showLineNumbers
-        autoFocus={false}
-        onChange={handleCodeChange}
-        maxLength={40}
-        initialValue={code}
-      />
+      <Editor value={code} isReadOnly={false} onChange={handleCodeChange} />
       <C.CodeButtons>
         {/* <C.KeysList
           data={keys}

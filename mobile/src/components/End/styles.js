@@ -33,4 +33,5 @@ export const CoinsCount = styled.Text`
 export const Metrics = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 `;

@@ -6,4 +6,8 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const TestCases = styled.ScrollView``;
+export const TestCases = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    paddingBottom: 100,
+  },
+}))``;

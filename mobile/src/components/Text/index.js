@@ -7,6 +7,7 @@ import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 import { Volume2 } from 'react-native-feather';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/styles/prism';
+import { Editor } from '../Editor';
 
 const maxDelay = 10;
 const typing = 1;
@@ -14,14 +15,14 @@ const typing = 1;
 export function Text({ type, title, body, isRendered }) {
   return (
     <C.Container type={type} animation={!isRendered ? 'fadeInLeft' : null}>
-      {type === 'alert' && <AlertIcon />}
       {title && <C.Title>{title}</C.Title>}
+      {type === 'alert' && <AlertIcon />}
       {type === 'code' ? (
         <>
           <C.Title>Exemplo</C.Title>
-          <SyntaxHighlighter language="javascript" style={okaidia} highlighter={'prism'}>
-            {body}
-          </SyntaxHighlighter>
+          <C.Code>
+            <Editor value={body} />
+          </C.Code>
         </>
       ) : (
         <C.Body type={type}>
@@ -35,9 +36,9 @@ export function Text({ type, title, body, isRendered }) {
             />
           </C.SpeechButton>
           {!isRendered ? (
-              <TypeWriter typing={typing} maxDelay={maxDelay}>
-                {body}
-              </TypeWriter>
+            <TypeWriter typing={typing} maxDelay={maxDelay}>
+              {body}
+            </TypeWriter>
           ) : (
             body
           )}
