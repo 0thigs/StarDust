@@ -1,16 +1,10 @@
-import React from 'react';
 import * as C from './styles';
-import theme from '../../global/styles/theme';
 import TypeWriter from 'react-native-typewriter';
+import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
 
 import { Volume2 } from 'react-native-feather';
-import SyntaxHighlighter from 'react-native-syntax-highlighter';
-import { okaidia } from 'react-syntax-highlighter/styles/prism';
 import { Editor } from '../Editor';
-
-const maxDelay = 10;
-const typing = 1;
 
 export function Text({ type, title, body, isRendered }) {
   return (
@@ -36,7 +30,7 @@ export function Text({ type, title, body, isRendered }) {
             />
           </C.SpeechButton>
           {!isRendered ? (
-            <TypeWriter typing={typing} maxDelay={maxDelay}>
+            <TypeWriter typing={1} maxDelay={10}>
               {body}
             </TypeWriter>
           ) : (

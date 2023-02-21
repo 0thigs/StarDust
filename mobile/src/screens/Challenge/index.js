@@ -7,6 +7,8 @@ import { Slider } from '../../components/Slider';
 import { End } from '../../components/End';
 import { execute } from '../../libs/delegua.mjs';
 import { challenges } from '../../utils/challenges';
+import ToastMenager, { Toast } from 'toastify-react-native';
+
 import * as C from './styles';
 
 const earningsByDifficulty = {
@@ -30,6 +32,7 @@ export function Challenge({ id = 1 }) {
   );
   const [userCode, setUserCode] = useState('');
   const [userOutputs, setUserOutputs] = useState([]);
+  const [isExecuted, setIsExecuted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [indicatorPositionX, setIndicatorPositionX] = useState(0);
@@ -48,12 +51,13 @@ export function Challenge({ id = 1 }) {
     });
   }
 
-  // TODO: Tratar erros
-  function showError(error) {
-    console.log(error);
+  function handleError(error) {
+    if (error) {
+      Toast.error(error);
+    }
   }
 
-  function handleUserOutput(userOutput) {
+  function addUserOutput(userOutput) {
     if (userOutput) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
@@ -72,11 +76,22 @@ export function Challenge({ id = 1 }) {
   }
 
   async function verifyCase({ input }) {
-    const formatedUserCode = formatCode(userCode, input);
-    const { erros, resultado } = await execute(formatedUserCode, handleUserOutput);
-    if (erros.length > 0) {
-      showError(erros[0].message);
-      return;
+    let code = userCode;
+    if (input) {
+      code = formatCode(userCode, input);
+    }
+
+    try {
+      const { erros, resultado } = await execute(code, addUserOutput);
+
+      if (erros.length > 0) {
+        if (erros[0] instanceof Error) {
+          throw erros[0];
+        }
+        throw erros[0].erroInterno;
+      }
+    } catch (error) {
+      handleError(error.message);
     }
   }
 
@@ -92,7 +107,14 @@ export function Challenge({ id = 1 }) {
     },
     {
       id: 2,
-      component: <Code code={code} setUserCode={setUserCode} handleUserCode={handleUserCode} />,
+      component: (
+        <Code
+          code={code}
+          setUserCode={setUserCode}
+          handleUserCode={handleUserCode}
+          isExecuted={isExecuted}
+        />
+      ),
     },
     {
       id: 3,
@@ -110,17 +132,26 @@ export function Challenge({ id = 1 }) {
   useEffect(() => {
     if (userOutputs.length > 0) {
       sliderRef.current.scrollToEnd();
+
     }
   }, [userOutputs]);
 
   useEffect(() => {
     if (!isEnd) {
-      setTimeout(() => setSeconds(currentSeconds => currentSeconds + 1), 1000);
+      //   setTimeout(() => setSeconds(currentSeconds => currentSeconds + 1), 1000);
     }
   }, [seconds]);
 
   return (
     <C.Container>
+      <ToastMenager
+        animationInTiming={700}
+        animationOutTiming={1000}
+        animationStyle={'rightInOut'}
+        width={320}
+        position="top"
+      />
+
       {!isEnd ? (
         <>
           <ChallengeHeader

@@ -1,10 +1,7 @@
-import React from 'react';
-import * as C from './styles';
+import styled from 'styled-components/native';
+
+export const Container = styled.ActivityIndicator``;
 
 export function Loading() {
-  return (
-    <Container>
-
-    </Container>
-  );
+  return <Container></Container>;
 }

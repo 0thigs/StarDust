@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { keys } from '../../utils/keys';
 import { Editor } from '../Editor';
+import { Loading } from '../Loading';
 import * as C from './styles';
 
-export function Code({ code, setUserCode, handleUserCode }) {
+export function Code({ code, setUserCode, handleUserCode, isExecuting }) {
   function handleCodeChange(userCode) {
     setUserCode(userCode);
   }
@@ -26,9 +27,13 @@ export function Code({ code, setUserCode, handleUserCode }) {
           )}
           horizontal
         /> */}
-        <C.CodeButton onPress={handleRunPress}>
-          <C.Title isRunButton={true}>executar</C.Title>
-        </C.CodeButton>
+        {isExecuting ? (
+          <Loading />
+        ) : (
+          <C.CodeButton onPress={handleRunPress}>
+            <C.Title isRunButton={true}>executar</C.Title>
+          </C.CodeButton>
+        )}
       </C.CodeButtons>
     </C.Container>
   );

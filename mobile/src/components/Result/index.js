@@ -39,12 +39,13 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
   return (
     <C.Container>
       <C.TestCases>
-        {testCases.map(({ input, expectedOutput }, index) => (
+        {testCases.map(({ input, expectedOutput, isLocked }, index) => (
           <TestCase
             key={`test-case-${index}`}
             number={index + 1}
             input={input}
             expectedOutput={expectedOutput}
+            isLocked={isLocked}
             userOutput={userOutputs[index]}
             isCorrect={results[index]}
           />

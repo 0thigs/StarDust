@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   interpolate,
   Transition,
@@ -6,12 +6,10 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { Check, X, ArrowDown } from 'react-native-feather';
+import { Check, X, ArrowDown, Lock } from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { useEffect } from 'react';
-const iconSize = 16;
-const arrowSize = 20;
+const iconSize = 20;
 
 const transition = (
   <Transition.Together>
@@ -21,7 +19,7 @@ const transition = (
   </Transition.Together>
 );
 
-export function TestCase({ number, input, expectedOutput, userOutput, isCorrect }) {
+export function TestCase({ number, input, expectedOutput, userOutput, isCorrect, isLocked }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const ButtonRotation = useSharedValue(true);
@@ -36,14 +34,25 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect 
     };
   });
 
-  function handlePressButton() {
-    containerRef.current.animateNextTransition();
-    setIsOpen(isOpen => !isOpen);
+  function rotateButton() {
     ButtonRotation.value = withTiming(isOpen, { duration: 500 });
   }
 
+  function handlePressButton() {
+    containerRef.current.animateNextTransition();
+    setIsOpen(isOpen => !isOpen);
+    rotateButton();
+  }
+
+  useEffect(() => {
+    if (userOutput) {
+      setIsOpen(true);
+      rotateButton();
+    }
+  }, [userOutput]);
+
   return (
-    <C.Container ref={containerRef} transition={transition}>
+    <C.Container ref={containerRef} transition={transition} isLocked={isLocked}>
       <C.Header>
         <C.Icon>
           {isCorrect ? (
@@ -57,15 +66,20 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect 
           onStartShouldSetResponder={handlePressButton}
           style={ButtonAnimatedStyle}
           activeOpacity={1}
+          disabled={isLocked}
         >
-          <ArrowDown width={arrowSize} height={arrowSize} color={theme.colors.gray_500} />
+          {isLocked ? (
+            <Lock width={iconSize} height={iconSize} color={theme.colors.gray_500} />
+          ) : (
+            <ArrowDown width={iconSize} height={iconSize} color={theme.colors.gray_500} />
+          )}
         </C.Button>
       </C.Header>
       {isOpen && (
         <C.Body>
           <C.Put>
             <C.Label>Input</C.Label>
-            <C.Value>{input.join(', ')}</C.Value>
+            <C.Value>{input ? input.join(', ') : 'Sem entrada'}</C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Seu resultado</C.Label>

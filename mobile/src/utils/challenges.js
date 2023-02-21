@@ -1,7 +1,7 @@
 export const challenges = [
   {
     id: 1,
-    starId: 1,
+    starId: 4,
     title: 'Somar 2 números',
     texts: [
       {
@@ -10,10 +10,8 @@ export const challenges = [
       },
       {
         type: 'code',
-        body: `
-Entrada: num1 = 5, num2 = 7
-Saida: 12
-        `,
+        body: `Entrada: num1 = 5, num2 = 7
+Saida: 12`,
       },
       {
         type: 'alert',
@@ -24,32 +22,29 @@ Saida: 12
       {
         input: [5, 5],
         expectedOutput: '25',
+        isLocked: false,
       },
       {
         input: [2, 4],
         expectedOutput: '8',
+        isLocked: false,
       },
       {
         input: [3, 4],
         expectedOutput: '12',
+        isLocked: true,
       },
     ],
 
     code: `
-    classe Animal {
-        correr() {
-          escreva("Correndo Loucamente");
-        }
-      }
-      classe Cachorro herda Animal {
-        latir() {
-          escreva("Au Au Au Au");
-        }
-      }
-      var nomeDoCachorro = Cachorro();
-      nomeDoCachorro.correr();
-      nomeDoCachorro.latir();
+     var x = leia()
+     var y = leia()
+     escreva(x * y)
     `,
     difficulty: 'easy',
   },
 ];
+
+// var x = leia()
+// var y = leia()
+// escreva(x * y)
