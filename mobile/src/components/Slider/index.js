@@ -23,7 +23,7 @@ export function Slider({ sliderRef, slides, onScroll }) {
       showsHorizontalScrollIndicator={false}
       pagingEnabled
       bounces={false}
-      scrollEventThrottle={16}
+      scrollEventThrottle={32}
       onScroll={onScroll}
     />
   );

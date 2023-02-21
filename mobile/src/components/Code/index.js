@@ -1,16 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { keys } from '../../utils/keys';
+import { useRef } from 'react';
 import { Editor } from '../Editor';
-import { Loading } from '../Loading';
+import { Sound } from '../Sound';
+// import { keys } from '../../utils/keys';
+import RunningCodeSound from '../../assets/GlobalAssets/running-code-sound.wav';
 import * as C from './styles';
 
-export function Code({ code, setUserCode, handleUserCode, isExecuting, userCode }) {
+export function Code({ code, userCode, handleUserCode }) {
+  const soundRef = useRef(null);
+
   function handleCodeChange(code) {
-    // setUserCode(userCode);
     userCode.current.value = code;
   }
 
   function handleRunPress() {
+    soundRef.current.playSound();
     handleUserCode();
   }
 
@@ -28,14 +31,13 @@ export function Code({ code, setUserCode, handleUserCode, isExecuting, userCode 
           )}
           horizontal
         /> */}
-        {isExecuting ? (
-          <Loading />
-        ) : (
-          <C.CodeButton onPress={handleRunPress}>
-            <C.Title isRunButton={true}>executar</C.Title>
-          </C.CodeButton>
-        )}
+
+        <C.CodeButton onPress={handleRunPress}>
+          <C.Title isRunButton={true}>executar</C.Title>
+        </C.CodeButton>
       </C.CodeButtons>
+
+      <Sound ref={soundRef} soundFile={RunningCodeSound} />
     </C.Container>
   );
 }

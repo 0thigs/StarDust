@@ -14,7 +14,7 @@ const fakeUser = {
   xp: 50,
   level: 1,
   unlocked_achievements_ids: [],
-  unlocked_stars_ids: [1],
+  unlocked_stars_ids: [1, 2, 3, 11, 4],
   acquired_rockets_ids: [1],
   selected_rocket_id: 2,
   ranking_id: 1,
@@ -22,8 +22,7 @@ const fakeUser = {
   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  starId: 7,
-  challengeId: 1,
+  starId: 4,
 };
 
 export function AuthContextProvider({ children }) {

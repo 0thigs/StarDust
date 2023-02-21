@@ -24,7 +24,7 @@ import { rockets } from '../../utils/rockets';
 
 export const starHeight = 100;
 
-export function Star({ id, name, number, isDisabled }) {
+export function Star({ id, name, number, isDisabled, isChallenge }) {
   const { user, setUser } = useAuth();
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
@@ -47,7 +47,8 @@ export function Star({ id, name, number, isDisabled }) {
 
     setTimeout(() => {
       setUser({ ...user, starId: id });
-      navigation.navigate('Lesson');
+      const screen = isChallenge ? 'Challenge' : 'Lesson';
+      navigation.navigate(screen);
     }, delay);
   }
 

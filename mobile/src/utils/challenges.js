@@ -1,16 +1,16 @@
 export const challenges = [
   {
     id: 1,
-    starId: 4,
-    title: 'Somar 2 números',
+    starId: 11,
+    title: 'Multiplicar 2 números',
     texts: [
       {
         type: 'default',
-        body: 'Escreva um programa que some 2 números e escreva o resultado na tela',
+        body: 'Escreva um programa que multiplique 2 números e que escreva o resultado na tela',
       },
       {
         type: 'code',
-        body: `Entrada: num1 = 5, num2 = 7
+        body: `Entrada: x = 5, y = 7
 Saida: 12`,
       },
       {
@@ -38,9 +38,7 @@ Saida: 12`,
 
     code: `
      var x = leia()
-     var y = leia()
-     escreva(x * y)
-    `,
+     var y = leia()`,
     difficulty: 'easy',
   },
 ];

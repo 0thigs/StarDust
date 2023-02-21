@@ -16,7 +16,9 @@ export const Main = styled.View`
   justify-content: space-between;
 `;
 
-export const CloseButton = styled.TouchableOpacity``;
+export const CloseButton = styled.TouchableOpacity`
+  padding: 8px 0 8px;
+`;
 
 export const Lives = styled.View`
   flex-direction: row;

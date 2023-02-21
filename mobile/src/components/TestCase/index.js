@@ -42,7 +42,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
     if (isLocked) {
       return;
     }
-    
+
     containerRef.current.animateNextTransition();
     setIsOpen(isOpen => !isOpen);
     rotateButton();
@@ -51,7 +51,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
   useEffect(() => {
     if (userOutput) {
       setIsOpen(true);
-      rotateButton();
+      if (!isLocked) rotateButton();
     }
   }, [userOutput]);
 
@@ -81,7 +81,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
       {isOpen && (
         <C.Body>
           <C.Put>
-            <C.Label>Input</C.Label>
+            <C.Label>Entrada</C.Label>
             <C.Value>{input ? input.join(', ') : 'Sem entrada'}</C.Value>
           </C.Put>
           <C.Put>

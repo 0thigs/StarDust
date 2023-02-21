@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+
 import { ChallengeHeader } from '../../components/ChallengeHeader';
 import { Code } from '../../components/Code';
 import { Problem } from '../../components/Problem';
 import { Result } from '../../components/Result';
 import { Slider } from '../../components/Slider';
 import { End } from '../../components/End';
+import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
+
 import { execute } from '../../libs/delegua.mjs';
 import { challenges } from '../../utils/challenges';
 import ToastMenager, { Toast } from 'toastify-react-native';
@@ -26,16 +30,17 @@ const earningsByDifficulty = {
   },
 };
 
-export function Challenge({ id = 1 }) {
-  const { title, texts, code, testCases, difficulty, starId } = challenges.find(
-    challenge => challenge.id === id
+export function Challenge() {
+  const { user } = useAuth();
+  const { title, texts, code, testCases, difficulty } = challenges.find(
+    challenge => challenge.starId === 11
   );
   const [userOutputs, setUserOutputs] = useState([]);
-  const [isExecuted, setIsExecuted] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  const sliderRef = useRef(null);
   const [indicatorPositionX, setIndicatorPositionX] = useState(0);
+  const [isEndTrasition, setIsEndTransition] = useState(false);
 
+  const sliderRef = useRef(null);
   const slideWidth = useRef({ value: 0 });
   const seconds = useRef({ value: 0 });
   const userCode = useRef({ value: '' });
@@ -108,14 +113,7 @@ export function Challenge({ id = 1 }) {
     },
     {
       id: 2,
-      component: (
-        <Code
-          code={code}
-          handleUserCode={handleUserCode}
-          isExecuted={isExecuted}
-          userCode={userCode}
-        />
-      ),
+      component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
     },
     {
       id: 3,
@@ -137,39 +135,52 @@ export function Challenge({ id = 1 }) {
   }, [userOutputs]);
 
   useEffect(() => {
+    let timer = null;
     if (!isEnd) {
-      setTimeout(() => seconds.current.value++, 1000);
+      timer = setTimeout(() => seconds.current.value++, 1000);
     }
+    return () => clearTimeout(timer);
   }, [seconds.current.value]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsEndTransition(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <C.Container>
-      <ToastMenager
-        animationInTiming={700}
-        animationOutTiming={1000}
-        animationStyle={'rightInOut'}
-        width={320}
-        position="top"
-      />
-
-      {!isEnd ? (
+      {!isEndTrasition ? (
+        <TransitionScreenAnimation />
+      ) : (
         <>
-          <ChallengeHeader
-            indicatorPositionX={indicatorPositionX}
-            slideWidth={slideWidth.current.value}
-            sliderRef={sliderRef}
+          <ToastMenager
+            animationInTiming={700}
+            animationOutTiming={1000}
+            animationStyle={'rightInOut'}
+            width={320}
+            position="top"
           />
 
-          <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />
+          {!isEnd ? (
+            <>
+              <ChallengeHeader
+                indicatorPositionX={indicatorPositionX}
+                slideWidth={slideWidth.current.value}
+                sliderRef={sliderRef}
+              />
+
+              <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />
+            </>
+          ) : (
+            <End
+              starId={starId}
+              isChallenge={true}
+              coins_={earningsByDifficulty[difficulty].coins}
+              xp_={earningsByDifficulty[difficulty].xp}
+              seconds_={seconds.current.value}
+            />
+          )}
         </>
-      ) : (
-        <End
-          starId={starId}
-          isChallenge={true}
-          coins_={earningsByDifficulty[difficulty].coins}
-          xp_={earningsByDifficulty[difficulty].xp}
-          seconds_={seconds.current.value}
-        />
       )}
     </C.Container>
   );

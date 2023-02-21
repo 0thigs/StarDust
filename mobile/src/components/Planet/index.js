@@ -34,7 +34,7 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
           <C.PlanetName>{name}</C.PlanetName>
         </C.PlanetSign>
       </C.PlanetInfo>
-      {stars.map(({ id, name, number, isUnlocked }) => {
+      {stars.map(({ id, name, number, isUnlocked, isChallenge }) => {
         return (
           <Star
             key={id}
@@ -42,6 +42,7 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
             name={name}
             number={number}
             isDisabled={!isUnlocked}
+            isChallenge={isChallenge}
           />
         );
       })}
