@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import * as C from './styles';
+import Lock from '../../assets/AchievementAssets/lock.svg'
 
 export function Achievement({
   title,
@@ -17,16 +17,10 @@ export function Achievement({
     return currentCount_ >= requiredCount ? requiredCount : currentCount_;
   }
 
-  useEffect(() => {
-    if (title === 'Começando a viagem') {
-      console.log({ barWidth });
-    }
-  }, []);
-
   return (
     <C.Container>
-      {/* {isGotten ? <AchievementIcon /> : <Lock />} */}
-      <Icon width={45} height={45} />
+      {isUnlocked ? <Icon width={45} height={45} /> : <Lock />}
+
       <C.AchievementsInfo>
         <C.AchievementsTitle>{title}</C.AchievementsTitle>
         <C.AchievementsDescription>{description}</C.AchievementsDescription>

@@ -11,10 +11,14 @@ export function CustomDrawer() {
   const [achievements, setAchievements] = useState([]);
   const navigation = useNavigation();
 
+  function verifyIfIsUnlocked(id) {
+    return user.unlocked_achievements_ids.includes(id);
+  }
+
   async function handleSignOut() {
     try {
       await signOut();
-      
+
       navigation.reset({
         routes: [{ name: 'SignIn' }],
       });
@@ -58,6 +62,7 @@ export function CustomDrawer() {
             icon={icon}
             requiredCount={requiredCount}
             currentCount={user[metric]}
+            isUnlocked={verifyIfIsUnlocked(id)}
           />
         )}
       />
