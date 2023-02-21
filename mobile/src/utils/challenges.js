@@ -1,6 +1,7 @@
 export const challenges = [
   {
     id: 1,
+    starId: 1,
     title: 'Somar 2 números',
     texts: [
       {
@@ -39,5 +40,6 @@ Saída: 12
     var y = leia()
     escreva(x * y)
     `,
+    difficulty: 'easy',
   },
 ];

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Problem } from '../components/Problem';
 import { Code } from '../components/Code';
 import { Result } from '../components/Result';
+import { Slider } from '../components/Slider';
 import { challenges } from '../utils/challenges';
 import { execute } from '../libs/delegua.mjs';
 
@@ -9,6 +10,15 @@ export function useChallenge(id) {
   const { title, texts, code, testCases } = challenges.find(challenge => challenge.id === id);
   const [userCode, setUserCode] = useState('');
   const [userOutputs, setUserOutputs] = useState([]);
+  const [IsEnd, setIsEnd] = useState(false);
+  const [indicatorPositionX, setIndicatorPositionX] = useState(0);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const sliderRef = useRef();
+
+  function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
+    setIndicatorPositionX(contentOffset.x);
+    setSlideWidth(layoutMeasurement.width);
+  }
 
   // TODO: Tratar erros
   function showError(error) {
@@ -58,12 +68,23 @@ export function useChallenge(id) {
     },
     {
       id: 3,
-      component: <Result testCases={testCases} userOutputs={userOutputs} />,
+      component: (
+        <Result
+          setIsEnd={setIsEnd}
+          testCases={testCases}
+          sliderRef={sliderRef}
+          userOutputs={userOutputs}
+        />
+      ),
     },
   ];
 
   return {
-    slides,
+    slider: <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />,
+    sliderRef,
+    indicatorPositionX,
+    slideWidth,
     userOutputs,
+    IsEnd,
   };
 }

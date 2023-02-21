@@ -22,7 +22,7 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
-export function End({ starId }) {
+export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
   const { user, setUser } = useAuth();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
@@ -137,10 +137,17 @@ export function End({ starId }) {
   }
 
   useEffect(() => {
-    setCoins(getCoins());
-    setXp(getXp());
-    setTime(convertSecondsToTime(state.secondsCount));
-    setAccurance(getAccurance());
+    if (isChallenge) {
+      setCoins(coins_);
+      setXp(xp_);
+      setTime(convertSecondsToTime(seconds_));
+    } else {
+      setCoins(getCoins());
+      setXp(getXp());
+      setTime(convertSecondsToTime(state.secondsCount));
+      setAccurance(getAccurance());
+    }
+
     setStarsAnimation();
     soundRef.current.playSound();
   }, []);
@@ -201,13 +208,15 @@ export function End({ starId }) {
               count={time}
               delay={750}
             />
-            <Metric
-              title={'Precisão'}
-              color={theme.colors.red_300}
-              icon={<Accurance width={iconSize} height={iconSize} />}
-              count={accurance}
-              delay={1000}
-            />
+            {!isChallenge && (
+              <Metric
+                title={'Precisão'}
+                color={theme.colors.red_300}
+                icon={<Accurance width={iconSize} height={iconSize} />}
+                count={accurance}
+                delay={1000}
+              />
+            )}
           </C.Metrics>
         </>
       )}

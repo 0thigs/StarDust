@@ -21,7 +21,7 @@ const transition = (
   </Transition.Together>
 );
 
-export function TestCase({ number, input, expectedOutput, isCorrect }) {
+export function TestCase({ number, input, expectedOutput, userOutput, isCorrect }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const ButtonRotation = useSharedValue(true);
