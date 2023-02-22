@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -6,7 +5,10 @@ export const Container = styled.View`
   align-items: center;
   margin-bottom: 8px;
   padding: 8px;
-  background-color: ${({ theme }) => theme.colors.gray_900};
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: ${({ theme, isLoggedUser }) =>
+    theme.colors[isLoggedUser ? 'green_700' : 'gray_900']};
 `;
 
 export const Position = styled.Text`
@@ -25,7 +27,7 @@ export const Avatar = styled.Image`
 export const Name = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.medium};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme, isLoggedUser }) => theme.colors[isLoggedUser ? 'green_300' : 'gray_500']};
   margin: 0 auto;
 `;
 

@@ -18,8 +18,8 @@ const podium = [
     icon: ThirdPlaceIcon,
   },
 ];
- 
-export function User({ position, id, name, avatar, xp }) {
+
+export function User({ position, id, name, avatar, xp, isLoggedUser }) {
   const navigation = useNavigation();
   const isInPodium = position <= 3;
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
@@ -29,14 +29,14 @@ export function User({ position, id, name, avatar, xp }) {
   }
 
   return (
-    <C.Container activeOpacity={0.7} onClick={handleUserCLick} >
+    <C.Container activeOpacity={0.7} onClick={handleUserCLick} isLoggedUser={isLoggedUser}>
       <C.Position>{isInPodium ? <Icon /> : position}</C.Position>
       <C.Avatar
         source={{
           uri: `http://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`,
         }}
       />
-      <C.Name>{name}</C.Name>
+      <C.Name isLoggedUser={isLoggedUser}>{name}</C.Name>
       <C.Xp>{xp} XP</C.Xp>
     </C.Container>
   );

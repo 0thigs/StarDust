@@ -15,8 +15,15 @@ export const Badges = styled.ImageBackground`
 export const Warning = styled.Text`
   text-align: center;
   font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.green_500};
+  color: ${props => props.theme.colors.white};
   margin-top: 24px;
+`;
+
+export const Days = styled.Text`
+  text-align: center;
+  font-family: ${props => props.theme.fonts.semibold};
+  color: ${props => props.theme.colors.green_300};
+  font-size: 16px;
 `;
 
 export const Divider = styled.View`
