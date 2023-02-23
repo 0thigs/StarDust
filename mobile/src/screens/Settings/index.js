@@ -14,8 +14,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 export function Settings({ navigation: { goBack } }) {
-  const { user, setUser } = useAuth();
-  const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
+  const { loggedUser, setUser } = useAuth();
+  const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false)
 
   const {
     control,
@@ -39,8 +39,8 @@ export function Settings({ navigation: { goBack } }) {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
 
-    setValue("name", user.name);
-    setValue("email", user.email);
+    setValue("name", loggedUser.name);
+    setValue("email", loggedUser.email);
     setValue("password", "fakePassword");
 
     return () => backHandler.remove();
@@ -63,7 +63,7 @@ export function Settings({ navigation: { goBack } }) {
       </C.Header>
       <C.Content>
         <C.Avatar>
-          <C.Image source={{ uri: user.avatar }} />
+          <C.Image source={{ uri: loggedUser.avatar }} />
           <C.Text>Mudar avatar</C.Text>
         </C.Avatar>
         <C.Form>
@@ -85,7 +85,7 @@ export function Settings({ navigation: { goBack } }) {
                     value={value}
                     onChangeText={onChange}
                     error={errors.name}
-                    userData={user.name}
+                    userData={loggedUser.name}
                   />
                 )}
               />
@@ -111,7 +111,7 @@ export function Settings({ navigation: { goBack } }) {
                     value={value}
                     onChangeText={onChange}
                     error={errors.email}
-                    userData={user.email}
+                    userData={loggedUser.email}
                   />
                 )}
               />

@@ -4,7 +4,7 @@ import api from '../services/api';
 
 export const AuthContext = createContext();
 
-const fakeUser = {
+const fakeLoggedUser = {
   id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
   name: 'John Petros',
   email: 'joaopcarvalho.cds@gmail.com',
@@ -28,7 +28,7 @@ const fakeUser = {
 };
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(fakeUser);
+  const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
 
   async function setUserInSession() {
     const {
@@ -43,7 +43,7 @@ export function AuthContextProvider({ children }) {
 
     try {
       const userInSession = await api.getUser(user.id);
-      setUser(userInSession);
+      setLoggedUser(userInSession);
     } catch (error) {
       throw new Error(error);
     }
@@ -92,7 +92,7 @@ export function AuthContextProvider({ children }) {
 
     try {
       const signedUser = await api.getUser(user.id);
-      setUser(signedUser);
+      setLoggedUser(signedUser);
       return user;
     } catch (error) {
       return error;
@@ -117,9 +117,28 @@ export function AuthContextProvider({ children }) {
     return success;
   }
 
+  async function updateLoggedUser(prop, data, updateDatabase = true) {
+    setLoggedUser(currentData => ({ ...currentData, [prop]: data }));
+
+    if (!updateDatabase) return;
+    try {
+      await api.updateUser(prop, data, loggedUser.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ signUp, signIn, signOut, resetPassword, setUserInSession, setUser, user }}
+      value={{
+        signUp,
+        signIn,
+        signOut,
+        resetPassword,
+        setUserInSession,
+        updateLoggedUser,
+        loggedUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

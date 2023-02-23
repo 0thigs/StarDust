@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 
 import { ChallengeHeader } from '../../components/ChallengeHeader';
 import { Code } from '../../components/Code';
@@ -31,7 +30,6 @@ const earningsByDifficulty = {
 };
 
 export function Challenge() {
-  const { user } = useAuth();
   const { title, texts, code, testCases, difficulty } = challenges.find(
     challenge => challenge.starId === 11
   );

@@ -7,12 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
 
 export function CustomDrawer() {
-  const { signOut, user } = useAuth();
+  const { signOut, loggedUser } = useAuth();
   const [achievements, setAchievements] = useState([]);
   const navigation = useNavigation();
 
   function verifyIfIsUnlocked(id) {
-    return user.unlocked_achievements_ids.includes(id);
+    return loggedUser.unlocked_achievements_ids.includes(id);
   }
 
   async function handleSignOut() {
@@ -29,7 +29,7 @@ export function CustomDrawer() {
 
   useEffect(() => {
     const sortedAchievements = achievementsFromJSON;
-    const { unlocked_achievements_ids } = user;
+    const { unlocked_achievements_ids } = loggedUser;
     sortedAchievements.sort((a, b) => {
       if (unlocked_achievements_ids.includes(a.id) && !unlocked_achievements_ids.includes(b.id)) {
         return 1;
@@ -40,13 +40,13 @@ export function CustomDrawer() {
       return 0;
     });
     setAchievements(sortedAchievements);
-  }, [user.unlocked_achievements_ids]);
+  }, [loggedUser.unlocked_achievements_ids]);
 
   return (
     <C.Container>
-      <C.Avatar source={{ uri: user.avatar }} />
-      <C.Name>{user.name}</C.Name>
-      <C.Email>{user.email}</C.Email>
+      <C.Avatar source={{ uri: loggedUser.avatar }} />
+      <C.Name>{loggedUser.name}</C.Name>
+      <C.Email>{loggedUser.email}</C.Email>
       <C.LogOutButton onPress={handleSignOut}>
         <C.LogOutButtonText>Sair</C.LogOutButtonText>
       </C.LogOutButton>
@@ -61,7 +61,7 @@ export function CustomDrawer() {
             description={description}
             icon={icon}
             requiredCount={requiredCount}
-            currentCount={user[metric]}
+            currentCount={loggedUser[metric]}
             isUnlocked={verifyIfIsUnlocked(id)}
           />
         )}

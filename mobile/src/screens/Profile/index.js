@@ -12,27 +12,27 @@ import Missing from '../../assets/GlobalAssets/missing-animation.json';
 import * as C from './styles';
 
 export function Profile() {
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   console.log(unlockedAchievements);
 
   function getUnlockedAchievements() {
     const unlockedAchievements = achievements.filter(achivement =>
-      user.unlocked_achievements_ids.includes(achivement.id)
+      loggedUser.unlocked_achievements_ids.includes(achivement.id)
     );
     setUnlockedAchievements(unlockedAchievements);
   }
 
   useEffect(() => {
     getUnlockedAchievements();
-  }, [user.unlocked_achievements_ids]);
+  }, [loggedUser.unlocked_achievements_ids]);
 
   return (
     <C.Container>
       <C.Content>
-        <ProfileStatus user={user} />
-        <Statistic user={user} />
-        <Streak user={user} />
+        <ProfileStatus user={loggedUser} />
+        <Statistic user={loggedUser} />
+        <Streak user={loggedUser} />
         <C.Title>Conquistas</C.Title>
         <C.Achievements>
           {unlockedAchievements.length > 0 ? (
@@ -43,7 +43,7 @@ export function Profile() {
                 description={description}
                 icon={icon}
                 requiredCount={requiredCount}
-                currentCount={user[metric]}
+                currentCount={loggedUser[metric]}
                 isUnlocked={true}
               />
             ))
@@ -52,12 +52,7 @@ export function Profile() {
               <C.NoAchievements>
                 Parace que você não desbloqueou nenhuma conquista ainda 😢
               </C.NoAchievements>
-              <Animation
-                source={Missing}
-                autoPlay={true}
-                loop={true}
-                size={220}
-              />
+              <Animation source={Missing} autoPlay={true} loop={true} size={220} />
             </>
           )}
         </C.Achievements>

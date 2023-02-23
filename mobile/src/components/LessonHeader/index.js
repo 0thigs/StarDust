@@ -15,10 +15,10 @@ import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
 export function LessonHeader() {
-  const { user, setUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const [state, dispatch] = useLesson();
   const navigation = useNavigation();
-  const Rocket = rockets.find(rocket => rocket.id === user.selected_rocket_id).image;
+  const Rocket = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
@@ -30,9 +30,8 @@ export function LessonHeader() {
   });
 
   async function handleCloseButton() {
-    if (state.livesCount < user.lives) {
-      await api.updateUser('lives', state.livesCount, user.id);
-      setUser({ ...user, lives: state.livesCount });
+    if (state.livesCount < loggedUser.lives) {
+      updateLoggedUser('lives', state.livesCount);
     }
 
     dispatch({ type: 'resetState' });

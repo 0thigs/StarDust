@@ -16,7 +16,6 @@ export const Title = styled.Text`
 `;
 
 export const Code = styled.ScrollView`
-  max-height: 400px;
   border-radius: 10px;
 `;
 

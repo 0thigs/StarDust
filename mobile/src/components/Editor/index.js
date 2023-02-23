@@ -4,7 +4,7 @@ export function Editor({ value, isReadOnly = true, onChange = null }) {
   return (
     <CodeEditor
       style={{
-        fontSize: 14,
+        fontSize: 12,
         inputLineHeight: 26,
         highlighterLineHeight: 26,
       }}

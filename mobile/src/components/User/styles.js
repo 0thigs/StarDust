@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   margin-bottom: 8px;
@@ -15,6 +15,7 @@ export const Position = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.semibold};
   color: ${({ theme }) => theme.colors.green_700};
+  width: 20px;
 `;
 
 export const Avatar = styled.Image`

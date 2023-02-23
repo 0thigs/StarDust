@@ -38,25 +38,24 @@ export const theories = [
         },
         {
           type: 'code',
-          body: `
-  algorimto Tomar Banho
+          body: `algorimto Tomar Banho
   
-  Início
+  Inicio
   
-      Pegar a toalha e roupas;
-      Entrar no banheiro e fechar a porta;
-      Tirar a roupa que está usando;
-      Ligar o chuveiro e esperar a água esquentar;
-      Entrar no box do banho;
-      Se molhar, ensaboar, enxaguar = banho;
-      Fechar o chuveiro;
-      Pegar a toalha e se secar;
-      Sair do box;
-      Se vestir com a roupa limpa;
-      Sair do banheiro.
+Pegar a toalha e roupas;
+Entrar no banheiro e fechar a porta;
+Tirar a roupa que está usando;
+Ligar o chuveiro
+Esperar a água esquentar;
+Entrar no box do banho;
+Se molhar, ensaboar, enxaguar = banho;
+Fechar o chuveiro;
+Pegar a toalha e se secar;
+Sair do box;
+Se vestir com a roupa limpa;
+Sair do banheiro.
   
-  Fim
-  `,
+  Fim`,
         },
         {
           type: 'default',

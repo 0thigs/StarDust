@@ -15,13 +15,13 @@ const today = dayjs().day();
 const sunday = 0;
 
 export function Ranking() {
-  const { user, setUser } = useAuth();
+  const { loggedUser } = useAuth();
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [isWinnersListShow, setIsWinnersListShow] = useState(true);
   const [daysToGo, setDaysToGo] = useState(0);
-  const [currentRankingId, setCurrentRankingId] = useState(user.ranking_id);
+  const [currentRankingId, setCurrentRankingId] = useState(loggedUser.ranking_id);
   const badgesListRef = useRef(null);
 
   function scrollToCurrentRanking() {
@@ -72,8 +72,8 @@ export function Ranking() {
   }, []);
 
   useEffect(() => {
-    setCurrentRankingId(rankings.find(ranking => ranking.id === user.ranking_id).id);
-  }, [user.ranking_id]);
+    setCurrentRankingId(rankings.find(ranking => ranking.id === loggedUser.ranking_id).id);
+  }, [loggedUser.ranking_id]);
 
   return (
     <C.Container>

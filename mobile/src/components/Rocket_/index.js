@@ -16,7 +16,7 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function Rocket_({ id, name, image: Image, price }) {
-  const { user, setUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
@@ -33,27 +33,19 @@ export function Rocket_({ id, name, image: Image, price }) {
   });
 
   async function updateUserData(updatedCoins, updatedAcquiredRocketsIds) {
-    setUser(user => {
-      return { ...user, coins: updatedCoins, acquired_rockets_ids: updatedAcquiredRocketsIds };
-    });
-
-    try {
-      await api.updateUser('coins', updatedCoins, user.id);
-      await api.updateUser('acquired_rockets_ids', updatedAcquiredRocketsIds, user.id);
-    } catch (error) {
-      console.log(error);
-    }
+    updateLoggedUser('coins', updatedCoins);
+    updateLoggedUser('acquired_rockets_ids', updatedAcquiredRocketsIds);
   }
 
   function buyRocket() {
-    if (user.coins < price) {
+    if (loggedUser.coins < price) {
       setIsRequesting(false);
       setIsModalOpen(true);
       return;
     }
 
-    const updatedCoins = user.coins - price;
-    const updatedAcquiredRocketsIds = [...user.acquired_rockets_ids, id];
+    const updatedCoins = loggedUser.coins - price;
+    const updatedAcquiredRocketsIds = [...loggedUser.acquired_rockets_ids, id];
 
     updateUserData(updatedCoins, updatedAcquiredRocketsIds);
     selectRocket();
@@ -62,11 +54,7 @@ export function Rocket_({ id, name, image: Image, price }) {
   }
 
   async function selectRocket() {
-    setUser(user => {
-      return { ...user, selected_rocket_id: id };
-    });
-
-    await api.updateUser('selected_rocket_id', id, user.id);
+    updateLoggedUser('selected_rocket_id', id);
     setIsRequesting(false);
     soundRef.current.playSound();
   }
@@ -86,9 +74,9 @@ export function Rocket_({ id, name, image: Image, price }) {
   }, []);
 
   useEffect(() => {
-    setIsSelected(id === user.selected_rocket_id);
-    setIsAcquired(user.acquired_rockets_ids.includes(id));
-  }, [user.selected_rocket_id, user.acquired_rockets_ids]);
+    setIsSelected(id === loggedUser.selected_rocket_id);
+    setIsAcquired(loggedUser.acquired_rockets_ids.includes(id));
+  }, [loggedUser.selected_rocket_id, loggedUser.acquired_rockets_ids]);
 
   return (
     <C.Container isSelected={isSelected} isAcquired={isAcquired}>

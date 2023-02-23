@@ -20,10 +20,9 @@ import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import api from '../../services/api';
 
 export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
-  const { user, setUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -38,11 +37,11 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
   const iconSize = 30;
 
   function getNewData() {
-    const updatedCoins = coins + user.coins;
-    const updatedXp = xp + user.xp;
+    const updatedCoins = coins + loggedUser.coins;
+    const updatedXp = xp + loggedUser.xp;
 
-    let completedPlanets = user.completed_planets;
-    let updatedUnlockedStarsIds = user.unlocked_stars_ids;
+    let completedPlanets = loggedUser.completed_planets;
+    let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
     let nextPlanet = null;
     let nextStar = {};
 
@@ -69,19 +68,9 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
 
   async function updateUserData() {
     const newData = getNewData();
-    setUser(currentData => {
-      return {
-        ...currentData,
-        ...newData,
-      };
-    });
 
-    for (data of Object.keys(newData)) {
-      try {
-        await api.updateUser(data, newData[data], user.id);
-      } catch (error) {
-        console.log(error);
-      }
+    for (key of Object.keys(newData)) {
+      updateLoggedUser(key, newData[key]);
     }
   }
 
@@ -164,7 +153,7 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
             size={250}
             colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
           />
-          <Streak user={user} setUser={setUser} isUpdateStreak={true} />
+          <Streak loggedUser={loggedUser} updateLoggedUser={updateLoggedUser} isUpdateStreak={true} />
         </>
       ) : (
         <>

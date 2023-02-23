@@ -4,9 +4,9 @@ import { useAuth } from '../hooks/useAuth';
 export const ScrollContext = createContext();
 
 export const ScrollProvider = ({ children }) => {
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
   const [lastUnlockedStarYPosition, setLastUnlockedStarYPosition] = useState(null);
-  const lastUnlockedStarId = user.unlocked_stars_ids.slice(-1)[0];
+  const lastUnlockedStarId = loggedUser.unlocked_stars_ids.slice(-1)[0];
 
   return (
     <ScrollContext.Provider

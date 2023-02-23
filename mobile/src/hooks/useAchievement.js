@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { getUnlockedAchievements } from '../utils/achivements';
-import api from '../services/api';
 
 export function useAchievement() {
-  const { user, setUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
 
   async function updateUnlockedAchievementsIds() {
-    const unlockedAchievements = getUnlockedAchievements(user);
+    const unlockedAchievements = getUnlockedAchievements(loggedUser);
 
     if (unlockedAchievements.length === 0) {
       return;
@@ -20,26 +19,15 @@ export function useAchievement() {
     );
     
     const updatedUnlockedAchievementsIds = [
-      ...user.unlocked_achievements_ids,
+      ...loggedUser.unlocked_achievements_ids,
       ...unlockedAchievementsIds,
     ];
-    setUser(user => {
-      return {
-        ...user,
-        unlocked_achievements_ids: updatedUnlockedAchievementsIds,
-      };
-    });
-
-    try {
-      await api.updateUser('unlocked_achievements_ids', updatedUnlockedAchievementsIds, user.id);
-    } catch (error) {
-      console.log(error);
-    }
+    updateLoggedUser('unlocked_achievements_ids', updatedUnlockedAchievementsIds)
   }
 
   useEffect(() => {
     updateUnlockedAchievementsIds();
-  }, [user]);
+  }, [loggedUser]);
 
   return {
     unlockedAchievements,

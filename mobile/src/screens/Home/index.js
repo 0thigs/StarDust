@@ -22,7 +22,7 @@ import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
 export function Home() {
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const { lastUnlockedStarYPosition } = useScroll();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +34,7 @@ export function Home() {
   const dimensions = useWindowDimensions();
 
   function verifyIfIsStarUnlocked(star) {
-    if (user.unlocked_stars_ids.includes(star.id)) {
+    if (loggedUser.unlocked_stars_ids.includes(star.id)) {
       return { ...star, isUnlocked: true };
     }
     return star;
@@ -149,7 +149,7 @@ export function Home() {
                       description={description}
                       icon={icon}
                       requiredCount={requiredCount}
-                      metric={user[metric]}
+                      metric={loggedUser[metric]}
                       isUnlocked={true}
                     />
                   </C.AchievementContainer>

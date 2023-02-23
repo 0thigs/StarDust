@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
 import * as C from './styles';
@@ -6,8 +7,8 @@ import * as C from './styles';
 import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
 import EnabledStarDust from '../../assets/StarAssets/enabled-stardust.svg';
 import DisabledStarDust from '../../assets/StarAssets/disabled-stardust.svg';
-
 import EnabledStar from '../../assets/StarAssets/enabled-star.json';
+import { rockets } from '../../utils/rockets';
 
 import LottieView from 'lottie-react-native';
 import {
@@ -19,19 +20,17 @@ import {
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/core';
-import { rockets } from '../../utils/rockets';
 
 export const starHeight = 100;
 
 export function Star({ id, name, number, isDisabled, isChallenge }) {
-  const { user, setUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
   const isLastStarUnlocked = lastUnlockedStarId === id;
   const starAnimation = useRef(null);
   const delay = 300;
-  const RocketImage = rockets.find(rocket => rocket.id === user.selected_rocket_id).image;
+  const RocketImage = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
   const navigation = useNavigation();
 
@@ -46,7 +45,7 @@ export function Star({ id, name, number, isDisabled, isChallenge }) {
     starAnimation.current.play(10, 50);
 
     setTimeout(() => {
-      setUser({ ...user, starId: id });
+      updateLoggedUser('starId', id, false);
       const screen = isChallenge ? 'Challenge' : 'Lesson';
       navigation.navigate(screen);
     }, delay);

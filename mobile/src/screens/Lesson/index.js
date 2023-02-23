@@ -10,7 +10,7 @@ import * as C from './styles';
 
 
 export function Lesson() {
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
   const [state, dispatch] = useLesson();
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
@@ -26,9 +26,9 @@ export function Lesson() {
         <TransitionScreenAnimation />
       ) : (
         <>
-          {state.currentStage === 'quiz' && <Quiz coins={user.coins} />}
-          {state.currentStage === 'theory' && <Theory starId={user.starId} />}
-          {state.currentStage === 'end' && <End starId={user.starId} />}
+          {state.currentStage === 'quiz' && <Quiz coins={loggedUser.coins} />}
+          {state.currentStage === 'theory' && <Theory starId={loggedUser.starId} />}
+          {state.currentStage === 'end' && <End starId={loggedUser.starId} />}
         </>
       )}
     </C.Container>

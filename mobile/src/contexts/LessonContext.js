@@ -70,10 +70,10 @@ const LessonReducer = (state, action) => {
 };
 
 export const LessonProvider = ({ children }) => {
-  const { user } = useAuth();
-  const currentQuestions = questions.filter(question => question.starId === user.starId);
+  const { loggedUser } = useAuth();
+  const currentQuestions = questions.filter(question => question.starId === loggedUser.starId);
 
-  initialState.livesCount = user.lives;
+  initialState.livesCount = loggedUser.lives;
   initialState.questions = currentQuestions;
 
   const value = useReducer(LessonReducer, initialState);

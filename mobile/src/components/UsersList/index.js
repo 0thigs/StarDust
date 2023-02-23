@@ -7,7 +7,7 @@ import theme from '../../global/styles/theme';
 const iconSize = 25;
 
 export function UsersList({ users }) {
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
 
   return (
     <FlatList
@@ -22,7 +22,7 @@ export function UsersList({ users }) {
               name={name}
               avatar={avatar}
               xp={xp}
-              isLoggedUser={id === user.id}
+              isLoggedUser={id === loggedUser.id}
             />
             {position === 5 && (
               <C.Divider>

@@ -15,7 +15,7 @@ import * as Speech from 'expo-speech';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
-export function Theory({ starId = 2 }) {
+export function Theory({ starId }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
   const [index, setIndex] = useState(1);

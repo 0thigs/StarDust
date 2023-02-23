@@ -7,14 +7,13 @@ import PlaceholderIcon from '../../assets/GlobalAssets/placeholder-icon.svg';
 import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
-import api from '../../services/api';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
 export function Streak({
-  user: { id, streak, week_status },
-  setUser = null,
-  isUpdateStreak = false,
+  user: { streak, week_status },
+  updateLoggedUser = null,
+  updateStreak = false,
 }) {
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
@@ -25,8 +24,7 @@ export function Streak({
       index === todayIndex ? 'done' : status
     );
     setWeekStatus(updatedWeekStatus);
-    setUser(user => ({ ...user, week_status: updatedWeekStatus }));
-    await api.updateUser('week_status', updatedWeekStatus, id);
+    updateLoggedUser('week_status', updatedWeekStatus);
   }
 
   async function updateStreak() {
@@ -41,8 +39,7 @@ export function Streak({
     if (yesterday === 'done') {
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
-      setUser(user => ({ ...user, streak: updatedStreak }));
-      await api.updateUser('streak', updatedStreak, id);
+      updateLoggedUser('streak', updatedStreak);
     }
 
     updateWeekStatus(todayIndex);
@@ -52,7 +49,7 @@ export function Streak({
     setWeekStatus(week_status);
     setStreakCount(streak);
 
-    if (isUpdateStreak) {
+    if (updateStreak) {
       updateStreak();
     }
   }, []);

@@ -1,19 +1,19 @@
 import { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useAchievement } from '../../hooks/useAchievement';
 
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { Rocket_ } from '../../components/Rocket_';
-
 import { rockets } from '../../utils/rockets';
 
 import * as C from './styles';
-
 import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
 export function Shop() {
+  const { loggedUser } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -26,7 +26,7 @@ export function Shop() {
             <Rocket_ key={id} id={id} name={name} price={price} image={image} />
           ))}
         </C.RocketList>
-
+            {/* FIXME: }
         {/* <C.Title>Vidas</C.Title>
         <C.LifeList horizontal showsHorizontalScrollIndicator={false}>
           <LifeBox lives={1} price={100} />
@@ -52,7 +52,7 @@ export function Shop() {
                       description={description}
                       icon={icon}
                       requiredCount={requiredCount}
-                      metric={user[metric]}
+                      metric={loggedUser[metric]}
                       isUnlocked={true}
                     />
                   </C.AchievementContainer>
