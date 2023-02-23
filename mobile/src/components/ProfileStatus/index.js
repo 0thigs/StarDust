@@ -1,3 +1,4 @@
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/core';
 import { getRankingImage, getRankingName } from '../../utils/rankings';
 import { rockets } from '../../utils/rockets';
@@ -8,8 +9,9 @@ import * as C from './styles';
 import dayjs from 'dayjs';
 
 export function ProfileStatus({
-  user: { ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
+  user: { id, ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
 }) {
+  const { loggedUser } = useAuth();
   const navigation = useNavigation();
   const RankingImage = getRankingImage(ranking_id);
   const rankingName = getRankingName(ranking_id);
@@ -25,9 +27,11 @@ export function ProfileStatus({
 
   return (
     <C.Container>
-      <C.SettingsButton activeOpacity={0.7} onPress={handleSettingsButton}>
-        <SettingsIcon width={35} height={35} />
-      </C.SettingsButton>
+      {id === loggedUser.id && (
+        <C.SettingsButton activeOpacity={0.7} onPress={handleSettingsButton}>
+          <SettingsIcon width={35} height={35} />
+        </C.SettingsButton>
+      )}
       <C.Avatar source={{ uri: avatar }} />
       <C.Name>{name}</C.Name>
       <C.Level>

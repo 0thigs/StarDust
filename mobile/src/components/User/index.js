@@ -25,7 +25,8 @@ export function User({ position, id, name, avatar, xp, isLoggedUser }) {
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
 
   function handleUserCLick() {
-    navigation.navigate('Profile', { id, isExternalUser: true });
+
+    navigation.navigate('Profile', { userId: id });
   }
 
   return (

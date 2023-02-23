@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-
+import { useRoute } from '@react-navigation/native';
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
@@ -12,27 +11,27 @@ import Missing from '../../assets/GlobalAssets/missing-animation.json';
 import * as C from './styles';
 
 export function Profile() {
-  const { loggedUser } = useAuth();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
-  console.log(unlockedAchievements);
+  const route = useRoute();
+  const user = route.params.user;
 
   function getUnlockedAchievements() {
     const unlockedAchievements = achievements.filter(achivement =>
-      loggedUser.unlocked_achievements_ids.includes(achivement.id)
+      user.unlocked_achievements_ids.includes(achivement.id)
     );
     setUnlockedAchievements(unlockedAchievements);
   }
 
   useEffect(() => {
     getUnlockedAchievements();
-  }, [loggedUser.unlocked_achievements_ids]);
+  }, [user]);
 
   return (
     <C.Container>
       <C.Content>
-        <ProfileStatus user={loggedUser} />
-        <Statistic user={loggedUser} />
-        <Streak user={loggedUser} />
+        <ProfileStatus user={user} />
+        <Statistic user={user} />
+        <Streak user={user} />
         <C.Title>Conquistas</C.Title>
         <C.Achievements>
           {unlockedAchievements.length > 0 ? (
@@ -43,15 +42,13 @@ export function Profile() {
                 description={description}
                 icon={icon}
                 requiredCount={requiredCount}
-                currentCount={loggedUser[metric]}
+                currentCount={user[metric]}
                 isUnlocked={true}
               />
             ))
           ) : (
             <>
-              <C.NoAchievements>
-                Parace que você não desbloqueou nenhuma conquista ainda 😢
-              </C.NoAchievements>
+              <C.NoAchievements>Nenhuma consquista desbloquada ainda 😢</C.NoAchievements>
               <Animation source={Missing} autoPlay={true} loop={true} size={220} />
             </>
           )}

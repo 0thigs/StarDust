@@ -55,7 +55,9 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
       nextStar = nextPlanet.stars[0];
     }
 
-    updatedUnlockedStarsIds.push(nextStar.id);
+    if (!updatedUnlockedStarsIds.includes(nextStar.id)) {
+      updatedUnlockedStarsIds.push(nextStar.id);
+    }
 
     return {
       coins: updatedCoins,
@@ -153,7 +155,11 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
             size={250}
             colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
           />
-          <Streak loggedUser={loggedUser} updateLoggedUser={updateLoggedUser} isUpdateStreak={true} />
+          <Streak
+            loggedUser={loggedUser}
+            updateLoggedUser={updateLoggedUser}
+            isUpdateStreak={true}
+          />
         </>
       ) : (
         <>

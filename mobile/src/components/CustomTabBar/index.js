@@ -1,3 +1,4 @@
+import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 
 import HomeIcon from '../../assets/TabAssets/home-tab-icon.svg';
@@ -5,29 +6,51 @@ import ShopIcon from '../../assets/TabAssets/shop-tab-icon.svg';
 import ProfileIcon from '../../assets/TabAssets/profile-tab-icon.svg';
 import RankingIcon from '../../assets/TabAssets/ranking-tab-icon.svg';
 
+const screens = [
+  {
+    name: 'Home',
+    label: 'Aprender',
+    Icon: HomeIcon,
+  },
+  {
+    name: 'Shop',
+    label: 'Loja',
+    Icon: ShopIcon,
+  },
+  {
+    name: 'Profile',
+    label: 'Perfil',
+    Icon: ProfileIcon,
+  },
+  {
+    name: 'Ranking',
+    label: 'Ranking',
+    Icon: RankingIcon,
+  },
+];
+const iconSize = 50;
+
 export function CustomTabBar({ state, navigation }) {
+  const { loggedUser } = useAuth();
+
   function goTo(screenName) {
-    navigation.navigate(screenName);
+    navigation.navigate(screenName, {
+      userId: screenName === 'Profile' ? loggedUser.id : undefined,
+    });
   }
 
   return (
     <C.Container>
-      <C.TabButton onPress={() => goTo('Home')}>
-        <HomeIcon style={{ opacity: state.index === 0 ? 1 : 0.8 }} width="50" height="50" />
-        <C.TabLabel isActive={state.index === 0}>Aprender</C.TabLabel>
-      </C.TabButton>
-      <C.TabButton onPress={() => goTo('Shop')}>
-        <ShopIcon style={{ opacity: state.index === 1 ? 1 : 0.8 }} width="50" height="50" />
-        <C.TabLabel isActive={state.index === 1}>Loja</C.TabLabel>
-      </C.TabButton>
-      <C.TabButton onPress={() => goTo('Profile')}>
-        <ProfileIcon style={{ opacity: state.index === 2 ? 1 : 0.8 }} width="50" height="50" />
-        <C.TabLabel isActive={state.index === 2}>Perfil</C.TabLabel>
-      </C.TabButton>
-      <C.TabButton onPress={() => goTo('Ranking')}>
-        <RankingIcon style={{ opacity: state.index === 3 ? 1 : 0.8 }} width="50" height="50" />
-        <C.TabLabel isActive={state.index === 3}>Ranking</C.TabLabel>
-      </C.TabButton>
+      {screens.map(({ name, label, Icon }, index) => (
+        <C.TabButton key={name} onPress={() => goTo(name)}>
+          <Icon
+            style={{ opacity: state.index === index ? 1 : 0.8 }}
+            width={iconSize}
+            height={iconSize}
+          />
+          <C.TabLabel isActive={state.index === index}>{label}</C.TabLabel>
+        </C.TabButton>
+      ))}
     </C.Container>
   );
 }

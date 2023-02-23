@@ -13,7 +13,7 @@ const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 export function Streak({
   user: { streak, week_status },
   updateLoggedUser = null,
-  updateStreak = false,
+  IsToUpdateStreak = false,
 }) {
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
@@ -49,7 +49,7 @@ export function Streak({
     setWeekStatus(week_status);
     setStreakCount(streak);
 
-    if (updateStreak) {
+    if (IsToUpdateStreak) {
       updateStreak();
     }
   }, []);
