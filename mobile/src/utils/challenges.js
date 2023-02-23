@@ -38,7 +38,8 @@ Saida: 12`,
 
     code: `
      var x = leia()
-     var y = leia()`,
+     var y = leia()
+     escreva(x * y)`,
     difficulty: 'easy',
   },
 ];

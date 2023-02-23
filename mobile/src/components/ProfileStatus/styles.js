@@ -13,7 +13,7 @@ export const Container = styled.View`
 export const ProfileButton = styled.TouchableOpacity`
   position: absolute;
   top: 48px;
-  right: 8px;
+  right: 4px;
   padding: 8px;
 `;
 

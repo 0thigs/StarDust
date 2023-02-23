@@ -21,7 +21,7 @@ import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 
-export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
+export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
@@ -70,7 +70,6 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
 
   async function updateUserData() {
     const newData = getNewData();
-
     for (key of Object.keys(newData)) {
       updateLoggedUser(key, newData[key]);
     }
@@ -107,7 +106,7 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
   function setStarsAnimation() {
     const AnimationUnitInSeconds = 15.4;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
-    starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
+    starsRef.current.play(0, AnimationUnitInSeconds * isNaN(totalStars) ? 100 : totalStars);
   }
 
   function handleButtonClick() {
@@ -129,9 +128,9 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
 
   useEffect(() => {
     if (isChallenge) {
-      setCoins(coins_);
-      setXp(xp_);
-      setTime(convertSecondsToTime(seconds_));
+      setCoins(_coins);
+      setXp(_xp);
+      setTime(convertSecondsToTime(_seconds));
     } else {
       setCoins(getCoins());
       setXp(getXp());
@@ -156,9 +155,9 @@ export function End({ starId, isChallenge, coins_, xp_, seconds_ }) {
             colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
           />
           <Streak
-            loggedUser={loggedUser}
+            user={loggedUser}
             updateLoggedUser={updateLoggedUser}
-            isUpdateStreak={true}
+            isToUpdateStreak={true}
           />
         </>
       ) : (

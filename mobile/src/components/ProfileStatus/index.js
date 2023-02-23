@@ -42,7 +42,7 @@ export function ProfileStatus({
           <ArrowLeft color={theme.colors.green_300} width={35} height={35}></ArrowLeft>
         </C.ProfileButton>
       )}
-      <C.Avatar source={{ uri: avatar }} />
+      <C.Avatar source={{ uri: `http://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg` }} />
       <C.Name>{name}</C.Name>
       <C.Level>
         Nível {level} - {xp} XP

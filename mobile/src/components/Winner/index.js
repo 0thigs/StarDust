@@ -55,7 +55,7 @@ export function Winner({ name, avatar, xp, position }) {
       />
       <C.Name>{name}</C.Name>
       <Icon />
-      <C.Position color={color} _position={position} animation={'fadeInUp'} delay={500 * position}>
+      <C.Position color={color} _position={position} animation={'fadeInUp'} delay={250 * position}>
         <C.Number>{order}</C.Number>
         <C.Xp color={color}>{xp}XP</C.Xp>
       </C.Position>

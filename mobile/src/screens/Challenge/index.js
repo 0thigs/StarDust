@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 import { ChallengeHeader } from '../../components/ChallengeHeader';
 import { Code } from '../../components/Code';
@@ -30,8 +31,9 @@ const earningsByDifficulty = {
 };
 
 export function Challenge() {
+  const { loggedUser } = useAuth();
   const { title, texts, code, testCases, difficulty } = challenges.find(
-    challenge => challenge.starId === 11
+    challenge => challenge.starId === loggedUser.starId
   );
   const [userOutputs, setUserOutputs] = useState([]);
   const [isEnd, setIsEnd] = useState(false);
@@ -171,11 +173,11 @@ export function Challenge() {
             </>
           ) : (
             <End
-              starId={starId}
+              starId={loggedUser.starId}
               isChallenge={true}
-              coins_={earningsByDifficulty[difficulty].coins}
-              xp_={earningsByDifficulty[difficulty].xp}
-              seconds_={seconds.current.value}
+              _coins={earningsByDifficulty[difficulty].coins}
+              _xp={earningsByDifficulty[difficulty].xp}
+              _seconds={seconds.current.value}
             />
           )}
         </>
