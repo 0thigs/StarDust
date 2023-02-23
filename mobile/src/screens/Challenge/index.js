@@ -18,7 +18,7 @@ import * as C from './styles';
 const earningsByDifficulty = {
   easy: {
     coins: 50,
-    xp: 100,
+    xp: 3000,
   },
   medium: {
     coins: 100,

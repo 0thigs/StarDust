@@ -32,7 +32,6 @@ export function Home() {
   const [direction, setDirection] = useState('');
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
-  console.log(loggedUser);
 
   function verifyIfIsStarUnlocked(star) {
     if (loggedUser.unlocked_stars_ids.includes(star.id)) {

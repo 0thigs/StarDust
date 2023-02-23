@@ -71,6 +71,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   async function updateUserData() {
     const newData = getNewData();
     for (key of Object.keys(newData)) {
+      console.log({key});
       updateLoggedUser(key, newData[key]);
     }
   }
@@ -106,7 +107,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   function setStarsAnimation() {
     const AnimationUnitInSeconds = 15.4;
     const totalStars = (parseInt(getAccurance()) * 5) / 100;
-    starsRef.current.play(0, AnimationUnitInSeconds * isNaN(totalStars) ? 100 : totalStars);
+    starsRef.current.play(0, AnimationUnitInSeconds * (isNaN(totalStars) ? 100 : totalStars));
   }
 
   function handleButtonClick() {
@@ -154,11 +155,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
             size={250}
             colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
           />
-          <Streak
-            user={loggedUser}
-            updateLoggedUser={updateLoggedUser}
-            isToUpdateStreak={true}
-          />
+          <Streak user={loggedUser} updateLoggedUser={updateLoggedUser} isToUpdateStreak={true} />
         </>
       ) : (
         <>

@@ -44,7 +44,11 @@ export function CustomDrawer() {
 
   return (
     <C.Container>
-      <C.Avatar source={{ uri: loggedUser.avatar }} />
+      <C.Avatar
+        source={{
+          uri: `http://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`,
+        }}
+      />
       <C.Name>{loggedUser.name}</C.Name>
       <C.Email>{loggedUser.email}</C.Email>
       <C.LogOutButton onPress={handleSignOut}>

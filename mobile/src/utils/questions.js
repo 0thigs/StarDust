@@ -48,7 +48,7 @@ export const questions = [
     ],
   },
   {
-    starId: 2,
+    starId: 1,
     type: 'drag-and-drop-list',
     stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
     items: [
@@ -117,7 +117,7 @@ export const questions = [
       'programar um sistema complexo',
       'detectar hackers',
     ],
-    correctOptions: ['planejar o algoritmo antes de codificá-lo', 'aprender lógica de programação'],
+    correctOptions: ['planejar um algoritmo', 'aprender lógica de programação'],
   },
   {
     starId: 3,
@@ -447,7 +447,7 @@ export const questions = [
     correctItemsIdsSequence: [1, 2],
   },
   {
-    starId: 6,
+    starId: 7,
     type: 'open',
     stem: 'Qual seria o valor lógico para a pergunta "10 é maior que 5?"',
     answer: 'verdadeiro',
