@@ -26,8 +26,8 @@ export function Shop() {
             <Rocket_ key={id} id={id} name={name} price={price} image={image} />
           ))}
         </C.RocketList>
-            {/* FIXME: }
-        {/* <C.Title>Vidas</C.Title>
+            {/* FIXME: 
+         <C.Title>Vidas</C.Title>
         <C.LifeList horizontal showsHorizontalScrollIndicator={false}>
           <LifeBox lives={1} price={100} />
           <LifeBox lives={3} price={250} />

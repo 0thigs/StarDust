@@ -39,7 +39,7 @@ export function Profile() {
   return (
     <C.Container>
       {isLoading ? (
-        <Loading />
+        <Loading isAnimation={true} />
       ) : (
         <C.Content>
           <ProfileStatus user={user} />

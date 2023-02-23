@@ -104,7 +104,7 @@ export function Ranking() {
           </C.Badges>
           <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
           <C.Days>{daysToGo} dias</C.Days>
-          {isLoading ? <Loading /> : <UsersList users={users} />}
+          {isLoading ? <Loading isAnimation={true} /> : <UsersList users={users} />}
         </>
       )}
     </C.Container>

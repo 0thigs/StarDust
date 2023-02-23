@@ -7,6 +7,7 @@ export const Container = styled.SafeAreaView`
   background-color: ${props => props.theme.colors.background};
   padding-bottom: 24px;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Content = styled.ScrollView`
