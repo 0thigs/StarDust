@@ -27,10 +27,7 @@ export function CheckboxForm({ options, correctOptions }) {
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
-
-    console.log({ correctOptions });
-    console.log({ userOptions });
-
+    
     const isAnswerCorrect = userOptions.every(userOption => correctOptions.includes(userOption));
     if (isAnswerCorrect) {
       setIsAnswerWrong(false);

@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${prop => prop.theme.colors.background};
+  justify-content: center;
 `;
 
 export const Badges = styled.ImageBackground`
@@ -24,21 +25,6 @@ export const Days = styled.Text`
   font-family: ${props => props.theme.fonts.semibold};
   color: ${props => props.theme.colors.green_300};
   font-size: 16px;
-`;
-
-export const Divider = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  margin-bottom: 8px;
-`;
-
-export const Message = styled.Text`
-  text-align: center;
-  font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.green_500};
-  margin: 0 8px;
 `;
 
 export const BadgesList = styled.FlatList``;

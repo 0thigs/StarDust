@@ -19,7 +19,10 @@ export default {
   },
 
   getUsersByCurrentRanking: async rankingId => {
-    const { data, error, status } = await supabase.from('users').select('*').eq('ranking_id', rankingId);
+    const { data, error, status } = await supabase
+      .from('users')
+      .select('*')
+      .eq('ranking_id', rankingId);
     if (error) {
       throw new Error(error.message);
     }

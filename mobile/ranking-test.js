@@ -49,6 +49,13 @@ export function Ranking() {
     setUser(user => ({ ...user, xp: newXp }));
   }
 
+  async function updateWinners() {
+    for (let winner of winners) {
+      await api.updateUser('isWinner', true, winner.id);
+    }
+    setIsWinningShow(true);
+  }
+
   async function updateRanking() {
     const newRankingId = currentRankingId + 1;
     for (let _user of users) {
@@ -59,23 +66,27 @@ export function Ranking() {
 
       if (_user.id === user.id) {
         setUser(user => ({ ...user, ranking_id: newRankingId }));
-        setUser(user => ({ ...user, didUpdateRanking: true }))
+        setUser(user => ({ ...user, didUpdateRanking: true }));
       }
     }
-    updateXp()
+    updateXp();
+  }
+
+  async function doOffSundayUpdating() {
+    for (let _user of users) {
+      await api.updateUser('didUpdateRanking', false, _user.id);
+    }
+    setUser(user => ({ ...user, didUpdateRanking: false }));
   }
 
   async function doSundayUpdating() {
     if (!user.didUpdateRanking && today === 3) {
-      updateRanking();
       await api.updateUser('didShowWinning', false, user.id);
       setUser(user => ({ ...user, didShowWinning: false }));
-      setIsWinningShow(true);
+      updateRanking();
+      updateWinners();
     } else if (user.didSundayUpdating && today !== 3) {
-      for (let _user of users) {
-        await api.updateUser('didUpdateRanking', false, _user.id)
-      }
-      setUser(user => ({ ...user, didUpdateRanking: false }))
+      doOffSundayUpdating();
     }
   }
 
@@ -88,7 +99,7 @@ export function Ranking() {
 
       await doSundayUpdating();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setIsloading(false);
     }
@@ -102,7 +113,7 @@ export function Ranking() {
   }, []);
 
   useEffect(() => {
-    setCurrentRankingId(rankings.find(ranking => ranking.id === user.ranking_id).id)
+    setCurrentRankingId(rankings.find(ranking => ranking.id === user.ranking_id).id);
   }, [user.ranking_id]);
 
   useEffect(() => {
