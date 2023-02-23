@@ -10,10 +10,11 @@ export const Container = styled.View`
   border-bottom-color: ${props => props.theme.colors.green_500};
 `;
 
-export const SettingsButton = styled.TouchableOpacity`
+export const ProfileButton = styled.TouchableOpacity`
   position: absolute;
   top: 48px;
   right: 24px;
+  padding: 8px;
 `;
 
 export const Avatar = styled.Image`

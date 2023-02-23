@@ -24,13 +24,12 @@ export function User({ position, id, name, avatar, xp, isLoggedUser }) {
   const isInPodium = position <= 3;
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
 
-  function handleUserCLick() {
-
+  function handleUserPress() {
     navigation.navigate('Profile', { userId: id });
   }
 
   return (
-    <C.Container activeOpacity={0.7} onClick={handleUserCLick} isLoggedUser={isLoggedUser}>
+    <C.Container activeOpacity={0.7} onPress={handleUserPress} isLoggedUser={isLoggedUser}>
       <C.Position>{isInPodium ? <Icon /> : position}</C.Position>
       <C.Avatar
         source={{

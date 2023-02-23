@@ -6,6 +6,7 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.colors.background};
   padding-bottom: 24px;
+  justify-content: center;
 `;
 
 export const Content = styled.ScrollView`

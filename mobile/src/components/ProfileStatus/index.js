@@ -7,6 +7,8 @@ import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
 
 import * as C from './styles';
 import dayjs from 'dayjs';
+import { ArrowLeft } from 'react-native-feather';
+import theme from '../../global/styles/theme';
 
 export function ProfileStatus({
   user: { id, ranking_id, selected_rocket_id, avatar, name, level, xp, created_at },
@@ -25,12 +27,20 @@ export function ProfileStatus({
     navigation.navigate('Settings');
   }
 
+  function handleBackButton() {
+    navigation.goBack();
+  }
+
   return (
     <C.Container>
-      {id === loggedUser.id && (
-        <C.SettingsButton activeOpacity={0.7} onPress={handleSettingsButton}>
+      {id === loggedUser.id ? (
+        <C.ProfileButton activeOpacity={0.7} onPress={handleSettingsButton}>
           <SettingsIcon width={35} height={35} />
-        </C.SettingsButton>
+        </C.ProfileButton>
+      ) : (
+        <C.ProfileButton onPress={handleBackButton}>
+          <ArrowLeft color={theme.colors.green_300} width={35} height={35}></ArrowLeft>
+        </C.ProfileButton>
       )}
       <C.Avatar source={{ uri: avatar }} />
       <C.Name>{name}</C.Name>
