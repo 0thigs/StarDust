@@ -8,6 +8,7 @@ import LockedStar from '../../assets/StarAssets/locked-star.svg';
 import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
 import UnlockedStarDust from '../../assets/StarAssets/unlocked-stardust.svg';
 import LockedStarDust from '../../assets/StarAssets/locked-stardust.svg';
+import StarSound from '../../assets/sounds/star-sound.wav';
 import { rockets } from '../../utils/rockets';
 
 import LottieView from 'lottie-react-native';
@@ -20,6 +21,7 @@ import {
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
+import { Sound } from '../Sound';
 
 export const starHeight = 100;
 
@@ -29,6 +31,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     useScroll();
   const isLastStarUnlocked = lastUnlockedStarId === id;
   const starAnimation = useRef(null);
+  const starSound = useRef(null);
   const delay = 300;
   const RocketImage = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
@@ -43,6 +46,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
 
   function HandleStarClick() {
     starAnimation.current.play(10, 50);
+    starSound.current.play();
 
     setTimeout(() => {
       updateLoggedUser('starId', id, false);
@@ -118,6 +122,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
           )}
         </>
       </C.StarButton>
+      <Sound ref={starSound} soundFile={StarSound} />
     </C.Container>
   );
 }

@@ -40,7 +40,7 @@ export function Modal({ isOpen, type = 'crying', title, body, footer }) {
 
   useEffect(() => {
     if (isOpen) {
-      soundRef.current.playSound();
+      soundRef.current.play();
     }
   }, [isOpen]);
 

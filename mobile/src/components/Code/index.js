@@ -13,7 +13,7 @@ export function Code({ code, userCode, handleUserCode }) {
   }
 
   function handleRunPress() {
-    soundRef.current.playSound();
+    soundRef.current.play();
     handleUserCode();
   }
 

@@ -17,7 +17,7 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerifi
 
   useEffect(() => {
     if (isAnswerVerified) {
-      soundRef.current.playSound();
+      soundRef.current.play();
     }
   }, [isAnswerVerified]);
 

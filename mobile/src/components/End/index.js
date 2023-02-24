@@ -140,7 +140,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
     }
 
     setStarsAnimation();
-    soundRef.current.playSound();
+    soundRef.current.play();
   }, []);
 
   return (
