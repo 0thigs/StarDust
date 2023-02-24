@@ -11,7 +11,6 @@ import { LessonHeader } from '../LessonHeader';
 import { theories } from '../../utils/theories';
 import { planets } from '../../utils/planets';
 
-import * as Speech from 'expo-speech';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
@@ -55,13 +54,6 @@ export function Theory({ starId }) {
     setIsFabButtonShown(!isScrollEnd);
   }
 
-  async function handleSpeechButton(text) {
-    if (await Speech.isSpeakingAsync()) {
-      Speech.stop();
-      return;
-    }
-    Speech.speak(text);
-  }
 
   useEffect(() => {
     setTexts([{ ...textsFromJSON[0], isRendered: false }]);

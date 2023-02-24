@@ -52,7 +52,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
       updateLoggedUser('starId', id, false);
       const screen = isChallenge ? 'Challenge' : 'Lesson';
       navigation.navigate(screen);
-    }, delay);
+    }, 100);
   }
 
   const RocketRotate = useSharedValue(180);
