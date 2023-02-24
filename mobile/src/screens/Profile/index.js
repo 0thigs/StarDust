@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useState, useCallback } from 'react';
+import { useRoute, useFocusEffect } from '@react-navigation/native';
 
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
@@ -30,11 +30,13 @@ export function Profile() {
     setUser(user);
   }
 
-  useEffect(() => {
-    init();
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, [userId]);
+  useFocusEffect(
+    useCallback(() => {
+      init();
+      const timer = setTimeout(() => setIsLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }, [userId])
+  );
 
   return (
     <C.Container>

@@ -94,9 +94,9 @@ export function Rocket_({ id, name, image: Image, price }) {
         <C.Name isSelected={isSelected}>{name}</C.Name>
         <Button
           title={isSelected && isAcquired ? 'Selecionado' : isAcquired ? 'Selecionar' : 'Comprar'}
+          isLoading={isRequesting}
           isDisabled={(isSelected && isAcquired) || isRequesting}
           onPress={handleButton}
-          isLoading={isRequesting}
           color={theme.colors.black}
           background={theme.colors.yellow_300}
         />

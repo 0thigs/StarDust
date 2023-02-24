@@ -28,7 +28,7 @@ export const Avatar = styled.Image`
 
 export const Name = styled.Text`
   color: ${props => props.theme.colors.green_500};
-  font-family: ${props => props.theme.fonts.bold};
+  font-family: ${props => props.theme.fonts.semibold};
   font-size: 20px;
 `;
 
@@ -40,7 +40,7 @@ export const Created_at = styled.Text`
 
 export const Level = styled.Text`
   color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.bold};
+  font-family: ${props => props.theme.fonts.semibold};
   font-size: 14px;
 `;
 export const Ranking = styled.View`
@@ -71,6 +71,6 @@ export const StatusName = styled.Text`
 export const Title = styled.Text`
   margin-left: 8px;
   color: ${props => props.theme.colors.green_500};
-  font-family: ${props => props.theme.fonts.bold};
+  font-family: ${props => props.theme.fonts.semibold};
   font-size: 14px;
 `;

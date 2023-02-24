@@ -11,7 +11,7 @@ export function WinnersList({ winners, isLoading, setIsWinnersListShow }) {
   const soundRef = useRef(null);
 
   useEffect(() => {
-    soundRef.current.playSound();
+    soundRef.current.play();
   }, []);
 
   return (

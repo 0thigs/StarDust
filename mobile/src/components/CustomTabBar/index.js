@@ -3,6 +3,7 @@ import * as C from './styles';
 
 import HomeIcon from '../../assets/TabAssets/home-tab-icon.svg';
 import ShopIcon from '../../assets/TabAssets/shop-tab-icon.svg';
+import ChallengesIcon from '../../assets/TabAssets/challenges-tab-icon.svg';
 import ProfileIcon from '../../assets/TabAssets/profile-tab-icon.svg';
 import RankingIcon from '../../assets/TabAssets/ranking-tab-icon.svg';
 
@@ -11,6 +12,11 @@ const screens = [
     name: 'Home',
     label: 'Aprender',
     Icon: HomeIcon,
+  },
+  {
+    name: 'Challenges',
+    label: 'Desafios',
+    Icon: ChallengesIcon,
   },
   {
     name: 'Shop',
