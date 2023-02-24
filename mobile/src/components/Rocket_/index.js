@@ -55,7 +55,7 @@ export function Rocket_({ id, name, image: Image, price }) {
   async function selectRocket() {
     updateLoggedUser('selected_rocket_id', id);
     setIsRequesting(false);
-    soundRef.current.playSound();
+    soundRef.current.play();
   }
 
   function handleButton() {

@@ -63,14 +63,13 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
       transform: [
         { rotate: `${RocketRotate.value}deg` },
         { scale: RocketScale.value },
-        { translateY: -RocketTranslateY.value },
       ],
     };
   });
 
   useEffect(() => {
+    console.log({lastUnlockedStarYPosition})
     StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
-    RocketTranslateY.value = withSpring(lastUnlockedStarYPosition, { duration: 800 });
 
     const timer = setTimeout(() => {
       RocketRotate.value = withTiming(540, { duration: 800 });

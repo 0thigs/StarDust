@@ -34,8 +34,6 @@ export function LessonHeader() {
       updateLoggedUser('lives', state.livesCount);
     }
 
-    dispatch({ type: 'resetState' });
-
     if (await Speech.isSpeakingAsync()) {
       Speech.stop();
     }
@@ -43,6 +41,7 @@ export function LessonHeader() {
     navigation.reset({
       routes: [{ name: 'DrawerRoutes' }],
     });
+    dispatch({ type: 'resetState' });
   }
 
   useEffect(() => {
