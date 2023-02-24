@@ -4,14 +4,13 @@ import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import RocketBackground from '../../assets/RocketAssets/rocket-background.png';
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 
-import api from '../../services/api';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 

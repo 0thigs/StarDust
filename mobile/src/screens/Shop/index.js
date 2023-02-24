@@ -9,7 +9,7 @@ import { Rocket_ } from '../../components/Rocket_';
 import { rockets } from '../../utils/rockets';
 
 import * as C from './styles';
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
 export function Shop() {

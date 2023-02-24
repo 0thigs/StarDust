@@ -8,8 +8,8 @@ import theme from '../../global/styles/theme';
 import { Sound } from '../Sound';
 
 const sounds = {
-  success: require('../../assets/LessonAssets/success-sound.wav'),
-  fail: require('../../assets/LessonAssets/fail-sound.wav'),
+  success: require('../../assets/sounds/success-sound.wav'),
+  fail: require('../../assets/sounds/fail-sound.wav'),
 };
 
 export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered }) {

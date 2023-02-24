@@ -14,9 +14,9 @@ import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
 import Accurance from '../../assets/GlobalAssets/accurance-icon.svg';
 import Time from '../../assets/GlobalAssets/time-icon.svg';
-import Astronaut from '../../assets/LessonAssets/astrounaut-animation.json';
-import Stars from '../../assets/LessonAssets/stars-animation.json';
-import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
+import Astronaut from '../../assets/animations/astrounaut-animation.json';
+import Stars from '../../assets/animations/stars-animation.json';
+import StreakAnimation from '../../assets/animations/streak-animation.json';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
@@ -220,7 +220,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
         background={theme.colors.green_500}
       />
 
-      <Sound ref={soundRef} soundFile={require('../../assets/LessonAssets/end-sound.mp3')} />
+      <Sound ref={soundRef} soundFile={require('../../assets/sounds/end-sound.mp3')} />
     </C.Container>
   );
 }

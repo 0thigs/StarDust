@@ -4,7 +4,7 @@ import * as C from './styles';
 
 import { Animation } from '../Animation';
 
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 import FirstPlaceIcon from '../../assets/RankingAssets/first-place.svg';
 import SecondPlaceIcon from '../../assets/RankingAssets/second-place.svg';
 import ThirdPlaceIcon from '../../assets/RankingAssets/third-place.svg';

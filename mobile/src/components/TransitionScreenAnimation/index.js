@@ -2,7 +2,7 @@ import React from 'react';
 import * as C from './styles';
 
 import { Animation } from '../Animation';
-import Transition from '../../assets/GlobalAssets/transition-animation.json';
+import Transition from '../../assets/animations/transition-animation.json';
 
 export function TransitionScreenAnimation() {
   return (

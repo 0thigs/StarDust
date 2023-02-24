@@ -9,7 +9,7 @@ import { Achievement } from '../../components/Achievement';
 import { Loading } from '../../components/Loading';
 import { achievements } from '../../utils/achivements';
 
-import Missing from '../../assets/GlobalAssets/missing-animation.json';
+import Missing from '../../assets/animations/missing-animation.json';
 import * as C from './styles';
 import api from '../../services/api';
 

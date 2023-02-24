@@ -10,7 +10,7 @@ export const Container = styled(Animatable.View)`
 export const StarDust = styled.View`
   width: 100%;
   padding-left: 42px;
-  opacity: ${props => (props.isDisabled ? 0.5 : 1)};
+  opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
 `;
 
 export const StarContainer = styled(Animated.View)``;
@@ -20,25 +20,24 @@ export const StarButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding-left: 3px;
-  opacity: ${props => (props.isDisabled ? 0.5 : 1)};
+  opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
 `;
 
-export const Rocket = styled(Animated.View)`
-`;
+export const Rocket = styled(Animated.View)``;
 
 export const StarNumber = styled.Text`
   font-size: 16px;
-  color: ${props => (props.isDisabled ? props.theme.colors.white : props.theme.colors.yellow_500)};
-  font-family: ${props => props.theme.fonts.bold};
+  color: ${({ isUnlocked, theme }) => (isUnlocked ? theme.colors.white : theme.colors.yellow_500)};
+  font-family: ${({ theme }) => theme.fonts.bold};
   position: absolute;
   top: 40%;
-  left: ${props => (props.isDisabled ? 16 : 17.5)}%;
+  left: ${({ isUnlocked }) => (isUnlocked ? 16 : 17.5)}%;
 `;
 
 export const StarSign = styled.View`
   border-width: 2px;
-  border-color: ${props =>
-    props.isDisabled ? props.theme.colors.gray_500 : props.theme.colors.yellow_300};
+  border-color: ${({ isUnlocked, theme }) =>
+    isUnlocked ? theme.colors.gray_500 : theme.colors.yellow_300};
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
@@ -48,7 +47,7 @@ export const StarSign = styled.View`
 `;
 
 export const StarName = styled.Text`
-  color: ${props =>
-    props.isDisabled ? props.theme.colors.gray_500 : props.theme.colors.yellow_300};
+  color: ${({ isUnlocked, theme }) =>
+    isUnlocked ? theme.colors.gray_500 : theme.colors.yellow_300};
   flex-wrap: wrap;
 `;

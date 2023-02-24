@@ -4,8 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Animation } from '../../components/Animation';
 
-import PlayButton from '../../assets/SplashAssets/play-button.json';
-import Rocket from '../../assets/SplashAssets/rocket.json';
+import PlayButton from '../../assets/animations/play-button-animation.json';
+import Rocket from '../../assets/animations/rocket-animation.json';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 

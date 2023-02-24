@@ -41,7 +41,7 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
             id={id}
             name={name}
             number={number}
-            isDisabled={!isUnlocked}
+            isUnlocked={!isUnlocked}
             isChallenge={isChallenge}
           />
         );

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Editor } from '../Editor';
 import { Sound } from '../Sound';
 // import { keys } from '../../utils/keys';
-import RunningCodeSound from '../../assets/GlobalAssets/running-code-sound.wav';
+import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import * as C from './styles';
 
 export function Code({ code, userCode, handleUserCode }) {

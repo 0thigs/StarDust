@@ -4,7 +4,7 @@ import * as C from './styles';
 import SuccessIcon from '../../assets/GlobalAssets/success-icon.svg';
 import FailIcon from '../../assets/GlobalAssets/fail-icon.svg';
 import PlaceholderIcon from '../../assets/GlobalAssets/placeholder-icon.svg';
-import StreakAnimation from '../../assets/GlobalAssets/streak-animation.json';
+import StreakAnimation from '../../assets/animations/streak-animation.json';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
 

@@ -15,7 +15,7 @@ import { Animation } from '../../components/Animation';
 import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
-import RewardLight from '../../assets/ModalAssets/reward-light-animation.json';
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';

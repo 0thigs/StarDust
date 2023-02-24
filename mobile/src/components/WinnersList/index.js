@@ -3,7 +3,7 @@ import { Button } from '../Button';
 import { Winner } from '../Winner';
 import { Loading } from '../Loading';
 import { Sound } from '../Sound';
-import EarningSound from '../../assets/ModalAssets/earning-sound.wav';
+import EarningSound from '../../assets/sounds/earning-sound.wav';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 

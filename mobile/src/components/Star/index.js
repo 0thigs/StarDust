@@ -4,10 +4,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
 import * as C from './styles';
 
-import DisabledStar from '../../assets/StarAssets/disabled-star.svg';
-import EnabledStarDust from '../../assets/StarAssets/enabled-stardust.svg';
-import DisabledStarDust from '../../assets/StarAssets/disabled-stardust.svg';
-import EnabledStar from '../../assets/StarAssets/enabled-star.json';
+import LockedStar from '../../assets/StarAssets/locked-star.svg';
+import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
+import UnlockedStarDust from '../../assets/StarAssets/unlocked-stardust.svg';
+import LockedStarDust from '../../assets/StarAssets/locked-stardust.svg';
 import { rockets } from '../../utils/rockets';
 
 import LottieView from 'lottie-react-native';
@@ -23,7 +23,7 @@ import {
 
 export const starHeight = 100;
 
-export function Star({ id, name, number, isDisabled, isChallenge }) {
+export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
@@ -89,15 +89,15 @@ export function Star({ id, name, number, isDisabled, isChallenge }) {
         }
       }}
     >
-      <C.StarDust>{isDisabled ? <DisabledStarDust /> : <EnabledStarDust />}</C.StarDust>
-      <C.StarButton onPress={HandleStarClick} disabled={isDisabled}>
-        <C.StarContainer style={!isDisabled && StarAnimatedStyle}>
-          {isDisabled ? (
-            <DisabledStar width={100} height={85} />
+      <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
+      <C.StarButton onPress={HandleStarClick} disabled={isUnlocked}>
+        <C.StarContainer style={!isUnlocked && StarAnimatedStyle}>
+          {isUnlocked ? (
+            <LockedStar width={100} height={85} />
           ) : (
             <LottieView
               ref={starAnimation}
-              source={EnabledStar}
+              source={UnlockedStar}
               autoPlay={true}
               loop={false}
               duration={2500}
@@ -106,10 +106,10 @@ export function Star({ id, name, number, isDisabled, isChallenge }) {
             />
           )}
         </C.StarContainer>
-        <C.StarNumber isDisabled={isDisabled}>{number}</C.StarNumber>
+        <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>
         <>
-          <C.StarSign isDisabled={isDisabled}>
-            <C.StarName isDisabled={isDisabled}>{name}</C.StarName>
+          <C.StarSign isUnlocked={isUnlocked}>
+            <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>
           </C.StarSign>
           {isLastStarUnlocked && (
             <C.Rocket style={RocketAnimatedStyle}>

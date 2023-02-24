@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as C from './styles';
 
-import Crying from '../../assets/ModalAssets/crying-animation.json';
-import Denying from '../../assets/ModalAssets/denying-animation.json';
-import Earning from '../../assets/ModalAssets/earning-animation.json';
-import Asking from '../../assets/ModalAssets/asking-animation.json';
+import Crying from '../../assets/animations/crying-animation.json';
+import Denying from '../../assets/animations/denying-animation.json';
+import Earning from '../../assets/animations/earning-animation.json';
+import Asking from '../../assets/animations/asking-animation.json';
 
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
@@ -14,22 +14,22 @@ const effects = [
   {
     id: 'earning',
     animation: Earning,
-    sound: require('../../assets/ModalAssets/earning-sound.wav'),
+    sound: require('../../assets/sounds/earning-sound.wav'),
   },
   {
     id: 'crying',
     animation: Crying,
-    sound: require('../../assets/ModalAssets/crying-sound.wav'),
+    sound: require('../../assets/sounds/crying-sound.wav'),
   },
   {
     id: 'denying',
     animation: Denying,
-    sound: require('../../assets/ModalAssets/denying-sound.wav'),
+    sound: require('../../assets/sounds/denying-sound.wav'),
   },
   {
     id: 'asking',
     animation: Asking,
-    sound: require('../../assets/ModalAssets/asking-sound.wav'),
+    sound: require('../../assets/sounds/asking-sound.wav'),
 
   },
 ];
