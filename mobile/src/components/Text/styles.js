@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 import { css } from 'styled-components';
+import * as Animatable from 'react-native-animatable'
 
-export const Container = styled.View`
+export const Container = styled(Animatable.View)`
   flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
   align-items: center;
   margin: 16px 0;

@@ -2,7 +2,7 @@ export const questions = [
   {
     starId: 1,
     type: 'selection',
-    stem: 'Dentro das opções que não se enquadra na hora de criar um algoritmo é',
+    stem: 'Dentro das opções que NÃO se enquadra na hora de fazer um algoritmo é',
     options: ['raciocínio lógico', 'aleatoriedade', 'análise', 'encadeamento de passos'],
     answer: 'aleatoriedade',
   },
@@ -15,7 +15,7 @@ export const questions = [
   {
     starId: 1,
     type: 'selection',
-    stem: 'O que é lógica de programação?',
+    stem: 'O que é lógica de programação mesmo?',
     options: [
       'sequência lógica de instruções',
       'fazer programa',
@@ -27,188 +27,155 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
+    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de vestir um traje espacial (a ordem lógica é sempre de cima para baixo)',
     items: [
       {
         id: 1,
-        label: 'retirar embalagem do chiclete',
+        label: 'retirar o traje do compartimento',
       },
       {
         id: 2,
-        label: 'colocar chiclete na boca',
+        label: 'abrir zíper do traje',
       },
       {
         id: 3,
-        label: 'mascar o chiclete',
+        label: 'colocar o traje',
       },
       {
         id: 4,
-        label: 'jogar o chiclete fora',
+        label: 'fechar o zíper do traje',
       },
     ],
   },
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto',
+    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de ligar um foguete (a ordem lógica é sempre de cima para baixo)',
     items: [
       {
         id: 1,
-        label: 'acordar',
+        label: 'ir para o painel de controle',
       },
       {
         id: 2,
-        label: 'vestir-se',
+        label: 'encontrar o botão de ligar',
       },
       {
         id: 3,
-        label: 'tirar o carro da garagem',
+        label: 'pressionar o botão',
       },
       {
         id: 4,
-        label: 'ir para o trabalho',
+        label: 'esperar o foguete decolar',
       },
     ],
   },
   {
     starId: 2,
     type: 'open',
-    stem: 'O nome que se dá para a representação informal de um algoritmo é',
-    answer: 'Pseudocódigo',
+    stem: 'O nome do comando para um programa receber informações é',
+    answer: 'leia',
   },
   {
     starId: 2,
     type: 'selection',
-    stem: 'Qual é a vantagem de se usar pseudocódigo?',
+    stem: 'Como com que um programa escreva "que horas são?"',
     options: [
-      'Facilitar a compreensão de um algoritmo',
-      'Melhorar a performance de um código',
-      'Aumentar a segurança de um sistema',
-      'Substituir a linguagem de programação',
+      'escreva(que horas são)',
+      'imprima("que horas são")',
+      'escreva("que horas são")',
+      'escreva("14:52am")',
     ],
-    answer: 'Facilitar a compreensão de um algoritmo',
+    answer: 'escreva("que horas são")',
   },
   {
     starId: 2,
-    type: 'selection',
-    stem: 'Para que o Portugol é utilizado?',
-    options: [
-      'Para programar sistemas operacionais',
-      'Para descrever algoritmos',
-      'Para programar jogos',
-      'Para programar aplicativos mobile',
-    ],
-    answer: 'Para descrever algoritmos',
-  },
-  {
-    starId: 2,
-    type: 'checkbox',
-    stem: 'Marque as opções que são consideradas linguagens de programação',
-    options: ['Portugol', 'PHP', 'JavaScript', 'Python'],
-    correctOptions: ['PHP', 'JavaScript', 'Python'],
-  },
-  {
-    starId: 2,
-    type: 'checkbox',
-    stem: 'Marque as opções que são momentos nas quais é recomendável usar pseudocódigo',
-    options: [
-      'planejar um algoritmo',
-      'aprender lógica de programação',
-      'programar um sistema complexo',
-      'detectar hackers',
-    ],
-    correctOptions: ['planejar um algoritmo', 'aprender lógica de programação'],
-  },
-  {
-    starId: 3,
     type: 'drag-and-drop-list',
-    stem: 'Reordene os elementos (de cima pra baixo), de modo que fique coerente com os conceitos de entrada processamento e saída',
+    stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
     items: [
       {
         id: 1,
-        label: 'armazenar os dados',
+        label: 'var quantidade',
       },
       {
         id: 2,
-        label: 'manipulação dos dados',
+        label: 'quantidade = leia()',
       },
       {
         id: 3,
-        label: 'exibir os resultados',
+        label: 'escreva(quantidade)',
       },
     ],
   },
   {
-    starId: 3,
-    type: 'selection',
-    stem: 'Em que momento ocorre a entrada de dados em um programa',
-    options: [
-      'Quando o programa é finalizado',
-      'Antes do processamento de dados',
-      'Durante o processamento de dados',
-      'Depois do processamento de dados',
-    ],
-    answer: 'Antes do processamento de dados',
-  },
-  {
-    starId: 3,
-    type: 'drag-and-drop-list',
-    stem: 'Reorganize o algoritmo, de modo que fique coerente com os conceitos de entrada processamento e saída',
-    items: [
+    starId: 2,
+    type: 'drag-and-drop-click',
+    stem: 'Clique nos elementos abaixo para completar o programa',
+    lines: [
       {
         id: 1,
-        label: 'LEIA idade',
+        texts: ['var nomeDoFoguete = ', 'dropZone'],
+        indentLevel: 0,
       },
       {
         id: 2,
-        label: 'idade <- 2022 - idade',
+        texts: ['dropZone', '(nomeDoFoguete)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'receba',
+      },
+      {
+        id: 2,
+        label: 'escreva',
       },
       {
         id: 3,
-        label: 'ESCREVA "A sua idade é: ", idade',
+        label: 'leia( )',
+      },
+      {
+        id: 4,
+        label: 'leia',
       },
     ],
+    correctItemsIdsSequence: [3, 2],
   },
   {
-    starId: 3,
+    starId: 2,
     type: 'open',
-    stem: 'Complete a frase: a etapa na qual é exibido as informações de um programa é ______ de dados',
-    answer: 'Saída',
+    stem: 'O nome do comando para um programa mostrar informações é',
+    answer: 'escreva',
   },
   {
     starId: 3,
     type: 'selection',
-    stem: 'Dentre os comandos abaixo que pode ser usado para saída de dados é',
-    options: ['ESCREVA', 'LEIA', 'FACA', 'CORRA'],
-    answer: 'ESCREVA',
-  },
-  {
-    starId: 4,
-    type: 'selection',
-    stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta no Portugol?',
+    stem: 'Qual das alternativas a seguir representa uma atribuição de variável correta?',
     options: [
-      'nome_da_variavel <- valor',
-      'nome_da_variavel = valor',
-      'nome_da_variavel > valor',
-      'nome_da_variavel == valor',
+      'nomeDaVariavel <- valor',
+      'nomeDaVariavel = valor',
+      'nomeDavariavel < valor',
+      'nomeDavariavel == valor',
     ],
-    answer: 'nome_da_variavel <- valor',
+    answer: 'nomeDaVariavel = valor',
   },
   {
-    starId: 4,
+    starId: 3,
     type: 'checkbox',
     stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
     correctOptions: ['_idade', 'altura_em_cm'],
   },
   {
-    starId: 4,
+    starId: 3,
     type: 'drag-and-drop-click',
     stem: 'Clique nos elementos abaixo para completar o algoritmo',
     lines: [
       {
         id: 1,
-        texts: ['variavel_qualquer', 'dropZone'],
+        texts: ['variavel_aleatoria = ', 'dropZone'],
         indentLevel: 0,
       },
     ],
@@ -223,47 +190,34 @@ export const questions = [
       },
       {
         id: 3,
-        label: 'Portugol',
+        label: '3Delegua',
       },
     ],
     correctItemsIdsSequence: [2],
   },
   {
-    starId: 4,
-    type: 'drag-and-drop-list',
-    stem: 'Organize o código na ordem como ele deve ser lido (de cima para baixo)',
-    items: [
-      {
-        id: 1,
-        label: 'var altura: inteiro',
-      },
-      {
-        id: 2,
-        label: 'inicio',
-      },
-      {
-        id: 3,
-        label: 'escreva ("Entre com sua altura: ")',
-      },
-      {
-        id: 4,
-        label: 'leia (altura)',
-      },
-      {
-        id: 5,
-        label: 'escreva ("Sua altura é: ", altura)',
-      },
-      {
-        id: 6,
-        label: 'fimalgoritmo',
-      },
+    starId: 3,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código?',
+    code: `
+var nomePlaneta = "Protheus"
+var nome = "0thigs"
+nomePlaneta = nome
+
+escreva("planeta encontrado: ", nomePlaneta)`,
+    options: [
+      'planeta encontrado: Protheus',
+      'planeta encontrado: 0thigs',
+      'planeta encontrado: nomePlaneta',
+      'planeta encontrado: "Protheus"',
     ],
+    answer: 'planeta encontrado: 0thigs',
   },
   {
-    starId: 4,
+    starId: 3,
     type: 'open',
     stem: 'O nome do comando para declarar variáveis é',
-    answer: 'VAR',
+    answer: 'var',
   },
   {
     starId: 5,

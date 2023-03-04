@@ -7,25 +7,25 @@ export const planets = [
     stars: [
       {
         id: 1,
-        name: 'Conceito de lógica',
+        name: 'Lógica e algoritmos',
         number: 1,
         isChallenge: false,
       },
       {
         id: 2,
-        name: 'O que é pseudocódigo',
+        name: 'Escreva e leia',
         number: 2,
         isChallenge: false,
       },
       {
         id: 3,
-        name: 'Entrada, processamento e saída',
+        name: 'Variáveis',
         number: 3,
         isChallenge: false,
       },
       {
-        id: 11,
-        name: 'Desafio: Multiplicar dois números',
+        id: 4,
+        name: 'Desafio: Enviar mensagem',
         number: 4,
         isChallenge: true,
       },
@@ -38,25 +38,25 @@ export const planets = [
     icon: require('../assets/PlanetAssets/planet-icon-2.svg').default,
     stars: [
       {
-        id: 4,
+        id: 5,
         name: 'Declaração e atribuição',
         number: 1,
         isChallenge: false,
       },
       {
-        id: 5,
+        id: 6,
         name: 'Caracteres',
         number: 2,
         isChallenge: false,
       },
       {
-        id: 6,
+        id: 7,
         name: 'Inteiros e Reais',
         number: 3,
         isChallenge: false,
       },
       {
-        id: 7,
+        id: 8,
         name: 'Lógicos',
         number: 4,
         isChallenge: false,

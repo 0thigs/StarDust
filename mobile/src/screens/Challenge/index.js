@@ -64,6 +64,7 @@ export function Challenge() {
   }
 
   function addUserOutput(userOutput) {
+    console.log(userOutput);
     if (userOutput) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
@@ -72,12 +73,14 @@ export function Challenge() {
   }
 
   function formatCode(code, input) {
-    const matches = code.match(/(leia\(\))/g);
+    const regex = /(leia\(\))/g
+    const matches = code.match(regex);
     if (matches.length !== input.length) {
       return;
     }
 
-    input.forEach(input => (code = code.replace(matches[0], input)));
+    input.forEach(input => (code = code.replace(regex, input)));
+    console.log(code);
     return code;
   }
 
