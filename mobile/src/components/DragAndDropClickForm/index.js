@@ -15,6 +15,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
+  const [_lines, setLines] = useState([]);
   const [zones, setZones] = useState([]);
   const totalDropZones = lines.reduce(
     (total, line) => (total += line.texts.includes('dropZone') ? 1 : 0),
@@ -34,6 +35,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) {
+        setZones([]);
         dispatch({ type: 'changeQuestion' });
       }
       return;
@@ -56,7 +58,11 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
 
   useEffect(() => {
     reorderItems(dropItems, setReorderedItems);
-  }, []);
+  }, [dropItems]);
+
+  useEffect(() => {
+    setLines(lines);
+  }, [lines]);
 
   return (
     <C.Container>
@@ -91,6 +97,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
             setZones={setZones}
             totalDropZones={totalDropZones}
             isAnswerVerified={isAnswerVerified}
+            reorderedItems={reorderedItems}
           />
         ))}
       </C.DropItems>

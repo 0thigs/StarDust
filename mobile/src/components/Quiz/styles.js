@@ -23,6 +23,7 @@ export const QuestionCode = styled(Animatable.Text)`
   font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
   max-width: ${lessonContainerWidth};
+  margin-bottom: 24px;
 `;
 
 export const Text = styled.Text`

@@ -200,18 +200,18 @@ export const questions = [
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código?',
     code: `
-var nomePlaneta = "Protheus"
-var nome = "0thigs"
+var nomePlaneta = "0thigs"
+var nome = "Datahon"
 nomePlaneta = nome
 
 escreva("planeta encontrado: ", nomePlaneta)`,
     options: [
-      'planeta encontrado: Protheus',
+      'planeta encontrado: Datahon',
       'planeta encontrado: 0thigs',
       'planeta encontrado: nomePlaneta',
-      'planeta encontrado: "Protheus"',
+      'planeta encontrado: "Datanhon"',
     ],
-    answer: 'planeta encontrado: 0thigs',
+    answer: 'planeta encontrado: Datahon',
   },
   {
     starId: 3,
@@ -219,90 +219,155 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     stem: 'O nome do comando para declarar variáveis é',
     answer: 'var',
   },
-  {
-    starId: 5,
-    type: 'open',
-    stem: 'Um nome em inglês que se pode dar para valores do tipo caracter é ',
-    answer: 'string',
-  },
-  {
-    starId: 5,
-    type: 'open',
-    stem: 'O nome do tipo para declarar valores que são texto é',
-    answer: 'caractere',
-  },
-  {
-    starId: 5,
-    type: 'checkbox',
-    stem: 'quais dos itens abaixo pode ser um tipo de text válido',
-    options: ['letra', '"não é uma string"', '"100"', '2.5'],
-    correctOptions: ['"não é uma string"', '"100"'],
-  },
-  {
-    starId: 5,
-    type: 'selection',
-    stem: 'Como declarar uma variável do tipo texto?',
-    options: ['var nome : inteiro', 'var nome : caractere', 'var nome : real', 'var nome : logico'],
-    answer: 'var nome : caractere',
-  },
+  //   {
+  //     starId: 5,
+  //     type: 'open',
+  //     stem: 'O nome que se dá para o ato de juntar textos em um programa é',
+  //     answer: 'concatenação',
+  //   },
+  //   {
+  //     starId: 5,
+  //     type: 'checkbox',
+  //     stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
+  //     options: ['letra', '"não é um texto"', '"100"', '2.5'],
+  //     correctOptions: ['"não é um texto"', '"100"'],
+  //   },
+  //   {
+  //     starId: 5,
+  //     type: 'selection',
+  //     stem: 'Qual será a saída do seguinte código',
+  //     code: `
+  //     var cor = "vermelho"
+  //     var nome = "Datahon"
+  //     var nome = "Planeta " + nome
+
+  //     escreva(nome, " tem a cor ", cor)`,
+  //     options: [
+  //       'Planeta Datahon tem a cor vermelha',
+  //       'Planeta Datahon tem a cor azul',
+  //       'Datahon tem a cor vermelha',
+  //       'Planeta tem a cor vermelha',
+  //     ],
+  //     answer: 'Planeta Datahon tem a cor vermelha',
+  //   },
   {
     starId: 5,
     type: 'drag-and-drop-click',
-    stem: 'Clique nos valores para completar as variáveis corretamente',
+    stem: 'Complete o código para que ele escreva a data correta',
     lines: [
       {
         id: 1,
-        texts: ['var'],
+        texts: ['var ', 'dropZone', '= "01/03/2023"'],
         indentLevel: 0,
       },
       {
         id: 2,
-        texts: ['fruta: ', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 3,
-        texts: ['inicio'],
-        indentLevel: 0,
-      },
-      {
-        id: 4,
-        texts: ['fruta <- ', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 5,
-        texts: ['fimalgoritmo'],
+        texts: ['escreva("mensagem enviada em "', 'dropZone', '" obrigado)'],
         indentLevel: 0,
       },
     ],
     dropItems: [
       {
         id: 1,
-        label: '"maçã"',
+        label: '"data"',
       },
       {
         id: 2,
-        label: 'caractere',
+        label: '+ data +',
       },
       {
         id: 3,
-        label: 'inteiro',
+        label: '- data -',
+      },
+      {
+        id: 4,
+        label: 'data',
       },
     ],
-    correctItemsIdsSequence: [2, 1],
+    correctItemsIdsSequence: [4, 2],
+  },
+  {
+    starId: 5,
+    type: 'drag-and-drop-click',
+    stem: 'Concatene os textos da maneira apropriada',
+    lines: [
+      {
+        id: 1,
+        texts: ['var mensagem = "Olá, mundo!"'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreva(`a mensagem ', 'dropZone', ' não foi entendida`)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'mensagem',
+      },
+      {
+        id: 2,
+        label: '+ mensagem +',
+      },
+      {
+        id: 3,
+        label: '${mensagem}',
+      },
+      {
+        id: 4,
+        label: "'Olá, mundo!'",
+      },
+    ],
+    correctItemsIdsSequence: [3],
   },
   {
     starId: 6,
-    type: 'open',
-    stem: 'Qual o nome do tipo mais apropriado para 3.3333?',
-    answer: 'real',
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que combustivel total seja igual 75',
+    lines: [
+      {
+        id: 1,
+        texts: ['var combustivelAtual = 25'],
+        indentLevel: 0,
+      },
+      {
+        id: 1,
+        texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreva(`o foguete tem ${combustivelTotal} de combustível no total'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '- 50',
+      },
+      {
+        id: 2,
+        label: '+ "50"',
+      },
+      {
+        id: 3,
+        label: '+ 50',
+      },
+      {
+        id: 4,
+        label: '75',
+      },
+    ],
+    correctItemsIdsSequence: [3],
   },
   {
     starId: 6,
     type: 'checkbox',
     stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
-    options: ['Inteiro', 'Real', 'Texto', 'Boolean'],
+    options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
     correctOptions: ['Inteiro', 'Real'],
   },
   {
@@ -315,90 +380,19 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 6,
     type: 'selection',
-    stem: 'Qual será o tipo do resultado da expressão 5/2',
-    options: ['inteiro', '2.5', 'real', 'caractere'],
+    stem: 'Qual será o tipo do resultado da expressão 5 ÷ 2',
+    options: ['inteiro', '2.5', 'real', 'texto'],
     answer: 'real',
   },
   {
     starId: 6,
-    type: 'drag-and-drop-click',
-    stem: 'Clique nos tipos para que o algoritmo esteja correto',
-    lines: [
-      {
-        id: 1,
-        texts: ['var'],
-        indentLevel: 0,
-      },
-      {
-        id: 2,
-        texts: ['idade: ', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 4,
-        texts: ['altura: ', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 5,
-        texts: ['inicio'],
-        indentLevel: 0,
-      },
-      {
-        id: 6,
-        texts: ['Escreva("Idade: ")'],
-        indentLevel: 1,
-      },
-      {
-        id: 7,
-        texts: ['Leia(idade)'],
-        indentLevel: 1,
-      },
-      {
-        id: 8,
-        texts: ['Escreva("Altura (m): ")'],
-        indentLevel: 1,
-      },
-      {
-        id: 9,
-        texts: ['Leia(altura)'],
-        indentLevel: 1,
-      },
-      {
-        id: 12,
-        texts: ['Escreva("Eu tenho ", peso ", anos")'],
-        indentLevel: 1,
-      },
-      {
-        id: 13,
-        texts: ['Escreva("Eu meço ", altura ", metros")'],
-        indentLevel: 1,
-      },
-      {
-        id: 15,
-        texts: ['Fimalgoritmo'],
-        indentLevel: 0,
-      },
-    ],
-    dropItems: [
-      {
-        id: 1,
-        label: 'inteiro',
-      },
-      {
-        id: 2,
-        label: 'real',
-      },
-      {
-        id: 3,
-        label: 'lógico',
-      },
-      {
-        id: 4,
-        label: 'caractere',
-      },
-    ],
-    correctItemsIdsSequence: [1, 2],
+    type: 'selection',
+    stem: 'Qual será o valor de distancia do seguinte código',
+    code: `var distancia = 2500 + "1000"
+var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
+escreva(mensagem)`,
+    options: ['3500', '25001000', '25002000', '35000000'],
+    answer: '25001000',
   },
   {
     starId: 7,
@@ -410,14 +404,14 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     starId: 7,
     type: 'selection',
     stem: 'Qual o valor padrão de uma variável do tipo lógico',
-    options: ['falso', 'verdadeiro', 'não há valor padrão', 'verdadeiro e falso'],
+    options: ['falso', 'verdadeiro', 'nulo', 'falso e nulo'],
     answer: 'falso',
   },
   {
     starId: 7,
     type: 'checkbox',
     stem: 'Quais os valores possíveis para uma variável do tipo lógico',
-    options: ['falso', 'verdadeiro', 'boolean', '"verdadeiro"'],
+    options: ['falso', 'verdadeiro', 'nulo', '"verdadeiro"'],
     correctOptions: ['falso', 'verdadeiro'],
   },
   {
@@ -441,53 +435,28 @@ fimalgoritmo
   {
     starId: 7,
     type: 'drag-and-drop-click',
-    stem: 'Clique nos itens para que o algoritmo esteja logicamente correto',
+    stem: 'Complete o código para que a resposta seja coerente com a afirmação',
     lines: [
       {
         id: 1,
-        texts: ['var'],
+        texts: ['var resposta = ', 'dropZone'],
         indentLevel: 0,
       },
       {
         id: 2,
-        texts: ['resposta: ', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 3,
-        texts: ['inicio'],
+        texts: ['escreva("A terra é plana e não redonda: ")'],
         indentLevel: 0,
       },
       {
-        id: 4,
-        texts: ['resposta <-', 'dropZone'],
-        indentLevel: 1,
-      },
-      {
-        id: 5,
-        texts: ['Escreva("A terra é plana e não redonda: ")'],
-        indentLevel: 1,
-      },
-      {
-        id: 6,
-        texts: ['Escreva("Resposta: ")'],
-        indentLevel: 1,
-      },
-      {
-        id: 7,
-        texts: ['Escreva(resposta)'],
-        indentLevel: 1,
-      },
-      {
-        id: 8,
-        texts: ['Fimalgoritmo'],
+        id: 3,
+        texts: ['escreva( ', 'dropZone', ' )'],
         indentLevel: 0,
       },
     ],
     dropItems: [
       {
         id: 1,
-        label: 'logico',
+        label: 'verdadeiro',
       },
       {
         id: 2,
@@ -495,13 +464,13 @@ fimalgoritmo
       },
       {
         id: 3,
-        label: 'verdadeiro',
+        label: 'nulo',
       },
       {
         id: 4,
-        label: 'real',
+        label: 'resposta',
       },
     ],
-    correctItemsIdsSequence: [1, 2],
+    correctItemsIdsSequence: [2, 4],
   },
 ];

@@ -14,7 +14,7 @@ import { CheckboxForm } from '../CheckboxForm';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 
-export function Quiz({ coins }) {
+export function Quiz() {
   const [state, dispatch] = useLesson();
   const [currentQuestion, setCurrentQuestion] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

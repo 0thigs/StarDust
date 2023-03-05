@@ -15,6 +15,7 @@ export const Container = styled.View`
 
 export const Lines = styled(Animated.View)`
   width: 350px;
+  margin-bottom: 32px;
 `;
 
 export const Line = styled.View`
@@ -39,7 +40,7 @@ export const DropZone = styled.View`
   border-width: 1px;
   border-bottom-color: ${props => props.theme.colors.green_500};
   color: ${props => props.theme.colors.green_500};
-  margin: 0 4px 0;
+  margin: 0 8px 0;
 `;
 
 export const DropItems = styled.View`

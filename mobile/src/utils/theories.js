@@ -114,7 +114,9 @@ Relaxar e curtir a viagem;
       },
       {
         type: 'code',
-        body: `escreva("explorar o espaço é legal")`,
+        body: `escreva("explorar o espaço é legal")
+
+Resultado: explorar o espaço é legal`,
       },
       {
         type: 'default',
@@ -284,108 +286,53 @@ escreva("sua idade é ", idade)`,
       },
     ],
   },
- 
+
   {
     starId: 5,
     texts: [
       {
         type: 'default',
         title: null,
-        body: 'Olá, agora que você aprendeu mais sobre variáveis para armazenar dados, vamos nos aprofundar nos tipos de dados',
+        body: 'Parece que sua mensagem foi enviada para planeta que você encontrou, mas você não obteve nenhuma resposta :(',
+      },
+      {
+        type: 'default',
+        title: 'Mas por quê?',
+        body: 'Isso dever ter acontecido por causa do tipo de dado que você estava usando.',
+      },
+      {
+        type: 'default',
+        title: 'Pera aí, tipo de dado?',
+        body: 'Isso mesmo! Em programação podemos usar vários tipos de dados diferentes, sendo os mais básicos os do tipo de texto, número e lógico.',
+      },
+      {
+        type: 'alert',
+        body: 'Por agora, vamos falar sobre o tipo de texto, que é o que nós mais usamos até agora.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Na programação, os tipos de dados são importantes para identificarmos o tipo de informação que estamos lidando, e, com isso, agir de maneira adequada na manipulação dos dados.',
+        body: 'Então, o tipo de texto é utilizado para representar valores que são texto, dã! Eles podem ser compostos por uma ou mais letras, como também números ou símbolos.',
       },
       {
         type: 'default',
-        title: null,
-        body: 'como você já sabe, existem 4 tipos de dados básicos',
-      },
-      {
-        type: 'list',
-        body: `
-          1 - Caractere 
-          2 - Inteiro 
-          3 - Real 
-          4 - Lógico
-          `,
-      },
-      {
-        type: 'alert',
-        body: 'Por agora, vamos falar sobre o tipo que caracter, que nada mais do que um tipo para lidar com textos.',
-      },
-      {
-        type: 'default',
-        title: null,
-        body: 'Então, o tipo caractere é utilizado para representar valores que são compostos por uma ou mais letras, números ou símbolos. Esses valores são conhecidos como "strings".',
-      },
-      {
-        type: 'default',
-        title: 'Declaração de caractere',
-        body: 'Para declarar uma variável do tipo caractere em Portugol, você deve escrever o seguinte:',
+        title: 'Declaração de dado do tipo texto',
+        body: 'Para fazer com que o programa entenda que uma informação é do tipo texto, basta colocá-lo entre aspas, podendo ser simples (\'\') ou duplas ("") assim como nós já fizemos antes:',
       },
       {
         type: 'code',
-        body: `
-      var
-          nome: caractere
-            `,
+        body: `var mensagem = "Olá, mundo!"`,
       },
       {
         type: 'default',
-        title: 'Declaração de caractere',
-        body: 'Agora você pode atribuir valores a variáveis do tipo caractere da seguinte forma:',
+        title: 'Tá mas e o que mais?',
+        body: 'Além disso, é possível unir textos por meio do operador +, ação que chamamos de concatenação:',
       },
       {
         type: 'code',
-        body: `
-      nomeDaVarivael <- "algum texto"
-            `,
-      },
-      {
-        type: 'alert',
-        body: 'Lembre-se sempre de colocar as aspas para indicar que é uma string.',
-      },
-      {
-        type: 'alert',
-        body: 'É importante notar também que, na hora de atribuir um valor à uma variável, o tipo de dado da variável seja compatível com o tipo de dado da informação que estamos atribuindo, ou seja, uma variável do tipo caractere apenas aceitas valores que são string',
-      },
-      {
-        type: 'default',
-        title: 'Declaração de caractere',
-        body: 'Aqui estão alguns exemplos de como você pode declarar e atribuir valores a variáveis do tipo caractere em Portugol:',
-      },
-      {
-        type: 'code',
-        body: `
-  algoritmo "aprendendoSobreStrings"
-  
-  var
-      nome: caractere
-      sobrenome: caractere
-      frase: caractere 
-  
-  inicio
-      nome <- "João"
-      sobrenome <- "Santos"
-      frase <- "Olá, mundo!" 
-  fimalgoritmo 
-            `,
-      },
-      {
-        type: 'default',
-        title: 'Concatenação',
-        body: 'É possível também unir textos por meio do operador +, ação que chamamos de concatenação:',
-      },
-      {
-        type: 'code',
-        body: `
-      escreva('Hoje fui para' + 'padaria')
-  
-      Resultado:
-          Hoje fui para padaria
+        body: `escreva('Eu encontrei um ' + 'planeta')
+
+Resultado: Eu encontrei um planeta
             `,
       },
       {
@@ -394,20 +341,30 @@ escreva("sua idade é ", idade)`,
       },
       {
         type: 'code',
-        body: `
-  jogador1 = "Pedro"
-  jogador2 = "Matheus"
-  escreva("Os jogadores: " + jogador1 + "e" + jogador2)
-  escreva("vão estreiar na quadra hoje!")
-  
-  Resultado:
-  Os jogadores Pedro e Matheus vão treinar na quadra hoje!
-            `,
+        body: `var nomePlaneta = "Datathon"
+escreva('Eu encontrei um' + 'planeta' + ' e ele se chama ' + nomePlaneta)
+
+Resultado: Eu encontrei um planeta e ele se chama Datahon`,
       },
       {
         type: 'default',
         title: null,
-        body: 'Agora que você conchece mais sobre tipo caractere, que tal reforçar isso com algumas questões?.',
+        body: 'Você também pode usar o que chamamos de interpolação, que é quando um texto possui em seu conteúdo algo como ${minha_variavel}, e se minha_variável foi definida anteriormente, o novo texto terá o valor de minha_variavel.',
+      },
+      {
+        type: 'code',
+        body: `var nomePlaneta = "Datahon"
+escreva("esse planeta \$\{nomePlaneta\} não parece ser amigável")
+
+Resultado: Esse planeta Datahon não parece ser amigável`,
+      },
+      {
+        type: 'alert',
+        body: 'Observe que para interpolar uma variável ela precisa estar em ${} senão não irá funcionar!',
+      },
+      {
+        type: 'list',
+        body: 'Agora que você conchece mais sobre o tipo texto, que tal reforçar isso com algumas questões?',
       },
     ],
   },
@@ -417,110 +374,76 @@ escreva("sua idade é ", idade)`,
       {
         type: 'default',
         title: null,
-        body: 'Muito bom, agora vamos falar sobre o tipos que representam os numéricos.',
+        body: 'Muito bom, já que eles não entendem mensagem do tipo texto, só resta tentar como tipo numérico.',
       },
       {
         type: 'default',
         title: 'Tipo inteiro',
-        body: 'Primeiramente, vamos falar o tipo inteiro. Ele diz respeito aos números sem parte decimal ou fracionária, como -5, 0, 1, 2, 3, entre outros.',
+        body: 'Os números em um programa podem ser inteiros e reais. Primeiramente, vamos falar sobre o tipo inteiro. Ele diz respeito aos números sem parte decimal ou fracionária, como -5, 0, 1, 2, 3, entre outros.',
       },
       {
         type: 'default',
         title: 'Declarando inteiros',
-        body: 'No Portugol, declaramos uma variável inteira da seguinte forma:',
+        body: 'Podemos declarar uma variável com um tipo número inteiro dessa forma:',
       },
       {
         type: 'code',
-        body: `
-      var
-          numero: inteiro
-            `,
+        body: `var identificador: 2370`,
+      },
+      {
+        type: 'alert',
+        body: 'Perceba que diferentemente do tipo texto, é preciso que o valor numérico não esteja entre aspas',
       },
       {
         type: 'default',
-        title: 'Declarando inteiros',
-        body: 'Em seguida, podemos atribuir um valor a ela, por exemplo:',
+        title: 'Reais',
+        body: 'Além dos inteiro há os números reais, também conhecidos como números de ponto flutuante, que nada mais são do que números com parte decimal, veja:',
       },
       {
         type: 'code',
-        body: `
-          numero <- 5
-            `,
+        body: `var serie = 8.5`,
       },
       {
         type: 'default',
-        title: 'Operações Matemáticas com Inteiros',
-        body: 'Podemos realizar operações matemáticas com inteiros, como adição, subtração, multiplicação e divisão e atribuir a variáveis. Aqui estão alguns exemplos:',
+        title: 'Números e textos',
+        body: 'Cuidado! tentar concaternar números e textos que são números acontece algo não tão surpreendente: número se torna um texto e acaba sendo juntado com número que já era texto, mas não havendo uma soma',
       },
       {
         type: 'code',
         body: `
-          var
-              a = 10;
-              b = 5;
-          inicio
-              soma = a + b;
-              subtracao = a - b;
-              multiplicacao = a * b;
-              divisao = a / b;
-  
-              escreval(soma)
-              escreval(subtracao)
-              escreval(multiplicacao)
-              escreva(divisao)
-          fimalgoritmo
-  
-          resultado:
-          15
-          5
-          50
-          2
+var identificador = "2370"
+var serie = 8.5
+escreva("o RG do meu foguete é " + identificador + 70)
+
+resultado: o RG do meu foguete é 237070
+   `,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Perceba que que deu 23708.5 ao invés de 2378.5, justamente porque o número foi convertido para texto para aí sim ser concatenado com outro texto',
+      },
+      {
+        type: 'default',
+        title: 'Conversão de números',
+        body: 'Também é possível converter um número inteiro para real, basta que o resultado de uma operção com um inteiro (uma divisão, por exemplo) resulte em um tipo real. O contrário também é possível',
+      },
+      {
+        type: 'code',
+        body: `
+var codigo = 467 / 2
+escreva("Enviar código: ", codigo)
+
+resultado: Enviar código: 233.5
    `,
       },
       {
         type: 'alert',
-        body: 'Cuidade, ao dividir inteiros, o resultado será sempre inteiro. Por exemplo, 10 dividido por 3 é 3, e não 3,3333...',
+        body: 'Contudo, vamos deixar de falar sobre operações aritméticas mais tarde para não estragar a surpresa ;)',
       },
+
       {
-        type: 'default',
-        title: null,
-        body: 'Falaremos mais sobre esses operadores futuramente. Agora como lidar com números reais?',
-      },
-      {
-        type: 'default',
-        title: 'Tipo real',
-        body: 'Tipo real é um tipo de dado que armazena números com parte decimal ou fracionária, como 3.14, -0.5, 0.0, entre outros.',
-      },
-      {
-        type: 'default',
-        title: 'Declaração de real',
-        body: 'No Portugol, declaramos uma variável real da seguinte forma:',
-      },
-      {
-        type: 'code',
-        body: `
-      var
-          pi: real
-            `,
-      },
-      {
-        type: 'default',
-        title: 'Declaração de real',
-        body: 'Em seguida, podemos atribuir um valor a ela, por exemplo:',
-      },
-      {
-        type: 'code',
-        body: `
-      pi <- 3.14;
-            `,
-      },
-      {
-        type: 'alert',
-        body: 'Em outras palavras, um tipo inteiro sempre vai ser um número inteiro, enquanto um tipo real sempre vai ser um número real dã.',
-      },
-      {
-        type: 'default',
-        title: null,
+        type: 'list',
         body: 'Agora vamos testar o que você aprendeu sobre numéricos',
       },
     ],
@@ -530,60 +453,70 @@ escreva("sua idade é ", idade)`,
     texts: [
       {
         type: 'default',
-        title: 'introdução',
-        body: 'Os dados do tipo lógico são valores que armazenam uma única opção entre duas possibilidades possíveis: Verdadeiro ou Falso.',
-      },
-      {
-        type: 'alert',
-        body: 'O tipo lógico também é conhecido por booleano ou em inglês boolean em homenagem ao matemático George Boole.',
+        title: null,
+        body: 'Parece que sua mensagem foi enviada e finalmente foi entendida 🎉! Contudo, eles enviaram uma resposta e é do tipo diferente do já foi visto antes.',
       },
       {
         type: 'default',
-        title: null,
-        body: 'O tipo lógico representa a linguagem que um computador verdadeiramente entende, ou seja, o binário, já que verdadeiro e falso representam 1 e 0 respectivamente:',
-      },
-      {
-        type: 'alert',
-        body: 'Dessa forma, é possível usar esse valores para trabalhar com operações lógicas, como "e" e "ou", como também com estruturas condicionais, mas vamos deixar isso para outra hora.',
+        title: 'E qual é?',
+        body: 'Tipo lógico que nada mais são do que valores que armazenam uma única opção entre apenas duas possibilidades possíveis: verdadeiro ou falso.',
       },
       {
         type: 'default',
         title: 'Declaração do tipo lógico',
-        body: 'Em Portugol, o tipo de dado lógico é representado pela palavra reservada logico. Logo, para declarar uma variável do tipo lógico, podemos usar a seguinte sintaxe:',
+        body: 'Para declarar um tipo de dado lógico, basta atribuir um valor verdadeiro ou um valor falso logo depois da variável:',
       },
       {
         type: 'code',
         body: `
-      var
-          nomeDaVariavel: logico
+var respostaEnviada = verdadeiro
+var eInimigo = falso
             `,
       },
       {
         type: 'default',
-        title: 'declaração do tipo lógico',
-        body: 'Por exemplo, para declarar uma variável que armazena se uma pessoa é maior de idade, podemos fazer:',
+        title: 'Declaração do tipo lógico',
+        body: 'No exemplo acima, a primeira variável indica se a resposta foi enviada (verdadeiro) ou não foi envidada (false). A segunda variável indica se quem enviou é amigo (verdadeiro) ou inimigo (falso):',
       },
       {
-        type: 'code',
-        body: `
-      var
-          eMaiorDeIdade: logico
-            `,
+        type: 'alert',
+        body: 'Perceba que o nome dessas variáveis são compostas por palavras diferentes, mas sem ser separadas por espaço. ',
+      },
+      {
+        type: 'alert',
+        body: 'Até aí tudo bem, mas veja que todas as palavras estão em maiúsculas exceto a primeira. Esse padrão se chama camelCase por lembrar as costas de camelo e é bem comum na hora de escrever nomes de variáveis',
+      },
+      {
+        type: 'alert',
+        body: 'Usando dados lógicos, é possível usar esse valores para trabalhar com os operadores lógicos, como "e" e "ou", como também com estruturas condicionais, mas vamos deixar isso para outra hora.',
       },
       {
         type: 'default',
-        title: null,
-        body: 'Agora, podemos inicializar a variável com um valor lógico (verdadeiro ou falso):',
+        title: 'O que eu faço com essa resposta enviada?',
+        body: 'O planeta proíbe a entrada de pessoas com armas, então é bom deixar claro que você não tem nenhuma:',
       },
       {
         type: 'code',
         body: `
-          eMaiorDeIdade <- verdadeiro
+var armas = nulo
+        `,
+      },
+      {
+        type: 'default',
+        title: 'O que diabos é esse nulo?',
+        body: 'Esqueci de dizer, mas existe um tipo de dado especial chamado nulo que basicamente quer dizer que a variável não tem nenhum valor. Isso quer dizer também que nulo é atribuído automaticamente a uma variável quando ela é declarada sem um valor atribuído a ela',
+      },
+      {
+        type: 'code',
+        body: `var espaco
+escreva(espaco)
+
+resultado: nulo
             `,
       },
       {
         type: 'alert',
-        body: 'Quando não iniciamos uma variável do tipo lógico ela recebe o valor padrão de falso',
+        body: 'Mais para frente veremos que nulo pode ser usado como um valor falso.',
       },
       {
         type: 'default',
@@ -593,63 +526,3 @@ escreva("sua idade é ", idade)`,
     ],
   },
 ];
-
-// Work in Progress
-// body: `
-// ALGORITMO “declaracao”
-
-// VAR
-//     varInteiro: inteiro
-//     varReal: real
-//     varCaractere: caractere
-//     varLogico: Logico
-// INICIO
-//     varInteiro <- 1
-//     varReal <- 1.5
-//     varCaractere <- “teste”
-//     varLogico <- VERDADEIRO
-//     ESCREVAL(varInteiro, varReal, varCaractere, varLogico)
-
-// FIMALGORITMO
-//     `,
-
-// TIPOS DE DADOS
-/*
-    Olá! Vamos começar uma aula introdutória sobre tipos de dados usando Portugol.
-    
-    O que são tipos de dados?
-    Tipos de dados são categorias que são atribuídas a variáveis em um programa de computador. Isso ajuda a identificar o tipo de informação que uma variável armazena, permitindo ao computador tomar decisões sobre como tratar esses dados.
-    
-    Quais são os tipos de dados básicos no Portugol?
-    
-    INTEIRO: Armazena números inteiros, sem casas decimais. Exemplo: -10, 0, 5, 100.
-    REAL: Armazena números reais, com casas decimais. Exemplo: -10,5, 0,25, 5,7.
-    CARACTERE: Armazena um único caractere, entre aspas simples. Exemplo: 'a', 'Z', '#'.
-    CADEIA: Armazena uma cadeia de caracteres, entre aspas duplas. Exemplo: "Olá mundo!", "12345".
-    
-    Olá! Vamos começar uma aula introdutória sobre tipos de dados usando Portugol.
-    
-    O que são tipos de dados?
-    Tipos de dados são categorias que são atribuídas a variáveis em um programa de computador. Isso ajuda a identificar o tipo de informação que uma variável armazena, permitindo ao computador tomar decisões sobre como tratar esses dados.
-    
-    Quais são os tipos de dados básicos no Portugol?
-    
-    INTEIRO: Armazena números inteiros, sem casas decimais. Exemplo: -10, 0, 5, 100.
-    REAL: Armazena números reais, com casas decimais. Exemplo: -10,5, 0,25, 5,7.
-    CARACTERE: Armazena um único caractere, entre aspas simples. Exemplo: 'a', 'Z', '#'.
-    CADEIA: Armazena uma cadeia de caracteres, entre aspas duplas. Exemplo: "Olá mundo!", "12345".
-    Por que é importante identificar o tipo de dado de uma variável?
-    Identificar o tipo de dado de uma variável é importante porque permite ao computador saber como tratar esses dados. Por exemplo, se você está trabalhando com uma variável INTEIRO, o computador sabe que essa variável armazena apenas números inteiros, então ele só permitirá que você execute operações matemáticas válidas para números inteiros. Se você tentar fazer uma operação inválida, como dividir um número inteiro por outro número inteiro e obter um resultado com casas decimais, o computador apresentará um erro.
-    
-    Como declarar variáveis com tipos de dados no Portugol?
-    Para declarar uma variável com um tipo de dado específico, você precisa usar a seguinte sintaxe:
-    TIPO NOME_DA_VARIAVEL;
-    Exemplos:
-    INTEIRO idade;
-    REAL altura;
-    CARACTERE primeiraLetra;
-    CADEIA nomeCompleto;
-    
-    Em resumo, os tipos de dados são importantes porque permitem que o computador saiba como tratar as informações armazenadas em variáveis. No Portugol, existem 4 tipos de dados básicos: INTEIRO, REAL, CARACTERE e CADEIA. É importante declarar as variáveis corretamente para garantir que o programa funcione de maneira correta.
-    
-    */
