@@ -30,16 +30,20 @@ const effects = [
     id: 'asking',
     animation: Asking,
     sound: require('../../assets/sounds/asking-sound.wav'),
-
+  },
+  {
+    id: 'generic',
+    animation: null,
+    sound: null,
   },
 ];
 
-export function Modal({ isOpen, type = 'crying', title, body, footer }) {
+export function Modal({ isOpen, type = 'generic', title, body, footer }) {
   const { animation, sound } = effects.find(animation => animation.id === type.toLocaleLowerCase());
   const soundRef = useRef();
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && type !== 'generic') {
       soundRef.current.play();
     }
   }, [isOpen]);
@@ -50,13 +54,15 @@ export function Modal({ isOpen, type = 'crying', title, body, footer }) {
         <C.Content entering={ZoomIn.duration(500)} exiting={ZoomOut.duration(500)}>
           <C.Header>
             <C.Title>{title}</C.Title>
-            <Animation source={animation} autoPlay={true} loop={true} size={200} />
+            {type !== 'generic' && (
+              <Animation source={animation} autoPlay={true} loop={true} size={200} />
+            )}
           </C.Header>
           <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
       </C.Fade>
-      <Sound ref={soundRef} soundFile={sound} />
+      {type !== 'generic' && <Sound ref={soundRef} soundFile={sound} />}
     </C.Container>
   );
 }

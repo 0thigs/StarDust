@@ -5,6 +5,7 @@ import * as C from './styles';
 
 export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
   const [results, setResults] = useState([]);
+  console.log(results);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
 

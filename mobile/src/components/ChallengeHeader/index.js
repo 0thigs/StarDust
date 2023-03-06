@@ -1,12 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { Modal } from '../Modal';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
-import { useNavigation } from '@react-navigation/native';
+import { Button } from '../Button';
 const iconSize = 25;
 
-export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
+export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigation = useNavigation();
   const CurrentIndicatorPositionX = useSharedValue(0);
 
@@ -16,10 +19,14 @@ export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
     };
   });
 
-  function hanbleBackButtonPress() {
+  function handleBackButtonPress() {
     navigation.reset({
       routes: [{ name: 'DrawerRoutes' }],
     });
+  }
+
+  function handleMoreButtonPress() {
+    setIsModalOpen(true);
   }
 
   function handleNavButtonPress(index) {
@@ -33,11 +40,11 @@ export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
   return (
     <C.Container>
       <C.Top>
-        <C.HeaderButton onPress={hanbleBackButtonPress}>
+        <C.HeaderButton onPress={handleBackButtonPress}>
           <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
-        <C.Title align={'right'}>Desafio</C.Title>
-        <C.HeaderButton>
+        <C.Title align={'right'}>{title}</C.Title>
+        <C.HeaderButton onPress={handleMoreButtonPress}>
           <Icon.MoreVertical width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
       </C.Top>
@@ -53,6 +60,31 @@ export function ChallengeHeader({ indicatorPositionX, slideWidth, sliderRef }) {
         </C.NavigationButton>
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
+
+      {/* <Modal
+        isOpen={isModalOpen}
+        type={'generic'}
+        title={'Tamanho da fonte'}
+        body={
+          <>
+            <IncreaseFontSizeButton>
+              <A>A</A>
+            </IncreaseFontSizeButton>
+
+            <DecreaseFontSizeButton>
+              <A>A</A>
+            </DecreaseFontSizeButton>
+          </>
+        }
+        footer={
+          <Button
+            title={'OK'}
+            onPress={() => setIsModalOpen(false)}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+          />
+        }
+      /> */}
     </C.Container>
   );
 }

@@ -1,7 +1,7 @@
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   margin: 16px 0;
   width: 90%;
 `;

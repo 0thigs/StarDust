@@ -24,7 +24,7 @@ const fakeLoggedUser = {
   created_at: new Date('2023-01-23T03:01:00.000Z'),
   didUpdateRanking: true,
   didShowWinning: false,
-  starId: 5,
+  starId: 8,
 };
 
 export function AuthContextProvider({ children }) {

@@ -59,12 +59,11 @@ export function Challenge() {
 
   function handleError(error) {
     if (error) {
-      Toast.error(error);
+      Toast.error(error.includes('null') ? 'código inválido' : error);
     }
   }
 
   function addUserOutput(userOutput) {
-    console.log(userOutput);
     if (userOutput) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
@@ -73,7 +72,7 @@ export function Challenge() {
   }
 
   function formatCode(code, input) {
-    const regex = /(leia\(\))/g
+    const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (matches.length !== input.length) {
       return;
@@ -84,13 +83,14 @@ export function Challenge() {
     return code;
   }
 
-  async function verifyCase({ input }) {
+  async function verifyCase({ input }, index) {
     let code = userCode.current.value;
     if (input) {
       code = formatCode(code, input);
     }
 
     try {
+      console.log({ index });
       const { erros, resultado } = await execute(code, addUserOutput);
 
       if (erros.length > 0) {
@@ -167,9 +167,10 @@ export function Challenge() {
           {!isEnd ? (
             <>
               <ChallengeHeader
-                indicatorPositionX={indicatorPositionX}
-                slideWidth={slideWidth.current.value}
+                title={title}
                 sliderRef={sliderRef}
+                slideWidth={slideWidth.current.value}
+                indicatorPositionX={indicatorPositionX}
               />
 
               <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />

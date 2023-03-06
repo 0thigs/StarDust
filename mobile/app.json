@@ -1,10 +1,44 @@
 {
   "expo": {
     "name": "StarDust",
-    "slug": "StarDust",
+    "slug": "stardust",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#141A1B"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.etec.stardust"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#141A1B"
+      },
+      "package": "com.etec.stardust"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cd20a5c8-553f-4e2d-96af-6072d9546816"
+      }
+    }
   }
 }
