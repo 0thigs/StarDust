@@ -32,6 +32,11 @@ export default createGlobalStyle`
         background: none;
         font-family: 'Poppins', sans-serif;
         color: var(--white);
+        outline: none;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     a {
