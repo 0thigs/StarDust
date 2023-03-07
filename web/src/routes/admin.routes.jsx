@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import { Users } from "../screens/dashboard/Users";
+import { Routes, Route } from 'react-router-dom';
+import { Users } from '../screens/dashboard/Users';
 
 export function AdminRoutes() {
   return (

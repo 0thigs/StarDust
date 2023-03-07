@@ -1,7 +1,18 @@
-import React from 'react';
+import * as C from './styles';
+
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 export function SignIn() {
   return (
-    <div>index</div>
-  )
+    <C.Container>
+      <aside>
+        <C.Intro>
+          <Logo />
+        </C.Intro>
+      </aside>
+      <main>
+        <C.Form></C.Form>
+      </main>
+    </C.Container>
+  );
 }
