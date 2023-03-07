@@ -54,7 +54,13 @@ export const Form = styled.form`
   display: grid;
   width: 35rem;
 
- > button {
+  > button {
     margin-top: 1.8rem;
   }
+`;
+
+export const ErrorMessage = styled.strong`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.red_700};
 `;
