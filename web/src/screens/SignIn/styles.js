@@ -11,6 +11,7 @@ export const Container = styled.div`
   }
   main {
     background-color: ${({ theme }) => theme.colors.gray_900};
+    position: relative;
   }
 
   aside,
@@ -26,6 +27,7 @@ export const Intro = styled.div`
   display: grid;
   justify-items: center;
   gap: 2rem;
+  z-index: 5;
 
   p {
     color: ${({ theme }) => theme.colors.white};
@@ -63,4 +65,10 @@ export const ErrorMessage = styled.strong`
   font-size: 14px;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.red_700};
+`;
+
+export const AnimationContainer = styled.div`
+position: absolute;
+top: 10%;
+left: 50%;
 `;

@@ -17,6 +17,8 @@ import { ReactComponent as SignInIcon } from '../../assets/icons/signin.svg';
 import { Mail, Lock } from 'react-feather';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import RocketLaunch from '../../assets/animations/rocket-launch.json';
+import { Animation } from '../../components/Animation';
 
 const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
@@ -124,8 +126,10 @@ export function SignIn() {
         <C.Intro>
           <Logo />
           <p>Aprenda enquanto se diverte!</p>
-          <Rocket width={200} height={200} />
         </C.Intro>
+        {/* <C.AnimationContainer>
+          <Animation animation={RocketLaunch} size={600} hasLoop={true} hasAutoplay={true} />
+        </C.AnimationContainer> */}
       </aside>
     </C.Container>
   );
