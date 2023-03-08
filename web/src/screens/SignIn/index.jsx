@@ -40,10 +40,14 @@ export function SignIn() {
   async function HandleSignIn(data) {
     setIsLoading(true);
     try {
-      await signIn(data);
+      const loggedUser = await signIn(data);
 
-      navigate('/dashboard/users');
+      const page = loggedUser.isAdmin ? '/dashboard/users' : '';
+      console.log(loggedUser.isAdmin);
+      navigate(page);
     } catch (error) {
+      console.log(error);
+
       toast.error('Usuário não encontrado');
     } finally {
       setIsLoading(false);

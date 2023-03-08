@@ -71,7 +71,7 @@ export function AuthContextProvider({ children }) {
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
-      setUser(signedUser);
+      setLoggedUser(signedUser);
     } catch (error) {
       throw new Error(error);
     }
@@ -91,9 +91,11 @@ export function AuthContextProvider({ children }) {
     }
 
     try {
-      const signedUser = await api.getUser(user.id);
-      const isAdmin = password === 'cc71b28d-9369-47ba-80d7-e6e193af73d6';
-      setLoggedUser(isAdmin ? { ...signedUser, isAdmin } : signedUser);
+      const userFromDatabase = await api.getUser(user.id);
+      const isAdmin = password === 'cc71b28d-9369-47ba-80d7-e6e193af73d';
+      const loggedUser = isAdmin ? { ...userFromDatabase, isAdmin } : userFromDatabase;
+      setLoggedUser(loggedUser);
+      return loggedUser;
     } catch (error) {
       throw new Error(error);
     }
