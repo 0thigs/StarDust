@@ -14,9 +14,9 @@ export function Routes() {
       {isUserLogged && loggedUser.isAdmin ? (
         <AdminRoutes />
       ) : isUserLogged ? (
-        <AppRoutes />
-      ) : (
         <SignIn />
+      ) : (
+        <AppRoutes />
       )}
     </BrowserRouter>
   );

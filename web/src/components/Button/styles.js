@@ -4,6 +4,7 @@ export const Container = styled.button`
   width: 100%;
   height: 48px;
   margin: 8px 0;
+  box-shadow: 0 10px 40px #00ff8052;
 
   justify-content: center;
   align-items: center;
@@ -14,4 +15,15 @@ export const Container = styled.button`
   font-size: 1.6rem;
   font-weight: bold;
   color: ${({ color }) => color};
+  border: 5px solid transparent;
+
+  transition: 0.4s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.green_700};
+  }
+
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.green_900};
+  }
 `;

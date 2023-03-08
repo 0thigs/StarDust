@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { animations } from './animations';
 
 export default createGlobalStyle`
     :root {
@@ -43,4 +44,6 @@ export default createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+
+    ${animations}
 `;

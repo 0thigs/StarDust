@@ -56,13 +56,6 @@ export function SignIn() {
 
   return (
     <C.Container>
-      <aside>
-        <C.Intro>
-          <Logo />
-          <p>Aprenda enquanto se diverte!</p>
-          <Rocket width={200} height={200} />
-        </C.Intro>
-      </aside>
       <main>
         <ToastContainer
           position="top-right"
@@ -89,7 +82,7 @@ export function SignIn() {
             name="email"
             render={({ field: { onChange, value } }) => (
               <Input
-                type={'email'}
+                type={'text'}
                 label={'E-mail'}
                 Icon={Mail}
                 placeholder={'Digite seu-mail'}
@@ -126,6 +119,14 @@ export function SignIn() {
           />
         </C.Form>
       </main>
+
+      <aside>
+        <C.Intro>
+          <Logo />
+          <p>Aprenda enquanto se diverte!</p>
+          <Rocket width={200} height={200} />
+        </C.Intro>
+      </aside>
     </C.Container>
   );
 }
