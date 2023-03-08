@@ -17,6 +17,10 @@ export const FormControl = styled.div`
   padding: 0.8rem 1.2rem;
   border-radius: 0.4rem;
   margin-top: 1.2rem;
+
+  button {
+    display: flex;
+  }
 `;
 
 export const Input = styled.input`

@@ -3,6 +3,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import theme from '../../styles/theme';
 import * as yup from 'yup';
@@ -39,11 +41,10 @@ export function SignIn() {
     setIsLoading(true);
     try {
       await signIn(data);
-      console.log('ok');
-    } catch (error) {
-      console.log('erro');
 
-      // Toast.error('Usuário não encontrado');
+      navigate('/dashboard/users');
+    } catch (error) {
+      toast.error('Usuário não encontrado');
     } finally {
       setIsLoading(false);
     }
@@ -59,6 +60,19 @@ export function SignIn() {
         </C.Intro>
       </aside>
       <main>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          bodyStyle={{ fontSize: 16 }}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
         <C.Form>
           <C.Header>
             <SignInIcon />
