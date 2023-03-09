@@ -1,14 +1,14 @@
-import { BrowserRouter, Route, Routes as Router } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './privateRoute';
 import { Home } from '../pages/app/Home';
 import { Users } from '../pages/dashboard/Users';
 import { SignIn } from '../pages/SignIn';
 import { ErrorPage } from '../pages/ErrorPage';
 
-export function Routes() {
+export function Router() {
   return (
     <BrowserRouter>
-      <Router>
+      <Routes>
         <Route element={<PrivateRoute routeType={'admin'} />}>
           <Route path="/dashboard/users" element={<Users />} />
         </Route>
@@ -19,7 +19,7 @@ export function Routes() {
 
         <Route path="/login" element={<SignIn />} />
         <Route path="*" element={<ErrorPage />} />
-      </Router>
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -98,6 +98,7 @@ export function AuthContextProvider({ children }) {
 
     try {
       const loggedUser = await api.getUser(user.id);
+      localStorage.setItem('logged_user', JSON.stringify(loggedUser));
       return loggedUser;
     } catch (error) {
       throw new Error(error);

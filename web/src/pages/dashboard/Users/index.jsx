@@ -1,27 +1,8 @@
+import Layout from '../../../components/Layout';
 import { useAuth } from '../../../hooks/useAuth';
 
 export function Users() {
   const { loggedUser, signOut } = useAuth();
-
-  //  async function verifySection() {
-  //   try {
-  //     const user = await getUserInSession();
-  //     console.log(user);
-  //     console.log(user.isAdmin);
-  //     if (!user) {
-  //       location.href = '/';
-  //     }
-  //     if (!user.isAdmin) {
-  //       navigate('/error');
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   verifySection();
-  // }, []);
 
   function handleLogout() {
     try {
@@ -32,9 +13,9 @@ export function Users() {
   }
 
   return (
-    <div>
+    <Layout>
       Admin
       <button onClick={handleLogout}>Sair</button>
-    </div>
+    </Layout>
   );
 }

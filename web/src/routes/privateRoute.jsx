@@ -22,9 +22,6 @@ export function PrivateRoute({ routeType }) {
   }
 
   const isAllowed = routeType === 'admin' ? loggedUser.isAdmin : !loggedUser.isAdmin;
-  if (isAllowed) {
-    return <Outlet />;
-  }
 
-  return <Navigate to={'/error'} />;
+  return isAllowed ? <Outlet /> : <Navigate to={'/error'} />;
 }
