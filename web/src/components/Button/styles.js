@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.button`
   width: 100%;
-  height: 48px;
+  height: ${({ isSmall }) => (isSmall ? 24 : 48)}px;
   margin: 8px 0;
   box-shadow: 0 10px 40px #00ff8052;
 
@@ -12,7 +12,7 @@ export const Container = styled.button`
   background-color: ${({ background }) => background};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
-  font-size: 1.6rem;
+  font-size: ${({ isSmall }) => (isSmall ? 1.2 : 1.6)}rem;
   font-weight: bold;
   color: ${({ color }) => color};
   border: 2px solid transparent;

@@ -6,6 +6,8 @@ import { navButtons } from '../../utils/navButtons';
 import { Settings, LogOut } from 'react-feather';
 import theme from '../../styles/theme';
 import * as C from './styles';
+const iconSize = 20;
+const iconColor = theme.colors.green_300;
 
 export function Sidebar() {
   const { signOut } = useAuth();
@@ -27,30 +29,32 @@ export function Sidebar() {
 
       <C.Nav>
         {navButtons.map(({ title, Icon, page }) => (
-          <C.NavButton key={title}>
+          <C.NavButton key={title} isActive={true}>
             <Icon />
             {title}
           </C.NavButton>
         ))}
       </C.Nav>
 
-      {/* <C.AdminButtons>
-        <Settings />
+      <C.AdminButtons>
+        <Settings color={iconColor} size={iconSize} />
         <Button
           title={'Configurações'}
           background={theme.colors.green_300}
           color={theme.colors.black}
           onClick={() => navigate('Settings')}
+          isSmall={true}
         />
 
-        <LogOut />
+        <LogOut color={iconColor} size={iconSize} />
         <Button
           title={'Sair'}
           background={theme.colors.green_300}
           color={theme.colors.black}
           onClick={handleSignOutButton}
+          isSmall={true}
         />
-      </C.AdminButtons> */}
+      </C.AdminButtons>
     </C.Container>
   );
 }
