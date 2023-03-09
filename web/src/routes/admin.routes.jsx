@@ -1,10 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import { Users } from '../screens/dashboard/Users';
+import { Navigate, Outlet } from 'react-router-dom';
 
-export function AdminRoutes() {
-  return (
-    <Routes>
-      <Route path="/dashboard/users" element={<Users />} />
-    </Routes>
-  );
+export function AdminRoutes({ user }) {
+  if (!user) {
+    return <Navigate to={'/login'} />;
+  }
+
+  if (user.isAdmin) {
+    return <Outlet />;
+  }
+
+  return <Navigate to={'/error'} />;
 }

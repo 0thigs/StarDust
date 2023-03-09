@@ -1,23 +1,25 @@
-import { BrowserRouter } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import { SignIn } from '../screens/SignIn';
-import { AdminRoutes } from './admin.routes';
-import { AppRoutes } from './app.routes';
+import { BrowserRouter, Route, Routes as Router } from 'react-router-dom';
+import { PrivateRoute } from './privateRoute';
+import { Home } from '../pages/app/Home';
+import { Users } from '../pages/dashboard/Users';
+import { SignIn } from '../pages/SignIn';
+import { ErrorPage } from '../pages/ErrorPage';
 
 export function Routes() {
-  const { loggedUser } = useAuth();
-  const isUserLogged = Object.entries(loggedUser).length > 0;
-  console.log(isUserLogged);
-
   return (
     <BrowserRouter>
-      {isUserLogged && loggedUser.isAdmin ? (
-        <AdminRoutes />
-      ) : isUserLogged ? (
-        <SignIn />
-      ) : (
-        <AppRoutes />
-      )}
+      <Router>
+        <Route element={<PrivateRoute routeType={'admin'} />}>
+          <Route path="/dashboard/users" element={<Users />} />
+        </Route>
+
+        <Route element={<PrivateRoute routeType={'app'} />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+
+        <Route path="/login" element={<SignIn />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Router>
     </BrowserRouter>
   );
 }

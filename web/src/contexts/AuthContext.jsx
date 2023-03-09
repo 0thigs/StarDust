@@ -1,36 +1,36 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { supabase } from '../services/supabase';
 import api from '../services/api';
 
 export const AuthContext = createContext();
 
-const fakeLoggedUser = {
-  id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
-  name: 'John Petros',
-  email: 'joaopcarvalho.cds@gmail.com',
-  avatar: 'https://github.com/JohnPetros.png',
-  coins: 100,
-  lives: 5,
-  xp: 50,
-  level: 1,
-  unlocked_achievements_ids: [],
-  unlocked_stars_ids: [1, 2, 3, 11, 4],
-  acquired_rockets_ids: [1],
-  selected_rocket_id: 2,
-  ranking_id: 1,
-  streak: 0,
-  week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
-  completed_planets: 0,
-  created_at: new Date('2023-01-23T03:01:00.000Z'),
-  didUpdateRanking: true,
-  didShowWinning: false,
-  starId: 8,
-};
+// const fakeLoggedUser = {
+//   id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
+//   name: 'John Petros',
+//   email: 'joaopcarvalho.cds@gmail.com',
+//   avatar: 'https://github.com/JohnPetros.png',
+//   coins: 100,
+//   lives: 5,
+//   xp: 50,
+//   level: 1,
+//   unlocked_achievements_ids: [],
+//   unlocked_stars_ids: [1, 2, 3, 11, 4],
+//   acquired_rockets_ids: [1],
+//   selected_rocket_id: 2,
+//   ranking_id: 1,
+//   streak: 0,
+//   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
+//   completed_planets: 0,
+//   created_at: new Date('2023-01-23T03:01:00.000Z'),
+//   didUpdateRanking: true,
+//   didShowWinning: false,
+//   starId: 8,
+// };
 
 export function AuthContextProvider({ children }) {
-  const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
+  const [loggedUser, setLoggedUser] = useState({});
 
-  async function setUserInSession() {
+  async function verifysession() {
     const {
       data: { session },
       error,
@@ -39,11 +39,17 @@ export function AuthContextProvider({ children }) {
     if (error) {
       throw new Error(error.message);
     }
+
+    if (!session) {
+      return;
+    }
     const { user } = session;
 
     try {
       const userInSession = await api.getUser(user.id);
       setLoggedUser(userInSession);
+      localStorage.setItem('logged_user', JSON.stringify(userInSession));
+      return userInSession;
     } catch (error) {
       throw new Error(error);
     }
@@ -91,10 +97,7 @@ export function AuthContextProvider({ children }) {
     }
 
     try {
-      const userFromDatabase = await api.getUser(user.id);
-      const isAdmin = password === 'cc71b28d-9369-47ba-80d7-e6e193af73d';
-      const loggedUser = isAdmin ? { ...userFromDatabase, isAdmin } : userFromDatabase;
-      setLoggedUser(loggedUser);
+      const loggedUser = await api.getUser(user.id);
       return loggedUser;
     } catch (error) {
       throw new Error(error);
@@ -107,6 +110,9 @@ export function AuthContextProvider({ children }) {
     if (error) {
       throw new Error(error.message);
     }
+
+    setLoggedUser({});
+    localStorage.removeItem('logged_user');
     return success;
   }
 
@@ -130,6 +136,18 @@ export function AuthContextProvider({ children }) {
     }
   }
 
+  function isUserLogged() {
+    return Object.entries(loggedUser).length > 0;
+  }
+
+  function isLoggedUserAdmin() {
+    return loggedUser.isAdmin;
+  }
+
+  useEffect(() => {
+    // setUserInSession();
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -137,8 +155,11 @@ export function AuthContextProvider({ children }) {
         signIn,
         signOut,
         resetPassword,
-        setUserInSession,
+        verifysession,
         updateLoggedUser,
+        setLoggedUser,
+        isUserLogged,
+        isLoggedUserAdmin,
         loggedUser,
       }}
     >

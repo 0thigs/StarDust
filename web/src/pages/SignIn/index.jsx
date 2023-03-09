@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
@@ -17,8 +17,8 @@ import { ReactComponent as SignInIcon } from '../../assets/icons/signin.svg';
 import { Mail, Lock } from 'react-feather';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import RocketLaunch from '../../assets/animations/rocket-launch.json';
 import { Animation } from '../../components/Animation';
+import RocketLaunching from '../../assets/animations/rocket-launching.json';
 
 const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
@@ -36,25 +36,35 @@ export function SignIn() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SingnInSchema) });
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [lauchRocket, setLauchRocket] = useState(false);
+  const { signIn, setLoggedUser } = useAuth();
   const navigate = useNavigate();
+  const loggedUser = localStorage.getItem('logged_user');
 
   async function HandleSignIn(data) {
     setIsLoading(true);
     try {
       const loggedUser = await signIn(data);
 
-      const page = loggedUser.isAdmin ? '/dashboard/users' : '';
-      console.log(loggedUser.isAdmin);
-      navigate(page);
+      const page = loggedUser.isAdmin ? '/dashboard/users' : '/';
+      setLauchRocket(true);
+      setTimeout(() => {
+        setLoggedUser(loggedUser);
+        navigate(page);
+      }, 3000);
     } catch (error) {
       console.log(error);
-
       toast.error('Usuário não encontrado');
     } finally {
       setIsLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (!!loggedUser) {
+      navigate('/dashboard/users');
+    }
+  }, []);
 
   return (
     <C.Container>
@@ -118,18 +128,23 @@ export function SignIn() {
             background={theme.colors.green_300}
             color={theme.colors.black}
             onClick={handleSubmit(HandleSignIn)}
+            isLoading={isLoading}
           />
         </C.Form>
       </main>
 
       <aside>
-        <C.Intro>
-          <Logo />
-          <p>Aprenda enquanto se diverte!</p>
-        </C.Intro>
-        {/* <C.AnimationContainer>
-          <Animation animation={RocketLaunch} size={600} hasLoop={true} hasAutoplay={true} />
-        </C.AnimationContainer> */}
+        {lauchRocket ? (
+          <C.AnimationContainer>
+            <Animation animation={RocketLaunching} size={600} hasLoop={false} />
+          </C.AnimationContainer>
+        ) : (
+          <C.Intro>
+            <Logo />
+            <p>Aprenda enquanto se diverte!</p>
+            <Rocket width={200} />
+          </C.Intro>
+        )}
       </aside>
     </C.Container>
   );

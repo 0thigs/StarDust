@@ -15,7 +15,7 @@ export const Container = styled.button`
   font-size: 1.6rem;
   font-weight: bold;
   color: ${({ color }) => color};
-  border: 5px solid transparent;
+  border: 2px solid transparent;
 
   transition: 0.4s ease;
 
@@ -25,5 +25,10 @@ export const Container = styled.button`
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.green_900};
+  }
+
+  > div {
+    flex: 1;
+    margin-top: -8px;
   }
 `;
