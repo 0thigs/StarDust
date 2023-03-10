@@ -9,31 +9,25 @@ export const navButtons = [
   {
     title: 'Usuários',
     Icon: Users,
-    page: 'Users',
   },
   {
     title: 'Estrelas',
     Icon: Stars,
-    page: 'Stars',
   },
   {
-    title: 'Planeta',
+    title: 'Planetas',
     Icon: Planet,
-    page: 'Planets',
   },
   {
     title: 'Foguetes',
     Icon: Rocket,
-    page: 'Rockets',
   },
   {
     title: 'Desafios',
     Icon: Challenge,
-    page: 'Challenges',
   },
   {
     title: 'Rankings',
     Icon: Ranking,
-    page: 'Rankings',
   },
 ];

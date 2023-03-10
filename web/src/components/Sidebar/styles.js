@@ -29,10 +29,15 @@ export const NavButton = styled.button`
   color: ${({ theme }) => theme.colors.green_500};
   border: 1px solid ${({ theme, isActive }) => theme.colors[isActive ? 'green_500' : 'background']};
   border-radius: 0.4rem;
+  transition: transform 0.4s ease-in-out;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const AdminButtons = styled.div`

@@ -1,16 +1,19 @@
 import { ThemeProvider } from 'styled-components';
 import { Router } from './routes/index.jsx';
-import { AuthContextProvider } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { DashboardProvider } from './contexts/DashboardContext';
 import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme.js';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <AuthContextProvider>
-        <GlobalStyles />
-        <Router />
-      </AuthContextProvider>
+      <AuthProvider>
+        <DashboardProvider>
+          <GlobalStyles />
+          <Router />
+        </DashboardProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

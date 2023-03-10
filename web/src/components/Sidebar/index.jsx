@@ -1,4 +1,5 @@
 import { useAuth } from '../../hooks/useAuth';
+import { useDashboard } from '../../hooks/useDashboard';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
@@ -11,14 +12,19 @@ const iconColor = theme.colors.green_300;
 
 export function Sidebar() {
   const { signOut } = useAuth();
+  const { setCurrentTable } = useDashboard();
   const navigate = useNavigate();
 
-  function goTo(page) {
-    navigate(page);
+  function handleNavButton(title) {
+    setCurrentTable(title);
   }
 
   function handleSignOutButton() {
-    signOut();
+    try {
+      signOut();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -28,8 +34,8 @@ export function Sidebar() {
       </C.Header>
 
       <C.Nav>
-        {navButtons.map(({ title, Icon, page }) => (
-          <C.NavButton key={title} isActive={true}>
+        {navButtons.map(({ title, Icon }) => (
+          <C.NavButton key={title} isActive={true} onClick={() => handleNavButton(title)}>
             <Icon />
             {title}
           </C.NavButton>

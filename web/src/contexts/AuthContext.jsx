@@ -27,7 +27,7 @@ export const AuthContext = createContext();
 //   starId: 8,
 // };
 
-export function AuthContextProvider({ children }) {
+export function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState({});
 
   async function verifysession() {

@@ -1,9 +1,9 @@
 import * as C from './styles';
 
-export function Header() {
+export function Header({ table }) {
   return (
     <C.Container>
-      <h1>Usuários</h1>
+      <h1>{table}</h1>
       <C.Admin>
         <div>
           <strong>John Admin</strong>

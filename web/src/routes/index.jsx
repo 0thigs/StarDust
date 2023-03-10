@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './privateRoute';
 import { Home } from '../pages/app/Home';
-import { Users } from '../pages/dashboard/Users';
+import { Dashboard } from '../pages/admin/DashBoard';
 import { SignIn } from '../pages/SignIn';
 import { ErrorPage } from '../pages/ErrorPage';
 
@@ -10,7 +10,7 @@ export function Router() {
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute routeType={'admin'} />}>
-          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
         </Route>
 
         <Route element={<PrivateRoute routeType={'app'} />}>

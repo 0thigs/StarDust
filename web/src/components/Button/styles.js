@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.button`
   width: 100%;
-  height: ${({ isSmall }) => (isSmall ? 24 : 48)}px;
-  margin: 8px 0;
+  height: ${({ isSmall }) => (isSmall ? 24 : 40)}px;
+  margin: 4px 0;
   box-shadow: 0 10px 40px #00ff8052;
 
   justify-content: center;
@@ -12,7 +12,7 @@ export const Container = styled.button`
   background-color: ${({ background }) => background};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
-  font-size: ${({ isSmall }) => (isSmall ? 1.2 : 1.6)}rem;
+  font-size: ${({ isSmall }) => (isSmall ? 1.2 : 1.4)}rem;
   font-weight: bold;
   color: ${({ color }) => color};
   border: 2px solid transparent;
@@ -24,9 +24,9 @@ export const Container = styled.button`
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.green_900};
+    border-color: ${({ theme }) => theme.colors.gray_700};
   }
-
+  
   > div {
     flex: 1;
     margin-top: -8px;
