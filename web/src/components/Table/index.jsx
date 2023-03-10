@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Command } from 'react-feather';
+import { Loading } from '../../components/Loading';
 import api from '../../services/api';
 import theme from '../../styles/theme';
+import { Button } from '../Button';
 import * as C from './styles';
 const CDNURL =
   'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images/rockets/rocket-2.svg';
@@ -10,6 +12,8 @@ export function Table({ table }) {
   const [images, setImages] = useState([]);
   const [entities, setEntities] = useState([]);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { entity, columns } = table;
 
   // async function getImages() {
   //   try {
@@ -28,15 +32,14 @@ export function Table({ table }) {
       console.log();
     } catch (errror) {
       console.log(errror);
-
+    } finally {
+      setIsLoading(false);
     }
   }
 
   async function getData() {
     try {
-      const { entity, columns } = table;
-
-      const columnsList = columns.reduce(
+      const columnsList = 'id, ' + columns.reduce(
         (list, currentColumn, index, array) =>
           list.concat(currentColumn.prop + (index + 1 !== array.length ? ', ' : '')),
         ''
@@ -47,6 +50,8 @@ export function Table({ table }) {
       setData(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -56,31 +61,55 @@ export function Table({ table }) {
   }, []);
   return (
     <C.Container>
-      <C.THead>
-        <tr>
-          <th />
-          {table.columns.map(({ name }) => (
-            <th key={name}>{name}</th>
-          ))}
-          <th>ações</th>
-        </tr>
-      </C.THead>
-      <C.TBody>
-        <tr>
-          <td>
-            <Command size={20} color={theme.colors.green_300} />
-          </td>
-          <td>
-            <img src="https://github.com/JohnPetros.png" alt="avatar" />
-          </td>
-          <td>John Petros</td>
-          <td>john@email.com</td>
-          <td>850</td>
-          <td>550</td>
-          <td>Editar</td>
-          <td>Excluir</td>
-        </tr>
-      </C.TBody>
+      {isLoading ? (
+        <Loading size={150} />
+      ) : (
+        <>
+          <C.THead>
+            <tr>
+              <th />
+              {columns.map(({ name }) => (
+                <th key={name}>{name}</th>
+              ))}
+              <th colSpan={2}>ações</th>
+            </tr>
+          </C.THead>
+          <C.TBody>
+            {data.map(data => (
+              <tr key={data}>
+                <td>
+                  <Command size={20} color={theme.colors.green_300} />
+                </td>
+                {columns.map(({ prop, isImage }) => (
+                  <td>
+                    {isImage ? (
+                      <img src="https://github.com/JohnPetros.png" alt="avatar" />
+                    ) : (
+                      data[prop]
+                    )}
+                  </td>
+                ))}
+                <td className="action-button">
+                  <Button
+                    title={'Editar'}
+                    background={theme.colors.blue_300}
+                    color={theme.colors.black}
+                    isSmall={true}
+                  />
+                </td>
+                <td className="action-button">
+                  <Button
+                    title={'Excluir'}
+                    background={theme.colors.red_700}
+                    color={theme.colors.white}
+                    isSmall={true}
+                  />
+                </td>
+              </tr>
+            ))}
+          </C.TBody>
+        </>
+      )}
     </C.Container>
   );
 }

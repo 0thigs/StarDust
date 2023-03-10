@@ -6,12 +6,41 @@ const tables = [
   {
     name: 'Usuários',
     columns: [
-      { name: 'nome', prop: 'name' },
-      { name: 'e-mail', prop: 'email' },
-      { name: 'poeira estelar', prop: 'coins' },
-      { name: 'xp', prop: 'xp' },
-      { name: 'foguete', prop: 'selected_rocket_id' },
-      { name: 'ranking', prop: 'ranking_id' },
+      {
+        name: 'avatar',
+        prop: 'avatar',
+        isImage: true,
+      },
+      {
+        name: 'nome',
+        prop: 'name',
+        isImage: false,
+      },
+      {
+        name: 'e-mail',
+        prop: 'email',
+        isImage: false,
+      },
+      {
+        name: 'poeira estelar',
+        prop: 'coins',
+        isImage: false,
+      },
+      {
+        name: 'xp',
+        prop: 'xp',
+        isImage: false,
+      },
+      {
+        name: 'foguete',
+        prop: 'selected_rocket_id',
+        isImage: false,
+      },
+      {
+        name: 'ranking',
+        prop: 'ranking_id',
+        isImage: false,
+      },
     ],
     entity: 'users',
     relatedEntities: ['rockets', 'rankings'],

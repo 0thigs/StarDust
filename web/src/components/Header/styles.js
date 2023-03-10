@@ -7,6 +7,9 @@ export const Container = styled.header`
   padding: 0 2.4rem;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.white};
+  justify-content: space-between;
+
+
 
   h1 {
     text-transform: uppercase;

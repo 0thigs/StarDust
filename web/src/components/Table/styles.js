@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.table`
   border-collapse: collapse;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 export const THead = styled.thead`
@@ -20,9 +20,13 @@ export const TBody = styled.tbody`
   border-radius: 4px;
 
   td {
-    padding: 1.6rem;
+    padding: 1.2rem;
     font-size: 1.2rem;
     color: ${({ theme }) => theme.colors.white};
+  }
+
+  td.action-button {
+    width: 10rem;
   }
 
   img {

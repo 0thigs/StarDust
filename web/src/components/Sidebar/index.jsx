@@ -29,38 +29,40 @@ export function Sidebar() {
 
   return (
     <C.Container>
-      <C.Header>
-        <Logo width={150} />
-      </C.Header>
+      <C.Content>
+        <C.Header>
+          <Logo width={150} />
+        </C.Header>
 
-      <C.Nav>
-        {navButtons.map(({ title, Icon }) => (
-          <C.NavButton key={title} isActive={true} onClick={() => handleNavButton(title)}>
-            <Icon />
-            {title}
-          </C.NavButton>
-        ))}
-      </C.Nav>
+        <C.Nav>
+          {navButtons.map(({ title, Icon }) => (
+            <C.NavButton key={title} isActive={true} onClick={() => handleNavButton(title)}>
+              <Icon />
+              {title}
+            </C.NavButton>
+          ))}
+        </C.Nav>
 
-      <C.AdminButtons>
-        <Settings color={iconColor} size={iconSize} />
-        <Button
-          title={'Configurações'}
-          background={theme.colors.green_300}
-          color={theme.colors.black}
-          onClick={() => navigate('Settings')}
-          isSmall={true}
-        />
+        <C.AdminButtons>
+          <Settings color={iconColor} size={iconSize} />
+          <Button
+            title={'Configurações'}
+            background={theme.colors.green_300}
+            color={theme.colors.black}
+            onClick={() => navigate('Settings')}
+            isSmall={true}
+          />
 
-        <LogOut color={iconColor} size={iconSize} />
-        <Button
-          title={'Sair'}
-          background={theme.colors.green_300}
-          color={theme.colors.black}
-          onClick={handleSignOutButton}
-          isSmall={true}
-        />
-      </C.AdminButtons>
+          <LogOut color={iconColor} size={iconSize} />
+          <Button
+            title={'Sair'}
+            background={theme.colors.green_300}
+            color={theme.colors.black}
+            onClick={handleSignOutButton}
+            isSmall={true}
+          />
+        </C.AdminButtons>
+      </C.Content>
     </C.Container>
   );
 }

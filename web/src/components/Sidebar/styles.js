@@ -2,10 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.aside`
   grid-area: S;
-  display: grid;
-  grid-template-rows: max-content auto max-content;
+  display: flex;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.background};
-  padding: 0 3.2rem 1.2rem;
+`;
+
+export const Content = styled.div`
+  padding: 0 0 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  height: 100vh;
 `;
 
 export const Header = styled.header`

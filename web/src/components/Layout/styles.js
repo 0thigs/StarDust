@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: 24rem 1fr 1fr;
-  grid-auto-rows: 8rem 1fr 1fr;
+  grid-template-columns: 20rem 1fr 1fr;
+  grid-auto-rows: 8rem auto auto;
 
   /*
     H - Header
