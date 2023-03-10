@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  padding: 2.4rem 4.8rem;
+`;
+
 export const Header = styled.header`
   display: grid;
   grid-template-columns: 24rem 40rem;
-  gap: 3.2rem;
-  padding: 2.4rem 4.8rem;
+  gap: 2.4rem;
 `;
 
 export const Box = styled.div`

@@ -17,33 +17,35 @@ export function Dashboard() {
 
   return (
     <Layout>
-      <C.Header>
-        <C.Box>
-          <C.Icon>
-            <Plus color={iconColor} size={iconSize} />
-          </C.Icon>
-          <Button
-            title={'Novo usuário'}
-            background={theme.colors.green_300}
-            color={theme.colors.black}
-            onClick={handleNewEntity}
-          />
-        </C.Box>
-        <C.Box>
-          <C.Icon>
-            <Filter color={iconColor} size={iconSize} />
-          </C.Icon>
-          <C.Search placeholder={'nome'} />
-          <Button
-            title={'Filtrar'}
-            background={theme.colors.green_300}
-            color={theme.colors.black}
-            onClick={handleFilter}
-          />
-        </C.Box>
-      </C.Header>
+      <C.Container>
+        <C.Header>
+          <C.Box>
+            <C.Icon>
+              <Plus color={iconColor} size={iconSize} />
+            </C.Icon>
+            <Button
+              title={'Novo usuário'}
+              background={theme.colors.green_300}
+              color={theme.colors.black}
+              onClick={handleNewEntity}
+            />
+          </C.Box>
+          <C.Box>
+            <C.Icon>
+              <Filter color={iconColor} size={iconSize} />
+            </C.Icon>
+            <C.Search placeholder={'nome'} />
+            <Button
+              title={'Filtrar'}
+              background={theme.colors.green_300}
+              color={theme.colors.black}
+              onClick={handleFilter}
+            />
+          </C.Box>
+        </C.Header>
 
-      <Table table={tables.find(table => (table.name = currentTableName))} />
+        <Table table={tables.find(table => (table.name = currentTableName))} />
+      </C.Container>
     </Layout>
   );
 }

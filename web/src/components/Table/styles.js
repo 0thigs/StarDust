@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.table`
   border-collapse: collapse;
-  margin: 0 auto;
+  margin: 2.4rem auto;
 `;
 
 export const THead = styled.thead`

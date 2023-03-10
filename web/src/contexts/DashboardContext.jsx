@@ -43,7 +43,10 @@ const tables = [
       },
     ],
     entity: 'users',
-    relatedEntities: ['rockets', 'rankings'],
+    relatedEntities: [
+      { name: 'rockets', prop: 'selected_rocket_id' },
+      { name: 'rankings', prop: 'ranking_id' },
+    ],
   },
 ];
 
