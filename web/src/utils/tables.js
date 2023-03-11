@@ -102,4 +102,50 @@ export const tables = [
     relatedEntities: null,
     boolValues: null,
   },
+  {
+    name: 'Foguetes',
+    columns: [
+      {
+        name: 'nome',
+        prop: 'name',
+        isImage: false,
+      },
+      {
+        name: 'imagem',
+        prop: 'image',
+        isImage: true,
+      },
+      {
+        name: 'preço',
+        prop: 'price',
+        isImage: false,
+      },
+    ],
+    entity: 'rockets',
+    relatedEntities: null,
+    boolValues: null,
+  },
+  {
+    name: 'Conquistas',
+    columns: [
+      {
+        name: 'nome',
+        prop: 'name',
+        isImage: false,
+      },
+      {
+        name: 'medalha',
+        prop: 'image',
+        isImage: true,
+      },
+      {
+        name: 'quantidade exigida',
+        prop: 'required_amount',
+        isImage: false,
+      },
+    ],
+    entity: 'achievements',
+    relatedEntities: null,
+    boolValues: null,
+  },
 ];

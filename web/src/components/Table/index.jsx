@@ -7,7 +7,7 @@ import { Button } from '../Button';
 import api from '../../services/api';
 import theme from '../../styles/theme';
 import * as C from './styles';
-const CDNURL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images';
+const CDN_URL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images';
 
 export function Table({ table }) {
   const { loggedUser } = useAuth();
@@ -33,7 +33,6 @@ export function Table({ table }) {
 
   function getRelatedData(prop, id) {
     const relatedData = relatedEntitiesData[prop];
-    console.log({relatedData});
     if (relatedData) {
       return relatedData.find(data => data.id === id);
     }
@@ -94,13 +93,13 @@ export function Table({ table }) {
                       <td key={prop} className={typeof data === 'number' ? 'number' : ''}>
                         {hasRelatedEntity(prop) ? (
                           <img
-                            src={`${CDNURL}/${getRelatedEntityName(prop)}/${
+                            src={`${CDN_URL}/${getRelatedEntityName(prop)}/${
                               getRelatedData(prop, data)?.image
                             }`}
                             alt={`imagem referente à coluna ${getRelatedEntityName(prop)}`}
                           />
                         ) : isImage ? (
-                          <img src="https://github.com/JohnPetros.png" alt="avatar" />
+                          <img src={`${CDN_URL}/${entity}/${data}`} alt="avatar" />
                         ) : typeof data === 'boolean' ? (
                           boolValues[Number(data)]
                         ) : (

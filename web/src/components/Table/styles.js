@@ -19,6 +19,10 @@ export const TBody = styled.tbody`
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 4px;
 
+  tr:not(:last-child) {
+    border-bottom: 0.4px solid ${({ theme }) => theme.colors.green_500};
+  }
+
   td {
     padding: 1.2rem 2.4rem;
     font-size: 1.2rem;
