@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-import { Command } from 'react-feather';
 import { Loading } from '../../components/Loading';
 import { Button } from '../Button';
 
@@ -12,7 +11,6 @@ const CDNURL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/publi
 
 export function Table({ table }) {
   const { loggedUser } = useAuth();
-  console.log(loggedUser);
   const [rows, setRows] = useState([]);
   const [relatedEntitiesData, setRelatedEntitiesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,17 +33,16 @@ export function Table({ table }) {
 
   function getRelatedData(prop, id) {
     const relatedData = relatedEntitiesData[prop];
+    console.log({relatedData});
     if (relatedData) {
       return relatedData.find(data => data.id === id);
     }
   }
 
   function hasRelatedEntity(prop) {
-    return relatedEntities.some(relatedEntity => relatedEntity.prop === prop);
-  }
-
-  function isAdmin(register, index) {
-    return register.hasOwnProperty('email') && register.email === loggedUser.email;
+    if (relatedEntities && relatedEntities.length) {
+      return relatedEntities?.some(relatedEntity => relatedEntity.prop === prop);
+    }
   }
 
   async function getRows() {
@@ -55,13 +52,11 @@ export function Table({ table }) {
         columns.reduce(
           (list, currentColumn, index, array) =>
             list.concat(currentColumn.prop + (index + 1 !== array.length ? ', ' : '')),
-          ''
+          entity === 'users' ? 'isAdmin, ' : ''
         );
 
       const rows = await api.getData(entity, columnsList);
-      setRows(
-        columnsList.includes('email') ? rows.filter(row => row.email !== loggedUser.email) : rows
-      );
+      setRows(columnsList.includes('isAdmin') ? rows.filter(row => !row.isAdmin) : rows);
 
       getRelatedEntitiesData();
     } catch (error) {

@@ -4,7 +4,7 @@ export const tables = [
     columns: [
       {
         name: 'avatar',
-        prop: 'avatar',
+        prop: 'avatar_id',
         isImage: true,
       },
       {
@@ -30,19 +30,21 @@ export const tables = [
       {
         name: 'foguete',
         prop: 'selected_rocket_id',
-        isImage: false,
+        isImage: true,
       },
       {
         name: 'ranking',
         prop: 'ranking_id',
-        isImage: false,
+        isImage: true,
       },
     ],
     entity: 'users',
     relatedEntities: [
+      { name: 'avatars', prop: 'avatar_id' },
       { name: 'rockets', prop: 'selected_rocket_id' },
       { name: 'rankings', prop: 'ranking_id' },
     ],
+    boolValues: null,
   },
   {
     name: 'Estrelas',
@@ -71,5 +73,33 @@ export const tables = [
     entity: 'stars',
     relatedEntities: [{ name: 'planets', prop: 'planet_id' }],
     boolValues: ['fase', 'desafio'],
+  },
+  {
+    name: 'Planetas',
+    columns: [
+      {
+        name: 'nome',
+        prop: 'name',
+        isImage: false,
+      },
+      {
+        name: 'imagem',
+        prop: 'image',
+        isImage: true,
+      },
+      {
+        name: 'ícone',
+        prop: 'icon',
+        isImage: true,
+      },
+      {
+        name: 'Ordenação',
+        prop: 'order',
+        isImage: false,
+      },
+    ],
+    entity: 'planets',
+    relatedEntities: null,
+    boolValues: null,
   },
 ];
