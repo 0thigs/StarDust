@@ -3,7 +3,7 @@ import { ReactComponent as Stars } from '../assets/icons/star.svg';
 import { ReactComponent as Planet } from '../assets/icons/planet.svg';
 import { ReactComponent as Rocket } from '../assets/icons/rocket.svg';
 import { ReactComponent as Ranking } from '../assets/icons/ranking.svg';
-import { ReactComponent as Challenge } from '../assets/icons/challenge.svg';
+import { ReactComponent as achievement } from '../assets/icons/achievement.svg';
 
 export const navButtons = [
   {
@@ -23,8 +23,8 @@ export const navButtons = [
     Icon: Rocket,
   },
   {
-    title: 'Desafios',
-    Icon: Challenge,
+    title: 'Conquistas',
+    Icon: achievement,
   },
   {
     title: 'Rankings',

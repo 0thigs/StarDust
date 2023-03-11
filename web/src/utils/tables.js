@@ -148,4 +148,22 @@ export const tables = [
     relatedEntities: null,
     boolValues: null,
   },
+  {
+    name: 'Rankings',
+    columns: [
+      {
+        name: 'nome',
+        prop: 'name',
+        isImage: false,
+      },
+      {
+        name: 'distintivo',
+        prop: 'image',
+        isImage: true,
+      },
+    ],
+    entity: 'achievements',
+    relatedEntities: null,
+    boolValues: null,
+  },
 ];
