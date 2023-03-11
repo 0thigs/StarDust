@@ -12,7 +12,7 @@ const iconColor = theme.colors.green_300;
 
 export function Sidebar() {
   const { signOut } = useAuth();
-  const { setCurrentTableName } = useDashboard();
+  const { currentTableName, setCurrentTableName } = useDashboard();
   const navigate = useNavigate();
 
   function handleNavButton(title) {
@@ -22,6 +22,7 @@ export function Sidebar() {
   function handleSignOutButton() {
     try {
       signOut();
+      navigate('/login')
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +37,11 @@ export function Sidebar() {
 
         <C.Nav>
           {navButtons.map(({ title, Icon }) => (
-            <C.NavButton key={title} isActive={true} onClick={() => handleNavButton(title)}>
+            <C.NavButton
+              key={title}
+              isActive={currentTableName === title}
+              onClick={() => handleNavButton(title)}
+            >
               <Icon />
               {title}
             </C.NavButton>

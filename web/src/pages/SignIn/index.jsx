@@ -19,6 +19,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Animation } from '../../components/Animation';
 import RocketLaunching from '../../assets/animations/rocket-launching.json';
+const adminPassword = 'cc71b28d-9369-47ba-80d7-e6e193af73d';
 
 const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
@@ -37,21 +38,17 @@ export function SignIn() {
   } = useForm({ resolver: yupResolver(SingnInSchema) });
   const [isLoading, setIsLoading] = useState(false);
   const [lauchRocket, setLauchRocket] = useState(false);
-  const { signIn, setLoggedUser } = useAuth();
+  const { signIn, loggedUser } = useAuth();
   const navigate = useNavigate();
-  const loggedUser = localStorage.getItem('logged_user');
 
   async function HandleSignIn(data) {
     setIsLoading(true);
     try {
       const loggedUser = await signIn(data);
 
-      const page = loggedUser.isAdmin ? '/dashboard/users' : '/';
+      const page = loggedUser.isAdmin ? '/admin/dashboard' : '/';
       setLauchRocket(true);
-      setTimeout(() => {
-        setLoggedUser(loggedUser);
-        navigate(page);
-      }, 3000);
+      setTimeout(() => navigate(page), 3000);
     } catch (error) {
       console.log(error);
       toast.error('Usuário não encontrado');
@@ -60,11 +57,10 @@ export function SignIn() {
     }
   }
 
-  useEffect(() => {
-    if (!!loggedUser) {
-      navigate('/dashboard/users');
-    }
-  }, []);
+  const isUserLogged = Object.entries(loggedUser).length > 0;
+  if (isUserLogged && !lauchRocket) {
+    navigate(-1);
+  }
 
   return (
     <C.Container>

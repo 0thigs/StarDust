@@ -48,7 +48,10 @@ export function AuthProvider({ children }) {
     try {
       const userInSession = await api.getUser(user.id);
       setLoggedUser(userInSession);
-      localStorage.setItem('logged_user', JSON.stringify(userInSession));
+      const userType = userInSession.isAdmin
+        ? 'eb0a191797624dd3a48fa681d3061212'
+        : '7777191797624dd3a48fa681d3061212';
+      localStorage.setItem('john_petros', userType);
       return userInSession;
     } catch (error) {
       throw new Error(error);
@@ -98,7 +101,11 @@ export function AuthProvider({ children }) {
 
     try {
       const loggedUser = await api.getUser(user.id);
-      localStorage.setItem('logged_user', JSON.stringify(loggedUser));
+      const userType = loggedUser.isAdmin
+        ? 'eb0a191797624dd3a48fa681d3061212'
+        : '7777191797624dd3a48fa681d3061212';
+      localStorage.setItem('john_petros', userType);
+      setLoggedUser(loggedUser);
       return loggedUser;
     } catch (error) {
       throw new Error(error);
@@ -113,7 +120,7 @@ export function AuthProvider({ children }) {
     }
 
     setLoggedUser({});
-    localStorage.removeItem('logged_user');
+    localStorage.removeItem('john_petros');
     return success;
   }
 
@@ -137,13 +144,23 @@ export function AuthProvider({ children }) {
     }
   }
 
+  async function getLoggedUser() {
+    const userId = localStorage.getItem('logged_user');
+    console.log({ userId });
+  }
+
   function isUserLogged() {
+    const userId = localStorage.getItem('logged_user');
     return Object.entries(loggedUser).length > 0;
   }
 
   function isLoggedUserAdmin() {
     return loggedUser.isAdmin;
   }
+
+  useEffect(() => {
+    verifysession();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -154,8 +171,8 @@ export function AuthProvider({ children }) {
         resetPassword,
         verifysession,
         updateLoggedUser,
+        getLoggedUser,
         isUserLogged,
-        isLoggedUserAdmin,
         loggedUser,
       }}
     >

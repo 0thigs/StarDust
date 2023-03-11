@@ -12,10 +12,11 @@ const CDNURL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/publi
 
 export function Table({ table }) {
   const { loggedUser } = useAuth();
+  console.log(loggedUser);
   const [rows, setRows] = useState([]);
   const [relatedEntitiesData, setRelatedEntitiesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { entity, relatedEntities, columns } = table;
+  const { entity, relatedEntities, boolValues, columns } = table;
 
   async function getRelatedEntitiesData() {
     try {
@@ -43,11 +44,8 @@ export function Table({ table }) {
     return relatedEntities.some(relatedEntity => relatedEntity.prop === prop);
   }
 
-  function addOrdering(register, index) {
-    const isAdmin = Object.hasOwn(register, 'email') && register.email === loggedUser.email;
-    if (isAdmin) return;
-
-    return { order: index + 1, ...register };
+  function isAdmin(register, index) {
+    return register.hasOwnProperty('email') && register.email === loggedUser.email;
   }
 
   async function getRows() {
@@ -60,9 +58,10 @@ export function Table({ table }) {
           ''
         );
 
-      const data = await api.getData(entity, columnsList);
-      const rows = data.map(addOrdering);
-      setRows(rows);
+      const rows = await api.getData(entity, columnsList);
+      setRows(
+        columnsList.includes('email') ? rows.filter(row => row.email !== loggedUser.email) : rows
+      );
 
       getRelatedEntitiesData();
     } catch (error) {
@@ -107,6 +106,8 @@ export function Table({ table }) {
                           />
                         ) : isImage ? (
                           <img src="https://github.com/JohnPetros.png" alt="avatar" />
+                        ) : typeof data === 'boolean' ? (
+                          boolValues[Number(data)]
                         ) : (
                           <div>{data}</div>
                         )}

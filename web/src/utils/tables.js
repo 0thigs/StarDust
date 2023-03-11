@@ -70,5 +70,6 @@ export const tables = [
     ],
     entity: 'stars',
     relatedEntities: [{ name: 'planets', prop: 'planet_id' }],
+    boolValues: ['fase', 'desafio'],
   },
 ];

@@ -36,8 +36,9 @@ export const NavButton = styled.button`
   background-color: ${({ theme }) => theme.colors.green_900};
   color: ${({ theme }) => theme.colors.green_500};
   border: 1px solid ${({ theme, isActive }) => theme.colors[isActive ? 'green_500' : 'background']};
+  font-weight: ${({ isActive }) => (isActive ? 600 : 400)};
   border-radius: 0.4rem;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   display: flex;
   justify-content: space-between;

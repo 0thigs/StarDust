@@ -19,7 +19,7 @@ export const Container = styled.button`
   transition: 0.4s ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.green_700};
+    transform: scale(1.05);
   }
 
   &:focus {

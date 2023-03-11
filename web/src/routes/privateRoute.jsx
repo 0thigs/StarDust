@@ -3,25 +3,22 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export function PrivateRoute({ routeType }) {
-  const { verifysession } = useAuth();
-  const loggedUser = JSON.parse(localStorage.getItem('logged_user'));
+  const userType = localStorage.getItem('john_petros');
+  const isAdmin = userType === 'eb0a191797624dd3a48fa681d3061212';
 
-  async function verifySection() {
-    try {
-      await verifysession();
-    } catch (error) {
-      console.log(error);
+  if (!userType) return <Navigate to="/error" />;
+
+  if (routeType === 'admin') {
+    if (isAdmin) {
+      return <Outlet />;
     }
-  }
-  useEffect(() => {
-    verifySection();
-  }, []);
-
-  if (!loggedUser) {
-    return <Navigate to={'/login'} />;
+    return <Navigate to="/" />;
   }
 
-  const isAllowed = routeType === 'admin' ? loggedUser.isAdmin : !loggedUser.isAdmin;
-
-  return isAllowed ? <Outlet /> : <Navigate to={'/error'} />;
+  if (routeType === 'app') {
+    if (!isAdmin) {
+      return <Outlet />;
+    }
+    return <Navigate to="/admin/dashboard" />;
+  }
 }

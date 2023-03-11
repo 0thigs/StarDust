@@ -34,6 +34,8 @@ export const TBody = styled.tbody`
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.green_500};
     color: ${({ theme }) => theme.colors.black};
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
   }
 
   td.action-button {
