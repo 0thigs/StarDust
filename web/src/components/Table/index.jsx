@@ -5,8 +5,6 @@ import { Command } from 'react-feather';
 import { Loading } from '../../components/Loading';
 import { Button } from '../Button';
 
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-
 import api from '../../services/api';
 import theme from '../../styles/theme';
 import * as C from './styles';
@@ -37,12 +35,16 @@ export function Table({ table }) {
   function getRelatedData(prop, id) {
     const relatedData = relatedEntitiesData[prop];
     if (relatedData) {
-      return relatedEntitiesData[prop].find(data => data.id === id);
+      return relatedData.find(data => data.id === id);
     }
   }
 
+  function hasRelatedEntity(prop) {
+    return relatedEntities.some(relatedEntity => relatedEntity.prop === prop);
+  }
+
   function addOrdering(register, index) {
-    const isAdmin = register.email === loggedUser.email;
+    const isAdmin = Object.hasOwn(register, 'email') && register.email === loggedUser.email;
     if (isAdmin) return;
 
     return { order: index + 1, ...register };
@@ -57,14 +59,12 @@ export function Table({ table }) {
             list.concat(currentColumn.prop + (index + 1 !== array.length ? ', ' : '')),
           ''
         );
-
       const data = await api.getData(entity, columnsList);
       const rows = data.map(addOrdering);
+      console.log(rows);
       setRows(rows);
 
-      if (!relatedEntitiesData.length) {
-        getRelatedEntitiesData();
-      }
+      getRelatedEntitiesData();
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,95 +72,71 @@ export function Table({ table }) {
     }
   }
 
-  const handleDragEnd = event => {
-    const { destination, source } = event;
-    if (!destination) return;
-
-    const reorderedRows = Array.from(rows);
-    const [reorderedRow] = reorderedRows.splice(source.index, 1);
-
-    reorderedRows.splice(destination.index, 0, reorderedRow);
-    setRows(reorderedRows);
-  };
+  useEffect(() => {
+      getRows();
+  }, [table]);
 
   useEffect(() => {
-    if (!rows.length) {
-      getRows();
-    }
-  }, []);
+  }, [table]);
+
   return (
     <>
       {isLoading ? (
         <Loading size={150} />
       ) : (
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <C.Container>
-            <C.THead>
-              <tr>
-                <th />
-                {columns.map(({ name }) => (
-                  <th key={name}>{name}</th>
-                ))}
-                <th colSpan={2}>ações</th>
-              </tr>
-            </C.THead>
-            <Droppable droppableId="droppable-1">
-              {provider => (
-                <C.TBody ref={provider.innerRef} {...provider.droppableProps}>
-                  {rows.map((row, index) => {
+        <C.Container>
+          <C.THead>
+            <tr>
+              {columns.map(({ name }) => (
+                <th key={name}>{name}</th>
+              ))}
+              <th colSpan={2}>ações</th>
+            </tr>
+          </C.THead>
+          <C.TBody>
+            {rows.map(row => {
+              return (
+                <tr key={row.id}>
+                  {columns.map(({ prop, isImage }) => {
+                    const data = row[prop];
                     return (
-                      <Draggable key={row.id} draggableId={row.id} index={index}>
-                        {provider => (
-                          <tr {...provider.draggableProps} ref={provider.innerRef}>
-                            <td {...provider.dragHandleProps}>
-                              <Command size={20} color={theme.colors.green_300} />
-                              <span className="order">{row.order}</span>
-                            </td>
-                            {columns.map(({ prop, isImage }) => (
-                              <td key={prop}>
-                                {relatedEntities.some(
-                                  relatedEntity => relatedEntity.prop === prop
-                                ) ? (
-                                  <img
-                                    src={`${CDNURL}/${getRelatedEntityName(prop)}/${
-                                      getRelatedData(prop, row[prop])?.image
-                                    }`}
-                                    alt={`imagem referente à coluna ${getRelatedEntityName(prop)}`}
-                                  />
-                                ) : isImage ? (
-                                  <img src="https://github.com/JohnPetros.png" alt="avatar" />
-                                ) : (
-                                  row[prop]
-                                )}
-                              </td>
-                            ))}
-                            <td className="action-button">
-                              <Button
-                                title={'Editar'}
-                                background={theme.colors.blue_300}
-                                color={theme.colors.black}
-                                isSmall={true}
-                              />
-                            </td>
-                            <td className="action-button">
-                              <Button
-                                title={'Excluir'}
-                                background={theme.colors.red_700}
-                                color={theme.colors.white}
-                                isSmall={true}
-                              />
-                            </td>
-                          </tr>
+                      <td key={prop} className={typeof data === 'number' ? 'number' : ''}>
+                        {hasRelatedEntity(prop) ? (
+                          <img
+                            src={`${CDNURL}/${getRelatedEntityName(prop)}/${
+                              getRelatedData(prop, data)?.image
+                            }`}
+                            alt={`imagem referente à coluna ${getRelatedEntityName(prop)}`}
+                          />
+                        ) : isImage ? (
+                          <img src="https://github.com/JohnPetros.png" alt="avatar" />
+                        ) : (
+                          <div>{data}</div>
                         )}
-                      </Draggable>
+                      </td>
                     );
                   })}
-                  {provider.placeholder}
-                </C.TBody>
-              )}
-            </Droppable>
-          </C.Container>
-        </DragDropContext>
+                  <td className="action-button">
+                    <Button
+                      title={'Editar'}
+                      background={theme.colors.blue_300}
+                      color={theme.colors.black}
+                      isSmall={true}
+                    />
+                  </td>
+                  <td className="action-button">
+                    <Button
+                      title={'Excluir'}
+                      background={theme.colors.red_700}
+                      color={theme.colors.white}
+                      isSmall={true}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </C.TBody>
+        </C.Container>
       )}
     </>
   );

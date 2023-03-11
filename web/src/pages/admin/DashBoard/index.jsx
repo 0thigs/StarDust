@@ -3,13 +3,20 @@ import { Plus, Filter } from 'react-feather';
 import { Layout } from '../../../components/Layout';
 import { Button } from '../../../components/Button';
 import { Table } from '../../../components/Table';
+import { tables } from '../../../utils/tables';
 import theme from '../../../styles/theme';
 import * as C from './styles';
+import { useEffect, useState } from 'react';
 const iconColor = theme.colors.green_500;
 const iconSize = 24;
 
 export function Dashboard() {
-  const { currentTableName, tables } = useDashboard();
+  const { currentTableName } = useDashboard();
+  const [currentTable, setCurrentTable] = useState([]);
+
+  useEffect(() => {
+    setCurrentTable(tables.find(table => (table.name === currentTableName)));
+  }, [currentTableName]);
 
   function handleNewEntity() {}
 
@@ -24,7 +31,7 @@ export function Dashboard() {
               <Plus color={iconColor} size={iconSize} />
             </C.Icon>
             <Button
-              title={'Novo usuário'}
+              title={`Novo ${currentTableName.toLowerCase()}`}
               background={theme.colors.green_300}
               color={theme.colors.black}
               onClick={handleNewEntity}
@@ -44,7 +51,8 @@ export function Dashboard() {
           </C.Box>
         </C.Header>
 
-        <Table table={tables.find(table => (table.name = currentTableName))} />
+
+        <Table table={currentTable} />
       </C.Container>
     </Layout>
   );

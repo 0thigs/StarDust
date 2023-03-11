@@ -12,11 +12,11 @@ const iconColor = theme.colors.green_300;
 
 export function Sidebar() {
   const { signOut } = useAuth();
-  const { setCurrentTable } = useDashboard();
+  const { setCurrentTableName } = useDashboard();
   const navigate = useNavigate();
 
   function handleNavButton(title) {
-    setCurrentTable(title);
+    setCurrentTableName(title);
   }
 
   function handleSignOutButton() {

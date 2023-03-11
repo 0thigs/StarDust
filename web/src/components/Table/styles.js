@@ -20,19 +20,24 @@ export const TBody = styled.tbody`
   border-radius: 4px;
 
   td {
-    padding: 1.2rem;
+    padding: 1.2rem 2.4rem;
     font-size: 1.2rem;
     color: ${({ theme }) => theme.colors.white};
   }
 
-  span.order {
-    color: ${({ theme }) => theme.colors.green_500};
-    position: absolute;
-    margin-left: 0.8rem;
+  td.number div {
+    display: grid;
+    place-items: center;
+    width: max-content;
+    padding: 0.4rem 0.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.green_500};
+    color: ${({ theme }) => theme.colors.black};
   }
 
   td.action-button {
-    width: 10rem;
+    width: 12rem;
   }
 
   img {
