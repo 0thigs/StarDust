@@ -25,6 +25,12 @@ export const TBody = styled.tbody`
     color: ${({ theme }) => theme.colors.white};
   }
 
+  span.order {
+    color: ${({ theme }) => theme.colors.green_500};
+    position: absolute;
+    margin-left: 0.8rem;
+  }
+
   td.action-button {
     width: 10rem;
   }
