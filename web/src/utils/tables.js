@@ -162,7 +162,7 @@ export const tables = [
         isImage: true,
       },
     ],
-    entity: 'achievements',
+    entity: 'rankings',
     relatedEntities: null,
     boolValues: null,
   },
