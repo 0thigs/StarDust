@@ -15,12 +15,18 @@ export function Dashboard() {
   const [currentTable, setCurrentTable] = useState([]);
 
   useEffect(() => {
-    setCurrentTable(tables.find(table => (table.name === currentTableName)));
+    setCurrentTable(tables.find(table => table.name === currentTableName));
+    getTitle();
   }, [currentTableName]);
 
   function handleNewEntity() {}
 
   function handleFilter() {}
+
+  function getTitle() {
+    const title = currentTableName.slice(0, currentTableName.length - 1);
+    return (title[title.length - 1] === 'a' ? 'Nova ' : 'Novo ') + title;
+  }
 
   return (
     <Layout>
@@ -31,7 +37,7 @@ export function Dashboard() {
               <Plus color={iconColor} size={iconSize} />
             </C.Icon>
             <Button
-              title={`Novo ${currentTableName.toLowerCase()}`}
+              title={getTitle()}
               background={theme.colors.green_300}
               color={theme.colors.black}
               onClick={handleNewEntity}
@@ -50,7 +56,6 @@ export function Dashboard() {
             />
           </C.Box>
         </C.Header>
-
 
         <Table table={currentTable} />
       </C.Container>

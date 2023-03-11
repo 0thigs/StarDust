@@ -59,9 +59,9 @@ export function Table({ table }) {
             list.concat(currentColumn.prop + (index + 1 !== array.length ? ', ' : '')),
           ''
         );
+
       const data = await api.getData(entity, columnsList);
       const rows = data.map(addOrdering);
-      console.log(rows);
       setRows(rows);
 
       getRelatedEntitiesData();
@@ -73,10 +73,7 @@ export function Table({ table }) {
   }
 
   useEffect(() => {
-      getRows();
-  }, [table]);
-
-  useEffect(() => {
+    getRows();
   }, [table]);
 
   return (

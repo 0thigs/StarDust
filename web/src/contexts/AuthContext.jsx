@@ -145,10 +145,6 @@ export function AuthProvider({ children }) {
     return loggedUser.isAdmin;
   }
 
-  useEffect(() => {
-    // setUserInSession();
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
@@ -158,7 +154,6 @@ export function AuthProvider({ children }) {
         resetPassword,
         verifysession,
         updateLoggedUser,
-        setLoggedUser,
         isUserLogged,
         isLoggedUserAdmin,
         loggedUser,
