@@ -13,6 +13,29 @@ export const THead = styled.thead`
     font-size: 1.2rem;
     text-align: start;
   }
+
+  th > div {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.8rem;
+  }
+
+  th .sortable-buttons {
+    display: grid;
+    grid-auto-rows: 1.4rem;
+  }
+
+  th .sortable-buttons button {
+    display: grid;
+    place-content: center;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  th .sortable-buttons button:hover {
+    transform: scale(1.4);
+    background-color: ${({ theme }) => theme.colors.green_800};
+    border-radius: 25%;
+  }
 `;
 
 export const TBody = styled.tbody`

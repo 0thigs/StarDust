@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 
+import { ChevronDown, ChevronUp } from 'react-feather';
 import { Loading } from '../../components/Loading';
 import { Button } from '../Button';
 
@@ -8,9 +8,10 @@ import api from '../../services/api';
 import theme from '../../styles/theme';
 import * as C from './styles';
 const CDN_URL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images';
+const iconSize = 12;
+const iconColor = theme.colors.green_500;
 
 export function Table({ table }) {
-  const { loggedUser } = useAuth();
   const [rows, setRows] = useState([]);
   const [relatedEntitiesData, setRelatedEntitiesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +79,19 @@ export function Table({ table }) {
           <C.THead>
             <tr>
               {columns.map(({ name }) => (
-                <th key={name}>{name}</th>
+                <th key={name}>
+                  <div>
+                    {name}
+                    <div className="sortable-buttons">
+                      <button>
+                        <ChevronUp color={iconColor} size={iconSize} />
+                      </button>
+                      <button>
+                        <ChevronDown color={iconColor} size={iconSize} />
+                      </button>
+                    </div>
+                  </div>
+                </th>
               ))}
               <th colSpan={2}>ações</th>
             </tr>
