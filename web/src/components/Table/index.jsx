@@ -6,10 +6,21 @@ import { Button } from '../Button';
 
 import api from '../../services/api';
 import theme from '../../styles/theme';
+import * as Tooltip from '@radix-ui/react-tooltip';
 import * as C from './styles';
+
 const CDN_URL = 'https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images';
 const iconSize = 12;
 const iconColor = theme.colors.green_500;
+const tooltipContentStyle = {
+  padding: 12,
+  backgroundColor: theme.colors.green_900,
+  color: theme.colors.green_500,
+  borderRadius: 25,
+};
+const tooltipArrowStyle = {
+  fill: theme.colors.green_900,
+};
 
 export function Table({ table }) {
   const [rows, setRows] = useState([]);
@@ -105,12 +116,24 @@ export function Table({ table }) {
                     return (
                       <td key={prop} className={typeof data === 'number' ? 'number' : ''}>
                         {hasRelatedEntity(prop) ? (
-                          <img
-                            src={`${CDN_URL}/${getRelatedEntityName(prop)}/${
-                              getRelatedData(prop, data)?.image
-                            }`}
-                            alt={`imagem referente à coluna ${getRelatedEntityName(prop)}`}
-                          />
+                          <Tooltip.Provider>
+                            <Tooltip.Root>
+                              <Tooltip.Trigger asChild>
+                                <img
+                                  src={`${CDN_URL}/${getRelatedEntityName(prop)}/${
+                                    getRelatedData(prop, data)?.image
+                                  }`}
+                                  alt={`imagem referente à coluna ${getRelatedEntityName(prop)}`}
+                                />
+                              </Tooltip.Trigger>
+                              <Tooltip.Portal>
+                                <Tooltip.Content style={tooltipContentStyle}>
+                                  {getRelatedData(prop, data)?.name}
+                                  <Tooltip.Arrow style={tooltipArrowStyle} />
+                                </Tooltip.Content>
+                              </Tooltip.Portal>
+                            </Tooltip.Root>
+                          </Tooltip.Provider>
                         ) : isImage ? (
                           <img src={`${CDN_URL}/${entity}/${data}`} alt="avatar" />
                         ) : typeof data === 'boolean' ? (

@@ -52,6 +52,12 @@ export const TBody = styled.tbody`
     color: ${({ theme }) => theme.colors.white};
   }
 
+  .TooltipContent {
+    background-color: ${({ theme }) => theme.colors.green_900};
+    color: ${({ theme }) => theme.colors.green_500};
+    padding: 1.2rem;
+  }
+
   td.number div {
     display: grid;
     place-items: center;
