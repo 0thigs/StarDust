@@ -22,6 +22,10 @@ import {
   withSequence,
 } from 'react-native-reanimated';
 import { Sound } from '../Sound';
+import { useState } from 'react';
+import api from '../../services/api';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
 export const starHeight = 100;
 
@@ -29,11 +33,11 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
+  const [rocket, setRocket] = useState({});
   const isLastStarUnlocked = lastUnlockedStarId === id;
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const delay = 300;
-  const RocketImage = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
   const navigation = useNavigation();
 
@@ -55,19 +59,26 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     }, 100);
   }
 
+  async function getRocket() {
+    try {
+      const rocket = await api.getRocket(loggedUser.selected_rocket_id);
+      setRocket(rocket);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const RocketRotate = useSharedValue(180);
   const RocketScale = useSharedValue(1);
   const RocketTranslateY = useSharedValue(-1000);
   const RocketAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { rotate: `${RocketRotate.value}deg` },
-        { scale: RocketScale.value },
-      ],
+      transform: [{ rotate: `${RocketRotate.value}deg` }, { scale: RocketScale.value }],
     };
   });
 
   useEffect(() => {
+    getRocket();
     StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
 
     const timer = setTimeout(() => {
@@ -113,9 +124,9 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
           <C.StarSign isUnlocked={isUnlocked}>
             <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>
           </C.StarSign>
-          {isLastStarUnlocked && (
+          {isLastStarUnlocked && rocket?.image && (
             <C.Rocket style={RocketAnimatedStyle}>
-              <RocketImage width={75} height={75} />
+              <SvgUri uri={getImage('rockets', rocket.image)} width={75} height={75} />
             </C.Rocket>
           )}
         </>
