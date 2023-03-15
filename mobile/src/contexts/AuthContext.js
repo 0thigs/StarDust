@@ -8,7 +8,7 @@ const fakeLoggedUser = {
   id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
   name: 'John Petros',
   email: 'joaopcarvalho.cds@gmail.com',
-  avatar: 'https://github.com/JohnPetros.png',
+  avatar_id: 'bd3313ad-16ef-49ae-baad-34a104752eb5',
   coins: 100,
   lives: 5,
   xp: 50,
@@ -71,7 +71,8 @@ export function AuthContextProvider({ children }) {
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
-      setUser(signedUser);
+      
+      setLoggedUser(signedUser);
     } catch (error) {
       throw new Error(error);
     }

@@ -49,7 +49,7 @@ export const achievements = [
   },
   {
     id: 7,
-    title: 'Senior',
+    title: 'Sênior',
     description: 'Ganhe 5000 XP',
     requiredCount: 5000,
     icon: require('../assets/AchievementAssets/achievement-9.svg').default,

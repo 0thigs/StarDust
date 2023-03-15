@@ -5,9 +5,12 @@ import { achievements as achievementsFromJSON } from '../../utils/achivements';
 import { Achievement } from '../Achievement';
 import { useNavigation } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
+import api from '../../services/api';
+import { getImage } from '../../utils/getImage';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
+  const [avatar, setAvatar] = useState('');
   const [achievements, setAchievements] = useState([]);
   const navigation = useNavigation();
 
@@ -27,6 +30,11 @@ export function CustomDrawer() {
     }
   }
 
+  async function getAvatar() {
+    const avatar = await api.getAvatar(loggedUser.avatar_id);
+    setAvatar(avatar);
+  }
+
   useEffect(() => {
     const sortedAchievements = achievementsFromJSON;
     const { unlocked_achievements_ids } = loggedUser;
@@ -40,15 +48,12 @@ export function CustomDrawer() {
       return 0;
     });
     setAchievements(sortedAchievements);
+    getAvatar();
   }, [loggedUser.unlocked_achievements_ids]);
 
   return (
     <C.Container>
-      <C.Avatar
-        source={{
-          uri: `http://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`,
-        }}
-      />
+      <C.Avatar source={{ uri: getImage('avatars', avatar) }} />
       <C.Name>{loggedUser.name}</C.Name>
       <C.Email>{loggedUser.email}</C.Email>
       <C.LogOutButton onPress={handleSignOut}>

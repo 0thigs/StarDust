@@ -43,10 +43,16 @@ export const Level = styled.Text`
   font-family: ${props => props.theme.fonts.semibold};
   font-size: 14px;
 `;
+
 export const Ranking = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+export const RankingImage = styled.Image`
+    width: 50px;
+    height: 50px;
 `;
 
 export const StatusContainer = styled.View`

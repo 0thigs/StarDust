@@ -36,8 +36,8 @@ export function TabRoutes({ navigation }) {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Challenges" component={Challenges} />
       <Tab.Screen name="Shop" component={Shop} />
-      <Tab.Screen name="Profile" component={Profile} />
       <Tab.Screen name="Ranking" component={Ranking} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }

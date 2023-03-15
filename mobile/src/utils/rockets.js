@@ -26,7 +26,7 @@ export const rockets = [
   },
   {
     id: 5,
-    name: 'Solaris Sprinter',
+    name: 'Petros Johanes',
     price: 1750,
     image: require('../assets/RocketAssets/rocket-5.svg').default,
   },

@@ -24,7 +24,6 @@ export function Input({
   const inputRef = useRef();
   const route = useRoute();
 
-
   function toggleSecureTextEntry() {
     setSecureTextEntry(!secureTextEntry);
   }
@@ -58,8 +57,6 @@ export function Input({
     }
   }, [isUpdatingPasswordForm]);
 
- 
-
   return (
     <C.Container
       animation={'fadeInLeft'}
@@ -91,7 +88,8 @@ export function Input({
           autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
           secureTextEntry={type === 'password' && secureTextEntry}
           error={error}
-          />
+          isFocus={isFocus}
+        />
         {type === 'password' ? (
           secureTextEntry ? (
             <Icon.Eye

@@ -29,6 +29,36 @@ export default {
     return data;
   },
 
+  getAvatar: async avatarId => {
+    const { data, error } = await supabase.from('avatars').select('image').eq('id', avatarId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const avatar = data[0];
+    return avatar.image;
+  },
+
+  getRanking: async rankingId => {
+    const { data, error } = await supabase
+      .from('rankings')
+      .select('image, name')
+      .eq('id', rankingId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const ranking = data[0];
+    return ranking;
+  },
+
+  getRocket: async rocketId => {
+    const { data, error } = await supabase.from('rockets').select('image, name').eq('id', rocketId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const rocket = data[0];
+    return rocket;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')

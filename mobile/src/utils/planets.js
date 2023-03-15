@@ -33,7 +33,7 @@ export const planets = [
   },
   {
     id: 2,
-    name: 'Variáveis',
+    name: 'Tipos de dados',
     image: require('../assets/PlanetAssets/planet-image-2.svg').default,
     icon: require('../assets/PlanetAssets/planet-icon-2.svg').default,
     stars: [

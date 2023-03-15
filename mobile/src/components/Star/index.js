@@ -68,7 +68,6 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   });
 
   useEffect(() => {
-    console.log({lastUnlockedStarYPosition})
     StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
 
     const timer = setTimeout(() => {

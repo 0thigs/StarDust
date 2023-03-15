@@ -99,6 +99,7 @@ export function SignIn() {
         routes: [{ name: 'DrawerRoutes' }],
       });
     } catch (error) {
+      console.log(error);
       Toast.error('Usuário já cadastrado');
       setIsLoading(false);
       return;
