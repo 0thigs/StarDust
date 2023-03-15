@@ -7,41 +7,53 @@ import PlaceholderIcon from '../../assets/GlobalAssets/placeholder-icon.svg';
 import StreakAnimation from '../../assets/animations/streak-animation.json';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
+import { useAuth } from '../../hooks/useAuth';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({
-  user: { streak, week_status },
-  updateLoggedUser = null,
-  isToUpdateStreak = false,
-}) {
+export function Streak({ user: { streak, week_status, created_at }, isToUpdateStreak = false }) {
+  const { updateLoggedUser } = useAuth();
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
+  const todayIndex = dayjs().day();
+  const today = week_status[todayIndex];
+  const yesterday = week_status[todayIndex - 1];
 
-  async function updateWeekStatus(todayIndex) {
+  async function updateWeekStatus(dayIndex, newStatus) {
     const updatedWeekStatus = week_status.map((status, index) =>
-      index === todayIndex ? 'done' : status
+      index === dayIndex ? newStatus : status
     );
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
   }
 
   async function updateStreak() {
-    const todayIndex = dayjs().day();
-    let today = week_status[todayIndex];
+    if (today !== 'todo') return;
 
-    if (today !== 'todo') {
-      return;
-    }
-
-    const yesterday = week_status[todayIndex - 1];
-    if (yesterday === 'done') {
+    if (!!yesterday && yesterday === 'done') {
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
       updateLoggedUser('streak', updatedStreak);
     }
 
-    updateWeekStatus(todayIndex);
+    updateWeekStatus(todayIndex, 'done');
+  }
+
+  function checkHasUndoneDay() {
+    if (today !== 'todo') return;
+
+    const currentDate = new Date();
+    const createdAtDate = new Date(created_at);
+
+    if (!!yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
+      console.log(true);
+      setStreakCount(0);
+      updateLoggedUser('streak', 0);
+      updateWeekStatus(todayIndex);
+
+      const yesterdayIndex = todayIndex - 1;
+      updateWeekStatus(yesterdayIndex, 'undone');
+    }
   }
 
   useEffect(() => {
@@ -51,6 +63,8 @@ export function Streak({
     if (isToUpdateStreak) {
       updateStreak();
     }
+
+    checkHasUndoneDay();
   }, []);
 
   return (
