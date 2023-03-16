@@ -16,17 +16,18 @@ const sunday = 0;
 
 export function Ranking() {
   const { loggedUser } = useAuth();
+  const [rankings, setRankings] = useState([]);
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  const [isWinnersListShow, setIsWinnersListShow] = useState(true);
+  const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
+  const [isWinnersListShow, setIsWinnersListShow] = useState(false);
   const [daysToGo, setDaysToGo] = useState(0);
-  const [currentRankingId, setCurrentRankingId] = useState(loggedUser.ranking_id);
   const badgesListRef = useRef(null);
 
-  function scrollToCurrentRanking() {
+  function scrollToCurrentRanking(currentRankingIndex) {
     badgesListRef.current?.scrollToIndex({
-      index: currentRankingId - 1,
+      index: currentRankingIndex - 1,
       viewPosition: 0.5,
     });
   }
@@ -35,28 +36,31 @@ export function Ranking() {
     return { ...user, position: index + 1 };
   }
 
-  function orderUsersByXp(users) {
-    const orderedUsers = users.sort((a, b) => a.xp < b.xp);
-    return orderedUsers.map(setPosition);
-  }
-
-  async function getUsersByCurrentRanking() {
+  async function setData() {
     try {
-      const users = await api.getUsersByCurrentRanking(currentRankingId);
-      const orderedUsers = orderUsersByXp(users);
+      const rankings = await api.getRankings();
+      setRankings(rankings);
 
-      setUsers(orderedUsers);
-      setWinners(() => {
-        let winners = [];
-        orderedUsers.slice(0, 3).forEach(user => {
-          if (user.position === 2) {
-            winners.unshift(user);
-            return;
-          }
-          winners.push(user);
-        });
-        return winners;
-      });
+      const users = await api.getUsersByCurrentRanking(loggedUser.ranking_id);
+      const rankingUsers = users.map(setPosition);
+      setUsers(rankingUsers);
+
+      const currentRankingIndex =
+        rankings.find(ranking => ranking.id === loggedUser.ranking_id).order - 1;
+
+      setCurrentRankingIndex(currentRankingIndex);
+
+      //   setWinners(() => {
+      //     let winners = [];
+      //     orderedUsers.slice(0, 3).forEach(user => {
+      //       if (user.position === 2) {
+      //         winners.unshift(user);
+      //         return;
+      //       }
+      //       winners.push(user);
+      //     });
+      //     return winners;
+      //   });
     } catch (error) {
       console.log(error);
     } finally {
@@ -66,14 +70,15 @@ export function Ranking() {
 
   useEffect(() => {
     setIsloading(true);
-    getUsersByCurrentRanking();
-    scrollToCurrentRanking();
+    setData();
     setDaysToGo(today === sunday ? 7 : 7 - today);
   }, []);
 
   useEffect(() => {
-    setCurrentRankingId(rankings.find(ranking => ranking.id === loggedUser.ranking_id).id);
-  }, [loggedUser.ranking_id]);
+    if (currentRankingIndex) {
+      scrollToCurrentRanking(currentRankingIndex);
+    }
+  }, [currentRankingIndex]);
 
   return (
     <C.Container>
@@ -90,9 +95,15 @@ export function Ranking() {
             <C.BadgesList
               ref={badgesListRef}
               data={rankings}
-              keyExtractor={achievement => achievement.id}
-              renderItem={({ item: { id, name, image } }) => (
-                <Badge id={id} name={name} image={image} currentRankingId={currentRankingId} />
+              keyExtractor={ranking => ranking.id}
+              renderItem={({ item: { id, name, image }, index}) => (
+                <Badge
+                  id={id}
+                  name={name}
+                  image={image}
+                  index={index}
+                  currentRankingIndex={currentRankingIndex}
+                />
               )}
               horizontal
               showsVerticalScrollIndicator={false}
