@@ -23,7 +23,7 @@ export default {
       .from('users')
       .select('*')
       .eq('ranking_id', rankingId)
-      .order('xp', { ascending: false });
+      .order('weekly_xp', { ascending: false });
     if (error) {
       throw new Error(error.message);
     }
@@ -37,6 +37,14 @@ export default {
     }
     const avatar = data[0];
     return avatar.image;
+  },
+
+  getAchievements: async () => {
+    const { data, error } = await supabase.from('achievements').select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
   },
 
   getRankings: async () => {
@@ -69,6 +77,17 @@ export default {
     }
     const rocket = data[0];
     return rocket;
+  },
+
+  getRockets: async () => {
+    const { data, error } = await supabase
+      .from('rockets')
+      .select('*')
+      .order('price', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
   },
 
   updateUser: async (column, data, userId) => {

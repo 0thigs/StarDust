@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-import { rankings } from '../../utils/rankings';
 import { Badge } from '../../components/Badge';
 import { Loading } from '../../components/Loading';
 

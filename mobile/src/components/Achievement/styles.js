@@ -51,7 +51,7 @@ export const Bar = styled.View`
   background-color: ${props => props.theme.colors.green_500};
 `;
 
-export const ProgressBarrequiredCount = styled.Text`
+export const ProgressBarrequiredAmount = styled.Text`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
   font-size: 12px;

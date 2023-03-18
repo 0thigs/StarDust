@@ -39,6 +39,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   function getNewData() {
     const updatedCoins = coins + loggedUser.coins;
     const updatedXp = xp + loggedUser.xp;
+    const updatedWeeklyXp = xp + loggedUser.weekly_xp;
 
     let completedPlanets = loggedUser.completed_planets;
     let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
@@ -62,6 +63,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
     return {
       coins: updatedCoins,
       xp: updatedXp,
+      weekly_xp: updatedWeeklyXp,
       lives: state.livesCount,
       unlocked_stars_ids: updatedUnlockedStarsIds,
       completed_planets: completedPlanets,

@@ -1,20 +1,21 @@
 import * as C from './styles';
-import Lock from '../../assets/AchievementAssets/lock.svg'
+import Lock from '../../assets/AchievementAssets/lock.svg';
 
 export function Achievement({
   title,
   icon: Icon,
   description,
-  requiredCount,
-  currentCount,
+  requiredAmount,
+  currentAmount,
   isUnlocked,
 }) {
-  const currentCount_ = Array.isArray(currentCount) ? currentCount.length - 1 : currentCount;
-  const percentage = (currentCount_ / requiredCount) * 100;
+
+  const currentAmount_ = Array.isArray(currentAmount) ? currentAmount.length - 1 : currentAmount;
+  const percentage = (currentAmount_ / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
 
-  function getFormatedCurrentCount() {
-    return currentCount_ >= requiredCount ? requiredCount : currentCount_;
+  function getFormatedCurrentAmount() {
+    return currentAmount_ >= requiredAmount ? requiredAmount : currentAmount_;
   }
 
   return (
@@ -29,9 +30,9 @@ export function Achievement({
             <C.ProgressBar>
               <C.Bar barWidth={barWidth + '%'} />
             </C.ProgressBar>
-            <C.ProgressBarrequiredCount>
-              {getFormatedCurrentCount()}/{requiredCount}
-            </C.ProgressBarrequiredCount>
+            <C.ProgressBarrequiredAmount>
+              {getFormatedCurrentAmount()}/{requiredAmount}
+            </C.ProgressBarrequiredAmount>
           </C.ProgressBarInfo>
         )}
       </C.AchievementsInfo>

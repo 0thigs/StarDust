@@ -10,11 +10,13 @@ import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function Rocket_({ id, name, image: Image, price }) {
+export function Rocket_({ id, name, image, price }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isAcquired, setIsAcquired] = useState(false);
@@ -87,7 +89,7 @@ export function Rocket_({ id, name, image: Image, price }) {
           </C.Price>
         )}
         <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <Image width={125} height={125} />
+          <SvgUri uri={getImage('rockets', image)} width={125} height={125} />
         </C.ImageContainer>
       </C.Background>
       <C.Info>
