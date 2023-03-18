@@ -68,6 +68,7 @@ export function SelectOptionForm({ options, answer }) {
           </C.OptionContainer>
         ))}
       </C.Options>
+      
       <VerificationButton
         verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
