@@ -3,7 +3,15 @@ import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming, FadeInDown } from 'react-native-reanimated';
 
-export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorderedItems }) {
+export function DropItem({
+  id,
+  label,
+  zones,
+  setZones,
+  isAnswerVerified,
+  reorderedItems,
+  isAnswerWrong,
+}) {
   const [isItemInZone, setIsItemInZone] = useState(false);
   const [isFirstRendering, setisFirstRendering] = useState(false);
   const [itemWidth, setItemWidth] = useState(null);
@@ -98,7 +106,9 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
       onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick(id)}
       style={ItemAnimatedStyle}
     >
-      <C.Label isItemInZone={isItemInZone}>{label}</C.Label>
+      <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
+        {label}
+      </C.Label>
     </C.DropItem>
   );
 }

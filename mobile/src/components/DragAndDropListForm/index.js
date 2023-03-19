@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 
-import { VerificationButton } from '../VerificationButton';
 import { compareSenquences } from '../../utils/compareSenquences';
 import { reorderItems } from '../../utils/reorderItems';
 

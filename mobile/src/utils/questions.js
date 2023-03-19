@@ -287,7 +287,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     correctItemsIdsSequence: [4, 2],
   },
   {
-    starId: 5,
+    starId: 6,
     type: 'drag-and-drop-click',
     stem: 'Concatene os textos da maneira apropriada',
     lines: [
@@ -380,7 +380,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
 //   {
 //     starId: 6,
 //     type: 'selection',
-//     stem: 'Qual será o tipo do resultado da expressão 5 ÷ 2',
+//     stem: 'Qual será o tipo do resultado de 5 ÷ 2',
 //     options: ['inteiro', '2.5', 'real', 'texto'],
 //     answer: 'real',
 //   },

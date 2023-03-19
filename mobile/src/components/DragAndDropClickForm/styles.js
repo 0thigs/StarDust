@@ -21,25 +21,25 @@ export const Lines = styled(Animated.View)`
 export const Line = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-left: ${props => defaultIdent * props.indentLevel}px;
+  margin-left: ${({ indentLevel }) => defaultIdent * indentLevel}px;
   margin-bottom: 4px;
   align-self: flex-start;
   margin-bottom: 8px;
 `;
 
-export const Content = styled.View`
-`;
+export const Content = styled.View``;
 
 export const Text = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.code};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.code};
 `;
 
 export const DropZone = styled.View`
-  width: ${props => props.width}px;
+  width: ${({ width }) => width}px;
   border-width: 1px;
-  border-bottom-color: ${props => props.theme.colors.green_500};
-  color: ${props => props.theme.colors.green_500};
+  border-bottom-color: ${({ theme, isAnswerWrong }) =>
+    theme.colors[isAnswerWrong ? 'red_700' : 'green_500']};
+  color: ${({ theme }) => theme.colors.green_500};
   margin: 0 8px 0;
 `;
 
@@ -63,16 +63,17 @@ export const DropItem = styled(Animated.View)`
   border-color: transparent;
   height: ${itemHeight}px;
 
-  ${props =>
-    !props.isItemInZone &&
+  ${({ isItemInZone }) =>
+    !isItemInZone &&
     css`
-      background-color: ${props => props.theme.colors.purple_700};
-      border-color: ${props => props.theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.purple_700};
+      border-color: ${({ theme }) => theme.colors.white};
       border-radius: 4px;
     `}
 `;
 
 export const Label = styled.Text`
-  color: ${props => (props.isItemInZone ? props.theme.colors.green_500 : props.theme.colors.white)};
-  font-family: ${props => props.theme.fonts.code};
+  color: ${({ theme, isItemInZone, isAnswerWrong }) =>
+    theme.colors[isItemInZone && isAnswerWrong ? 'red_300' : isItemInZone ? 'green_500' : 'white']};
+  font-family: ${({ theme }) => theme.fonts.code};
 `;

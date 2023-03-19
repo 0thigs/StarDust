@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { reorderItems } from '../../utils/reorderItems';
-import { QuestionStem } from '../Quiz/styles';
+import { Editor } from '../Editor';
+import { QuestionStem, QuestionCode } from '../Quiz/styles';
 import * as C from './styles';
 const delay = 200;
 
-export function SelectOptionForm({ stem, options, answer, index }) {
+export function SelectOptionForm({ stem, code, options, answer, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
@@ -76,6 +77,11 @@ export function SelectOptionForm({ stem, options, answer, index }) {
       {isCurrentQuestion && (
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          {code && (
+            <QuestionCode>
+              <Editor value={code} />
+            </QuestionCode>
+          )}
           <C.Options>
             {reorderedOptions.map((option, index) => (
               <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
