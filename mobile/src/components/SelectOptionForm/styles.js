@@ -15,12 +15,16 @@ export const OptionContainer = styled(Animatable.View)`
 `;
 
 export const Option = styled.TouchableOpacity`
-  background-color: ${props => props.theme.colors.purple_700};
+  background-color: ${({ theme }) => theme.colors.purple_700};
   border-width: 1px;
-  border-color: ${props =>
-    props.currentOption === props.selectedOption
-      ? props.theme.colors.blue_300
-      : props.theme.colors.white};
+  border-color: ${({ theme, isSelected, isAnswerWrong, isCorrectAnswer }) =>
+    isAnswerWrong && isSelected
+      ? theme.colors.red_300
+      : isCorrectAnswer
+      ? theme.colors.green_500
+      : isSelected
+      ? theme.colors.blue_300
+      : theme.colors.white};
   height: 48px;
   width: 350px;
 
@@ -30,9 +34,13 @@ export const Option = styled.TouchableOpacity`
 `;
 
 export const Label = styled.Text`
-  color: ${props =>
-    props.currentOption === props.selectedOption
-      ? props.theme.colors.blue_300
-      : props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme, isSelected, isAnswerWrong, isCorrectAnswer }) =>
+    isAnswerWrong && isSelected
+      ? theme.colors.red_300
+      : isCorrectAnswer
+      ? theme.colors.green_500
+      : isSelected
+      ? theme.colors.blue_300
+      : theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;

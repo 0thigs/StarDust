@@ -1,14 +1,22 @@
-import { useState } from 'react';
-import * as C from './styles';
+import { useEffect, useState } from 'react';
 import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
+import { QuestionStem } from '../Quiz/styles';
+import * as C from './styles';
 
-export function OpenForm({ answer }) {
-  const [, dispatch] = useLesson();
+export function OpenForm({ stem, answer, index }) {
+  const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [userAnswer, setUserAnswer] = useState('');
-  const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
+  const isCurrentQuestion = index === currentQuestion;
+
+  function setIsAnswerVerified(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerVerified', value } });
+  }
+
+  function setIsAnswerWrong(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerWrong', value } });
+  }
 
   function resetAnswer() {
     if (isAnswerVerified && userAnswer) {
@@ -37,20 +45,39 @@ export function OpenForm({ answer }) {
     if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!userAnswer } });
+    }
+  }, [userAnswer]);
+
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({
+        type: 'setState',
+        payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
+      });
+    }
+  }, [isAnswerVerified, userAnswer]);
+
   return (
     <C.Container>
-      <C.Input
-        autoFocus
-        value={userAnswer}
-        onChangeText={setUserAnswer}
-        isAnswerWrong={isAnswerVerified && isAnswerWrong}
-      />
-      <VerificationButton
-        verifyAnswer={handleVerifyAnswer}
-        isAnswerVerified={isAnswerVerified}
-        isAnswerWrong={isAnswerWrong}
-        isAnswered={userAnswer}
-      />
+      {isCurrentQuestion && (
+        <>
+          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <C.Input
+            value={userAnswer}
+            onChangeText={setUserAnswer}
+            isAnswerWrong={isAnswerVerified && isAnswerWrong}
+          />
+          <VerificationButton
+            verifyAnswer={handleVerifyAnswer}
+            isAnswerVerified={isAnswerVerified}
+            isAnswerWrong={isAnswerWrong}
+            isAnswered={userAnswer}
+          />
+        </>
+      )}
     </C.Container>
   );
 }

@@ -52,7 +52,7 @@ export function LessonHeader() {
   }
 
   useEffect(() => {
-    barWidth.value = withTiming(currentWidth, { duration: 400 });
+    barWidth.value = withTiming(currentWidth, { duration: 500 });
   }, [currentWidth]);
 
   useEffect(() => {

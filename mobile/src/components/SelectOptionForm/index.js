@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
-import { VerificationButton } from '../VerificationButton';
 import { reorderItems } from '../../utils/reorderItems';
+import { QuestionStem } from '../Quiz/styles';
 import * as C from './styles';
+const delay = 200;
 
-export function SelectOptionForm({ options, answer }) {
-  const [, dispatch] = useLesson();
+export function SelectOptionForm({ stem, options, answer, index }) {
+  const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
-  const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
-  const delay = 100;
+  const isCurrentQuestion = index === currentQuestion;
+
+  function setIsAnswerVerified(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerVerified', value } });
+  }
+
+  function setIsAnswerWrong(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerWrong', value } });
+  }
 
   function resetAnswer() {
     if (isAnswerVerified && !!selectedOption) {
@@ -37,6 +44,7 @@ export function SelectOptionForm({ options, answer }) {
       dispatch({ type: 'incrementWrongsCount' });
       setIsncremented(true);
     }
+
     if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
@@ -46,35 +54,53 @@ export function SelectOptionForm({ options, answer }) {
 
   useEffect(() => {
     reorderItems(options, setReorderedOptions);
-  }, [options]);
+  }, []);
+
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!selectedOption } });
+    }
+  }, [selectedOption]);
+
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({
+        type: 'setState',
+        payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
+      });
+    }
+  }, [isAnswerVerified, selectedOption]);
 
   return (
     <C.Container>
-      <C.Options>
-        {reorderedOptions.map((option, index) => (
-          <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
-            <C.Option
-              currentOption={option}
-              onPress={() => handleSelectOption(option)}
-              selectedOption={selectedOption}
-              disabled={isAnswerVerified}
-              isAnswerWrong={isAnswerVerified && isAnswerWrong}
-              activeOpacity={0.7}
-            >
-              <C.Label currentOption={option} selectedOption={selectedOption}>
-                {option}
-              </C.Label>
-            </C.Option>
-          </C.OptionContainer>
-        ))}
-      </C.Options>
-      
-      <VerificationButton
-        verifyAnswer={handleVerifyAnswer}
-        isAnswerWrong={isAnswerWrong}
-        isAnswerVerified={isAnswerVerified}
-        isAnswered={!!selectedOption}
-      />
+      {isCurrentQuestion && (
+        <>
+          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <C.Options>
+            {reorderedOptions.map((option, index) => (
+              <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
+                <C.Option
+                  onPress={() => handleSelectOption(option)}
+                  disabled={isAnswerVerified}
+                  isSelected={selectedOption === option}
+                  isAnswerWrong={isAnswerVerified && isAnswerWrong}
+                  isCorrectAnswer={isAnswerVerified && !isAnswerWrong && option === answer}
+                  activeOpacity={0.7}
+                >
+                  <C.Label
+                    currentOption={option}
+                    isSelected={selectedOption === option}
+                    isAnswerWrong={isAnswerVerified && isAnswerWrong}
+                    isCorrectAnswer={isAnswerVerified && !isAnswerWrong && option === answer}
+                  >
+                    {option}
+                  </C.Label>
+                </C.Option>
+              </C.OptionContainer>
+            ))}
+          </C.Options>
+        </>
+      )}
     </C.Container>
   );
 }

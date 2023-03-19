@@ -14,6 +14,10 @@ const initialState = {
   livesCount: 0,
   secondsCount: 0,
   time: '',
+  verifyAnswer: () => {},
+  isAnswerWrong: false,
+  isAnswerVerified: false,
+  isAnswered: false,
 };
 
 const LessonReducer = (state, action) => {
@@ -50,7 +54,7 @@ const LessonReducer = (state, action) => {
     case 'decrementLivesCount':
       return {
         ...state,
-        livesCount: state.livesCount - 1,
+        livesCount: state.livesCount === 0 ? state.livesCount : state.livesCount - 1,
       };
     case 'incrementSecondsCount':
       return {
@@ -61,6 +65,11 @@ const LessonReducer = (state, action) => {
       return {
         ...state,
         time: action.payload,
+      };
+    case 'setState':
+      return {
+        ...state,
+        [action.payload.prop]: action.payload.value,
       };
     case 'resetState':
       return initialState;

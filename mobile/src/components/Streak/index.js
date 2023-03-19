@@ -19,12 +19,15 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
   const today = week_status[todayIndex];
   const yesterday = week_status[todayIndex - 1];
 
-  async function updateWeekStatus(dayIndex, newStatus) {
+  function updateWeekStatus(dayIndex, newStatus) {
+    console.log(newStatus);
     const updatedWeekStatus = week_status.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
+    console.log({ updatedWeekStatus });
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
+
   }
 
   async function updateStreak() {
@@ -35,7 +38,6 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
       setStreakCount(updatedStreak);
       updateLoggedUser('streak', updatedStreak);
     }
-
     updateWeekStatus(todayIndex, 'done');
   }
 
@@ -46,7 +48,6 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
     const createdAtDate = new Date(created_at);
 
     if (!!yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
-      console.log(true);
       setStreakCount(0);
       updateLoggedUser('streak', 0);
       updateWeekStatus(todayIndex);
@@ -62,9 +63,9 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
 
     if (isToUpdateStreak) {
       updateStreak();
+      return
     }
 
-    checkHasUndoneDay();
   }, []);
 
   return (

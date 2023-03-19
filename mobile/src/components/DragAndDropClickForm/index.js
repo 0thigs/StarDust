@@ -7,8 +7,9 @@ import { DropZone } from '../DropZone';
 import { VerificationButton } from '../VerificationButton';
 import { compareSenquences } from '../../utils/compareSenquences';
 import { reorderItems } from '../../utils/reorderItems';
+import { QuestionStem } from '../Quiz/styles';
 
-export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence }) {
+export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSequence }) {
   const [, dispatch] = useLesson();
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
@@ -66,6 +67,7 @@ export function DragAndDropClickForm({ lines, dropItems, correctItemsIdsSequence
 
   return (
     <C.Container>
+      <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
       <C.Lines>
         {lines.map(({ id, texts, indentLevel }) => (
           <C.Line key={id} indentLevel={indentLevel}>

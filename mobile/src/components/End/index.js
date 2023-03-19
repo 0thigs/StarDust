@@ -73,7 +73,6 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   async function updateUserData() {
     const newData = getNewData();
     for (key of Object.keys(newData)) {
-      console.log({key});
       updateLoggedUser(key, newData[key]);
     }
   }

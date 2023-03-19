@@ -13,23 +13,33 @@ import DraggableFlatList, {
   ShadowDecorator,
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
+import { QuestionStem } from '../Quiz/styles';
 
-export function DragAndDropListForm({ items }) {
-  const [, dispatch] = useLesson();
-  const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
+export function DragAndDropListForm({ index, stem, items }) {
+  const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
-  const correctItemsIdsSequence = items.map(item => item.id);
   const ItemScale = useSharedValue(0.5);
+  const correctItemsIdsSequence = items.map(item => item.id);
+  const isCurrentQuestion = index === currentQuestion;
+
+  function setIsAnswerVerified(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerVerified', value } });
+  }
+
+  function setIsAnswerWrong(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerWrong', value } });
+  }
+
+  function isUserAnswerCorrect() {
+    const userItemsIdSequence = reorderedItems.map(item => item.id);
+    return compareSenquences(userItemsIdSequence, correctItemsIdsSequence);
+  }
 
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const userItemsIdSequence = reorderedItems.map(item => item.id);
-    const areTheTwoSequencesEqual = compareSenquences(userItemsIdSequence, correctItemsIdsSequence);
-
-    if (areTheTwoSequencesEqual) {
+    if (isUserAnswerCorrect()) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) {
@@ -54,50 +64,81 @@ export function DragAndDropListForm({ items }) {
 
   useEffect(() => {
     reorderItems(items, setReorderedItems);
-  }, [items]);
-
-  useEffect(() => {
     ItemScale.value = withTiming(1, { duration: 500, easing: Easing.bounce });
   }, []);
+
+  useEffect(() => {
+    if (index === currentQuestion) {
+      dispatch({
+        type: 'setState',
+        payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
+      });
+
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: true } });
+    }
+  }, [isAnswerVerified, reorderedItems]);
 
   function renderItem({ item, drag }) {
     const { isActive } = useOnCellActiveAnimation();
     return (
       <ShadowDecorator>
         <C.ItemContainer onLongPress={drag} disabled={isAnswerVerified}>
-          <C.Item
-            style={ItemAnimatedStyle}
-            isActive={isActive}
-            isAnswerWrong={isAnswerWrong}
-            isAnswerVerified={isAnswerVerified}
-          >
-            <C.Decorator>:</C.Decorator>
-            <C.Label>{item.label}</C.Label>
-            <C.Decorator>:</C.Decorator>
+          <C.Item style={ItemAnimatedStyle} isActive={isActive}>
+            <C.Decorator
+              isAnswerWrong={isAnswerVerified && isAnswerWrong}
+              isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
+            >
+              :
+            </C.Decorator>
+            <C.Label
+              isAnswerWrong={isAnswerVerified && isAnswerWrong}
+              isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
+            >
+              {item.label}
+            </C.Label>
+            <C.Decorator
+              isAnswerWrong={isAnswerVerified && isAnswerWrong}
+              isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
+            >
+              :
+            </C.Decorator>
           </C.Item>
         </C.ItemContainer>
       </ShadowDecorator>
     );
   }
 
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!items } });
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({
+        type: 'setState',
+        payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
+      });
+    }
+  }, [isAnswerVerified, items]);
+
   return (
     <C.Container>
-      <GestureHandlerRootView>
-        <DraggableFlatList
-          data={reorderedItems}
-          keyExtractor={item => item.id}
-          onDragEnd={({ data }) => setReorderedItems(data)}
-          renderItem={renderItem}
-          containerStyle={{ alignItems: 'center' }}
-        />
-      </GestureHandlerRootView>
-
-      <VerificationButton
-        verifyAnswer={handleVerifyAnswer}
-        isAnswerWrong={isAnswerWrong}
-        isAnswerVerified={isAnswerVerified}
-        isAnswered={!!items}
-      />
+      {isCurrentQuestion && (
+        <>
+          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <GestureHandlerRootView>
+            <DraggableFlatList
+              data={reorderedItems}
+              keyExtractor={item => item.id}
+              onDragEnd={({ data }) => setReorderedItems(data)}
+              renderItem={renderItem}
+              containerStyle={{ alignItems: 'center' }}
+            />
+          </GestureHandlerRootView>
+        </>
+      )}
     </C.Container>
   );
 }

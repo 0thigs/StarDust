@@ -15,7 +15,7 @@ export const QuestionStem = styled(Animatable.Text)`
   font-size: 16px;
   max-width: ${lessonContainerWidth};
   margin: 8px 0 24px;
-  text-align: center;
+  align-self: center;
 `;
 
 export const QuestionCode = styled(Animatable.Text)`

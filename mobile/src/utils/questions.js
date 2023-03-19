@@ -27,7 +27,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de vestir um traje espacial (a ordem lógica é sempre de cima para baixo)',
+    stem: 'Ordene a sequência correta de se vestir um traje espacial (Pressione e segure item)',
     items: [
       {
         id: 1,
@@ -50,7 +50,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de ligar um foguete (a ordem lógica é sempre de cima para baixo)',
+    stem: 'Ordene a sequência correta de se ligar um foguete (Pressione e segure item)',
     items: [
       {
         id: 1,
@@ -322,47 +322,47 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     ],
     correctItemsIdsSequence: [3],
   },
-  {
-    starId: 6,
-    type: 'drag-and-drop-click',
-    stem: 'Complete o código para que combustivel total seja igual 75',
-    lines: [
-      {
-        id: 1,
-        texts: ['var combustivelAtual = 25'],
-        indentLevel: 0,
-      },
-      {
-        id: 1,
-        texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
-        indentLevel: 0,
-      },
-      {
-        id: 2,
-        texts: ['escreva(`o foguete tem ${combustivelTotal} de combustível no total'],
-        indentLevel: 0,
-      },
-    ],
-    dropItems: [
-      {
-        id: 1,
-        label: '- 50',
-      },
-      {
-        id: 2,
-        label: '+ "50"',
-      },
-      {
-        id: 3,
-        label: '+ 50',
-      },
-      {
-        id: 4,
-        label: '75',
-      },
-    ],
-    correctItemsIdsSequence: [3],
-  },
+//   {
+//     starId: 6,
+//     type: 'drag-and-drop-click',
+//     stem: 'Complete o código para que combustivel total seja igual 75',
+//     lines: [
+//       {
+//         id: 1,
+//         texts: ['var combustivelAtual = 25'],
+//         indentLevel: 0,
+//       },
+//       {
+//         id: 1,
+//         texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
+//         indentLevel: 0,
+//       },
+//       {
+//         id: 2,
+//         texts: ['escreva(`o foguete tem ${combustivelTotal} de combustível no total'],
+//         indentLevel: 0,
+//       },
+//     ],
+//     dropItems: [
+//       {
+//         id: 1,
+//         label: '- 50',
+//       },
+//       {
+//         id: 2,
+//         label: '+ "50"',
+//       },
+//       {
+//         id: 3,
+//         label: '+ 50',
+//       },
+//       {
+//         id: 4,
+//         label: '75',
+//       },
+//     ],
+//     correctItemsIdsSequence: [3],
+//   },
   {
     starId: 6,
     type: 'checkbox',
@@ -377,23 +377,23 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     options: ['"10"', '10', '2.5', '-10'],
     correctOptions: ['10', '-10'],
   },
-  {
-    starId: 6,
-    type: 'selection',
-    stem: 'Qual será o tipo do resultado da expressão 5 ÷ 2',
-    options: ['inteiro', '2.5', 'real', 'texto'],
-    answer: 'real',
-  },
-  {
-    starId: 6,
-    type: 'selection',
-    stem: 'Qual será o valor de distancia do seguinte código',
-    code: `var distancia = 2500 + "1000"
-var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
-escreva(mensagem)`,
-    options: ['3500', '25001000', '25002000', '35000000'],
-    answer: '25001000',
-  },
+//   {
+//     starId: 6,
+//     type: 'selection',
+//     stem: 'Qual será o tipo do resultado da expressão 5 ÷ 2',
+//     options: ['inteiro', '2.5', 'real', 'texto'],
+//     answer: 'real',
+//   },
+//   {
+//     starId: 6,
+//     type: 'selection',
+//     stem: 'Qual será o valor de distancia do seguinte código',
+//     code: `var distancia = 2500 + "1000"
+// var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
+// escreva(mensagem)`,
+//     options: ['3500', '25001000', '25002000', '35000000'],
+//     answer: '25001000',
+//   },
   {
     starId: 7,
     type: 'open',

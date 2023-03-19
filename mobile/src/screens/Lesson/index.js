@@ -26,8 +26,8 @@ export function Lesson() {
         <TransitionScreenAnimation />
       ) : (
         <>
-          {state.currentStage === 'quiz' && <Quiz coins={loggedUser.coins} />}
           {state.currentStage === 'theory' && <Theory starId={loggedUser.starId} />}
+          {state.currentStage === 'quiz' && <Quiz coins={loggedUser.coins} />}
           {state.currentStage === 'end' && <End starId={loggedUser.starId} />}
         </>
       )}
