@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react';
-import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
 import Animated, { RotateInDownRight, RotateOutDownRight } from 'react-native-reanimated';
 
+import { reorderItems } from '../../utils/reorderItems';
+import { QuestionStem } from '../Quiz/styles';
+import theme from '../../global/styles/theme';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
-import theme from '../../global/styles/theme';
-import { reorderItems } from '../../utils/reorderItems';
+const delay = 200;
 
-export function CheckboxForm({ options, correctOptions }) {
-  const [, dispatch] = useLesson();
+export function CheckboxForm({ stem, options, correctOptions, index }) {
+  const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
-  const [isAnswerWrong, setIsAnswerWrong] = useState(false);
-  const [isAnswerVerified, setIsAnswerVerified] = useState(false);
   const [isIncremented, setIsncremented] = useState(false);
-  const delay = 100;
+  const isCurrentQuestion = index === currentQuestion;
+
+  function setIsAnswerVerified(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerVerified', value } });
+  }
+
+  function setIsAnswerWrong(value) {
+    dispatch({ type: 'setState', payload: { prop: 'isAnswerWrong', value } });
+  }
 
   function resetAnswer() {
     if (isAnswerVerified && !!userOptions) {
@@ -24,12 +31,15 @@ export function CheckboxForm({ options, correctOptions }) {
     }
   }
 
+  function isUserAnswerCorrect() {
+    return userOptions.every(userOption => correctOptions.includes(userOption));
+  }
+
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
-    
-    const isAnswerCorrect = userOptions.every(userOption => correctOptions.includes(userOption));
-    if (isAnswerCorrect) {
+
+    if (isUserAnswerCorrect()) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) dispatch({ type: 'changeQuestion' });
@@ -56,39 +66,63 @@ export function CheckboxForm({ options, correctOptions }) {
     reorderItems(options, setReorderedOptions);
   }, [options]);
 
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!userOptions } });
+    }
+  }, [userOptions]);
+
+  useEffect(() => {
+    if (isCurrentQuestion) {
+      dispatch({
+        type: 'setState',
+        payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
+      });
+    }
+  }, [isAnswerVerified, userOptions]);
+
   return (
     <C.Container>
+      <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
       <C.Options>
         {reorderedOptions.map((option, index) => (
           <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
             <C.Option
               onPress={() => handleCheckOption(option)}
-              checkedOption={option}
-              userOptions={userOptions}
               disabled={isAnswerVerified}
               isAnswerWrong={isAnswerVerified && isAnswerWrong}
+              isAnswerCorrect={isAnswerVerified && isUserAnswerCorrect()}
+              isSelected={userOptions.includes(option)}
               activeOpacity={0.7}
             >
-              <C.Box checkedOption={option} userOptions={userOptions}>
+              <C.Box
+                isAnswerWrong={isAnswerVerified && isAnswerWrong}
+                isAnswerCorrect={isAnswerVerified && isUserAnswerCorrect()}
+                isSelected={userOptions.includes(option)}
+              >
                 {userOptions.includes(option) && (
                   <Animated.View entering={RotateInDownRight} exiting={RotateOutDownRight}>
                     <Icon.Check color={theme.colors.blue_300} width={18} />
                   </Animated.View>
                 )}
               </C.Box>
-              <C.Label checkedOption={option} userOptions={userOptions}>
+              <C.Label
+                isAnswerWrong={isAnswerVerified && isAnswerWrong}
+                isAnswerCorrect={isAnswerVerified && isUserAnswerCorrect()}
+                isSelected={userOptions.includes(option)}
+              >
                 {option}
               </C.Label>
             </C.Option>
           </C.OptionContainer>
         ))}
       </C.Options>
-      <VerificationButton
+      {/* <VerificationButton
         verifyAnswer={handleVerifyAnswer}
         isAnswerWrong={isAnswerWrong}
         isAnswerVerified={isAnswerVerified}
         isAnswered={!!userOptions}
-      />
+      /> */}
     </C.Container>
   );
 }

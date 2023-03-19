@@ -15,12 +15,16 @@ export const OptionContainer = styled(Animatable.View)`
 `;
 
 export const Option = styled.TouchableOpacity`
-  background-color: ${props => props.theme.colors.purple_700};
+  background-color: ${({ theme }) => theme.colors.purple_700};
   border-width: 1px;
-  border-color: ${props =>
-    props.userOptions.includes(props.checkedOption)
-      ? props.theme.colors.blue_300
-      : props.theme.colors.white};
+  border-color: ${({ theme, isSelected, isAnswerWrong, isAnswerCorrect }) =>
+    isAnswerWrong && isSelected
+      ? theme.colors.red_300
+      : isAnswerCorrect && isSelected
+      ? theme.colors.green_500
+      : isSelected
+      ? theme.colors.blue_300
+      : theme.colors.white};
   min-height: 48px;
   width: 350px;
 
@@ -34,10 +38,14 @@ export const Box = styled.View`
   width: 20px;
   height: 20px;
   border-width: 1px;
-  border-color: ${props =>
-    props.userOptions.includes(props.checkedOption)
-      ? props.theme.colors.blue_300
-      : props.theme.colors.white};
+  border-color: ${({ theme, isSelected, isAnswerWrong, isAnswerCorrect }) =>
+    isAnswerWrong && isSelected
+      ? theme.colors.red_300
+      : isAnswerCorrect && isSelected
+      ? theme.colors.green_500
+      : isSelected
+      ? theme.colors.blue_300
+      : theme.colors.white};
   margin-left: 8px;
   position: absolute;
   top: 50%;
@@ -48,10 +56,14 @@ export const Box = styled.View`
 `;
 
 export const Label = styled.Text`
-  color: ${props =>
-    props.userOptions.includes(props.checkedOption)
-      ? props.theme.colors.blue_300
-      : props.theme.colors.white};
+  color: ${({ theme, isSelected, isAnswerWrong, isAnswerCorrect }) =>
+    isAnswerWrong && isSelected
+      ? theme.colors.red_300
+      : isAnswerCorrect && isSelected
+      ? theme.colors.green_500
+      : isSelected
+      ? theme.colors.blue_300
+      : theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
   margin: auto;
 `;

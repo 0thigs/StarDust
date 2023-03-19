@@ -322,61 +322,61 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     ],
     correctItemsIdsSequence: [3],
   },
+  {
+    starId: 6,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que combustivel total seja igual 75',
+    lines: [
+      {
+        id: 1,
+        texts: ['var combustivelAtual = 25'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(`o foguete tem  ${combustivelTotal} de combustível no total'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '- 50',
+      },
+      {
+        id: 2,
+        label: '+ "50"',
+      },
+      {
+        id: 3,
+        label: '+ 50',
+      },
+      {
+        id: 4,
+        label: '75',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
 //   {
 //     starId: 6,
-//     type: 'drag-and-drop-click',
-//     stem: 'Complete o código para que combustivel total seja igual 75',
-//     lines: [
-//       {
-//         id: 1,
-//         texts: ['var combustivelAtual = 25'],
-//         indentLevel: 0,
-//       },
-//       {
-//         id: 1,
-//         texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
-//         indentLevel: 0,
-//       },
-//       {
-//         id: 2,
-//         texts: ['escreva(`o foguete tem ${combustivelTotal} de combustível no total'],
-//         indentLevel: 0,
-//       },
-//     ],
-//     dropItems: [
-//       {
-//         id: 1,
-//         label: '- 50',
-//       },
-//       {
-//         id: 2,
-//         label: '+ "50"',
-//       },
-//       {
-//         id: 3,
-//         label: '+ 50',
-//       },
-//       {
-//         id: 4,
-//         label: '75',
-//       },
-//     ],
-//     correctItemsIdsSequence: [3],
+//     type: 'checkbox',
+//     stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
+//     options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
+//     correctOptions: ['Inteiro', 'Real'],
 //   },
-  {
-    starId: 6,
-    type: 'checkbox',
-    stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
-    options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
-    correctOptions: ['Inteiro', 'Real'],
-  },
-  {
-    starId: 6,
-    type: 'checkbox',
-    stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
-    options: ['"10"', '10', '2.5', '-10'],
-    correctOptions: ['10', '-10'],
-  },
+//   {
+//     starId: 6,
+//     type: 'checkbox',
+//     stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
+//     options: ['"10"', '10', '2.5', '-10'],
+//     correctOptions: ['10', '-10'],
+//   },
 //   {
 //     starId: 6,
 //     type: 'selection',
