@@ -24,7 +24,8 @@ export const Content = styled(Animated.View)`
   align-self: center;
   background-color: ${({ theme }) => theme.colors.green_900};
   width: 320px;
-  padding: 12px;
+  height: 220px;
+  padding: 24px;
   border-radius: 8px;
   justify-content: space-between;
 `;
@@ -38,6 +39,7 @@ export const Range = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  margin-bottom: -4px;
 `;
 
 export const Controls = styled.View`
@@ -59,6 +61,7 @@ export const Button = styled.TouchableOpacity`
 
 export const Title = styled.Text`
   font-size: 24px;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.green_700};
 `;
 
@@ -85,7 +88,9 @@ export const Knob = styled.View`
 `;
 
 export const Label = styled.Text`
-  font-size: 12px;
-  margin-bottom: 4px;
+  top: -24px;
+  position: absolute;
+  font-size: ${({ fontSize }) => fontSize}px;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.white};
 `;

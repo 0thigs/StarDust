@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { Check, MoreVertical } from 'react-native-feather';
 import { ZoomIn, ZoomOut } from 'react-native-reanimated';

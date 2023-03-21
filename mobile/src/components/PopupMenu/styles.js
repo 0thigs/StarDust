@@ -24,7 +24,7 @@ export const Menu = styled(Animated.View)`
 `;
 
 export const Button = styled.TouchableOpacity`
-  padding: 12px 0;
+  padding: 16px 24px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ isLastButton, theme }) =>
     isLastButton ? 'transparent' : theme.colors.green_500};
