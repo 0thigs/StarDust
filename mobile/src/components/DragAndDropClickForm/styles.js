@@ -34,7 +34,7 @@ export const Text = styled.Text`
   font-family: ${({ theme }) => theme.fonts.code};
 `;
 
-export const DropZone = styled.View`
+export const DropZone = styled(Animated.View)`
   width: ${({ width }) => width}px;
   border-width: 1px;
   border-bottom-color: ${({ theme, isAnswerWrong }) =>

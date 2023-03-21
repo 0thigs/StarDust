@@ -1,20 +1,24 @@
 import CodeEditor, { CodeEditorSyntaxStyles } from '@rivascva/react-native-code-editor';
+import { useEditor } from '../../hooks/useEditor';
 
 export function Editor({ value, isReadOnly = true, onChange = null }) {
+  const { fontSize, isDarkMode } = useEditor();
+  const theme = isDarkMode ? 'stackoverflowDark' : 'stackoverflowLight';
+  
   return (
     <CodeEditor
       style={{
-        fontSize: 12,
+        fontSize: fontSize,
         inputLineHeight: 26,
         highlighterLineHeight: 26,
       }}
-      language={'apache'}
+      language={theme}
       showLineNumbers
       autoFocus={false}
       onChange={onChange}
       initialValue={value}
       readOnly={isReadOnly}
-      syntaxStyle={CodeEditorSyntaxStyles.a11yDark}
+      syntaxStyle={CodeEditorSyntaxStyles[theme]}
     />
   );
 }

@@ -13,6 +13,7 @@ import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
+import { EditorProvider } from './src/contexts/EditorContext';
 import './src/libs/dayjs';
 
 export default function App() {
@@ -28,14 +29,14 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
         <LessonProvider>
-            <ScrollProvider>
+          <ScrollProvider>
+            <EditorProvider>
               <StatusBar style={'light'} backgroundColor={'transparent'} />
               {fontsLoaded && <Routes />}
-            </ScrollProvider>
+            </EditorProvider>
+          </ScrollProvider>
         </LessonProvider>
       </AuthContextProvider>
     </ThemeProvider>
   );
 }
-
-

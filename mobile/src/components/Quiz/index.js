@@ -107,7 +107,6 @@ export function Quiz() {
   }, [state.livesCount]);
 
   useEffect(() => {
-    console.log("render");
     if (!forms?.length) return;
 
     sliderRef?.current.scrollToIndex({

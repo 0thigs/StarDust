@@ -6,11 +6,29 @@ import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import { Button } from '../Button';
+import { useEditor } from '../../hooks/useEditor';
+import { PopupMenu } from '../PopupMenu';
 const iconSize = 25;
 
 export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setFontSize, isDarkMode, setIsDarkMode } = useEditor();
   const navigation = useNavigation();
+
+  const popupMenuButtons = [
+    {
+      title: 'Dark Mode',
+      isToggle: true,
+      value: isDarkMode,
+      action: () => setIsDarkMode(!isDarkMode),
+    },
+    {
+      title: 'Font Size',
+      isToggle: false,
+      value: null,
+      action: () => alert('Abrir input range'),
+    },
+  ];
+
   const CurrentIndicatorPositionX = useSharedValue(0);
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
@@ -44,9 +62,7 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
           <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
         <C.Title align={'right'}>{title}</C.Title>
-        <C.HeaderButton onPress={handleMoreButtonPress}>
-          <Icon.MoreVertical width={iconSize} height={iconSize} color={theme.colors.green_500} />
-        </C.HeaderButton>
+        <PopupMenu buttons={popupMenuButtons} />
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>

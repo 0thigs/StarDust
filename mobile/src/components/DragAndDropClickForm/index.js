@@ -4,7 +4,6 @@ import { useLesson } from '../../hooks/useLesson';
 
 import { DropItem } from '../DropItem';
 import { DropZone } from '../DropZone';
-import { VerificationButton } from '../VerificationButton';
 import { compareSenquences } from '../../utils/compareSenquences';
 import { reorderItems } from '../../utils/reorderItems';
 import { QuestionStem } from '../Quiz/styles';
@@ -12,14 +11,18 @@ import { QuestionStem } from '../Quiz/styles';
 export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSequence, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
-  const [_lines, setLines] = useState([]);
+  const [linesWidth, setLinesWidth] = useState([]);
   const [zones, setZones] = useState([]);
-  const totalDropZones = lines.reduce(
-    (total, line) => (total += line.texts.includes('dropZone') ? 1 : 0),
-    0
-  );
+
+  function getTotalDropZones(total, text) {
+    return (total += text === 'dropZone' ? 1 : 0);
+  }
+
+  const totalDropZones = lines.reduce((total, line) => {
+    return total + line.texts.reduce(getTotalDropZones, 0);
+  }, 0);
+
   const isCurrentQuestion = index === currentQuestion;
 
   function setIsAnswerVerified(value) {
@@ -57,8 +60,19 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
     if (isAnswerVerified) dispatch({ type: 'decrementLivesCount' });
   }
 
+  function registerLineWidth({ target }, id) {
+    target.measure((x, y, width) => {
+      if (linesWidth.length < lines.length) {
+        setLinesWidth(linesWidth => [...linesWidth, { id, width }]);
+        return
+      }
+
+      setLinesWidth(linesWidth => linesWidth.map(line => (line.id === id ? { id, width } : line)));
+    });
+  }
+
   useEffect(() => {
-    if (zones.length > 0 && isCurrentQuestion) {
+    if (zones.length && isCurrentQuestion) {
       const areAllZonesFilled = zones.every(zone => zone.itemId !== null);
       dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: areAllZonesFilled } });
     }
@@ -67,10 +81,6 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   useEffect(() => {
     reorderItems(dropItems, setReorderedItems);
   }, [dropItems]);
-
-  useEffect(() => {
-    setLines(lines);
-  }, [lines]);
 
   useEffect(() => {
     if (isCurrentQuestion) {
@@ -85,21 +95,26 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
     <C.Container>
       {isCurrentQuestion && (
         <>
-          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <QuestionStem>{stem}</QuestionStem>
           <C.Lines>
             {lines.map(({ id, texts, indentLevel }) => (
-              <C.Line key={id} indentLevel={indentLevel}>
+              <C.Line
+                key={id}
+                indentLevel={indentLevel}
+                onLayout={event => registerLineWidth(event, id)}
+              >
                 {texts.map((text, index) => (
                   <C.Content key={index}>
                     <C.Text>{text !== 'dropZone' && text}</C.Text>
                     {text === 'dropZone' && (
                       <DropZone
-                        key={id}
-                        id={id}
+                        key={index}
+                        id={index}
                         zones={zones}
                         setZones={setZones}
                         totalDropZones={totalDropZones}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
+                        linesWidth={linesWidth}
                       />
                     )}
                   </C.Content>
@@ -116,6 +131,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 label={label}
                 zones={zones}
                 setZones={setZones}
+                linesWidth={linesWidth}
                 totalDropZones={totalDropZones}
                 reorderedItems={reorderedItems}
                 isAnswerVerified={isAnswerVerified}

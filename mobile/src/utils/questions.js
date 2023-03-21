@@ -219,37 +219,37 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     stem: 'O nome do comando para declarar variáveis é',
     answer: 'var',
   },
-  //   {
-  //     starId: 5,
-  //     type: 'open',
-  //     stem: 'O nome que se dá para o ato de juntar textos em um programa é',
-  //     answer: 'concatenação',
-  //   },
-  //   {
-  //     starId: 5,
-  //     type: 'checkbox',
-  //     stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
-  //     options: ['letra', '"não é um texto"', '"100"', '2.5'],
-  //     correctOptions: ['"não é um texto"', '"100"'],
-  //   },
-  //   {
-  //     starId: 5,
-  //     type: 'selection',
-  //     stem: 'Qual será a saída do seguinte código',
-  //     code: `
-  //     var cor = "vermelho"
-  //     var nome = "Datahon"
-  //     var nome = "Planeta " + nome
+  {
+    starId: 5,
+    type: 'open',
+    stem: 'O nome que se dá para o ato de juntar textos em um programa é',
+    answer: 'concatenação',
+  },
+  {
+    starId: 5,
+    type: 'checkbox',
+    stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
+    options: ['letra', '"não é um texto"', '"100"', '2.5'],
+    correctOptions: ['"não é um texto"', '"100"'],
+  },
+  {
+    starId: 5,
+    type: 'selection',
+    stem: 'Qual será a saída do seguinte código',
+    code: `
+      var cor = "vermelho"
+      var nome = "Datahon"
+      var nome = "Planeta " + nome
 
-  //     escreva(nome, " tem a cor ", cor)`,
-  //     options: [
-  //       'Planeta Datahon tem a cor vermelha',
-  //       'Planeta Datahon tem a cor azul',
-  //       'Datahon tem a cor vermelha',
-  //       'Planeta tem a cor vermelha',
-  //     ],
-  //     answer: 'Planeta Datahon tem a cor vermelha',
-  //   },
+      escreva(nome, " tem a cor ", cor)`,
+    options: [
+      'Planeta Datahon tem a cor vermelha',
+      'Planeta Datahon tem a cor azul',
+      'Datahon tem a cor vermelha',
+      'Planeta tem a cor vermelha',
+    ],
+    answer: 'Planeta Datahon tem a cor vermelha',
+  },
   {
     starId: 5,
     type: 'drag-and-drop-click',
@@ -334,7 +334,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
       },
       {
         id: 2,
-        texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
+        texts: ['var combustivelTotal', 'dropZone', 'combustivelAtual ', 'dropZone'],
         indentLevel: 0,
       },
       {
@@ -363,37 +363,37 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     ],
     correctItemsIdsSequence: [3],
   },
-//   {
-//     starId: 6,
-//     type: 'checkbox',
-//     stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
-//     options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
-//     correctOptions: ['Inteiro', 'Real'],
-//   },
-//   {
-//     starId: 6,
-//     type: 'checkbox',
-//     stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
-//     options: ['"10"', '10', '2.5', '-10'],
-//     correctOptions: ['10', '-10'],
-//   },
-//   {
-//     starId: 6,
-//     type: 'selection',
-//     stem: 'Qual será o tipo do resultado de 5 ÷ 2',
-//     options: ['inteiro', '2.5', 'real', 'texto'],
-//     answer: 'real',
-//   },
-//   {
-//     starId: 6,
-//     type: 'selection',
-//     stem: 'Qual será o valor de distancia do seguinte código',
-//     code: `var distancia = 2500 + "1000"
-// var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
-// escreva(mensagem)`,
-//     options: ['3500', '25001000', '25002000', '35000000'],
-//     answer: '25001000',
-//   },
+  {
+    starId: 6,
+    type: 'checkbox',
+    stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
+    options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
+    correctOptions: ['Inteiro', 'Real'],
+  },
+  {
+    starId: 6,
+    type: 'checkbox',
+    stem: 'Quais dos valores abaixo pode ser um tipo inteiro?',
+    options: ['"10"', '10', '2.5', '-10'],
+    correctOptions: ['10', '-10'],
+  },
+  {
+    starId: 6,
+    type: 'selection',
+    stem: 'Qual será o tipo do resultado de 5 ÷ 2',
+    options: ['inteiro', '2.5', 'real', 'texto'],
+    answer: 'real',
+  },
+  {
+    starId: 6,
+    type: 'selection',
+    stem: 'Qual será o valor de distancia do seguinte código',
+    code: `var distancia = 2500 + "1000"
+var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
+escreva(mensagem)`,
+    options: ['3500', '25001000', '25002000', '35000000'],
+    answer: '25001000',
+  },
   {
     starId: 7,
     type: 'open',
