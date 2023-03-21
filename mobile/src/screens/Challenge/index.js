@@ -79,7 +79,6 @@ export function Challenge() {
     }
 
     input.forEach(input => (code = code.replace(regex, input)));
-    console.log(code);
     return code;
   }
 
@@ -90,7 +89,6 @@ export function Challenge() {
     }
 
     try {
-      console.log({ index });
       const { erros, resultado } = await execute(code, addUserOutput);
 
       if (erros.length > 0) {

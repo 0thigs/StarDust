@@ -5,13 +5,14 @@ import { Modal } from '../Modal';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
-import { Button } from '../Button';
 import { useEditor } from '../../hooks/useEditor';
 import { PopupMenu } from '../PopupMenu';
+import { RangeInput } from '../RangeInput';
 const iconSize = 25;
 
 export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
-  const { setFontSize, isDarkMode, setIsDarkMode } = useEditor();
+  const { isDarkMode, setIsDarkMode } = useEditor();
+  const [isRangeInputVisible, setIsRangeInputVisible] = useState(true);
   const navigation = useNavigation();
 
   const popupMenuButtons = [
@@ -25,15 +26,15 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
       title: 'Font Size',
       isToggle: false,
       value: null,
-      action: () => alert('Abrir input range'),
+      action: () => setIsRangeInputVisible(true),
     },
   ];
 
-  const CurrentIndicatorPositionX = useSharedValue(0);
+  const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 250 }) }],
+      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 350 }) }],
     };
   });
 
@@ -43,15 +44,12 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
     });
   }
 
-  function handleMoreButtonPress() {
-    setIsModalOpen(true);
-  }
-
   function handleNavButtonPress(index) {
     sliderRef.current.scrollToIndex({ index });
   }
 
   useEffect(() => {
+    console.log('render');
     CurrentIndicatorPositionX.value = indicatorPositionX / 3;
   }, [indicatorPositionX]);
 
@@ -77,30 +75,7 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
 
-      {/* <Modal
-        isOpen={isModalOpen}
-        type={'generic'}
-        title={'Tamanho da fonte'}
-        body={
-          <>
-            <IncreaseFontSizeButton>
-              <A>A</A>
-            </IncreaseFontSizeButton>
-
-            <DecreaseFontSizeButton>
-              <A>A</A>
-            </DecreaseFontSizeButton>
-          </>
-        }
-        footer={
-          <Button
-            title={'OK'}
-            onPress={() => setIsModalOpen(false)}
-            color={theme.colors.black}
-            background={theme.colors.green_500}
-          />
-        }
-      /> */}
+      <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
     </C.Container>
   );
 }

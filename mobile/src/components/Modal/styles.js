@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 
 export const Container = styled.Modal``;
 
-export const Fade = styled.View`
+export const Fade = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;

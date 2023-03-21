@@ -7,11 +7,7 @@ import * as C from './styles';
 
 export function PopupMenu({ buttons }) {
   const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    console.log(isVisible);
-  }, [isVisible]);
-
+  
   return (
     <>
       <C.Trigger>
