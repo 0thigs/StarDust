@@ -71,7 +71,7 @@ export function LessonHeader() {
         </C.Lives>
       </C.Main>
       <C.ProgressBar>
-        <C.Bar style={barAnimatedStyle}></C.Bar>
+        <C.Bar style={barAnimatedStyle} />
         {rocket && (
           <SvgUri
             uri={getImage('rockets', rocket.image)}

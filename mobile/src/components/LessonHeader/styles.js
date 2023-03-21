@@ -47,8 +47,3 @@ export const Bar = styled(Animated.View)`
   align-items: flex-end;
   background-color: ${props => props.theme.colors.green_500};
 `;
-
-export const Rocket = styled.Image`
-  height: 100%;
-  margin-left: -18px;
-`;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { Modal } from '../Modal';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import { useEditor } from '../../hooks/useEditor';
 import { PopupMenu } from '../PopupMenu';
 import { RangeInput } from '../RangeInput';
+import Modal from "react-native-modal";
 const iconSize = 25;
 
 export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
