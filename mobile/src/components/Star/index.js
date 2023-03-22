@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
+import { useRocket } from '../../hooks/useRocket';
 import * as C from './styles';
 
 import LockedStar from '../../assets/StarAssets/locked-star.svg';
@@ -9,7 +10,6 @@ import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
 import UnlockedStarDust from '../../assets/StarAssets/unlocked-stardust.svg';
 import LockedStarDust from '../../assets/StarAssets/locked-stardust.svg';
 import StarSound from '../../assets/sounds/star-sound.wav';
-import { rockets } from '../../utils/rockets';
 
 import LottieView from 'lottie-react-native';
 import {
@@ -21,7 +21,9 @@ import {
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
+import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
+import { getImage } from '../../utils/getImage';
 
 export const starHeight = 100;
 
@@ -29,11 +31,12 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
-  const isLastStarUnlocked = lastUnlockedStarId === id;
+  const isLastUnlockedStar = lastUnlockedStarId === id;
+
+  const { rocket } = useRocket(loggedUser.rocket_id, isLastUnlockedStar);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const delay = 300;
-  const RocketImage = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
   const navigation = useNavigation();
 
@@ -44,7 +47,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     };
   });
 
-  function HandleStarClick() {
+  function handleStarPress() {
     starAnimation.current.play(10, 50);
     starSound.current.play();
 
@@ -60,15 +63,12 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const RocketTranslateY = useSharedValue(-1000);
   const RocketAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { rotate: `${RocketRotate.value}deg` },
-        { scale: RocketScale.value },
-      ],
+      transform: [{ rotate: `${RocketRotate.value}deg` }, { scale: RocketScale.value }],
     };
   });
 
   useEffect(() => {
-    StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
+    StarScale.value = withRepeat(withSpring(1.15), isLastUnlockedStar ? -1 : 1, true);
 
     const timer = setTimeout(() => {
       RocketRotate.value = withTiming(540, { duration: 800 });
@@ -84,7 +84,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     <C.Container
       animation={'bounceIn'}
       onLayout={event => {
-        if (isLastStarUnlocked) {
+        if (isLastUnlockedStar) {
           event.target.measure((x, y, width, height, pageX, pageY) => {
             setLastUnlockedStarYPosition(pageY);
           });
@@ -92,7 +92,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
       }}
     >
       <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
-      <C.StarButton onPress={HandleStarClick} disabled={isUnlocked}>
+      <C.StarButton onPress={handleStarPress} disabled={isUnlocked}>
         <C.StarContainer style={!isUnlocked && StarAnimatedStyle}>
           {isUnlocked ? (
             <LockedStar width={100} height={85} />
@@ -113,9 +113,9 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
           <C.StarSign isUnlocked={isUnlocked}>
             <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>
           </C.StarSign>
-          {isLastStarUnlocked && (
+          {isLastUnlockedStar && rocket && (
             <C.Rocket style={RocketAnimatedStyle}>
-              <RocketImage width={75} height={75} />
+              <SvgUri uri={getImage('rockets', rocket.image)} width={75} height={75} />
             </C.Rocket>
           )}
         </>

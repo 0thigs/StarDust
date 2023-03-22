@@ -13,14 +13,14 @@ export function UsersList({ users }) {
     <FlatList
       data={users}
       keyExtractor={user => user.id}
-      renderItem={({ item: { id, name, avatar, xp, position } }) => {
+      renderItem={({ item: { id, name, avatar_id, xp, position } }) => {
         return (
           <>
             <User
               position={position}
               id={id}
               name={name}
-              avatar={avatar}
+              avatar_id={avatar_id}
               xp={xp}
               isLoggedUser={id === loggedUser.id}
             />

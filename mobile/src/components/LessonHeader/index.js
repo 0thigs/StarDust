@@ -17,14 +17,14 @@ import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
+import { useRocket } from '../../hooks/useRocket';
 
 export function LessonHeader() {
-  const { loggedUser, updateLoggedUser } = useAuth();
+  const { loggedUser } = useAuth();
   const [state, dispatch] = useLesson();
-  const [rocket, setRocket] = useState(null);
+  const { rocket } = useRocket(loggedUser.rocket_id);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigation = useNavigation();
-  //   const Rocket = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
 
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
@@ -34,11 +34,6 @@ export function LessonHeader() {
       width: `${barWidth.value}%`,
     };
   });
-
-  async function getRocket() {
-    const rocket = await api.getRocket(loggedUser.selected_rocket_id);
-    setRocket(rocket);
-  }
 
   async function handleCloseButton() {
     if (await Speech.isSpeakingAsync()) {
@@ -54,10 +49,6 @@ export function LessonHeader() {
   useEffect(() => {
     barWidth.value = withTiming(currentWidth, { duration: 500 });
   }, [currentWidth]);
-
-  useEffect(() => {
-    getRocket();
-  }, []);
 
   return (
     <C.Container>

@@ -17,7 +17,7 @@ const fakeLoggedUser = {
   unlocked_achievements_ids: [],
   unlocked_stars_ids: [1],
   acquired_rockets_ids: [1],
-  selected_rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
+  rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
   streak: 0,
   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],

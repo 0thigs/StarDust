@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import * as C from './styles';
-import * as Icon from 'react-native-feather';
-import theme from '../../global/styles/theme';
 import { useEditor } from '../../hooks/useEditor';
 import { PopupMenu } from '../PopupMenu';
 import { RangeInput } from '../RangeInput';
-import Modal from "react-native-modal";
+import * as C from './styles';
+import * as Icon from 'react-native-feather';
+import theme from '../../global/styles/theme';
 const iconSize = 25;
 
-export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
+export function ChallengeHeader({
+  title,
+  indicatorPositionX,
+  slideWidth,
+  sliderRef,
+  CurrentIndicatorPositionX,
+}) {
   const { isDarkMode, setIsDarkMode } = useEditor();
-  const [isRangeInputVisible, setIsRangeInputVisible] = useState(true);
+  const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const navigation = useNavigation();
 
   const popupMenuButtons = [
@@ -30,11 +35,11 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
     },
   ];
 
-  const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
+  //   const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 350 }) }],
+      transform: [{ translateX: CurrentIndicatorPositionX.value }],
     };
   });
 
@@ -49,9 +54,8 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
   }
 
   useEffect(() => {
-    console.log('render');
-    CurrentIndicatorPositionX.value = indicatorPositionX / 3;
-  }, [indicatorPositionX]);
+    console.log({ slideWidth });
+  }, [CurrentIndicatorPositionX]);
 
   return (
     <C.Container>
@@ -64,13 +68,13 @@ export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderR
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>
-          <C.Title isActive={0 === indicatorPositionX}>Problema</C.Title>
+          <C.Title isActive={0 === CurrentIndicatorPositionX.value}>Problema</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(1)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth === indicatorPositionX}>Código</C.Title>
+          <C.Title isActive={slideWidth === CurrentIndicatorPositionX.value}>Código</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(2)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth * 2 === indicatorPositionX}>Resultado</C.Title>
+          <C.Title isActive={slideWidth * 2 === CurrentIndicatorPositionX.value}>Resultado</C.Title>
         </C.NavigationButton>
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />

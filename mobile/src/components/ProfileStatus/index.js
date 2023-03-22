@@ -10,32 +10,20 @@ import dayjs from 'dayjs';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 import * as C from './styles';
+import { useRocket } from '../../hooks/useRocket';
+import { useRanking } from '../../hooks/useRanking';
+import { useAvatar } from '../../hooks/useAvatar';
 
 export function ProfileStatus({
-  user: { id, ranking_id, selected_rocket_id, avatar_id, name, level, xp, created_at },
+  user: { id, ranking_id, rocket_id, avatar_id, name, level, xp, created_at },
 }) {
   const { loggedUser } = useAuth();
-  const [avatar, setAvatar] = useState('');
-  const [ranking, setRanking] = useState(null);
-  const [rocket, setRocket] = useState(null);
+  const { avatar } = useAvatar(avatar_id);
+  const { rocket } = useRocket(rocket_id);
+  const { ranking } = useRanking(ranking_id);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
-
-  async function getRanking() {
-    const ranking = await api.getRanking(ranking_id);
-    setRanking(ranking);
-  }
-
-  async function getRocket() {
-    const rocket = await api.getRocket(selected_rocket_id);
-    setRocket(rocket);
-  }
-
-  async function getAvatar() {
-    const avatar = await api.getAvatar(avatar_id);
-    setAvatar(avatar);
-  }
 
   function handleSettingsButton() {
     navigation.navigate('Settings');
@@ -47,7 +35,6 @@ export function ProfileStatus({
 
   useEffect(() => {
     try {
-      getRocket();
       getAvatar();
       getRanking();
     } catch (error) {

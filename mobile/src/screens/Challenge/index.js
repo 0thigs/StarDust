@@ -14,6 +14,7 @@ import { challenges } from '../../utils/challenges';
 import ToastMenager, { Toast } from 'toastify-react-native';
 
 import * as C from './styles';
+import { useSharedValue } from 'react-native-reanimated';
 
 const earningsByDifficulty = {
   easy: {
@@ -45,8 +46,11 @@ export function Challenge() {
   const seconds = useRef({ value: 0 });
   const userCode = useRef({ value: '' });
 
+  const CurrentIndicatorPositionX = useSharedValue(0);
+
   function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
-    setIndicatorPositionX(contentOffset.x);
+    // setIndicatorPositionX(contentOffset.x);
+    CurrentIndicatorPositionX.value = contentOffset.x / 3;
     slideWidth.current.value = layoutMeasurement.width;
   }
 
@@ -168,7 +172,7 @@ export function Challenge() {
                 title={title}
                 sliderRef={sliderRef}
                 slideWidth={slideWidth.current.value}
-                indicatorPositionX={indicatorPositionX}
+                CurrentIndicatorPositionX={CurrentIndicatorPositionX}
               />
 
               <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />
