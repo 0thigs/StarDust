@@ -87,15 +87,16 @@ export function CustomDrawer() {
       <C.AchievementList
         data={achievements}
         keyExtractor={achievement => achievement.id}
-        renderItem={({ item: { id, title, description, icon, required_amount, metric } }) => (
+        renderItem={({ item: { id, name, description, icon, required_amount, metric } }) => (
           <Achievement
             id={id}
-            title={title}
+            name={name}
             description={description}
             icon={icon}
             requiredAmount={required_amount}
             currentAmount={loggedUser[metric]}
             isUnlocked={verifyIfIsUnlocked(id)}
+            hasRescueFeat={true}
           />
         )}
       />

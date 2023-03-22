@@ -23,7 +23,7 @@ export function LessonHeader() {
   const { loggedUser } = useAuth();
   const [state, dispatch] = useLesson();
   const { rocket } = useRocket(loggedUser.rocket_id);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
 
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
@@ -53,7 +53,7 @@ export function LessonHeader() {
   return (
     <C.Container>
       <C.Main>
-        <C.CloseButton onPress={() => setIsModalOpen(true)}>
+        <C.CloseButton onPress={() => setIsModalVisible(true)}>
           <Icon.X color={theme.colors.red_700} width={35} height={35} />
         </C.CloseButton>
         <C.Lives>
@@ -75,9 +75,9 @@ export function LessonHeader() {
         )}
       </C.ProgressBar>
 
-      {isModalOpen && (
+      {isModalVisible && (
         <Modal
-          isOpen={isModalOpen}
+          isVisible={isModalVisible}
           type={'crying'}
           playSong={false}
           title={'Deseja mesmo sair?'}
@@ -94,7 +94,7 @@ export function LessonHeader() {
                 title={'Voltar'}
                 color={theme.colors.black}
                 background={theme.colors.blue_300}
-                onPress={() => setIsModalOpen(false)}
+                onPress={() => setIsModalVisible(false)}
               />
             </>
           }

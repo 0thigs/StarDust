@@ -14,7 +14,7 @@ export const Container = styled.View`
   z-index: 10;
 `;
 
-export const AchievementsInfo = styled.View`
+export const Info = styled.View`
   width: 70%;
   padding: 4px;
   margin-left: 8px;
@@ -22,15 +22,15 @@ export const AchievementsInfo = styled.View`
   border-top-color: ${props => props.theme.colors.green_500};
 `;
 
-export const AchievementsTitle = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.bold};
+export const Name = styled.Text`
+  color: ${({ isToRescue, theme }) => theme.colors[isToRescue ? 'green_500' : 'white']};
+  font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 14px;
 `;
 
-export const AchievementsDescription = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+export const Description = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 12px;
 `;
 
@@ -42,18 +42,37 @@ export const ProgressBar = styled.View`
   margin-top: 8px;
   width: 70%;
   height: 4px;
-  background-color: ${props => props.theme.colors.gray_500};
+  background-color: ${({ theme }) => theme.colors.gray_500};
 `;
 
 export const Bar = styled.View`
-  width: ${props => props.barWidth};
+  width: ${({ barWidth }) => barWidth};
   height: 4px;
-  background-color: ${props => props.theme.colors.green_500};
+  background-color: ${({ theme }) => theme.colors.green_500};
 `;
 
 export const ProgressBarrequiredAmount = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 12px;
   margin-left: 4px;
+`;
+
+export const Message = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 95%;
+`;
+
+export const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.semibold};
+  font-size: 16px;
+`;
+
+export const Reward = styled.Text`
+  color: ${({ theme }) => theme.colors.green_500};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: 16px;
 `;

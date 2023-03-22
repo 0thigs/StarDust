@@ -19,7 +19,7 @@ import { VerificationButton } from '../VerificationButton';
 export function Quiz() {
   const [state, dispatch] = useLesson();
   const [forms, setForms] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
   const sliderRef = useRef(null);
 
@@ -102,7 +102,7 @@ export function Quiz() {
 
   useEffect(() => {
     if (state.livesCount === 0) {
-      setIsModalOpen(true);
+      setIsModalVisible(true);
     }
   }, [state.livesCount]);
 
@@ -151,7 +151,7 @@ export function Quiz() {
       <Modal
         type={'crying'}
         title={'Puxa, parece que você não tem mais vidas'}
-        isOpen={isModalOpen}
+        isVisible={isModalVisible}
         body={<C.Text>Mais sorte da próxima vez</C.Text>}
         footer={
           <C.Buttons>

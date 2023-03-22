@@ -19,7 +19,7 @@ export function Theory({ starId }) {
   const [texts, setTexts] = useState([]);
   const [index, setIndex] = useState(1);
   const [isFabButtonShown, setIsFabButtonShown] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isScrollEnd, setIsScrollEnd] = useState(false);
   const scrollRef = useRef();
   const textsFromJSON = theories.filter(theory => theory.starId === starId)[0].texts;
@@ -82,7 +82,7 @@ export function Theory({ starId }) {
         <Button
           title={index >= textsFromJSON.length ? 'Praticar' : 'Continuar'}
           onPress={
-            index >= textsFromJSON.length ? () => setIsModalOpen(true) : handleContinueButton
+            index >= textsFromJSON.length ? () => setIsModalVisible(true) : handleContinueButton
           }
           color={theme.colors.black}
           background={theme.colors.green_500}
@@ -96,7 +96,7 @@ export function Theory({ starId }) {
       )}
 
       <Modal
-        isOpen={isModalOpen}
+        isVisible={isModalVisible}
         type={'asking'}
         title={'Bora praticar o que você aprendeu?'}
         body={null}

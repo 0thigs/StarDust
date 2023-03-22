@@ -92,15 +92,15 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   function getCoins() {
     let maxCoins = 50;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxCoins -= 5;
+      maxCoins -= 10;
     }
     return maxCoins;
   }
 
   function getXp() {
-    let maxXp = 100;
+    let maxXp = 20;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxXp -= 5;
+      maxXp -= 10;
     }
     return maxXp;
   }

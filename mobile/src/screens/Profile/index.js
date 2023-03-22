@@ -51,10 +51,10 @@ export function Profile() {
           <C.Achievements>
             {unlockedAchievements.length > 0 ? (
               unlockedAchievements.map(
-                ({ id, title, description, icon, requiredCount, metric }) => (
+                ({ id, name, description, icon, requiredCount, metric }) => (
                   <Achievement
                     key={id}
-                    title={title}
+                    name={name}
                     description={description}
                     icon={icon}
                     requiredCount={requiredCount}

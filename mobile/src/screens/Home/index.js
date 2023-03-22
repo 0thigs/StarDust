@@ -25,7 +25,7 @@ export function Home() {
   const { loggedUser } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const { lastUnlockedStarYPosition } = useScroll();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
   const [isFabButtonShown, setIsFabButtonShown] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -66,7 +66,7 @@ export function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsEndTransition(true);
-      setIsModalOpen(true);
+      setIsModalVisible(true);
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
@@ -126,7 +126,7 @@ export function Home() {
 
       {unlockedAchievements.length > 0 && (
         <Modal
-          isOpen={isModalOpen}
+          isVisible={isModalVisible}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
@@ -162,7 +162,7 @@ export function Home() {
               title={'Entendido'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setIsModalOpen(false)}
+              onPress={() => setIsModalVisible(false)}
             />
           }
         />

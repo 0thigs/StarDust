@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
@@ -24,7 +24,7 @@ import {
 import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
-
+const animationDuration = 800;
 export const starHeight = 100;
 
 export function Star({ id, name, number, isUnlocked, isChallenge }) {
@@ -71,10 +71,13 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     StarScale.value = withRepeat(withSpring(1.15), isLastUnlockedStar ? -1 : 1, true);
 
     const timer = setTimeout(() => {
-      RocketRotate.value = withTiming(540, { duration: 800 });
+      RocketRotate.value = withTiming(540, { duration: animationDuration });
       RocketScale.value = withDelay(
         delay,
-        withSequence(withTiming(1.25, { duration: 800 }), withTiming(1, { duration: 800 }))
+        withSequence(
+          withTiming(1.25, { duration: animationDuration }),
+          withTiming(1, { duration: animationDuration })
+        )
       );
     }, delay);
     return () => clearTimeout(timer);

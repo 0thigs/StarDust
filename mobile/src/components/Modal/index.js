@@ -38,18 +38,18 @@ const effects = [
   },
 ];
 
-export function Modal({ isOpen, type = 'generic', playSong = true, title, body, footer }) {
+export function Modal({ isVisible, type = 'generic', playSong = true, title, body, footer }) {
   const { animation, sound } = effects.find(animation => animation.id === type.toLocaleLowerCase());
   const soundRef = useRef();
 
   useEffect(() => {
-    if (playSong && isOpen && type !== 'generic') {
+    if (playSong && isVisible && type !== 'generic') {
       soundRef.current.play();
     }
-  }, [isOpen]);
+  }, [isVisible]);
 
   return (
-    <C.Container transparent visible={isOpen}>
+    <C.Container transparent visible={isVisible}>
       <C.Fade>
         <C.Content entering={ZoomIn.duration(500)} exiting={ZoomOut.duration(500)}>
           <C.Header>

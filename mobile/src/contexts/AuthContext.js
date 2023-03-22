@@ -14,9 +14,10 @@ const fakeLoggedUser = {
   xp: 50,
   weekly_xp: 350,
   level: 1,
-  unlocked_achievements_ids: [],
   unlocked_stars_ids: [1],
-  acquired_rockets_ids: [1],
+  unlocked_achievements_ids: [],
+  achievements_ids_to_rescue: ['2e435369-9f92-4d69-bb4c-64119b5d5a59'],
+  acquired_rockets_ids: ['03f3f359-a0ee-42c1-bd5f-b2ad01810d47'],
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
   streak: 0,
@@ -72,7 +73,7 @@ export function AuthContextProvider({ children }) {
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
-      
+
       setLoggedUser(signedUser);
     } catch (error) {
       throw new Error(error);

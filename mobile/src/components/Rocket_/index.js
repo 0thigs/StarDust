@@ -55,7 +55,7 @@ export function Rocket_({ id, name, image, price }) {
   }
 
   async function selectRocket() {
-    updateLoggedUser('selected_rocket_id', id);
+    updateLoggedUser('rocket_id', id);
     setIsRequesting(false);
     soundRef.current.play();
   }
@@ -75,9 +75,9 @@ export function Rocket_({ id, name, image, price }) {
   }, []);
 
   useEffect(() => {
-    setIsSelected(id === loggedUser.selected_rocket_id);
+    setIsSelected(id === loggedUser.rocket_id);
     setIsAcquired(loggedUser.acquired_rockets_ids.includes(id));
-  }, [loggedUser.selected_rocket_id, loggedUser.acquired_rockets_ids]);
+  }, [loggedUser.rocket_id, loggedUser.acquired_rockets_ids]);
 
   return (
     <C.Container isSelected={isSelected} isAcquired={isAcquired}>
@@ -105,7 +105,7 @@ export function Rocket_({ id, name, image, price }) {
       </C.Info>
 
       <Modal
-        isOpen={isModalOpen}
+        isVisible={isModalOpen}
         type={modalType}
         title={
           modalType === 'denying'

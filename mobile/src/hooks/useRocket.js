@@ -7,7 +7,6 @@ export const useRocket = (idRocket, isToFecth = true) => {
   async function fetchRocket() {
     try {
       const rocket = await api.getRocket(idRocket);
-      console.log({ rocket });
       setRocket(rocket);
     } catch (error) {
       console.log(error);

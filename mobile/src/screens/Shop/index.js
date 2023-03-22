@@ -17,7 +17,7 @@ export function Shop() {
   const { loggedUser } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const [rockets, setRockets] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   async function getRockets() {
@@ -62,7 +62,7 @@ export function Shop() {
 
       {unlockedAchievements.length > 0 && (
         <Modal
-          isOpen={isModalOpen}
+          isVisible={isModalVisible}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
@@ -90,7 +90,7 @@ export function Shop() {
               title={'Entendido'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setIsModalOpen(false)}
+              onPress={() => setIsModalVisible(false)}
             />
           }
         />
