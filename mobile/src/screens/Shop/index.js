@@ -12,18 +12,32 @@ import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 import { Loading } from '../../components/Loading';
+import { Avatar } from '../../components/Avatar';
+import { useRef } from 'react';
 
 export function Shop() {
   const { loggedUser } = useAuth();
   const { unlockedAchievements } = useAchievement();
   const [rockets, setRockets] = useState([]);
+  const [avatars, setAvatars] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const avatarsListRef = useRef(null);
 
-  async function getRockets() {
+  function scrollTo(index) {
+    avatarsListRef.current.scrollToIndex({
+      index,
+      animated: true,
+    });
+  }
+
+  async function setShopData() {
     try {
       const rockets = await api.getRockets();
       setRockets(rockets);
+
+      const avatars = await api.getAvatars();
+      setAvatars(avatars);
     } catch (error) {
       console.log(error);
     } finally {
@@ -33,7 +47,7 @@ export function Shop() {
 
   useEffect(() => {
     setIsLoading(true);
-    getRockets();
+    setShopData();
   }, []);
 
   return (
@@ -49,13 +63,26 @@ export function Shop() {
                 <Rocket_ key={id} id={id} name={name} price={price} image={image} />
               ))}
             </C.RocketList>
-            {/* FIXME: 
-     <C.Title>Vidas</C.Title>
-    <C.LifeList horizontal showsHorizontalScrollIndicator={false}>
-      <LifeBox lives={1} price={100} />
-      <LifeBox lives={3} price={250} />
-      <LifeBox lives={5} price={500} />
-    </C.LifeList> */}
+
+            <C.Title>Avatares</C.Title>
+            <C.AvatarsList
+              ref={avatarsListRef}
+              data={avatars}
+              keyExtractor={avatar => avatar.id}
+              renderItem={({ item: { id, name, image, price }, index }) => (
+                <Avatar
+                  id={id}
+                  name={name}
+                  price={price}
+                  image={image}
+                  index={index}
+                  scrollTo={scrollTo}
+                />
+              )}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingRigth: 12 }}
+            />
           </>
         )}
       </C.Content>

@@ -24,6 +24,7 @@ export function Rocket_({ id, name, image, price }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
+  const isBuyable = loggedUser.coins > price;
 
   const RocketPosition = useSharedValue(-5);
 
@@ -39,7 +40,7 @@ export function Rocket_({ id, name, image, price }) {
   }
 
   function buyRocket() {
-    if (loggedUser.coins < price) {
+    if (!isBuyable) {
       setIsRequesting(false);
       setIsModalOpen(true);
       return;
@@ -60,7 +61,7 @@ export function Rocket_({ id, name, image, price }) {
     soundRef.current.play();
   }
 
-  function handleButton() {
+  function handleButtonPress() {
     setIsRequesting(true);
 
     if (isAcquired) {
@@ -80,7 +81,7 @@ export function Rocket_({ id, name, image, price }) {
   }, [loggedUser.rocket_id, loggedUser.acquired_rockets_ids]);
 
   return (
-    <C.Container isSelected={isSelected} isAcquired={isAcquired}>
+    <C.Container isSelected={isSelected} isAvailable={isAcquired || isBuyable}>
       <C.Background source={RocketBackground}>
         {!isAcquired && (
           <C.Price>
@@ -98,7 +99,7 @@ export function Rocket_({ id, name, image, price }) {
           title={isSelected && isAcquired ? 'Selecionado' : isAcquired ? 'Selecionar' : 'Comprar'}
           isLoading={isRequesting}
           isDisabled={(isSelected && isAcquired) || isRequesting}
-          onPress={handleButton}
+          onPress={handleButtonPress}
           color={theme.colors.black}
           background={theme.colors.yellow_300}
         />

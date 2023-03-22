@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
+import { useAuth } from './useAuth';
 
 export const useAvatar = idAvatar => {
+  const { loggedUser } = useAuth();
   const [avatar, setAvatar] = useState(null);
 
   async function fetchAvatar() {
     try {
       const avatar = await api.getAvatar(idAvatar);
-      console.log(avatar);
       setAvatar(avatar);
     } catch (error) {
       console.log(error);
@@ -16,7 +17,7 @@ export const useAvatar = idAvatar => {
 
   useEffect(() => {
     fetchAvatar();
-  }, []);
+  }, [loggedUser.avatar_id]);
 
   return { avatar };
 };

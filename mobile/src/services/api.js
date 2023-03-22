@@ -90,6 +90,17 @@ export default {
     return data;
   },
 
+  getAvatars: async () => {
+    const { data, error } = await supabase
+      .from('avatars')
+      .select('*')
+      .order('price', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')

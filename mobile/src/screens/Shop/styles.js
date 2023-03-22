@@ -10,6 +10,7 @@ export const Content = styled.ScrollView.attrs(({ isLoading }) => ({
     flex: isLoading ? 1 : 0,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 48,
   },
 }))`
   background-color: ${prop => prop.theme.colors.background};
@@ -30,6 +31,8 @@ export const RocketList = styled.View`
   justify-content: space-between;
   margin-bottom: 24px;
 `;
+
+export const AvatarsList = styled.FlatList``;
 
 export const LifeList = styled.ScrollView`
   flex-direction: row;
