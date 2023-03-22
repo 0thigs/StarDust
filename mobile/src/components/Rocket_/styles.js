@@ -59,6 +59,7 @@ export const Name = styled.Text`
 `;
 
 export const Text = styled.Text`
+  margin: 12px 0;
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.white};
   font-size: 14px;
@@ -70,4 +71,3 @@ export const AcquiredRocket = styled.View`
   justify-content: center;
   align-items: center;
 `;
-

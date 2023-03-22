@@ -38,7 +38,7 @@ export function Achievement({
     setIsModalVisible(true);
 
     updateLoggedUser('achievements_ids_to_rescue', []);
-    updateLoggedUser('coins', coins + 20);
+    updateLoggedUser('coins', coins + reward);
   }
 
   return (
@@ -80,7 +80,7 @@ export function Achievement({
         body={
           <C.Message>
             <C.Text>Parabéns! Você acabou de ganhar </C.Text>
-            <C.Reward>50 </C.Reward>
+            <C.Reward>{reward} </C.Reward>
             <C.Text>de poeira estela pela conquista </C.Text>
             <C.Reward>{rescuedAchievementName}</C.Reward>
           </C.Message>

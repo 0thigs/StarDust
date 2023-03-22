@@ -16,7 +16,7 @@ const fakeLoggedUser = {
   level: 1,
   unlocked_stars_ids: [1],
   unlocked_achievements_ids: [],
-  achievements_ids_to_rescue: ['2e435369-9f92-4d69-bb4c-64119b5d5a59'],
+  achievements_ids_to_rescue: [],
   acquired_rockets_ids: ['03f3f359-a0ee-42c1-bd5f-b2ad01810d47'],
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',

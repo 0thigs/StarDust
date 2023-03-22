@@ -7,6 +7,7 @@ export const useAvatar = idAvatar => {
   async function fetchAvatar() {
     try {
       const avatar = await api.getAvatar(idAvatar);
+      console.log(avatar);
       setAvatar(avatar);
     } catch (error) {
       console.log(error);

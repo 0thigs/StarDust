@@ -21,7 +21,6 @@ export function ProfileStatus({
   const { avatar } = useAvatar(avatar_id);
   const { rocket } = useRocket(rocket_id);
   const { ranking } = useRanking(ranking_id);
-  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
 
@@ -32,15 +31,6 @@ export function ProfileStatus({
   function handleBackButton() {
     navigation.navigate('Ranking');
   }
-
-  useEffect(() => {
-    try {
-      getAvatar();
-      getRanking();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   return (
     <C.Container>

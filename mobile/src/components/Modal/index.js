@@ -61,8 +61,8 @@ export function Modal({ isVisible, type = 'generic', playSong = true, title, bod
           <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
+        {type !== 'generic' && <Sound ref={soundRef} soundFile={sound} />}
       </C.Fade>
-      {type !== 'generic' && <Sound ref={soundRef} soundFile={sound} />}
     </C.Container>
   );
 }

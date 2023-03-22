@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useAvatar } from '../../hooks/useAvatar';
+import { useAchievement } from '../../hooks/useAchievement';
 import { useNavigation } from '@react-navigation/native';
-import { achievements as achievementsFromJSON } from '../../utils/achivements';
 import { Achievement } from '../Achievement';
 
 import { getImage } from '../../utils/getImage';
 import ToastMenager, { Toast } from 'toastify-react-native';
-import api from '../../services/api';
 import * as C from './styles';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
-  const [avatar, setAvatar] = useState('');
-  const [achievements, setAchievements] = useState([]);
+  const { avatar } = useAvatar(loggedUser.avatar_id);
+  const { achievements } = useAchievement();
+  const [sortedAchievements, setSortedAchievements] = useState([]);
   const navigation = useNavigation();
 
   function verifyIfIsUnlocked(id) {
@@ -31,16 +32,7 @@ export function CustomDrawer() {
     }
   }
 
-  async function getAvatar() {
-    try {
-      const avatar = await api.getAvatar(loggedUser.avatar_id);
-      setAvatar(avatar);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function sortByBlock(a, b) {
+  function sortByBlocking(a, b) {
     const { unlocked_achievements_ids } = loggedUser;
 
     if (unlocked_achievements_ids.includes(a.id) && !unlocked_achievements_ids.includes(b.id)) {
@@ -52,20 +44,16 @@ export function CustomDrawer() {
     return 0;
   }
 
-  async function getAchievements() {
-    try {
-      const achievements = await api.getAchievements();
-      const sortedAchievements = [...achievements].sort(sortByBlock);
-      setAchievements(sortedAchievements);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+//   useEffect(() => {
+//     setIsLoading(true);
+//     const sortedAchievements = [...achievements].sort(sortByBlocking);
+//     setSortedAchievements(sortedAchievements);
+//     if (sortedAchievements.length) setIsLoading(false);
+//   }, [loggedUser.unlocked_achievements_ids]);
 
-  useEffect(() => {
-    getAvatar();
-    getAchievements();
-  }, [loggedUser.unlocked_achievements_ids]);
+//   useEffect(() => {
+//     if (sortedAchievements.length) setIsLoading(false);
+//   }, [sortedAchievements]);
 
   return (
     <C.Container>
@@ -84,22 +72,25 @@ export function CustomDrawer() {
         <C.LogOutButtonText>Sair</C.LogOutButtonText>
       </C.LogOutButton>
 
-      <C.AchievementList
-        data={achievements}
-        keyExtractor={achievement => achievement.id}
-        renderItem={({ item: { id, name, description, icon, required_amount, metric } }) => (
-          <Achievement
-            id={id}
-            name={name}
-            description={description}
-            icon={icon}
-            requiredAmount={required_amount}
-            currentAmount={loggedUser[metric]}
-            isUnlocked={verifyIfIsUnlocked(id)}
-            hasRescueFeat={true}
-          />
-        )}
-      />
+        <C.AchievementList
+          data={achievements}
+          keyExtractor={achievement => achievement.id}
+          renderItem={({
+            item: { id, name, description, icon, required_amount, metric, reward },
+          }) => (
+            <Achievement
+              id={id}
+              name={name}
+              description={description}
+              icon={icon}
+              reward={reward}
+              requiredAmount={required_amount}
+              currentAmount={loggedUser[metric]}
+              isUnlocked={verifyIfIsUnlocked(id)}
+              hasRescueFeat={true}
+            />
+          )}
+        />
     </C.Container>
   );
 }
