@@ -101,6 +101,14 @@ export default {
     return data;
   },
 
+  getChallenges: async () => {
+    const { data, error } = await supabase.from('challenges').select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')

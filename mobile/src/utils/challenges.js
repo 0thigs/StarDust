@@ -65,7 +65,7 @@ saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
       },
     ],
 
-    code:`
+    code: `
 var nome = "Datahon"
 var temperatura = 53.5
 var temOxigenio = falso
@@ -75,6 +75,127 @@ var tipoTemperatura
 var tipoOxigenio
 
 escreva("lógico")`,
+    difficulty: 'easy',
+  },
+  {
+    id: 2,
+    starId: 8,
+    title: 'Análise do ambiente',
+    texts: [
+      {
+        type: 'default',
+        body: 'Parece que permitiram você adentrar no planeta Datahon! Entretanto, é melhor fazer uma análise do ambiente antes de fazer um pouso seguro, o que o seu foguete já fez de antemão, retornando para você dados do planeta como nome, idade, temperatura e se tem ar respirável.',
+      },
+      {
+        type: 'default',
+        body: 'Sua missão é escrever qual o tipo de dado de cada um na ordem em que são declarados, veja um exemplo',
+      },
+      {
+        type: 'code',
+        body: `var nomeEstrela = "Proxima Centauri"
+var temCorAmarela = verdadeiro
+
+escreva("tipo nomeEstrela: " + "texto" + ", tipo nomeEstrela: lógico")
+
+saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
+      },
+      {
+        type: 'alert',
+        body: 'Dica: você pode colocar o nome dos tipos em variáveis e concatená-las com os textos, mas lembre-se de respeitar as vírgulas e os espaços',
+      },
+    ],
+    testCases: [
+      {
+        input: null,
+        expectedOutput: `lógico`,
+        isLocked: false,
+      },
+    ],
+
+    code: `
+var nome = "Datahon"
+var temperatura = 53.5
+var temOxigenio = falso
+
+var tipoNome
+var tipoTemperatura
+var tipoOxigenio
+
+escreva("lógico")`,
+    difficulty: 'easy',
+  },
+  {
+    id: 11,
+    starId: null,
+    title: 'Quanto há de água?',
+    texts: [
+      {
+        type: 'default',
+        body: 'Você está navegando pelo espaço e de repente seu foguete quebra 😢. Tudo o que resta fazer é enviar uma mesagem de socorro espaço a fora',
+      },
+      {
+        type: 'default',
+        body: 'Logo, sua missão é criar uma simples função que retorne "Socorro, preciso de ajuda!"',
+      },
+      {
+        type: 'code',
+        body: `
+Saida: "Olá, mundo!"`,
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim na pontuação',
+      },
+    ],
+    testCases: [
+      {
+        input: [],
+        expectedOutput: 'Socorro, preciso de ajuda!',
+        isLocked: false,
+      },
+    ],
+
+    code: `
+function hello() {
+
+}`,
+    difficulty: 'hard',
+  },
+  {
+    id: 12,
+    starId: null,
+    title: 'Pedido de ajuda',
+    texts: [
+      {
+        type: 'default',
+        body: 'Você está navegando pelo espaço e de repente seu foguete quebra 😢. Tudo o que resta fazer é enviar uma messagem de socorro espaço a fora',
+      },
+      {
+        type: 'default',
+        body: 'Logo, sua missão é criar uma simples função que retorne "Socorro, preciso de ajuda!"',
+      },
+      {
+        type: 'code',
+        body: `
+Saida: "Olá, mundo!"`,
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim na pontuação',
+      },
+    ],
+    testCases: [
+      {
+        input: [],
+        expectedOutput: 'Socorro, preciso de ajuda!',
+        isLocked: false,
+      },
+    ],
+
+    code: `
+function hello() {
+
+}`,
     difficulty: 'easy',
   },
 ];
