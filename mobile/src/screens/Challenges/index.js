@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Challenge } from '../../components/Challenge';
 import { challenges } from '../../utils/challenges';
+import { sorters } from '../../utils/sorters';
 import api from '../../services/api';
 import * as C from './styles';
+import { SelectInput } from '../../components/SelectInput_';
 
 const difficultyTable = {
   easy: 'Fácil',
@@ -29,7 +31,11 @@ export function Challenges() {
 
   return (
     <C.Container>
-      <C.SortInputList></C.SortInputList>
+      <C.Sorters>
+        {sorters.map(({ type, label, options }) => (
+          <SelectInput key={type} type={type} label={label} options={options} />
+        ))}
+      </C.Sorters>
       <C.ChallengesList
         data={challenges.filter(challenge => !challenge.starId)}
         keyExtractor={challenge => challenge.id}

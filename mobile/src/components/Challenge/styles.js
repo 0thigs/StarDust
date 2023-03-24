@@ -10,6 +10,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.gray_900};
   border-radius: 8px;
   padding: 16px 12px;
+  margin-top: 24px;
 `;
 
 export const Header = styled.View`

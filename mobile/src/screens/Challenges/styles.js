@@ -6,7 +6,9 @@ export const Container = styled.SafeAreaView`
   padding: 24px;
 `;
 
-export const SortInputList = styled.View`
+export const Sorters = styled.View`
+  flex-flow: row;
+  flex-wrap: wrap;
 `;
 
 export const ChallengesList = styled.FlatList`
