@@ -10,7 +10,6 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.gray_900};
   border-radius: 8px;
   padding: 16px 12px;
-  margin-top: 24px;
 `;
 
 export const Header = styled.View`
@@ -56,19 +55,21 @@ export const StatusText = styled.Text`
   margin-left: 8px;
 `;
 
-export const Tags = styled.View`
+export const CategoriesList = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin-right: 8px;
   margin-bottom: 12px;
 `;
 
-export const Tag = styled.Text`
+export const Category = styled.Text`
   font-size: 12px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.gray_500};
+  color: ${({ theme, isSelected }) => theme.colors[isSelected ? 'gray_500' : 'black']};
+  background-color: ${({ theme, isSelected }) => theme.colors[isSelected ? 'black' : 'gray_500']};
   padding: 4px;
   border-radius: 8px;
   margin-right: 8px;
+  margin-bottom: 8px;
 `;

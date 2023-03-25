@@ -123,46 +123,58 @@ var tipoOxigenio
 
 escreva("lógico")`,
     difficulty: 'easy',
+    categories: ['básico', 'textos', 'números'],
   },
   {
-    id: 11,
+    id: 12,
     starId: null,
-    title: 'Quanto há de água?',
+    title: 'Somar energias',
     texts: [
       {
         type: 'default',
-        body: 'Você está navegando pelo espaço e de repente seu foguete quebra 😢. Tudo o que resta fazer é enviar uma mesagem de socorro espaço a fora',
+        body: 'Em uma galáxia muito, muito distante, há uma nave espacial que precisa de um sistema para calcular a soma de energia de duas fontes diferentes.',
       },
       {
         type: 'default',
-        body: 'Logo, sua missão é criar uma simples função que retorne "Socorro, preciso de ajuda!"',
+        body: 'Então, crie uma função que receba dois valores de energia como argumentos e retorne a soma total de energia',
       },
       {
-        type: 'code',
+        type: 'markdown',
         body: `
 Saida: "Olá, mundo!"`,
       },
       {
         type: 'alert',
-        body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim na pontuação',
+        body: 'Não se esqueça de usar o "retorna" na função',
       },
     ],
     testCases: [
       {
-        input: [],
-        expectedOutput: 'Socorro, preciso de ajuda!',
+        input: [3, 2],
+        expectedOutput: 5,
+        isLocked: false,
+      },
+      {
+        input: [-3, -6],
+        expectedOutput: -9,
+        isLocked: false,
+      },
+      {
+        input: [7, 3],
+        expectedOutput: 3,
         isLocked: false,
       },
     ],
 
     code: `
-function hello() {
+function calcularEnergia(energia1, energia2) {
 
 }`,
     difficulty: 'hard',
+    categories: ['básico', 'matemática', 'números'],
   },
   {
-    id: 12,
+    id: 13,
     starId: null,
     title: 'Pedido de ajuda',
     texts: [
@@ -181,7 +193,11 @@ Saida: "Olá, mundo!"`,
       },
       {
         type: 'alert',
-        body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim na pontuação',
+        body: 'Não se esqueça de usar o "retorna" na função',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim como a pontuação',
       },
     ],
     testCases: [
@@ -191,11 +207,67 @@ Saida: "Olá, mundo!"`,
         isLocked: false,
       },
     ],
-
     code: `
 function hello() {
 
 }`,
     difficulty: 'easy',
+    categories: ['básico', 'textos'],
+  },
+  {
+    id: 14,
+    starId: null,
+    title: 'Conversor de números para crons',
+    texts: [
+      {
+        type: 'default',
+        body: 'Você é um engenheiro de nave espacial em uma missão para explorar uma galáxia distante. A tripulação da nave utiliza uma unidade de tempo espacial para medir o tempo, que é diferente da unidade de tempo terrestre.',
+      },
+      {
+        type: 'default',
+        body: 'A unidade de tempo espacial é chamada de "cron". Um cron é igual a 60 minutos terrestres. Por exemplo, se a tripulação diz que um evento ocorrerá em 3 crons, isso significa que o evento ocorrerá em 3 x 60 = 180 minutos terrestres.',
+      },
+      {
+        type: 'default',
+        body: 'Você precisa criar uma função chamada minutosParaCrons que converta uma quantidade de minutos terrestres em crons.',
+      },
+      {
+        type: 'markdown',
+        body: `
+Saida: "Olá, mundo!"`,
+      },
+      {
+        type: 'alert',
+        body: 'Não se esqueça de usar o "retorna" na função',
+      },
+      {
+        type: 'alert',
+        body: 'Dica: Lembre-se de que um cron é igual a 60 minutos terrestres.',
+      },
+    ],
+    testCases: [
+      {
+        input: [300],
+        expectedOutput: 5,
+        isLocked: false,
+      },
+      {
+        input: [180],
+        expectedOutput: 3,
+        isLocked: false,
+      },
+      {
+        input: [120],
+        expectedOutput: 2,
+        isLocked: false,
+      },
+    ],
+
+    code: `
+function converterMinutosParaCrons(minutos) {
+
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'matemática', 'números'],
   },
 ];

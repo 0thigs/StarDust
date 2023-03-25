@@ -2,25 +2,25 @@ import { Minus, CheckCircle, Circle, Target, User } from 'react-native-feather';
 import theme from '../global/styles/theme';
 const iconSize = 12;
 
-export const sorters = [
+export const filters = [
   {
-    type: 'status',
+    type: 'isCompleted',
     label: 'status',
     options: [
       {
         title: 'Todos',
         icon: <Minus fontSize={iconSize} color={theme.colors.white} />,
-        color: theme.colors.green_300,
+        color: null,
       },
       {
         title: 'Resolvido',
         icon: <CheckCircle fontSize={iconSize} color={theme.colors.green_300} />,
-        color: theme.colors.yellow_300,
+        color: null,
       },
       {
         title: 'Não resolvido',
         icon: <Circle fontSize={iconSize} color={theme.colors.gray_500} />,
-        color: theme.colors.red_300,
+        color: null,
       },
     ],
   },
@@ -46,23 +46,23 @@ export const sorters = [
     ],
   },
   {
-    type: 'tags',
-    label: 'tags',
+    type: 'categories',
+    label: 'categorias',
     options: [
       {
         title: 'Fundamentos',
         icon: null,
-        color: theme.colors.gray_500,
+        color: null,
       },
       {
         title: 'Textos',
         icon: null,
-        color: theme.colors.gray_500,
+        color: null,
       },
       {
         title: 'Funções',
         icon: null,
-        color: theme.colors.gray_500,
+        color: null,
       },
     ],
   },

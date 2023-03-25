@@ -1,4 +1,3 @@
-import { useAuth } from '../../hooks/useAuth';
 import { BarChart, CheckCircle, Circle, Target, User } from 'react-native-feather';
 import { Button } from '../Button';
 import theme from '../../global/styles/theme';
@@ -6,16 +5,16 @@ import * as C from './styles';
 const iconColor = theme.colors.gray_500;
 const iconSize = 12;
 
-export function Challenge({ id, title, difficulty, likes, votes, totalCompletions, author }) {
-  console.log(title);
-  const {
-    loggedUser: { completed_challenges_ids },
-  } = useAuth();
-
-  function isSolved() {
-    return completed_challenges_ids.includes(id);
-  }
-
+export function Challenge({
+  title,
+  difficulty,
+  likes,
+  votes,
+  totalCompletions,
+  author,
+  categories,
+  isCompleted,
+}) {
   function getAcceptanceRate() {
     return (likes / votes) * 100;
   }
@@ -30,14 +29,14 @@ export function Challenge({ id, title, difficulty, likes, votes, totalCompletion
       </C.Header>
       <C.Info>
         <C.Status>
-          {isSolved() ? (
+          {isCompleted ? (
             <CheckCircle color={theme.colors.green_500} fontSize={iconSize} />
           ) : (
             <Circle color={iconColor} fontSize={iconSize} />
           )}
 
-          <C.StatusText isSolved={isSolved()}>
-            {isSolved() ? 'Resolvido' : 'Não resolvido'}
+          <C.StatusText isCompleted={isCompleted}>
+            {isCompleted ? 'Resolvido' : 'Não resolvido'}
           </C.StatusText>
         </C.Status>
         <C.Status>
@@ -53,12 +52,13 @@ export function Challenge({ id, title, difficulty, likes, votes, totalCompletion
           <C.StatusText>{author}</C.StatusText>
         </C.Status>
       </C.Info>
-      <C.Tags>
-        <C.Tag>Fundamentos</C.Tag>
-        <C.Tag>Textos</C.Tag>
-      </C.Tags>
+      <C.CategoriesList>
+        {categories.map(category => (
+          <C.Category key={category}>{category}</C.Category>
+        ))}
+      </C.CategoriesList>
       <Button
-        title={isSolved() ? 'Praticar' : 'Resolver'}
+        title={isCompleted ? 'Praticar' : 'Resolver'}
         color={theme.colors.black}
         background={theme.colors.green_500}
         isSmall

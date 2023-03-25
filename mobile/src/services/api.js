@@ -109,6 +109,14 @@ export default {
     return data;
   },
 
+  getCategories: async () => {
+    const { data, error } = await supabase.from('categories').select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')
