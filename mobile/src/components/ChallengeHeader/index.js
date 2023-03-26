@@ -14,6 +14,7 @@ export function ChallengeHeader({
   sliderRef,
   CurrentIndicatorPositionX,
   currentSlideIndex,
+  setCurrentSlideIndex,
 }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
@@ -49,6 +50,7 @@ export function ChallengeHeader({
   }
 
   function handleNavButtonPress(index) {
+    setCurrentSlideIndex(index);
     sliderRef.current.scrollToIndex({ index });
   }
 

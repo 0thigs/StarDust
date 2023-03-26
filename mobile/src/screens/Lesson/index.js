@@ -9,7 +9,7 @@ import { TransitionScreenAnimation } from '../../components/TransitionScreenAnim
 import * as C from './styles';
 
 export function Lesson({ route }) {
-  const starId = route.params.id;
+  const starId = route?.params?.id;
   const { planets, getCurrentStar } = usePlanet();
   const [star, setStar] = useState(null);
   const [state, dispatch] = useLesson();
@@ -24,6 +24,7 @@ export function Lesson({ route }) {
     if (!planets.length) return;
     const star = getCurrentStar(starId);
     setStar(star);
+    return;
     dispatch({ type: 'setQuestions', payload: star.questions });
   }, [planets]);
 
@@ -33,9 +34,9 @@ export function Lesson({ route }) {
         <TransitionScreenAnimation />
       ) : (
         <>
-          {state.currentStage === 'theory' && <Theory star={star} />}
+          {state.currentStage === 'theory' && <Theory title={star.name} allTexts={star.texts} />}
           {state.currentStage === 'quiz' && <Quiz />}
-          {state.currentStage === 'end' && <End star={star} />}
+          {state.currentStage === 'end' && <End starId={star.id} isChallenge={false} />}
         </>
       )}
     </C.Container>

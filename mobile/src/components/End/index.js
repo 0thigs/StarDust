@@ -22,9 +22,15 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconSize = 30;
 
-export function End({ star, isChallenge, _coins, _xp, _seconds }) {
+export function End({
+  starId = 'e35bba41-f5cd-4a37-9b67-533171a086cc',
+  isChallenge,
+  _coins,
+  _xp,
+  _seconds,
+}) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const { getCurrentPlanet } = usePlanet();
+  const { planets, getCurrentPlanet, getNextStar } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -42,17 +48,22 @@ export function End({ star, isChallenge, _coins, _xp, _seconds }) {
     const updatedXp = xp + loggedUser.xp;
     const updatedWeeklyXp = xp + loggedUser.weekly_xp;
 
+    if (!starId) {
+      return {
+        coins: updatedCoins,
+        xp: updatedXp,
+        weekly_xp: updatedWeeklyXp,
+      };
+    }
+
     let completedPlanets = loggedUser.completed_planets;
     let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
-    let nextStar = null;
-
-    const currentPlanet = planets.find(planet => planet.stars.some(star => star.id === starId));
-    const currentStar = currentPlanet.stars.find(star => star.id === starId);
-    nextStar = currentPlanet.stars.find(star => star.number === currentStar.number + 1);
+    let nextStar = getNextStar(starId);
 
     if (!nextStar) {
       completedPlanets += 1;
-      const nextPlanet = planets[planets.indexOf(currentPlanet) + 1];
+      const currentPlanet = getCurrentPlanet(starId);
+      const nextPlanet = planets.find(planet => planet.order === currentPlanet.order + 1);
       nextStar = nextPlanet.stars[0];
     }
 
@@ -64,7 +75,6 @@ export function End({ star, isChallenge, _coins, _xp, _seconds }) {
       coins: updatedCoins,
       xp: updatedXp,
       weekly_xp: updatedWeeklyXp,
-      lives: state.livesCount,
       unlocked_stars_ids: updatedUnlockedStarsIds,
       completed_planets: completedPlanets,
     };

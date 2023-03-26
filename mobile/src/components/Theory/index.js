@@ -16,7 +16,7 @@ import { LessonHeader } from '../LessonHeader';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
-export function Theory({ star }) {
+export function Theory({ title, allTexts }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
   const [nextTextIndex, setNextTextIndex] = useState(1);
@@ -25,8 +25,6 @@ export function Theory({ star }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const scrollRef = useRef(null);
   const isScrollToEnd = useRef(false);
-  const allTexts = star.texts;
-  const starName = star.name;
 
   function fixValue(value) {
     return Math.floor(value);
@@ -66,7 +64,7 @@ export function Theory({ star }) {
         <Loading />
       ) : (
         <>
-          <C.Title animation={'fadeInDown'}>{starName}</C.Title>
+          <C.Title animation={'fadeInDown'}>{title}</C.Title>
           <C.Theories
             showsVerticalScrollIndicator={false}
             ref={scrollRef}

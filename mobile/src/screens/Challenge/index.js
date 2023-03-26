@@ -32,18 +32,13 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  const challengeId = route.params.id;
-  console.log(challengeId);
-  const { loggedUser } = useAuth();
+  const challengeId = '62fef857-42fa-4602-8483-4dc4a446927d';
   const { challenge } = useChallenge(challengeId);
-  const { title, texts, code, function_name, test_cases, difficulty } = challenge;
+  const { title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
   const testCases = Array.isArray(test_cases) ? test_cases : [test_cases];
 
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  //   const { title, texts, code, testCases, difficulty } = challenges.find(
-  //     challenge => challenge.starId === loggedUser.starId
-  //   );
   const [userOutputs, setUserOutputs] = useState([]);
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -99,7 +94,7 @@ export function Challenge({ route }) {
   }
 
   function handleResult(result) {
-    if (!result.length) return;
+    if (!result) return;
 
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, result];
@@ -112,7 +107,6 @@ export function Challenge({ route }) {
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
-
       if (erros.length) {
         if (erros[0] instanceof Error) {
           throw erros[0];
@@ -122,6 +116,7 @@ export function Challenge({ route }) {
 
       handleResult(resultado[1]);
     } catch (error) {
+      console.log(error.message);
       handleError(error.message);
     }
   }
@@ -195,6 +190,7 @@ export function Challenge({ route }) {
               <ChallengeHeader
                 title={title}
                 sliderRef={sliderRef}
+                setCurrentSlideIndex={setCurrentSlideIndex}
                 CurrentIndicatorPositionX={CurrentIndicatorPositionX}
                 currentSlideIndex={currentSlideIndex}
               />
@@ -208,7 +204,7 @@ export function Challenge({ route }) {
             </>
           ) : (
             <End
-              starId={loggedUser.starId}
+              starId={star_id}
               isChallenge={true}
               _coins={earningsByDifficulty[difficulty].coins}
               _xp={earningsByDifficulty[difficulty].xp}

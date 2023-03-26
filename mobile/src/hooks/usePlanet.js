@@ -8,8 +8,8 @@ export const usePlanet = () => {
     return planets.find(planet => planet.stars.some(star => star.id === starId));
   }
 
-  function getCurrentStar(starId) {    
-    if (!planets.length) return 
+  function getCurrentStar(starId) {
+    if (!planets.length) return;
     const currentPlanet = getCurrentPlanet(starId);
     return currentPlanet.stars.find(star => star.id === starId);
   }
@@ -31,9 +31,9 @@ export const usePlanet = () => {
   }
 
   useEffect(() => {
-    if (planets.length) return 
+    if (planets.length) return;
     fetchPlanets();
   }, []);
 
-  return { planets, getCurrentStar, getNextStar };
+  return { planets, getCurrentPlanet, getCurrentStar, getNextStar };
 };

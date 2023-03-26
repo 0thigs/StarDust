@@ -12,14 +12,13 @@ const fakeLoggedUser = {
   xp: 0,
   weekly_xp: 0,
   level: 1,
-  unlocked_stars_ids: ['b34a4a76-0615-4910-89a9-05d34925dc70', 'e35bba41-f5cd-4a37-9b67-533171a086cc'],
+  unlocked_stars_ids: [
+    'b34a4a76-0615-4910-89a9-05d34925dc70',
+  ],
   unlocked_achievements_ids: [],
   achievements_ids_to_rescue: [],
   acquired_rockets_ids: ['03f3f359-a0ee-42c1-bd5f-b2ad01810d47'],
-  acquired_avatars_ids: [
-    'bd3313ad-16ef-49ae-baad-34a104752eb5',
-    '54eb3e10-b1b2-44aa-a496-ba7f042e09a2',
-  ],
+  acquired_avatars_ids: ['bd3313ad-16ef-49ae-baad-34a104752eb5'],
   completed_challenges_ids: [1],
   avatar_id: '54eb3e10-b1b2-44aa-a496-ba7f042e09a2',
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
