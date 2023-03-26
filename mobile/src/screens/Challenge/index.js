@@ -10,11 +10,11 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import { challenges } from '../../utils/challenges';
 import ToastMenager, { Toast } from 'toastify-react-native';
 
 import * as C from './styles';
 import { useSharedValue } from 'react-native-reanimated';
+import { useChallenge } from '../../hooks/useChallenge';
 
 const earningsByDifficulty = {
   easy: {
@@ -31,14 +31,19 @@ const earningsByDifficulty = {
   },
 };
 
-export function Challenge() {
+export function Challenge({ route }) {
+  const challengeId = route.params.id;
   const { loggedUser } = useAuth();
-  const { title, texts, code, testCases, difficulty } = challenges.find(
-    challenge => challenge.starId === loggedUser.starId
-  );
+  const { challenge } = useChallenge(challengeId);
+  const { title, texts, code, function_name, test_cases, difficulty } = challenge;
+
+  const testCases = Array.isArray(test_cases) ? test_cases : [test_cases];
+  const [slides, setSlides] = useState([]);
+  //   const { title, texts, code, testCases, difficulty } = challenges.find(
+  //     challenge => challenge.starId === loggedUser.starId
+  //   );
   const [userOutputs, setUserOutputs] = useState([]);
   const [isEnd, setIsEnd] = useState(false);
-  const [indicatorPositionX, setIndicatorPositionX] = useState(0);
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
   const sliderRef = useRef(null);
@@ -49,7 +54,6 @@ export function Challenge() {
   const CurrentIndicatorPositionX = useSharedValue(0);
 
   function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
-    // setIndicatorPositionX(contentOffset.x);
     CurrentIndicatorPositionX.value = contentOffset.x / 3;
     slideWidth.current.value = layoutMeasurement.width;
   }
@@ -68,7 +72,7 @@ export function Challenge() {
   }
 
   function addUserOutput(userOutput) {
-    if (userOutput) {
+    if (userOutput && !function_name) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
       });
@@ -76,6 +80,12 @@ export function Challenge() {
   }
 
   function formatCode(code, input) {
+    if (function_name) {
+      return code.concat(';' + function_name + ';');
+    }
+
+    if (!input) return code;
+
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (matches.length !== input.length) {
@@ -86,21 +96,29 @@ export function Challenge() {
     return code;
   }
 
+  function handleResult(result) {
+    if (!result.length) return;
+
+    setUserOutputs(currentUserOutputs => {
+      return [...currentUserOutputs, result];
+    });
+  }
+
   async function verifyCase({ input }, index) {
     let code = userCode.current.value;
-    if (input) {
-      code = formatCode(code, input);
-    }
+    code = formatCode(code, input);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
 
-      if (erros.length > 0) {
+      if (erros.length) {
         if (erros[0] instanceof Error) {
           throw erros[0];
         }
         throw erros[0].erroInterno;
       }
+
+      handleResult(resultado[1]);
     } catch (error) {
       handleError(error.message);
     }
@@ -111,30 +129,34 @@ export function Challenge() {
     testCases.forEach(verifyCase);
   }
 
-  const slides = [
-    {
-      id: 1,
-      component: <Problem title={title} texts={texts} />,
-    },
-    {
-      id: 2,
-      component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
-    },
-    {
-      id: 3,
-      component: (
-        <Result
-          setIsEnd={setIsEnd}
-          testCases={testCases}
-          userOutputs={userOutputs}
-          backToCode={backToCode}
-        />
-      ),
-    },
-  ];
+  useEffect(() => {
+    if (!Object.entries(challenge).length) return;
+    const slides = [
+      {
+        id: 1,
+        component: <Problem title={title} texts={texts} />,
+      },
+      {
+        id: 2,
+        component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
+      },
+      {
+        id: 3,
+        component: (
+          <Result
+            setIsEnd={setIsEnd}
+            testCases={testCases}
+            userOutputs={userOutputs}
+            backToCode={backToCode}
+          />
+        ),
+      },
+    ];
+    setSlides(slides);
+  }, [challenge, userOutputs]);
 
   useEffect(() => {
-    if (userOutputs.length > 0) {
+    if (userOutputs.length) {
       sliderRef.current.scrollToEnd();
     }
   }, [userOutputs]);
@@ -163,7 +185,7 @@ export function Challenge() {
             animationOutTiming={1000}
             animationStyle={'rightInOut'}
             width={320}
-            position="top"
+            position={'top'}
           />
 
           {!isEnd ? (

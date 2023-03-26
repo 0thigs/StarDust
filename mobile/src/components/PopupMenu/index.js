@@ -1,26 +1,25 @@
 import { useState } from 'react';
 import { Check, MoreVertical } from 'react-native-feather';
 import { ZoomIn, ZoomOut } from 'react-native-reanimated';
+import Popover, { PopoverPlacement } from 'react-native-popover-view';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { Text } from 'react-native';
 
 export function PopupMenu({ buttons }) {
-  const [isVisible, setIsVisible] = useState(false);
-  
   return (
-    <>
-      <C.Trigger>
-        <MoreVertical
-          width={25}
-          height={25}
-          color={theme.colors.green_500}
-          onPress={() => setIsVisible(true)}
-        />
-      </C.Trigger>
-      <C.Content transparent visible={isVisible}>
-        <C.Outside onTouchStart={() => setIsVisible(false)}></C.Outside>
-
-        <C.Menu entering={ZoomIn.duration(250)} exiting={ZoomOut.duration(250)}>
+    <Popover
+      debug
+      placement={PopoverPlacement.RIGHT}
+      from={
+        <C.Trigger>
+          <MoreVertical width={25} height={25} color={theme.colors.green_500} />
+        </C.Trigger>
+      }
+    >
+      <C.Content>
+        <Text>Oláaaaaaaaaaaaaa</Text>
+        {/* <C.Menu>
           {buttons.map(({ title, isToggle, action, value }, index) => (
             <C.Button
               key={title}
@@ -38,8 +37,8 @@ export function PopupMenu({ buttons }) {
               )}
             </C.Button>
           ))}
-        </C.Menu>
+        </C.Menu> */}
       </C.Content>
-    </>
+    </Popover>
   );
 }

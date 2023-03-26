@@ -5,14 +5,13 @@ import * as C from './styles';
 
 export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
   const [results, setResults] = useState([]);
-  console.log(results);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
 
   function handleVerificationButton() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const isAnswerCorrect = results.length > 0 && results.every(result => !!result);
+    const isAnswerCorrect = results.length && results.every(result => !!result);
     if (isAnswerCorrect) {
       setIsAnswerWrong(false);
       if (isAnswerVerified) setIsEnd(true);
@@ -32,7 +31,8 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
   }
 
   useEffect(() => {
-    if (userOutputs.length > 0) {
+    if (userOutputs.length) {
+
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);

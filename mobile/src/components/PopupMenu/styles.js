@@ -2,19 +2,16 @@ import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
 export const Trigger = styled.TouchableOpacity`
-  position: absolute;
-  top: -8px;
-  right: 0;
   padding: 12px;
 `;
 
-export const Content = styled.Modal``;
+export const Content = styled.View``;
 
 export const Outside = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Menu = styled(Animated.View)`
+export const Menu = styled.View`
   position: absolute;
   top: 24px;
   right: 24px;

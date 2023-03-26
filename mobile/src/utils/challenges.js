@@ -29,6 +29,7 @@ Saida: "Olá, mundo!"`,
     code: `
 var mensagem = leia()`,
     difficulty: 'easy',
+    categories: ['básico'],
   },
   {
     id: 2,
@@ -76,6 +77,7 @@ var tipoOxigenio
 
 escreva("lógico")`,
     difficulty: 'easy',
+    categories: ['básico', 'textos', 'números'],
   },
   {
     id: 2,
@@ -200,6 +202,7 @@ Saida: "Olá, mundo!"`,
         body: 'Lembre-se de prestar atenção nas letras maiúsculas e minúsculas, assim como a pontuação',
       },
     ],
+    function: 'pedirAjuda()',
     testCases: [
       {
         input: [],

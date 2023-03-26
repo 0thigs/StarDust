@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { BarChart, CheckCircle, Circle, Target, User } from 'react-native-feather';
 import { Button } from '../Button';
 import theme from '../../global/styles/theme';
@@ -6,17 +7,19 @@ const iconColor = theme.colors.gray_500;
 const iconSize = 12;
 
 export function Challenge({
-  title,
+  id,
+  name,
   difficulty,
-  likes,
-  votes,
-  totalCompletions,
+  acceptanceRate,
+  totalCompletitions,
   author,
   categories,
   isCompleted,
 }) {
-  function getAcceptanceRate() {
-    return (likes / votes) * 100;
+  const navigation = useNavigation();
+
+  function handleButtonPress() {
+    navigation.navigate('Challenge', { id });
   }
 
   return (
@@ -25,7 +28,7 @@ export function Challenge({
         <C.Difficulty difficulty={difficulty}>
           <C.DifficultyName difficulty={difficulty}>{difficulty}</C.DifficultyName>
         </C.Difficulty>
-        <C.Title>{title}</C.Title>
+        <C.Title>{name}</C.Title>
       </C.Header>
       <C.Info>
         <C.Status>
@@ -41,11 +44,11 @@ export function Challenge({
         </C.Status>
         <C.Status>
           <BarChart color={iconColor} fontSize={iconSize} />
-          <C.StatusText>{getAcceptanceRate()}%</C.StatusText>
+          <C.StatusText>{acceptanceRate}%</C.StatusText>
         </C.Status>
         <C.Status>
           <Target color={iconColor} fontSize={iconSize} />
-          <C.StatusText>{totalCompletions}</C.StatusText>
+          <C.StatusText>{totalCompletitions}</C.StatusText>
         </C.Status>
         <C.Status>
           <User color={iconColor} fontSize={iconSize} />
@@ -61,6 +64,7 @@ export function Challenge({
         title={isCompleted ? 'Praticar' : 'Resolver'}
         color={theme.colors.black}
         background={theme.colors.green_500}
+        onPress={handleButtonPress}
         isSmall
       />
     </C.Container>

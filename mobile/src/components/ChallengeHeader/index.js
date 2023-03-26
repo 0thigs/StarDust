@@ -54,7 +54,6 @@ export function ChallengeHeader({
   }
 
   useEffect(() => {
-    console.log({ slideWidth });
   }, [CurrentIndicatorPositionX]);
 
   return (

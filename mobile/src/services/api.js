@@ -109,6 +109,29 @@ export default {
     return data;
   },
 
+  getChallenge: async challengeId => {
+    const { data, error } = await supabase
+      .from('challenges')
+      .select('*, test_cases (*)')
+      .eq('id', challengeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const challenge = data[0];
+    return challenge;
+  },
+
+  getTestCases: async challengeId => {
+    const { data, error } = await supabase
+      .from('test_cases')
+      .select('*')
+      .eq('challenge_id', challengeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   getCategories: async () => {
     const { data, error } = await supabase.from('categories').select('*');
     if (error) {

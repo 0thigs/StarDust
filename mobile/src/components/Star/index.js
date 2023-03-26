@@ -25,20 +25,18 @@ import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
 const animationDuration = 800;
+const delay = 300;
 export const starHeight = 100;
 
 export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const { rocket } = useRocket(loggedUser.rocket_id, isLastUnlockedStar);
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
-  const isLastUnlockedStar = lastUnlockedStarId === id;
-
-  const { rocket } = useRocket(loggedUser.rocket_id, isLastUnlockedStar);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
-  const delay = 300;
-
   const navigation = useNavigation();
+  const isLastUnlockedStar = lastUnlockedStarId === id;
 
   const StarScale = useSharedValue(1);
   const StarAnimatedStyle = useAnimatedStyle(() => {

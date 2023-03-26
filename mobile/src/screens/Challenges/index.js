@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useState, useEffect, useMemo } from 'react';
+import { useChallenge } from '../../hooks/useChallenge';
 
 import { View } from 'react-native';
+import { Loading } from '../../components/Loading';
 import { Challenge } from '../../components/Challenge';
 import { SelectInput } from '../../components/SelectInput_';
-import { challenges } from '../../utils/challenges';
 import { filters } from '../../utils/filters';
 
-import * as C from './styles';
-import { useMemo } from 'react';
 import { X } from 'react-native-feather';
+import * as C from './styles';
 import theme from '../../global/styles/theme';
 
 const difficultyTable = {
@@ -19,28 +18,11 @@ const difficultyTable = {
 };
 
 export function Challenges() {
-  const {
-    loggedUser: { completed_challenges_ids },
-  } = useAuth();
-
-  const [_Challenges, set_Challenges] = useState([]);
+  const { challenges } = useChallenge();
+  const [filteredChallenges, setFilteredChallenges] = useState([]);
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  function isChalllengeCompleted(id) {
-    return completed_challenges_ids.includes(id);
-  }
-
-  //   async function getChallenges() {
-  //     try {
-  //       const challenges = await api.getChallenges();
-  //       console.log(challenges);
-  //       setChallenges(challenges);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
 
   function getDifficulty(difficultyName) {
     for (const difficulty in difficultyTable) {
@@ -106,14 +88,14 @@ export function Challenges() {
     }
     setTags(currentTags);
     const filteredChallenges = filterChallenges(currentTags);
-    set_Challenges(filteredChallenges);
+    setFilteredChallenges(filteredChallenges);
   }
 
   function handleTagButtonPress(type, value) {
     let updatedTags = [];
 
     if (type === 'categories') {
-      const updatedCategories = categories.filter(category => category !== value);
+      const updatedCategories = [...categories].filter(category => category !== value);
       setCategories(updatedCategories);
 
       const targetTag = tags.find(tag => tag.type === 'categories');
@@ -125,7 +107,7 @@ export function Challenges() {
 
     setTags(updatedTags);
     const filteredChallenges = filterChallenges(updatedTags);
-    set_Challenges(filteredChallenges);
+    setFilteredChallenges(filteredChallenges);
   }
 
   function setChallenges(challenge) {
@@ -134,10 +116,11 @@ export function Challenges() {
   }
 
   useEffect(() => {
-    const filteredChallenges = challenges.map(setChallenges).filter(challenge => !challenge.starId);
-    set_Challenges(filteredChallenges);
-    //   getChallenges();
-  }, []);
+    if (challenges.length) {
+      setFilteredChallenges(challenges);
+      setIsLoading(false);
+    }
+  }, [challenges]);
 
   return (
     <C.Container>
@@ -179,37 +162,41 @@ export function Challenges() {
           </View>
         ))}
       </C.TagsList>
-      <C.ChallengesList
-        data={_Challenges}
-        keyExtractor={challenge => challenge.id}
-        renderItem={({
-          item: {
-            id,
-            title,
-            difficulty,
-            likes,
-            votes,
-            author,
-            totalCompletions,
-            categories,
-            isCompleted,
-          },
-        }) => {
-          return (
-            <Challenge
-              id={id}
-              title={title}
-              difficulty={difficultyTable[difficulty]}
-              likes={likes}
-              votes={votes}
-              totalCompletions={totalCompletions}
-              author={author}
-              categories={categories}
-              isCompleted={isCompleted}
-            />
-          );
-        }}
-      />
+      {isLoading ? (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Loading isAnimation={true} />
+        </View>
+      ) : (
+        <C.ChallengesList
+          data={filteredChallenges}
+          keyExtractor={challenge => challenge.id}
+          renderItem={({
+            item: {
+              id,
+              name,
+              difficulty,
+              acceptanceRate,
+              author,
+              totalCompletitions,
+              categories,
+              isCompleted,
+            },
+          }) => {
+            return (
+              <Challenge
+                id={id}
+                name={name}
+                difficulty={difficultyTable[difficulty]}
+                acceptanceRate={acceptanceRate}
+                totalCompletitions={totalCompletitions}
+                author={author}
+                categories={categories}
+                isCompleted={isCompleted}
+              />
+            );
+          }}
+        />
+      )}
     </C.Container>
   );
 }

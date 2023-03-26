@@ -67,7 +67,7 @@ export function Home() {
     const timer = setTimeout(() => {
       setIsEndTransition(true);
       setIsModalVisible(true);
-    }, 2500);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 

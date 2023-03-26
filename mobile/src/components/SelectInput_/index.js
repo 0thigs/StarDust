@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { ChevronDown, ChevronUp, Search } from 'react-native-feather';
