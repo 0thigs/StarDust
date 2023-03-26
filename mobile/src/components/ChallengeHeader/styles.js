@@ -3,7 +3,7 @@ import Animated from 'react-native-reanimated';
 
 export const Container = styled.View`
   width: 100%;
-  padding-top: 12px;
+  padding-top: 24px;
   background-color: ${prop => prop.theme.colors.gray_900};
 `;
 

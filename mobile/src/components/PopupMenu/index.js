@@ -1,25 +1,28 @@
 import { useState } from 'react';
 import { Check, MoreVertical } from 'react-native-feather';
-import { ZoomIn, ZoomOut } from 'react-native-reanimated';
-import Popover, { PopoverPlacement } from 'react-native-popover-view';
+import { Popover, usePopover } from 'react-native-modal-popover';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { Text } from 'react-native';
 
 export function PopupMenu({ buttons }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [popOverAnchor, setPopOverAnchor] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
+    usePopover();
+
   return (
-    <Popover
-      debug
-      placement={PopoverPlacement.RIGHT}
-      from={
-        <C.Trigger>
-          <MoreVertical width={25} height={25} color={theme.colors.green_500} />
-        </C.Trigger>
-      }
-    >
-      <C.Content>
-        <Text>Oláaaaaaaaaaaaaa</Text>
-        {/* <C.Menu>
+    <>
+      <C.Trigger ref={touchableRef} onPress={openPopover}>
+        <MoreVertical width={25} height={25} color={theme.colors.green_500} />
+      </C.Trigger>
+      <Popover
+        contentStyle={{ backgroundColor: theme.colors.blue_700 }}
+        arrowStyle={{ borderTopColor: theme.colors.blue_700 }}
+        visible={popoverVisible}
+        fromRect={popoverAnchorRect}
+        onClose={closePopover}
+      >
+        <C.Menu>
           {buttons.map(({ title, isToggle, action, value }, index) => (
             <C.Button
               key={title}
@@ -37,8 +40,8 @@ export function PopupMenu({ buttons }) {
               )}
             </C.Button>
           ))}
-        </C.Menu> */}
-      </C.Content>
-    </Popover>
+        </C.Menu>
+      </Popover>
+    </>
   );
 }

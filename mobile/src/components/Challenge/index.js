@@ -8,7 +8,7 @@ const iconSize = 12;
 
 export function Challenge({
   id,
-  name,
+  title,
   difficulty,
   acceptanceRate,
   totalCompletitions,
@@ -28,7 +28,7 @@ export function Challenge({
         <C.Difficulty difficulty={difficulty}>
           <C.DifficultyName difficulty={difficulty}>{difficulty}</C.DifficultyName>
         </C.Difficulty>
-        <C.Title>{name}</C.Title>
+        <C.Title>{title}</C.Title>
       </C.Header>
       <C.Info>
         <C.Status>

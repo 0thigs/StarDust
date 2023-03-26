@@ -1,49 +1,103 @@
-import { View } from 'react-native';
+import { useState, useEffect, useMemo } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { ChevronDown, ChevronUp, Search } from 'react-native-feather';
-import SelectDropdown from 'react-native-select-dropdown';
 import theme from '../../global/styles/theme';
+import api from '../../services/api';
+import { CategoriesList, Category } from '../Challenge/styles';
+import { Popover, usePopover } from 'react-native-modal-popover';
 import * as C from './styles';
 const iconSize = 12;
 const iconColor = theme.colors.gray_500;
 
-export function SelectInput({ type, options, label }) {
-  const hasSearch = type === 'tags';
+export function SelectInput({ type, options, label, selectedCategories, handleSelectChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
+    usePopover();
+
+  function filterCategories() {
+    if (!searchText) {
+      return categories;
+    }
+
+    function removeAccentuation(word) {
+      return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    return categories.filter(category =>
+      removeAccentuation(category.name.toLowerCase()).includes(
+        removeAccentuation(searchText.toLowerCase())
+      )
+    );
+  }
+
+  async function getCategories() {
+    try {
+      const categories = await api.getCategories();
+      setCategories(categories);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const filteredCategories = useMemo(filterCategories, [searchText, categories]);
 
   return (
     <C.Container>
-      <C.Label>{label}</C.Label>
-      <SelectDropdown
-        data={options}
-        onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
-        }}
-        defaultButtonText={hasSearch ? 'Tags' : options[0].title}
-        buttonTextStyle={C.attrStyles.buttonText}
-        buttonStyle={[C.attrStyles.button, { width: hasSearch ? 200 : 150 }]}
-        buttonTextAfterSelection={(selectedItem, index) => selectedItem.title}
-        dropdownStyle={C.attrStyles.dropdown}
-        dropdownBackgroundColor={theme.colors.background}
-        rowStyle={C.attrStyles.row}
-        searchInputStyle={C.attrStyles.search}
-        renderDropdownIcon={isOpen =>
-          isOpen ? (
-            <ChevronUp fontSize={iconSize} color={iconColor} />
-          ) : (
-            <ChevronDown fontSize={iconSize} color={iconColor} />
-          )
-        }
-        renderCustomizedRowChild={({ title, icon }, index) => (
-          <C.Option>
-            {icon && icon}
-            <C.Title>{title}</C.Title>
-          </C.Option>
+      <C.Select ref={touchableRef} activeOpacity={0.7} onPress={openPopover}>
+        <C.Label>{label}</C.Label>
+        {isOpen ? (
+          <ChevronUp fontSize={iconSize} color={iconColor} />
+        ) : (
+          <ChevronDown fontSize={iconSize} color={iconColor} />
         )}
-        search
-        searchInputTxtColor={theme.colors.gray_700}
-        searchPlaceHolder={'Pesquisar'}
-        searchPlaceHolderColor={theme.colors.gray_700}
-        renderSearchInputLeftIcon={() => <Search fontSize={iconSize} color={iconColor} />}
-      />
+      </C.Select>
+      <Popover
+        contentStyle={{ borderRadius: 8, backgroundColor: theme.colors.gray_900 }}
+        arrowStyle={{ borderTopColor: theme.colors.gray_900 }}
+        visible={popoverVisible}
+        fromRect={popoverAnchorRect}
+        onClose={closePopover}
+        placement={'bottom'}
+      >
+        {type === 'categories' ? (
+          <C.Content>
+            <C.Search>
+              <Search fontSize={iconSize} color={theme.colors.gray_500} />
+              <C.Input placeholder={'Pesquisar...'} onChangeText={setSearchText} />
+            </C.Search>
+            <CategoriesList>
+              {filteredCategories.map(({ id, name }) => {
+                const isSelected = selectedCategories.includes(name);
+                return (
+                  <TouchableOpacity key={id} onPress={() => handleSelectChange(type, name)}>
+                    <Category isSelected={isSelected}>{name}</Category>
+                  </TouchableOpacity>
+                );
+              })}
+            </CategoriesList>
+          </C.Content>
+        ) : (
+          options.map(({ title, icon, color }, index) => (
+            <C.Option
+              key={title}
+              isLast={index === options.length - 1}
+              onPress={() => {
+                closePopover();
+                handleSelectChange(type, title, icon, color);
+              }}
+            >
+              {icon && icon}
+              <C.Title color={color}>{title}</C.Title>
+            </C.Option>
+          ))
+        )}
+      </Popover>
     </C.Container>
   );
 }

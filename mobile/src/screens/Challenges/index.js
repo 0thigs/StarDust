@@ -4,7 +4,7 @@ import { useChallenge } from '../../hooks/useChallenge';
 import { View } from 'react-native';
 import { Loading } from '../../components/Loading';
 import { Challenge } from '../../components/Challenge';
-import { SelectInput } from '../../components/SelectInput_';
+import { SelectInput } from '../../components/SelectInput';
 import { filters } from '../../utils/filters';
 
 import { X } from 'react-native-feather';
@@ -61,7 +61,7 @@ export function Challenges() {
   }
 
   function filterChallenges(currentTags) {
-    let filteredChallenges = challenges.map(setChallenges).filter(challenge => !challenge.starId);
+    let filteredChallenges = challenges;
 
     for (const tag of currentTags) {
       filteredChallenges = filteredChallenges.filter(challenge => {
@@ -108,11 +108,6 @@ export function Challenges() {
     setTags(updatedTags);
     const filteredChallenges = filterChallenges(updatedTags);
     setFilteredChallenges(filteredChallenges);
-  }
-
-  function setChallenges(challenge) {
-    const isCompleted = isChalllengeCompleted(challenge.id);
-    return { ...challenge, isCompleted };
   }
 
   useEffect(() => {
@@ -173,7 +168,7 @@ export function Challenges() {
           renderItem={({
             item: {
               id,
-              name,
+              title,
               difficulty,
               acceptanceRate,
               author,
@@ -185,7 +180,7 @@ export function Challenges() {
             return (
               <Challenge
                 id={id}
-                name={name}
+                title={title}
                 difficulty={difficultyTable[difficulty]}
                 acceptanceRate={acceptanceRate}
                 totalCompletitions={totalCompletitions}

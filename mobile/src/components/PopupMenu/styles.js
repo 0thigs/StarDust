@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
 export const Trigger = styled.TouchableOpacity`
-  padding: 12px;
+
 `;
 
 export const Content = styled.View``;
@@ -11,10 +11,7 @@ export const Outside = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Menu = styled.View`
-  position: absolute;
-  top: 24px;
-  right: 24px;
+export const Menu = styled(Animated.View)`
   background-color: ${({ theme }) => theme.colors.green_900};
   padding: 8px 12px;
   border-radius: 8px;
