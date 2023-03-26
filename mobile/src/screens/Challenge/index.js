@@ -33,6 +33,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   const challengeId = route.params.id;
+  console.log(challengeId);
   const { loggedUser } = useAuth();
   const { challenge } = useChallenge(challengeId);
   const { title, texts, code, function_name, test_cases, difficulty } = challenge;

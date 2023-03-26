@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useState } from 'react';
 import { useEditor } from '../../hooks/useEditor';
+import { useNavigation } from '@react-navigation/native';
+import { useAnimatedStyle } from 'react-native-reanimated';
 import { PopupMenu } from '../PopupMenu';
 import { RangeInput } from '../RangeInput';
 import * as C from './styles';

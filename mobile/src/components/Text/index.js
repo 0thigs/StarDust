@@ -7,13 +7,6 @@ import { Editor } from '../Editor';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
 
-const copy = `# h1 Heading 8-)
-
-**This is some bold text!**
-
-This is normal text
-`;
-
 export function Text({ type, title, body, isRendered }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const iconSize = 25;

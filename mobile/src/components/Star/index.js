@@ -1,9 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
 import { useRocket } from '../../hooks/useRocket';
-import * as C from './styles';
 
 import LockedStar from '../../assets/StarAssets/locked-star.svg';
 import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
@@ -21,9 +20,13 @@ import {
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
+
 import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
+import api from '../../services/api';
+import * as C from './styles';
+import { Loading } from '../Loading';
 const animationDuration = 800;
 const delay = 300;
 export const starHeight = 100;
@@ -33,6 +36,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const { rocket } = useRocket(loggedUser.rocket_id, isLastUnlockedStar);
   const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
     useScroll();
+  const [isLoading, setIsloading] = useState(false);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const navigation = useNavigation();
@@ -45,15 +49,28 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     };
   });
 
+  async function handleStarNavigation() {
+    if (isChallenge) {
+      try {
+        const challengeId = await api.getChallengeId(id);
+        navigation.navigate('Challenge', { id: challengeId });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigation.navigate('Lesson', { id });
+    }
+  }
+
   function handleStarPress() {
     starAnimation.current.play(10, 50);
     starSound.current.play();
-
+    setIsloading(true);
     setTimeout(() => {
       updateLoggedUser('starId', id, false);
-      const screen = isChallenge ? 'Challenge' : 'Lesson';
-      navigation.navigate(screen);
-    }, 100);
+      handleStarNavigation();
+      setIsloading(false);
+    }, 15);
   }
 
   const RocketRotate = useSharedValue(180);
@@ -105,11 +122,12 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
               loop={false}
               duration={2500}
               style={{ width: 100, height: starHeight }}
-              colorFilters={[{ keypath: 'Star 1', color: 'red' }]}
             />
           )}
         </C.StarContainer>
-        <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>
+        <C.StarContent isUnlocked={isUnlocked}>
+          {isLoading ? <Loading /> : <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>}
+        </C.StarContent>
         <>
           <C.StarSign isUnlocked={isUnlocked}>
             <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>

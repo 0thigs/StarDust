@@ -1,5 +1,6 @@
 import { createContext, useReducer } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { usePlanet } from '../hooks/usePlanet';
 import { questions } from '../utils/questions';
 
 export const LessonContext = createContext();
@@ -7,11 +8,11 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const initialState = {
-  currentStage: stages[1],
+  currentStage: stages[0],
   questions: [],
   currentQuestion: 0,
   wrongsCount: 0,
-  livesCount: 0,
+  livesCount: 5,
   secondsCount: 0,
   time: '',
   verifyAnswer: () => {},
@@ -38,8 +39,9 @@ const LessonReducer = (state, action) => {
         currentQuestion: nextQuestion,
         currentStage: isEnd ? stages[2] : state.currentStage,
       };
-    case 'reorderQuestions':
-      const reorderedQuestions = state.questions.sort(() => {
+    case 'setQuestions':
+      const questions = action.payload;
+      const reorderedQuestions = questions.sort(() => {
         return Math.random() - 0.5;
       });
       return {
@@ -79,12 +81,6 @@ const LessonReducer = (state, action) => {
 };
 
 export const LessonProvider = ({ children }) => {
-  const { loggedUser } = useAuth();
-  const currentQuestions = questions.filter(question => question.starId === loggedUser.starId);
-
-  initialState.livesCount = loggedUser.lives;
-  initialState.questions = currentQuestions;
-
   const value = useReducer(LessonReducer, initialState);
 
   return <LessonContext.Provider value={value}>{children}</LessonContext.Provider>;

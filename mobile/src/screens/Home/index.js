@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { usePlanet } from '../../hooks/usePlanet';
 import { useScroll } from '../../hooks/useScroll';
 import { useAchievement } from '../../hooks/useAchievement';
 import { useWindowDimensions } from 'react-native';
@@ -12,7 +13,6 @@ import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
 import { Animation } from '../../components/Animation';
-import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
@@ -23,6 +23,7 @@ import * as C from './styles';
 
 export function Home() {
   const { loggedUser } = useAuth();
+  const { planets } = usePlanet();
   const { unlockedAchievements } = useAchievement();
   const { lastUnlockedStarYPosition } = useScroll();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,11 +34,9 @@ export function Home() {
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
-  function verifyIfIsStarUnlocked(star) {
-    if (loggedUser.unlocked_stars_ids.includes(star.id)) {
-      return { ...star, isUnlocked: true };
-    }
-    return star;
+  function verifyStarUnlocking(star) {
+    const isUnlocked = loggedUser.unlocked_stars_ids.includes(star.id);
+    return { ...star, isUnlocked };
   }
 
   function scrollToLastUnlockedStar() {
@@ -105,7 +104,7 @@ export function Home() {
                 name={name}
                 icon={icon}
                 image={image}
-                stars={stars.map(verifyIfIsStarUnlocked)}
+                stars={stars.map(verifyStarUnlocking)}
               />
             ))}
           </>

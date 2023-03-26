@@ -9,8 +9,10 @@ import {
   withTiming,
   withDelay,
 } from 'react-native-reanimated';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
-export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
+export function Planet({ name, image, icon, stars }) {
   const PlanetSignPosition = useSharedValue(-5);
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -28,9 +30,9 @@ export function Planet({ name, image: PlanetImage, icon: PlanetIcon, stars }) {
   return (
     <C.Container>
       <C.PlanetInfo>
-        <PlanetImage width={100} height={100} />
+        <SvgUri uri={getImage('planets', image)} width={100} height={100} />
         <C.PlanetSign style={PlanetSignAnimatedStyle}>
-          <PlanetIcon />
+        <SvgUri uri={getImage('planets', icon)} />
           <C.PlanetName>{name}</C.PlanetName>
         </C.PlanetSign>
       </C.PlanetInfo>

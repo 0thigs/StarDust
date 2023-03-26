@@ -21,8 +21,8 @@ import { useRocket } from '../../hooks/useRocket';
 
 export function LessonHeader() {
   const { loggedUser } = useAuth();
-  const [state, dispatch] = useLesson();
   const { rocket } = useRocket(loggedUser.rocket_id);
+  const [state, dispatch] = useLesson();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
 

@@ -194,7 +194,7 @@ function calcularEnergia(energia1, energia2) {
       },
       {
         type: 'alert',
-        body: 'Não se esqueça de usar o "retorna" na função',
+        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
       },
       {
         type: 'alert',
@@ -234,19 +234,24 @@ function hello() {
         body: 'Você precisa criar uma função chamada minutosParaCrons que converta uma quantidade de minutos terrestres em crons.',
       },
       {
-        type: 'markdown',
+        type: 'code',
         body: `
-Saida: "Olá, mundo!"`,
+Entrada: 240
+Saida: 4
+
+Entrada: 360
+Saida: 6`,
       },
       {
         type: 'alert',
-        body: 'Não se esqueça de usar o "retorna" na função',
+        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
       },
       {
         type: 'alert',
         body: 'Dica: Lembre-se de que um cron é igual a 60 minutos terrestres.',
       },
     ],
+    function: 'converterMinutosParaCrons()',
     testCases: [
       {
         input: [300],

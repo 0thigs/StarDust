@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
+import { usePlanet } from '../../hooks/usePlanet';
 import { useNavigation } from '@react-navigation/core';
 
 import { Metric } from '../Metric';
@@ -8,7 +9,6 @@ import { Button } from '../Button';
 import { Streak } from '../Streak';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
-import { planets } from '../../utils/planets';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
@@ -20,9 +20,11 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+const iconSize = 30;
 
-export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
+export function End({ star, isChallenge, _coins, _xp, _seconds }) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const { getCurrentPlanet } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -31,20 +33,18 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isStreakShown, setIsStreakShown] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
-  const starsRef = useRef();
-  const soundRef = useRef();
+  const starsRef = useRef(null);
+  const soundRef = useRef(null);
   const navigation = useNavigation();
-  const iconSize = 30;
 
-  function getNewData() {
+  function getUpdatedData() {
     const updatedCoins = coins + loggedUser.coins;
     const updatedXp = xp + loggedUser.xp;
     const updatedWeeklyXp = xp + loggedUser.weekly_xp;
 
     let completedPlanets = loggedUser.completed_planets;
     let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
-    let nextPlanet = null;
-    let nextStar = {};
+    let nextStar = null;
 
     const currentPlanet = planets.find(planet => planet.stars.some(star => star.id === starId));
     const currentStar = currentPlanet.stars.find(star => star.id === starId);
@@ -52,7 +52,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
 
     if (!nextStar) {
       completedPlanets += 1;
-      nextPlanet = planets[planets.indexOf(currentPlanet) + 1];
+      const nextPlanet = planets[planets.indexOf(currentPlanet) + 1];
       nextStar = nextPlanet.stars[0];
     }
 
@@ -71,7 +71,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   }
 
   async function updateUserData() {
-    const newData = getNewData();
+    const newData = getUpdatedData();
     for (key of Object.keys(newData)) {
       updateLoggedUser(key, newData[key]);
     }

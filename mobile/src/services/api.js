@@ -30,6 +30,18 @@ export default {
     return data;
   },
 
+  getPlanets: async () => {
+    const { data, error } = await supabase
+      .from('planets')
+      .select('*, stars (*)')
+      .order('order', { ascending: true })
+      .order('number', { foreignTable: 'stars', ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   getAvatar: async avatarId => {
     const { data, error } = await supabase.from('avatars').select('image').eq('id', avatarId);
     if (error) {
@@ -118,6 +130,15 @@ export default {
       throw new Error(error.message);
     }
     const challenge = data[0];
+    return challenge;
+  },
+
+  getChallengeId: async starId => {
+    const { data, error } = await supabase.from('challenges').select('id').eq('star_id', starId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const challenge = data[0].id;
     return challenge;
   },
 

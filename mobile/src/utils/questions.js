@@ -79,7 +79,7 @@ export const questions = [
   {
     starId: 2,
     type: 'selection',
-    stem: 'Como com que um programa escreva "que horas são?"',
+    stem: 'Como fazer que um programa escreva "que horas são?"',
     options: [
       'escreva(que horas são)',
       'imprima("que horas são")',
