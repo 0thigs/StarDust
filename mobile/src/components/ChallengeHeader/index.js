@@ -11,10 +11,9 @@ const iconSize = 25;
 
 export function ChallengeHeader({
   title,
-  indicatorPositionX,
-  slideWidth,
   sliderRef,
   CurrentIndicatorPositionX,
+  currentSlideIndex,
 }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
@@ -53,9 +52,6 @@ export function ChallengeHeader({
     sliderRef.current.scrollToIndex({ index });
   }
 
-  useEffect(() => {
-  }, [CurrentIndicatorPositionX]);
-
   return (
     <C.Container>
       <C.Top>
@@ -67,13 +63,13 @@ export function ChallengeHeader({
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>
-          <C.Title isActive={0 === CurrentIndicatorPositionX.value}>Problema</C.Title>
+          <C.Title isActive={currentSlideIndex === 0}>Problema</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(1)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth === CurrentIndicatorPositionX.value}>Código</C.Title>
+          <C.Title isActive={currentSlideIndex === 1}>Código</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(2)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth * 2 === CurrentIndicatorPositionX.value}>Resultado</C.Title>
+          <C.Title isActive={currentSlideIndex === 2}>Resultado</C.Title>
         </C.NavigationButton>
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />

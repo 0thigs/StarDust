@@ -1,8 +1,20 @@
-import { useCallback, memo } from 'react';
+import { useCallback, memo, useRef } from 'react';
 import { FlatList, View, useWindowDimensions } from 'react-native';
 
-function SliderComponent({ sliderRef, slides, onScroll, scrollEnabled = true }) {
+function SliderComponent({
+  sliderRef,
+  slides,
+  onScroll,
+  scrollEnabled = true,
+  setCurrentSlideIndex,
+}) {
   const { width } = useWindowDimensions();
+
+  const onViewableItemsChanged = useRef(({ viewableItems, changed }) => {
+    if (!setCurrentSlideIndex) return;
+    setCurrentSlideIndex(viewableItems[0].index);
+  });
+  const viewabilityConfig = { viewAreaCoveragePercentThreshold: 40, waitForInteraction: true };
 
   const renderItem = useCallback(
     ({ item: { component } }) => (
@@ -32,6 +44,8 @@ function SliderComponent({ sliderRef, slides, onScroll, scrollEnabled = true }) 
       scrollEventThrottle={32}
       onScroll={onScroll}
       scrollEnabled={scrollEnabled}
+      onViewableItemsChanged={onViewableItemsChanged.current}
+      viewabilityConfig={viewabilityConfig}
     />
   );
 }

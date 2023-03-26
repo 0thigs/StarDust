@@ -190,8 +190,7 @@ function calcularEnergia(energia1, energia2) {
       },
       {
         type: 'code',
-        body: `
-Saida: "Olá, mundo!"`,
+        body: `Saida: "Olá, mundo!"`,
       },
       {
         type: 'alert',

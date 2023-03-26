@@ -36,9 +36,10 @@ export function Challenge({ route }) {
   const { loggedUser } = useAuth();
   const { challenge } = useChallenge(challengeId);
   const { title, texts, code, function_name, test_cases, difficulty } = challenge;
-
   const testCases = Array.isArray(test_cases) ? test_cases : [test_cases];
+
   const [slides, setSlides] = useState([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   //   const { title, texts, code, testCases, difficulty } = challenges.find(
   //     challenge => challenge.starId === loggedUser.starId
   //   );
@@ -193,11 +194,16 @@ export function Challenge({ route }) {
               <ChallengeHeader
                 title={title}
                 sliderRef={sliderRef}
-                slideWidth={slideWidth.current.value}
                 CurrentIndicatorPositionX={CurrentIndicatorPositionX}
+                currentSlideIndex={currentSlideIndex}
               />
 
-              <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />
+              <Slider
+                sliderRef={sliderRef}
+                slides={slides}
+                onScroll={handleSliderScroll}
+                setCurrentSlideIndex={setCurrentSlideIndex}
+              />
             </>
           ) : (
             <End
