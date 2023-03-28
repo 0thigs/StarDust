@@ -12,7 +12,6 @@ import * as Icon from 'react-native-feather';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
 import theme from '../../global/styles/theme';
-import api from '../../services/api';
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
 import { Modal } from '../Modal';

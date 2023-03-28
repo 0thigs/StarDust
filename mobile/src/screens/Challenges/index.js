@@ -10,7 +10,6 @@ import { filters } from '../../utils/filters';
 import { X } from 'react-native-feather';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-
 const difficultyTable = {
   easy: 'Fácil',
   medium: 'Médio',
@@ -37,7 +36,6 @@ export function Challenges() {
   function getCategories(newCategory) {
     if (categories.some(category => category === newCategory)) {
       const updatedCategories = categories.filter(category => category !== newCategory);
-      console.log(updatedCategories);
       setCategories(updatedCategories);
       return updatedCategories;
     }
@@ -115,82 +113,84 @@ export function Challenges() {
       setFilteredChallenges(challenges);
       setIsLoading(false);
     }
-  }, [challenges]);
+  }, [challenges, categories]);
 
   return (
     <C.Container>
-      <C.FiltersList>
-        {filters.map(({ type, label, options }) => (
-          <SelectInput
-            key={type}
-            type={type}
-            label={label}
-            options={options}
-            selectedCategories={categories}
-            handleSelectChange={handleSelectChange}
-          />
-        ))}
-      </C.FiltersList>
-      <C.TagsList>
-        {tags.map(({ type, value, icon, color }) => (
-          <View key={value}>
-            {Array.isArray(value) ? (
-              value.map(value => (
-                <C.Tag key={value}>
-                  <C.TagName>{value}</C.TagName>
-                  <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
-                    <X width={22} color={theme.colors.gray_500} />
-                  </C.RemoveTagButton>
-                </C.Tag>
-              ))
-            ) : (
-              <C.Tag key={value}>
-                {icon && icon}
-                <C.TagName color={color}>
-                  {type === 'difficulty' ? difficultyTable[value] : getStatusName(value)}
-                </C.TagName>
-                <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
-                  <X width={22} color={theme.colors.gray_500} />
-                </C.RemoveTagButton>
-              </C.Tag>
-            )}
-          </View>
-        ))}
-      </C.TagsList>
       {isLoading ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Loading isAnimation={true} />
         </View>
       ) : (
-        <C.ChallengesList
-          data={filteredChallenges}
-          keyExtractor={challenge => challenge.id}
-          renderItem={({
-            item: {
-              id,
-              title,
-              difficulty,
-              acceptanceRate,
-              author,
-              totalCompletitions,
-              categories,
-              isCompleted,
-            },
-          }) => {
-            return (
-              <Challenge
-                id={id}
-                title={title}
-                difficulty={difficultyTable[difficulty]}
-                acceptanceRate={acceptanceRate}
-                totalCompletitions={totalCompletitions}
-                author={author}
-                categories={categories}
-                isCompleted={isCompleted}
+        <>
+          <C.FiltersList>
+            {filters.map(({ type, label, options }) => (
+              <SelectInput
+                key={type}
+                type={type}
+                label={label}
+                options={options}
+                selectedCategories={categories}
+                handleSelectChange={handleSelectChange}
               />
-            );
-          }}
-        />
+            ))}
+          </C.FiltersList>
+          <C.TagsList>
+            {tags.map(({ type, value, icon, color }) => (
+              <View key={value}>
+                {Array.isArray(value) ? (
+                  value.map(value => (
+                    <C.Tag key={value}>
+                      <C.TagName>{value}</C.TagName>
+                      <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
+                        <X width={22} color={theme.colors.gray_500} />
+                      </C.RemoveTagButton>
+                    </C.Tag>
+                  ))
+                ) : (
+                  <C.Tag key={value}>
+                    {icon && icon}
+                    <C.TagName color={color}>
+                      {type === 'difficulty' ? difficultyTable[value] : getStatusName(value)}
+                    </C.TagName>
+                    <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
+                      <X width={22} color={theme.colors.gray_500} />
+                    </C.RemoveTagButton>
+                  </C.Tag>
+                )}
+              </View>
+            ))}
+          </C.TagsList>
+          <C.ChallengesList
+            data={filteredChallenges}
+            keyExtractor={challenge => challenge.id}
+            renderItem={({
+              item: {
+                id,
+                title,
+                difficulty,
+                acceptanceRate,
+                author,
+                totalCompletitions,
+                categories,
+                isCompleted,
+              },
+            }) => {
+              return (
+                <Challenge
+                  id={id}
+                  title={title}
+                  difficulty={difficultyTable[difficulty]}
+                  acceptanceRate={acceptanceRate}
+                  totalCompletitions={totalCompletitions}
+                  author={author}
+                  categories={categories}
+                  isCompleted={isCompleted}
+                />
+              );
+            }}
+          />
+        </>
       )}
     </C.Container>
   );

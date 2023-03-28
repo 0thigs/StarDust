@@ -28,7 +28,6 @@ export function Profile() {
       const unlockedAchievements = achievements.filter(achivement =>
         user.unlocked_achievements_ids.includes(achivement.id)
       );
-      console.log({ unlockedAchievements });
 
       setUnlockedAchievements(unlockedAchievements);
       setUser(user);

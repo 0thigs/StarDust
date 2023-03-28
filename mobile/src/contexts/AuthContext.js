@@ -19,7 +19,7 @@ const fakeLoggedUser = {
   achievements_ids_to_rescue: [],
   acquired_rockets_ids: ['03f3f359-a0ee-42c1-bd5f-b2ad01810d47'],
   acquired_avatars_ids: ['bd3313ad-16ef-49ae-baad-34a104752eb5'],
-  completed_challenges_ids: [1],
+  completed_challenges_ids: [],
   avatar_id: '54eb3e10-b1b2-44aa-a496-ba7f042e09a2',
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',

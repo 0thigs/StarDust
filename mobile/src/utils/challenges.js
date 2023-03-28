@@ -61,7 +61,7 @@ saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
     testCases: [
       {
         input: null,
-        expectedOutput: `lógico`,
+        expectedOutput: `tipo nome: texto, tipo temperatura: número, tipo temOxigênio: lógico`,
         isLocked: false,
       },
     ],
@@ -75,7 +75,7 @@ var tipoNome
 var tipoTemperatura
 var tipoOxigenio
 
-escreva("lógico")`,
+escreva()`,
     difficulty: 'easy',
     categories: ['básico', 'textos', 'números'],
   },
@@ -109,7 +109,7 @@ saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
     testCases: [
       {
         input: null,
-        expectedOutput: `lógico`,
+        expectedOutput: `tipo nomeEstrela: texto, tipo nomeEstrela: lógico`,
         isLocked: false,
       },
     ],
@@ -276,5 +276,67 @@ function converterMinutosParaCrons(minutos) {
 }`,
     difficulty: 'easy',
     categories: ['básico', 'matemática', 'números'],
+  },
+];
+
+[
+  {
+    starId: null,
+    title: 'Área do escudo protetor',
+    texts: [
+      {
+        type: 'default',
+        body: 'Em um planeta distante da galáxia, os habitantes da Terra foram desafiados a calcular a área de um triângulo que representa o escudo protetor da cidade espacial.',
+      },
+      {
+        type: 'default',
+        body: 'Sua tarefa é calcular a área desse triângulo analisando sua base e altura.',
+      },
+      {
+        type: 'code',
+        body: `
+    Entrada: (3, 2)
+    Resultado: 3
+    
+    Entrada: (7, 4)
+    Resultado: 14
+    
+    Entrada: (10, 10)
+    Resultado: 50`,
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se: a área de um triângulo é base vezes a altura dividido por 2',
+      },
+      {
+        type: 'alert',
+        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
+      },
+    ],
+    function: 'converterMinutosParaCrons',
+    testCases: [
+      {
+        input: [10, 5],
+        expectedOutput: 25,
+        isLocked: false,
+      },
+      {
+        input: [8, 12],
+        expectedOutput: 48,
+        isLocked: false,
+      },
+      {
+        input: [15, 3],
+        expectedOutput: 22.5,
+        isLocked: false,
+      },
+    ],
+
+    code: `
+funcao calcularAreaEscudo(base, altura) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
   },
 ];

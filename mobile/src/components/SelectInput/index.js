@@ -10,7 +10,6 @@ const iconSize = 12;
 const iconColor = theme.colors.gray_500;
 
 export function SelectInput({ type, options, label, selectedCategories, handleSelectChange }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [searchText, setSearchText] = useState('');
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
@@ -42,7 +41,7 @@ export function SelectInput({ type, options, label, selectedCategories, handleSe
   }
 
   useEffect(() => {
-    getCategories();
+    if (type === 'categories') getCategories();
   }, []);
 
   const filteredCategories = useMemo(filterCategories, [searchText, categories]);
@@ -51,7 +50,7 @@ export function SelectInput({ type, options, label, selectedCategories, handleSe
     <C.Container>
       <C.Select ref={touchableRef} activeOpacity={0.7} onPress={openPopover}>
         <C.Label>{label}</C.Label>
-        {isOpen ? (
+        {popoverVisible ? (
           <ChevronUp fontSize={iconSize} color={iconColor} />
         ) : (
           <ChevronDown fontSize={iconSize} color={iconColor} />

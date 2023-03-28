@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
-import { getUnlockedAchievements } from '../utils/achivements';
+// import { getUnlockedAchievements } from '../utils/achivements';
 import api from '../services/api';
 
 export function useAchievement() {
@@ -15,6 +15,27 @@ export function useAchievement() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function checkAchievement(achievement, user) {
+    if (user.unlocked_achievements_ids.includes(achievement.id)) {
+      return;
+    }
+
+    const userCurrentCount = Array.isArray(user[achievement.metric])
+      ? user[achievement.metric].length - 1
+      : user[achievement.metric];
+
+    const isAchievementUnlocked = userCurrentCount >= achievement.requiredCount;
+    if (isAchievementUnlocked) {
+      return { ...achievement, isUnlocked: true };
+    }
+  }
+
+  function getUnlockedAchievements(user) {
+    return achievements
+      .map(achievement => checkAchievement(achievement, user))
+      .filter(achievement => achievement !== undefined); // bug fix;
   }
 
   async function updateUnlockedAchievementsIds() {

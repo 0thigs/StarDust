@@ -287,7 +287,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     correctItemsIdsSequence: [4, 2],
   },
   {
-    starId: 6,
+    starId: 5,
     type: 'drag-and-drop-click',
     stem: 'Concatene os textos da maneira apropriada',
     lines: [

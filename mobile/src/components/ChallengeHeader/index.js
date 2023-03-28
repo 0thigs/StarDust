@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle } from 'react-native-reanimated';
+
 import { PopupMenu } from '../PopupMenu';
 import { RangeInput } from '../RangeInput';
+import { Modal } from '../Modal';
+import { Button } from '../Button';
+
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
@@ -18,6 +22,7 @@ export function ChallengeHeader({
 }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
 
   const popupMenuButtons = [
@@ -35,8 +40,6 @@ export function ChallengeHeader({
     },
   ];
 
-  //   const CurrentIndicatorPositionX = useSharedValue(indicatorPositionX);
-
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: CurrentIndicatorPositionX.value }],
@@ -44,9 +47,7 @@ export function ChallengeHeader({
   });
 
   function handleBackButtonPress() {
-    navigation.reset({
-      routes: [{ name: 'DrawerRoutes' }],
-    });
+    setIsModalVisible(true);
   }
 
   function handleNavButtonPress(index) {
@@ -77,6 +78,30 @@ export function ChallengeHeader({
       <C.Indicator style={IndicatorAnimatedStyle} />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
+
+      <Modal
+        isVisible={isModalVisible}
+        type={'crying'}
+        playSong={false}
+        title={'Deseja mesmo sair?'}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Sair'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={() => navigation.goBack()}
+            />
+            <Button
+              title={'Voltar'}
+              color={theme.colors.black}
+              background={theme.colors.green_300}
+              onPress={() => setIsModalVisible(false)}
+            />
+          </>
+        }
+      />
     </C.Container>
   );
 }

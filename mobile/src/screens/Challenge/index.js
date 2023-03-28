@@ -10,7 +10,7 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 
 import * as C from './styles';
 import { useSharedValue } from 'react-native-reanimated';
@@ -18,24 +18,24 @@ import { useChallenge } from '../../hooks/useChallenge';
 
 const earningsByDifficulty = {
   easy: {
-    coins: 50,
-    xp: 3000,
+    coins: 20,
+    xp: 125,
   },
   medium: {
-    coins: 100,
-    xp: 150,
+    coins: 30,
+    xp: 20,
   },
   hard: {
-    coins: 150,
-    xp: 200,
+    coins: 40,
+    xp: 30,
   },
 };
 
 export function Challenge({ route }) {
-  const challengeId = '62fef857-42fa-4602-8483-4dc4a446927d';
+    // const challengeId = route.params.id;
+  const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
   const { challenge } = useChallenge(challengeId);
-  const { title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
-  const testCases = Array.isArray(test_cases) ? test_cases : [test_cases];
+  const { id, title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
 
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -44,15 +44,13 @@ export function Challenge({ route }) {
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
   const sliderRef = useRef(null);
-  const slideWidth = useRef({ value: 0 });
   const seconds = useRef({ value: 0 });
   const userCode = useRef({ value: '' });
 
   const CurrentIndicatorPositionX = useSharedValue(0);
 
-  function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
+  function handleSliderScroll({ nativeEvent: { contentOffset } }) {
     CurrentIndicatorPositionX.value = contentOffset.x / 3;
-    slideWidth.current.value = layoutMeasurement.width;
   }
 
   function backToCode() {
@@ -78,7 +76,8 @@ export function Challenge({ route }) {
 
   function formatCode(code, input) {
     if (function_name) {
-      return code.concat(';' + function_name + ';');
+      const params = '(' + input.join(',') + ')';
+      return code.concat(';' + function_name + params + ';');
     }
 
     if (!input) return code;
@@ -101,7 +100,7 @@ export function Challenge({ route }) {
     });
   }
 
-  async function verifyCase({ input }, index) {
+  async function verifyCase({ input }) {
     let code = userCode.current.value;
     code = formatCode(code, input);
 
@@ -116,14 +115,13 @@ export function Challenge({ route }) {
 
       handleResult(resultado[1]);
     } catch (error) {
-      console.log(error.message);
       handleError(error.message);
     }
   }
 
   function handleUserCode() {
     setUserOutputs([]);
-    testCases.forEach(verifyCase);
+    test_cases.forEach(verifyCase);
   }
 
   useEffect(() => {
@@ -142,7 +140,7 @@ export function Challenge({ route }) {
         component: (
           <Result
             setIsEnd={setIsEnd}
-            testCases={testCases}
+            testCases={test_cases}
             userOutputs={userOutputs}
             backToCode={backToCode}
           />
@@ -155,6 +153,7 @@ export function Challenge({ route }) {
   useEffect(() => {
     if (userOutputs.length) {
       sliderRef.current.scrollToEnd();
+      setCurrentSlideIndex(2);
     }
   }, [userOutputs]);
 
@@ -177,14 +176,6 @@ export function Challenge({ route }) {
         <TransitionScreenAnimation />
       ) : (
         <>
-          <ToastMenager
-            animationInTiming={700}
-            animationOutTiming={1000}
-            animationStyle={'rightInOut'}
-            width={320}
-            position={'top'}
-          />
-
           {!isEnd ? (
             <>
               <ChallengeHeader
@@ -205,7 +196,7 @@ export function Challenge({ route }) {
           ) : (
             <End
               starId={star_id}
-              isChallenge={true}
+              challengeId={id}
               _coins={earningsByDifficulty[difficulty].coins}
               _xp={earningsByDifficulty[difficulty].xp}
               _seconds={seconds.current.value}

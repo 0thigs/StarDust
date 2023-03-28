@@ -124,7 +124,7 @@ export default {
   getChallenge: async challengeId => {
     const { data, error } = await supabase
       .from('challenges')
-      .select('*, test_cases (*)')
+      .select('*')
       .eq('id', challengeId);
     if (error) {
       throw new Error(error.message);

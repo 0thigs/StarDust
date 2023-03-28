@@ -8,7 +8,6 @@ import FlagIcon from '../../assets/GlobalAssets/flag-icon.svg';
 export function Statistic({
   user: { unlocked_stars_ids, completed_planets, unlocked_achievements_ids },
 }) {
-  console.log(unlocked_achievements_ids);
   return (
     <C.Container>
       <C.Statistic hasBorderRight={true}>

@@ -7581,6 +7581,11 @@
   dependencies:
     "react-syntax-highlighter" "^6.0.4"
 
+"react-native-toast-message@^2.1.6":
+  "integrity" "sha512-VctXuq20vmRa9AE13acaNZhrLcS3FaBS2zEevS3+vhBsnVZYG0FIlWIis9tVnpnNxUb3ART+BWtwQjzSttXTng=="
+  "resolved" "https://registry.npmjs.org/react-native-toast-message/-/react-native-toast-message-2.1.6.tgz"
+  "version" "2.1.6"
+
 "react-native-typewriter@^0.7.0":
   "integrity" "sha512-lwlo8TemtZHgYH/EctYaCT5xMkgIk9ZQVyFm7qaY5b3MxveOd1v5g58oHNAkC9+vRJfdef+3dZoTJ9bM/+75/w=="
   "resolved" "https://registry.npmjs.org/react-native-typewriter/-/react-native-typewriter-0.7.0.tgz"

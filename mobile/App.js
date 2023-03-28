@@ -14,6 +14,8 @@ import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
 import { EditorProvider } from './src/contexts/EditorContext';
+// import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import ToastMenager from 'toastify-react-native';
 import './src/libs/dayjs';
 
 export default function App() {
@@ -26,17 +28,26 @@ export default function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <AuthContextProvider>
-        <LessonProvider>
-          <ScrollProvider>
-            <EditorProvider>
-              <StatusBar style={'light'} backgroundColor={'transparent'} />
-              {fontsLoaded && <Routes />}
-            </EditorProvider>
-          </ScrollProvider>
-        </LessonProvider>
-      </AuthContextProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <AuthContextProvider>
+          <LessonProvider>
+            <ScrollProvider>
+              <EditorProvider>
+                <StatusBar style={'light'} backgroundColor={'transparent'} />
+                {fontsLoaded && <Routes />}
+              </EditorProvider>
+            </ScrollProvider>
+          </LessonProvider>
+        </AuthContextProvider>
+      </ThemeProvider>
+      <ToastMenager
+        animationInTiming={700}
+        animationOutTiming={1000}
+        animationStyle={'rightInOut'}
+        width={320}
+        position={'top'}
+      />
+    </>
   );
 }

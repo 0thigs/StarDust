@@ -1,11 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Editor } from '../Editor';
 import { Sound } from '../Sound';
 // import { keys } from '../../utils/keys';
 import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import * as C from './styles';
+import { View } from 'react-native';
 
 export function Code({ code, userCode, handleUserCode }) {
+  const [currentCode, setCurrentCode] = useState(code);
+  console.log(currentCode);
+
   const soundRef = useRef(null);
 
   function handleCodeChange(code) {
@@ -19,7 +23,9 @@ export function Code({ code, userCode, handleUserCode }) {
 
   return (
     <C.Container>
-      <Editor value={code} isReadOnly={false} onChange={handleCodeChange} />
+      <View currentCode={currentCode}>
+        <Editor value={currentCode} isReadOnly={false} onChange={handleCodeChange}  />
+      </View>
       <C.CodeButtons>
         {/* <C.KeysList
           data={keys}

@@ -18,6 +18,7 @@ export const Title = styled.Text`
 
 export const Code = styled.ScrollView`
   border-radius: 10px;
+  min-width: 250px;
 `;
 
 const DefaultStyle = css`

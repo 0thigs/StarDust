@@ -31,7 +31,7 @@ export const NavigationButton = styled.TouchableOpacity`
   width: 33%;
   justify-content: center;
   align-items: center;
- 
+
   padding-bottom: 12px;
 `;
 
@@ -39,4 +39,9 @@ export const Indicator = styled(Animated.View)`
   background-color: ${props => props.theme.colors.green_500};
   height: 1px;
   width: 33%;
+`;
+
+export const Buttons = styled.View`
+  flex-direction: row;
+  max-width: 100%;
 `;

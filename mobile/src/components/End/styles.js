@@ -35,3 +35,23 @@ export const Metrics = styled.View`
   flex-wrap: wrap;
   justify-content: center;
 `;
+
+export const NewLevelMessage = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 95%;
+`;
+
+export const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.semibold};
+  font-size: 16px;
+`;
+
+export const NewLevel = styled.Text`
+  color: ${({ theme }) => theme.colors.green_500};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: 16px;
+`;
+
