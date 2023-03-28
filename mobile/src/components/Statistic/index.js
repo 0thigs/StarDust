@@ -1,9 +1,9 @@
-import React from 'react';
 import * as C from './styles';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import PlanetIcon from '../../assets/PlanetAssets/planet-image-1.svg';
 import FlagIcon from '../../assets/GlobalAssets/flag-icon.svg';
+
 
 export function Statistic({
   user: { unlocked_stars_ids, completed_planets, unlocked_achievements_ids },

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useRocket } from '../../hooks/useRocket';
 import { useAvatar } from '../../hooks/useAvatar';
@@ -8,13 +8,13 @@ import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { Rocket_ } from '../../components/Rocket_';
+import { Loading } from '../../components/Loading';
+import { AvatarsList } from '../../components/AvatarsList';
 
 import * as C from './styles';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
-import { Loading } from '../../components/Loading';
-import { Avatar } from '../../components/Avatar';
-import { useRef } from 'react';
+
 
 export function Shop() {
   const { loggedUser } = useAuth();
@@ -51,24 +51,7 @@ export function Shop() {
             </C.RocketList>
 
             <C.Title>Avatares</C.Title>
-            <C.AvatarsList
-              ref={avatarsListRef}
-              data={avatars}
-              keyExtractor={avatar => avatar.id}
-              renderItem={({ item: { id, name, image, price }, index }) => (
-                <Avatar
-                  id={id}
-                  name={name}
-                  price={price}
-                  image={image}
-                  index={index}
-                  scrollTo={scrollTo}
-                />
-              )}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingRigth: 12 }}
-            />
+            <AvatarsList avatars={avatars}  />
           </>
         )}
       </C.Content>

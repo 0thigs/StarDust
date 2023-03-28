@@ -26,12 +26,11 @@ export const useAvatar = avatarId => {
   }
 
   useEffect(() => {
-    if (!avatarId) {
+    if (!avatarId && !avatars.length) {
       fetchAvatars();
       return;
     }
     fetchAvatar();
-    console.log("oi");
   }, [loggedUser.avatar_id, loggedUser.acquired_avatars_id]);
 
   return { avatar, avatars };

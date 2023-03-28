@@ -7,6 +7,7 @@ import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
 import { Animation } from '../../components/Animation';
 import { Achievement } from '../../components/Achievement';
+import { ChallengesGraph } from '../../components/ChallengesGraph';
 import { Loading } from '../../components/Loading';
 
 import Missing from '../../assets/animations/missing-animation.json';
@@ -48,12 +49,13 @@ export function Profile() {
 
   return (
     <C.Container>
-      {isLoading && !user ? (
+      {isLoading || !user ? (
         <Loading isAnimation={true} />
       ) : (
         <C.Content>
           <ProfileStatus user={user} />
           <Statistic user={user} />
+          <ChallengesGraph />
           <Streak user={user} />
           <C.Title>Conquistas</C.Title>
           <C.Achievements>
