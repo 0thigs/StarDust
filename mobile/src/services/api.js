@@ -106,7 +106,7 @@ export default {
     const { data, error } = await supabase
       .from('avatars')
       .select('*')
-      .order('price', { ascending: true });
+      .order('price, name', { ascending: true });
     if (error) {
       throw new Error(error.message);
     }

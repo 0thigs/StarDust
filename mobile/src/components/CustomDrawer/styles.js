@@ -7,14 +7,6 @@ export const Container = styled.View`
   background-color: ${props => props.theme.colors.background};
 `;
 
-export const Avatar = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  margin-bottom: 10px;
-
-`;
-
 export const Name = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
   font-size: 14px;

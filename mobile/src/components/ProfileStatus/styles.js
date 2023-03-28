@@ -17,6 +17,8 @@ export const ProfileButton = styled.TouchableOpacity`
   padding: 8px;
 `;
 
+export const AvatarButton = styled.TouchableOpacity``;
+
 export const Avatar = styled.Image`
   width: 150px;
   height: 150px;

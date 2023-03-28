@@ -9,6 +9,7 @@ export const Container = styled.View`
   border-color: ${({ isSelected, theme }) =>
     theme.colors[isSelected ? 'yellow_300' : 'background']};
   opacity: ${({ isAvailable }) => (isAvailable ? 1 : 0.7)};
+  position: relative;
 `;
 
 export const Info = styled.View`
@@ -42,10 +43,17 @@ export const Name = styled.Text`
   margin-bottom: 12px;
 `;
 
+
 export const Image = styled.Image`
   width: 55%;
   height: 100%;
   border-radius: 4px;
+`;
+
+export const Icon = styled.View`
+  position: absolute;
+  top: 8px;
+  right: 8px;
 `;
 
 export const Text = styled.Text`

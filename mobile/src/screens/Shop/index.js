@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useRocket } from '../../hooks/useRocket';
+import { useAvatar } from '../../hooks/useAvatar';
 import { useAchievement } from '../../hooks/useAchievement';
 
 import { Modal } from '../../components/Modal';
@@ -10,18 +12,17 @@ import { Rocket_ } from '../../components/Rocket_';
 import * as C from './styles';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
-import api from '../../services/api';
 import { Loading } from '../../components/Loading';
 import { Avatar } from '../../components/Avatar';
 import { useRef } from 'react';
 
 export function Shop() {
   const { loggedUser } = useAuth();
+  const { avatars } = useAvatar();
+  const { rockets } = useRocket();
   const { unlockedAchievements } = useAchievement();
-  const [rockets, setRockets] = useState([]);
-  const [avatars, setAvatars] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const avatarsListRef = useRef(null);
 
   function scrollTo(index) {
@@ -31,24 +32,9 @@ export function Shop() {
     });
   }
 
-  async function setShopData() {
-    try {
-      const rockets = await api.getRockets();
-      setRockets(rockets);
-
-      const avatars = await api.getAvatars();
-      setAvatars(avatars);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   useEffect(() => {
-    setIsLoading(true);
-    setShopData();
-  }, []);
+    if (avatars.length && rockets.length) setIsLoading(false);
+  }, [avatars, rockets]);
 
   return (
     <C.Container>

@@ -1,26 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useRocket } from '../../hooks/useRocket';
+import { useRanking } from '../../hooks/useRanking';
+import { useAvatar } from '../../hooks/useAvatar';
 import { useNavigation } from '@react-navigation/core';
+
 import { ArrowLeft } from 'react-native-feather';
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
+import { UserAvatar } from '../UserAvatar';
+import { SelectAvatar } from '../SelectAvatar';
 
 import SettingsIcon from '../../assets/GlobalAssets/settings-icon.svg';
 import dayjs from 'dayjs';
 import theme from '../../global/styles/theme';
-import api from '../../services/api';
 import * as C from './styles';
-import { useRocket } from '../../hooks/useRocket';
-import { useRanking } from '../../hooks/useRanking';
-import { useAvatar } from '../../hooks/useAvatar';
 
 export function ProfileStatus({
   user: { id, ranking_id, rocket_id, avatar_id, name, level, xp, created_at },
 }) {
   const { loggedUser } = useAuth();
-  const { avatar } = useAvatar(avatar_id);
+  const isFromLoggedUser = id === loggedUser.id;
+  const { avatar } = useAvatar(isFromLoggedUser ? loggedUser.avatar_id : avatar_id);
   const { rocket } = useRocket(rocket_id);
   const { ranking } = useRanking(ranking_id);
+  const [isSelectAvatarVisible, setIsSelectAvatarVisible] = useState(false);
   const navigation = useNavigation();
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
 
@@ -32,9 +36,21 @@ export function ProfileStatus({
     navigation.navigate('Ranking');
   }
 
+  function handleAvatarButton() {
+    if (!isFromLoggedUser) return;
+
+    setIsSelectAvatarVisible(true);
+  }
+
+  useEffect(() => {
+    if (isFromLoggedUser && isSelectAvatarVisible) {
+      setIsSelectAvatarVisible(false);
+    }
+  }, [loggedUser.avatar_id]);
+
   return (
     <C.Container>
-      {id === loggedUser.id ? (
+      {isFromLoggedUser ? (
         <C.ProfileButton activeOpacity={0.7} onPress={handleSettingsButton}>
           <SettingsIcon width={35} height={35} />
         </C.ProfileButton>
@@ -43,7 +59,18 @@ export function ProfileStatus({
           <ArrowLeft color={theme.colors.green_300} width={35} height={35}></ArrowLeft>
         </C.ProfileButton>
       )}
-      <C.Avatar source={{ uri: getImage('avatars', avatar) }} />
+      <C.AvatarButton onPress={handleAvatarButton}>
+        <UserAvatar avatar={avatar} size={150} />
+      </C.AvatarButton>
+
+      {isFromLoggedUser && (
+        <SelectAvatar
+          isVisible={isSelectAvatarVisible}
+          setIsVisible={setIsSelectAvatarVisible}
+          avatar={avatar}
+        />
+      )}
+
       <C.Name>{name}</C.Name>
       <C.Level>
         Nível {level} - {xp} XP

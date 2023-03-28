@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from './useAuth';
 import api from '../services/api';
 
-export const useRocket = (idRocket, isToFecth = true) => {
+export const useRocket = idRocket => {
+  const { loggedUser } = useAuth();
   const [rocket, setRocket] = useState(null);
+  const [rockets, setRockets] = useState([]);
 
   async function fetchRocket() {
     try {
@@ -13,9 +16,22 @@ export const useRocket = (idRocket, isToFecth = true) => {
     }
   }
 
-  useEffect(() => {
-    if (isToFecth) fetchRocket();
-  }, []);
+  async function fetchRockets() {
+    try {
+      const rockets = await api.getRockets();
+      setRockets(rockets);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  return { rocket };
+  useEffect(() => {
+    if (!idRocket) {
+      fetchRockets();
+      return;
+    }
+    fetchRocket();
+  }, [loggedUser.avatar_id, loggedUser.acquired_avatars_id]);
+
+  return { rocket, rockets };
 };

@@ -16,7 +16,7 @@ import api from '../../services/api';
 export function Profile() {
   const { achievements } = useAchievement();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const route = useRoute();
   const { userId } = route.params;
@@ -48,7 +48,7 @@ export function Profile() {
 
   return (
     <C.Container>
-      {isLoading ? (
+      {isLoading && !user ? (
         <Loading isAnimation={true} />
       ) : (
         <C.Content>

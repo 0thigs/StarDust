@@ -5,6 +5,7 @@ import api from '../services/api';
 export const useAvatar = avatarId => {
   const { loggedUser } = useAuth();
   const [avatar, setAvatar] = useState(null);
+  const [avatars, setAvatars] = useState([]);
 
   async function fetchAvatar() {
     try {
@@ -15,9 +16,23 @@ export const useAvatar = avatarId => {
     }
   }
 
-  useEffect(() => {
-    fetchAvatar();
-  }, [loggedUser.avatar_id]);
+  async function fetchAvatars() {
+    try {
+      const avatars = await api.getAvatars();
+      setAvatars(avatars);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  return { avatar };
+  useEffect(() => {
+    if (!avatarId) {
+      fetchAvatars();
+      return;
+    }
+    fetchAvatar();
+    console.log("oi");
+  }, [loggedUser.avatar_id, loggedUser.acquired_avatars_id]);
+
+  return { avatar, avatars };
 };

@@ -12,6 +12,7 @@ import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { Lock } from 'react-native-feather';
 
 export function Avatar({ id, name, image, price, index, scrollTo }) {
   const { loggedUser, updateLoggedUser } = useAuth();
@@ -22,6 +23,8 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
   const isBuyable = loggedUser.coins > price;
+  const updatedCoins = loggedUser.coins - price;
+  const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
 
   async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
     updateLoggedUser('coins', updatedCoins);
@@ -34,11 +37,6 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
       setIsModalOpen(true);
       return;
     }
-
-    const updatedCoins = loggedUser.coins - price;
-    const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
-
-    console.log(updatedAcquiredAvatarsIds);
 
     updateUserData(updatedCoins, updatedAcquiredAvatarsIds);
     selectAvatar();
@@ -67,7 +65,7 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
     setIsSelected(id === loggedUser.avatar_id);
     setIsAcquired(loggedUser.acquired_avatars_ids.includes(id));
 
-    if (isSelected) scrollTo(0);
+    if (isSelected) scrollTo(index);
   }, [loggedUser.avatar_id, loggedUser.acquired_avatars_ids]);
 
   return (
@@ -77,7 +75,7 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
       isFirstItem={index === 0}
     >
       <C.Info>
-        {!isAcquired && (
+        {!isAcquired && price > 0 && (
           <C.Price>
             <CoinIcon width={30} height={30} />
             <C.Coins>{price}</C.Coins>
@@ -96,6 +94,11 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
       </C.Info>
 
       <C.Image source={{ uri: getImage('avatars', image) }} />
+      {!isAcquired && price > 0 && (
+        <C.Icon>
+          <Lock width={50} color={theme.colors.gray_900} />
+        </C.Icon>
+      )}
 
       <Modal
         isVisible={isModalOpen}
