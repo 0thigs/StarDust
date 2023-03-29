@@ -277,6 +277,73 @@ function converterMinutosParaCrons(minutos) {
     difficulty: 'easy',
     categories: ['básico', 'matemática', 'números'],
   },
+  {
+    id: 14,
+    starId: null,
+    title: 'Detector de naves bumerangue',
+    texts: [
+      {
+        type: 'default',
+        body: 'Em uma galáxia muito distante, existe uma frota de naves espaciais que patrulham o espaço em busca de ameaças alienígenas.',
+      },
+      {
+        type: 'default',
+        body: 'O código de cada uma dessas naves é composto por três números de 1 a N e são equipadas com um dispositivo que pode detectar a presença de outras naves em um raio de alcance.',
+      },
+      {
+        type: 'default',
+        body: 'Aqui está o desafio: escreva uma função conteBumerangues que retorne o número de vezes que uma nave do tipo "bumerangue" é detectada em uma determinada patrulha. O código de uma nave "bumerangue" possui uma sequência de três números consecutivos em que a primeiro e a terceiro são o mesmo, mas o segundo número é diferente.',
+      },
+      {
+        type: 'default',
+        body: 'Por exemplo, se o vetor de entrada for [1, 2, 1, 3, 1, 4, 2, 5, 2, 6], a função deve retornar 2, porque existem duas sequências de três números consecutivos em que a primeira e a terceiro número são iguais: [1, 2, 1] e [2, 5, 2].',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [3, 7, 3, 2, 1, 5, 1, 2, 2, -2, 2]
+Resultado: 3
+Explicacao: a partir do vetor de entrada é possível extrair 3 naves bumerangues: [3, 7, 3], [1, 5, 1], [2, -2, 2]
+
+Entrada: [9, 5, 9, 5, 1, 1, 1]
+Resultado: 2
+Explicacao: a partir do vetor de entrada é possível extrair 2 naves bumerangues: [9, 5, 9], [5, 9, 4]
+
+Entrada: [1, 7, 1, 7, 1, 7, 1]
+Resultado: 5
+Explicacao: a partir do vetor de entrada é possível extrair 5 naves bumerangues: [1, 7, 1], [7, 1, 7], [1, 7, 1], [7, 1, 7], e [1, 7, 1]`,
+      },
+      {
+        type: 'alert',
+        body: 'Observe que [5, 5, 5] (vetor com 3 dígitos identicos) não é considerado uma nave bumerangue porque o valor do meio é identico ao primeiro e o terceiro.',
+      },
+    ],
+    function: 'conteNavesBumerangues()',
+    testCases: [
+      {
+        input: [[5, 6, 6, 7, 6, 3, 9]],
+        expectedOutput: 1,
+        isLocked: false,
+      },
+      {
+        input: [[4, 4, 4, 9, 9, 9, 9]],
+        expectedOutput: 0,
+        isLocked: true,
+      },
+      {
+        input: [[1, 2, 1, 3, 1, 4, 2, 5, 2, 6]],
+        expectedOutput: 3,
+        isLocked: true,
+      },
+    ],
+
+    code: `
+function conteNavesBumerangues(numeros) {
+
+}`,
+    difficulty: 'hard',
+    categories: ['vetores', 'laços'],
+  },
 ];
 
 [

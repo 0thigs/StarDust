@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-    // const challengeId = route.params.id;
-  const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
+  // const challengeId = route.params.id;
+  const challengeId = '0a088952-b63e-4053-9f41-e748e51fd156';
   const { challenge } = useChallenge(challengeId);
   const { id, title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
 
@@ -74,26 +74,30 @@ export function Challenge({ route }) {
     }
   }
 
-  function formatCode(code, input) {
+  function formatCode(code, inputValues) {
     if (function_name) {
-      const params = '(' + input.join(',') + ')';
+      const paramsValues = inputValues.map(value =>
+        Array.isArray(value) ? `[${value.join(',')}]` : value
+      );
+      const params = '(' + paramsValues.join(',') + ')';
       return code.concat(';' + function_name + params + ';');
     }
 
-    if (!input) return code;
+    if (!inputValues) return code;
 
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
-    if (matches.length !== input.length) {
+    if (matches.length !== inputValues.length) {
       return;
     }
 
-    input.forEach(input => (code = code.replace(regex, input)));
+    inputValues.forEach(value => (code = code.replace(regex, value)));
     return code;
   }
 
   function handleResult(result) {
     if (!result) return;
+    console.log(result);
 
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, result];
@@ -103,17 +107,13 @@ export function Challenge({ route }) {
   async function verifyCase({ input }) {
     let code = userCode.current.value;
     code = formatCode(code, input);
-
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
-        if (erros[0] instanceof Error) {
-          throw erros[0];
-        }
+        if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
-
-      handleResult(resultado[1]);
+      handleResult(resultado.splice(-1)[0]);
     } catch (error) {
       handleError(error.message);
     }

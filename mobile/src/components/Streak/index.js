@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { useRoute } from '@react-navigation/native';
 import * as C from './styles';
 
 import SuccessIcon from '../../assets/GlobalAssets/success-icon.svg';
@@ -7,12 +9,15 @@ import PlaceholderIcon from '../../assets/GlobalAssets/placeholder-icon.svg';
 import StreakAnimation from '../../assets/animations/streak-animation.json';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
-import { useAuth } from '../../hooks/useAuth';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({ user: { streak, week_status, created_at }, isToUpdateStreak = false }) {
+export function Streak({
+  user: { streak, week_status, didCompleteSaturday, created_at },
+  isToUpdateStreak = false,
+}) {
   const { updateLoggedUser } = useAuth();
+  const route = useRoute();
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
   const todayIndex = dayjs().day();
@@ -20,14 +25,12 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
   const yesterday = week_status[todayIndex - 1];
 
   function updateWeekStatus(dayIndex, newStatus) {
-    console.log(newStatus);
     const updatedWeekStatus = week_status.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
     console.log({ updatedWeekStatus });
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
-
   }
 
   async function updateStreak() {
@@ -47,7 +50,7 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
     const currentDate = new Date();
     const createdAtDate = new Date(created_at);
 
-    if (!!yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
+    if (yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
       setStreakCount(0);
       updateLoggedUser('streak', 0);
       updateWeekStatus(todayIndex);
@@ -60,12 +63,11 @@ export function Streak({ user: { streak, week_status, created_at }, isToUpdateSt
   useEffect(() => {
     setWeekStatus(week_status);
     setStreakCount(streak);
-
-    if (isToUpdateStreak) {
+    checkHasUndoneDay();
+    if (route.name !== 'Profile') {
       updateStreak();
-      return
+      return;
     }
-
   }, []);
 
   return (

@@ -8,7 +8,6 @@ import { View } from 'react-native';
 
 export function Code({ code, userCode, handleUserCode }) {
   const [currentCode, setCurrentCode] = useState(code);
-  console.log(currentCode);
 
   const soundRef = useRef(null);
 
