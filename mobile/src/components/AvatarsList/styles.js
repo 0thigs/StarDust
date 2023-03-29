@@ -12,7 +12,7 @@ export const Navigation = styled.View`
 `;
 
 export const NavButton = styled.TouchableOpacity`
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
   border: 1px solid ${({ theme }) => theme.colors.blue_300};
   border-radius: 8px;
   padding: 8px;

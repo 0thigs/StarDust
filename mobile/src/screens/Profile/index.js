@@ -55,6 +55,7 @@ export function Profile() {
         <C.Content>
           <ProfileStatus user={user} />
           <Statistic user={user} />
+          <C.Title>Desafios concluídos</C.Title>
           <ChallengesGraph />
           <Streak user={user} />
           <C.Title>Conquistas</C.Title>

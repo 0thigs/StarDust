@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
@@ -9,22 +9,17 @@ import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
+import { Lock } from 'react-native-feather';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { Lock } from 'react-native-feather';
 
-export function Avatar({ id, name, image, price, index, scrollTo }) {
+export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquired, isFirstItem }) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const [isSelected, setIsSelected] = useState(false);
-  const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
-  const isBuyable = loggedUser.coins > price;
-  const updatedCoins = loggedUser.coins - price;
-  const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
 
   async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
     updateLoggedUser('coins', updatedCoins);
@@ -38,6 +33,8 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
       return;
     }
 
+    const updatedCoins = loggedUser.coins - price;
+    const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
     updateUserData(updatedCoins, updatedAcquiredAvatarsIds);
     selectAvatar();
     setModalType('earning');
@@ -48,7 +45,6 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
     updateLoggedUser('avatar_id', id);
     setIsRequesting(false);
     soundRef.current.play();
-    console.log(index);
   }
 
   function handleButtonPress() {
@@ -61,18 +57,11 @@ export function Avatar({ id, name, image, price, index, scrollTo }) {
     buyAvatar();
   }
 
-  useEffect(() => {
-    setIsSelected(id === loggedUser.avatar_id);
-    setIsAcquired(loggedUser.acquired_avatars_ids.includes(id));
-
-    if (isSelected) scrollTo(index);
-  }, [loggedUser.avatar_id, loggedUser.acquired_avatars_ids]);
-
   return (
     <C.Container
       isSelected={isSelected}
       isAvailable={isAcquired || isBuyable}
-      isFirstItem={index === 0}
+      isFirstItem={isFirstItem}
     >
       <C.Info>
         {!isAcquired && price > 0 && (
