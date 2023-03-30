@@ -16,3 +16,10 @@ export const Winners = styled.View`
   flex-direction: row;
   margin-bottom: 24px;
 `;
+
+export const Message = styled.Text`
+  text-align: center;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.green_300};
+  margin: 12px 0;
+`;

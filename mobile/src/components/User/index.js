@@ -29,6 +29,7 @@ export function User({ position, id, name, avatar_id, xp, isLoggedUser }) {
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
 
   function handleUserPress() {
+    if (!id) return;
     navigation.navigate('Profile', { userId: id });
   }
 

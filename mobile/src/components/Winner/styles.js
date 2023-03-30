@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 export const Container = styled.View`
   flex: 1;
   align-items: center;
+  justify-content: flex-end;
 `;
 
 export const Avatar = styled.Image`

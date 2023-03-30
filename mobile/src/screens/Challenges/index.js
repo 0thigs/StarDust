@@ -117,7 +117,7 @@ export function Challenges() {
 
   return (
     <C.Container>
-      {isLoading ? (
+      {isLoading && !categories.length ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Loading isAnimation={true} />
         </View>

@@ -10,23 +10,25 @@ import api from '../../services/api';
 import * as C from './styles';
 import { WinnersList } from '../../components/WinnersList';
 import { UsersList } from '../../components/UsersList';
+import { useRanking } from '../../hooks/useRanking';
 const today = dayjs().day();
 const sunday = 0;
+const daysToGo = today === sunday ? 7 : 7 - today;
 
 export function Ranking() {
-  const { loggedUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
+  const { ranking: currentRanking } = useRanking(loggedUser.ranking_id);
   const [rankings, setRankings] = useState([]);
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
   const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
-  const [isWinnersListShow, setIsWinnersListShow] = useState(false);
-  const [daysToGo, setDaysToGo] = useState(0);
+  const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
+  const isLoggedUserWinner = [1, 2, 3].includes(loggedUser.last_position);
 
-  function scrollToCurrentRanking(currentRankingIndex) {
+  function scrollToCurrentRanking() {
     badgesListRef.current?.scrollToIndex({
-      index: currentRankingIndex - 1,
+      index: currentRankingIndex,
       viewPosition: 0.5,
     });
   }
@@ -35,31 +37,40 @@ export function Ranking() {
     return { ...user, position: index + 1 };
   }
 
+  async function showWinners() {
+    try {
+      const winners = await api.getWinners();
+      const lastWeekRankingId = isLoggedUserWinner
+        ? rankings.find(ranking => (ranking.position = 1)).id
+        : currentRanking.id;
+      const winnersByLastWeekRankingId = winners.filter(
+        winner => winner.ranking_id === lastWeekRankingId
+      );
+      setWinners(() => {
+        let orderedWinners = [];
+        winnersByLastWeekRankingId.forEach(winner => {
+          if (winner.position === 2) {
+            orderedWinners.unshift(winner);
+            return;
+          }
+          orderedWinners.push(winner);
+        });
+        return orderedWinners;
+      });
+
+      updateLoggedUser('did_update_ranking', false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function setData() {
     try {
       const rankings = await api.getRankings();
       setRankings(rankings);
-
       const users = await api.getUsersByCurrentRanking(loggedUser.ranking_id);
       const rankingUsers = users.map(setPosition);
       setUsers(rankingUsers);
-
-      const currentRankingIndex =
-        rankings.find(ranking => ranking.id === loggedUser.ranking_id).order - 1;
-
-      setCurrentRankingIndex(currentRankingIndex);
-
-      //   setWinners(() => {
-      //     let winners = [];
-      //     orderedUsers.slice(0, 3).forEach(user => {
-      //       if (user.position === 2) {
-      //         winners.unshift(user);
-      //         return;
-      //       }
-      //       winners.push(user);
-      //     });
-      //     return winners;
-      //   });
     } catch (error) {
       console.log(error);
     } finally {
@@ -70,51 +81,60 @@ export function Ranking() {
   useEffect(() => {
     setIsloading(true);
     setData();
-    setDaysToGo(today === sunday ? 7 : 7 - today);
   }, []);
 
   useEffect(() => {
-    if (currentRankingIndex) {
+    if (currentRanking) {
+      const currentRankingIndex = currentRanking.position - 1;
+      setCurrentRankingIndex(currentRankingIndex);
       scrollToCurrentRanking(currentRankingIndex);
+      if (loggedUser.did_update_ranking) showWinners();
     }
-  }, [currentRankingIndex]);
+  }, [currentRanking]);
 
   return (
-    <C.Container>
-      {isWinnersListShow ? (
-        <WinnersList
-          winners={winners}
-          users={users}
-          isLoading={isLoading}
-          setIsWinnersListShow={setIsWinnersListShow}
-        />
+    <C.Container isLoading={isLoading}>
+      {isLoading ? (
+        <Loading isAnimation={true} />
       ) : (
         <>
-          <C.Badges source={Background}>
-            <C.BadgesList
-              ref={badgesListRef}
-              data={rankings}
-              keyExtractor={ranking => ranking.id}
-              renderItem={({ item: { id, name, image }, index}) => (
-                <Badge
-                  id={id}
-                  name={name}
-                  image={image}
-                  index={index}
-                  currentRankingIndex={currentRankingIndex}
-                />
-              )}
-              horizontal
-              showsVerticalScrollIndicator={false}
-              onScrollToIndexFailed={() => {
-                const wait = new Promise(resolve => setTimeout(resolve, 100));
-                wait.then(() => scrollToCurrentRanking());
-              }}
+          {winners.length ? (
+            <WinnersList
+              winners={winners}
+              users={users}
+              isLoading={isLoading}
+              setWinners={setWinners}
+              isLoggedUserWinner={isLoggedUserWinner}
             />
-          </C.Badges>
-          <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
-          <C.Days>{daysToGo} dias</C.Days>
-          {isLoading ? <Loading isAnimation={true} /> : <UsersList users={users} />}
+          ) : (
+            <>
+              <C.Badges source={Background}>
+                <C.BadgesList
+                  ref={badgesListRef}
+                  data={rankings}
+                  keyExtractor={ranking => ranking.id}
+                  renderItem={({ item: { id, name, image }, index }) => (
+                    <Badge
+                      id={id}
+                      name={name}
+                      image={image}
+                      index={index}
+                      currentRankingIndex={currentRankingIndex}
+                    />
+                  )}
+                  horizontal
+                  showsVerticalScrollIndicator={false}
+                  onScrollToIndexFailed={() => {
+                    const wait = new Promise(resolve => setTimeout(resolve, 100));
+                    wait.then(() => scrollToCurrentRanking());
+                  }}
+                />
+              </C.Badges>
+              <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
+              <C.Days>{daysToGo} dias</C.Days>
+              <UsersList users={users} />
+            </>
+          )}
         </>
       )}
     </C.Container>

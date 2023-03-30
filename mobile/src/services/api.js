@@ -59,27 +59,24 @@ export default {
     return data;
   },
 
-  getRankings: async () => {
-    const { data, error } = await supabase
-      .from('rankings')
-      .select('id, image, name, order')
-      .order('order', { ascending: true });
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
-  },
-
   getRanking: async rankingId => {
-    const { data, error } = await supabase
-      .from('rankings')
-      .select('image, name, order')
-      .eq('id', rankingId);
+    const { data, error } = await supabase.from('rankings').select('*').eq('id', rankingId);
     if (error) {
       throw new Error(error.message);
     }
     const ranking = data[0];
     return ranking;
+  },
+
+  getRankings: async () => {
+    const { data, error } = await supabase
+      .from('rankings')
+      .select('*')
+      .order('position', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
   },
 
   getRocket: async rocketId => {
@@ -122,10 +119,7 @@ export default {
   },
 
   getChallenge: async challengeId => {
-    const { data, error } = await supabase
-      .from('challenges')
-      .select('*')
-      .eq('id', challengeId);
+    const { data, error } = await supabase.from('challenges').select('*').eq('id', challengeId);
     if (error) {
       throw new Error(error.message);
     }
@@ -155,6 +149,14 @@ export default {
 
   getCategories: async () => {
     const { data, error } = await supabase.from('categories').select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getWinners: async () => {
+    const { data, error } = await supabase.from('winners').select('*');
     if (error) {
       throw new Error(error.message);
     }

@@ -1,13 +1,15 @@
-import React from 'react';
-import theme from '../../global/styles/theme';
-import * as C from './styles';
 
 import { Animation } from '../Animation';
+import { useAvatar } from '../../hooks/useAvatar';
+import { UserAvatar } from '../UserAvatar';
 
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import FirstPlaceIcon from '../../assets/RankingAssets/first-place.svg';
 import SecondPlaceIcon from '../../assets/RankingAssets/second-place.svg';
 import ThirdPlaceIcon from '../../assets/RankingAssets/third-place.svg';
+
+import theme from '../../global/styles/theme';
+import * as C from './styles';
 
 const podium = [
   {
@@ -30,7 +32,8 @@ const podium = [
   },
 ];
 
-export function Winner({ name, avatar, xp, position }) {
+export function Winner({ name, avatar_id, xp, position }) {
+  const { avatar } = useAvatar(avatar_id);
   const { color, order, Icon } = podium.find(color => color.position === position);
 
   return (
@@ -43,16 +46,10 @@ export function Winner({ name, avatar, xp, position }) {
           size={220}
           isAbsolute={true}
           top={-15}
-          left={-12}
+          left={-14}
         />
       )}
-
-      <C.Avatar
-        color={color}
-        source={{
-          uri: `http://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`,
-        }}
-      />
+      <UserAvatar avatar={avatar} size={70} />
       <C.Name>{name}</C.Name>
       <Icon />
       <C.Position color={color} _position={position} animation={'fadeInUp'} delay={250 * position}>

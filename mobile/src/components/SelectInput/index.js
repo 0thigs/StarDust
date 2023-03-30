@@ -15,13 +15,13 @@ export function SelectInput({ type, options, label, selectedCategories, handleSe
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
     usePopover();
 
+  function removeAccentuation(word) {
+    return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   function filterCategories() {
     if (!searchText) {
       return categories;
-    }
-
-    function removeAccentuation(word) {
-      return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     return categories.filter(category =>

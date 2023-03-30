@@ -23,7 +23,7 @@ const fakeLoggedUser = {
     'a785d743-52f5-4b78-90ff-18b408bb0566',
     '70273298-097e-4ed6-964f-11b7284436a8',
   ],
-  completed_challenges_ids: [],
+  completed_challenges_ids: ['0a088952-b63e-4053-9f41-e748e51fd156'],
   avatar_id: '557a33e8-ce8a-4ac2-992c-7eab630d186d',
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
@@ -31,7 +31,8 @@ const fakeLoggedUser = {
   week_status: ['todo', 'todo', 'todo', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  didCompleteSaturday: true,
+  did_update_ranking: false,
+  last_position: 8,
   starId: 8,
 };
 
