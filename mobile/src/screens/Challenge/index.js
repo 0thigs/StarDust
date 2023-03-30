@@ -40,6 +40,7 @@ export function Challenge({ route }) {
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userOutputs, setUserOutputs] = useState([]);
+
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
@@ -97,10 +98,8 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
-    console.log(result);
-
     setUserOutputs(currentUserOutputs => {
-      return [...currentUserOutputs, result];
+      return [...currentUserOutputs, JSON.parse(result).valor];
     });
   }
 
@@ -113,7 +112,7 @@ export function Challenge({ route }) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
-      handleResult(resultado.splice(-1)[0]);
+      handleResult(resultado.splice(-1)[0]) // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
     }

@@ -32,7 +32,6 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
 
   useEffect(() => {
     if (userOutputs.length) {
-
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);

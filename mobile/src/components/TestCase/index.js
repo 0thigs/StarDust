@@ -49,9 +49,9 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
   }
 
   useEffect(() => {
-    if (userOutput) {
+    if (userOutput && !isLocked) {
       setIsOpen(true);
-      if (!isLocked) rotateButton();
+      rotateButton();
     }
   }, [userOutput]);
 
@@ -86,7 +86,9 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           </C.Put>
           <C.Put>
             <C.Label>Seu resultado</C.Label>
-            <C.Value from={'user'}>{userOutput ? userOutput : 'Sem resultado'}</C.Value>
+            <C.Value from={'user'}>
+              {userOutput || userOutput === 0 ? userOutput : 'Sem resultado'}
+            </C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Resultado esperado</C.Label>

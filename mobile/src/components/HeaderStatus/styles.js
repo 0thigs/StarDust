@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import LottieView from 'lottie-react-native';
 
 export const Container = styled.TouchableOpacity`
   margin-right: 24px;
@@ -8,25 +9,24 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const CoinsCount = styled.Text`
-  font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 16px;
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 10px;
-  color: ${props => props.theme.colors.yellow_300};
+  color: ${({ theme }) => theme.colors.yellow_300};
 `;
 
-export const Hearts = styled.TouchableOpacity`
-  flex-direction: row;
+export const Streak = styled(LottieView)`
+  width: 40px;
+  height: 40px;
 `;
 
-export const HeartsCount = styled.Text`
-  font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.white};
+export const StreakCount = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.medium};
   font-size: 16px;
   margin-top: 5px;
-  margin-left: 5px;
-  color: ${props => props.theme.colors.red_700};
-
+  margin-right: 5px;
+  color: ${({ theme }) => theme.colors.green_500};
 `;

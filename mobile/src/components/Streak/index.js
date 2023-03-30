@@ -12,10 +12,7 @@ import dayjs from 'dayjs';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({
-  user: { streak, week_status, didCompleteSaturday, created_at },
-  isToUpdateStreak = false,
-}) {
+export function Streak({ user: { streak, week_status, didCompleteSaturday, created_at } }) {
   const { updateLoggedUser } = useAuth();
   const route = useRoute();
   const [weekStatus, setWeekStatus] = useState([]);
@@ -28,7 +25,6 @@ export function Streak({
     const updatedWeekStatus = week_status.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
-    console.log({ updatedWeekStatus });
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
   }
@@ -36,12 +32,18 @@ export function Streak({
   async function updateStreak() {
     if (today !== 'todo') return;
 
-    if (!!yesterday && yesterday === 'done') {
+    if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && didCompleteSaturday)) {
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
       updateLoggedUser('streak', updatedStreak);
+      if (todayIndex === 4) {
+        console.log({ todayIndex });
+        updateLoggedUser('did_complete_saturday', true);
+      }
     }
     updateWeekStatus(todayIndex, 'done');
+
+    if (todayIndex !== 6 && didCompleteSaturday) updateLoggedUser('did_complete_saturday', false);
   }
 
   function checkHasUndoneDay() {
@@ -64,6 +66,7 @@ export function Streak({
     setWeekStatus(week_status);
     setStreakCount(streak);
     checkHasUndoneDay();
+
     if (route.name !== 'Profile') {
       updateStreak();
       return;

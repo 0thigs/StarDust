@@ -27,12 +27,11 @@ const fakeLoggedUser = {
   avatar_id: '557a33e8-ce8a-4ac2-992c-7eab630d186d',
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
-  streak: 0,
-  week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
+  streak: 3,
+  week_status: ['todo', 'todo', 'todo', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  didUpdateRanking: true,
-  didShowWinning: false,
+  didCompleteSaturday: true,
   starId: 8,
 };
 
