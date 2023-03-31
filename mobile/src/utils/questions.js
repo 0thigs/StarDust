@@ -473,4 +473,23 @@ fimalgoritmo
     ],
     correctItemsIdsSequence: [2, 4],
   },
+  {
+    starId: 8,
+    type: 'checkbox',
+    stem: 'Marque as opções que são operadores válidos para um programa',
+    options: ['/', '+', '÷', 'x'],
+    correctOptions: ['/', '+'],
+  },
+  {
+    starId: 8,
+    type: 'selection',
+    stem: 'Qual será o resultado de 5 + 3 * 2?',
+    options: [
+      '11',
+      '16',
+      '13',
+      '15',
+    ],
+    answer: '11',
+  },
 ];

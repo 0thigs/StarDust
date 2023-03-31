@@ -61,12 +61,9 @@ export function AvatarsList({ avatars }) {
   }, []);
 
   useEffect(() => {
-    let selectedAvatarIndex = 0;
-    avatars.forEach(
-      (avatar, index) => (selectedAvatarIndex = avatar.id === loggedUser.avatar_id ? index : null)
-    );
-    setSelectedAvatarIndex(selectedAvatarIndex);
-    scrollTo(selectedAvatarIndex);
+      const selectedAvatarIndex = avatars.findIndex(avatar => avatar.id === loggedUser.avatar_id);
+      setSelectedAvatarIndex(selectedAvatarIndex);
+      scrollTo(selectedAvatarIndex);
   }, [loggedUser.avatar_id]);
 
   return (

@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { ChevronDown, ChevronUp, Search } from 'react-native-feather';
-import theme from '../../global/styles/theme';
-import api from '../../services/api';
 import { CategoriesList, Category } from '../Challenge/styles';
 import { Popover, usePopover } from 'react-native-modal-popover';
+import theme from '../../global/styles/theme';
+import api from '../../services/api';
 import * as C from './styles';
 const iconSize = 12;
 const iconColor = theme.colors.gray_500;

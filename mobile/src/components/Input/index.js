@@ -14,9 +14,7 @@ export function Input({
   value,
   onChangeText,
   error,
-  userData,
-  isUpdatingPasswordForm,
-  setIsUpdatingPasswordForm,
+  autoFocus = false,
 }) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
@@ -28,11 +26,6 @@ export function Input({
     setSecureTextEntry(!secureTextEntry);
   }
 
-  function showUpdatingPasswordForm() {
-    if (route.name === 'Settings' && type === 'password') {
-      setIsUpdatingPasswordForm(true);
-    }
-  }
 
   function handleInputClick() {
     // inputRef.current.focus();
@@ -50,12 +43,6 @@ export function Input({
     setIsFocus(false);
     setIsFilled(!!value);
   }
-
-  useEffect(() => {
-    if (!isUpdatingPasswordForm) {
-      // inputRef.current.blur()
-    }
-  }, [isUpdatingPasswordForm]);
 
   return (
     <C.Container

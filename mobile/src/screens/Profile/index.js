@@ -1,26 +1,32 @@
 import { useState, useCallback } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useAchievement } from '../../hooks/useAchievement';
-import { useRoute, useFocusEffect } from '@react-navigation/native';
+import { useRoute, useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
 import { Streak } from '../../components/Streak';
 import { Animation } from '../../components/Animation';
 import { Achievement } from '../../components/Achievement';
+import { Button } from '../../components/Button';
 import { ChallengesGraph } from '../../components/ChallengesGraph';
 import { Loading } from '../../components/Loading';
 
 import Missing from '../../assets/animations/missing-animation.json';
 import * as C from './styles';
 import api from '../../services/api';
+import theme from '../../global/styles/theme';
 
 export function Profile() {
+  const { loggedUser } = useAuth();
   const { achievements } = useAchievement();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
+  const isFromLoggedUser = userId === loggedUser.id;
 
   async function setProfileData() {
     try {
@@ -39,6 +45,10 @@ export function Profile() {
     }
   }
 
+  function handleButtonPress() {
+    navigation.navigate('Codes');
+  }
+
   useFocusEffect(
     useCallback(() => {
       setProfileData();
@@ -53,8 +63,16 @@ export function Profile() {
         <Loading isAnimation={true} />
       ) : (
         <C.Content>
-          <ProfileStatus user={user} />
+          <ProfileStatus user={user} isFromLoggedUser={isFromLoggedUser} />
           <Statistic user={user} />
+          {isFromLoggedUser && (
+            <Button
+              title={'Ver meus códigos'}
+              color={theme.colors.black}
+              background={theme.colors.green_500}
+              onPress={handleButtonPress}
+            />
+          )}
           <C.Title>Desafios concluídos</C.Title>
           <ChallengesGraph />
           <Streak user={user} />

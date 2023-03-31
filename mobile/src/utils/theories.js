@@ -535,4 +535,208 @@ export const theories = [
       },
     ],
   },
+  {
+    starId: 8,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: '.',
+      },
+      {
+        type: 'default',
+        title: 'Missão cumprida!',
+        body: 'Sim! Pelo visto o ambiente do planeta é habitável 🎉! Contudo, você ainda tem uma questão pendente.',
+      },
+      {
+        type: 'default',
+        title: 'E qual seria?',
+        body: 'Você precisa verificar o custo vida, pois não dá para viver em um planeta sem analisar os gastos né?',
+      },
+      {
+        type: 'default',
+        title: 'E como faço isso?',
+        body: 'Por sorte seu foguete é equipado com tecnologia de ponta que faz cálculos usando operadores aritméticos',
+      },
+      {
+        type: 'default',
+        title: 'Pera aí, operadores aritméticos? tipo somar e subtrair?',
+        body: 'Sim!! não só aritméticos, mas também lógicos e relacionais!',
+      },
+      {
+        type: 'alert',
+        body: 'Porém, por enquanto vamos apenas usar os aritméticos para efetuar operações mais simples',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, já é uma boa hora de reabastecer o foguete com combustível, ou seja, precisamos adicionar combustível atual com combustível novo',
+      },
+      {
+        type: 'default',
+        title: 'Adição (+)',
+        body: 'E para isso nós usamos o operador "+" de adição mesmo usado para concatenar textos.',
+      },
+      {
+        type: 'code',
+        body: `
+var combustivel = 100;
+var combustivelAtual = 200;
+var totalCombustivel = combustivel + combustivelAtual;
+escreva("A nave agora tem " + totalCombustivel + "  galões de combustível");
+// Resultado: A nave agora tem 300 galões de combustível.
+              `,
+      },
+      {
+        type: 'default',
+        title: 'Subtração (-)',
+        body: 'Além reabastecer, o próprio foquete calcula quanto de supriementos vc já consumiu até agora, utilizando simplesmente o operador de subtração "-"',
+      },
+      {
+        type: 'code',
+        body: `
+var suprimentosConsumidos = 250
+var suprimentosAtual = 300;
+var suprimentosRestante = suprimentosAtual - suprimentosConsumidos
+escreva('Você possui ' + suprimentosRestante ' suprimentos')
+// Resultado: Você possui 50 suprimentos
+          `,
+      },
+      {
+        type: 'alert',
+        body: 'Parece que você não tem muitos suprimentos agora não é mesmo?',
+      },
+      {
+        type: 'default',
+        title: 'Nem tudo está perdido.',
+        body: 'Por sua sorte (de novo) seu foguete está preparado com uma máquina de produzir suprimentos',
+      },
+      {
+        type: 'default',
+        title: 'Mas nem tudo são flores',
+        body: 'A máquina de fazer suprimentos produz apenas 1 suprimento por dia. Logo, para fazer o cálculo da quantidade de suprimentos que você teria em mês é necessário fazer uma operação de multiplicação',
+      },
+      {
+        type: 'default',
+        title: 'Multiplicação (*)',
+        body: 'Você não leu errado. Para fazer um cálculo de multiplicação, usamos o operador "*" em vez de "x"',
+      },
+      {
+        type: 'code',
+        body: `
+var suprimento = 1
+var diasMes = 30
+var suprimentosMes = suprimento * diasMes
+escreva('Em um mês você terá ' + suprimentosMes + ' suprimentos')
+//  resultado: Em um mês você terá 30 suprimentos
+              `,
+      },
+      {
+        type: 'default',
+        title: 'Será que é o suficiente?',
+        body: 'Parece muito para você? Ok, mas agora é necessário calcular quantidade de suprimentos que você consome por mês. Normalmente, vejo que seu consumo é 90 suprimentos por mês, então basta dividir 90 por 30.',
+      },
+      {
+        type: 'default',
+        title: 'Divisão (/)',
+        body: 'Aí temos mais uma caso diferenciado: em vez de usar o operador "÷" que você provavelmente já está acostumado, é necessário usar a barra "/". Veja o exemplo',
+      },
+      {
+        type: 'code',
+        body: `
+var suprimentosMes = 90
+var diasMes = 30
+var suprimentosDia = suprimentosMes / diasMes
+escreva('Você consome ' + suprimentosDia + ' por dia')
+//  resultado: Você consome 3 suprimentos por dia`,
+      },
+      {
+        type: 'default',
+        body: 'Obviamente0 você também pode usar múltiplos operadores diferentes ou não ao mesmo tempo em uma única linha.',
+      },
+      {
+        type: 'alert',
+        body: 'Cuidado! Os operadores obedecem a ordem de precedência da matemática, ou seja, operações de multiplicação ou divisão são executadas antes de adição ou subtração!',
+      },
+      {
+        type: 'default',
+        body: 'Por exemplo, ao querer calcular 5 + 5 * 5, o resultado não vai ser 50 e sim 30!',
+      },
+      {
+        type: 'code',
+        body: `
+escreva(5 + 5 * 5)
+//  resultado: 30`,
+      },
+      {
+        type: 'default',
+        title: 'Mas então o que eu faço?',
+        body: 'Assim como na matemática, você deve colocar entre parênteses as expressões que deseja que sejam calculadas primeiro',
+      },
+      {
+        type: 'code',
+        body: `
+escreva((5 + 5) * 5)
+//  resultado: 50`,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja um exemplo usando vários operadores',
+      },
+      {
+        type: 'code',
+        body: `
+var diasMes = 30;
+var suprimentosDia = 1;
+var suprimentosAtual = 300;
+var consumoTotal = suprimentosAtual - 250 + 1 * diasMes - 3 * diasMes;
+teste++
+escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos')
+//  resultado: no final do mês você terá -10 de suprimentos`,
+      },
+      {
+        type: 'alert',
+        body: 'Não é preciso ser o mestre da matemática pra perceber você não terá quantides de suprimento para sobreviver nesse planeta não é mesmo?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nesse caso, suponho que você precise achar vida alienígena para obter outros tipos de suprimentos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, ainda há questão de quanto de energia existe disponível para os dois motores presentes no foguete, pois que por algum motivo a proporção não está igual.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Para o foguete funcionar direito, seus dois motores precisam dividir a energia de forma equivalente, caso contrário as chances dele explodir com você dentro aumentam bastante :)',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'No momento atual há disponível 10125 de energia. Para saber se é possível distribuir a energia igualmente para os dois motores, basta verificar se esse número é divisível por 2',
+      },
+      {
+        type: 'default',
+        title: 'Módulo (%)',
+        body: 'Para isso, podemos usar um operador especial chamado "módulo", que serve para calcular ao resto da divisão entre 2 números usando o símbolo de porcentagem (%)',
+      },
+      {
+        type: 'code',
+        body: `
+var energiaAtual = 10125
+var resto = 10125 % 2;
+escreva('o resto é igual a ' + resto)
+//  resultado: o resto é igual a 1`,
+      },
+      {
+        type: 'default',
+        title: 'Explicação',
+        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores 😢',
+      },
+    ],
+  },
 ];

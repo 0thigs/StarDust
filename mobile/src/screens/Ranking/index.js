@@ -25,6 +25,7 @@ export function Ranking() {
   const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
   const isLoggedUserWinner = [1, 2, 3].includes(loggedUser.last_position);
+  console.log(currentRanking);
 
   function scrollToCurrentRanking() {
     badgesListRef.current?.scrollToIndex({

@@ -5,7 +5,7 @@ import { useRanking } from '../../hooks/useRanking';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useNavigation } from '@react-navigation/core';
 
-import { ArrowLeft } from 'react-native-feather';
+import { ArrowLeft, Edit } from 'react-native-feather';
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
 import { UserAvatar } from '../UserAvatar';
@@ -17,10 +17,10 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function ProfileStatus({
-  user: { id, ranking_id, rocket_id, avatar_id, name, level, xp, created_at },
+  user: { ranking_id, rocket_id, avatar_id, name, level, xp, created_at },
+  isFromLoggedUser,
 }) {
   const { loggedUser } = useAuth();
-  const isFromLoggedUser = id === loggedUser.id;
   const { avatar } = useAvatar(isFromLoggedUser ? loggedUser.avatar_id : avatar_id);
   const { rocket } = useRocket(rocket_id);
   const { ranking } = useRanking(ranking_id);
@@ -61,6 +61,11 @@ export function ProfileStatus({
       )}
       <C.AvatarButton onPress={handleAvatarButton}>
         <UserAvatar avatar={avatar} size={150} />
+        {isFromLoggedUser && (
+          <C.Icon>
+            <Edit color={theme.colors.green_300} />
+          </C.Icon>
+        )}
       </C.AvatarButton>
 
       {isFromLoggedUser && (

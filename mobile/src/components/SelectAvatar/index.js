@@ -13,7 +13,7 @@ export function SelectAvatar({ isVisible, setIsVisible }) {
       <C.Content>
         <AvatarsList avatars={avatars} />
         <Button
-          title={'Cancelar'}
+          title={'Ok'}
           color={theme.colors.black}
           background={theme.colors.blue_300}
           onPress={() => setIsVisible(false)}

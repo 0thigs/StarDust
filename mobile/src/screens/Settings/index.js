@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 export function Settings({ navigation: { goBack } }) {
   const { loggedUser, setUser } = useAuth();
-  const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false)
+  const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
 
   const {
     control,
@@ -28,7 +28,7 @@ export function Settings({ navigation: { goBack } }) {
       setIsUpdatingPasswordForm(false);
       return;
     }
-    goBack()
+    goBack();
   }
 
   function handleBackEvent() {
@@ -39,9 +39,9 @@ export function Settings({ navigation: { goBack } }) {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
 
-    setValue("name", loggedUser.name);
-    setValue("email", loggedUser.email);
-    setValue("password", "fakePassword");
+    setValue('name', loggedUser.name);
+    setValue('email', loggedUser.email);
+    setValue('password', 'fakePassword');
 
     return () => backHandler.remove();
   }, []);
@@ -56,16 +56,16 @@ export function Settings({ navigation: { goBack } }) {
             <Icon.ArrowLeft color={theme.colors.green_500} width={28} height={28} />
           )}
         </C.HeaderButton>
-        <C.Title>Configurações</C.Title>
+        <C.Title>Configurações de conta</C.Title>
         <C.HeaderButton>
           <C.Text>Salvar</C.Text>
         </C.HeaderButton>
       </C.Header>
       <C.Content>
-        <C.Avatar>
+        {/* <C.Avatar>
           <C.Image source={{ uri: loggedUser.avatar }} />
           <C.Text>Mudar avatar</C.Text>
-        </C.Avatar>
+        </C.Avatar> */}
         <C.Form>
           {!isUpdatingPasswordForm && (
             <>
@@ -119,29 +119,9 @@ export function Settings({ navigation: { goBack } }) {
             </>
           )}
 
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                label={'Senha'}
-                placeholder={'Digite sua senha'}
-                icon={
-                  <Icon.Lock
-                    color={errors.password ? theme.colors.red_700 : theme.colors.green_300}
-                  />
-                }
-                value={value}
-                type={'password'}
-                onChangeText={onChange}
-                error={errors.password}
-                userData={'fakePassword'}
-                isUpdatingPasswordForm={isUpdatingPasswordForm}
-                setIsUpdatingPasswordForm={setIsUpdatingPasswordForm}
-              />
-            )}
-          />
-          {errors.password && <C.ErrorMessage>{errors.password?.message}</C.ErrorMessage>}
+          <C.ChangePasswordButton>
+            <C.Text>Mudar senha</C.Text>
+          </C.ChangePasswordButton>
 
           {isUpdatingPasswordForm && (
             <>

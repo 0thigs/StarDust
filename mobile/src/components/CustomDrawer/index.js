@@ -6,9 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Achievement } from '../Achievement';
 
 import { getImage } from '../../utils/getImage';
-import ToastMenager, { Toast } from 'toastify-react-native';
 import * as C from './styles';
 import { UserAvatar } from '../UserAvatar';
+import { Button } from '../Button';
+import theme from '../../global/styles/theme';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
@@ -62,9 +63,17 @@ export function CustomDrawer() {
 
       <C.Name>{loggedUser.name}</C.Name>
       <C.Email>{loggedUser.email}</C.Email>
-      <C.LogOutButton onPress={handleSignOut}>
-        <C.LogOutButtonText>Sair</C.LogOutButtonText>
-      </C.LogOutButton>
+      <C.Buttons>
+        <C.ButtonWrapper>
+          <Button
+            title={'Sair'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={handleSignOut}
+            isSmall={true}
+          />
+        </C.ButtonWrapper>
+      </C.Buttons>
 
       <C.AchievementList
         data={achievements}

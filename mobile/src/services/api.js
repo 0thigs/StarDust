@@ -163,6 +163,25 @@ export default {
     return data;
   },
 
+  getCodes: async userId => {
+    const { data, error } = await supabase.from('codes').select('*').eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  updateCode: async (codeId, codeTitle) => {
+    const { success, error } = await supabase
+      .from('codes')
+      .update({ title: codeTitle })
+      .eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')
