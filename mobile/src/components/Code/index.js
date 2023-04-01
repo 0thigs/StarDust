@@ -12,7 +12,7 @@ export function Code({ code, userCode, handleUserCode }) {
   const soundRef = useRef(null);
 
   function handleCodeChange(code) {
-    userCode.current.value = code;
+    userCode.current = code;
   }
 
   function handleRunPress() {

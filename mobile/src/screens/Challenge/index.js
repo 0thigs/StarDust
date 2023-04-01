@@ -45,8 +45,8 @@ export function Challenge({ route }) {
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
   const sliderRef = useRef(null);
-  const seconds = useRef({ value: 0 });
-  const userCode = useRef({ value: '' });
+  const seconds = useRef(0);
+  const userCode = useRef('');
 
   const CurrentIndicatorPositionX = useSharedValue(0);
 
@@ -159,10 +159,10 @@ export function Challenge({ route }) {
   useEffect(() => {
     let timer = null;
     if (!isEnd) {
-      timer = setTimeout(() => seconds.current.value++, 1000);
+      timer = setTimeout(() => seconds.current++, 1000);
     }
     return () => clearTimeout(timer);
-  }, [seconds.current.value]);
+  }, [seconds.current]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
@@ -198,7 +198,7 @@ export function Challenge({ route }) {
               challengeId={id}
               _coins={earningsByDifficulty[difficulty].coins}
               _xp={earningsByDifficulty[difficulty].xp}
-              _seconds={seconds.current.value}
+              _seconds={seconds.current}
             />
           )}
         </>

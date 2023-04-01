@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useCode } from '../../hooks/useCode';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -20,6 +21,7 @@ export function Codes() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const codeTitle = useRef('');
   const currentCodeId = useRef('');
+  const navigation = useNavigation();
 
   function onPromptConfirm() {
     const id = currentCodeId.current;
@@ -32,6 +34,10 @@ export function Codes() {
 
   function onPromptCancel() {
     setIsPromptVisible(false);
+  }
+
+  function handleCreateCodePress() {
+    navigation.navigate('Playground');
   }
 
   function handleDeleteButtonPress() {
@@ -70,7 +76,7 @@ export function Codes() {
 
   return (
     <C.Container>
-      <C.Button activeOpacity={0.7}>
+      <C.Button onPress={handleCreateCodePress} activeOpacity={0.7}>
         <C.Icon>
           <Plus color={theme.colors.green_500} />
         </C.Icon>

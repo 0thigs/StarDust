@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 
-export const useCode = userId => {
+export const useCode = (codeId, userId) => {
   const [codes, setCodes] = useState([]);
+  const [code, setCode] = useState('');
 
   async function deleteCode(id) {
     try {
@@ -20,6 +21,16 @@ export const useCode = userId => {
     }
   }
 
+  async function fetchCode() {
+    try {
+      const codes = await api.getCode(codeId);
+      console.log(codes);
+      setCodes(codes);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchCodes() {
     try {
       const codes = await api.getCodes(userId);
@@ -32,7 +43,8 @@ export const useCode = userId => {
 
   useEffect(() => {
     if (codes.length) return;
-    fetchCodes();
+    if (codeId) fetchCode();
+    if (userId) fetchCodes();
   }, []);
 
   return { codes, updateCode, deleteCode, fetchCodes };

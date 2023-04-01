@@ -8,6 +8,7 @@ import { Settings } from '../screens/Settings';
 import { ForgotPassword } from '../screens/ForgotPassword';
 import { Challenge } from '../screens/Challenge';
 import { Codes } from '../screens/Codes';
+import { Playground } from '../screens/Playground';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Playground" component={Playground} />
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="SignIn" component={SignIn} />
