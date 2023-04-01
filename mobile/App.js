@@ -14,7 +14,7 @@ import { AuthContextProvider } from './src/contexts/AuthContext';
 import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
 import { EditorProvider } from './src/contexts/EditorContext';
-// import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ToastMenager from 'toastify-react-native';
 import './src/libs/dayjs';
 
@@ -28,7 +28,7 @@ export default function App() {
   });
 
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
         <AuthContextProvider>
           <LessonProvider>
@@ -48,6 +48,6 @@ export default function App() {
         width={320}
         position={'top'}
       />
-    </>
+    </GestureHandlerRootView>
   );
 }

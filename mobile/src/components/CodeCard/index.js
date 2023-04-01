@@ -3,8 +3,10 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconColor = theme.colors.gray_500;
 
-export function CodeCard({ id, title, onPress }) {
-  function handleCodeCardPress() {}
+export function CodeCard({ id, title, onPress, navigation }) {
+  function handleCodeCardPress() {
+    navigation.navigate('Playground', { id });
+  }
 
   return (
     <C.Container onPress={handleCodeCardPress}>

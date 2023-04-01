@@ -23,9 +23,8 @@ export const useCode = (codeId, userId) => {
 
   async function fetchCode() {
     try {
-      const codes = await api.getCode(codeId);
-      console.log(codes);
-      setCodes(codes);
+      const code = await api.getCode(codeId);
+      setCode(code);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +33,6 @@ export const useCode = (codeId, userId) => {
   async function fetchCodes() {
     try {
       const codes = await api.getCodes(userId);
-      console.log(codes);
       setCodes(codes);
     } catch (error) {
       console.log(error);
@@ -42,10 +40,9 @@ export const useCode = (codeId, userId) => {
   }
 
   useEffect(() => {
-    if (codes.length) return;
     if (codeId) fetchCode();
-    if (userId) fetchCodes();
+    if (!codes.length && userId) fetchCodes();
   }, []);
 
-  return { codes, updateCode, deleteCode, fetchCodes };
+  return { code, codes, updateCode, deleteCode, fetchCodes };
 };

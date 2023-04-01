@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
-  background-color: ${prop => prop.theme.colors.gray_900};
+  background-color: ${prop => prop.theme.colors.green_900};
   flex-direction: row;
-  padding: 24px 0 0;
+  padding: 16px 0;
 `;
 
 export const Title = styled.Text`

@@ -171,6 +171,15 @@ export default {
     return data;
   },
 
+  getCode: async codeId => {
+    const { data, error } = await supabase.from('codes').select('*').eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const code = data[0];
+    return code;
+  },
+
   updateCode: async (codeId, codeTitle) => {
     const { success, error } = await supabase
       .from('codes')

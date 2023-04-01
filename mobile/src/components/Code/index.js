@@ -8,7 +8,6 @@ import { View } from 'react-native';
 
 export function Code({ code, userCode, handleUserCode }) {
   const [currentCode, setCurrentCode] = useState(code);
-
   const soundRef = useRef(null);
 
   function handleCodeChange(code) {
@@ -23,7 +22,7 @@ export function Code({ code, userCode, handleUserCode }) {
   return (
     <C.Container>
       <View currentCode={currentCode}>
-        <Editor value={currentCode} isReadOnly={false} onChange={handleCodeChange}  />
+        <Editor value={code} isReadOnly={false} onChange={handleCodeChange}  />
       </View>
       <C.CodeButtons>
         {/* <C.KeysList

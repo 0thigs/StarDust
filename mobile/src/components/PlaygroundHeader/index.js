@@ -6,14 +6,14 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconColor = theme.colors.green_500;
 
-export function PlaygroundHeader() {
+export function PlaygroundHeader({ title }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
 
   const popupMenuButtons = [
     {
       title: 'Salvar',
-      isToggle: true,
+      isToggle: false,
       value: isDarkMode,
       action: () => setIsDarkMode(!isDarkMode),
     },
@@ -43,7 +43,7 @@ export function PlaygroundHeader() {
         <ArrowLeft color={iconColor} />
       </C.HeaderButton>
 
-      <C.Title>Playground</C.Title>
+      <C.Title>{title}</C.Title>
 
       <C.HeaderButton activeOpacity={0.7}>
         <Share2 color={iconColor} />

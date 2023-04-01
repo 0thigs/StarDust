@@ -15,7 +15,7 @@ import theme from '../../global/styles/theme';
 
 export function Codes() {
   const { loggedUser } = useAuth();
-  const { codes, updateCode, deleteCode, fetchCodes } = useCode(loggedUser.id);
+  const { codes, updateCode, deleteCode, fetchCodes } = useCode(null, loggedUser.id);
   const [isLoading, setIsLoading] = useState(true);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -89,7 +89,12 @@ export function Codes() {
           data={codes}
           keyExtractor={({ id }) => id}
           renderItem={({ item: { id, title } }) => (
-            <CodeCard id={id} title={title} onPress={handleCodeButtonPress} />
+            <CodeCard
+              id={id}
+              title={title}
+              onPress={handleCodeButtonPress}
+              navigation={navigation}
+            />
           )}
         />
       )}
