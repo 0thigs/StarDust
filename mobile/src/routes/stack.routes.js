@@ -18,8 +18,8 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Codes" component={Codes} />
+      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Challenge" component={Challenge} />
       <Stack.Screen name="Lesson" component={Lesson} />

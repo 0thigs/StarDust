@@ -182,6 +182,14 @@ export default {
     return success;
   },
 
+  deleteCode: async codeId => {
+    const { success, error } = await supabase.from('codes').delete().eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   updateUser: async (column, data, userId) => {
     const { success, error } = await supabase
       .from('users')

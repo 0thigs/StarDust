@@ -1,42 +1,62 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useCode } from '../../hooks/useCode';
 import { useAuth } from '../../hooks/useAuth';
 
 import { CodeCard } from '../../components/CodeCard';
 import { Loading } from '../../components/Loading';
+import { Button } from '../../components/Button';
+import { Prompt } from '../../components/Prompt';
+import { Modal } from '../../components/Modal';
 
 import { Plus } from 'react-native-feather';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { AvatarsList } from '../../components/AvatarsList';
 
 export function Codes() {
   const { loggedUser } = useAuth();
-  const { codes } = useCode(loggedUser.id);
+  const { codes, updateCode, deleteCode, fetchCodes } = useCode(loggedUser.id);
   const [isLoading, setIsLoading] = useState(true);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
-  const [codeTitle, setCodeTitle] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const codeTitle = useRef('');
+  const currentCodeId = useRef('');
 
-  function onPromptConfirm() {}
-
-  function onPromptCancel() {}
-
-  function editCode(id) {
-    setIsPromptVisible(true);
+  function onPromptConfirm() {
+    const id = currentCodeId.current;
+    const title = codeTitle.current;
+    if (!title) return;
+    updateCode(id, title);
+    setIsPromptVisible(false);
+    fetchCodes();
   }
 
-  function deleteCode(id) {}
+  function onPromptCancel() {
+    setIsPromptVisible(false);
+  }
+
+  function handleDeleteButtonPress() {
+    const id = currentCodeId.current;
+    setIsModalVisible(false);
+    deleteCode(id);
+    fetchCodes();
+  }
+
+  function editCode(id) {
+    currentCodeId.current = id;
+    codeTitle.current = codes.find(code => code.id === id).title;
+    setIsPromptVisible(true);
+  }
 
   function shareCode(id) {}
 
   function handleCodeButtonPress(action, id) {
-    console.log(action);
     switch (action) {
       case 'edit':
         editCode(id);
         break;
       case 'delete':
-        deleteCode(id);
+        currentCodeId.current = id;
+        setIsModalVisible(true);
         break;
       case 'share':
         shareCode(id);
@@ -67,6 +87,38 @@ export function Codes() {
           )}
         />
       )}
+
+      <Prompt
+        isVisible={isPromptVisible}
+        title={'Renomeie o código'}
+        onConfirm={onPromptConfirm}
+        onCancel={onPromptCancel}
+        value={codeTitle}
+      />
+
+      <Modal
+        isVisible={isModalVisible}
+        title={'Tem certeza que deseja deletar esse código?'}
+        type={'crying'}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Deletar'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={handleDeleteButtonPress}
+            />
+            <Button
+              title={'Cancelar'}
+              color={theme.colors.black}
+              background={theme.colors.blue_300}
+              onPress={() => setIsModalVisible(false)}
+            />
+          </>
+        }
+        playSong={false}
+      />
     </C.Container>
   );
 }
