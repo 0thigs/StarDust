@@ -1,7 +1,6 @@
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { ChevronDown } from 'react-native-feather';
 
 export function Output({ bottomSheetRef, result }) {
   return (

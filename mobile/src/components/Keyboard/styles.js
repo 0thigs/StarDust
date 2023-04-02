@@ -1,9 +1,8 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex: 1;
-  width: 100%;
-  position: relative;
+  background-color: ${({ theme }) => theme.colors.green_900};
+
 `;
 
 export const CodeButtons = styled.View`
@@ -14,12 +13,10 @@ export const CodeButtons = styled.View`
   width: 120px;
 `;
 
-export const KeysList = styled.FlatList``;
-
 export const CodeButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 8px 16px;
 `;
 
 export const Title = styled.Text`
@@ -27,3 +24,4 @@ export const Title = styled.Text`
   color: ${({ theme, isRunButton }) => (isRunButton ? theme.colors.green_500 : theme.colors.white)};
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
+
