@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { useEditor } from '../../hooks/useEditor';
@@ -19,6 +19,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
+  const [popoverMenuButtons, setPopoverMenuButtons] = useState([]);
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -56,32 +57,40 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
     navigation.goBack();
   }
 
-  const popoverMenuButtons = [
-    {
-      title: 'Salvar código',
-      isToggle: false,
-      value: isDarkMode,
-      action: () => (codeId.current ? onPromptConfirm() : setIsPromptVisible(true)),
-    },
-    {
-      title: 'Dark Mode',
-      isToggle: true,
-      value: isDarkMode,
-      action: () => setIsDarkMode(!isDarkMode),
-    },
-    {
-      title: 'Font Size',
-      isToggle: false,
-      value: null,
-      action: () => setIsRangeInputVisible(true),
-    },
-    {
-      title: 'Deletar',
-      isToggle: false,
-      value: null,
-      action: () => setIsModalVisible(true),
-    },
-  ];
+  useEffect(() => {
+    const popoverMenuButtons = [
+      {
+        title: 'Salvar código',
+        isToggle: false,
+        value: isDarkMode,
+        action: () => (codeId.current ? onPromptConfirm() : setIsPromptVisible(true)),
+      },
+      {
+        title: 'Dark Mode',
+        isToggle: true,
+        value: isDarkMode,
+        action: () => setIsDarkMode(!isDarkMode),
+      },
+      {
+        title: 'Font Size',
+        isToggle: false,
+        value: null,
+        action: () => setIsRangeInputVisible(true),
+      },
+    ];
+
+    if (codeId.current) {
+      const deleteButton = {
+        title: 'Deletar',
+        isToggle: false,
+        value: null,
+        action: () => setIsModalVisible(true),
+      };
+      popoverMenuButtons.push(deleteButton);
+    }
+
+    setPopoverMenuButtons(popoverMenuButtons);
+  }, []);
 
   return (
     <C.Container>
