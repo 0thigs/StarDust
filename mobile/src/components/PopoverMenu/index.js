@@ -1,11 +1,18 @@
+import { useImperativeHandle, forwardRef } from 'react';
 import { Check, MoreVertical } from 'react-native-feather';
 import { Popover, usePopover } from 'react-native-modal-popover';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function PopoverMenu({ buttons }) {
+export const PopoverMenu = forwardRef(({ buttons }, ref) => {
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
     usePopover();
+
+  useImperativeHandle(ref, () => {
+    return {
+      closePopover,
+    };
+  });
 
   return (
     <>
@@ -41,4 +48,4 @@ export function PopoverMenu({ buttons }) {
       </Popover>
     </>
   );
-}
+});

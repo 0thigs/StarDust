@@ -85,7 +85,6 @@ export function Challenge({ route }) {
     }
 
     if (!inputValues) return code;
-
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (matches.length !== inputValues.length) {
@@ -104,7 +103,7 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
-    let code = userCode.current.value;
+    let code = userCode.current;
     code = formatCode(code, input);
     try {
       const { erros, resultado } = await execute(code, addUserOutput);

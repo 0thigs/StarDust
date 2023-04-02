@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 export function Prompt({ isVisible, title, value, onConfirm, onCancel }) {
   const [text, setText] = useState('');
+  
   function handleChangeText(text) {
     value.current = text;
     setText(text);

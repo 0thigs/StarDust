@@ -19,6 +19,7 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
+  console.log(isSelected ? name : '');
   const soundRef = useRef();
 
   async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
@@ -27,6 +28,8 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
   }
 
   function buyAvatar() {
+    setIsRequesting(true);
+
     if (!isBuyable) {
       setIsRequesting(false);
       setIsModalOpen(true);
@@ -43,13 +46,11 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
 
   async function selectAvatar() {
     updateLoggedUser('avatar_id', id);
-    setIsRequesting(false);
+    // setIsRequesting(false);
     soundRef.current.play();
   }
 
   function handleButtonPress() {
-    setIsRequesting(true);
-
     if (isAcquired) {
       selectAvatar();
       return;

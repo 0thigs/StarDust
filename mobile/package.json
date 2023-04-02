@@ -40,6 +40,7 @@
     "react-native-draggable-flatlist": "^4.0.0",
     "react-native-feather": "^1.1.2",
     "react-native-gesture-handler": "~2.8.0",
+    "react-native-get-random-values": "^1.8.0",
     "react-native-markdown-package": "^1.8.2",
     "react-native-modal": "^13.0.1",
     "react-native-modal-popover": "^2.1.3",

@@ -492,4 +492,86 @@ fimalgoritmo
     ],
     answer: '11',
   },
+  {
+    starId: 8,
+    type: 'selection',
+    stem: 'Qual será o resultado de 50 % 2?',
+    options: [
+      '0',
+      '25',
+      '1',
+      '100',
+    ],
+    answer: '0',
+  },
+  {
+    starId: 8,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a 20',
+    lines: [
+      {
+        id: 1,
+        texts: ['5 ', 'dropZone', ' 2 ', 'dropZone', ' 4', ' = 13'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '/',
+      },
+      {
+        id: 2,
+        label: '+',
+      },
+      {
+        id: 3,
+        label: '*',
+      },
+      {
+        id: 4,
+        label: 'x',
+      },
+      {
+        id: 5,
+        label: '-',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3],
+  },
+  {
+    starId: 8,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a 20',
+    lines: [
+      {
+        id: 1,
+        texts: ['dropZone', ' + ', 'dropZone', ' / ', '2', ' = 10'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '4',
+      },
+      {
+        id: 2,
+        label: '12',
+      },
+      {
+        id: 3,
+        label: '6',
+      },
+      {
+        id: 4,
+        label: '-4',
+      },
+      {
+        id: 5,
+        label: '10',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
 ];

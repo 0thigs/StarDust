@@ -41,6 +41,13 @@ export function AvatarsList({ avatars }) {
     setCurrentIndex(index);
   }
 
+  function scrollToCurrentAvatar() {
+    const selectedAvatarIndex = avatars.findIndex(avatar => avatar.id === loggedUser.avatar_id);
+    setSelectedAvatarIndex(selectedAvatarIndex);
+    setCurrentIndex(selectedAvatarIndex);
+    scrollTo(selectedAvatarIndex);
+  }
+
   const renderItem = useCallback(({ item: { id, name, image, price }, index }) => {
     const isSelected = index === selectedAvatarIndex;
     const isFirstItem = index === 0;
@@ -61,9 +68,7 @@ export function AvatarsList({ avatars }) {
   }, []);
 
   useEffect(() => {
-      const selectedAvatarIndex = avatars.findIndex(avatar => avatar.id === loggedUser.avatar_id);
-      setSelectedAvatarIndex(selectedAvatarIndex);
-      scrollTo(selectedAvatarIndex);
+    scrollToCurrentAvatar();
   }, [loggedUser.avatar_id]);
 
   return (
@@ -79,6 +84,10 @@ export function AvatarsList({ avatars }) {
         viewabilityConfig={viewabilityConfig}
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}
+        onScrollToIndexFailed={() => {
+          const wait = new Promise(resolve => setTimeout(resolve, 100));
+          wait.then(() => scrollToCurrentAvatar());
+        }}
       />
       <C.Navigation>
         <C.NavButton

@@ -9,26 +9,28 @@ import { Prompt } from '../Prompt';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { PopoverMenu } from '../PopoverMenu';
+import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { usePopover } from 'react-native-modal-popover';
 const iconColor = theme.colors.green_500;
 
 export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
-  const { closePopover } = usePopover();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
   const codeTitle = useRef('');
+  const popoverMenuRef = useRef(null);
 
   function onPromptConfirm() {
+    popoverMenuRef.current.closePopover();
+
     if (codeId.current) {
-      updateCode(codeId.current, { code });
+      updateCode(codeId.current, { code: code.current });
       return;
     }
     const id = uuidv4();
@@ -93,7 +95,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
         <Share2 color={iconColor} />
       </C.HeaderButton>
 
-      <PopoverMenu  buttons={popoverMenuButtons}  />
+      <PopoverMenu ref={popoverMenuRef} buttons={popoverMenuButtons} />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
 

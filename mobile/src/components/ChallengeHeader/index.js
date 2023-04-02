@@ -24,6 +24,7 @@ export function ChallengeHeader({
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
+  const popoverMenuRef = useRef(null);
 
   const popoverMenuButtons = [
     {
@@ -62,7 +63,7 @@ export function ChallengeHeader({
           <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
         <C.Title align={'right'}>{title}</C.Title>
-        <PopoverMenu buttons={popoverMenuButtons} />
+        <PopoverMenu ref={popoverMenuRef} buttons={popoverMenuButtons} />
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>
