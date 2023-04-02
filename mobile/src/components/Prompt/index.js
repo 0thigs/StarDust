@@ -5,9 +5,9 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { useEffect } from 'react';
 
-export function Prompt({ isVisible, title, value, onConfirm, onCancel }) {
+export function Prompt({ isVisible, title, value, onConfirm, onCancel, promptRef }) {
   const [text, setText] = useState('');
-  
+
   function handleChangeText(text) {
     value.current = text;
     setText(text);
@@ -24,6 +24,7 @@ export function Prompt({ isVisible, title, value, onConfirm, onCancel }) {
       <C.Content>
         <C.Title>{title}</C.Title>
         <C.Input
+          ref={promptRef}
           onChangeText={handleChangeText}
           underlineColorAndroid={theme.colors.purple_700}
           value={value.current}
@@ -36,6 +37,7 @@ export function Prompt({ isVisible, title, value, onConfirm, onCancel }) {
               color={theme.colors.black}
               background={theme.colors.green_500}
               onPress={onConfirm}
+              isDisabled={!value.current}
             />
           </C.ButtonWrapper>
 
