@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { Check, MoreVertical } from 'react-native-feather';
 import { Popover, usePopover } from 'react-native-modal-popover';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function PopupMenu({ buttons }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [popOverAnchor, setPopOverAnchor] = useState({ x: 0, y: 0, width: 0, height: 0 });
+export function PopoverMenu({ buttons }) {
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
     usePopover();
 

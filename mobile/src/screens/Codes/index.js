@@ -27,7 +27,7 @@ export function Codes() {
     const id = currentCodeId.current;
     const title = codeTitle.current;
     if (!title) return;
-    updateCode(id, title);
+    updateCode(id, { title });
     setIsPromptVisible(false);
     fetchCodes();
   }
@@ -71,6 +71,7 @@ export function Codes() {
   }
 
   useEffect(() => {
+    fetchCodes();
     if (codes.length) setIsLoading(false);
   }, [codes]);
 
@@ -101,7 +102,7 @@ export function Codes() {
 
       <Prompt
         isVisible={isPromptVisible}
-        title={'Renomeie o código'}
+        title={'Renomear código'}
         onConfirm={onPromptConfirm}
         onCancel={onPromptCancel}
         value={codeTitle}

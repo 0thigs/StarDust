@@ -1,21 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { Code } from '../../components/Code';
+import { Output } from '../../components/Output';
 import { PlaygroundHeader } from '../../components/PlaygroundHeader';
 import { execute } from '../../libs/delegua.mjs';
 import { Toast } from 'toastify-react-native';
 import * as C from './styles';
-import { Output } from '../../components/Output';
 
 export function Playground({ route }) {
-  const codeId = route.params?.id ?? null;
+  const codeId = useRef(route.params?.id ?? null);
   const {
     code: { code, title },
-    updateCode,
-    deleteCode,
-    fetchCodes,
-  } = useCode(codeId);
+  } = useCode(codeId.current);
   const [codeTitle, setCodeTitle] = useState('');
   const [output, setOutput] = useState('');
   const userCode = useRef('');
@@ -29,32 +25,36 @@ export function Playground({ route }) {
   }
 
   function handleOutput(output) {
-    console.log(output);
     setOutput(output);
+    if (!output) setOutput('Sem resultado');
+    bottomSheetRef.current.collapse();
   }
 
   async function handleUserCode() {
-    const code = userCode.current;
-    console.log(code);
     try {
-      const { erros, resultado } = await execute(code, handleOutput);
+      const { erros, resultado } = await execute(userCode.current, handleOutput);
       if (erros.length) {
         if (erros[0] instanceof Error) throw erros[0];
+        bottomSheetRef.current.close();
         throw erros[0].erroInterno;
       }
-      bottomSheetRef.current.collapse();
     } catch (error) {
       handleError(error.message);
     }
   }
 
   useEffect(() => {
-    setCodeTitle(codeId ? title : 'Playground');
+    setCodeTitle(codeId.current ? title : 'Playground');
   }, [code]);
 
   return (
     <C.Container>
-      <PlaygroundHeader title={codeTitle} updateCode={updateCode} />
+      <PlaygroundHeader
+        title={codeTitle}
+        code={userCode}
+        codeId={codeId}
+        setCodeTitle={setCodeTitle}
+      />
       {codeTitle && <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />}
       <Output bottomSheetRef={bottomSheetRef} result={output} />
     </C.Container>

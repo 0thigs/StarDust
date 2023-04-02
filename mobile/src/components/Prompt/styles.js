@@ -4,7 +4,7 @@ export const Content = styled.View`
   background-color: ${({ theme }) => theme.colors.green_900};
   align-items: center;
   width: 100%;
-  padding: 12px;
+  padding: 24px 12px;
   border-radius: 4px;
 `;
 

@@ -2,18 +2,19 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
-  background-color: ${prop => prop.theme.colors.green_900};
+  background-color: ${({ theme }) => theme.colors.green_900};
   flex-direction: row;
   padding: 16px 0;
 `;
 
 export const Title = styled.Text`
-  margin: ${props => (props.align === 'right' ? '0 auto 0 24px' : 'auto')};
-  font-family: ${props => props.theme.fonts.medium};
+  margin: ${({ align }) => (align === 'right' ? '0 auto 0 24px' : 'auto')};
+  font-family: ${({ theme }) => theme.fonts.medium};
   font-size: 16px;
-  color: ${props => (props.isActive ? props.theme.colors.green_500 : props.theme.colors.white)};
+  color: ${({ theme, isActive }) => (isActive ? theme.colors.green_500 : theme.colors.white)};
 `;
 
 export const HeaderButton = styled.TouchableOpacity`
   margin: 0 12px;
+  padding: 2px;
 `;

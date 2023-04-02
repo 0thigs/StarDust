@@ -5,17 +5,26 @@ export const useCode = (codeId, userId) => {
   const [codes, setCodes] = useState([]);
   const [code, setCode] = useState('');
 
-  async function deleteCode(id) {
+  async function addCode(codeId, code, userId) {
     try {
-      await api.deleteCode(id);
+      await api.addCode(codeId, code, userId);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function updateCode(id, title) {
+  async function updateCode(codeId, data) {
     try {
-      await api.updateCode(id, title);
+        console.log(data);
+      await api.updateCode(codeId, data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function deleteCode(id) {
+    try {
+      await api.deleteCode(id);
     } catch (error) {
       console.log(error);
     }
@@ -44,5 +53,5 @@ export const useCode = (codeId, userId) => {
     if (!codes.length && userId) fetchCodes();
   }, []);
 
-  return { code, codes, updateCode, deleteCode, fetchCodes };
+  return { code, codes, addCode, updateCode, deleteCode, fetchCodes };
 };

@@ -164,7 +164,11 @@ export default {
   },
 
   getCodes: async userId => {
-    const { data, error } = await supabase.from('codes').select('*').eq('user_id', userId);
+    const { data, error } = await supabase
+      .from('codes')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: true });
     if (error) {
       throw new Error(error.message);
     }
@@ -180,11 +184,18 @@ export default {
     return code;
   },
 
-  updateCode: async (codeId, codeTitle) => {
+  addCode: async (title, code, userId) => {
     const { success, error } = await supabase
       .from('codes')
-      .update({ title: codeTitle })
-      .eq('id', codeId);
+      .insert([{ title, code, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  updateCode: async (codeId, data) => {
+    const { success, error } = await supabase.from('codes').update(data).eq('id', codeId);
     if (error) {
       throw new Error(error.message);
     }

@@ -3,7 +3,7 @@ import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle } from 'react-native-reanimated';
 
-import { PopupMenu } from '../PopupMenu';
+import { PopoverMenu } from '../PopoverMenu';
 import { RangeInput } from '../RangeInput';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
@@ -25,7 +25,7 @@ export function ChallengeHeader({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
 
-  const popupMenuButtons = [
+  const popoverMenuButtons = [
     {
       title: 'Dark Mode',
       isToggle: true,
@@ -62,7 +62,7 @@ export function ChallengeHeader({
           <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
         <C.Title align={'right'}>{title}</C.Title>
-        <PopupMenu buttons={popupMenuButtons} />
+        <PopoverMenu buttons={popoverMenuButtons} />
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>
