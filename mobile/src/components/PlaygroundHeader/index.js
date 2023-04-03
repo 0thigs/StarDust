@@ -19,6 +19,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
+  console.log({isDarkMode});
   const [popoverMenuButtons, setPopoverMenuButtons] = useState([]);
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
@@ -42,7 +43,6 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   }
 
   function onPromptCancel() {
-    console.log(code);
     setIsPromptVisible(false);
     closePopover();
   }

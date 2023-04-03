@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
 
@@ -64,7 +64,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
     target.measure((x, y, width) => {
       if (linesWidth.length < lines.length) {
         setLinesWidth(linesWidth => [...linesWidth, { id, width }]);
-        return
+        return;
       }
 
       setLinesWidth(linesWidth => linesWidth.map(line => (line.id === id ? { id, width } : line)));
@@ -109,7 +109,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                     {text === 'dropZone' && (
                       <DropZone
                         key={index}
-                        id={index}
+                        id={`${index}-${id}`}
                         zones={zones}
                         setZones={setZones}
                         totalDropZones={totalDropZones}
@@ -131,7 +131,6 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 label={label}
                 zones={zones}
                 setZones={setZones}
-                linesWidth={linesWidth}
                 totalDropZones={totalDropZones}
                 reorderedItems={reorderedItems}
                 isAnswerVerified={isAnswerVerified}

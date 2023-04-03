@@ -10,8 +10,6 @@ import { Loading } from '../Loading';
 import { FabButton } from '../FabButton';
 import { Modal } from '../Modal';
 import { LessonHeader } from '../LessonHeader';
-// import { theories } from '../../utils/theories';
-// import { planets } from '../../utils/planets';
 
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
@@ -23,8 +21,8 @@ export function Theory({ title, allTexts }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isScrollToEnd, setIsScrollToEnd] = useState(true);
   const scrollRef = useRef(null);
-  const isScrollToEnd = useRef(false);
 
   function fixValue(value) {
     return Math.floor(value);
@@ -46,16 +44,19 @@ export function Theory({ title, allTexts }) {
   }
 
   function handleScroll({ contentOffset, contentSize, layoutMeasurement }) {
-    isScrollToEnd.current =
+    const isScrollToEnd =
       fixValue(contentOffset.y) + fixValue(layoutMeasurement.height) >=
-      fixValue(contentSize.height) - C.minHeightText + 100;
-    setIsFabButtonVisible(!isScrollToEnd.current);
+      fixValue(contentSize.height) - C.minHeightText + 25;
+    setIsScrollToEnd(isScrollToEnd);
+    setIsFabButtonVisible(!isScrollToEnd);
   }
 
   useEffect(() => {
     setTexts([{ ...allTexts[0], isRendered: false }]);
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {}, [texts]);
 
   return (
     <C.Container>
@@ -69,15 +70,16 @@ export function Theory({ title, allTexts }) {
             showsVerticalScrollIndicator={false}
             ref={scrollRef}
             onScroll={event => handleScroll(event.nativeEvent)}
-            onContentSizeChange={isScrollToEnd.current && scrollToEnd}
+            onContentSizeChange={isScrollToEnd && scrollToEnd}
           >
-            {texts.map(({ type, title, body, isRendered }, index) => (
+            {texts.map(({ type, title, body, isRendered, isRunnable }, index) => (
               <Text
                 key={`text-${index}`}
                 type={type}
                 title={title}
                 body={body}
                 isRendered={isRendered}
+                isRunnable={isRunnable}
               />
             ))}
           </C.Theories>

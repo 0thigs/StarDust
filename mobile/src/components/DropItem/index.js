@@ -94,15 +94,9 @@ export function DropItem({
   }
 
   useEffect(() => {
+    if (isFirstRendering) return
     adjustPosition(id);
   }, [zones]);
-
-  useEffect(() => {
-    // if (isItemInZone) {
-    //   resetPosition();
-    //   setIsItemInZone(false);
-    // }
-  }, [reorderedItems]);
 
   return (
     <C.DropItem

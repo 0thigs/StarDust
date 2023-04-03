@@ -88,7 +88,7 @@ export function End({
       nextStar = nextPlanet.stars[0];
     }
 
-    if (!updatedUnlockedStarsIds.includes(nextStar.id)) {
+    if (nextStar && !updatedUnlockedStarsIds.includes(nextStar.id)) {
       updatedUnlockedStarsIds.push(nextStar.id);
     }
 

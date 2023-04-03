@@ -24,4 +24,5 @@ export const Theories = styled.ScrollView`
 
 export const ButtonContainer = styled.View`
   width: 90%;
+  margin-bottom: 4px;
 `;

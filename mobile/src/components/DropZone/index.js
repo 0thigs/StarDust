@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import * as C from '../DragAndDropClickForm/styles';
 
 export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, linesWidth }) {
-  const [zoneWidth, setZoneWidth] = useState(minZoneWidth);
+  const [zoneWidth, setZoneWidth] = useState(0);
   const zoneRef = useRef(null);
 
   useEffect(() => {
-    // console.log({ zones });
-
     if (zones.length) {
       const targetZone = zones.find(zone => zone && zone.id === id);
       if (targetZone) setZoneWidth(targetZone.width);
@@ -28,6 +25,11 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
       updateZone(zone);
     });
   }, [linesWidth]);
+
+
+//   useEffect(() => {
+//     setZoneWidth(minZoneWidth)
+//   }, [])
 
   function updateZone({ id, x, y, width }) {
     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
@@ -54,7 +56,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth}
+      width={zoneWidth === 0 ? minZoneWidth : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

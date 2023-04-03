@@ -1,16 +1,16 @@
 import styled from 'styled-components/native';
 import { css } from 'styled-components';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
 
 export const Container = styled(Animatable.View)`
-  flex-direction: ${props => (props.type === 'alert' ? 'row' : 'column')};
+  flex-direction: ${({ type }) => (type === 'alert' ? 'row' : 'column')};
   align-items: center;
   margin: 16px 0;
 `;
 
 export const Title = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.semibold};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.semibold};
   font-size: 16px;
   margin-bottom: 4px;
   align-self: flex-start;
@@ -18,48 +18,61 @@ export const Title = styled.Text`
 
 export const Code = styled.ScrollView`
   border-radius: 10px;
-  min-width: 250px;
-`;
-
-const DefaultStyle = css`
-  background-color: ${props => props.theme.colors.purple_700};
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
-  font-size: 14px;
   width: 100%;
-  border-radius: 10px;
-  padding: 16px;
+  position: relative;
 `;
 
-const ListStyle = css`
-  background-color: ${props => props.theme.colors.blue_700};
-  color: ${props => props.theme.colors.blue_300};
-  font-family: ${props => props.theme.fonts.regular};
-  font-size: 14px;
-  border-radius: 10px;
+const DefaultContainer = css`
+  background-color: ${({ theme }) => theme.colors.purple_700};
+  width: 100%;
+`;
+
+export const CodeButton = styled.TouchableOpacity`
+  background-color: ${({ theme }) => theme.colors.blue_700};
+  border: 0.4px ${({ theme }) => theme.colors.green_700};
+  border-radius: 8px;
+  padding: 4px;
+  position: absolute;
+  right: 0;
+  top: 32px;
+  z-index: 5;
+`;
+
+export const CodeButtonTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.green_700};
+  text-transform: uppercase;
+`;
+
+const ListContainer = css`
+  background-color: ${({ theme }) => theme.colors.blue_700};
   border-width: 2px;
-  border-left-color: ${props => props.theme.colors.blue_300};
-  padding: 16px;
+  border-left-color: ${({ theme }) => theme.colors.blue_300};
   width: 100%;
 `;
 
-const AlertStyle = css`
-  background-color: ${props => props.theme.colors.yellow_300};
-  color: ${props => props.theme.colors.black};
-  font-family: ${props => props.theme.fonts.regular};
-  border-radius: 10px;
-  padding: 16px;
+const AlertContainer = css`
+  background-color: ${({ theme }) => theme.colors.yellow_300};
   width: 85%;
   margin-left: 18px;
 `;
 
+export const Body = styled.View`
+  border-radius: 10px;
+  padding: 16px;
+  ${({ type }) => type === 'default' && DefaultContainer}
+  ${({ type }) => type === 'list' && ListContainer}
+  ${({ type }) => type === 'alert' && AlertContainer}
+`;
 
-export const Body = styled.Text`
-    ${props => props.type === 'default' && DefaultStyle}
-    ${props => props.type === 'list' && ListStyle}
-    ${props => props.type === 'alert' && AlertStyle}
+export const Text = styled.Text`
+  font-size: 14px;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'alert' ? 'black' : type === 'list' ? 'blue_300' : 'white']};
+  letter-spacing: 0.8px;
+  line-height: 18px;
 `;
 
 export const SpeechButton = styled.TouchableOpacity`
-  padding-bottom: 24px;
+  padding-bottom: 12px;
 `;

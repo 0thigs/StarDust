@@ -14,6 +14,7 @@ export function Playground({ route }) {
     code: { code, title },
   } = useCode(codeId.current);
   const [codeTitle, setCodeTitle] = useState('');
+  const [initialCode, setInitialCodeCode] = useState('');
   const [output, setOutput] = useState([]);
   const [isPromptVisible, setisPromptVisible] = useState(false);
   const [promptTitle, setPromptTitle] = useState('');
@@ -96,6 +97,8 @@ export function Playground({ route }) {
 
   useEffect(() => {
     setCodeTitle(codeId.current ? title : 'Playground');
+    setCodeTitle(codeId.current ? title : 'Playground');
+    setInitialCodeCode(codeId.current ? code : route.params?.code);
   }, [code]);
 
   return (
@@ -107,7 +110,7 @@ export function Playground({ route }) {
         setCodeTitle={setCodeTitle}
       />
 
-      {codeTitle && <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />}
+      {codeTitle && <Code code={initialCode} handleUserCode={handleUserCode} userCode={userCode} />}
 
       <Prompt
         isVisible={isPromptVisible}

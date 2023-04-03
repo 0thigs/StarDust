@@ -484,24 +484,14 @@ fimalgoritmo
     starId: 8,
     type: 'selection',
     stem: 'Qual será o resultado de 5 + 3 * 2?',
-    options: [
-      '11',
-      '16',
-      '13',
-      '15',
-    ],
+    options: ['11', '16', '13', '15'],
     answer: '11',
   },
   {
     starId: 8,
     type: 'selection',
     stem: 'Qual será o resultado de 50 % 2?',
-    options: [
-      '0',
-      '25',
-      '1',
-      '100',
-    ],
+    options: ['0', '25', '1', '100'],
     answer: '0',
   },
   {
@@ -570,6 +560,115 @@ fimalgoritmo
       {
         id: 5,
         label: '10',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 9,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `
+var altitudeAtual = 2000;
+var altitudeSegura = 1500;
+
+var altitudeSegura = altitudeSegura + 500
+escreva(altitudeSegura < altitudeAtual)
+    `,
+    options: ['falso', 'verdadeiro', '1500', '2000'],
+    answer: 'falso',
+  },
+  {
+    starId: 9,
+    type: 'open',
+    stem: 'Qual símbolo você usuaria para verificar se 9 é maior ou igual a 7?',
+    answer: '>=',
+  },
+  {
+    starId: 9,
+    type: 'selection',
+    stem: 'Qual o tipo de dado que se obtém ao usar operadores relacionais?',
+    options: ['falso', 'verdadeiro', 'lógico', 'texto'],
+    answer: 'lógico',
+  },
+  {
+    starId: 9,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var velocidadeLimite = 5000'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var velocidadeAtual ', 'dropZone', ' 2000'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (', 'velocidadeLimite ', 'dropZone', ' velocidadeAtual)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '=',
+      },
+      {
+        id: 2,
+        label: '!=',
+      },
+      {
+        id: 3,
+        label: '==',
+      },
+      {
+        id: 4,
+        label: '<',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 9,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var combustivelAtual = ', 'dropZone'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var combustivelNecessario = ', 'dropZone'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (combustivelAtual <= combustivelNecessario)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '250',
+      },
+      {
+        id: 2,
+        label: '300',
+      },
+      {
+        id: 3,
+        label: 'verdadeiro',
+      },
+      {
+        id: 4,
+        label: '<',
       },
     ],
     correctItemsIdsSequence: [1, 2],

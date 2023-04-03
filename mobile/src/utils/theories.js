@@ -521,8 +521,7 @@ export const theories = [
         body: `var espaco
   escreva(espaco)
   
-  resultado: nulo
-              `,
+//  Resultado: nulo`,
       },
       {
         type: 'alert',
@@ -540,11 +539,6 @@ export const theories = [
     texts: [
       {
         type: 'default',
-        title: null,
-        body: '.',
-      },
-      {
-        type: 'default',
         title: 'Missão cumprida!',
         body: 'Sim! Pelo visto o ambiente do planeta é habitável 🎉! Contudo, você ainda tem uma questão pendente.',
       },
@@ -556,26 +550,26 @@ export const theories = [
       {
         type: 'default',
         title: 'E como faço isso?',
-        body: 'Por sorte seu foguete é equipado com tecnologia de ponta que faz cálculos usando operadores aritméticos',
+        body: 'Por sorte seu foguete é equipado com tecnologia de ponta que faz cálculos usando operadores aritméticos.',
       },
       {
         type: 'default',
-        title: 'Pera aí, operadores aritméticos? tipo somar e subtrair?',
+        title: 'Pera aí, operadores aritméticos? Tipo somar e subtrair?',
         body: 'Sim!! não só aritméticos, mas também lógicos e relacionais!',
       },
       {
         type: 'alert',
-        body: 'Porém, por enquanto vamos apenas usar os aritméticos para efetuar operações mais simples',
+        body: 'Porém, por enquanto vamos apenas usar os aritméticos para efetuar operações mais simples.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, já é uma boa hora de reabastecer o foguete com combustível, ou seja, precisamos adicionar combustível atual com combustível novo',
+        body: 'Por exemplo, já é uma boa hora de reabastecer o foguete com combustível, ou seja, precisamos adicionar combustível atual com combustível novo.',
       },
       {
         type: 'default',
         title: 'Adição (+)',
-        body: 'E para isso nós usamos o operador "+" de adição mesmo usado para concatenar textos.',
+        body: 'E para isso nós usamos o operador "+" de adição, o mesmo usado para concatenar textos.',
       },
       {
         type: 'code',
@@ -584,23 +578,25 @@ var combustivel = 100;
 var combustivelAtual = 200;
 var totalCombustivel = combustivel + combustivelAtual;
 escreva("A nave agora tem " + totalCombustivel + "  galões de combustível");
-// Resultado: A nave agora tem 300 galões de combustível.
-              `,
+
+// Resultado: A nave agora tem 300 galões de combustível.`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: 'Subtração (-)',
-        body: 'Além reabastecer, o próprio foquete calcula quanto de supriementos vc já consumiu até agora, utilizando simplesmente o operador de subtração "-"',
+        body: 'Além de reabastecer, o próprio foquete consegue calcular o quanto de supriementos vc já consumiu até agora, utilizando simplesmente o operador de subtração "-".',
       },
       {
         type: 'code',
         body: `
-var suprimentosConsumidos = 250
+var suprimentosConsumidos = 250;
 var suprimentosAtual = 300;
-var suprimentosRestante = suprimentosAtual - suprimentosConsumidos
-escreva('Você possui ' + suprimentosRestante ' suprimentos')
-// Resultado: Você possui 50 suprimentos
-          `,
+var suprimentosRestante = suprimentosAtual - suprimentosConsumidos;
+escreva("Você possui " + suprimentosRestante " suprimentos");
+
+// Resultado: Você possui 50 suprimentos`,
+        isRunnable: true,
       },
       {
         type: 'alert',
@@ -609,12 +605,12 @@ escreva('Você possui ' + suprimentosRestante ' suprimentos')
       {
         type: 'default',
         title: 'Nem tudo está perdido.',
-        body: 'Por sua sorte (de novo) seu foguete está preparado com uma máquina de produzir suprimentos',
+        body: 'Por sua sorte (de novo) seu foguete está preparado com uma máquina de produzir suprimentos.',
       },
       {
         type: 'default',
         title: 'Mas nem tudo são flores',
-        body: 'A máquina de fazer suprimentos produz apenas 1 suprimento por dia. Logo, para fazer o cálculo da quantidade de suprimentos que você teria em mês é necessário fazer uma operação de multiplicação',
+        body: 'A máquina de fazer suprimentos produz apenas 1 suprimento por dia. Logo, para fazer o cálculo da quantidade de suprimentos que você teria em um mês é necessário fazer uma operação de multiplicação.',
       },
       {
         type: 'default',
@@ -624,35 +620,38 @@ escreva('Você possui ' + suprimentosRestante ' suprimentos')
       {
         type: 'code',
         body: `
-var suprimento = 1
-var diasMes = 30
-var suprimentosMes = suprimento * diasMes
-escreva('Em um mês você terá ' + suprimentosMes + ' suprimentos')
-//  resultado: Em um mês você terá 30 suprimentos
-              `,
+var suprimento = 1;
+var diasMes = 30;
+var suprimentosMes = suprimento * diasMes;
+escreva("Em um mês você terá " + suprimentosMes + " suprimentos");
+
+//  Resultado: Em um mês você terá 30 suprimentos`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: 'Será que é o suficiente?',
-        body: 'Parece muito para você? Ok, mas agora é necessário calcular quantidade de suprimentos que você consome por mês. Normalmente, vejo que seu consumo é 90 suprimentos por mês, então basta dividir 90 por 30.',
+        body: 'Parece muito para você? Ok, mas agora é necessário calcular a quantidade de suprimentos que você consome por mês. Normalmente, vejo que seu consumo é 90 suprimentos ao mês, então basta dividir 90 por 30.',
       },
       {
         type: 'default',
         title: 'Divisão (/)',
-        body: 'Aí temos mais uma caso diferenciado: em vez de usar o operador "÷" que você provavelmente já está acostumado, é necessário usar a barra "/". Veja o exemplo',
+        body: 'Aí temos mais uma caso diferenciado: em vez de usar o operador "÷" que você provavelmente já se acustumou a utilizar, é necessário usar a barra "/". Veja o exemplo:',
       },
       {
         type: 'code',
         body: `
-var suprimentosMes = 90
-var diasMes = 30
-var suprimentosDia = suprimentosMes / diasMes
-escreva('Você consome ' + suprimentosDia + ' por dia')
-//  resultado: Você consome 3 suprimentos por dia`,
+var suprimentosMes = 90;
+var diasMes = 30;
+var suprimentosDia = suprimentosMes / diasMes;
+escreva("Você consome " + suprimentosDia + " por dia");
+
+//  Resultado: Você consome 3 suprimentos por dia`,
+        isRunnable: true,
       },
       {
         type: 'default',
-        body: 'Obviamente0 você também pode usar múltiplos operadores diferentes ou não ao mesmo tempo em uma única linha.',
+        body: 'Obviamente, você também pode usar múltiplos operadores, diferentes ou não, ao mesmo tempo em uma única linha.',
       },
       {
         type: 'alert',
@@ -660,29 +659,33 @@ escreva('Você consome ' + suprimentosDia + ' por dia')
       },
       {
         type: 'default',
-        body: 'Por exemplo, ao querer calcular 5 + 5 * 5, o resultado não vai ser 50 e sim 30!',
+        body: 'Por exemplo, ao querer calcular 5 + 5 * 5, o resultado não vai ser 50, mas sim 30!',
       },
       {
         type: 'code',
         body: `
-escreva(5 + 5 * 5)
-//  resultado: 30`,
+escreva(5 + 5 * 5);
+
+//  Resultado: 30`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: 'Mas então o que eu faço?',
-        body: 'Assim como na matemática, você deve colocar entre parênteses as expressões que deseja que sejam calculadas primeiro',
+        body: 'Assim como na matemática, você deve colocar entre parênteses as expressões que deseja que sejam calculadas primeiro.',
       },
       {
         type: 'code',
         body: `
-escreva((5 + 5) * 5)
-//  resultado: 50`,
+escreva((5 + 5) * 5);
+
+//  Resultado: 50`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Veja um exemplo usando vários operadores',
+        body: 'Veja um exemplo usando vários operadores:',
       },
       {
         type: 'code',
@@ -691,13 +694,14 @@ var diasMes = 30;
 var suprimentosDia = 1;
 var suprimentosAtual = 300;
 var consumoTotal = suprimentosAtual - 250 + 1 * diasMes - 3 * diasMes;
-teste++
-escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos')
-//  resultado: no final do mês você terá -10 de suprimentos`,
+escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos');
+
+//  Resultado: no final do mês você terá -10 de suprimentos`,
+        isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Não é preciso ser o mestre da matemática pra perceber você não terá quantides de suprimento para sobreviver nesse planeta não é mesmo?',
+        body: 'Não é preciso ser o mestre da matemática pra perceber que você não terá quantides de suprimento para sobreviver nesse planeta, não é mesmo?',
       },
       {
         type: 'default',
@@ -707,7 +711,7 @@ escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos')
       {
         type: 'default',
         title: null,
-        body: 'Porém, ainda há questão de quanto de energia existe disponível para os dois motores presentes no foguete, pois que por algum motivo a proporção não está igual.',
+        body: 'Porém, ainda há questão de quanto de energia existe disponível para os dois motores presentes no foguete, pois por algum motivo a proporção não está igual.',
       },
       {
         type: 'default',
@@ -717,25 +721,240 @@ escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos')
       {
         type: 'default',
         title: null,
-        body: 'No momento atual há disponível 10125 de energia. Para saber se é possível distribuir a energia igualmente para os dois motores, basta verificar se esse número é divisível por 2',
+        body: 'No momento atual há disponível 10125 de energia. Para saber se é possível distribuir a energia igualmente para os dois motores, basta verificar se esse número é divisível por 2.',
       },
       {
         type: 'default',
         title: 'Módulo (%)',
-        body: 'Para isso, podemos usar um operador especial chamado "módulo", que serve para calcular ao resto da divisão entre 2 números usando o símbolo de porcentagem (%)',
+        body: 'Para isso, podemos usar um operador especial chamado "módulo", que serve para calcular ao resto da divisão entre 2 números usando o símbolo de porcentagem (%).',
       },
       {
         type: 'code',
         body: `
-var energiaAtual = 10125
+var energiaAtual = 10125;
 var resto = 10125 % 2;
-escreva('o resto é igual a ' + resto)
-//  resultado: o resto é igual a 1`,
+escreva('o resto é igual a ' + resto);
+
+//  Resultado: o resto é igual a 1`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: 'Explicação',
-        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores 😢',
+        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores 😢.',
+      },
+    ],
+  },
+  {
+    starId: 9,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Cá estamos, e tudo o que resta a fazer é cair fora desse planeta.',
+      },
+      {
+        type: 'default',
+        title: '#Partiu',
+        body: 'No entanto, é preciso verificar se tudo está ok para fazer uma partida segura e manter uma viagem no espaço.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Por exemplo, é importante averiguar se a quantidade de combustível atualmente disponível é maior que a quantidade necessaária para fazer decolagem.',
+      },
+      {
+        type: 'default',
+        title: 'E como fazer isso?',
+        body: 'É aí que entra em cena os operadores relacionais! Eles servem justamente para fazer uma comparação (relação) entre dois valores.',
+      },
+      {
+        type: 'list',
+        title: 'Operador de maior que (>)',
+        body: 'Por exemplo, caso queira verificar se um número é maior que outro, você pode utilizar o operador "maior que" representado pelo símbolo ">", como você deve saber.',
+      },
+      {
+        type: 'code',
+        body: `
+var combAtual = 100;
+var combExigido = 5;
+escreva(combAtual > combExigido);
+
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Perceba que o resultado da comparação entre dois valores é um valor do tipo lógico, e isso vai acontecer toda vez você usar os operadores relacionais.',
+      },
+      {
+        type: 'alert',
+        body: 'Não se esqueça disso, pois isso vai ser bastante importante depois!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E é claro, se existe o operador de maior que, também existe o de menor que.',
+      },
+      {
+        type: 'list',
+        title: 'Operador de menor que (<)',
+        body: 'Por exemplo, se quisermos fazer a mesma comparação anterior, só que verificando se a quantidade de combustível necessária é menor que a atual, teríamos que o operador "menor que" (<).',
+      },
+      {
+        type: 'code',
+        body: `
+var combAtual = 100;
+var combExigido = 5;
+escreva(combAtual < combExigido);
+
+//  Resultado: falso`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Note que o resultado agora é falso justamente porque a quantidade atual é maior que a exigida.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Começamos a decolar! Entretanto, é preciso checar se a velocidade atual do foguete é igual ou pelo menos superior que a velocidade de decolagem necessária para sair da atmosfera.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer isso não dá para usar operador ">" porque ele só verifica se é maior ou não.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E no nosso caso a velocidade não precisa ser tão superior, mas no mínimo igual.',
+      },
+      {
+        type: 'list',
+        title: 'Operador maior ou igual a (>=)',
+        body: 'É aí que entra em cena o novo operador que verifca se um valor é igual ou maior que outro valor, e por isso o motivo do símbolo ">=".',
+      },
+      {
+        type: 'code',
+        body: `
+var velAtual = 300;
+var velExigida = 300;
+escreva(velAtual >= velExigida);
+
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        title: 'Operador menor ou igual a (>=)',
+        body: 'Se o caso fosse checar se um valor é menor ou igual a outro, utilizaríamos o "<=".',
+      },
+      {
+        type: 'code',
+        body: `
+var velAtual = 300;
+var velExigida = 300;
+escreva(velAtual <= velExigida);
+
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Perceba que o resultado é mesmo que usar o ">=", pois ambos os operadores checam se é verdadeiro uma de duas condições (se é maior/menor ou igual).',
+      },
+      {
+        type: 'alert',
+        body: 'Note também que a gente está usando apenas números para fazer as comparações. Caso usássemos outro tipo de dado, o programa daria erro.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Beleza, mas ainda há outros questões a serem conferidas.',
+      },
+      {
+        type: 'default',
+        title: 'E quais seriam?',
+        body: 'Por exemplo, lembra que eu disse que os dois motores do foguete precisam usar a mesma quantidade de energia?',
+      },
+      {
+        type: 'default',
+        title: 'Sim!',
+        body: 'Então, é possível fazer isso agora usando o operador de igual, porém não o sinal "=", visto que esse serve para atribuir valores a variáveis.',
+      },
+      {
+        type: 'list',
+        title: 'Operador de igual (==)',
+        body: 'Para verificar se um valor é igual a outro, a gente usa o símbolo de "==", justamente para diferenciar do operador de "=".',
+      },
+      {
+        type: 'code',
+        body: `
+var energiaMoto1 = 501;
+var energiaMoto2 = 500;
+escreva(energiaMoto1 == energiaMoto2);
+
+//  Resultado: falso`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como esperado, o resultado é falso, pois os dois não estão usando a mesma quantidade de energia!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'O resultado seria verdadeiro se estivéssemos verificando se as quantidades são diferentes.',
+      },
+      {
+        type: 'list',
+        title: 'Operador de diferente (!=)',
+        body: 'Para fazer isso, basta usar o operador de "!=", que checa se dois valores são diferentes.',
+      },
+      {
+        type: 'code',
+        body: `
+var energiaMoto1 = 501;
+var energiaMoto2 = 500;
+escreva(energiaMoto1 != energiaMoto2);
+
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora o resultado é verdadeiro, justamente porque ambos não são iguais.',
+      },
+      {
+        type: 'default',
+        title: 'Se é verdadeiro, então está de boa?',
+        body: 'NÃO! Independentemente se é verdadeiro ou não, ainda estamos em uma fria porque o foguete tem chances de explodir já que as quantidades de energia estão diferentes 😢.',
+      },
+    ],
+  },
+  {
+    starId: 10,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Cá estamos, e tudo o que resta a fazer é cair fora desse planeta.',
+      },
+      {
+        type: 'default',
+        title: '#Partiu',
+        body: 'No entanto, é preciso verificar se tudo está ok para fazer uma partida segura e manter uma viagem no espaço.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Por exemplo, é importante averiguar o quanto de oxigêncio ',
       },
     ],
   },
