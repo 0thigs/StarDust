@@ -23,7 +23,7 @@ export function Code({ code, userCode, handleUserCode }) {
   }
 
   useEffect(() => {
-    keyboardRef.current.collapse();
+    // keyboardRef.current.collapse();
   }, []);
 
   return (
@@ -34,9 +34,11 @@ export function Code({ code, userCode, handleUserCode }) {
 
       <Keyboard
         ref={keyboardRef}
-        snapPoints={['15%', '15%']}
+        snapPoints={['1%', '18%']}
         index={1}
         backgroundStyle={{ backgroundColor: theme.colors.black }}
+        enableContentPanningGesture={false}
+        keyboardBehavior={'extend'}
         children={
           <C.Container>
             {/* <C.KeysList

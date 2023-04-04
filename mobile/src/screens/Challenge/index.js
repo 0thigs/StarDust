@@ -33,7 +33,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '0a088952-b63e-4053-9f41-e748e51fd156';
+  const challengeId = '9c003df3-f283-4b65-afd4-bfad3824ed92';
   const { challenge } = useChallenge(challengeId);
   const { id, title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
 
@@ -88,10 +88,10 @@ export function Challenge({ route }) {
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (matches.length !== inputValues.length) {
-      return;
+        return;
     }
 
-    inputValues.forEach(value => (code = code.replace(regex, value)));
+    inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
     return code;
   }
 
@@ -102,9 +102,10 @@ export function Challenge({ route }) {
     });
   }
 
-  async function verifyCase({ input }) {
+  async function verifyCase({ input }, index) {
     let code = userCode.current;
     code = formatCode(code, input);
+
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {

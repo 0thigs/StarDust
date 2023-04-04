@@ -46,7 +46,7 @@ export function Text({ type, title, body, isRendered, isRunnable, index }) {
             </C.CodeButton>
           )}
 
-          <C.Code horizontal>
+          <C.Code>
             <Editor value={body} />
           </C.Code>
         </>
