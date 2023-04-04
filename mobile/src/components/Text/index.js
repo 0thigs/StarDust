@@ -7,10 +7,10 @@ import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
-import { useEffect } from 'react';
 
-export function Text({ type, title, body, isRendered, isRunnable }) {
+export function Text({ type, title, body, isRendered, isRunnable, index }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();
   const iconSize = 25;
   const iconColor =
@@ -20,26 +20,18 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
     navigation.navigate('Playground', { id: null, code: body });
   }
 
-  async function verifyIsSpeaking() {
-    console.log(true);
-    if (!(await Speech.isSpeakingAsync())) {
-      setIsSpeaking(false);
-    }
-  }
-
   async function handleSpeechButton(text) {
     if (await Speech.isSpeakingAsync()) {
       setIsSpeaking(false);
       Speech.stop();
       return;
     }
-    setIsSpeaking(true);
-    Speech.speak(text);
+    Speech.speak(text, {
+      onDone: () => setIsSpeaking(false),
+      onStopped: () => setIsSpeaking(false),
+      onStart: () => setIsSpeaking(true),
+    });
   }
-
-  useEffect(() => {
-    verifyIsSpeaking();
-  }, [Speech]);
 
   return (
     <C.Container type={type} animation={!isRendered ? 'fadeInLeft' : null}>

@@ -80,6 +80,7 @@ export function Theory({ title, allTexts }) {
                 body={body}
                 isRendered={isRendered}
                 isRunnable={isRunnable}
+                index={index}
               />
             ))}
           </C.Theories>
