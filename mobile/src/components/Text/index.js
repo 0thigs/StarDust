@@ -7,6 +7,7 @@ import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
+import { useEffect } from 'react';
 
 export function Text({ type, title, body, isRendered, isRunnable }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -19,6 +20,13 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
     navigation.navigate('Playground', { id: null, code: body });
   }
 
+  async function verifyIsSpeaking() {
+    console.log(true);
+    if (!(await Speech.isSpeakingAsync())) {
+      setIsSpeaking(false);
+    }
+  }
+
   async function handleSpeechButton(text) {
     if (await Speech.isSpeakingAsync()) {
       setIsSpeaking(false);
@@ -28,6 +36,10 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
     setIsSpeaking(true);
     Speech.speak(text);
   }
+
+  useEffect(() => {
+    verifyIsSpeaking();
+  }, [Speech]);
 
   return (
     <C.Container type={type} animation={!isRendered ? 'fadeInLeft' : null}>
@@ -42,7 +54,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
             </C.CodeButton>
           )}
 
-          <C.Code>
+          <C.Code horizontal>
             <Editor value={body} />
           </C.Code>
         </>

@@ -639,17 +639,17 @@ escreva(altitudeSegura < altitudeAtual)
     lines: [
       {
         id: 1,
-        texts: ['var combustivelAtual = ', 'dropZone'],
+        texts: ['var combustivelAtual = ', 'dropZone', ';'],
         indentLevel: 0,
       },
       {
         id: 2,
-        texts: ['var combustivelNecessario = ', 'dropZone'],
+        texts: ['var combustivelNecessario = ', 'dropZone', ';'],
         indentLevel: 0,
       },
       {
         id: 3,
-        texts: ['escreva (combustivelAtual <= combustivelNecessario)'],
+        texts: ['escreva (combustivelAtual <= combustivelNecessario);'],
         indentLevel: 0,
       },
     ],
@@ -672,5 +672,109 @@ escreva(altitudeSegura < altitudeAtual)
       },
     ],
     correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 10,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código? (Se for muito grande, você pode scrollar o código para baixo):',
+    code: `var atmosfera = 7000;
+var altituteAtual = 4000;
+var fogueteDecolou = verdadeiro;
+var saiuDoPlaneta = altituteAtual > atmosfera e fogueteDecolou
+escreva(saiuDoPlaneta)
+    `,
+    options: ['falso', 'verdadeiro', '11000', 'lógico'],
+    answer: 'falso',
+  },
+  {
+    starId: 10,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var temOxigenio = verdadeiro;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var temComida = falso;'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (', 'temOxigenio ', 'dropZone', ' temComida)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'e',
+      },
+      {
+        id: 2,
+        label: '!',
+      },
+      {
+        id: 3,
+        label: 'ou',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
+  {
+    starId: 10,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var acimaVelocidadeLuz = ', 'dropZone'  , ' < 3600;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var fogueteTemResistencia = ', 'dropZone', ';'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['var seguranca = acimaVelocidadeLuz e fogueteTemResistencia'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '1200',
+      },
+      {
+        id: 2,
+        label: 'verdadeiro',
+      },
+      {
+        id: 3,
+        label: 'falso',
+      },
+      {
+        id: 4,
+        label: '3700',
+      },
+    ],
+    correctItemsIdsSequence: [4, 2],
+  },
+  {
+    starId: 10,
+    type: 'open',
+    stem: 'Qual o símbolo usado para inverter valores lógicos?',
+    answer: '!',
+  },
+  {
+    starId: 10,
+    type: 'checkbox',
+    stem: 'Marque as opções que são operadores lógicos',
+    options: ['>', 'e', '!', 'ou'],
+    correctOptions: ['e', '!', 'ou'],
   },
 ];

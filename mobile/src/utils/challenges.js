@@ -344,6 +344,77 @@ function conteNavesBumerangues(numeros) {
     difficulty: 'hard',
     categories: ['vetores', 'laços'],
   },
+  {
+    id: 15,
+    starId: null,
+    title: 'Chuva de asteroides',
+    texts: [
+      {
+        type: 'default',
+        body: 'Faz alguns minutos que seu foguete saiu para o espaço, mas você já encontrou um planeta à vista!.',
+      },
+      {
+        type: 'default',
+        body: 'Porém, há três asteroides gigantes em sua direção.',
+      },
+      {
+        type: 'Que??',
+        body: 'Seu dever é testar se o escudo protetor do foguete esteja ativo (valor verdadeiro) e que a resistência (valor 700) dele seja maior que a soma das forças dos três asteroides (A, B, C).',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: 100, 200, 300, verdadeiro
+Resultado: verdadeiro
+Explicacao: a soma das forças dá 600 e a resistencia é 700. Como o escudo está ativo (verdadeiro) e essa soma é menor que 700, logo o resultado é verdadeiro
+
+Entrada: 500, 500, 500, verdadeiro
+Resultado: falso
+Explicacao: soma é 1500 e a resitência é 700, logo o resultado já é falso
+
+Entrada: 50, 100, 150, falso
+Resultado: falso
+Explicacao: soma é 300 e a resitência é 700, porém o escudo não está ativo, então o resultado é falso`,
+      },
+      {
+        type: 'alert',
+        body: 'Dica: coloque a soma das forças em uma variável soma e depois compare se ela é maior ou não que a resistência.',
+      },
+      {
+        type: 'alert',
+        body: 'Não se esqueça de comparar também se o escudo está ativo.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [100, 100, 100, 'verdadeiro'],
+        expectedOutput: 'verdadeiro',
+        isLocked: false,
+      },
+      {
+        input: [300, 400, 800, 'falso'],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+      {
+        input: [100, 500, 100, 'verdadeiro'],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+    ],
+
+    code: `
+var asteroideA = leia();
+var asteroideB = leia();
+var asteroideC = leia();
+
+var escudoAtivo = leia();
+
+var resitencia = 700`,
+    difficulty: 'easy',
+    categories: ['matemática', 'básico', 'números'],
+  },
 ];
 
 [

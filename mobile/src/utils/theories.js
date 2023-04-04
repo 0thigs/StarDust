@@ -944,17 +944,217 @@ escreva(energiaMoto1 != energiaMoto2);
       {
         type: 'default',
         title: null,
-        body: 'Cá estamos, e tudo o que resta a fazer é cair fora desse planeta.',
+        body: 'Ok, a prioridade agora é concertar os motores do foguete!',
       },
       {
         type: 'default',
-        title: '#Partiu',
-        body: 'No entanto, é preciso verificar se tudo está ok para fazer uma partida segura e manter uma viagem no espaço.',
+        title: null,
+        body: 'Estamos no compartimento dos motores, e agora devemos verificar o funcionamento de um por vez.',
+      },
+      {
+        type: 'default',
+        title: 'E como fazer isso?',
+        body: 'Cada motor possui duas turbinas e elas devem estar girando ao mesmo tempo para ele funcionar corretamente.',
+      },
+      {
+        type: 'default',
+        title: 'E... Como fazer isso?',
+        body: 'Para conferir se tanto um, quanto o outro estão girando, você pode conferir usando um operador lógico.',
+      },
+      {
+        type: 'default',
+        title: 'O que é um operador lógico?',
+        body: 'Operadores lógicos são utilizados para comparar valores do tipo lógico, diferentemente dos relacionais, que só comparam números.',
+      },
+      {
+        type: 'list',
+        title: 'Operador (e)',
+        body: 'Para testar se dois valores são verdadeiros, você deve usar o operador "e", que verifica se o primeiro valor é igual a verdadeiro E se o segundo também é verdadeiro.',
+      },
+      {
+        type: 'code',
+        body: `
+var girandoTurbina1 = verdadeiro;
+var girandoTurbina2 = falso;
+escreva(girandoTurbina1 e girandoTurbina2);
+
+//  Resultado: falso`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'O resultado é falso, pois apenas a turbina 1 está girando e para que resultasse em verdadeiro, ambos os valores deveriam ser igual a verdadeiro.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Pois bem, ao concertar a turbina 1, você deve verificar novamente, mas dessa vez você pode colocar o resultado da comparação em uma variável à parte.',
+      },
+      {
+        type: 'code',
+        body: `
+var girandoTurbina1 = verdadeiro;
+var girandoTurbina2 = verdadeiro;
+var turbinasGirando = girandoTurbina1 e girandoTurbina2;
+escreva(turbinasGirando);
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas é possível isso?',
+        body: 'Sim! Lembre-se que esses operadores comparam valores do tipo lógico, então qualquer expressão que resulta em um valor lógico pode ser utilizado para comparar outro valor.',
+      },
+      {
+        type: 'default',
+        title: 'Explica mais',
+        body: 'Por exemplo, você pode testar se o nível de combustível atual está acima do mínimo para o funcionamento, ou seja combAtual > combMin.',
+      },
+      {
+        type: 'code',
+        body: `
+var turbinasGirando = verdadeiro;
+var combAtual = 90;
+var combMin = 10;
+escreva(turbinasGirando e combAtual > combMin);
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Explicação',
+        body: 'Como turbinasGirando é verdadeiro, assim como combAtual > combMin resulta em verdadeiro, então o resultado final é verdadeiro.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Beleza! O motor 1 está funcionado corretamente. Agora resta verificar o motor 2',
+      },
+      {
+        type: 'default',
+        title: 'O segundo também está funcionando',
+        body: 'É... Parece que as turbinas do motor 2 estão girando. Então, pode haver um problema no tipo de combustível que está sendo consumido pelo motor',
       },
       {
         type: 'default',
         title: 'Como assim?',
-        body: 'Por exemplo, é importante averiguar o quanto de oxigêncio ',
+        body: 'O motor pode aceitar apenas dois tipos de combustível: Etherium e Plasmatron.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Logo, apenas uma condição precisa ser verdadeira para o motor funcionar.',
+      },
+      {
+        type: 'list',
+        title: 'Operador (ou)',
+        body: 'Para fazer tal façanha, é só usar o operador "ou", que verifica se o primeiro valor é igual a verdadeiro OU o segundo é igual a verdadeiro.',
+      },
+      {
+        type: 'code',
+        body: `
+var comb = "Quantum";
+escreva(comb == "Etherium" ou comb == "Plasmatron");
+    
+//  Resultado: falso`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como esperado, o combustível consumido por esse motor não é aceitável',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas agora se trocarmos o combustível para "Plasmatron"...',
+      },
+      {
+        type: 'code',
+        body: `
+var comb = "Plasmatron";
+escreva(comb == "Etherium" ou comb == "Plasmatron");
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas e o Etherium?',
+        body: 'Como você percebeu, o resultado é verdadeiro porque apenas uma das duas comparações precisa resultar em verdadeiro.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nesse caso, o combustível não é do tipo "Etherium", mas é do tipo "Plasmatron", o que também é aceitável.',
+      },
+      {
+        type: 'default',
+        title: 'Troca feita com sucesso!',
+        body: 'Agora sim o motor 2 está funcionando corretamente.',
+      },
+      {
+        type: 'default',
+        title: 'Ufa!',
+        body: 'Calma aí! É bom verificar antes se agora os dois motores estão funcionando corretamente:',
+      },
+      {
+        type: 'code',
+        body: `
+var motor1Funcionando = verdadeiro;
+var motor2Funcionando = verdadeiro;
+var tudoOk = !motor1Funcionando e motor2Funcionando
+escreva(tudoOk);
+    
+//  Resultado: falso`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Calma aí! Mas as duas variáveis são verdadeiro!',
+        body: 'Sim! Acontece que há um operador extra sendo utilizado.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim? Onde?',
+        body: 'Perceba que antes da variável motor1Funcionando há um ponto de exclamação. E sua similaridade com o operador "!=" não é coincidência.',
+      },
+      {
+        type: 'list',
+        title: 'Operador de negação (!)',
+        body: 'Esse operador serve para inverter valores do tipo lógico. Ou seja, se colocado antes de um valor, ele inverte o seu valor lógico.',
+      },
+      {
+        type: 'default',
+        title: 'Sério?',
+        body: 'Sim! Por exemplo, se o valor inicial for falso, ele será invertido para verdadeiro, e vice-versa.',
+      },
+      {
+        type: 'code',
+        body: `
+escreva(!falso);
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Entendi!',
+        body: 'Então basta tirar esse operador de negação.',
+      },
+      {
+        type: 'code',
+        body: `
+var motor1Funcionando = verdadeiro;
+var motor2Funcionando = verdadeiro;
+var tudoOk = motor1Funcionando e motor2Funcionando
+escreva(tudoOk);
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
       },
     ],
   },
