@@ -420,58 +420,55 @@ var resitencia = 700`,
 [
   {
     starId: null,
-    title: 'Área do escudo protetor',
+    title: 'Retorne o primeiro planeta destino',
     texts: [
       {
         type: 'default',
-        body: 'Em um planeta distante da galáxia, os habitantes da Terra foram desafiados a calcular a área de um triângulo que representa o escudo protetor da cidade espacial.',
+        body: 'Você é um comandante espacial em uma missão para explorar o universo em busca de planetas habitáveis.',
       },
       {
         type: 'default',
-        body: 'Sua tarefa é calcular a área desse triângulo analisando sua base e altura.',
+        body: 'Para ajudá-lo em sua missão, sua equipe de cientistas coletou dados de vários planetas e armazenou-os em um vetor.',
+      },
+      {
+        type: 'default',
+        body: 'Sua tarefa é retornar o primeiro elemento desse vetor, que será o próximo destino de sua equipe de exploração.',
       },
       {
         type: 'code',
-        body: `
-    Entrada: (3, 2)
-    Resultado: 3
-    
-    Entrada: (7, 4)
-    Resultado: 14
-    
-    Entrada: (10, 10)
-    Resultado: 50`,
+        body: `Entrada: ["Tatooine", "Endor", "Naboo", "Alderaan"]
+Resultado: Tatooine`,
       },
       {
         type: 'alert',
-        body: 'Lembre-se: a área de um triângulo é base vezes a altura dividido por 2',
+        body: 'Lembre-se sobre os índices de vetores',
       },
       {
         type: 'alert',
         body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
       },
     ],
-    function: 'converterMinutosParaCrons',
+    function: 'pegarPrimeiroPlaneta',
     testCases: [
       {
-        input: [10, 5],
-        expectedOutput: 25,
+        input: [['Marte', 'Vênus', 'Terra', 'Júpiter']],
+        expectedOutput: 'Marte',
         isLocked: false,
       },
       {
-        input: [8, 12],
-        expectedOutput: 48,
+        input: [['Pandora', 'Hoth', 'Terra', 'Dagobah']],
+        expectedOutput: 'Pandora',
         isLocked: false,
       },
       {
-        input: [15, 3],
+        input: [['Krypton', 'Tatooine', 'Asgard', 'Gallifrey']],
         expectedOutput: 22.5,
         isLocked: false,
       },
     ],
 
     code: `
-funcao calcularAreaEscudo(base, altura) {
+funcao pegarPrimeiroPlaneta(planetas) {
     
 }`,
     difficulty: 'easy',

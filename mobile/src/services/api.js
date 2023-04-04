@@ -184,6 +184,14 @@ export default {
     return code;
   },
 
+  getTopics: async () => {
+    const { data, error } = await supabase.from('topics').select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   addCode: async (title, code, userId) => {
     const { success, error } = await supabase
       .from('codes')

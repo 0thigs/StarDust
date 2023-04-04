@@ -730,7 +730,7 @@ escreva(saiuDoPlaneta)
     lines: [
       {
         id: 1,
-        texts: ['var acimaVelocidadeLuz = ', 'dropZone'  , ' < 3600;'],
+        texts: ['var acimaVelocidadeLuz = ', 'dropZone', ' < 3600;'],
         indentLevel: 0,
       },
       {
@@ -776,5 +776,194 @@ escreva(saiuDoPlaneta)
     stem: 'Marque as opções que são operadores lógicos',
     options: ['>', 'e', '!', 'ou'],
     correctOptions: ['e', '!', 'ou'],
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o programa para que ele resulte em "Sou amigo"',
+    items: [
+      {
+        id: 1,
+        label: 'var amigo = verdadeiro',
+      },
+      {
+        id: 2,
+        label: 'se (amigo) {',
+      },
+      {
+        id: 3,
+        label: '    escreva("Sou amigo")',
+      },
+      {
+        id: 4,
+        label: '}',
+      },
+    ],
+  },
+  {
+    starId: 11,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `var planetaCor = "bege";
+var temAtmosferaBoa = 2022 > 2023;
+
+se (temAtmosferaBoa) {
+     planetaCor = "marrom";
+}
+escreva(planetaCor);
+    `,
+    options: ['bege', 'marrom', 'preto', 'indefinido'],
+    answer: 'falso',
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a "planeta grande"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var planetaDiametro = 1800'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['se (planetaDiametro ', 'dropZone' ,' 15000) {'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['escreva("planeta ', 'dropZone', ' ");'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '>',
+      },
+      {
+        id: 2,
+        label: '<=',
+      },
+      {
+        id: 3,
+        label: 'pequeno',
+      },
+      {
+        id: 4,
+        label: 'grande',
+      },
+    ],
+    correctItemsIdsSequence: [1, 4],
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['se ( ', 'dropZone', ' ) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreva(verdadeiro);'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'falso',
+      },
+      {
+        id: 2,
+        label: '1 > 2',
+      },
+      {
+        id: 3,
+        label: '!falso',
+      },
+      {
+        id: 4,
+        label: '!verdadeiro',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
+  {
+    starId: 11,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `var planetaPopulacao = 1000 * 1000;
+var temAtmosferaBoa = 2022 > 2023;
+var status = "pouca gente";
+
+se (planetaPopulacao > 1000) {
+    var status = "muita gente"
+}
+escreva(status);
+    `,
+    options: ['pouca gente', 'muita gente', 'gente', 'indefinido'],
+    answer: 'pouca gente',
+  },
+  {
+    starId: 12,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a "planeta rico"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var dinheiro = ', '2500 * 4'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['se (dinheiro > 10000) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(', 'dropZone', ')'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['} senao {'],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: ['escreva( ', 'dropZone', ' )'],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'planeta rico',
+      },
+      {
+        id: 2,
+        label: 'planeta pobre',
+      },
+    ],
+    correctItemsIdsSequence: [1],
   },
 ];

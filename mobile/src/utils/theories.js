@@ -1158,4 +1158,184 @@ escreva(tudoOk);
       },
     ],
   },
+  {
+    starId: 11,
+    texts: [
+      {
+        type: 'default',
+        title: 'São e salvo',
+        body: 'Muito bem!! você se salvou da chuva de asteroides gigantes 🎉!.',
+      },
+      {
+        type: 'default',
+        body: 'Agora, resta visitar o novo que você descobriu, e por sorte ele é totalmente amigável!',
+      },
+      {
+        type: 'default',
+        title: 'Pera aí! Como você sabe disso?',
+        body: 'Simples, o foguete entende estruturas condicionais sempre que a situação pede.',
+      },
+      {
+        type: 'default',
+        title: 'Que? Estruturas condicionais?',
+        body: 'Sim! Estruturas condicionais são recursos da programação que permitem que um trecho de código seja executado apenas se uma determinada condição for verdadeira.',
+      },
+      {
+        type: 'alert',
+        body: 'Há 3 maneiras de criar uma instrução condicional: (1 - se, 2 - senão, 3 - senão se). Por enquanto, vamos começar pelo básico',
+      },
+      {
+        type: 'list',
+        title: 'Estrutura condicional simples (se)',
+        body: 'A forma mais básica é escrever "se" e depois a condição que deve ser verificada entre parênteses. Em seguida você abre e fecha chaves ({}) e coloca o código que você deseja que seja executado.',
+      },
+      {
+        type: 'code',
+        body: `
+var planetaAmigavel = verdadeiro;
+
+se (planetaAmigavel) {
+    escreva(planetaAmigavel)
+}
+    
+//  Resultado: verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Legal!',
+        body: 'Perceba que a condição (tudo escrito em parênteses), deve resultar em verdadeiro para que o código entre chaves seja executado.',
+      },
+      {
+        type: 'default',
+        title: 'Mas se não for?',
+        body: 'Simples: o programa ignora tudo que está entre chaves do se e executa todo o resto do código após ele.',
+      },
+      {
+        type: 'code',
+        body: `
+var souBonito = falso;
+
+se (souBonito) {
+    escreva(souBonito)
+}
+    
+//  Resultado: Nada`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Só isso?',
+        body: 'Nós podemos usar tudo que vimos anteriormente que conseguem resultar em valores lógicos dentro da condição do se.',
+      },
+      {
+        type: 'code',
+        body: `
+var poder = 8000 * 1000;
+
+se (poder > 8000) {
+    escreva('Seu poder é mais de 8 mil!')
+}
+    
+//  Resultado: Seu poder é mais de 8 mil!`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Entendi!',
+        body: 'Bacana, mas acho que já é hora de você entender escopo de variável.',
+      },
+      {
+        type: 'default',
+        title: 'Essopo?',
+        body: 'Não, escopo. No geral, o escopo é a região do código em que uma variável pode ser acessada dentro do programa.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Em programação, normalmente existem dois tipos de escopo de variável: global e local.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'As variáveis globais são aquelas que são declaradas fora de qualquer tipo de instrução (se, para, funcao e por aí vai).',
+      },
+      {
+        type: 'default',
+        title: 'Que? Para? Função?',
+        body: 'No momento se concetre apenas na instrução "se" que estamos estudando agora.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim? Para? Função?',
+        body: 'No momento se concentre apenas a na instrução "se" que estamos estudando agora.',
+      },
+      {
+        type: 'default',
+        title: 'Ok.',
+        body: 'Por exemplo, caso tentemos acessar uma variável declarada dentro de "se", o código resultará em "variável indefinida"',
+      },
+      {
+        type: 'code',
+        body: `
+var planetaAmigavel = verdadeiro; // variável global
+
+se (verdadeiro) {
+    var planetaNome = "Ifthenia"; // variável local
+}
+escreva(planetaNome);
+escreva(planetaAmigavel);
+    
+//  Resultado: ERRO: Variável planetaNome indefinida`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Nossa...',
+        body: 'O erro ocorre, pois planetaNome é uma variável local porque ela foi declarada dentro da instrução se.',
+      },
+      {
+        type: 'default',
+        title: 'Então é só colocar para fora do se?',
+        body: 'Sim! Aí você tranformaria ela em uma variável de escopo global, assim como a variável planetaAmigavel.',
+      },
+      {
+        type: 'code',
+        body: `
+var planetaAmigavel = verdadeiro; // variável global
+var planetaNome = "Ifthenia"; // variável global
+
+se (verdadeiro) {
+}
+escreva(planetaNome);
+escreva(planetaAmigavel);
+    
+//  Resultado: Ifthenia verdadeiro`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Humm...',
+        body: 'É como se os escopos fossem dois universos paralelos: Pode haver uma variável local com o mesmo nome de uma global, porém elas ainda vão ser compotar de maneira diferente.',
+      },
+      {
+        type: 'code',
+        body: `
+var planetaNome = "Ifthenia"; // variável global
+
+se (verdadeiro) {
+    var planetaNome = "Elsethenia" // variável local
+}
+escreva(planetaNome);
+
+//  Resultado: Ifthenia`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Entendi tudo!',
+        body: 'Legal! Então, que tal praticar um pouco?.',
+      },
+    ],
+  },
 ];

@@ -3,6 +3,7 @@ import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
 import { useAnimatedStyle } from 'react-native-reanimated';
 
+import { Dictionary } from '../Dictionary';
 import { PopoverMenu } from '../PopoverMenu';
 import { RangeInput } from '../RangeInput';
 import { Modal } from '../Modal';
@@ -23,10 +24,17 @@ export function ChallengeHeader({
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDictionaryVisible, setIsDictionaryVisible] = useState(false);
   const navigation = useNavigation();
   const popoverMenuRef = useRef(null);
 
   const popoverMenuButtons = [
+    {
+      title: 'Dicionário',
+      isToggle: false,
+      value: null,
+      action: () => setIsDictionaryOpen(true),
+    },
     {
       title: 'Dark Mode',
       isToggle: true,
@@ -77,6 +85,8 @@ export function ChallengeHeader({
         </C.NavigationButton>
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
+
+      <Dictionary isVisible={isDictionaryVisible} />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
 
