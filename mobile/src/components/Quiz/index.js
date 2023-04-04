@@ -119,32 +119,7 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
 
-      {/* {currentQuestion.code && (
-        <C.QuestionCode animation={'fadeInLeft'}>{currentQuestion.code}</C.QuestionCode>
-      )} */}
-      {/* {currentQuestion.type === 'selection' && (
-        <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
-      )}
-      {currentQuestion.type === 'open' && <OpenForm answer={currentQuestion.answer} />}
-      {currentQuestion.type === 'checkbox' && (
-        <CheckboxForm
-          options={currentQuestion.options}
-          correctOptions={currentQuestion.correctOptions}
-        />
-      )}
-      {currentQuestion.type === 'drag-and-drop-list' && (
-        <DragAndDropListForm
-          items={currentQuestion.items}
-          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
-        />
-      )}
-      {currentQuestion.type === 'drag-and-drop-click' && (
-        <DragAndDropClickForm
-          lines={currentQuestion.lines}
-          dropItems={currentQuestion.dropItems}
-          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
-        />
-      )} */}
+    
 
       <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} />
 

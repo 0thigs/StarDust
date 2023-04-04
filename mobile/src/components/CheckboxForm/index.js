@@ -68,7 +68,7 @@ export function CheckboxForm({ stem, options, correctOptions, index }) {
 
   useEffect(() => {
     if (isCurrentQuestion) {
-      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!userOptions } });
+      dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: !!userOptions.length } });
     }
   }, [userOptions]);
 

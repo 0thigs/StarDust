@@ -9,7 +9,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
   useEffect(() => {
     if (zones.length) {
       const targetZone = zones.find(zone => zone && zone.id === id);
-      if (targetZone) setZoneWidth(targetZone.width);
+      if (targetZone) setZoneWidth(targetZone?.width);
     }
   }, [zones]);
 
@@ -56,7 +56,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth === 0 ? minZoneWidth : zoneWidth}
+      width={zoneWidth === 0 ? 15 : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

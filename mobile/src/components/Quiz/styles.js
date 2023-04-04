@@ -24,7 +24,7 @@ export const QuestionCode = styled.ScrollView`
   font-size: 16px;
   align-self: center;
   width: 350px;
-  max-height: 175px;
+  max-height: 220px;
   margin-bottom: 8px;
 `;
 
