@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TestCase } from '../TestCase';
 import { VerificationButton } from '../VerificationButton';
+import { CommentsList } from '../CommentsList';
 import * as C from './styles';
 
 export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
   const [results, setResults] = useState([]);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
+  const bottomSheetRef = useRef(null);
 
   function handleVerificationButton() {
     setIsAnswerVerified(!isAnswerVerified);
@@ -28,6 +30,10 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
     if (userOutputs[index]) {
       return expectedOutput.toString().trim() === userOutputs[index].toString().trim();
     }
+  }
+
+  function showComments() {
+    bottomSheetRef.current.expand();
   }
 
   useEffect(() => {
@@ -56,7 +62,10 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
         isAnswered={true}
         isAnswerVerified={isAnswerVerified}
         isAnswerWrong={isAnswerWrong}
+        showComments={showComments}
       />
+
+      <CommentsList bottomSheetRef={bottomSheetRef} />
     </C.Container>
   );
 }
