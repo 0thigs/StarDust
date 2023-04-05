@@ -14,8 +14,7 @@ export const topics = [
       },
       {
         type: 'code',
-        body: `
-        var variavel = "1"; // Aqui declaro uma variável chamada "variável", um texto, cujo valor é "1".`,
+        body: `var variavel = "1"; // Aqui declaro uma variável chamada "variável", um texto, cujo valor é "1".`,
         isRunnable: false,
       },
       {

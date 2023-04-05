@@ -1,17 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { Modal } from '../Modal';
-import { Loading } from '../Loading';
-import * as C from './styles';
-import api from '../../services/api';
+import { X, Lock, ArrowLeft } from 'react-native-feather';
 
-export function Dictionary({ isVisible }) {
+import Modal from 'react-native-modal';
+import theme from '../../global/styles/theme';
+import api from '../../services/api';
+import * as C from './styles';
+import { Text } from '../Text';
+
+export function Dictionary({ isVisible, setIsVisible }) {
   const { loggedUser } = useAuth([]);
   const [topics, setTopics] = useState([]);
+  const [title, setTitle] = useState('Dicionário');
+  const [texts, setTexts] = useState([]);
+  const [isTopicContentVisible, setIsTopicContentVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  function showTopicContent(title, texts) {
+    setTitle(title);
+    setTexts(texts);
+    setIsTopicContentVisible(true);
+  }
+
+  function handleBackButtonPress() {
+    setIsTopicContentVisible(false);
+    setTitle('Dicionário');
+  }
+
   function isTopicUnlocked(topic) {
-    const isUnlocked = loggedUser.unlocked_topics.includes(topic);
+    const isUnlocked = loggedUser.unlocked_topics.includes(topic.id);
     return { ...topic, isUnlocked };
   }
 
@@ -20,7 +37,6 @@ export function Dictionary({ isVisible }) {
       const topics = await api.getTopics();
       const verifiedTopics = topics.map(isTopicUnlocked);
       setTopics(verifiedTopics);
-      console.log({ verifiedTopics });
     } catch (error) {
       console.log(error);
     } finally {
@@ -35,13 +51,49 @@ export function Dictionary({ isVisible }) {
 
   return (
     <Modal isVisible={isVisible} animationIn={'slideInUp'} animationOut={'bounceOut'}>
-      {isLoading && !topics.length ? (
-        <Loading />
-      ) : (
-        <C.Content>
-          <C.TopicsList data={topics} />
-        </C.Content>
-      )}
+      <C.Content>
+        <C.Header>
+          <C.Title>{title}</C.Title>
+          <C.Exit onPress={() => setIsVisible(false)}>
+            <X color={theme.colors.red_700} />
+          </C.Exit>
+        </C.Header>
+
+        {isTopicContentVisible ? (
+          <>
+            <C.Back onPress={handleBackButtonPress}>
+              <ArrowLeft color={theme.colors.green_300} />
+            </C.Back>
+            <C.Texts>
+              {texts.map(({ type, title, body }, index) => (
+                <Text
+                  key={`text-${index}`}
+                  type={type}
+                  title={title}
+                  body={body}
+                  isRendered={true}
+                />
+              ))}
+            </C.Texts>
+          </>
+        ) : (
+          <C.TopicsList
+            data={topics}
+            keyExtractor={topic => topic.id}
+            numColumns={2}
+            renderItem={({ item: { title, texts, isUnlocked } }) => (
+              <C.Topic
+                onPress={() => isUnlocked && showTopicContent(title, texts)}
+                isUnlocked={isUnlocked}
+                activeOpacity={0.7}
+              >
+                <C.Icon>{!isUnlocked && <Lock color={theme.colors.gray_500} width={16} />}</C.Icon>
+                <C.TopicTitle>{title}</C.TopicTitle>
+              </C.Topic>
+            )}
+          />
+        )}
+      </C.Content>
     </Modal>
   );
 }

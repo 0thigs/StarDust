@@ -8,7 +8,7 @@ import { Editor } from '../Editor';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
 
-export function Text({ type, title, body, isRendered, isRunnable, index }) {
+export function Text({ type, title, body, isRendered, isRunnable }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();

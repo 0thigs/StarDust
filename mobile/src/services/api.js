@@ -185,7 +185,10 @@ export default {
   },
 
   getTopics: async () => {
-    const { data, error } = await supabase.from('topics').select('*');
+    const { data, error } = await supabase
+      .from('topics')
+      .select('*')
+      .order('position', { ascending: true });
     if (error) {
       throw new Error(error.message);
     }

@@ -86,7 +86,7 @@ export function ChallengeHeader({
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
 
-      <Dictionary isVisible={isDictionaryVisible} />
+      <Dictionary isVisible={isDictionaryVisible} setIsVisible={setIsDictionaryVisible} />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
 

@@ -75,5 +75,5 @@ export const DropItem = styled(Animated.View)`
 export const Label = styled.Text`
   color: ${({ theme, isItemInZone, isAnswerWrong }) =>
     theme.colors[isItemInZone && isAnswerWrong ? 'red_300' : isItemInZone ? 'green_500' : 'white']};
-  font-family: ${({ theme }) => theme.fonts.code};
+  font-family: ${({ theme }) => theme.fonts.code};  
 `;
