@@ -14,7 +14,7 @@ const fakeLoggedUser = {
   level: 1,
   unlocked_stars_ids: ['b34a4a76-0615-4910-89a9-05d34925dc70', 'dfc95427-e31f-489a-96c7-5aadae45af86'],
   unlocked_achievements_ids: [],
-  unlocked_topics: ['f60a0e67-c0b9-401a-a652-c9d5f8042ff1', '36db0f5a-a026-4d06-9580-dd6f70f1351f'],
+  unlocked_topics_ids: [],
   achievements_ids_to_rescue: [],
   acquired_rockets_ids: ['03f3f359-a0ee-42c1-bd5f-b2ad01810d47'],
   acquired_avatars_ids: [

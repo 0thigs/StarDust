@@ -35,7 +35,12 @@ export function Challenge({ route }) {
   // const challengeId = route.params.id;
   const challengeId = '9c003df3-f283-4b65-afd4-bfad3824ed92';
   const { challenge } = useChallenge(challengeId);
-  const { id, title, texts, code, function_name, test_cases, difficulty, star_id } = challenge;
+  const { id, title, texts, code, function_name, test_cases, difficulty, star_id, topic_id } =
+    challenge;
+  const {
+    loggedUser: { unlocked_topics_ids },
+    updateLoggedUser,
+  } = useAuth();
 
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -88,7 +93,7 @@ export function Challenge({ route }) {
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (matches.length !== inputValues.length) {
-        return;
+      return;
     }
 
     inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
@@ -112,7 +117,7 @@ export function Challenge({ route }) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
-      handleResult(resultado.splice(-1)[0]) // {"valor":1,"tipo":"número"};
+      handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
     }
@@ -122,6 +127,13 @@ export function Challenge({ route }) {
     setUserOutputs([]);
     test_cases.forEach(verifyCase);
   }
+
+  useEffect(() => {
+      if (topic_id && !unlocked_topics_ids.includes(topic_id)) {
+        console.log({ unlocked_topics_ids });
+      updateLoggedUser('unlocked_topics_ids', [...unlocked_topics_ids, topic_id]);
+    }
+  }, []);
 
   useEffect(() => {
     if (!Object.entries(challenge).length) return;

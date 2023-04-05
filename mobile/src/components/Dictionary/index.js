@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { X, Lock, ArrowLeft } from 'react-native-feather';
+import { Text } from '../Text';
 
 import Modal from 'react-native-modal';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 import * as C from './styles';
-import { Text } from '../Text';
 
 export function Dictionary({ isVisible, setIsVisible }) {
   const { loggedUser } = useAuth([]);
@@ -28,7 +28,7 @@ export function Dictionary({ isVisible, setIsVisible }) {
   }
 
   function isTopicUnlocked(topic) {
-    const isUnlocked = loggedUser.unlocked_topics.includes(topic.id);
+    const isUnlocked = loggedUser.unlocked_topics_ids.includes(topic.id);
     return { ...topic, isUnlocked };
   }
 
