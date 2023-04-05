@@ -28,6 +28,7 @@ export const Option = styled.TouchableOpacity`
   min-height: 48px;
   width: 350px;
 
+  border-radius: 4px;
   margin-top: 20px;
   align-items: center;
   justify-content: center;

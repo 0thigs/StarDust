@@ -780,19 +780,19 @@ escreva(saiuDoPlaneta)
   {
     starId: 11,
     type: 'drag-and-drop-list',
-    stem: 'Reordene o programa para que ele resulte em "Sou amigo"',
+    stem: 'Reordene o programa para que ele fique na ordem correta',
     items: [
       {
         id: 1,
-        label: 'var amigo = verdadeiro',
+        label: 'var planeta = verdadeiro',
       },
       {
         id: 2,
-        label: 'se (amigo) {',
+        label: 'se (planeta) {',
       },
       {
         id: 3,
-        label: '    escreva("Sou amigo")',
+        label: '    escreva("De fato se trata de um planeta")',
       },
       {
         id: 4,
@@ -813,7 +813,7 @@ se (temAtmosferaBoa) {
 escreva(planetaCor);
     `,
     options: ['bege', 'marrom', 'preto', 'indefinido'],
-    answer: 'falso',
+    answer: 'bege',
   },
   {
     starId: 11,
@@ -903,7 +903,7 @@ escreva(planetaCor);
     correctItemsIdsSequence: [3],
   },
   {
-    starId: 11,
+    starId: 12,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código:',
     code: `var planetaPopulacao = 1000 * 1000;
@@ -949,7 +949,7 @@ escreva(status);
         indentLevel: 1,
       },
       {
-        id: 5,
+        id: 6,
         texts: ['}'],
         indentLevel: 0,
       },

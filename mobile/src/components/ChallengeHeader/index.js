@@ -33,7 +33,7 @@ export function ChallengeHeader({
       title: 'Dicionário',
       isToggle: false,
       value: null,
-      action: () => setIsDictionaryOpen(true),
+      action: () => setIsDictionaryVisible(true),
     },
     {
       title: 'Dark Mode',

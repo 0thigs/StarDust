@@ -1168,7 +1168,7 @@ escreva(tudoOk);
       },
       {
         type: 'default',
-        body: 'Agora, resta visitar o novo que você descobriu, e por sorte ele é totalmente amigável!',
+        body: 'Agora, resta visitar o novo planeta que você descobriu, e por sorte ele é totalmente amigável!',
       },
       {
         type: 'default',
@@ -1182,7 +1182,7 @@ escreva(tudoOk);
       },
       {
         type: 'alert',
-        body: 'Há 3 maneiras de criar uma instrução condicional: (1 - se, 2 - senão, 3 - senão se). Por enquanto, vamos começar pelo básico',
+        body: 'Há 3 maneiras de criar uma instrução condicional:\n 1 - se\n 2 - senão\n 3 - senão se.\n Por enquanto, vamos começar pelo básico',
       },
       {
         type: 'list',
@@ -1220,7 +1220,7 @@ se (souBonito) {
     escreva(souBonito)
 }
     
-//  Resultado: Nada`,
+//  Resultado: sem resultado`,
         isRunnable: true,
       },
       {
@@ -1243,7 +1243,7 @@ se (poder > 8000) {
       {
         type: 'default',
         title: 'Entendi!',
-        body: 'Bacana, mas acho que já é hora de você entender escopo de variável.',
+        body: 'Bacana, mas acho que já é hora de você entender o que é escopo de variável.',
       },
       {
         type: 'default',
@@ -1262,11 +1262,6 @@ se (poder > 8000) {
       },
       {
         type: 'default',
-        title: 'Que? Para? Função?',
-        body: 'No momento se concetre apenas na instrução "se" que estamos estudando agora.',
-      },
-      {
-        type: 'default',
         title: 'Como assim? Para? Função?',
         body: 'No momento se concentre apenas a na instrução "se" que estamos estudando agora.',
       },
@@ -1278,21 +1273,24 @@ se (poder > 8000) {
       {
         type: 'code',
         body: `
-var planetaAmigavel = verdadeiro; // variável global
+var planetaAmigavel = verdadeiro; /* variável global */
 
 se (verdadeiro) {
-    var planetaNome = "Ifthenia"; // variável local
-}
-escreva(planetaNome);
-escreva(planetaAmigavel);
+    var planetaNome = "Ifthenia"; /* variável local */
+    }
     
-//  Resultado: ERRO: Variável planetaNome indefinida`,
+    escreva(planetaNome);
+//  Resultado: ERRO: Variável não definida: 'planetaNome'`,
         isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'O "/* */" é outra forma de colar comentários dentro do código',
       },
       {
         type: 'default',
         title: 'Nossa...',
-        body: 'O erro ocorre, pois planetaNome é uma variável local porque ela foi declarada dentro da instrução se.',
+        body: 'O erro no código acima ocorre, pois planetaNome é uma variável local porque ela foi declarada dentro da instrução se.',
       },
       {
         type: 'default',
@@ -1302,8 +1300,8 @@ escreva(planetaAmigavel);
       {
         type: 'code',
         body: `
-var planetaAmigavel = verdadeiro; // variável global
-var planetaNome = "Ifthenia"; // variável global
+var planetaAmigavel = verdadeiro; /* variável global */
+var planetaNome = "Ifthenia"; /* variável global */
 
 se (verdadeiro) {
 }
@@ -1316,15 +1314,15 @@ escreva(planetaAmigavel);
       {
         type: 'default',
         title: 'Humm...',
-        body: 'É como se os escopos fossem dois universos paralelos: Pode haver uma variável local com o mesmo nome de uma global, porém elas ainda vão ser compotar de maneira diferente.',
+        body: 'É como se os escopos fossem dois universos paralelos: Pode haver uma variável local com o mesmo nome de uma global, porém elas ainda vão ser comportar de maneira diferente.',
       },
       {
         type: 'code',
         body: `
-var planetaNome = "Ifthenia"; // variável global
+var planetaNome = "Ifthenia"; /* variável global */
 
 se (verdadeiro) {
-    var planetaNome = "Elsethenia" // variável local
+    var planetaNome = "Elsethenia" /* variável local */
 }
 escreva(planetaNome);
 
@@ -1334,7 +1332,7 @@ escreva(planetaNome);
       {
         type: 'default',
         title: 'Entendi tudo!',
-        body: 'Legal! Então, que tal praticar um pouco?.',
+        body: 'Legal! Então, que tal praticar um pouco?',
       },
     ],
   },

@@ -27,8 +27,8 @@ export const Option = styled.TouchableOpacity`
       : theme.colors.white};
   height: 48px;
   width: 350px;
-
-  margin-top: 12px;
+  border-radius: 4px;
+  margin-top: 8px;
   align-items: center;
   justify-content: center;
 `;

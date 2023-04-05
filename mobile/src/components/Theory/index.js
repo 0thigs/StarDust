@@ -116,7 +116,7 @@ export function Theory({ title, allTexts }) {
             title={'Praticar'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={() => dispatch({ type: 'changeStage' })}
+            onPress={() => dispatch({ type: 'showQuiz' })}
           />
         }
       />

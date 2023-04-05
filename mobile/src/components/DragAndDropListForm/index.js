@@ -13,6 +13,8 @@ import DraggableFlatList, {
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
 import { QuestionStem } from '../Quiz/styles';
+import { List } from 'react-native-feather';
+import theme from '../../global/styles/theme';
 
 export function DragAndDropListForm({ index, stem, items }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
@@ -83,24 +85,23 @@ export function DragAndDropListForm({ index, stem, items }) {
       <ShadowDecorator>
         <C.ItemContainer onLongPress={drag} disabled={isAnswerVerified}>
           <C.Item style={ItemAnimatedStyle} isActive={isActive}>
-            <C.Decorator
-              isAnswerWrong={isAnswerVerified && isAnswerWrong}
-              isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
-            >
-              :
-            </C.Decorator>
             <C.Label
               isAnswerWrong={isAnswerVerified && isAnswerWrong}
               isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
             >
               {item.label}
             </C.Label>
-            <C.Decorator
-              isAnswerWrong={isAnswerVerified && isAnswerWrong}
-              isCorrectAnswer={isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()}
-            >
-              :
-            </C.Decorator>
+            <List
+              color={
+                theme.colors[
+                  isAnswerVerified && isAnswerWrong
+                    ? 'red_700'
+                    : isAnswerVerified && !isAnswerWrong && isUserAnswerCorrect()
+                    ? 'green_500'
+                    : 'blue_300'
+                ]
+              }
+            />
           </C.Item>
         </C.ItemContainer>
       </ShadowDecorator>

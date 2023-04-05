@@ -24,8 +24,9 @@ export const Item = styled(Animated.View)`
   flex-direction: row;
   height: 48px;
   width: 350px;
-  padding: 0 8px;
+  padding: 0 12px;
   margin-bottom: 8px;
+  border-radius: 4px;
 `;
 
 export const Label = styled.Text`
