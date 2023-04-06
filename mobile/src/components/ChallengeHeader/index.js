@@ -10,8 +10,8 @@ import { Modal } from '../Modal';
 import { Button } from '../Button';
 
 import * as C from './styles';
-import * as Icon from 'react-native-feather';
 import theme from '../../global/styles/theme';
+import { ArrowLeft, MoreVertical } from 'react-native-feather';
 const iconSize = 25;
 
 export function ChallengeHeader({
@@ -68,10 +68,14 @@ export function ChallengeHeader({
     <C.Container>
       <C.Top>
         <C.HeaderButton onPress={handleBackButtonPress}>
-          <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
+          <ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
         <C.Title align={'right'}>{title}</C.Title>
-        <PopoverMenu ref={popoverMenuRef} buttons={popoverMenuButtons} />
+        <PopoverMenu
+          ref={popoverMenuRef}
+          buttons={popoverMenuButtons}
+          icon={<MoreVertical width={25} height={25} color={theme.colors.green_500} />}
+        />
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>

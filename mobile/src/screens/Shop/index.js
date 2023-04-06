@@ -15,7 +15,6 @@ import * as C from './styles';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 
-
 export function Shop() {
   const { loggedUser } = useAuth();
   const { avatars } = useAvatar();
@@ -23,14 +22,6 @@ export function Shop() {
   const { unlockedAchievements } = useAchievement();
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const avatarsListRef = useRef(null);
-
-  function scrollTo(index) {
-    avatarsListRef.current.scrollToIndex({
-      index,
-      animated: true,
-    });
-  }
 
   useEffect(() => {
     if (avatars.length && rockets.length) setIsLoading(false);

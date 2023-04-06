@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
-import { ArrowLeft, Share2 } from 'react-native-feather';
+import { ArrowLeft, MoreVertical, Share2 } from 'react-native-feather';
 import { RangeInput } from '../RangeInput';
 import { Prompt } from '../Prompt';
 import { Modal } from '../Modal';
@@ -19,7 +19,6 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
-  console.log({isDarkMode});
   const [popoverMenuButtons, setPopoverMenuButtons] = useState([]);
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
@@ -104,7 +103,11 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
         <Share2 color={iconColor} />
       </C.HeaderButton>
 
-      <PopoverMenu ref={popoverMenuRef} buttons={popoverMenuButtons} />
+      <PopoverMenu
+        ref={popoverMenuRef}
+        buttons={popoverMenuButtons}
+        icon={<MoreVertical width={25} height={25} color={iconColor} />}
+      />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
 

@@ -185,10 +185,7 @@ export default {
   },
 
   getAuthor: async userId => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id, name, avatar_id')
-      .eq('id', userId);
+    const { data, error } = await supabase.from('users').select('name, avatar_id').eq('id', userId);
     if (error) {
       throw new Error(error.message);
     }
@@ -207,11 +204,32 @@ export default {
     return data;
   },
 
+  addComment: async (body, replyId, authorId, challengeId) => {
+    const { success, error } = await supabase
+      .from('comments')
+      .insert([{ body, reply_id: replyId, author_id: authorId, challenge_id: challengeId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   getComments: async challengeId => {
     const { data, error } = await supabase
       .from('comments')
-      .select('*')
+      .select('*, users(name, avatar_id)')
       .eq('challenge_id', challengeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getReplyComments: async commentId => {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*, users(name, avatar_id)')
+      .eq('reply_id', commentId);
     if (error) {
       throw new Error(error.message);
     }
@@ -237,7 +255,7 @@ export default {
   },
 
   updateComment: async (commentId, data) => {
-    const { success, error } = await supabase.from('codes').update(data).eq('id', commentId);
+    const { success, error } = await supabase.from('comments').update(data).eq('id', commentId);
     if (error) {
       throw new Error(error.message);
     }

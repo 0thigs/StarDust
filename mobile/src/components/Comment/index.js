@@ -1,28 +1,65 @@
 import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useComment } from '../../hooks/useComment';
+import { Popover, usePopover } from 'react-native-modal-popover';
 import { UserAvatar } from '../UserAvatar';
-import { ChevronUp } from 'react-native-feather';
-import { Loading } from '../Loading';
+import { ChevronUp, MoreVertical } from 'react-native-feather';
 import * as C from './styles';
 import dayjs from 'dayjs';
 import theme from '../../global/styles/theme';
+import { PopoverMenu } from '../PopoverMenu';
 
-export function Comment({ id, authorId, body, created_at, likes }) {
-  const { loggedUser, updateLoggedUser } = useAuth();
-  const { author, updateComment } = useComment(authorId);
+export function Comment({
+  id,
+  author,
+  authorId,
+  body,
+  created_at,
+  likes,
+  replyComments,
+  updateComment,
+  loggedUserId,
+  likedCommentsIds,
+  updateLoggedUser,
+  handleAddCommentButtonPress,
+}) {
   const [likesCount, setLikesCount] = useState(likes);
+  const [isEditInputVisible, setiIsEditInputVisible] = useState(false);
+  const [editedText, setEditedText] = useState('');
+
   const createdAt = dayjs(created_at).format('DD/MM/YYYY');
+  const isLiked = likedCommentsIds.includes(id);
+  const isFromLoggedUser = loggedUserId === authorId;
+
+  const popoverMenuButtons = [
+    {
+      title: 'Editar',
+      isToggle: false,
+      value: null,
+      action: () => handleAddCommentButtonPress(),
+    },
+    {
+      title: 'Dark Mode',
+      isToggle: true,
+      value: null,
+      action: () => setIsDarkMode(!isDarkMode),
+    },
+    {
+      title: 'Font Size',
+      isToggle: false,
+      value: null,
+      action: () => setIsRangeInputVisible(true),
+    },
+  ];
+
+  function insertCode() {}
 
   function handleLikeButtonPress() {
-    const { liked_comments_ids } = loggedUser;
-    let updatedLikes = likes;
+    let updatedLikes = likesCount;
     let updatedLikedCommentsIds = [];
-    if (liked_comments_ids.includes(id)) {
-      updatedLikedCommentsIds = liked_comments_ids.filter(likedCommnetId => likedCommnetId !== id);
+    if (isLiked) {
+      updatedLikedCommentsIds = likedCommentsIds.filter(likedCommnetId => likedCommnetId !== id);
       updatedLikes--;
     } else {
-      updatedLikedCommentsIds = [...liked_comments_ids, id];
+      updatedLikedCommentsIds = [...likedCommentsIds, id];
       updatedLikes++;
     }
     setLikesCount(updatedLikes);
@@ -32,9 +69,7 @@ export function Comment({ id, authorId, body, created_at, likes }) {
 
   return (
     <C.Container>
-      {!author ? (
-        <Loading />
-      ) : (
+      {authorId && (
         <>
           <UserAvatar avatarId={author.avatar_id} size={40} />
           <C.Info>
@@ -42,21 +77,42 @@ export function Comment({ id, authorId, body, created_at, likes }) {
               <C.Authorname>{author.name}</C.Authorname>
               <C.Date>{createdAt}</C.Date>
             </C.Header>
-            <C.Body>{body}</C.Body>
-            <C.Footer>
-              <C.FooterButton onPress={handleLikeButtonPress} activeOpacity={0.7}>
-                <ChevronUp color={theme.colors.green_700} />
-              </C.FooterButton>
-              <C.FooterButton marginRight={'auto'} activeOpacity={0.7}>
-                <C.LikesCount>+{likesCount}</C.LikesCount>
-              </C.FooterButton>
-              <C.FooterButton marginRight={'12px'} activeOpacity={0.7}>
-                <C.ReplyText>81 respostas</C.ReplyText>
-              </C.FooterButton>
-              <C.FooterButton activeOpacity={0.7}>
-                <C.ReplyText>Responder</C.ReplyText>
-              </C.FooterButton>
-            </C.Footer>
+
+            {isEditInputVisible ? (
+              <C.EditInputWrapper>
+                <C.Label>Seu comentário</C.Label>
+                <C.EditInput multiline style={{ textAlignVertical: 'top' }} />
+                <C.EditButtons>
+                  <C.Button marginRight={'auto'}>
+                    <C.CodeButtonTitle>+ inserir código</C.CodeButtonTitle>
+                  </C.Button>
+                  <C.Button marginRight={'12px'}>
+                    <C.ButtonTitle>Cancelar</C.ButtonTitle>
+                  </C.Button>
+                  <C.Button>
+                    <C.ButtonTitle>Salvar</C.ButtonTitle>
+                  </C.Button>
+                </C.EditButtons>
+              </C.EditInputWrapper>
+            ) : (
+              <>
+                <C.Body>{body}</C.Body>
+                <C.Footer>
+                  <C.Button onPress={handleLikeButtonPress} activeOpacity={0.7}>
+                    <ChevronUp color={theme.colors[isLiked ? 'green_700' : 'gray_500']} />
+                  </C.Button>
+                  <C.Button marginRight={'auto'} activeOpacity={0.7}>
+                    <C.LikesCount>+{likesCount}</C.LikesCount>
+                  </C.Button>
+                  <C.Button marginRight={'12px'} activeOpacity={0.7}>
+                    <C.ButtonTitle>{replyComments.length} respostas</C.ButtonTitle>
+                  </C.Button>
+                  <C.Button onPress={() => handleAddCommentButtonPress(id)} activeOpacity={0.7}>
+                    <C.ButtonTitle>Responder</C.ButtonTitle>
+                  </C.Button>
+                </C.Footer>
+              </>
+            )}
           </C.Info>
         </>
       )}

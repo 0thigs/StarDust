@@ -4,7 +4,7 @@ import { Popover, usePopover } from 'react-native-modal-popover';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export const PopoverMenu = forwardRef(({ buttons }, ref) => {
+export const PopoverMenu = forwardRef(({ buttons, icon }, ref) => {
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
     usePopover();
 
@@ -17,7 +17,7 @@ export const PopoverMenu = forwardRef(({ buttons }, ref) => {
   return (
     <>
       <C.Trigger ref={touchableRef} onPress={openPopover}>
-        <MoreVertical width={25} height={25} color={theme.colors.green_500} />
+        {icon}
       </C.Trigger>
       <Popover
         contentStyle={{ backgroundColor: theme.colors.blue_700 }}

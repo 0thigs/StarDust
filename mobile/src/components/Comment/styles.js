@@ -6,6 +6,7 @@ export const Container = styled.View`
   flex-direction: row;
   padding: 12px;
   width: 100%;
+  border: 0.4px solid ${({ theme }) => theme.colors.black};
 `;
 
 export const Info = styled.View`
@@ -16,6 +17,8 @@ export const Info = styled.View`
 export const Header = styled.View`
   flex-direction: row;
   margin-bottom: 4px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Authorname = styled.Text`
@@ -41,7 +44,7 @@ export const Footer = styled.View`
   justify-content: center;
 `;
 
-export const FooterButton = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity`
   ${({ marginRight }) => 'margin-right: ' + marginRight};
   padding: 2px;
 `;
@@ -52,7 +55,32 @@ export const LikesCount = styled.Text`
   margin-right: auto;
 `;
 
-export const ReplyText = styled.Text`
+export const ButtonTitle = styled.Text`
   color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.semibold};
+`;
+
+export const EditInputWrapper = styled.View``;
+
+export const Label = styled.Text`
+  font-size: 12px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.gray_500};
+`;
+
+export const EditInput = styled.TextInput`
+  color: ${({ theme }) => theme.colors.white};
+  border-color: ${({ theme }) => theme.colors.green_700};
+  border-bottom-width: 1px;
+  margin-bottom: 12px;
+`;
+
+export const EditButtons = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CodeButtonTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.gray_500};
   font-family: ${({ theme }) => theme.fonts.semibold};
 `;

@@ -13,12 +13,12 @@ export const Outside = styled.SafeAreaView`
 
 export const Menu = styled(Animated.View)`
   background-color: ${({ theme }) => theme.colors.green_900};
-  padding: 8px 12px;
+  padding: 4px 8px;
   border-radius: 8px;
 `;
 
 export const Button = styled.TouchableOpacity`
-  padding: 16px 24px;
+  padding: 16px 8px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ isLastButton, theme }) =>
     isLastButton ? 'transparent' : theme.colors.green_500};
