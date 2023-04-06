@@ -1,3 +1,4 @@
+import { useAvatar } from '../../hooks/useAvatar';
 import { getImage } from '../../utils/getImage';
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
@@ -11,6 +12,7 @@ const Avatar = styled.Image`
   margin-bottom: 10px;
 `;
 
-export function UserAvatar({ avatar, size }) {
+export function UserAvatar({ avatarId, size }) {
+  const { avatar } = useAvatar(avatarId);
   return <Avatar source={{ uri: getImage('avatars', avatar) }} size={size} />;
 }

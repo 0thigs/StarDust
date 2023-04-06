@@ -21,7 +21,6 @@ export function ProfileStatus({
   isFromLoggedUser,
 }) {
   const { loggedUser } = useAuth();
-  const { avatar } = useAvatar(isFromLoggedUser ? loggedUser.avatar_id : avatar_id);
   const { rocket } = useRocket(rocket_id);
   const { ranking } = useRanking(ranking_id);
   const [isSelectAvatarVisible, setIsSelectAvatarVisible] = useState(false);
@@ -60,7 +59,7 @@ export function ProfileStatus({
         </C.ProfileButton>
       )}
       <C.AvatarButton onPress={handleAvatarButton}>
-        <UserAvatar avatar={avatar} size={150} />
+        <UserAvatar avatarId={isFromLoggedUser ? loggedUser.avatar_id : avatar_id} size={150} />
         {isFromLoggedUser && (
           <C.Icon>
             <Edit color={theme.colors.green_300} />

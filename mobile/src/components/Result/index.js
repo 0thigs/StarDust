@@ -4,7 +4,7 @@ import { VerificationButton } from '../VerificationButton';
 import { CommentsList } from '../CommentsList';
 import * as C from './styles';
 
-export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
+export function Result({ challengeId, testCases, userOutputs, setIsEnd, backToCode }) {
   const [results, setResults] = useState([]);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
@@ -65,7 +65,7 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
         showComments={showComments}
       />
 
-      <CommentsList bottomSheetRef={bottomSheetRef} />
+      <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />
     </C.Container>
   );
 }

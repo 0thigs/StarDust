@@ -184,11 +184,34 @@ export default {
     return code;
   },
 
+  getAuthor: async userId => {
+    const { data, error } = await supabase
+      .from('users')
+      .select('id, name, avatar_id')
+      .eq('id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const code = data[0];
+    return code;
+  },
+
   getTopics: async () => {
     const { data, error } = await supabase
       .from('topics')
       .select('*')
       .order('position', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getComments: async challengeId => {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*')
+      .eq('challenge_id', challengeId);
     if (error) {
       throw new Error(error.message);
     }
@@ -207,6 +230,14 @@ export default {
 
   updateCode: async (codeId, data) => {
     const { success, error } = await supabase.from('codes').update(data).eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  updateComment: async (commentId, data) => {
+    const { success, error } = await supabase.from('codes').update(data).eq('id', commentId);
     if (error) {
       throw new Error(error.message);
     }

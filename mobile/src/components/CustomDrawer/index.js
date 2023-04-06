@@ -13,7 +13,6 @@ import theme from '../../global/styles/theme';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
-  const { avatar } = useAvatar(loggedUser.avatar_id);
   const { achievements } = useAchievement();
   const [sortedAchievements, setSortedAchievements] = useState([]);
   const navigation = useNavigation();
@@ -59,7 +58,7 @@ export function CustomDrawer() {
 
   return (
     <C.Container>
-      <UserAvatar avatar={avatar} size={100} />
+      <UserAvatar avatarId={loggedUser.avatar_id} size={100} />
 
       <C.Name>{loggedUser.name}</C.Name>
       <C.Email>{loggedUser.email}</C.Email>

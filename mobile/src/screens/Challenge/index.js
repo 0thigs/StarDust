@@ -150,6 +150,7 @@ export function Challenge({ route }) {
         id: 3,
         component: (
           <Result
+            challengeId={id}
             setIsEnd={setIsEnd}
             testCases={test_cases}
             userOutputs={userOutputs}
