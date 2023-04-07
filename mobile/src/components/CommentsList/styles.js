@@ -17,7 +17,7 @@ export const Heading = styled.Text`
   margin-bottom: 8px;
 `;
 
-export const FilterWrapper = styled.View`
+export const SortWrapper = styled.View`
   justify-content: flex-end;
   flex-direction: row;
   background-color: ${({ theme }) => theme.colors.black};
@@ -25,7 +25,7 @@ export const FilterWrapper = styled.View`
   padding: 8px;
 `;
 
-export const Filter = styled.TouchableOpacity`
+export const Sorter = styled.View`
   flex-direction: row;
 `;
 

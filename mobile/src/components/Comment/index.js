@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { UserAvatar } from '../UserAvatar';
 import { Editor } from '../Editor';
 import { ChevronUp, MoreVertical } from 'react-native-feather';
-import * as C from './styles';
+import { PopoverMenu } from '../PopoverMenu';
 import dayjs from 'dayjs';
 import theme from '../../global/styles/theme';
-import { PopoverMenu } from '../PopoverMenu';
+import * as C from './styles';
 
 export function Comment({
   id,
@@ -77,8 +77,6 @@ export function Comment({
       action: () => setIsReportFormVisible(true),
     },
   ];
-
-  function insertCode() {}
 
   function handleLikeButtonPress() {
     let updatedLikes = likesCount;

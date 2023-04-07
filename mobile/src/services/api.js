@@ -218,7 +218,8 @@ export default {
     const { data, error } = await supabase
       .from('comments')
       .select('*, users(name, avatar_id)')
-      .eq('challenge_id', challengeId);
+      .eq('challenge_id', challengeId)
+      .order('created_at', { ascending: false });
     if (error) {
       throw new Error(error.message);
     }
@@ -271,7 +272,7 @@ export default {
   },
 
   deleteComment: async codeId => {
-    const { success, error } = await supabase.from('codes').delete().eq('id', codeId);
+    const { success, error } = await supabase.from('comments').delete().eq('id', codeId);
     if (error) {
       throw new Error(error.message);
     }

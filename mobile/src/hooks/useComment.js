@@ -3,6 +3,25 @@ import api from '../services/api';
 
 export const useComment = challengeId => {
   const [comments, setComments] = useState([]);
+  const [sorter, setSorter] = useState('date');
+
+  function sortCommentsByDate() {
+    return [...comments].sort((a, b) => {
+      const createdAtA = new Date(a.created_at);
+      const createdAtB = new Date(b.created_at);
+      return createdAtB.getTime() - createdAtA.getTime();
+    });
+  }
+
+  function sortCommentsByLikes() {
+    return [...comments].sort((a, b) => a.likes < b.likes);
+  }
+
+  function handleSorterComments(sorter) {
+    setSorter(sorter);
+    const sortedComments = sorter === 'likes' ? sortCommentsByLikes() : sortCommentsByDate();
+    setComments(sortedComments)
+  }
 
   async function deleteComment(commentId) {
     try {
@@ -56,5 +75,14 @@ export const useComment = challengeId => {
     if (!comments.length) fetchComments();
   }, []);
 
-  return { comments, setComments, fetchComments, addComment, updateComment, deleteComment };
+  return {
+    comments,
+    setComments,
+    fetchComments,
+    addComment,
+    updateComment,
+    deleteComment,
+    handleSorterComments,
+    sorter,
+  };
 };

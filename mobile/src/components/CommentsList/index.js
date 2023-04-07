@@ -19,27 +19,42 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     loggedUser: { id: loggedUserId, liked_comments_ids, avatar_id },
     updateLoggedUser,
   } = useAuth();
-  const { comments, fetchComments, addComment, updateComment, deleteComment } =
-    useComment(challengeId);
+  const {
+    comments,
+    fetchComments,
+    addComment,
+    updateComment,
+    deleteComment,
+    handleSorterComments,
+    sorter,
+  } = useComment(challengeId);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [isMiniEditorVisible, setIsMiniEditorVisible] = useState(false);
   const [commentTexts, setCommentTexts] = useState('');
-  const [code, setCode] = useState('');
   const [replyId, setReplyId] = useState(null);
   const contentRef = useRef(null);
 
-  const popoverMenuButtons = [
-    {
-      title: 'Inserir código',
-      isToggle: false,
-      value: null,
-      action: () => setIsMiniEditorVisible(true),
-    },
+  const popoverMenuInputButtons = [
     {
       title: 'Cancelar',
       isToggle: false,
       value: null,
       action: () => setIsInputVisible(false),
+    },
+  ];
+
+  const popoverMenuSortButtons = [
+    {
+      title: 'Mais recentes',
+      isToggle: false,
+      value: null,
+      action: () => handleSorterComments('date'),
+    },
+    {
+      title: 'Mais curtidos',
+      isToggle: false,
+      value: null,
+      action: () => handleSorterComments('likes'),
     },
   ];
 
@@ -50,13 +65,14 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
   }
 
   function SendComment() {
-    const texts = commentTexts.split(/(`[^`]+`)/).filter(text => text !== '');
+    const texts = commentTexts.split(/(`[^`]+`)/).sort(text => text !== '');
     const content = texts.map(parseText);
 
     addComment(content, replyId, loggedUserId, challengeId);
     setCommentTexts('');
     setIsInputVisible(false);
     fetchComments();
+    contentRef.current.scrollToEnd();
   }
 
   function handleAddCommentButtonPress(replyId) {
@@ -64,9 +80,8 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     setReplyId(replyId);
   }
 
-  useEffect(() => {
-    contentRef.current.scrollToEnd();
-  }, [comments]);
+  //   useEffect(() => {
+  //   }, [comments]);
 
   return (
     <BottomSheet
@@ -79,12 +94,17 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
         <C.Container>
           <C.Header>
             <C.Heading>{comments.length} Comentários</C.Heading>
-            <C.FilterWrapper>
-              <C.Filter activeOpacity={0.7}>
-                <C.Title>Mais recentes</C.Title>
-                <ChevronDown color={theme.colors.white} />
-              </C.Filter>
-            </C.FilterWrapper>
+            <C.SortWrapper>
+              <PopoverMenu
+                buttons={popoverMenuSortButtons}
+                icon={
+                  <C.Sorter activeOpacity={0.7}>
+                    <C.Title>Mais {sorter === 'date' ? 'recentes' : 'curtidos'}</C.Title>
+                    <ChevronDown color={theme.colors.white} />
+                  </C.Sorter>
+                }
+              />
+            </C.SortWrapper>
           </C.Header>
 
           <C.Content ref={contentRef}>
@@ -128,7 +148,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
               />
 
               <PopoverMenu
-                buttons={popoverMenuButtons}
+                buttons={popoverMenuInputButtons}
                 icon={<PlusCircle color={theme.colors.green_700} width={iconWidth} />}
               />
 
