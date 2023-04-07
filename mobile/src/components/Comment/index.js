@@ -19,13 +19,15 @@ export function Comment({
   replies,
   updateComment,
   parseText,
-  loggedUserId,
   deleteComment,
+  isFromLoggedUser,
   handleAddCommentButtonPress,
   parentId,
 }) {
   const [likesCount, setLikesCount] = useState(likes);
   const [author, setAuthor] = useState(user);
+  const [isCurrentCommentLiked, setIsCurrentCommentLiked] = useState(isLiked);
+  const [currentCommentContent, setCurrentCommentContent] = useState(content);
   const [isEditInputVisible, setIsEditInputVisible] = useState(false);
   const [isReportFormVisible, setIsReportFormVisible] = useState(false);
   const [isRepliesVisible, setIsRepliesVisible] = useState(false);
@@ -33,13 +35,13 @@ export function Comment({
   const isReply = Boolean(parentId);
 
   const createdAt = dayjs(created_at).format('DD/MM/YYYY');
-  const isFromLoggedUser = loggedUserId === authorId;
   const isButtonDisabled = replies.length === 0;
 
   function handleSaveEditButtonPress() {
     const texts = editedText.split(/(`[^`]+`)/).filter(text => text !== '');
     const content = texts.map(parseText);
-    updateComment(id, { content });
+    setCurrentCommentContent(content);
+    updateComment(id, 'content', content);
     setIsEditInputVisible(false);
   }
 
@@ -69,7 +71,7 @@ export function Comment({
       title: 'Deletar',
       isToggle: false,
       value: null,
-      action: () => deleteComment(id),
+      action: () => deleteComment(id, isReply),
     },
   ];
 
@@ -84,18 +86,20 @@ export function Comment({
 
   function handleLikeButtonPress() {
     let updatedLikes = likesCount;
-    if (isLiked) {
+    if (isCurrentCommentLiked) {
       updatedLikes--;
     } else {
       updatedLikes++;
     }
     setLikesCount(updatedLikes);
-    updateComment(id, 'likes', updatedLikes, isLiked);
+    setIsCurrentCommentLiked(!isCurrentCommentLiked);
+    updateComment(id, 'likes', updatedLikes, isCurrentCommentLiked);
   }
 
   async function fetchAuthor(author_id) {
     try {
       const author = await api.getAuthor(author_id);
+      console.log(author.avatar_id);
       setAuthor(author);
     } catch (error) {
       console.log(error);
@@ -111,7 +115,7 @@ export function Comment({
     <C.Container>
       {authorId && (
         <>
-          <UserAvatar avatarId={author?.avatar_id} size={40} />
+          {author?.avatar_id && <UserAvatar avatarId={author?.avatar_id} size={40} />}
           <C.Info isReply={isReply}>
             <C.Header>
               <C.Authorname>{author?.name}</C.Authorname>
@@ -146,7 +150,7 @@ export function Comment({
             ) : (
               <>
                 <C.Content>
-                  {content.map(({ type, body }, index) =>
+                  {currentCommentContent.map(({ type, body }, index) =>
                     type === 'generic' ? (
                       <C.Generic key={`content-${index}`}>{body}</C.Generic>
                     ) : (
@@ -158,7 +162,9 @@ export function Comment({
                 </C.Content>
                 <C.Footer>
                   <C.Button onPress={handleLikeButtonPress} activeOpacity={0.7}>
-                    <ChevronUp color={theme.colors[isLiked ? 'green_700' : 'gray_500']} />
+                    <ChevronUp
+                      color={theme.colors[isCurrentCommentLiked ? 'green_700' : 'gray_500']}
+                    />
                   </C.Button>
                   <C.Button marginRight={'auto'} activeOpacity={0.7}>
                     <C.LikesCount>+{likesCount}</C.LikesCount>
@@ -175,7 +181,10 @@ export function Comment({
                     </C.Button>
                   )}
                   <C.Button
-                    onPress={() => handleAddCommentButtonPress(isReply ? parentId : id)}
+                    onPress={() => {
+                      setIsRepliesVisible(true);
+                      handleAddCommentButtonPress(isReply ? parentId : id);
+                    }}
                     activeOpacity={0.7}
                   >
                     <C.ButtonTitle>Responder</C.ButtonTitle>

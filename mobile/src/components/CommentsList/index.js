@@ -56,7 +56,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
 
   function parseText(text) {
     const type = text.includes('`') ? 'code' : 'generic';
-    const body = text;
+    const body = text.replace(/`/g, '');
     return { type, body };
   }
 

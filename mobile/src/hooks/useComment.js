@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
 import { useAuth } from './useAuth';
+import api from '../services/api';
 
 export const useComment = challengeId => {
-  const { loggedUser, updateLoggedUser } = useAuth();
+  const { loggedUser } = useAuth();
   const [comments, setComments] = useState([]);
   const [sorter, setSorter] = useState('date');
 
@@ -33,18 +33,23 @@ export const useComment = challengeId => {
     setComments(sortedComments);
   }
 
-  async function deleteComment(commentId, isLiked) {
+  async function deleteComment(commentId, isReply) {
     try {
       await api.deleteComment(commentId);
-      const updatedComments = comments.filter(comment => comment.id !== commentId);
-      setComments(updatedComments);
-
-      if (isLiked) {
-        const updatedLikedCommentsIds = liked_comments_ids.filter(
-          likedCommentId => likedCommentId !== commentId
+      if (isReply) {
+        const currentParentComment = comments.find(comment =>
+          comment.replies.some(reply => reply.id === commentId)
         );
-        updateLoggedUser('liked_comments_ids', updatedLikedCommentsIds);
+        currentParentComment.replies = currentParentComment.replies.filter(
+          reply => reply.id !== commentId
+        );
+        const updatedComments = comments.map(comment =>
+          comment.id === currentParentComment.id ? currentParentComment : comment
+        );
+        setComments(updatedComments);
+        return;
       }
+      setComments(comments => comments.filter(comment => comment.id !== commentId));
     } catch (error) {
       console.log(error);
     }
@@ -59,11 +64,10 @@ export const useComment = challengeId => {
   }
 
   async function updateComment(commentId, prop, payload, isLiked) {
-
     try {
       setComments(
         comments.map(comment =>
-          comment.id === commentId ? { ...comment, [prop]: payload, isLiked: !isLiked } : comment
+          comment.id === commentId ? { ...comment, [prop]: payload } : comment
         )
       );
       await api.updateComment(commentId, prop, payload);
@@ -103,8 +107,8 @@ export const useComment = challengeId => {
       const commentsFromApi = await api.getComments(challengeId);
       const likedComments = await fetchLikedComments();
       const comments = commentsFromApi
-        .map(addReplies)
         .map(comment => verifyComment(comment, likedComments))
+        .map(addReplies)
         .filter(comment => comment.parent_id === null);
 
       setComments(comments);
