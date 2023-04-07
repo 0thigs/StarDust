@@ -8,10 +8,10 @@ import { PopoverMenu } from '../PopoverMenu';
 import { RangeInput } from '../RangeInput';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
+import { ArrowLeft, MoreVertical } from 'react-native-feather';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { ArrowLeft, MoreVertical } from 'react-native-feather';
 const iconSize = 25;
 
 export function ChallengeHeader({

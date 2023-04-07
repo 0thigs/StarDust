@@ -246,6 +246,14 @@ export default {
     return success;
   },
 
+  deleteCode: async codeId => {
+    const { success, error } = await supabase.from('codes').delete().eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   updateCode: async (codeId, data) => {
     const { success, error } = await supabase.from('codes').update(data).eq('id', codeId);
     if (error) {
@@ -262,7 +270,7 @@ export default {
     return success;
   },
 
-  deleteCode: async codeId => {
+  deleteComment: async codeId => {
     const { success, error } = await supabase.from('codes').delete().eq('id', codeId);
     if (error) {
       throw new Error(error.message);

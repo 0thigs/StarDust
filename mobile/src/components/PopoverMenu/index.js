@@ -1,5 +1,5 @@
 import { useImperativeHandle, forwardRef } from 'react';
-import { Check, MoreVertical } from 'react-native-feather';
+import { Check } from 'react-native-feather';
 import { Popover, usePopover } from 'react-native-modal-popover';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
@@ -13,6 +13,11 @@ export const PopoverMenu = forwardRef(({ buttons, icon }, ref) => {
       closePopover,
     };
   });
+
+  function handlePopoverMenuButtonPress(action) {
+    closePopover();
+    action();
+  }
 
   return (
     <>
@@ -32,7 +37,7 @@ export const PopoverMenu = forwardRef(({ buttons, icon }, ref) => {
               key={title}
               isLastButton={index === buttons.length - 1}
               activeOpacity={0.7}
-              onPress={action}
+              onPress={() => handlePopoverMenuButtonPress(action)}
             >
               <C.Title>{title}</C.Title>
               {isToggle ? (

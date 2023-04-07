@@ -16,37 +16,65 @@ export function Comment({
   likes,
   replyComments,
   updateComment,
+  parseText,
   loggedUserId,
   likedCommentsIds,
   updateLoggedUser,
+  deleteComment,
   handleAddCommentButtonPress,
 }) {
   const [likesCount, setLikesCount] = useState(likes);
-  const [isEditInputVisible, setiIsEditInputVisible] = useState(false);
+  const [isEditInputVisible, setIsEditInputVisible] = useState(false);
+  const [isReportFormVisible, setIsReportFormVisible] = useState(false);
   const [editedText, setEditedText] = useState('');
 
   const createdAt = dayjs(created_at).format('DD/MM/YYYY');
   const isLiked = likedCommentsIds.includes(id);
   const isFromLoggedUser = loggedUserId === authorId;
 
-  const popoverMenuButtons = [
+  function handleSaveEditButtonPress() {
+    const texts = editedText.split(/(`[^`]+`)/).filter(text => text !== '');
+    const content = texts.map(parseText)
+    updateComment(id, { content });
+    setIsEditInputVisible(false);
+  }
+
+  function handleCancelEditButtonPress() {
+    setIsEditInputVisible(false);
+    setEditedText('');
+  }
+
+  function stringfyText(text) {
+    return text.type === 'code' ? '\n`' + text.body + '`\n' : text.body;
+  }
+
+  function editComment() {
+    const editedText = content.map(stringfyText).join('');
+    setEditedText(editedText);
+    setIsEditInputVisible(true);
+  }
+
+  const popoverMenuLoggedUserButtons = [
     {
       title: 'Editar',
       isToggle: false,
       value: null,
-      action: () => handleAddCommentButtonPress(),
+      action: () => editComment(),
     },
     {
-      title: 'Dark Mode',
-      isToggle: true,
-      value: null,
-      action: () => setIsDarkMode(!isDarkMode),
-    },
-    {
-      title: 'Font Size',
+      title: 'Deletar',
       isToggle: false,
       value: null,
-      action: () => setIsRangeInputVisible(true),
+      action: () => deleteComment(id),
+    },
+  ];
+
+  const popoverMenuDefaultButtons = [
+    {
+      title: 'Reportar',
+      isToggle: false,
+      value: null,
+      action: () => setIsReportFormVisible(true),
     },
   ];
 
@@ -76,20 +104,29 @@ export function Comment({
             <C.Header>
               <C.Authorname>{author.name}</C.Authorname>
               <C.Date>{createdAt}</C.Date>
+              <PopoverMenu
+                buttons={
+                  isFromLoggedUser ? popoverMenuLoggedUserButtons : popoverMenuDefaultButtons
+                }
+                icon={<MoreVertical color={theme.colors.green_700} />}
+              />
             </C.Header>
 
             {isEditInputVisible ? (
               <C.EditInputWrapper>
                 <C.Label>Seu comentário</C.Label>
-                <C.EditInput multiline style={{ textAlignVertical: 'top' }} />
+                <C.EditInput
+                  multiline
+                  autoFocus
+                  style={{ textAlignVertical: 'top' }}
+                  value={editedText}
+                  onChangeText={setEditedText}
+                />
                 <C.EditButtons>
-                  <C.Button marginRight={'auto'}>
-                    <C.CodeButtonTitle>+ inserir código</C.CodeButtonTitle>
-                  </C.Button>
-                  <C.Button marginRight={'12px'}>
+                  <C.Button marginRight={'12px'} onPress={handleCancelEditButtonPress}>
                     <C.ButtonTitle>Cancelar</C.ButtonTitle>
                   </C.Button>
-                  <C.Button>
+                  <C.Button onPress={handleSaveEditButtonPress}>
                     <C.ButtonTitle>Salvar</C.ButtonTitle>
                   </C.Button>
                 </C.EditButtons>

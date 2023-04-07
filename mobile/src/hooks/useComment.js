@@ -4,7 +4,17 @@ import api from '../services/api';
 export const useComment = challengeId => {
   const [comments, setComments] = useState([]);
 
-  async function addComment(content, reply_id = null, authorId, challengeId) {
+  async function deleteComment(commentId) {
+    try {
+      await api.deleteComment(commentId);
+      const updatedComments = comments.filter(comment => comment.id !== commentId);
+      setComments(updatedComments);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function addComment(content, reply_id = null, authorId) {
     try {
       await api.addComment(content, reply_id, authorId, challengeId);
     } catch (error) {
@@ -15,6 +25,9 @@ export const useComment = challengeId => {
   async function updateComment(commentId, data) {
     try {
       await api.updateComment(commentId, data);
+      setComments(
+        comments.map(comment => (comment.id === commentId ? { ...comment, ...data } : comment))
+      );
     } catch (error) {
       console.log(error);
     }
@@ -43,5 +56,5 @@ export const useComment = challengeId => {
     if (!comments.length) fetchComments();
   }, []);
 
-  return { comments, setComments, fetchComments, addComment, updateComment };
+  return { comments, setComments, fetchComments, addComment, updateComment, deleteComment };
 };

@@ -9,6 +9,7 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { PopoverMenu } from '../PopoverMenu';
 import { MiniEditor } from '../MiniEditor';
+import { useEffect } from 'react';
 const avatarWidth = 32;
 const iconWidth = 22;
 const iconMarginBetween = 12;
@@ -18,7 +19,8 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     loggedUser: { id: loggedUserId, liked_comments_ids, avatar_id },
     updateLoggedUser,
   } = useAuth();
-  const { comments, fetchComments, addComment, updateComment } = useComment(challengeId);
+  const { comments, fetchComments, addComment, updateComment, deleteComment } =
+    useComment(challengeId);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [isMiniEditorVisible, setIsMiniEditorVisible] = useState(false);
   const [commentTexts, setCommentTexts] = useState('');
@@ -41,7 +43,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     },
   ];
 
-  function verifyText(text) {
+  function parseText(text) {
     const type = text.includes('`') ? 'code' : 'generic';
     const body = text;
     return { type, body };
@@ -49,7 +51,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
 
   function SendComment() {
     const texts = commentTexts.split(/(`[^`]+`)/).filter(text => text !== '');
-    const content = texts.map(verifyText);
+    const content = texts.map(parseText);
 
     addComment(content, replyId, loggedUserId, challengeId);
     setCommentTexts('');
@@ -61,6 +63,10 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     setIsInputVisible(true);
     setReplyId(replyId);
   }
+
+  useEffect(() => {
+    contentRef.current.scrollToEnd();
+  }, [comments]);
 
   return (
     <BottomSheet
@@ -81,7 +87,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
             </C.FilterWrapper>
           </C.Header>
 
-          <C.Content ref={contentRef} onContentSizeChange={() => contentRef.current.scrollToEnd()}>
+          <C.Content ref={contentRef}>
             {comments.map(
               ({ id, users: author, author_id, content, created_at, likes, replyComments }) => (
                 <Comment
@@ -94,6 +100,8 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
                   likes={likes}
                   replyComments={replyComments}
                   updateComment={updateComment}
+                  deleteComment={deleteComment}
+                  parseText={parseText}
                   loggedUserId={loggedUserId}
                   likedCommentsIds={liked_comments_ids}
                   updateLoggedUser={updateLoggedUser}

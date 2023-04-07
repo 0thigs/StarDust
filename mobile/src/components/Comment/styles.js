@@ -32,9 +32,7 @@ export const Date = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
-export const Content = styled.View`
-margin-bottom: 4px;
-`;
+export const Content = styled.View``;
 
 export const Generic = styled.Text`
   color: ${({ theme }) => theme.colors.white};
@@ -47,6 +45,8 @@ export const Code = styled.ScrollView`
 `;
 
 export const Footer = styled.View`
+  margin-top: 8px;
+
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -66,6 +66,7 @@ export const LikesCount = styled.Text`
 export const ButtonTitle = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.semibold};
+  font-size: 12px;
 `;
 
 export const EditInputWrapper = styled.View``;

@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
-import { ArrowLeft, MoreVertical, Share2 } from 'react-native-feather';
+import { ArrowLeft, Share2 } from 'react-native-feather';
 import { RangeInput } from '../RangeInput';
 import { Prompt } from '../Prompt';
 import { Modal } from '../Modal';
@@ -106,7 +106,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
       <PopoverMenu
         ref={popoverMenuRef}
         buttons={popoverMenuButtons}
-        icon={<MoreVertical width={25} height={25} color={iconColor} />}
+        icon={<MoreVertical width={25} height={25} color={theme.colors.green_500} />}
       />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
