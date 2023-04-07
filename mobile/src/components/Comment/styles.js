@@ -32,10 +32,18 @@ export const Date = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
-export const Body = styled.Text`
+export const Content = styled.View`
+margin-bottom: 4px;
+`;
+
+export const Generic = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 12px;
+`;
+
+export const Code = styled.ScrollView`
+  min-height: 50px;
 `;
 
 export const Footer = styled.View`

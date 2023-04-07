@@ -4,9 +4,9 @@ import api from '../services/api';
 export const useComment = challengeId => {
   const [comments, setComments] = useState([]);
 
-  async function addComment(body, reply_id = null, authorId, challengeId) {
+  async function addComment(content, reply_id = null, authorId, challengeId) {
     try {
-      await api.addComment(body, reply_id, authorId, challengeId);
+      await api.addComment(content, reply_id, authorId, challengeId);
     } catch (error) {
       console.log(error);
     }

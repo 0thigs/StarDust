@@ -8,6 +8,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { PopoverMenu } from '../PopoverMenu';
+import { MiniEditor } from '../MiniEditor';
 const avatarWidth = 32;
 const iconWidth = 22;
 const iconMarginBetween = 12;
@@ -20,7 +21,8 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
   const { comments, fetchComments, addComment, updateComment } = useComment(challengeId);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [isMiniEditorVisible, setIsMiniEditorVisible] = useState(false);
-  const [commentText, setCommentText] = useState('');
+  const [commentTexts, setCommentTexts] = useState('');
+  const [code, setCode] = useState('');
   const [replyId, setReplyId] = useState(null);
   const contentRef = useRef(null);
 
@@ -39,12 +41,20 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     },
   ];
 
+  function verifyText(text) {
+    const type = text.includes('`') ? 'code' : 'generic';
+    const body = text;
+    return { type, body };
+  }
+
   function SendComment() {
-    addComment(commentText, replyId, loggedUserId, challengeId);
-    setCommentText('');
+    const texts = commentTexts.split(/(`[^`]+`)/).filter(text => text !== '');
+    const content = texts.map(verifyText);
+
+    addComment(content, replyId, loggedUserId, challengeId);
+    setCommentTexts('');
     setIsInputVisible(false);
     fetchComments();
-    contentRef.current?.scrollToEnd();
   }
 
   function handleAddCommentButtonPress(replyId) {
@@ -70,15 +80,16 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
               </C.Filter>
             </C.FilterWrapper>
           </C.Header>
-          <C.Content ref={contentRef}>
+
+          <C.Content ref={contentRef} onContentSizeChange={() => contentRef.current.scrollToEnd()}>
             {comments.map(
-              ({ id, users: author, author_id, body, created_at, likes, replyComments }) => (
+              ({ id, users: author, author_id, content, created_at, likes, replyComments }) => (
                 <Comment
                   key={id}
                   id={id}
                   author={author}
                   authorId={author_id}
-                  body={body}
+                  content={content}
                   created_at={created_at}
                   likes={likes}
                   replyComments={replyComments}
@@ -92,13 +103,15 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
             )}
           </C.Content>
 
+          <MiniEditor isVisible={isMiniEditorVisible} setIsVisible={setIsMiniEditorVisible} />
+
           {isInputVisible ? (
             <C.InputWrapper>
               <UserAvatar avatarId={avatar_id} size={avatarWidth} />
               <C.Input
                 autoFocus
                 multiline
-                onChangeText={setCommentText}
+                onChangeText={setCommentTexts}
                 style={{ textAlignVertical: 'top' }}
                 avatarWidth={avatarWidth}
                 iconWidth={iconWidth}

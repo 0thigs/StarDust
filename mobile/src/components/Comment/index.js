@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Popover, usePopover } from 'react-native-modal-popover';
 import { UserAvatar } from '../UserAvatar';
+import { Editor } from '../Editor';
 import { ChevronUp, MoreVertical } from 'react-native-feather';
 import * as C from './styles';
 import dayjs from 'dayjs';
@@ -11,7 +11,7 @@ export function Comment({
   id,
   author,
   authorId,
-  body,
+  content,
   created_at,
   likes,
   replyComments,
@@ -96,7 +96,17 @@ export function Comment({
               </C.EditInputWrapper>
             ) : (
               <>
-                <C.Body>{body}</C.Body>
+                <C.Content>
+                  {content.map(({ type, body }, index) =>
+                    type === 'generic' ? (
+                      <C.Generic key={`content-${index}`}>{body}</C.Generic>
+                    ) : (
+                      <C.Code key={`content-${index}`}>
+                        <Editor value={body}>{body}</Editor>
+                      </C.Code>
+                    )
+                  )}
+                </C.Content>
                 <C.Footer>
                   <C.Button onPress={handleLikeButtonPress} activeOpacity={0.7}>
                     <ChevronUp color={theme.colors[isLiked ? 'green_700' : 'gray_500']} />

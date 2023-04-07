@@ -20,7 +20,7 @@ export function Prompt({ isVisible, title, value, onConfirm, onCancel, promptRef
   }, [isVisible]);
 
   return (
-    <Modal isVisible={isVisible}>
+    <Modal isVisible={isVisible} animationIn={'slideInUp'} animationOut={'bounceOut'}>
       <C.Content>
         <C.Title>{title}</C.Title>
         <C.Input

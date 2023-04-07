@@ -35,6 +35,5 @@ export const Buttons = styled.View`
 
 export const ButtonWrapper = styled.View`
   width: 45%;
-  flex-direction: row;
   margin-left: ${({ isRight }) => (isRight ? 24 : 0)}px;
 `;

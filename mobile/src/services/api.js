@@ -204,10 +204,10 @@ export default {
     return data;
   },
 
-  addComment: async (body, replyId, authorId, challengeId) => {
+  addComment: async (content, replyId, authorId, challengeId) => {
     const { success, error } = await supabase
       .from('comments')
-      .insert([{ body, reply_id: replyId, author_id: authorId, challenge_id: challengeId }]);
+      .insert([{ content, reply_id: replyId, author_id: authorId, challenge_id: challengeId }]);
     if (error) {
       throw new Error(error.message);
     }
