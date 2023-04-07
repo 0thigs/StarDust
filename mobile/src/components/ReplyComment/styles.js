@@ -5,12 +5,13 @@ const { width } = Dimensions.get('screen');
 export const Container = styled.View`
   flex-direction: row;
   padding: 12px;
+  width: 100%;
   border: 0.4px solid ${({ theme }) => theme.colors.black};
 `;
 
 export const Info = styled.View`
   padding: 0 8px;
-  width: ${({ isReply }) => width - (isReply ? 75 : 50)}px;
+  width: ${width - 50}px;
 `;
 
 export const Header = styled.View`
@@ -92,8 +93,4 @@ export const EditButtons = styled.View`
 export const CodeButtonTitle = styled.Text`
   color: ${({ theme }) => theme.colors.gray_500};
   font-family: ${({ theme }) => theme.fonts.semibold};
-`;
-
-export const Replies = styled.View`
-  margin-left: -40px;
 `;

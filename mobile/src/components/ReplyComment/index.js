@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UserAvatar } from '../UserAvatar';
 import { Editor } from '../Editor';
 import { ChevronUp, MoreVertical } from 'react-native-feather';
@@ -6,35 +6,32 @@ import { PopoverMenu } from '../PopoverMenu';
 import dayjs from 'dayjs';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import api from '../../services/api';
 
-export function Comment({
+export function ReplyComment({
   id,
-  user,
+  author,
   authorId,
   content,
   created_at,
   likes,
-  isLiked,
-  replies,
+  replyComments,
   updateComment,
   parseText,
   loggedUserId,
+  likedCommentsIds,
+  updateLoggedUser,
   deleteComment,
   handleAddCommentButtonPress,
-  parentId,
 }) {
   const [likesCount, setLikesCount] = useState(likes);
-  const [author, setAuthor] = useState(user);
   const [isEditInputVisible, setIsEditInputVisible] = useState(false);
   const [isReportFormVisible, setIsReportFormVisible] = useState(false);
-  const [isRepliesVisible, setIsRepliesVisible] = useState(false);
   const [editedText, setEditedText] = useState('');
-  const isReply = Boolean(parentId);
 
   const createdAt = dayjs(created_at).format('DD/MM/YYYY');
+  const isLiked = likedCommentsIds.includes(id);
   const isFromLoggedUser = loggedUserId === authorId;
-  const isButtonDisabled = replies.length === 0;
+  const isButtonDisabled = replyComments.length === 0;
 
   function handleSaveEditButtonPress() {
     const texts = editedText.split(/(`[^`]+`)/).filter(text => text !== '');
@@ -84,37 +81,27 @@ export function Comment({
 
   function handleLikeButtonPress() {
     let updatedLikes = likesCount;
+    let updatedLikedCommentsIds = [];
     if (isLiked) {
+      updatedLikedCommentsIds = likedCommentsIds.filter(likedCommnetId => likedCommnetId !== id);
       updatedLikes--;
     } else {
+      updatedLikedCommentsIds = [...likedCommentsIds, id];
       updatedLikes++;
     }
     setLikesCount(updatedLikes);
-    updateComment(id, 'likes', updatedLikes, isLiked);
+    updateComment(id, { likes: updatedLikes });
+    updateLoggedUser('liked_comments_ids', updatedLikedCommentsIds);
   }
-
-  async function fetchAuthor(author_id) {
-    try {
-      const author = await api.getAuthor(author_id);
-      setAuthor(author);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    if (!isReply || author) return;
-    fetchAuthor(authorId);
-  }, [author]);
 
   return (
     <C.Container>
       {authorId && (
         <>
-          <UserAvatar avatarId={author?.avatar_id} size={40} />
-          <C.Info isReply={isReply}>
+          <UserAvatar avatarId={author.avatar_id} size={40} />
+          <C.Info>
             <C.Header>
-              <C.Authorname>{author?.name}</C.Authorname>
+              <C.Authorname>{author.name}</C.Authorname>
               <C.Date>{createdAt}</C.Date>
               <PopoverMenu
                 buttons={
@@ -155,6 +142,9 @@ export function Comment({
                       </C.Code>
                     )
                   )}
+                  <C.Replys>
+                    <Comment />
+                  </C.Replys>
                 </C.Content>
                 <C.Footer>
                   <C.Button onPress={handleLikeButtonPress} activeOpacity={0.7}>
@@ -163,60 +153,18 @@ export function Comment({
                   <C.Button marginRight={'auto'} activeOpacity={0.7}>
                     <C.LikesCount>+{likesCount}</C.LikesCount>
                   </C.Button>
-                  {!isReply && (
-                    <C.Button
-                      marginRight={'12px'}
-                      activeOpacity={0.7}
-                      disabled={isButtonDisabled}
-                      isDisabled={isButtonDisabled}
-                      onPress={() => setIsRepliesVisible(!isRepliesVisible)}
-                    >
-                      <C.ButtonTitle>{replies.length} respostas</C.ButtonTitle>
-                    </C.Button>
-                  )}
                   <C.Button
-                    onPress={() => handleAddCommentButtonPress(isReply ? parentId : id)}
+                    marginRight={'12px'}
                     activeOpacity={0.7}
+                    disabled={isButtonDisabled}
+                    isDisabled={isButtonDisabled}
                   >
+                    <C.ButtonTitle>{replyComments.length} respostas</C.ButtonTitle>
+                  </C.Button>
+                  <C.Button onPress={() => handleAddCommentButtonPress(id)} activeOpacity={0.7}>
                     <C.ButtonTitle>Responder</C.ButtonTitle>
                   </C.Button>
                 </C.Footer>
-                {replies.length > 0 && isRepliesVisible && (
-                  <C.Replies>
-                    {replies.map(
-                      ({
-                        id,
-                        author_id,
-                        content,
-                        created_at,
-                        likes,
-                        isLiked,
-                        parent_id,
-                        isFromLoggedUser,
-                      }) => {
-                        return (
-                          <Comment
-                            key={id}
-                            id={id}
-                            user={null}
-                            authorId={author_id}
-                            content={content}
-                            created_at={created_at}
-                            likes={likes}
-                            isLiked={isLiked}
-                            replies={[]}
-                            parentId={parent_id}
-                            updateComment={updateComment}
-                            deleteComment={deleteComment}
-                            parseText={parseText}
-                            isFromLoggedUser={isFromLoggedUser}
-                            handleAddCommentButtonPress={handleAddCommentButtonPress}
-                          />
-                        );
-                      }
-                    )}
-                  </C.Replies>
-                )}
               </>
             )}
           </C.Info>

@@ -204,10 +204,20 @@ export default {
     return data;
   },
 
-  addComment: async (content, replyId, authorId, challengeId) => {
+  addComment: async (content, parentId, authorId, challengeId) => {
     const { success, error } = await supabase
       .from('comments')
-      .insert([{ content, reply_id: replyId, author_id: authorId, challenge_id: challengeId }]);
+      .insert([{ content, parent_id: parentId, author_id: authorId, challenge_id: challengeId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  addLikedComment: async (commentId, userId) => {
+    const { success, error } = await supabase
+      .from('users_liked_comments')
+      .insert([{ comment_id: commentId, user_id: userId }]);
     if (error) {
       throw new Error(error.message);
     }
@@ -226,15 +236,46 @@ export default {
     return data;
   },
 
-  getReplyComments: async commentId => {
+  getLikedComments: async userId => {
     const { data, error } = await supabase
-      .from('comments')
-      .select('*, users(name, avatar_id)')
-      .eq('reply_id', commentId);
+      .from('users_liked_comments')
+      .select('*')
+      .eq('user_id', userId);
     if (error) {
       throw new Error(error.message);
     }
     return data;
+  },
+
+  updateComment: async (commentId, column, data) => {
+    const { success, error } = await supabase
+      .from('comments')
+      .update({ [column]: data })
+      .eq('id', commentId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  deleteComment: async codeId => {
+    const { success, error } = await supabase.from('comments').delete().eq('id', codeId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  deleteLikedComment: async (commentId, userId) => {
+    const { success, error } = await supabase
+      .from('users_liked_comments')
+      .delete()
+      .eq('comment_id', commentId)
+      .eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
   },
 
   addCode: async (title, code, userId) => {
@@ -257,22 +298,6 @@ export default {
 
   updateCode: async (codeId, data) => {
     const { success, error } = await supabase.from('codes').update(data).eq('id', codeId);
-    if (error) {
-      throw new Error(error.message);
-    }
-    return success;
-  },
-
-  updateComment: async (commentId, data) => {
-    const { success, error } = await supabase.from('comments').update(data).eq('id', commentId);
-    if (error) {
-      throw new Error(error.message);
-    }
-    return success;
-  },
-
-  deleteComment: async codeId => {
-    const { success, error } = await supabase.from('comments').delete().eq('id', codeId);
     if (error) {
       throw new Error(error.message);
     }

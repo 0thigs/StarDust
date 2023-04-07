@@ -3,21 +3,18 @@ import { useAuth } from '../../hooks/useAuth';
 import { useComment } from '../../hooks/useComment';
 import { Comment } from '../Comment';
 import { UserAvatar } from '../UserAvatar';
+import { PopoverMenu } from '../PopoverMenu';
 import { ChevronDown, Plus, PlusCircle, Send } from 'react-native-feather';
 import BottomSheet from '@gorhom/bottom-sheet';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { PopoverMenu } from '../PopoverMenu';
-import { MiniEditor } from '../MiniEditor';
-import { useEffect } from 'react';
 const avatarWidth = 32;
 const iconWidth = 22;
 const iconMarginBetween = 12;
 
 export function CommentsList({ challengeId, bottomSheetRef }) {
   const {
-    loggedUser: { id: loggedUserId, liked_comments_ids, avatar_id },
-    updateLoggedUser,
+    loggedUser: { id: loggedUserId, avatar_id },
   } = useAuth();
   const {
     comments,
@@ -29,9 +26,8 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
     sorter,
   } = useComment(challengeId);
   const [isInputVisible, setIsInputVisible] = useState(false);
-  const [isMiniEditorVisible, setIsMiniEditorVisible] = useState(false);
   const [commentTexts, setCommentTexts] = useState('');
-  const [replyId, setReplyId] = useState(null);
+  const [parentId, setParentId] = useState(null);
   const contentRef = useRef(null);
 
   const popoverMenuInputButtons = [
@@ -65,23 +61,28 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
   }
 
   function SendComment() {
-    const texts = commentTexts.split(/(`[^`]+`)/).sort(text => text !== '');
+    const texts = commentTexts.split(/(`[^`]+`)/).filter(text => text !== '');
     const content = texts.map(parseText);
 
-    addComment(content, replyId, loggedUserId, challengeId);
+    addComment(content, parentId, loggedUserId, challengeId);
     setCommentTexts('');
     setIsInputVisible(false);
     fetchComments();
-    contentRef.current.scrollToEnd();
+
+    if (sorter === 'likes') {
+      contentRef.current.scrollToEnd();
+      return;
+    }
+    contentRef.current.scrollTo({
+      index: 0,
+      animated: true,
+    });
   }
 
-  function handleAddCommentButtonPress(replyId) {
+  function handleAddCommentButtonPress(parentId) {
     setIsInputVisible(true);
-    setReplyId(replyId);
+    setParentId(parentId);
   }
-
-  //   useEffect(() => {
-  //   }, [comments]);
 
   return (
     <BottomSheet
@@ -109,29 +110,38 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
 
           <C.Content ref={contentRef}>
             {comments.map(
-              ({ id, users: author, author_id, content, created_at, likes, replyComments }) => (
+              ({
+                id,
+                users: user,
+                author_id,
+                content,
+                created_at,
+                likes,
+                isLiked,
+                replies,
+                parent_id,
+                isFromLoggedUser,
+              }) => (
                 <Comment
                   key={id}
                   id={id}
-                  author={author}
+                  user={user}
                   authorId={author_id}
                   content={content}
                   created_at={created_at}
                   likes={likes}
-                  replyComments={replyComments}
+                  isLiked={isLiked}
+                  replies={replies}
+                  parentId={parent_id}
                   updateComment={updateComment}
                   deleteComment={deleteComment}
                   parseText={parseText}
-                  loggedUserId={loggedUserId}
-                  likedCommentsIds={liked_comments_ids}
-                  updateLoggedUser={updateLoggedUser}
+                  isFromLoggedUser={isFromLoggedUser}
                   handleAddCommentButtonPress={handleAddCommentButtonPress}
                 />
               )
             )}
           </C.Content>
-
-          <MiniEditor isVisible={isMiniEditorVisible} setIsVisible={setIsMiniEditorVisible} />
 
           {isInputVisible ? (
             <C.InputWrapper>

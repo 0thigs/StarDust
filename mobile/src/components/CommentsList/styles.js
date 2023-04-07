@@ -63,7 +63,7 @@ export const InputWrapper = styled.View`
 
 export const Input = styled.TextInput`
   margin-right: auto;
-  padding: 0 ${({ paddingVertical }) => paddingVertical}px;
+  padding: 4px ${({ paddingVertical }) => paddingVertical}px;
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.medium};
   width: ${({ avatarWidth, iconWidth, paddingVertical, iconMarginBetween }) =>

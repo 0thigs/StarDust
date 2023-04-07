@@ -8,6 +8,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, backToCo
   const [results, setResults] = useState([]);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
+  const [canFetchComments, setCanFetchComments] = useState(false);
   const bottomSheetRef = useRef(null);
 
   function handleVerificationButton() {
@@ -33,6 +34,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, backToCo
   }
 
   function showComments() {
+    setCanFetchComments(true);
     bottomSheetRef.current.expand();
   }
 
