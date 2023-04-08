@@ -34,11 +34,6 @@ export function Home() {
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
-  function verifyStarUnlocking(star) {
-    const isUnlocked = loggedUser.unlocked_stars_ids.includes(star.id);
-    return { ...star, isUnlocked };
-  }
-
   function scrollToLastUnlockedStar() {
     scrollRef.current.scrollTo({
       x: 0,
@@ -104,7 +99,7 @@ export function Home() {
                 name={name}
                 icon={icon}
                 image={image}
-                stars={stars.map(verifyStarUnlocking)}
+                stars={stars}
               />
             ))}
           </>

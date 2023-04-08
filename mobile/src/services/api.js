@@ -42,6 +42,17 @@ export default {
     return data;
   },
 
+  getUnlockedStars: async userId => {
+    const { data, error } = await supabase
+      .from('users_unlocked_stars')
+      .select('*')
+      .eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   getAvatar: async avatarId => {
     const { data, error } = await supabase.from('avatars').select('image').eq('id', avatarId);
     if (error) {

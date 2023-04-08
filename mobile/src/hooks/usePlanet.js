@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from './useAuth';
 import api from '../services/api';
 
 export const usePlanet = () => {
+  const { loggedUser } = useAuth();
   const [planets, setPlanets] = useState([]);
 
   function getCurrentPlanet(starId) {
@@ -20,11 +22,26 @@ export const usePlanet = () => {
     return currentPlanet.stars.find(star => star.number === currentStar.number + 1);
   }
 
+  function verifyStarUnlocking(planet, unlockedStars) {
+    const { stars } = planet;
+    const verifiedStars = stars.map(star => {
+      const isUnlocked = unlockedStars.some(unlockedStar => unlockedStar.id === star.id);
+      return { ...star, isUnlocked };
+    });
+    planet.stars = verifiedStars;
+    return planet;
+  }
+
   async function fetchPlanets() {
     try {
       const planets = await api.getPlanets();
-
-      setPlanets(planets);
+      console.log(loggedUser.id);
+      const unlockedStars = await api.getUnlockedStars(loggedUser.id);
+      const planetsWithUnlockdedStars = planets.map(planet =>
+        verifyStarUnlocking(planet, unlockedStars)
+      );
+      console.log(unlockedStars);
+      setPlanets(planetsWithUnlockdedStars);
     } catch (error) {
       console.log(error);
     }
