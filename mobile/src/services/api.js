@@ -42,7 +42,17 @@ export default {
     return data;
   },
 
-  getUnlockedStars: async userId => {
+  addUnlockedStar: async (starId, userId) => {
+    const { success, error } = await supabase
+      .from('users_unlocked_stars')
+      .insert([{ star_id: starId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  getUserUnlockedStars: async userId => {
     const { data, error } = await supabase
       .from('users_unlocked_stars')
       .select('*')
@@ -63,11 +73,35 @@ export default {
   },
 
   getAchievements: async () => {
-    const { data, error } = await supabase.from('achievements').select('*');
+    const { data, error } = await supabase
+      .from('achievements')
+      .select('*')
+      .order('position', { ascending: true });
     if (error) {
       throw new Error(error.message);
     }
     return data;
+  },
+
+  getUserUnlockedAchievements: async userId => {
+    const { data, error } = await supabase
+      .from('users_unlocked_achievements')
+      .select('*')
+      .eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  addUserUnlockedAchievement: async (achievementId, userId) => {
+    const { success, error } = await supabase
+      .from('users_unlocked_achievements')
+      .insert([{ achievement_id: achievementId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
   },
 
   getRanking: async rankingId => {

@@ -5,6 +5,7 @@ import api from '../services/api';
 export const usePlanet = () => {
   const { loggedUser } = useAuth();
   const [planets, setPlanets] = useState([]);
+  const [lastUnlockedStarId, setLasUnlockedStarId] = useState('');
 
   function getCurrentPlanet(starId) {
     return planets.find(planet => planet.stars.some(star => star.id === starId));
@@ -22,10 +23,19 @@ export const usePlanet = () => {
     return currentPlanet.stars.find(star => star.number === currentStar.number + 1);
   }
 
+  async function addUnlockedStar(starId) {
+    try {
+      await api.addUnlockedStar(starId, loggedUser.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function verifyStarUnlocking(planet, unlockedStars) {
     const { stars } = planet;
-    const verifiedStars = stars.map(star => {
-      const isUnlocked = unlockedStars.some(unlockedStar => unlockedStar.id === star.id);
+    const verifiedStars = stars.map((star) => {
+      const isUnlocked = unlockedStars.some(unlockedStar => unlockedStar.star_id === star.id);
+      if (isUnlocked) setLasUnlockedStarId(star.id);
       return { ...star, isUnlocked };
     });
     planet.stars = verifiedStars;
@@ -35,12 +45,10 @@ export const usePlanet = () => {
   async function fetchPlanets() {
     try {
       const planets = await api.getPlanets();
-      console.log(loggedUser.id);
-      const unlockedStars = await api.getUnlockedStars(loggedUser.id);
+      const unlockedStars = await api.getUserUnlockedStars(loggedUser.id);
       const planetsWithUnlockdedStars = planets.map(planet =>
         verifyStarUnlocking(planet, unlockedStars)
       );
-      console.log(unlockedStars);
       setPlanets(planetsWithUnlockdedStars);
     } catch (error) {
       console.log(error);
@@ -52,5 +60,12 @@ export const usePlanet = () => {
     fetchPlanets();
   }, []);
 
-  return { planets, getCurrentPlanet, getCurrentStar, getNextStar };
+  return {
+    planets,
+    lastUnlockedStarId,
+    getCurrentPlanet,
+    getCurrentStar,
+    getNextStar,
+    addUnlockedStar,
+  };
 };

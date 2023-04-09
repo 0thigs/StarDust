@@ -5,15 +5,18 @@ import Lock from '../../assets/AchievementAssets/lock.svg';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { Modal } from '../Modal';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
 export function Achievement({
   id,
   name,
-  icon: Icon,
+  icon,
   description,
   requiredAmount,
   currentAmount,
   isUnlocked,
+  position,
   hasRescueFeat,
   reward,
 }) {
@@ -24,13 +27,13 @@ export function Achievement({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
 
-  const _currentAmount = Array.isArray(currentAmount) ? currentAmount.length - 1 : currentAmount;
-  const percentage = (_currentAmount / requiredAmount) * 100;
+  const currentUserAmount = position === 1 ? currentAmount - 1 : currentAmount
+  const percentage = (currentUserAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
   const isToRescue = achievements_ids_to_rescue.includes(id) && hasRescueFeat;
 
   function getFormatedCurrentAmount() {
-    return _currentAmount >= requiredAmount ? requiredAmount : _currentAmount;
+    return currentUserAmount >= requiredAmount ? requiredAmount : currentUserAmount;
   }
 
   function handleRescueButtonPress() {
@@ -43,7 +46,7 @@ export function Achievement({
 
   return (
     <C.Container>
-      {isUnlocked ? <Icon width={45} height={45} /> : <Lock />}
+      {isUnlocked ? <SvgUri uri={getImage('achievements', icon)} width={45} /> : <Lock />}
 
       <C.Info>
         <C.Name isToRescue={isToRescue}>{name}</C.Name>

@@ -12,13 +12,14 @@ import {
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
 
-export function Planet({ name, image, icon, stars }) {
+export function Planet({ name, image, icon, stars, lastUnlockedStarId }) {
   const PlanetSignPosition = useSharedValue(-5);
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: PlanetSignPosition.value }],
     };
   });
+
 
   useEffect(() => {
     PlanetSignPosition.value = withDelay(
@@ -32,7 +33,7 @@ export function Planet({ name, image, icon, stars }) {
       <C.PlanetInfo>
         <SvgUri uri={getImage('planets', image)} width={100} height={100} />
         <C.PlanetSign style={PlanetSignAnimatedStyle}>
-        <SvgUri uri={getImage('planets', icon)} />
+          <SvgUri uri={getImage('planets', icon)} />
           <C.PlanetName>{name}</C.PlanetName>
         </C.PlanetSign>
       </C.PlanetInfo>
@@ -45,6 +46,7 @@ export function Planet({ name, image, icon, stars }) {
             number={number}
             isUnlocked={!isUnlocked}
             isChallenge={isChallenge}
+            isLastUnlockedStar={id === lastUnlockedStarId}
           />
         );
       })}

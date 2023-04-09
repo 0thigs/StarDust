@@ -1,9 +1,7 @@
 import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
-export const Trigger = styled.TouchableOpacity`
-
-`;
+export const Trigger = styled.TouchableOpacity``;
 
 export const Content = styled.View``;
 
@@ -25,6 +23,7 @@ export const Button = styled.TouchableOpacity`
 
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Title = styled.Text`

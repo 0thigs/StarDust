@@ -19,7 +19,7 @@ export function Shop() {
   const { loggedUser } = useAuth();
   const { avatars } = useAvatar();
   const { rockets } = useRocket();
-  const { unlockedAchievements } = useAchievement();
+  const { newUnlockedAchievements } = useAchievement();
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,14 +47,14 @@ export function Shop() {
         )}
       </C.Content>
 
-      {unlockedAchievements.length > 0 && (
+      {newUnlockedAchievements.length > 0 && (
         <Modal
           isVisible={isModalVisible}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
             <C.Achievements>
-              {unlockedAchievements.map(
+              {newUnlockedAchievements.map(
                 ({ id, title, icon, description, requiredCount, metric }) => (
                   <C.AchievementContainer key={id}>
                     <C.Animation source={RewardLight} autoPlay={true} loop={true} />

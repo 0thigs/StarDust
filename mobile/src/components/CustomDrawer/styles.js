@@ -28,4 +28,8 @@ export const ButtonWrapper = styled.View`
   flex-direction: column;
 `;
 
+export const Menu = styled.View`
+  align-self: flex-end;
+`;
+
 export const AchievementList = styled.FlatList``;

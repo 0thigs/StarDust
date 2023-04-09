@@ -1,70 +1,86 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
-// import { getUnlockedAchievements } from '../utils/achivements';
 import api from '../services/api';
 
-export function useAchievement() {
+export function useAchievement(canGetNewUnlockedAchievements) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [achievements, setAchievements] = useState([]);
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
+  const [newUnlockedAchievements, setNewUnlockedAchievements] = useState([]);
+
+  function updateAchivement(achievement, newUnlockedAchievements) {
+    const isUnlocked = newUnlockedAchievements.some(
+      unlockedAchievement => unlockedAchievement.id === achievement.id
+    );
+    return { ...achievement, isUnlocked };
+  }
+
+  function isNewAchievementUnlocked(achievement) {
+    if (achievement.isUnlocked) return;
+
+    const userCurrentAmount = loggedUser[achievement.metric];
+
+    const isNewAchievementUnlocked = userCurrentAmount >= achievement.required_amount;
+    if (isNewAchievementUnlocked) return achievement;
+  }
+
+  function getNewUnlockedAchievements(currentAchievements) {
+    return currentAchievements
+      .filter(isNewAchievementUnlocked)
+      .filter(achievement => achievement !== undefined); // bug fix;
+  }
+
+  function verifyAchievementUnlocking(achievement, userUnlockedAchievements) {
+    const isUnlocked = userUnlockedAchievements.some(
+      unlockedAchievement => unlockedAchievement.achievement_id === achievement.id
+    );
+    return { ...achievement, isUnlocked };
+  }
+
+  async function verifyHasNewUnlockedAchievements() {
+    const newUnlockedAchievements = getNewUnlockedAchievements(achievements);
+
+    if (!newUnlockedAchievements.length) return;
+
+    setNewUnlockedAchievements(newUnlockedAchievements);
+
+    let achievementsIdsToRecue = [];
+    for (const { id } of newUnlockedAchievements) {
+      api.addUserUnlockedAchievement(id, loggedUser.id);
+      achievementsIdsToRecue.push(id);
+    }
+
+    const updatedAchievements = achievements.map(achievement =>
+      updateAchivement(achievement, newUnlockedAchievements)
+    );
+    setAchievements(updatedAchievements);
+
+    updateLoggedUser('achievements_ids_to_rescue', [
+      ...loggedUser.achievements_ids_to_rescue,
+      ...achievementsIdsToRecue,
+    ]);
+  }
 
   async function fetchAchievements() {
     try {
       const achievements = await api.getAchievements();
-      setAchievements(achievements);
+      const userUnlockedAchievements = await api.getUserUnlockedAchievements(loggedUser.id);
+      const currentAchievements = achievements.map(achievement =>
+        verifyAchievementUnlocking(achievement, userUnlockedAchievements)
+      );
+      setAchievements(currentAchievements);
     } catch (error) {
       console.log(error);
     }
   }
 
-  function checkAchievement(achievement, user) {
-    if (user.unlocked_achievements_ids.includes(achievement.id)) {
-      return;
-    }
-
-    const userCurrentCount = Array.isArray(user[achievement.metric])
-      ? user[achievement.metric].length - 1
-      : user[achievement.metric];
-
-    const isAchievementUnlocked = userCurrentCount >= achievement.requiredCount;
-    if (isAchievementUnlocked) {
-      return { ...achievement, isUnlocked: true };
-    }
-  }
-
-  function getUnlockedAchievements(user) {
-    return achievements
-      .map(achievement => checkAchievement(achievement, user))
-      .filter(achievement => achievement !== undefined); // bug fix;
-  }
-
-  async function updateUnlockedAchievementsIds() {
-    const unlockedAchievements = getUnlockedAchievements(loggedUser);
-
-    if (unlockedAchievements.length === 0) return;
-
-    setUnlockedAchievements(unlockedAchievements);
-    const unlockedAchievementsIds = unlockedAchievements.map(
-      unlockedAchievement => unlockedAchievement.id
-    );
-
-    const updatedUnlockedAchievementsIds = [
-      ...loggedUser.unlocked_achievements_ids,
-      ...unlockedAchievementsIds,
-    ];
-    updateLoggedUser('unlocked_achievements_ids', updatedUnlockedAchievementsIds);
-
-    const achievementsIdsToRecue = [...unlockedAchievementsIds];
-    updateLoggedUser('achievements_ids_to_rescue', achievementsIdsToRecue);
-  }
-
   useEffect(() => {
-    fetchAchievements();
-    updateUnlockedAchievementsIds();
-  }, [loggedUser]);
+    if (!achievements.length) fetchAchievements();
+    if (canGetNewUnlockedAchievements) verifyHasNewUnlockedAchievements();
+  }, [achievements, loggedUser]);
 
   return {
     achievements,
-    unlockedAchievements,
+    newUnlockedAchievements,
   };
 }

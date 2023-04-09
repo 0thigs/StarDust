@@ -24,24 +24,20 @@ import {
 import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
-import api from '../../services/api';
-import * as C from './styles';
 import { Loading } from '../Loading';
+import * as C from './styles';
+import api from '../../services/api';
 const animationDuration = 800;
 const delay = 300;
 export const starHeight = 100;
 
-export function Star({ id, name, number, isUnlocked, isChallenge }) {
-  const { loggedUser, updateLoggedUser } = useAuth();
-  const { rocket } = useRocket(loggedUser.rocket_id, isLastUnlockedStar);
-  const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
-    useScroll();
+export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlockedStar }) {
+  const { rocket, setLastUnlockedStarYPosition } = useScroll();
   const [isLoading, setIsloading] = useState(false);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const navigation = useNavigation();
-  const isLastUnlockedStar = lastUnlockedStarId === id;
-
+  
   const StarScale = useSharedValue(1);
   const StarAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -67,7 +63,6 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     starSound.current.play();
     setIsloading(true);
     setTimeout(() => {
-      updateLoggedUser('starId', id, false);
       handleStarNavigation();
       setIsloading(false);
     }, 15);
@@ -111,7 +106,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     >
       <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
       <C.StarButton onPress={handleStarPress} disabled={isUnlocked}>
-        <C.StarContainer style={!isUnlocked && StarAnimatedStyle}>
+        <C.StarContainer style={isLastUnlockedStar && StarAnimatedStyle}>
           {isUnlocked ? (
             <LockedStar width={100} height={85} />
           ) : (

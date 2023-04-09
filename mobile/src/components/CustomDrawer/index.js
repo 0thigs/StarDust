@@ -1,25 +1,88 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { useAvatar } from '../../hooks/useAvatar';
 import { useAchievement } from '../../hooks/useAchievement';
 import { useNavigation } from '@react-navigation/native';
 import { Achievement } from '../Achievement';
+import { PopoverMenu } from '../PopoverMenu';
 
-import { getImage } from '../../utils/getImage';
-import * as C from './styles';
 import { UserAvatar } from '../UserAvatar';
 import { Button } from '../Button';
+import { MoreHorizontal } from 'react-native-feather';
 import theme from '../../global/styles/theme';
+import * as C from './styles';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
   const { achievements } = useAchievement();
   const [sortedAchievements, setSortedAchievements] = useState([]);
+  const [sorter, setSorter] = useState('');
   const navigation = useNavigation();
 
-  function verifyIfIsUnlocked(id) {
-    return loggedUser.unlocked_achievements_ids.includes(id);
+  function sortedAchievementsByLocking(a, b) {
+    if (!a.isUnlocked && b.isUnlocked) {
+      return -1; // b vem antes de a
+    } else if (a.isUnlocked && !b.isUnlocked) {
+      return 1; // b vem depois de a
+    } else {
+      return 0; // a e b são iguais em relação à isUnlocked
+    }
   }
+
+  function sortedAchievementsByUnlocking(a, b) {
+    if (a.isUnlocked && !b.isUnlocked) {
+      return -1; // a vem antes de b
+    } else if (!a.isUnlocked && b.isUnlocked) {
+      return 1; // a vem depois de b
+    } else {
+      return 0; // a e b são iguais em relação à isUnlocked
+    }
+  }
+
+  function sortedAchievementsByPosition(a, b) {
+    return a.position - b.position;
+  }
+
+  function sortAchievements(sorter) {
+    setSorter(sorter);
+
+    console.log(sorter);
+    let sortedAchievements = [];
+    switch (sorter) {
+      case 'Ordem padrão':
+        sortedAchievements = [...achievements].sort(sortedAchievementsByPosition);
+        break;
+      case 'Desbloqueadas':
+        sortedAchievements = [...achievements].sort(sortedAchievementsByUnlocking);
+        break;
+      case 'Bloqueadas':
+        sortedAchievements = [...achievements].sort(sortedAchievementsByLocking);
+        break;
+      default:
+        return;
+    }
+    setSortedAchievements(sortedAchievements);
+  }
+
+  const popoverMenuButtons = [
+    {
+      title: 'Ordem padrão',
+      isToggle: true,
+      value: sorter === 'Ordem padrão',
+      action: () => sortAchievements('Ordem padrão'),
+    },
+    {
+      title: 'Desbloqueadas',
+      isToggle: true,
+      value: sorter === 'Desbloqueadas',
+      action: () => sortAchievements('Desbloqueadas'),
+    },
+    {
+      title: 'Bloqueadas',
+      isToggle: true,
+      value: sorter === 'Bloqueadas',
+      action: () => sortAchievements('Bloqueadas'),
+    },
+  ];
 
   async function handleSignOut() {
     try {
@@ -33,28 +96,9 @@ export function CustomDrawer() {
     }
   }
 
-  function sortByBlocking(a, b) {
-    const { unlocked_achievements_ids } = loggedUser;
-
-    if (unlocked_achievements_ids.includes(a.id) && !unlocked_achievements_ids.includes(b.id)) {
-      return 1;
-    }
-    if (!unlocked_achievements_ids.includes(a.id) && unlocked_achievements_ids.includes(b.id)) {
-      return -1;
-    }
-    return 0;
-  }
-
-  //   useEffect(() => {
-  //     setIsLoading(true);
-  //     const sortedAchievements = [...achievements].sort(sortByBlocking);
-  //     setSortedAchievements(sortedAchievements);
-  //     if (sortedAchievements.length) setIsLoading(false);
-  //   }, [loggedUser.unlocked_achievements_ids]);
-
-  //   useEffect(() => {
-  //     if (sortedAchievements.length) setIsLoading(false);
-  //   }, [sortedAchievements]);
+  useEffect(() => {
+    if (!sortedAchievements.length) sortAchievements('Ordem padrão');
+  }, [achievements]);
 
   return (
     <C.Container>
@@ -74,11 +118,28 @@ export function CustomDrawer() {
         </C.ButtonWrapper>
       </C.Buttons>
 
+      <C.Menu>
+        <PopoverMenu
+          buttons={popoverMenuButtons}
+          icon={<MoreHorizontal color={theme.colors.green_300} />}
+        />
+      </C.Menu>
+
       <C.AchievementList
-        data={achievements}
+        data={sortedAchievements}
         keyExtractor={achievement => achievement.id}
         renderItem={({
-          item: { id, name, description, icon, required_amount, metric, reward },
+          item: {
+            id,
+            name,
+            description,
+            icon,
+            required_amount,
+            metric,
+            isUnlocked,
+            position,
+            reward,
+          },
         }) => (
           <Achievement
             id={id}
@@ -86,9 +147,10 @@ export function CustomDrawer() {
             description={description}
             icon={icon}
             reward={reward}
+            position={position}
             requiredAmount={required_amount}
             currentAmount={loggedUser[metric]}
-            isUnlocked={verifyIfIsUnlocked(id)}
+            isUnlocked={isUnlocked}
             hasRescueFeat={true}
           />
         )}

@@ -23,8 +23,8 @@ import * as C from './styles';
 
 export function Home() {
   const { loggedUser } = useAuth();
-  const { planets } = usePlanet();
-  const { unlockedAchievements } = useAchievement();
+  const { planets, lastUnlockedStarId } = usePlanet();
+  const { newUnlockedAchievements } = useAchievement(true);
   const { lastUnlockedStarYPosition } = useScroll();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
@@ -100,6 +100,7 @@ export function Home() {
                 icon={icon}
                 image={image}
                 stars={stars}
+                lastUnlockedStarId={lastUnlockedStarId}
               />
             ))}
           </>
@@ -118,15 +119,15 @@ export function Home() {
         />
       )}
 
-      {unlockedAchievements.length > 0 && (
+      {newUnlockedAchievements.length > 0 && (
         <Modal
           isVisible={isModalVisible}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
             <C.Achievements>
-              {unlockedAchievements.map(
-                ({ id, title, icon, description, requiredCount, metric }) => (
+              {newUnlockedAchievements.map(
+                ({ id, name, icon, description, required_amount, metric }) => (
                   <C.AchievementContainer key={id}>
                     <Animation
                       source={RewardLight}
@@ -139,11 +140,11 @@ export function Home() {
                     />
                     <Achievement
                       key={id}
-                      title={title}
+                      name={name}
                       description={description}
                       icon={icon}
-                      requiredCount={requiredCount}
-                      metric={loggedUser[metric]}
+                      requiredAmount={required_amount}
+                      currentAmount={loggedUser[metric]}
                       isUnlocked={true}
                     />
                   </C.AchievementContainer>

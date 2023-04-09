@@ -31,7 +31,7 @@ export function End({
   _seconds,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const { planets, getCurrentPlanet, getNextStar } = usePlanet();
+  const { planets, getCurrentPlanet, getNextStar, addUnlockedStar } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -78,7 +78,7 @@ export function End({
     }
 
     let completedPlanets = loggedUser.completed_planets;
-    let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
+    let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
     let nextStar = getNextStar(starId);
 
     if (!nextStar) {
@@ -88,8 +88,8 @@ export function End({
       nextStar = nextPlanet.stars[0];
     }
 
-    if (nextStar && !updatedUnlockedStarsIds.includes(nextStar.id)) {
-      updatedUnlockedStarsIds.push(nextStar.id);
+    if (nextStar && !nextStar.isUnlocked) {
+      addUnlockedStar(nextStar.id);
     }
 
     return {
@@ -97,7 +97,7 @@ export function End({
       xp: updatedXp,
       weekly_xp: updatedWeeklyXp,
       level: updatedLevel,
-      unlocked_stars_ids: updatedUnlockedStarsIds,
+      unlocked_stars: updatedUnlockedStars,
       completed_planets: completedPlanets,
     };
   }
