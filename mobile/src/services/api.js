@@ -75,7 +75,7 @@ export default {
   getAchievements: async () => {
     const { data, error } = await supabase
       .from('achievements')
-      .select('*')
+      .select('*, users_unlocked_achievements(user_id, achievement_id)')
       .order('position', { ascending: true });
     if (error) {
       throw new Error(error.message);

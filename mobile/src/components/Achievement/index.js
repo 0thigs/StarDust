@@ -16,21 +16,20 @@ export function Achievement({
   requiredAmount,
   currentAmount,
   isUnlocked,
-  position,
   hasRescueFeat,
   reward,
 }) {
   const {
-    loggedUser: { achievements_ids_to_rescue, coins },
+    loggedUser: { achievements_to_rescue, coins },
     updateLoggedUser,
   } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
 
-  const currentUserAmount = position === 1 ? currentAmount - 1 : currentAmount
+  const currentUserAmount = currentAmount - 1;
   const percentage = (currentUserAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
-  const isToRescue = achievements_ids_to_rescue.includes(id) && hasRescueFeat;
+  const isToRescue = achievements_to_rescue.includes(id) && hasRescueFeat;
 
   function getFormatedCurrentAmount() {
     return currentUserAmount >= requiredAmount ? requiredAmount : currentUserAmount;
@@ -40,7 +39,10 @@ export function Achievement({
     setRescuedAchievementName(name);
     setIsModalVisible(true);
 
-    updateLoggedUser('achievements_ids_to_rescue', []);
+    updateLoggedUser(
+      'achievements_to_rescue',
+      achievements_to_rescue.filter(achievementId => achievementId !== id)
+    );
     updateLoggedUser('coins', coins + reward);
   }
 

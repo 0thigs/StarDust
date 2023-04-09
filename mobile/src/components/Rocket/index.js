@@ -41,8 +41,10 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
     }
 
     const updatedCoins = loggedUser.coins - price;
+    const updatedAcquiredRockets = loggedUser.acquired_rockets + 1;
     addUserAcquiredRocket(id);
     updateLoggedUser('coins', updatedCoins);
+    updateLoggedUser('acquired_rockets', updatedAcquiredRockets);
     selectRocket();
     setModalType('earning');
     setIsModalOpen(true);

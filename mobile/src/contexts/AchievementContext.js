@@ -7,14 +7,14 @@ export const ScrollContext = createContext();
 export const ScrollProvider = ({ children }) => {
 
   return (
-    <ScrollContext.Provider
+    <AchievementContext.Provider
       value={{
-        lastUnlockedStarYPosition,
+        achievements,
         setLastUnlockedStarYPosition,
         rocket,
       }}
     >
       {children}
-    </ScrollContext.Provider>
+    </AchievementContext.Provider>
   );
 };

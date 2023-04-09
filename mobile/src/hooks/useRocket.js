@@ -26,7 +26,6 @@ export const useRocket = rocketId => {
     try {
       await api.addUserAcquiredRocket(rocketId, loggedUser.id);
       const updatedRocket = rockets.find(rocket => rocket.id === rocketId);
-      const updatedRockets = updatecurrentRockets(rockets, updatedRocket);
       setRockets(currentRockets => updatecurrentRockets(currentRockets, updatedRocket));
     } catch (error) {
       console.log(error);

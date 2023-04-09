@@ -24,7 +24,7 @@ import * as C from './styles';
 export function Home() {
   const { loggedUser } = useAuth();
   const { planets, lastUnlockedStarId } = usePlanet();
-  const { newUnlockedAchievements } = useAchievement(true);
+  const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
   const { lastUnlockedStarYPosition } = useScroll();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);

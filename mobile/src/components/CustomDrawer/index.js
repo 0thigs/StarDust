@@ -13,9 +13,9 @@ import * as C from './styles';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
-  const { achievements } = useAchievement();
+  const { achievements } = useAchievement(loggedUser.id);
   const [sortedAchievements, setSortedAchievements] = useState([]);
-  const [sorter, setSorter] = useState('');
+  const [sorter, setSorter] = useState('Ordem padrão');
   const navigation = useNavigation();
 
   function sortedAchievementsByLocking(a, b) {
@@ -96,7 +96,7 @@ export function CustomDrawer() {
   }
 
   useEffect(() => {
-    if (!sortedAchievements.length) sortAchievements('Ordem padrão');
+    sortAchievements(sorter);
   }, [achievements]);
 
   return (
