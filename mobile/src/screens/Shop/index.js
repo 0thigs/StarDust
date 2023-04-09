@@ -7,7 +7,7 @@ import { useAchievement } from '../../hooks/useAchievement';
 import { Modal } from '../../components/Modal';
 import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
-import { Rocket_ } from '../../components/Rocket_';
+import { Rocket } from '../../components/Rocket';
 import { Loading } from '../../components/Loading';
 import { AvatarsList } from '../../components/AvatarsList';
 
@@ -18,7 +18,7 @@ import theme from '../../global/styles/theme';
 export function Shop() {
   const { loggedUser } = useAuth();
   const { avatars } = useAvatar();
-  const { rockets } = useRocket();
+  const { rockets, addUserAcquiredRocket } = useRocket();
   const { newUnlockedAchievements } = useAchievement();
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,13 +36,21 @@ export function Shop() {
           <>
             <C.Title>Foguetes</C.Title>
             <C.RocketList>
-              {rockets.map(({ id, name, image, price }) => (
-                <Rocket_ key={id} id={id} name={name} price={price} image={image} />
+              {rockets.map(({ id, name, image, price, isAcquired }) => (
+                <Rocket
+                  key={id}
+                  id={id}
+                  name={name}
+                  price={price}
+                  image={image}
+                  isAcquired={isAcquired}
+                  addUserAcquiredRocket={addUserAcquiredRocket}
+                />
               ))}
             </C.RocketList>
 
             <C.Title>Avatares</C.Title>
-            <AvatarsList avatars={avatars}  />
+            <AvatarsList avatars={avatars} />
           </>
         )}
       </C.Content>

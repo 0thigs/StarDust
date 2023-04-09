@@ -45,7 +45,6 @@ export function CustomDrawer() {
   function sortAchievements(sorter) {
     setSorter(sorter);
 
-    console.log(sorter);
     let sortedAchievements = [];
     switch (sorter) {
       case 'Ordem padrão':

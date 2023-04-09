@@ -144,6 +144,27 @@ export default {
     return data;
   },
 
+  getUserAcquiredRockets: async userId => {
+    const { data, error } = await supabase
+      .from('users_acquired_rockets')
+      .select('rocket_id')
+      .eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  addUserAcquiredRocket: async (rocketId, userId) => {
+    const { success, error } = await supabase
+      .from('users_acquired_rockets')
+      .insert([{ rocket_id: rocketId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   getAvatars: async () => {
     const { data, error } = await supabase
       .from('avatars')

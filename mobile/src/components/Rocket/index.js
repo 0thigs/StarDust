@@ -16,10 +16,9 @@ import { getImage } from '../../utils/getImage';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function Rocket_({ id, name, image, price }) {
+export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRocket }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
-  const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
@@ -34,12 +33,7 @@ export function Rocket_({ id, name, image, price }) {
     };
   });
 
-  async function updateUserData(updatedCoins, updatedAcquiredRocketsIds) {
-    updateLoggedUser('coins', updatedCoins);
-    updateLoggedUser('acquired_rockets_ids', updatedAcquiredRocketsIds);
-  }
-
-  function buyRocket() {
+  async function buyRocket() {
     if (!isBuyable) {
       setIsRequesting(false);
       setIsModalOpen(true);
@@ -47,9 +41,8 @@ export function Rocket_({ id, name, image, price }) {
     }
 
     const updatedCoins = loggedUser.coins - price;
-    const updatedAcquiredRocketsIds = [...loggedUser.acquired_rockets_ids, id];
-
-    updateUserData(updatedCoins, updatedAcquiredRocketsIds);
+    addUserAcquiredRocket(id);
+    updateLoggedUser('coins', updatedCoins);
     selectRocket();
     setModalType('earning');
     setIsModalOpen(true);
@@ -77,7 +70,6 @@ export function Rocket_({ id, name, image, price }) {
 
   useEffect(() => {
     setIsSelected(id === loggedUser.rocket_id);
-    setIsAcquired(loggedUser.acquired_rockets_ids.includes(id));
   }, [loggedUser.rocket_id, loggedUser.acquired_rockets_ids]);
 
   return (
@@ -127,7 +119,7 @@ export function Rocket_({ id, name, image, price }) {
                 top={-15}
                 left={-8}
               />
-              <Image width={100} height={100} />
+              <SvgUri uri={getImage('rockets', image)} width={100} height={100} />
               <C.Name>{name}</C.Name>
             </C.AcquiredRocket>
           )
