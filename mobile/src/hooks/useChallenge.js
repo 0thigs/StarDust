@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api';
 import { useAuth } from './useAuth';
+import api from '../services/api';
 
 export const useChallenge = challengeId => {
+  const { loggedUser } = useAuth();
   const {
     loggedUser: { completed_challenges_ids },
   } = useAuth();
   const [challenges, setChallenges] = useState([]);
   const [challenge, setChallenge] = useState({});
 
-  function isChalllengeCompleted(id) {
-    return completed_challenges_ids.includes(id);
-  }
-
   function getAcceptanceRate(likes, votes) {
     return votes === 0 ? 0 : (likes / votes) * 100;
   }
 
-  function addCompletaryData(challenge) {
-    const isCompleted = isChalllengeCompleted(challenge.id);
+  function addCompletaryData(challenge, userCompletedChallenges) {
+    const isCompleted = userCompletedChallenges.some(
+      completedChallenge => completedChallenge.challenge_id === challenge.id
+    );
     const acceptanceRate = getAcceptanceRate(challenge.likes, challenge.votes);
     return { ...challenge, isCompleted, acceptanceRate };
   }
@@ -26,8 +25,9 @@ export const useChallenge = challengeId => {
   async function fetchChallenges() {
     try {
       const challenges = await api.getChallenges();
+      const userCompletedChallenges = await api.getUserCompletedChallenges(loggedUser.id);
       const filteredChallenges = challenges
-        .map(addCompletaryData)
+        .map(challenge => addCompletaryData(challenge, userCompletedChallenges))
         .filter(challenge => !challenge.star_id);
 
       setChallenges(filteredChallenges);

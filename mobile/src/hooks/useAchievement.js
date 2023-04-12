@@ -52,7 +52,6 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
       updateAchivement(achievement, newUnlockedAchievements)
     );
     setAchievements(updatedAchievements);
-    console.log({updatedAchievements});
 
     updateLoggedUser('achievements_to_rescue', [
       ...loggedUser.achievements_to_rescue,

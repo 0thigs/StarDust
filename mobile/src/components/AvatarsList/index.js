@@ -7,7 +7,7 @@ import * as C from './styles';
 const iconSize = 24;
 const iconColor = theme.colors.blue_300;
 
-export function AvatarsList({ avatars }) {
+export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
   const { loggedUser } = useAuth();
   const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,21 +48,21 @@ export function AvatarsList({ avatars }) {
     scrollTo(selectedAvatarIndex);
   }
 
-  const renderItem = useCallback(({ item: { id, name, image, price }, index }) => {
+  const renderItem = useCallback(({ item: { id, name, image, price, isAcquired }, index }) => {
     const isSelected = index === selectedAvatarIndex;
     const isFirstItem = index === 0;
     const isBuyable = loggedUser.coins > price;
-    const isAcquired = loggedUser.acquired_avatars_ids.includes(id);
     return (
       <Avatar
         id={id}
         name={name}
         price={price}
         image={image}
+        isAcquired={isAcquired}
         isSelected={isSelected}
         isBuyable={isBuyable}
         isFirstItem={isFirstItem}
-        isAcquired={isAcquired}
+        addUserAcquiredAvatar={addUserAcquiredAvatar}
       />
     );
   }, []);

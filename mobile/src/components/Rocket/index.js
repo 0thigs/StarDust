@@ -15,12 +15,14 @@ import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { Image } from '../Image';
 
 export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRocket }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
   const isBuyable = loggedUser.coins > price;
@@ -72,7 +74,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
 
   useEffect(() => {
     setIsSelected(id === loggedUser.rocket_id);
-  }, [loggedUser.rocket_id, loggedUser.acquired_rockets_ids]);
+  }, [loggedUser.rocket_id]);
 
   return (
     <C.Container isSelected={isSelected} isAvailable={isAcquired || isBuyable}>
@@ -84,7 +86,12 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
           </C.Price>
         )}
         <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <SvgUri uri={getImage('rockets', image)} width={125} height={125} />
+          <SvgUri
+            uri={getImage('rockets', image)}
+            width={125}
+            height={125}
+            onLoad={() => setIsImageLoaded(true)}
+          />
         </C.ImageContainer>
       </C.Background>
       <C.Info>

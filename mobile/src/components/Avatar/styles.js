@@ -8,7 +8,7 @@ export const Container = styled.View`
   border-width: 1px;
   border-color: ${({ isSelected, theme }) =>
     theme.colors[isSelected ? 'yellow_300' : 'background']};
-  opacity: ${({ isAvailable }) => (isAvailable ? 1 : 0.7)};
+  opacity: ${({ isAvailable }) => (isAvailable ? 1 : 0.5)};
   position: relative;
 `;
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
@@ -14,20 +14,31 @@ import { Lock } from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquired, isFirstItem }) {
+export function Avatar({
+  id,
+  name,
+  image,
+  price,
+  isBuyable,
+  isAcquired,
+  isFirstItem,
+  addUserAcquiredAvatar,
+}) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const [isSelected, setIsSelected] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
-  console.log(isSelected ? name : '');
   const soundRef = useRef();
+//   console.log(name === 'Apollo executivo' ? isAcquired : '');
+console.log(isAcquired);
 
   async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
     updateLoggedUser('coins', updatedCoins);
     updateLoggedUser('acquired_avatars_ids', updatedAcquiredAvatarsIds);
   }
 
-  function buyAvatar() {
+  async function buyAvatar() {
     setIsRequesting(true);
 
     if (!isBuyable) {
@@ -39,6 +50,10 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
     const updatedCoins = loggedUser.coins - price;
     const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
     updateUserData(updatedCoins, updatedAcquiredAvatarsIds);
+    updateLoggedUser('coins', updatedCoins);
+
+    addUserAcquiredAvatar(id);
+
     selectAvatar();
     setModalType('earning');
     setIsModalOpen(true);
@@ -46,7 +61,7 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
 
   async function selectAvatar() {
     updateLoggedUser('avatar_id', id);
-    // setIsRequesting(false);
+    setIsRequesting(false);
     soundRef.current.play();
   }
 
@@ -57,6 +72,11 @@ export function Avatar({ id, name, image, price, isSelected, isBuyable, isAcquir
     }
     buyAvatar();
   }
+
+  useEffect(() => {
+    setIsSelected(id === loggedUser.avatar_id);
+  }, [loggedUser.avatar_id]);
+
 
   return (
     <C.Container

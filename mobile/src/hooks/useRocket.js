@@ -18,7 +18,7 @@ export const useRocket = rocketId => {
 
   function updatecurrentRockets(currentRockets, updatedRocket) {
     return currentRockets.map(currentRocket =>
-      currentRocket.id === updatedRocket.id ? {...updatedRocket, isAcquired: true} : currentRocket
+      currentRocket.id === updatedRocket.id ? { ...updatedRocket, isAcquired: true } : currentRocket
     );
   }
 
@@ -32,9 +32,9 @@ export const useRocket = rocketId => {
     }
   }
 
-  function verifyRocketAcquirement(rocket, userAcquiredRockets) {
-    const isAcquired = userAcquiredRockets.some(
-      acquiredRocket => acquiredRocket.rocket_id === rocket.id
+  function verifyRocketAcquirement(rocket) {
+    const isAcquired = rocket.users_acquired_rockets.some(
+      acquiredRocket => acquiredRocket.user_id === loggedUser.id
     );
     return { ...rocket, isAcquired };
   }
@@ -42,10 +42,7 @@ export const useRocket = rocketId => {
   async function fetchRockets() {
     try {
       const rockets = await api.getRockets();
-      const userAcquiredRockets = await api.getUserAcquiredRockets(loggedUser.id);
-      const verifiedRockets = rockets.map(rocket =>
-        verifyRocketAcquirement(rocket, userAcquiredRockets)
-      );
+      const verifiedRockets = rockets.map(verifyRocketAcquirement);
       setRockets(verifiedRockets);
     } catch (error) {
       console.log(error);

@@ -13,7 +13,7 @@ export const Count = styled.Text`
   top: 42%;
   left: 39%;
   font-size: 20px;
-  font-family: ${({ theme }) => theme.fonts.bold};
+  font-family: ${({ theme }) => theme.fonts.code};
   color: ${({ theme }) => theme.colors.white};
   margin: 0 12px;
 `;

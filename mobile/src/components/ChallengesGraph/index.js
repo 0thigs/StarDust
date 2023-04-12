@@ -20,14 +20,14 @@ export function ChallengesGraph() {
 
   function getCompletedChallengesCountByDifficulty(difficulty) {
     return challenges.filter(
-      challenge => challenge.isCompleted && challenge.difficulty === difficulty
+      challenge => challenge.difficulty === difficulty && challenge.isCompleted
     ).length;
   }
 
   function getCompletedChallengesPercentageByDifficulty(difficulty) {
     const totalChallenges = totalChallengesByDifficulty[difficulty];
     if (totalChallenges === 0) return 0;
-    return (getCompletedChallengesCount() / totalChallenges) * 100;
+    return (getCompletedChallengesCountByDifficulty() / challenges.length) * 100;
   }
 
   function countChallengesByDifficulty() {
@@ -42,20 +42,23 @@ export function ChallengesGraph() {
         challenge => challenge.difficulty === difficulty
       ).length;
     }
+
     setTotalChallengesByDifficulty(totalChallengesByDifficulty);
   }
 
   useEffect(() => {
+    if (!challenges.length) return;
+    // console.log(getCompletedChallengesPercentageByDifficulty('hard'));
+
     countChallengesByDifficulty();
-    console.log(getCompletedChallengesCount());
-  }, []);
+  }, [challenges]);
 
   return (
     <C.Container>
       <C.Graph>
         <CircularProgressBase
           {...props}
-          value={getCompletedChallengesPercentageByDifficulty('easy')}
+          value={60}
           radius={80}
           activeStrokeColor={theme.colors.green_500}
           inActiveStrokeColor={theme.colors.green_500}

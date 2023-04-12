@@ -71,7 +71,6 @@ export function ProfileStatus({
         <SelectAvatar
           isVisible={isSelectAvatarVisible}
           setIsVisible={setIsSelectAvatarVisible}
-          avatar={avatar}
         />
       )}
 

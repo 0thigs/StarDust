@@ -17,7 +17,7 @@ import theme from '../../global/styles/theme';
 
 export function Shop() {
   const { loggedUser } = useAuth();
-  const { avatars } = useAvatar();
+  const { avatars, addUserAcquiredAvatar } = useAvatar();
   const { rockets, addUserAcquiredRocket } = useRocket();
   const { newUnlockedAchievements } = useAchievement();
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -50,7 +50,7 @@ export function Shop() {
             </C.RocketList>
 
             <C.Title>Avatares</C.Title>
-            <AvatarsList avatars={avatars} />
+            <AvatarsList avatars={avatars} addUserAcquiredAvatar={addUserAcquiredAvatar} />
           </>
         )}
       </C.Content>

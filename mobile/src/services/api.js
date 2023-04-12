@@ -136,7 +136,7 @@ export default {
   getRockets: async () => {
     const { data, error } = await supabase
       .from('rockets')
-      .select('*')
+      .select('*, users_acquired_rockets(user_id)')
       .order('price', { ascending: true });
     if (error) {
       throw new Error(error.message);
@@ -168,7 +168,7 @@ export default {
   getAvatars: async () => {
     const { data, error } = await supabase
       .from('avatars')
-      .select('*')
+      .select('*, users_acquired_avatars(user_id)')
       .order('price, name', { ascending: true });
     if (error) {
       throw new Error(error.message);
@@ -176,8 +176,31 @@ export default {
     return data;
   },
 
+  addUserAcquiredAvatar: async (avatarId, userId) => {
+    const { success, error } = await supabase
+      .from('users_acquired_avatars')
+      .insert([{ avatar_id: avatarId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
   getChallenges: async () => {
-    const { data, error } = await supabase.from('challenges').select('*');
+    const { data, error } = await supabase
+      .from('challenges')
+      .select('*');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getUserCompletedChallenges: async userId => {
+    const { data, error } = await supabase
+      .from('users_completed_challenges')
+      .select('challenge_id')
+      .eq('user_id', userId);
     if (error) {
       throw new Error(error.message);
     }
@@ -202,11 +225,10 @@ export default {
     return challenge;
   },
 
-  getTestCases: async challengeId => {
+  addUserCompleteChallenges: async (achievementId, userId) => {
     const { data, error } = await supabase
-      .from('test_cases')
-      .select('*')
-      .eq('challenge_id', challengeId);
+      .from('users_completed_challenges')
+      .insert([{ achievement_id: achievementId, user_id: userId }]);
     if (error) {
       throw new Error(error.message);
     }

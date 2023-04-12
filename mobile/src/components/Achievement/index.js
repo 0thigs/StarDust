@@ -26,13 +26,12 @@ export function Achievement({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
 
-  const currentUserAmount = currentAmount - 1;
-  const percentage = (currentUserAmount / requiredAmount) * 100;
+  const percentage = (currentAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
   const isToRescue = achievements_to_rescue.includes(id) && hasRescueFeat;
 
   function getFormatedCurrentAmount() {
-    return currentUserAmount >= requiredAmount ? requiredAmount : currentUserAmount;
+    return currentAmount >= requiredAmount ? requiredAmount : currentAmount;
   }
 
   function handleRescueButtonPress() {
