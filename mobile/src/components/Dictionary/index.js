@@ -8,13 +8,12 @@ import theme from '../../global/styles/theme';
 import api from '../../services/api';
 import * as C from './styles';
 
-export function Dictionary({ isVisible, setIsVisible }) {
+export function Dictionary({ isVisible, setIsVisible, topicId }) {
   const { loggedUser } = useAuth([]);
   const [topics, setTopics] = useState([]);
   const [title, setTitle] = useState('Dicionário');
   const [texts, setTexts] = useState([]);
   const [isTopicContentVisible, setIsTopicContentVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   function showTopicContent(title, texts) {
     setTitle(title);
@@ -27,25 +26,42 @@ export function Dictionary({ isVisible, setIsVisible }) {
     setTitle('Dicionário');
   }
 
-  function isTopicUnlocked(topic) {
-    const isUnlocked = loggedUser.unlocked_topics_ids.includes(topic.id);
+  function verifyTopicUnlocking(topic, userUnlockedTopics) {
+    const isUnlocked = userUnlockedTopics.some(
+      unlockedTopic => unlockedTopic.topic_id === topic.id
+    );
     return { ...topic, isUnlocked };
+  }
+
+  async function addUserUnlockedTopic() {
+    try {
+      await api.addUserUnlockedTopic(topicId, loggedUser.id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function fetchTopics() {
     try {
       const topics = await api.getTopics();
-      const verifiedTopics = topics.map(isTopicUnlocked);
+      const userUnlockedTopics = await api.getUnlockedTopics(loggedUser.id);
+      const verifiedTopics = topics.map(topic => verifyTopicUnlocking(topic, userUnlockedTopics));
+      const hasNewUnlockedTopic = !verifiedTopics.find(topic => topic.id === topicId)?.isUnlocked;
+      if (hasNewUnlockedTopic && topicId) {
+        addUserUnlockedTopic();
+        const verifiedTopicsWithNewUnlockedTopic = verifiedTopics.map(topic =>
+          topic.id === topicId ? { ...topic, isUnlocked: true } : topic
+        );
+        setTopics(verifiedTopicsWithNewUnlockedTopic);
+        return;
+      }
       setTopics(verifiedTopics);
     } catch (error) {
       console.log(error);
-    } finally {
-      isLoading;
     }
   }
 
   useEffect(() => {
-    setIsLoading(true);
     fetchTopics();
   }, []);
 

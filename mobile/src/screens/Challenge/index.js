@@ -33,14 +33,11 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '6602259c-4082-470e-9211-3740033b0271';
+  const challengeId = 'bc9f8c6e-292d-46e6-b9b3-b27f6c04cdb3';
   const { challenge } = useChallenge(challengeId);
   const { id, title, texts, code, function_name, test_cases, difficulty, star_id, topic_id } =
     challenge;
-  const {
-    loggedUser: { unlocked_topics_ids },
-    updateLoggedUser,
-  } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
 
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -129,13 +126,6 @@ export function Challenge({ route }) {
   }
 
   useEffect(() => {
-      if (topic_id && !unlocked_topics_ids.includes(topic_id)) {
-        console.log({ unlocked_topics_ids });
-      updateLoggedUser('unlocked_topics_ids', [...unlocked_topics_ids, topic_id]);
-    }
-  }, []);
-
-  useEffect(() => {
     if (!Object.entries(challenge).length) return;
     const slides = [
       {
@@ -196,6 +186,7 @@ export function Challenge({ route }) {
                 setCurrentSlideIndex={setCurrentSlideIndex}
                 CurrentIndicatorPositionX={CurrentIndicatorPositionX}
                 currentSlideIndex={currentSlideIndex}
+                topicId={topic_id}
               />
 
               <Slider

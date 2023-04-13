@@ -20,6 +20,7 @@ export function ChallengeHeader({
   CurrentIndicatorPositionX,
   currentSlideIndex,
   setCurrentSlideIndex,
+  topicId,
 }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
@@ -90,7 +91,11 @@ export function ChallengeHeader({
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
 
-      <Dictionary isVisible={isDictionaryVisible} setIsVisible={setIsDictionaryVisible} />
+      <Dictionary
+        isVisible={isDictionaryVisible}
+        setIsVisible={setIsDictionaryVisible}
+        topicId={topicId}
+      />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
 

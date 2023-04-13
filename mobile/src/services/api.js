@@ -187,9 +187,7 @@ export default {
   },
 
   getChallenges: async () => {
-    const { data, error } = await supabase
-      .from('challenges')
-      .select('*');
+    const { data, error } = await supabase.from('challenges').select('*');
     if (error) {
       throw new Error(error.message);
     }
@@ -286,6 +284,27 @@ export default {
       .from('topics')
       .select('*')
       .order('position', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  addUserUnlockedTopic: async (topicId, userId) => {
+    const { success, error } = await supabase
+      .from('users_unlocked_topics')
+      .insert([{ topic_id: topicId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  getUnlockedTopics: async userId => {
+    const { data, error } = await supabase
+      .from('users_unlocked_topics')
+      .select('*')
+      .eq('user_id', userId);
     if (error) {
       throw new Error(error.message);
     }
