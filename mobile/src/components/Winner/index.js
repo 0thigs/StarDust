@@ -32,8 +32,7 @@ const podium = [
   },
 ];
 
-export function Winner({ name, avatar_id, xp, position }) {
-  const { avatar } = useAvatar(avatar_id);
+export function Winner({ name, avatarId, xp, position }) {
   const { color, order, Icon } = podium.find(color => color.position === position);
 
   return (
@@ -49,7 +48,7 @@ export function Winner({ name, avatar_id, xp, position }) {
           left={-14}
         />
       )}
-      <UserAvatar avatar={avatar} size={70} />
+      <UserAvatar avatarId={avatarId} size={70} />
       <C.Name>{name}</C.Name>
       <Icon />
       <C.Position color={color} _position={position} animation={'fadeInUp'} delay={250 * position}>

@@ -1,31 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useRanking } from '../../hooks/useRanking';
 
 import { Badge } from '../../components/Badge';
 import { Loading } from '../../components/Loading';
+import { WinnersList } from '../../components/WinnersList';
+import { UsersList } from '../../components/UsersList';
 
 import Background from '../../assets/GlobalAssets/background.png';
 import dayjs from 'dayjs';
 import api from '../../services/api';
 import * as C from './styles';
-import { WinnersList } from '../../components/WinnersList';
-import { UsersList } from '../../components/UsersList';
-import { useRanking } from '../../hooks/useRanking';
 const today = dayjs().day();
 const sunday = 0;
 const daysToGo = today === sunday ? 7 : 7 - today;
 
 export function Ranking() {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const { ranking: currentRanking } = useRanking(loggedUser.ranking_id);
-  const [rankings, setRankings] = useState([]);
+  const { ranking: currentRanking, rankings } = useRanking(loggedUser.ranking_id, true);
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState([]);
   const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
   const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
   const isLoggedUserWinner = [1, 2, 3].includes(loggedUser.last_position);
-  console.log(currentRanking);
 
   function scrollToCurrentRanking() {
     badgesListRef.current?.scrollToIndex({
@@ -41,9 +39,11 @@ export function Ranking() {
   async function showWinners() {
     try {
       const winners = await api.getWinners();
-      const lastWeekRankingId = isLoggedUserWinner
-        ? rankings.find(ranking => (ranking.position = 1)).id
-        : currentRanking.id;
+      console.log(currentRanking);
+      const lastWeekRankingId =
+        isLoggedUserWinner && currentRanking.position !== rankings.length
+          ? rankings.find(({ position }) => (position - 1 === 0 ? 1 : position - 1)).id
+          : currentRanking.id;
       const winnersByLastWeekRankingId = winners.filter(
         winner => winner.ranking_id === lastWeekRankingId
       );
@@ -67,11 +67,10 @@ export function Ranking() {
 
   async function setData() {
     try {
-      const rankings = await api.getRankings();
-      setRankings(rankings);
       const users = await api.getUsersByCurrentRanking(loggedUser.ranking_id);
       const rankingUsers = users.map(setPosition);
       setUsers(rankingUsers);
+
     } catch (error) {
       console.log(error);
     } finally {
@@ -85,13 +84,13 @@ export function Ranking() {
   }, []);
 
   useEffect(() => {
-    if (currentRanking) {
+    if (currentRanking && rankings.length) {
       const currentRankingIndex = currentRanking.position - 1;
       setCurrentRankingIndex(currentRankingIndex);
       scrollToCurrentRanking(currentRankingIndex);
       if (loggedUser.did_update_ranking) showWinners();
     }
-  }, [currentRanking]);
+  }, [currentRanking, rankings]);
 
   return (
     <C.Container isLoading={isLoading}>
@@ -103,7 +102,7 @@ export function Ranking() {
             <WinnersList
               winners={winners}
               users={users}
-              isLoading={isLoading}
+              reward={currentRanking.reward}
               setWinners={setWinners}
               isLoggedUserWinner={isLoggedUserWinner}
             />

@@ -12,18 +12,8 @@ const fakeLoggedUser = {
   xp: 550,
   weekly_xp: 0,
   level: 1,
-  unlocked_achievements_ids: [],
   unlocked_stars: 2,
-  unlocked_topics_ids: [],
   achievements_to_rescue: [],
-  acquired_avatars_ids: [
-    '54eb3e10-b1b2-44aa-a496-ba7f042e09a2',
-    '557a33e8-ce8a-4ac2-992c-7eab630d186d',
-    'c008e3a2-d79b-43f3-a1e2-77acdefeb909',
-    'a785d743-52f5-4b78-90ff-18b408bb0566',
-    '70273298-097e-4ed6-964f-11b7284436a8',
-  ],
-  completed_challenges_ids: ['0a088952-b63e-4053-9f41-e748e51fd156'],
   avatar_id: 'c008e3a2-d79b-43f3-a1e2-77acdefeb909',
   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
   acquired_rockets: 0,
@@ -32,8 +22,8 @@ const fakeLoggedUser = {
   week_status: ['todo', 'todo', 'todo', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  did_update_ranking: false,
-  last_position: 8,
+  did_update_ranking: true,
+  last_position: 1,
 };
 
 export function AuthContextProvider({ children }) {
