@@ -19,11 +19,12 @@ const fakeLoggedUser = {
   acquired_rockets: 0,
   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
   streak: 0,
-  week_status: ['todo', 'todo', 'todo', 'done', 'todo', 'todo', 'todo'],
+  week_status: ['todo', 'todo', 'done', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
   did_update_ranking: true,
-  last_position: 1,
+  did_complete_saturday: true,
+  last_position: 5,
 };
 
 export function AuthContextProvider({ children }) {

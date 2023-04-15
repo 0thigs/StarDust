@@ -12,6 +12,7 @@ import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
+import { Meteor } from '../../components/Meteor';
 import { Animation } from '../../components/Animation';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
@@ -28,12 +29,14 @@ export function Home() {
   const { lastUnlockedStarYPosition } = useScroll();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
-  const [isFabButtonShown, setIsFabButtonShown] = useState(false);
+  const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [direction, setDirection] = useState('');
+  const [currentYOffset, setCurrentYOffset] = useState(0);
+  const visibleContentHeight = useRef(0);
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
-
+ 
   function scrollToLastUnlockedStar() {
     scrollRef.current.scrollTo({
       x: 0,
@@ -43,6 +46,9 @@ export function Home() {
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
+    visibleContentHeight.current = layoutMeasurement.height;
+    setCurrentYOffset(contentOffset.y);
+
     if (isfirstScroll) {
       setIsfirstScroll(false);
       return;
@@ -54,7 +60,7 @@ export function Home() {
       (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
 
     setDirection(isLastUnlockedStarAboveLayout ? 'down' : 'up');
-    setIsFabButtonShown(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
+    setIsFabButtonVisible(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
   }
 
   useEffect(() => {
@@ -105,8 +111,14 @@ export function Home() {
             ))}
           </>
         )}
+        <Meteor
+          currentYOffset={currentYOffset}
+          visibleContentHeight={visibleContentHeight.current}
+          screenWidth={dimensions.width}
+        />
       </C.Container>
-      {isFabButtonShown && (
+
+      {isFabButtonVisible && (
         <FabButton
           onPress={scrollToLastUnlockedStar}
           icon={
@@ -165,3 +177,4 @@ export function Home() {
     </>
   );
 }
+

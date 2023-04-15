@@ -71,6 +71,7 @@ export function Ranking() {
       const rankingUsers = users.map(setPosition);
       setUsers(rankingUsers);
 
+      if (loggedUser.did_update_ranking) showWinners();
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,21 +81,17 @@ export function Ranking() {
 
   useEffect(() => {
     setIsloading(true);
-    setData();
-  }, []);
-
-  useEffect(() => {
     if (currentRanking && rankings.length) {
       const currentRankingIndex = currentRanking.position - 1;
       setCurrentRankingIndex(currentRankingIndex);
       scrollToCurrentRanking(currentRankingIndex);
-      if (loggedUser.did_update_ranking) showWinners();
+      setData();
     }
   }, [currentRanking, rankings]);
 
   return (
     <C.Container isLoading={isLoading}>
-      {isLoading ? (
+      {isLoading && (isLoggedUserWinner ? winners.length : true) ? (
         <Loading isAnimation={true} />
       ) : (
         <>

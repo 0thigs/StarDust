@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 
-export const Container = styled.ScrollView.attrs({})``;
+export const Container = styled.ScrollView.attrs({
+    position: 'relative'
+})``;
 
 export const Background = styled.View`
   position: absolute;
