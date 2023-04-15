@@ -119,8 +119,6 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
 
-    
-
       <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} />
 
       <Modal

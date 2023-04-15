@@ -10,7 +10,7 @@ function SliderComponent({
 }) {
   const { width } = useWindowDimensions();
 
-  const onViewableItemsChanged = useRef(({ viewableItems, changed }) => {
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
     if (!setCurrentSlideIndex) return;
     setCurrentSlideIndex(viewableItems[0].index);
   });

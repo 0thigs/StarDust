@@ -68,7 +68,7 @@ export function Meteor({ currentYOffset, screenWidth }) {
 
   useEffect(() => {
     if (!currentYOffset) return;
-    const delay = getRandomNumber(1000, 5000);
+    const delay = getRandomNumber(20000, 50000);
     const coins = getRandomNumber(1, 5);
 
     clearTimeout(timer.current);
