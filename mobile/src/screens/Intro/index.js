@@ -6,7 +6,6 @@ import { slides } from '../../utils/introSlides';
 import { ArrowRight, Check } from 'react-native-feather';
 import { CircularProgressBase } from 'react-native-circular-progress-indicator';
 import {
-  Extrapolate,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
@@ -37,7 +36,7 @@ export function Intro() {
 
   function handleSliderButtonPress() {
     if (isLastSlide) return;
-
+    setCurrentSlideIndex(currentSlideIndex + 1)
     scrollTo(currentSlideIndex + 1);
   }
 
