@@ -1,4 +1,7 @@
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
+const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -17,11 +20,12 @@ export const PaginationDots = styled.View`
   gap: 12px;
 `;
 
-export const Dot = styled.TouchableOpacity`
-  width: 24px;
-  height: 24px;
+export const Dot = styled(AnimatedButton)`
+  width: 16px;
+  height: 16px;
   border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors.green_900};
+  background-color: ${({ theme, isActive }) => theme.colors[isActive ? 'green_500' : 'green_900']};
+  margin-left: ${({ isFirst }) => (isFirst ? 0 : 12)}px;
 `;
 
 export const ButtonContainer = styled.View`

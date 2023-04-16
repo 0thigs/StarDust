@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  padding: 24px;
+  padding: 32px;
   align-items: center;
 `;
 
@@ -20,6 +20,7 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.Text`
+  text-align: center;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.white};
   margin-top: 12px;
