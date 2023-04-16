@@ -80,9 +80,9 @@ export function SignIn() {
     try {
       await signIn(data);
 
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
+    //   navigation.reset({
+    //     routes: [{ name: 'DrawerRoutes' }],
+    //   });
     } catch (error) {
       Toast.error('Usuário não encontrado');
     } finally {
@@ -96,13 +96,12 @@ export function SignIn() {
       await signUp(data);
 
       navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
+        routes: [{ name: 'Intro' }],
       });
     } catch (error) {
       console.log(error);
       Toast.error('Usuário já cadastrado');
       setIsLoading(false);
-      return;
     } finally {
       setIsLoading(false);
     }
@@ -122,7 +121,7 @@ export function SignIn() {
 
   return (
     <C.Container onPress={Keyboard.dismiss}>
-      <C.Content bevavior={'position'} enabled>
+      <C.Content bevavior={'position'}>
         <ToastMenager
           animationInTiming={700}
           animationOutTiming={1000}

@@ -95,7 +95,6 @@ export function AuthContextProvider({ children }) {
     try {
       const signedUser = await api.getUser(user.id);
       setLoggedUser(signedUser);
-      return user;
     } catch (error) {
       return error;
     }
@@ -130,6 +129,13 @@ export function AuthContextProvider({ children }) {
     }
   }
 
+  async function updateAuthUserEmail(email) {
+    const { success, error } = await supabase.auth.update({ email });
+    if (error) throw Error(error.message);
+
+    console.log(success);
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -139,6 +145,7 @@ export function AuthContextProvider({ children }) {
         resetPassword,
         setUserInSession,
         updateLoggedUser,
+        updateAuthUserEmail,
         loggedUser,
       }}
     >

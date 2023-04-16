@@ -2,23 +2,36 @@ import { useEffect, useState } from 'react';
 import { BackHandler } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 
-import * as Icon from 'react-native-feather';
-import theme from '../../global/styles/theme';
-import * as C from './styles';
-
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import { SingnUpSchema as SettingsSchema } from '../SignIn';
+
+import theme from '../../global/styles/theme';
+import * as yup from 'yup';
+import * as Icon from 'react-native-feather';
+import * as C from './styles';
 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 export function Settings({ navigation: { goBack } }) {
-  const { loggedUser, setUser } = useAuth();
+  const { loggedUser, updateAuthUserEmail } = useAuth();
+  const [currentData, setCurrentData] = useState({
+    name: loggedUser.name,
+    name: loggedUser.email,
+  });
   const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
+
+  const SettingsSchema = yup.object({
+    email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
+    name: yup
+      .string()
+      .min(2, 'Nome de usuário deve ter pelo menos 2 dígitos!')
+      .required('Nome de usuário não pode estar vazio!'),
+  });
 
   const {
     control,
+    handleSubmit,
     setValue,
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
@@ -31,6 +44,15 @@ export function Settings({ navigation: { goBack } }) {
     goBack();
   }
 
+  async function handleSaveButton({ name, email }) {
+    try {
+      updateAuthUserEmail(email);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(data);
+  }
+
   function handleBackEvent() {
     setIsUpdatingPasswordForm(false);
     return true;
@@ -41,7 +63,6 @@ export function Settings({ navigation: { goBack } }) {
 
     setValue('name', loggedUser.name);
     setValue('email', loggedUser.email);
-    setValue('password', 'fakePassword');
 
     return () => backHandler.remove();
   }, []);
@@ -57,7 +78,7 @@ export function Settings({ navigation: { goBack } }) {
           )}
         </C.HeaderButton>
         <C.Title>Configurações de conta</C.Title>
-        <C.HeaderButton>
+        <C.HeaderButton onPress={handleSubmit(handleSaveButton)}>
           <C.Text>Salvar</C.Text>
         </C.HeaderButton>
       </C.Header>
@@ -122,36 +143,6 @@ export function Settings({ navigation: { goBack } }) {
           <C.ChangePasswordButton>
             <C.Text>Mudar senha</C.Text>
           </C.ChangePasswordButton>
-
-          {isUpdatingPasswordForm && (
-            <>
-              <Controller
-                control={control}
-                name="passwordConfirm"
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    label={'Confirmar senha'}
-                    placeholder={'Digite sua senha novamente'}
-                    icon={
-                      <Icon.Lock
-                        color={
-                          errors.passwordConfirm ? theme.colors.red_700 : theme.colors.green_300
-                        }
-                      />
-                    }
-                    value={value}
-                    type={'password'}
-                    onChangeText={onChange}
-                    error={errors.passwordConfirm}
-                    setIsUpdatingPasswordForm={setIsUpdatingPasswordForm}
-                  />
-                )}
-              />
-              {errors.passwordConfirm && (
-                <C.ErrorMessage>{errors.passwordConfirm?.message}</C.ErrorMessage>
-              )}
-            </>
-          )}
         </C.Form>
         <Button
           title={'Sair da conta'}

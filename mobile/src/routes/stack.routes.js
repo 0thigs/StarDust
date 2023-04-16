@@ -21,9 +21,9 @@ export function StackRoutes() {
       }}
     >
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
-      <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Challenge" component={Challenge} />
       <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Codes" component={Codes} />

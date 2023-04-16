@@ -14,7 +14,6 @@ export function Input({
   value,
   onChangeText,
   error,
-  autoFocus = false,
 }) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
@@ -30,13 +29,11 @@ export function Input({
   function handleInputClick() {
     // inputRef.current.focus();
 
-    showUpdatingPasswordForm();
   }
 
   function handleInputFocus() {
     setIsFocus(true);
 
-    showUpdatingPasswordForm();
   }
 
   function handleInputBlur() {
