@@ -20,6 +20,7 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="SignIn" component={SignIn} />
@@ -29,7 +30,6 @@ export function StackRoutes() {
       <Stack.Screen name="Playground" component={Playground} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
 }

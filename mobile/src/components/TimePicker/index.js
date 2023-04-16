@@ -5,14 +5,17 @@ import Modal from 'react-native-modal';
 import WheelPicker from 'react-native-wheely';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { useNotification } from '../../hooks/useNotification';
 
 export function TimePicker({ isVisible, setIsVisible }) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const [selectedTime, setSelectedTime] = useState('10:00');
+  const { setNotification } = useNotification();
+  const [selectedTime, setSelectedTime] = useState(loggedUser.study_time);
 
   function handleOkPress() {
     updateLoggedUser('study_time', selectedTime);
     setIsVisible(false);
+    setNotification('studyTime', selectedTime);
   }
 
   function handleCancelPress() {
