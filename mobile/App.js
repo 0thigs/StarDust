@@ -10,7 +10,8 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
-import { AuthContextProvider } from './src/contexts/AuthContext';
+import { AuthProvider } from './src/contexts/AuthContext';
+import { ConfigProvider } from './src/contexts/ConfigContext';
 import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
 import { EditorProvider } from './src/contexts/EditorContext';
@@ -30,16 +31,18 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <AuthContextProvider>
-          <LessonProvider>
-            <ScrollProvider>
-              <EditorProvider>
-                <StatusBar style={'light'} backgroundColor={'transparent'} />
-                {fontsLoaded && <Routes />}
-              </EditorProvider>
-            </ScrollProvider>
-          </LessonProvider>
-        </AuthContextProvider>
+        <AuthProvider>
+          <ConfigProvider>
+            <LessonProvider>
+              <ScrollProvider>
+                <EditorProvider>
+                  <StatusBar style={'light'} backgroundColor={'transparent'} />
+                  {fontsLoaded && <Routes />}
+                </EditorProvider>
+              </ScrollProvider>
+            </LessonProvider>
+          </ConfigProvider>
+        </AuthProvider>
       </ThemeProvider>
       <ToastMenager
         animationInTiming={700}

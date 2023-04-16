@@ -20,7 +20,7 @@ export const Content = styled.View`
   padding: 24px;
 `;
 
-export const HeaderButton = styled.TouchableOpacity``;
+export const Button = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
   font-size: 16px;
@@ -56,6 +56,28 @@ export const Image = styled.Image`
   border-width: ${StyleSheet.hairlineWidth}px;
   border-color: ${({ theme }) => theme.colors.background};
   margin-bottom: 10px;
+`;
+
+export const ToggleInput = styled.View`
+  margin-top: 12px;
+  border: 1px solid ${({ theme }) => theme.colors.green_500};
+  border-radius: 4px;
+  padding: 8px 24px;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const Label = styled.Text`
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.green_500};
+  margin-right: auto;
+`;
+
+export const Time = styled.Text`
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Form = styled.View`

@@ -10,6 +10,7 @@ export const Header = styled.Text`
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.semibold};
+  font-size: 16px;
   margin-bottom: 12px;
 `;
 
@@ -21,11 +22,12 @@ export const Footer = styled.View`
 `;
 
 export const Button = styled.TouchableOpacity`
-padding: 8px;
+  padding: 8px;
 `;
 
 export const Text = styled.Text`
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.green_500};
   font-family: ${({ theme }) => theme.fonts.medium};
+  font-size: 16px;
 `;

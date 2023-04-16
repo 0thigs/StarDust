@@ -28,7 +28,7 @@ const fakeLoggedUser = {
   last_position: 5,
 };
 
-export function AuthContextProvider({ children }) {
+export function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
 
   async function setUserInSession() {
@@ -130,10 +130,16 @@ export function AuthContextProvider({ children }) {
   }
 
   async function updateAuthUserEmail(email) {
-    const { success, error } = await supabase.auth.update({ email });
-    if (error) throw Error(error.message);
+    // const {
+    //   data: { user },
+    //   error,
+    // } = await supabase.auth.getUser();
 
-    console.log(success);
+    const { data, error } = await supabase.auth.updateUser({ email });
+
+    if (error) throw new Error(error.message);
+
+    console.log(data);
   }
 
   return (

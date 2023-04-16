@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BackHandler } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
+import { useConfig } from '../../hooks/useConfig';
 
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
@@ -9,17 +10,21 @@ import theme from '../../global/styles/theme';
 import * as yup from 'yup';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { TimePicker } from '../../components/TimePicker';
 
 export function Settings({ navigation: { goBack } }) {
   const { loggedUser, updateAuthUserEmail } = useAuth();
+  const { config, updateConfig } = useConfig();
   const [currentData, setCurrentData] = useState({
     name: loggedUser.name,
-    name: loggedUser.email,
+    email: loggedUser.email,
   });
   const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
+  const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
 
   const SettingsSchema = yup.object({
     email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
@@ -36,6 +41,10 @@ export function Settings({ navigation: { goBack } }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
+  function getConfigValue(configName) {
+    return config.find(config => config.name === configName).value;
+  }
+
   function handleExitButton() {
     if (isUpdatingPasswordForm) {
       setIsUpdatingPasswordForm(false);
@@ -46,11 +55,11 @@ export function Settings({ navigation: { goBack } }) {
 
   async function handleSaveButton({ name, email }) {
     try {
+      console.log(email);
       updateAuthUserEmail(email);
     } catch (error) {
       console.log(error);
     }
-    console.log(data);
   }
 
   function handleBackEvent() {
@@ -58,11 +67,15 @@ export function Settings({ navigation: { goBack } }) {
     return true;
   }
 
+  function handleToggle(configName, value) {
+    updateConfig(configName, !value);
+  }
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
 
-    setValue('name', loggedUser.name);
-    setValue('email', loggedUser.email);
+    setValue('name', currentData.name);
+    setValue('email', currentData.email);
 
     return () => backHandler.remove();
   }, []);
@@ -70,23 +83,19 @@ export function Settings({ navigation: { goBack } }) {
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderButton onPress={handleExitButton}>
+        <C.Button onPress={handleExitButton}>
           {!isUpdatingPasswordForm ? (
             <Icon.X color={theme.colors.green_500} width={28} height={28} />
           ) : (
             <Icon.ArrowLeft color={theme.colors.green_500} width={28} height={28} />
           )}
-        </C.HeaderButton>
+        </C.Button>
         <C.Title>Configurações de conta</C.Title>
-        <C.HeaderButton onPress={handleSubmit(handleSaveButton)}>
+        <C.Button onPress={handleSubmit(handleSaveButton)}>
           <C.Text>Salvar</C.Text>
-        </C.HeaderButton>
+        </C.Button>
       </C.Header>
       <C.Content>
-        {/* <C.Avatar>
-          <C.Image source={{ uri: loggedUser.avatar }} />
-          <C.Text>Mudar avatar</C.Text>
-        </C.Avatar> */}
         <C.Form>
           {!isUpdatingPasswordForm && (
             <>
@@ -143,6 +152,36 @@ export function Settings({ navigation: { goBack } }) {
           <C.ChangePasswordButton>
             <C.Text>Mudar senha</C.Text>
           </C.ChangePasswordButton>
+
+          <C.ToggleInput>
+            <C.Label>Efeitos sonoros</C.Label>
+            <ToggleSwitch
+              isOn={getConfigValue('canPlaySound')}
+              onColor={theme.colors.green_700}
+              offColor={theme.colors.green_900}
+              size="medium"
+              onToggle={isOn => handleToggle('canPlaySound', !isOn)}
+            />
+          </C.ToggleInput>
+
+          <C.ToggleInput>
+            <C.Label>Noticação</C.Label>
+            <ToggleSwitch
+              isOn={getConfigValue('canPushNotification')}
+              onColor={theme.colors.green_700}
+              offColor={theme.colors.green_900}
+              size="medium"
+              onToggle={isOn => handleToggle('canPushNotification', !isOn)}
+            />
+          </C.ToggleInput>
+          <TimePicker isVisible={isTimePickerVisible} setIsVisible={setIsTimePickerVisible} />
+
+          <C.ToggleInput>
+            <C.Label>Noticação</C.Label>
+            <C.Button onPress={() => setIsTimePickerVisible(true)}>
+              <C.Time>{loggedUser.study_time}</C.Time>
+            </C.Button>
+          </C.ToggleInput>
         </C.Form>
         <Button
           title={'Sair da conta'}

@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
+import { useForm, Controller } from 'react-hook-form';
 import { Keyboard } from 'react-native';
 import * as C from './styles';
 
@@ -9,10 +12,6 @@ import { ErrorMessage } from '../../components/ErrorMessage';
 import SignInIcon from '../../assets/SignInAssets/signin.svg';
 import theme from '../../global/styles/theme';
 
-import { useAuth } from '../../hooks/useAuth';
-
-import { useNavigation } from '@react-navigation/native';
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import * as Icon from 'react-native-feather';
@@ -80,9 +79,9 @@ export function SignIn() {
     try {
       await signIn(data);
 
-    //   navigation.reset({
-    //     routes: [{ name: 'DrawerRoutes' }],
-    //   });
+      navigation.reset({
+        routes: [{ name: 'DrawerRoutes' }],
+      });
     } catch (error) {
       Toast.error('Usuário não encontrado');
     } finally {
@@ -94,6 +93,16 @@ export function SignIn() {
     setIsLoading(true);
     try {
       await signUp(data);
+      const config = [
+        {
+          name: 'canPushNotification',
+          value: true,
+        },
+        {
+          name: 'canPlaySound',
+          value: true,
+        },
+      ];
 
       navigation.reset({
         routes: [{ name: 'Intro' }],
