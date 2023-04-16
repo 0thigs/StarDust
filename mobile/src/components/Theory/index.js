@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
-import { usePlanet } from '../../hooks/usePlanet';
 
 import theme from '../../global/styles/theme';
 

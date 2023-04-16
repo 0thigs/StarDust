@@ -22,6 +22,7 @@ const fakeLoggedUser = {
   week_status: ['todo', 'todo', 'done', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
+  study_time: '13:00',
   did_update_ranking: true,
   did_complete_saturday: true,
   last_position: 5,

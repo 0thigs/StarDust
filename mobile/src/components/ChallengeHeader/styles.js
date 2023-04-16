@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 export const Container = styled.View`
   width: 100%;
   padding-top: 24px;
-  background-color: ${prop => prop.theme.colors.gray_900};
+  background-color: ${({ theme }) => theme.colors.gray_900};
 `;
 
 export const Top = styled.View`
@@ -15,10 +15,10 @@ export const Top = styled.View`
 export const HeaderButton = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
-  margin: ${props => (props.align === 'right' ? '0 auto 0 24px' : 'auto')};
-  font-family: ${props => props.theme.fonts.medium};
+  margin: ${({ align }) => (align === 'right' ? '0 auto 0 24px' : 'auto')};
+  font-family: ${({ theme }) => theme.fonts.medium};
   font-size: 16px;
-  color: ${props => (props.isActive ? props.theme.colors.green_500 : props.theme.colors.white)};
+  color: ${({ theme, isActive }) => theme.colors[isActive ? 'green_500' : 'white']};
 `;
 
 export const Navigation = styled.View`
@@ -36,7 +36,7 @@ export const NavigationButton = styled.TouchableOpacity`
 `;
 
 export const Indicator = styled(Animated.View)`
-  background-color: ${props => props.theme.colors.green_500};
+  background-color: ${({ theme }) => theme.colors.green_500};
   height: 1px;
   width: 33%;
 `;

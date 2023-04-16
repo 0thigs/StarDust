@@ -7,6 +7,20 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.colors.background};
   align-items: center;
+  justify-content: center;
+`;
+
+export const Title = styled.Text`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.green_300};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: 24px;
+`;
+
+export const Message = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: 16px;
 `;
 
 export const Footer = styled.View`
@@ -21,9 +35,9 @@ export const PaginationDots = styled.View`
 `;
 
 export const Dot = styled(AnimatedButton)`
-  width: 16px;
+  width: ${({ isActive }) => (isActive ? 24 : 12)}px;
   height: 16px;
-  border-radius: 12px;
+  border-radius: ${({ isActive }) => (isActive ? 12 : 6)}px;
   background-color: ${({ theme, isActive }) => theme.colors[isActive ? 'green_500' : 'green_900']};
   margin-left: ${({ isFirst }) => (isFirst ? 0 : 12)}px;
 `;
@@ -42,5 +56,10 @@ export const SliderButton = styled.TouchableOpacity`
   justify-content: center;
   position: absolute;
   top: 18%;
-  left: 6%;
+  left: 5.8%;
+`;
+
+export const End = styled.View`
+  align-items: center;
+  padding: 24px;
 `;

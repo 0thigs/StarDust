@@ -11,10 +11,9 @@ function SliderComponent({
   const { width } = useWindowDimensions();
 
   const onViewableItemsChanged = useRef(({ viewableItems }) => {
-    if (!setCurrentSlideIndex) return;
     setCurrentSlideIndex(viewableItems[0].index);
   });
-  const viewabilityConfig = { viewAreaCoveragePercentThreshold: 40, waitForInteraction: true };
+  const viewabilityConfig = { viewAreaCoveragePercentThreshold: 40, waitForInteraction: false };
 
   const renderItem = useCallback(
     ({ item: { component } }) => (
