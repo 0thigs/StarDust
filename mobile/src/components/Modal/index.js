@@ -9,6 +9,7 @@ import Asking from '../../assets/animations/asking-animation.json';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 import { ZoomIn, ZoomOut } from 'react-native-reanimated';
+import { useConfig } from '../../hooks/useConfig';
 
 const effects = [
   {
@@ -39,11 +40,14 @@ const effects = [
 ];
 
 export function Modal({ isVisible, type = 'generic', playSong = true, title, body, footer }) {
+  const {
+    config: { canPlaySound },
+  } = useConfig();
   const { animation, sound } = effects.find(animation => animation.id === type.toLocaleLowerCase());
   const soundRef = useRef(null);
 
   useEffect(() => {
-    if (playSong && isVisible && type !== 'generic') {
+    if (canPlaySound && playSong && isVisible && type !== 'generic') {
       soundRef.current.play();
     }
   }, [isVisible]);

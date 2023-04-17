@@ -2,16 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 import { createContext, useState } from 'react';
 
-const defaultConfig = [
-  {
-    name: 'canPushNotification',
-    value: true,
-  },
-  {
-    name: 'canPlaySound',
-    value: true,
-  },
-];
+const defaultConfig = {
+  canPushNotification: true,
+  canPlaySound: true,
+};
 
 export const ConfigContext = createContext();
 
@@ -19,9 +13,7 @@ export const ConfigProvider = ({ children }) => {
   const [config, setConfig] = useState([]);
 
   async function updateConfig(name, payload) {
-    const updatedConfig = config.map(currentConfig =>
-      currentConfig.name === name ? { name, value: payload } : currentConfig
-    );
+    const updatedConfig = { ...config, [name]: payload };
     console.log(updatedConfig);
     setConfig(updatedConfig);
     try {

@@ -41,10 +41,7 @@ export function Settings({ navigation: { goBack } }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
-  function getConfigValue(configName) {
-    return config.find(config => config.name === configName).value;
-  }
-
+ 
   function handleExitButton() {
     if (isUpdatingPasswordForm) {
       setIsUpdatingPasswordForm(false);
@@ -156,7 +153,7 @@ export function Settings({ navigation: { goBack } }) {
           <C.ToggleInput>
             <C.Label>Efeitos sonoros</C.Label>
             <ToggleSwitch
-              isOn={getConfigValue('canPlaySound')}
+              isOn={config.canPlaySound}
               onColor={theme.colors.green_700}
               offColor={theme.colors.green_900}
               size="medium"
@@ -167,7 +164,7 @@ export function Settings({ navigation: { goBack } }) {
           <C.ToggleInput>
             <C.Label>Noticação</C.Label>
             <ToggleSwitch
-              isOn={getConfigValue('canPushNotification')}
+              isOn={config.canPushNotification}
               onColor={theme.colors.green_700}
               offColor={theme.colors.green_900}
               size="medium"
