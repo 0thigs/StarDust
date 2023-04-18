@@ -19,10 +19,11 @@ export default {
   },
 
   getUsersByCurrentRanking: async rankingId => {
-    const { data, error, status } = await supabase
+    const { data, error } = await supabase
       .from('users')
       .select('*')
-      .eq('ranking_id', rankingId);
+      .eq('ranking_id', rankingId)
+      .order('xp', { ascending: false });
     if (error) {
       throw new Error(error.message);
     }
@@ -38,10 +39,21 @@ export default {
     return avatar.image;
   },
 
+  getRankings: async () => {
+    const { data, error } = await supabase
+      .from('rankings')
+      .select('id, image, name, order')
+      .order('order', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   getRanking: async rankingId => {
     const { data, error } = await supabase
       .from('rankings')
-      .select('image, name')
+      .select('image, name, order')
       .eq('id', rankingId);
     if (error) {
       throw new Error(error.message);

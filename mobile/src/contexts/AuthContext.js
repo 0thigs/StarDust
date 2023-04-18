@@ -14,7 +14,7 @@ const fakeLoggedUser = {
   xp: 50,
   level: 1,
   unlocked_achievements_ids: [],
-  unlocked_stars_ids: [1, 2, 3, 11, 4],
+  unlocked_stars_ids: [1],
   acquired_rockets_ids: [1],
   selected_rocket_id: 2,
   ranking_id: 1,
