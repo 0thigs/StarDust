@@ -4,7 +4,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { rankings } from '../../utils/rankings';
 import { Badge } from '../../components/Badge';
 import { Loading } from '../../components/Loading';
-import { doSundayUpdating } from '../../utils/doSundayUpdating';
 
 import Background from '../../assets/GlobalAssets/background.png';
 import dayjs from 'dayjs';

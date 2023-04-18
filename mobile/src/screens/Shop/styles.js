@@ -5,12 +5,20 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Content = styled.ScrollView`
+export const Content = styled.ScrollView.attrs(({ isLoading }) => ({
+  contentContainerStyle: {
+    flex: isLoading ? 1 : 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 48,
+  },
+}))`
   background-color: ${prop => prop.theme.colors.background};
   padding: 24px;
 `;
 
 export const Title = styled.Text`
+  align-self: flex-start;
   color: ${prop => prop.theme.colors.white};
   font-family: ${props => props.theme.fonts.bold};
   font-size: 18px;
@@ -24,15 +32,17 @@ export const RocketList = styled.View`
   margin-bottom: 24px;
 `;
 
+export const AvatarsList = styled.FlatList``;
+
 export const LifeList = styled.ScrollView`
   flex-direction: row;
 `;
 
 export const Achievements = styled.ScrollView.attrs({
-    contentContainerStyle: {
-      alignItems: 'center',
-    },
-  })``;
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})``;
 
 export const AchievementContainer = styled.View`
   position: relative;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useLesson } from '../../hooks/useLesson';
 
@@ -13,12 +13,15 @@ import { CheckboxForm } from '../CheckboxForm';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+import { Slider } from '../Slider';
+import { VerificationButton } from '../VerificationButton';
 
 export function Quiz() {
   const [state, dispatch] = useLesson();
-  const [currentQuestion, setCurrentQuestion] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [forms, setForms] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
+  const sliderRef = useRef(null);
 
   function LeaveLesson() {
     navigation.reset({
@@ -26,55 +29,102 @@ export function Quiz() {
     });
   }
 
+  function getForm(question, index) {
+    switch (question.type) {
+      case 'selection':
+        return {
+          id: index,
+          component: (
+            <SelectOptionForm
+              stem={question.stem}
+              code={question.code}
+              options={question.options}
+              answer={question.answer}
+              index={index}
+            />
+          ),
+        };
+      case 'open':
+        return {
+          id: index,
+          component: <OpenForm stem={question.stem} answer={question.answer} index={index} />,
+        };
+      case 'checkbox':
+        return {
+          id: index,
+          component: (
+            <CheckboxForm
+              stem={question.stem}
+              options={question.options}
+              correctOptions={question.correctOptions}
+              index={index}
+            />
+          ),
+        };
+      case 'drag-and-drop-list':
+        return {
+          id: index,
+          component: (
+            <DragAndDropListForm
+              stem={question.stem}
+              items={question.items}
+              correctItemsIdsSequence={question.correctItemsIdsSequence}
+              index={index}
+            />
+          ),
+        };
+      case 'drag-and-drop-click':
+        return {
+          id: index,
+          component: (
+            <DragAndDropClickForm
+              stem={question.stem}
+              lines={question.lines}
+              dropItems={question.dropItems}
+              correctItemsIdsSequence={question.correctItemsIdsSequence}
+              index={index}
+            />
+          ),
+        };
+      default:
+        return;
+    }
+  }
+
+  useEffect(() => {
+    if (forms.length) return;
+    setForms(state.questions.map(getForm));
+  }, []);
+
   useEffect(() => {
     setTimeout(() => dispatch({ type: 'incrementSecondsCount' }), 1000);
   }, [state.currentStage, state.secondsCount]);
 
   useEffect(() => {
     if (state.livesCount === 0) {
-      setIsModalOpen(true);
+      setIsModalVisible(true);
     }
   }, [state.livesCount]);
 
   useEffect(() => {
-    setCurrentQuestion(state.questions[state.currentQuestion]);
+    if (!forms?.length) return;
+
+    sliderRef?.current.scrollToIndex({
+      index: state.currentQuestion,
+      animated: true,
+    });
   }, [state.currentQuestion]);
 
   return (
     <C.Container>
       <LessonHeader />
-      <C.QuestionStem animation={'fadeInDown'}>{currentQuestion.stem}</C.QuestionStem>
-      {currentQuestion.code && (
-        <C.QuestionCode animation={'fadeInLeft'}>{currentQuestion.code}</C.QuestionCode>
-      )}
-      {currentQuestion.type === 'selection' && (
-        <SelectOptionForm options={currentQuestion.options} answer={currentQuestion.answer} />
-      )}
-      {currentQuestion.type === 'open' && <OpenForm answer={currentQuestion.answer} />}
-      {currentQuestion.type === 'checkbox' && (
-        <CheckboxForm
-          options={currentQuestion.options}
-          correctOptions={currentQuestion.correctOptions}
-        />
-      )}
-      {currentQuestion.type === 'drag-and-drop-list' && (
-        <DragAndDropListForm
-          items={currentQuestion.items}
-          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
-        />
-      )}
-      {currentQuestion.type === 'drag-and-drop-click' && (
-        <DragAndDropClickForm
-          lines={currentQuestion.lines}
-          dropItems={currentQuestion.dropItems}
-          correctItemsIdsSequence={currentQuestion.correctItemsIdsSequence}
-        />
-      )}
+
+      <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} />
 
       <Modal
         type={'crying'}
         title={'Puxa, parece que você não tem mais vidas'}
-        isOpen={isModalOpen}
+        isVisible={isModalVisible}
         body={<C.Text>Mais sorte da próxima vez</C.Text>}
         footer={
           <C.Buttons>
@@ -93,6 +143,12 @@ export function Quiz() {
             />
           </C.Buttons>
         }
+      />
+      <VerificationButton
+        verifyAnswer={state.verifyAnswer}
+        isAnswerWrong={state.isAnswerWrong}
+        isAnswerVerified={state.isAnswerVerified}
+        isAnswered={state.isAnswered}
       />
     </C.Container>
   );

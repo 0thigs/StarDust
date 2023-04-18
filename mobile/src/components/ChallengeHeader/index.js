@@ -1,90 +1,127 @@
-import { useEffect, useState } from 'react';
+import { useState, useRef } from 'react';
+import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle } from 'react-native-reanimated';
+
+import { Dictionary } from '../Dictionary';
+import { PopoverMenu } from '../PopoverMenu';
+import { RangeInput } from '../RangeInput';
 import { Modal } from '../Modal';
-import * as C from './styles';
-import * as Icon from 'react-native-feather';
-import theme from '../../global/styles/theme';
 import { Button } from '../Button';
+import { ArrowLeft, MoreVertical } from 'react-native-feather';
+
+import * as C from './styles';
+import theme from '../../global/styles/theme';
 const iconSize = 25;
 
-export function ChallengeHeader({ title, indicatorPositionX, slideWidth, sliderRef }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export function ChallengeHeader({
+  title,
+  sliderRef,
+  CurrentIndicatorPositionX,
+  currentSlideIndex,
+  setCurrentSlideIndex,
+  topicId,
+}) {
+  const { isDarkMode, setIsDarkMode } = useEditor();
+  const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDictionaryVisible, setIsDictionaryVisible] = useState(false);
   const navigation = useNavigation();
-  const CurrentIndicatorPositionX = useSharedValue(0);
+  const popoverMenuRef = useRef(null);
+
+  const popoverMenuButtons = [
+    {
+      title: 'Dicionário',
+      isToggle: false,
+      value: null,
+      action: () => setIsDictionaryVisible(true),
+    },
+    {
+      title: 'Dark Mode',
+      isToggle: true,
+      value: isDarkMode,
+      action: () => setIsDarkMode(!isDarkMode),
+    },
+    {
+      title: 'Font Size',
+      isToggle: false,
+      value: null,
+      action: () => setIsRangeInputVisible(true),
+    },
+  ];
 
   const IndicatorAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: withTiming(CurrentIndicatorPositionX.value, { duration: 250 }) }],
+      transform: [{ translateX: CurrentIndicatorPositionX.value }],
     };
   });
 
   function handleBackButtonPress() {
-    navigation.reset({
-      routes: [{ name: 'DrawerRoutes' }],
-    });
-  }
-
-  function handleMoreButtonPress() {
-    setIsModalOpen(true);
+    setIsModalVisible(true);
   }
 
   function handleNavButtonPress(index) {
+    setCurrentSlideIndex(index);
     sliderRef.current.scrollToIndex({ index });
   }
-
-  useEffect(() => {
-    CurrentIndicatorPositionX.value = indicatorPositionX / 3;
-  }, [indicatorPositionX]);
 
   return (
     <C.Container>
       <C.Top>
         <C.HeaderButton onPress={handleBackButtonPress}>
-          <Icon.ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
+          <ArrowLeft width={iconSize} height={iconSize} color={theme.colors.green_500} />
         </C.HeaderButton>
         <C.Title align={'right'}>{title}</C.Title>
-        <C.HeaderButton onPress={handleMoreButtonPress}>
-          <Icon.MoreVertical width={iconSize} height={iconSize} color={theme.colors.green_500} />
-        </C.HeaderButton>
+        <PopoverMenu
+          ref={popoverMenuRef}
+          buttons={popoverMenuButtons}
+          icon={<MoreVertical width={25} height={25} color={theme.colors.green_500} />}
+        />
       </C.Top>
       <C.Navigation>
         <C.NavigationButton onPress={() => handleNavButtonPress(0)} activeOpacity={0.7}>
-          <C.Title isActive={0 === indicatorPositionX}>Problema</C.Title>
+          <C.Title isActive={currentSlideIndex === 0}>Problema</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(1)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth === indicatorPositionX}>Código</C.Title>
+          <C.Title isActive={currentSlideIndex === 1}>Código</C.Title>
         </C.NavigationButton>
         <C.NavigationButton onPress={() => handleNavButtonPress(2)} activeOpacity={0.7}>
-          <C.Title isActive={slideWidth * 2 === indicatorPositionX}>Resultado</C.Title>
+          <C.Title isActive={currentSlideIndex === 2}>Resultado</C.Title>
         </C.NavigationButton>
       </C.Navigation>
       <C.Indicator style={IndicatorAnimatedStyle} />
 
-      {/* <Modal
-        isOpen={isModalOpen}
-        type={'generic'}
-        title={'Tamanho da fonte'}
-        body={
-          <>
-            <IncreaseFontSizeButton>
-              <A>A</A>
-            </IncreaseFontSizeButton>
+      <Dictionary
+        isVisible={isDictionaryVisible}
+        setIsVisible={setIsDictionaryVisible}
+        topicId={topicId}
+      />
 
-            <DecreaseFontSizeButton>
-              <A>A</A>
-            </DecreaseFontSizeButton>
+      <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />
+
+      <Modal
+        isVisible={isModalVisible}
+        type={'crying'}
+        playSong={false}
+        title={'Deseja mesmo sair?'}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Sair'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={() => navigation.goBack()}
+            />
+            <Button
+              title={'Voltar'}
+              color={theme.colors.black}
+              background={theme.colors.green_300}
+              onPress={() => setIsModalVisible(false)}
+            />
           </>
         }
-        footer={
-          <Button
-            title={'OK'}
-            onPress={() => setIsModalOpen(false)}
-            color={theme.colors.black}
-            background={theme.colors.green_500}
-          />
-        }
-      /> */}
+      />
     </C.Container>
   );
 }

@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
 import { createContext, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useRocket } from '../hooks/useRocket';
 
 export const ScrollContext = createContext();
 
 export const ScrollProvider = ({ children }) => {
   const { loggedUser } = useAuth();
+  const { rocket } = useRocket(loggedUser.rocket_id);
   const [lastUnlockedStarYPosition, setLastUnlockedStarYPosition] = useState(null);
-  const lastUnlockedStarId = loggedUser.unlocked_stars_ids.slice(-1)[0];
-
-  useEffect(() => {
-    // console.log(lastUnlockedStarYPosition);
-  }, [lastUnlockedStarYPosition])
 
   return (
     <ScrollContext.Provider
-      value={{ lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition }}
+      value={{
+        lastUnlockedStarYPosition,
+        setLastUnlockedStarYPosition,
+        rocket,
+      }}
     >
       {children}
     </ScrollContext.Provider>

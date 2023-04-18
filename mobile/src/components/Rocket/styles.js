@@ -11,11 +11,11 @@ export const Container = styled.SafeAreaView`
   width: ${rocketWidth}px;
   margin-bottom: 18px;
   border-width: 1px;
-  border-color: ${props =>
-    props.isSelected ? props.theme.colors.yellow_300 : props.theme.colors.background};
+  border-color: ${({ isSelected, theme }) =>
+    theme.colors[isSelected ? 'yellow_300' : 'background']};
   border-radius: 8px;
   overflow: hidden;
-  opacity: ${props => (props.isAcquired ? 1 : 0.7)};
+  opacity: ${({ isAvailable }) => (isAvailable ? 1 : 0.7)};
 `;
 
 export const Background = styled.ImageBackground`
@@ -35,8 +35,8 @@ export const Price = styled.View`
 `;
 
 export const Coins = styled.Text`
-  color: ${prop => prop.theme.colors.yellow_300};
-  font-family: ${props => props.theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.yellow_300};
+  font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 18px;
   margin-bottom: -8px;
   margin-left: 4px;
@@ -46,12 +46,12 @@ export const ImageContainer = styled(Animated.View)``;
 
 export const Info = styled.ImageBackground`
   padding: 12px;
-  background-color: ${prop => prop.theme.colors.purple_700};
+  background-color: ${({ theme }) => theme.colors.green_900};
 `;
 
 export const Name = styled.Text`
-  font-family: ${props => props.theme.fonts.bold};
-  color: ${props => (props.isSelected ? props.theme.colors.yellow_300 : props.theme.colors.white)};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme, isSelected }) => theme.colors[isSelected ? 'yellow_300' : 'white']};
 
   text-align: center;
   font-size: 16px;
@@ -59,8 +59,9 @@ export const Name = styled.Text`
 `;
 
 export const Text = styled.Text`
-  font-family: ${props => props.theme.fonts.regular};
-  color: ${props => props.theme.colors.white};
+  margin: 12px 0;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 14px;
   text-align: center;
 `;
@@ -70,4 +71,3 @@ export const AcquiredRocket = styled.View`
   justify-content: center;
   align-items: center;
 `;
-

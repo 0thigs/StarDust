@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { Button } from '../Button';
+import { Sound } from '../Sound';
 import * as C from './styles';
 
 import Check from '../../assets/LessonAssets/correct-answer-icon.svg';
 import X from '../../assets/LessonAssets/incorrect-answer-icon.svg';
 import theme from '../../global/styles/theme';
-import { Sound } from '../Sound';
 
 const sounds = {
   success: require('../../assets/sounds/success-sound.wav'),
   fail: require('../../assets/sounds/fail-sound.wav'),
 };
 
-export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered }) {
+export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered, showComments }) {
   const soundRef = useRef();
 
   useEffect(() => {
@@ -25,6 +25,11 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerifi
     <C.Container isAnswerWrong={isAnswerVerified && isAnswerWrong}>
       {isAnswerVerified && (
         <C.Feedback>
+          {!isAnswerWrong && (
+            <C.CommentsButton onPress={showComments}>
+              <C.Title>Mostrar comentários</C.Title>
+            </C.CommentsButton>
+          )}
           {isAnswerWrong ? <X /> : <Check />}
           <C.Message animation={'bounceInUp'} isAnswerWrong={isAnswerWrong}>
             {isAnswerWrong ? 'Oops, tente denovo!' : 'Correto, parabéns!'}
@@ -47,6 +52,7 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerifi
         isDisabled={!isAnswered}
       />
       <Sound ref={soundRef} soundFile={sounds[isAnswerWrong ? 'fail' : 'success']} />
+
     </C.Container>
   );
 }

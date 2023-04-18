@@ -21,3 +21,8 @@ export const Title = styled(Animatable.Text)`
 export const Theories = styled.ScrollView`
   width: ${lessonContainerWidth};
 `;
+
+export const ButtonContainer = styled.View`
+  width: 90%;
+  margin-bottom: 4px;
+`;

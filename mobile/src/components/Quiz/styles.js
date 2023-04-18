@@ -14,16 +14,18 @@ export const QuestionStem = styled(Animatable.Text)`
   font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
   max-width: ${lessonContainerWidth};
-  margin: 8px 0 24px;
-  text-align: center;
+  margin: 8px 0 16px;
+  align-self: center;
 `;
 
-export const QuestionCode = styled(Animatable.Text)`
+export const QuestionCode = styled.ScrollView`
   color: ${props => props.theme.colors.white};
   font-family: ${props => props.theme.fonts.regular};
   font-size: 16px;
-  max-width: ${lessonContainerWidth};
-  margin-bottom: 24px;
+  align-self: center;
+  width: 350px;
+  max-height: 220px;
+  margin-bottom: 8px;
 `;
 
 export const Text = styled.Text`
@@ -33,5 +35,4 @@ export const Text = styled.Text`
   font-size: 16px;
 `;
 
-export const Buttons = styled.View`
-`;
+export const Buttons = styled.View``;

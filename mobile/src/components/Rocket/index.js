@@ -10,18 +10,22 @@ import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { Image } from '../Image';
 
-export function Rocket_({ id, name, image: Image, price }) {
+export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRocket }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
-  const [isAcquired, setIsAcquired] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
+  const isBuyable = loggedUser.coins > price;
 
   const RocketPosition = useSharedValue(-5);
 
@@ -31,34 +35,30 @@ export function Rocket_({ id, name, image: Image, price }) {
     };
   });
 
-  async function updateUserData(updatedCoins, updatedAcquiredRocketsIds) {
-    updateLoggedUser('coins', updatedCoins);
-    updateLoggedUser('acquired_rockets_ids', updatedAcquiredRocketsIds);
-  }
-
-  function buyRocket() {
-    if (loggedUser.coins < price) {
+  async function buyRocket() {
+    if (!isBuyable) {
       setIsRequesting(false);
       setIsModalOpen(true);
       return;
     }
 
     const updatedCoins = loggedUser.coins - price;
-    const updatedAcquiredRocketsIds = [...loggedUser.acquired_rockets_ids, id];
-
-    updateUserData(updatedCoins, updatedAcquiredRocketsIds);
+    const updatedAcquiredRockets = loggedUser.acquired_rockets + 1;
+    addUserAcquiredRocket(id);
+    updateLoggedUser('coins', updatedCoins);
+    updateLoggedUser('acquired_rockets', updatedAcquiredRockets);
     selectRocket();
     setModalType('earning');
     setIsModalOpen(true);
   }
 
   async function selectRocket() {
-    updateLoggedUser('selected_rocket_id', id);
+    updateLoggedUser('rocket_id', id);
     setIsRequesting(false);
     soundRef.current.play();
   }
 
-  function handleButton() {
+  function handleButtonPress() {
     setIsRequesting(true);
 
     if (isAcquired) {
@@ -73,12 +73,11 @@ export function Rocket_({ id, name, image: Image, price }) {
   }, []);
 
   useEffect(() => {
-    setIsSelected(id === loggedUser.selected_rocket_id);
-    setIsAcquired(loggedUser.acquired_rockets_ids.includes(id));
-  }, [loggedUser.selected_rocket_id, loggedUser.acquired_rockets_ids]);
+    setIsSelected(id === loggedUser.rocket_id);
+  }, [loggedUser.rocket_id]);
 
   return (
-    <C.Container isSelected={isSelected} isAcquired={isAcquired}>
+    <C.Container isSelected={isSelected} isAvailable={isAcquired || isBuyable}>
       <C.Background source={RocketBackground}>
         {!isAcquired && (
           <C.Price>
@@ -87,7 +86,12 @@ export function Rocket_({ id, name, image: Image, price }) {
           </C.Price>
         )}
         <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <Image width={125} height={125} />
+          <SvgUri
+            uri={getImage('rockets', image)}
+            width={125}
+            height={125}
+            onLoad={() => setIsImageLoaded(true)}
+          />
         </C.ImageContainer>
       </C.Background>
       <C.Info>
@@ -96,14 +100,14 @@ export function Rocket_({ id, name, image: Image, price }) {
           title={isSelected && isAcquired ? 'Selecionado' : isAcquired ? 'Selecionar' : 'Comprar'}
           isLoading={isRequesting}
           isDisabled={(isSelected && isAcquired) || isRequesting}
-          onPress={handleButton}
+          onPress={handleButtonPress}
           color={theme.colors.black}
           background={theme.colors.yellow_300}
         />
       </C.Info>
 
       <Modal
-        isOpen={isModalOpen}
+        isVisible={isModalOpen}
         type={modalType}
         title={
           modalType === 'denying'
@@ -124,7 +128,7 @@ export function Rocket_({ id, name, image: Image, price }) {
                 top={-15}
                 left={-8}
               />
-              <Image width={100} height={100} />
+              <SvgUri uri={getImage('rockets', image)} width={100} height={100} />
               <C.Name>{name}</C.Name>
             </C.AcquiredRocket>
           )

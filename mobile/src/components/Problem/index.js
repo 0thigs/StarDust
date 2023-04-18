@@ -5,7 +5,7 @@ import { Text } from '../Text';
 
 export function Problem({ title, texts }) {
   return (
-    <C.Container>
+    <C.Container showsVerticalScrollIndicator={false}>
       <C.Title>{title}</C.Title>
       {texts.map(({ type, body }, index) => (
         <Text key={`text-${index}`} type={type} body={body} isRendered={false} />

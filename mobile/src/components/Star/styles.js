@@ -21,17 +21,21 @@ export const StarButton = styled.TouchableOpacity`
   align-items: center;
   padding-left: 3px;
   opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
+  position: relative;
 `;
 
 export const Rocket = styled(Animated.View)``;
+
+export const StarContent = styled.View`
+  position: absolute;
+  top: 40%;
+  left: ${({ isUnlocked }) => (isUnlocked ? 16.6 : 17.4)}%;
+`;
 
 export const StarNumber = styled.Text`
   font-size: 16px;
   color: ${({ isUnlocked, theme }) => (isUnlocked ? theme.colors.white : theme.colors.yellow_500)};
   font-family: ${({ theme }) => theme.fonts.bold};
-  position: absolute;
-  top: 40%;
-  left: ${({ isUnlocked }) => (isUnlocked ? 16 : 17.5)}%;
 `;
 
 export const StarSign = styled.View`

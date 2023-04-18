@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
+import { usePlanet } from '../../hooks/usePlanet';
 import { useNavigation } from '@react-navigation/core';
 
 import { Metric } from '../Metric';
@@ -8,7 +9,6 @@ import { Button } from '../Button';
 import { Streak } from '../Streak';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
-import { planets } from '../../utils/planets';
 
 import Coin from '../../assets/GlobalAssets/coin-icon.svg';
 import XP from '../../assets/GlobalAssets/xp-icon.svg';
@@ -20,58 +20,91 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+import { Modal } from '../Modal';
+const iconSize = 30;
 
-export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
+export function End({
+  starId = 'e35bba41-f5cd-4a37-9b67-533171a086cc',
+  challengeId,
+  _coins,
+  _xp,
+  _seconds,
+}) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const { planets, getCurrentPlanet, getNextStar, addUnlockedStar } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
+  const [newLevel, setNewLevel] = useState(0);
   const [time, setTime] = useState('');
   const [accurance, setAccurance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isStreakShown, setIsStreakShown] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isStreakVisible, setIsStreakVisible] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
-  const starsRef = useRef();
-  const soundRef = useRef();
+  const starsRef = useRef(null);
+  const soundRef = useRef(null);
   const navigation = useNavigation();
-  const iconSize = 30;
 
-  function getNewData() {
+  function getUpdatedLevel(updatedXp) {
+    const hasNewLevel = updatedXp > 50 + (loggedUser.level - 1) * 25;
+    if (hasNewLevel) {
+      const newLevel = loggedUser.level + 1;
+      setNewLevel(newLevel);
+      return newLevel;
+    }
+    return loggedUser.level;
+  }
+
+  function getUpdatedData() {
     const updatedCoins = coins + loggedUser.coins;
     const updatedXp = xp + loggedUser.xp;
+    const updatedWeeklyXp = xp + loggedUser.weekly_xp;
+    const updatedLevel = getUpdatedLevel(updatedXp);
+    let completedChallengesIds = loggedUser.completed_challenges_ids;
+
+    if (challengeId && !loggedUser.completed_challenges_ids.includes(challengeId)) {
+      completedChallengesIds.push(challengeId);
+    }
+
+    if (!starId) {
+      return {
+        coins: updatedCoins,
+        xp: updatedXp,
+        weekly_xp: updatedWeeklyXp,
+        level: updatedLevel,
+        completed_challenges_ids: completedChallengesIds,
+      };
+    }
 
     let completedPlanets = loggedUser.completed_planets;
-    let updatedUnlockedStarsIds = loggedUser.unlocked_stars_ids;
-    let nextPlanet = null;
-    let nextStar = {};
-
-    const currentPlanet = planets.find(planet => planet.stars.some(star => star.id === starId));
-    const currentStar = currentPlanet.stars.find(star => star.id === starId);
-    nextStar = currentPlanet.stars.find(star => star.number === currentStar.number + 1);
+    let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
+    let nextStar = getNextStar(starId);
 
     if (!nextStar) {
       completedPlanets += 1;
-      nextPlanet = planets[planets.indexOf(currentPlanet) + 1];
+      const currentPlanet = getCurrentPlanet(starId);
+      const nextPlanet = planets.find(planet => planet.order === currentPlanet.order + 1);
       nextStar = nextPlanet.stars[0];
     }
 
-    if (!updatedUnlockedStarsIds.includes(nextStar.id)) {
-      updatedUnlockedStarsIds.push(nextStar.id);
+    if (nextStar && !nextStar.isUnlocked) {
+      addUnlockedStar(nextStar.id);
     }
 
     return {
       coins: updatedCoins,
       xp: updatedXp,
-      lives: state.livesCount,
-      unlocked_stars_ids: updatedUnlockedStarsIds,
+      weekly_xp: updatedWeeklyXp,
+      level: updatedLevel,
+      unlocked_stars: updatedUnlockedStars,
       completed_planets: completedPlanets,
     };
   }
 
   async function updateUserData() {
-    const newData = getNewData();
+    const newData = getUpdatedData();
     for (key of Object.keys(newData)) {
-      console.log({key});
       updateLoggedUser(key, newData[key]);
     }
   }
@@ -89,17 +122,17 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   }
 
   function getCoins() {
-    let maxCoins = 50;
+    let maxCoins = 20;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxCoins -= 5;
+      maxCoins -= 10;
     }
     return maxCoins;
   }
 
   function getXp() {
-    let maxXp = 100;
+    let maxXp = 10;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxXp -= 5;
+      maxXp -= 10;
     }
     return maxXp;
   }
@@ -112,9 +145,9 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
 
   function handleButtonClick() {
     if (isFirstClick) {
-      setIsStreakShown(true);
+      setIsModalVisible(true);
+      setIsStreakVisible(true);
       setIsFirstClick(false);
-      updateUserData();
       return;
     }
 
@@ -128,7 +161,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
   }
 
   useEffect(() => {
-    if (isChallenge) {
+    if (challengeId) {
       setCoins(_coins);
       setXp(_xp);
       setTime(convertSecondsToTime(_seconds));
@@ -143,9 +176,14 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
     soundRef.current.play();
   }, []);
 
+  useEffect(() => {
+    if (!planets.length) return;
+    updateUserData();
+  }, [planets]);
+
   return (
     <C.Container>
-      {isStreakShown ? (
+      {isStreakVisible ? (
         <>
           <Animation
             source={StreakAnimation}
@@ -199,7 +237,7 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
               count={time}
               delay={750}
             />
-            {!isChallenge && (
+            {!challengeId && (
               <Metric
                 title={'Precisão'}
                 color={theme.colors.red_300}
@@ -219,6 +257,29 @@ export function End({ starId, isChallenge, _coins, _xp, _seconds }) {
         color={theme.colors.black}
         background={theme.colors.green_500}
       />
+
+      {newLevel > 0 && (
+        <Modal
+          isVisible={isModalVisible}
+          type={'earning'}
+          title={'Parabéns! Você alcançou um novo nível!'}
+          body={
+            <C.NewLevelMessage>
+              <C.Text>Você acaba de chegar no </C.Text>
+              <C.NewLevel>Nível {newLevel} 😀</C.NewLevel>
+              <C.Text>Continue assim!</C.Text>
+            </C.NewLevelMessage>
+          }
+          footer={
+            <Button
+              title={'Legal'}
+              color={theme.colors.black}
+              background={theme.colors.green_500}
+              onPress={() => setIsModalVisible(false)}
+            />
+          }
+        />
+      )}
 
       <Sound ref={soundRef} soundFile={require('../../assets/sounds/end-sound.mp3')} />
     </C.Container>

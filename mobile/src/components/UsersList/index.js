@@ -6,22 +6,22 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconSize = 25;
 
-export function UsersList({ users }) {
+export function UsersList({ users, initialPosition = 0 }) {
   const { loggedUser } = useAuth();
 
   return (
     <FlatList
       data={users}
       keyExtractor={user => user.id}
-      renderItem={({ item: { id, name, avatar, xp, position } }) => {
+      renderItem={({ item: { id, name, avatar_id, weekly_xp, position } }) => {
         return (
           <>
             <User
-              position={position}
+              position={position + initialPosition}
               id={id}
               name={name}
-              avatar={avatar}
-              xp={xp}
+              avatar_id={avatar_id}
+              xp={weekly_xp}
               isLoggedUser={id === loggedUser.id}
             />
             {position === 5 && (

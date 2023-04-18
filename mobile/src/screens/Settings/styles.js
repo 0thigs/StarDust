@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: ${props => props.theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
@@ -13,26 +13,26 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
   border-width: ${StyleSheet.hairlineWidth}px;
-  border-bottom-color: ${props => props.theme.colors.green_500};
+  border-bottom-color: ${({ theme }) => theme.colors.green_500};
 `;
 
 export const Content = styled.View`
   padding: 24px;
 `;
 
-export const HeaderButton = styled.TouchableOpacity``;
+export const Button = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
   font-size: 16px;
-  font-family: ${props => props.theme.fonts.bold};
-  color: ${props => props.theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Text = styled.Text`
   text-transform: uppercase;
   font-size: 16px;
-  font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.green_500};
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.green_500};
 `;
 
 export const Avatar = styled.View`
@@ -40,13 +40,44 @@ export const Avatar = styled.View`
   padding: 8px 0 8px;
 `;
 
+export const ChangePasswordButton = styled.TouchableOpacity`
+  margin-top: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.green_500};
+  border-radius: 4px;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Image = styled.Image`
   width: 150px;
   height: 150px;
   border-radius: 75px;
   border-width: ${StyleSheet.hairlineWidth}px;
-  border-color: ${props => props.theme.colors.background};
+  border-color: ${({ theme }) => theme.colors.background};
   margin-bottom: 10px;
+`;
+
+export const ToggleInput = styled.View`
+  margin-top: 12px;
+  border: 1px solid ${({ theme }) => theme.colors.green_500};
+  border-radius: 4px;
+  padding: 8px 24px;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const Label = styled.Text`
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.green_500};
+  margin-right: auto;
+`;
+
+export const Time = styled.Text`
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Form = styled.View`
@@ -55,6 +86,6 @@ export const Form = styled.View`
 
 export const ErrorMessage = styled.Text`
   font-size: 15px;
-  font-family: ${props => props.theme.fonts.regular};
-  color: ${props => props.theme.colors.red_700};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.red_700};
 `;

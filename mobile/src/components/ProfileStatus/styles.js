@@ -17,13 +17,14 @@ export const ProfileButton = styled.TouchableOpacity`
   padding: 8px;
 `;
 
-export const Avatar = styled.Image`
-  width: 150px;
-  height: 150px;
-  border-radius: 75px;
-  border-width: ${StyleSheet.hairlineWidth}px;
-  border-color: ${props => props.theme.colors.green_500};
-  margin-bottom: 10px;
+export const AvatarButton = styled.TouchableOpacity`
+  position: relative;
+`;
+
+export const Icon = styled.View`
+  position: absolute;
+  right: 0;
+  top: 80%;
 `;
 
 export const Name = styled.Text`
@@ -51,8 +52,8 @@ export const Ranking = styled.View`
 `;
 
 export const RankingImage = styled.Image`
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 `;
 
 export const StatusContainer = styled.View`

@@ -5,27 +5,23 @@ import theme from '../../global/styles/theme';
 
 import { Text } from '../Text';
 import { Button } from '../Button';
+import { Loading } from '../Loading';
 import { FabButton } from '../FabButton';
 import { Modal } from '../Modal';
 import { LessonHeader } from '../LessonHeader';
-import { theories } from '../../utils/theories';
-import { planets } from '../../utils/planets';
 
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
-export function Theory({ starId }) {
+export function Theory({ title, allTexts }) {
   const [, dispatch] = useLesson();
   const [texts, setTexts] = useState([]);
-  const [index, setIndex] = useState(1);
-  const [isFabButtonShown, setIsFabButtonShown] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isScrollEnd, setIsScrollEnd] = useState(false);
-  const scrollRef = useRef();
-  const textsFromJSON = theories.filter(theory => theory.starId === starId)[0].texts;
-  const starName = planets
-    .find(planet => planet.stars.some(star => star.id === starId))
-    .stars.find(star => star.id === starId).name;
+  const [nextTextIndex, setNextTextIndex] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isScrollToEnd, setIsScrollToEnd] = useState(true);
+  const scrollRef = useRef(null);
 
   function fixValue(value) {
     return Math.floor(value);
@@ -36,59 +32,73 @@ export function Theory({ starId }) {
   }
 
   function handleContinueButton() {
-    if (!textsFromJSON[index]) return;
+    if (!allTexts[nextTextIndex]) return;
 
-    setIndex(index => index + 1);
+    setNextTextIndex(index => index + 1);
     setTexts(texts => {
       const previousTexts = texts.map(text => ({ ...text, isRendered: true }));
-      const nextText = textsFromJSON[index];
+      const nextText = allTexts[nextTextIndex];
       return [...previousTexts, nextText];
     });
   }
 
   function handleScroll({ contentOffset, contentSize, layoutMeasurement }) {
-    setIsScrollEnd(
+    const isScrollToEnd =
       fixValue(contentOffset.y) + fixValue(layoutMeasurement.height) >=
-        fixValue(contentSize.height) - C.minHeightText + 50
-    );
-    setIsFabButtonShown(!isScrollEnd);
+      fixValue(contentSize.height) - C.minHeightText + 25;
+    setIsScrollToEnd(isScrollToEnd);
+    setIsFabButtonVisible(!isScrollToEnd);
   }
 
-
   useEffect(() => {
-    setTexts([{ ...textsFromJSON[0], isRendered: false }]);
+    setTexts([{ ...allTexts[0], isRendered: false }]);
+    setIsLoading(false);
   }, []);
+
+  useEffect(() => {}, [texts]);
 
   return (
     <C.Container>
       <LessonHeader />
-      <C.Title animation={'fadeInDown'}>{starName}</C.Title>
-      <C.Theories
-        showsVerticalScrollIndicator={false}
-        ref={scrollRef}
-        onScroll={event => handleScroll(event.nativeEvent)}
-        onContentSizeChange={isScrollEnd && scrollToEnd}
-      >
-        {texts.map(({ type, title, body, isRendered }, index) => (
-          <Text
-            key={`text-${index}`}
-            type={type}
-            title={title}
-            body={body}
-            isRendered={isRendered}
-          />
-        ))}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <C.Title animation={'fadeInDown'}>{title}</C.Title>
+          <C.Theories
+            showsVerticalScrollIndicator={false}
+            ref={scrollRef}
+            onScroll={event => handleScroll(event.nativeEvent)}
+            onContentSizeChange={isScrollToEnd && scrollToEnd}
+          >
+            {texts.map(({ type, title, body, isRendered, isRunnable }, index) => (
+              <Text
+                key={`text-${index}`}
+                type={type}
+                title={title}
+                body={body}
+                isRendered={isRendered}
+                isRunnable={isRunnable}
+                index={index}
+              />
+            ))}
+          </C.Theories>
+          <C.ButtonContainer>
+            <Button
+              title={nextTextIndex >= allTexts.length ? 'Praticar' : 'Continuar'}
+              onPress={
+                nextTextIndex >= allTexts.length
+                  ? () => setIsModalVisible(true)
+                  : handleContinueButton
+              }
+              color={theme.colors.black}
+              background={theme.colors.green_500}
+            />
+          </C.ButtonContainer>
+        </>
+      )}
 
-        <Button
-          title={index >= textsFromJSON.length ? 'Praticar' : 'Continuar'}
-          onPress={
-            index >= textsFromJSON.length ? () => setIsModalOpen(true) : handleContinueButton
-          }
-          color={theme.colors.black}
-          background={theme.colors.green_500}
-        />
-      </C.Theories>
-      {isFabButtonShown && (
+      {isFabButtonVisible && (
         <FabButton
           onPress={scrollToEnd}
           icon={<Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />}
@@ -96,7 +106,7 @@ export function Theory({ starId }) {
       )}
 
       <Modal
-        isOpen={isModalOpen}
+        isVisible={isModalVisible}
         type={'asking'}
         title={'Bora praticar o que você aprendeu?'}
         body={null}
@@ -105,7 +115,7 @@ export function Theory({ starId }) {
             title={'Praticar'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={() => dispatch({ type: 'changeStage' })}
+            onPress={() => dispatch({ type: 'showQuiz' })}
           />
         }
       />

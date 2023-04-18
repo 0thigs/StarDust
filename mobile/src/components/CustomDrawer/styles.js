@@ -7,14 +7,6 @@ export const Container = styled.View`
   background-color: ${props => props.theme.colors.background};
 `;
 
-export const Avatar = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  margin-bottom: 10px;
-
-`;
-
 export const Name = styled.Text`
   font-family: ${props => props.theme.fonts.bold};
   font-size: 14px;
@@ -27,21 +19,17 @@ export const Email = styled.Text`
   color: ${props => props.theme.colors.white};
 `;
 
-export const LogOutButton = styled.TouchableOpacity`
-  background-color: ${props => props.theme.colors.green_500};
-  padding: 3px;
-  border-radius: 4px;
-  width: 40%;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
+export const Buttons = styled.View`
+  align-self: center;
+  width: 150px;
 `;
 
-export const LogOutButtonText = styled.Text`
-  font-size: 14px;
-  font-family: ${props => props.theme.fonts.bold};
+export const ButtonWrapper = styled.View`
+  flex-direction: column;
 `;
 
-export const AchievementList = styled.FlatList`
-
+export const Menu = styled.View`
+  align-self: flex-end;
 `;
+
+export const AchievementList = styled.FlatList``;

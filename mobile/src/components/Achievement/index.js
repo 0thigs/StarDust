@@ -1,40 +1,103 @@
+import { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { Button } from '../Button';
+import Lock from '../../assets/AchievementAssets/lock.svg';
+import theme from '../../global/styles/theme';
 import * as C from './styles';
-import Lock from '../../assets/AchievementAssets/lock.svg'
+import { Modal } from '../Modal';
+import { SvgUri } from 'react-native-svg';
+import { getImage } from '../../utils/getImage';
 
 export function Achievement({
-  title,
-  icon: Icon,
+  id,
+  name,
+  icon,
   description,
-  requiredCount,
-  currentCount,
+  requiredAmount,
+  currentAmount,
   isUnlocked,
+  hasRescueFeat,
+  reward,
 }) {
-  const currentCount_ = Array.isArray(currentCount) ? currentCount.length - 1 : currentCount;
-  const percentage = (currentCount_ / requiredCount) * 100;
-  const barWidth = percentage > 100 ? 100 : percentage;
+  const {
+    loggedUser: { achievements_to_rescue, coins },
+    updateLoggedUser,
+  } = useAuth();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [rescuedAchievementName, setRescuedAchievementName] = useState('');
 
-  function getFormatedCurrentCount() {
-    return currentCount_ >= requiredCount ? requiredCount : currentCount_;
+  const percentage = (currentAmount / requiredAmount) * 100;
+  const barWidth = percentage > 100 ? 100 : percentage;
+  const isToRescue = achievements_to_rescue.includes(id) && hasRescueFeat;
+
+  function getFormatedCurrentAmount() {
+    return currentAmount >= requiredAmount ? requiredAmount : currentAmount;
+  }
+
+  function handleRescueButtonPress() {
+    setRescuedAchievementName(name);
+    setIsModalVisible(true);
+
+    updateLoggedUser(
+      'achievements_to_rescue',
+      achievements_to_rescue.filter(achievementId => achievementId !== id)
+    );
+    updateLoggedUser('coins', coins + reward);
   }
 
   return (
     <C.Container>
-      {isUnlocked ? <Icon width={45} height={45} /> : <Lock />}
+      {isUnlocked ? <SvgUri uri={getImage('achievements', icon)} width={45} /> : <Lock />}
 
-      <C.AchievementsInfo>
-        <C.AchievementsTitle>{title}</C.AchievementsTitle>
-        <C.AchievementsDescription>{description}</C.AchievementsDescription>
-        {!isUnlocked && (
-          <C.ProgressBarInfo>
-            <C.ProgressBar>
-              <C.Bar barWidth={barWidth + '%'} />
-            </C.ProgressBar>
-            <C.ProgressBarrequiredCount>
-              {getFormatedCurrentCount()}/{requiredCount}
-            </C.ProgressBarrequiredCount>
-          </C.ProgressBarInfo>
+      <C.Info>
+        <C.Name isToRescue={isToRescue}>{name}</C.Name>
+        {isToRescue ? (
+          <Button
+            title={'Resgatar'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            isSmall={true}
+            hasAnimation={true}
+            onPress={handleRescueButtonPress}
+          />
+        ) : (
+          <>
+            <C.Description>{description}</C.Description>
+            {!isUnlocked && (
+              <C.ProgressBarInfo>
+                <C.ProgressBar>
+                  <C.Bar barWidth={barWidth + '%'} />
+                </C.ProgressBar>
+                <C.ProgressBarrequiredAmount>
+                  {getFormatedCurrentAmount()}/{requiredAmount}
+                </C.ProgressBarrequiredAmount>
+              </C.ProgressBarInfo>
+            )}
+          </>
         )}
-      </C.AchievementsInfo>
+      </C.Info>
+
+      <Modal
+        isVisible={isModalVisible}
+        type={'earning'}
+        title={'Recompensa resgatada!'}
+        body={
+          <C.Message>
+            <C.Text>Parabéns! Você acabou de ganhar </C.Text>
+            <C.Reward>{reward} </C.Reward>
+            <C.Text>de poeira estela pela conquista </C.Text>
+            <C.Reward>{rescuedAchievementName}</C.Reward>
+          </C.Message>
+        }
+        footer={
+          <Button
+            title={'Entendido'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={() => setIsModalVisible(false)}
+          />
+        }
+      />
     </C.Container>
   );
 }

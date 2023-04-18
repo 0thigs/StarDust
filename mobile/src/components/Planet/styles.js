@@ -13,7 +13,7 @@ export const PlanetInfo = styled(Animated.View)`
 `;
 
 export const PlanetSign = styled(Animated.View)`
-  background-color: ${props => props.theme.colors.green_800};
+  background-color: ${({ theme }) => theme.colors.green_800};
   border-radius: 10px;
   padding: 0 16px;
   justify-content: center;
@@ -25,8 +25,8 @@ export const PlanetSign = styled(Animated.View)`
 `;
 
 export const PlanetName = styled.Text`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.semibold};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.semibold};
   font-size: 14px;
   margin-left: 12px;
 `;

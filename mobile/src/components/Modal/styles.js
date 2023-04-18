@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 
 export const Container = styled.Modal``;
 
-export const Fade = styled.View`
+export const Fade = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@ export const Header = styled.View`
   background-color: ${props => props.theme.colors.blue_700};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  padding: 16px 0 0;
+  padding: 16px 8px 0;
 `;
 
 export const Animation = styled(LottieView)`

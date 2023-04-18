@@ -1,18 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TestCase } from '../TestCase';
 import { VerificationButton } from '../VerificationButton';
+import { CommentsList } from '../CommentsList';
 import * as C from './styles';
 
-export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
+export function Result({ challengeId, testCases, userOutputs, setIsEnd, backToCode }) {
   const [results, setResults] = useState([]);
-  console.log(results);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
+  const [canFetchComments, setCanFetchComments] = useState(false);
+  const bottomSheetRef = useRef(null);
 
   function handleVerificationButton() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const isAnswerCorrect = results.length > 0 && results.every(result => !!result);
+    const isAnswerCorrect = results.length && results.every(result => !!result);
     if (isAnswerCorrect) {
       setIsAnswerWrong(false);
       if (isAnswerVerified) setIsEnd(true);
@@ -31,8 +33,13 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
     }
   }
 
+  function showComments() {
+    setCanFetchComments(true);
+    bottomSheetRef.current.expand();
+  }
+
   useEffect(() => {
-    if (userOutputs.length > 0) {
+    if (userOutputs.length) {
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);
@@ -57,7 +64,10 @@ export function Result({ testCases, userOutputs, setIsEnd, backToCode }) {
         isAnswered={true}
         isAnswerVerified={isAnswerVerified}
         isAnswerWrong={isAnswerWrong}
+        showComments={showComments}
       />
+
+      <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />
     </C.Container>
   );
 }

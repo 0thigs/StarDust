@@ -1,7 +1,7 @@
 export const achievements = [
   {
     id: 1,
-    title: 'Começando a viagem',
+    name: 'Começando a viagem',
     description: 'Termine a primeira fase do StarDust',
     requiredCount: 1,
     icon: require('../assets/AchievementAssets/achievement-1.svg').default,
@@ -9,7 +9,7 @@ export const achievements = [
   },
   {
     id: 2,
-    title: 'Início da exploração',
+    name: 'Início da exploração',
     description: 'Complete o primeiro planeta do StarDust',
     requiredCount: 1,
     icon: require('../assets/AchievementAssets/achievement-2.svg').default,
@@ -17,7 +17,7 @@ export const achievements = [
   },
   {
     id: 3,
-    title: 'Novato',
+    name: 'Novato',
     description: 'Ganhe 100 XP',
     requiredCount: 100,
     icon: require('../assets/AchievementAssets/achievement-3.svg').default,
@@ -25,7 +25,7 @@ export const achievements = [
   },
   {
     id: 4,
-    title: 'Principiante',
+    name: 'Principiante',
     description: 'Ganhe 500 XP',
     requiredCount: 500,
     icon: require('../assets/AchievementAssets/achievement-5.svg').default,
@@ -33,7 +33,7 @@ export const achievements = [
   },
   {
     id: 5,
-    title: 'Júnior',
+    name: 'Júnior',
     description: 'Ganhe 1000 XP',
     requiredCount: 1000,
     icon: require('../assets/AchievementAssets/achievement-7.svg').default,
@@ -41,7 +41,7 @@ export const achievements = [
   },
   {
     id: 6,
-    title: 'Pleno',
+    name: 'Pleno',
     description: 'Ganhe 2500 XP',
     requiredCount: 2500,
     icon: require('../assets/AchievementAssets/achievement-8.svg').default,
@@ -49,7 +49,7 @@ export const achievements = [
   },
   {
     id: 7,
-    title: 'Sênior',
+    name: 'Sênior',
     description: 'Ganhe 5000 XP',
     requiredCount: 5000,
     icon: require('../assets/AchievementAssets/achievement-9.svg').default,
@@ -57,7 +57,7 @@ export const achievements = [
   },
   {
     id: 8,
-    title: 'Coletor de estrelas',
+    name: 'Coletor de estrelas',
     description: 'Complete 5 estrelas',
     requiredCount: 5,
     icon: require('../assets/AchievementAssets/achievement-4.svg').default,
@@ -65,7 +65,7 @@ export const achievements = [
   },
   {
     id: 9,
-    title: 'Colecionador de estrelas',
+    name: 'Colecionador de estrelas',
     description: 'Complete 10 estrelas',
     requiredCount: 10,
     icon: require('../assets/AchievementAssets/achievement-10.svg').default,
@@ -73,7 +73,7 @@ export const achievements = [
   },
   {
     id: 10,
-    title: 'Caçador de estrelas',
+    name: 'Caçador de estrelas',
     description: 'Complete 20 estrelas',
     requiredCount: 20,
     icon: require('../assets/AchievementAssets/achievement-11.svg').default,
@@ -81,7 +81,7 @@ export const achievements = [
   },
   {
     id: 11,
-    title: 'Comprador de primeira viagem',
+    name: 'Comprador de primeira viagem',
     description: 'Compre um fogute',
     requiredCount: 1,
     icon: require('../assets/AchievementAssets/achievement-6.svg').default,
@@ -89,7 +89,7 @@ export const achievements = [
   },
   {
     id: 12,
-    title: 'Comprador moderado',
+    name: 'Comprador moderado',
     description: 'Compre 5 fogutes',
     requiredCount: 5,
     icon: require('../assets/AchievementAssets/achievement-14.svg').default,
@@ -97,7 +97,7 @@ export const achievements = [
   },
   {
     id: 13,
-    title: 'Comprador compulsivo',
+    name: 'Comprador compulsivo',
     description: 'Compre 10 fogutes',
     requiredCount: 10,
     icon: require('../assets/AchievementAssets/achievement-15.svg').default,
@@ -105,7 +105,7 @@ export const achievements = [
   },
   {
     id: 14,
-    title: 'Explorando terras distantes',
+    name: 'Explorando terras distantes',
     description: 'complete 5 planetas',
     requiredCount: 5,
     icon: require('../assets/AchievementAssets/achievement-12.svg').default,
@@ -113,7 +113,7 @@ export const achievements = [
   },
   {
     id: 15,
-    title: 'Ao infinito e além',
+    name: 'Ao infinito e além',
     description: 'complete 9 planetas',
     requiredCount: 9,
     icon: require('../assets/AchievementAssets/achievement-13.svg').default,
@@ -121,7 +121,7 @@ export const achievements = [
   },
   {
     id: 16,
-    title: 'A constância é a base de tudo',
+    name: 'A constância é a base de tudo',
     description: 'Mantenha uma sequência de 5 dias estudados',
     requiredCount: 5,
     icon: require('../assets/AchievementAssets/achievement-16.svg').default,
@@ -129,7 +129,7 @@ export const achievements = [
   },
   {
     id: 17,
-    title: 'A constância é a mãe da excelência',
+    name: 'A constância é a mãe da excelência',
     description: 'Mantenha uma sequência de 10 dias estudados',
     requiredCount: 10,
     icon: require('../assets/AchievementAssets/achievement-17.svg').default,
@@ -137,7 +137,7 @@ export const achievements = [
   },
   {
     id: 18,
-    title: 'A constância é a força que move universos',
+    name: 'A constância é a força que move universos',
     description: 'Mantenha uma sequência de 20 dias estudados',
     requiredCount: 20,
     icon: require('../assets/AchievementAssets/achievement-18.svg').default,

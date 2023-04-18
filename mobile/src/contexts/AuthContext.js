@@ -8,10 +8,9 @@ const fakeLoggedUser = {
   id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
   name: 'John Petros',
   email: 'joaopcarvalho.cds@gmail.com',
-  avatar_id: 'bd3313ad-16ef-49ae-baad-34a104752eb5',
-  coins: 100,
-  lives: 5,
-  xp: 50,
+  coins: 225,
+  xp: 550,
+  weekly_xp: 0,
   level: 1,
   unlocked_achievements_ids: [],
   unlocked_stars_ids: [1],
@@ -20,14 +19,23 @@ const fakeLoggedUser = {
   ranking_id: 1,
   streak: 0,
   week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
+  unlocked_stars: 2,
+  achievements_to_rescue: [],
+  avatar_id: 'c008e3a2-d79b-43f3-a1e2-77acdefeb909',
+  rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
+  acquired_rockets: 0,
+  ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
+  streak: 4,
+  week_status: ['todo', 'todo', 'done', 'done', 'todo', 'todo', 'todo'],
   completed_planets: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
-  didUpdateRanking: true,
-  didShowWinning: false,
-  starId: 8,
+  study_time: '13:00',
+  did_update_ranking: true,
+  did_complete_saturday: true,
+  last_position: 5,
 };
 
-export function AuthContextProvider({ children }) {
+export function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
 
   async function setUserInSession() {
@@ -71,7 +79,7 @@ export function AuthContextProvider({ children }) {
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
-      
+
       setLoggedUser(signedUser);
     } catch (error) {
       throw new Error(error);
@@ -94,7 +102,6 @@ export function AuthContextProvider({ children }) {
     try {
       const signedUser = await api.getUser(user.id);
       setLoggedUser(signedUser);
-      return user;
     } catch (error) {
       return error;
     }
@@ -129,6 +136,19 @@ export function AuthContextProvider({ children }) {
     }
   }
 
+  async function updateAuthUserEmail(email) {
+    // const {
+    //   data: { user },
+    //   error,
+    // } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.auth.updateUser({ email });
+
+    if (error) throw new Error(error.message);
+
+    console.log(data);
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -138,6 +158,7 @@ export function AuthContextProvider({ children }) {
         resetPassword,
         setUserInSession,
         updateLoggedUser,
+        updateAuthUserEmail,
         loggedUser,
       }}
     >

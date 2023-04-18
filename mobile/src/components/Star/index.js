@@ -1,15 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
-import * as C from './styles';
+import { useRocket } from '../../hooks/useRocket';
 
 import LockedStar from '../../assets/StarAssets/locked-star.svg';
 import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
 import UnlockedStarDust from '../../assets/StarAssets/unlocked-stardust.svg';
 import LockedStarDust from '../../assets/StarAssets/locked-stardust.svg';
 import StarSound from '../../assets/sounds/star-sound.wav';
-import { rockets } from '../../utils/rockets';
 
 import LottieView from 'lottie-react-native';
 import {
@@ -21,22 +20,24 @@ import {
   withTiming,
   withSequence,
 } from 'react-native-reanimated';
-import { Sound } from '../Sound';
 
+import { SvgUri } from 'react-native-svg';
+import { Sound } from '../Sound';
+import { getImage } from '../../utils/getImage';
+import { Loading } from '../Loading';
+import * as C from './styles';
+import api from '../../services/api';
+const animationDuration = 800;
+const delay = 300;
 export const starHeight = 100;
 
-export function Star({ id, name, number, isUnlocked, isChallenge }) {
-  const { loggedUser, updateLoggedUser } = useAuth();
-  const { lastUnlockedStarId, lastUnlockedStarYPosition, setLastUnlockedStarYPosition } =
-    useScroll();
-  const isLastStarUnlocked = lastUnlockedStarId === id;
+export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlockedStar }) {
+  const { rocket, setLastUnlockedStarYPosition } = useScroll();
+  const [isLoading, setIsloading] = useState(false);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
-  const delay = 300;
-  const RocketImage = rockets.find(rocket => rocket.id === loggedUser.selected_rocket_id).image;
-
   const navigation = useNavigation();
-
+  
   const StarScale = useSharedValue(1);
   const StarAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -44,15 +45,27 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     };
   });
 
-  function HandleStarClick() {
+  async function handleStarNavigation() {
+    if (isChallenge) {
+      try {
+        const challengeId = await api.getChallengeId(id);
+        navigation.navigate('Challenge', { id: challengeId });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigation.navigate('Lesson', { id });
+    }
+  }
+
+  function handleStarPress() {
     starAnimation.current.play(10, 50);
     starSound.current.play();
-
+    setIsloading(true);
     setTimeout(() => {
-      updateLoggedUser('starId', id, false);
-      const screen = isChallenge ? 'Challenge' : 'Lesson';
-      navigation.navigate(screen);
-    }, 100);
+      handleStarNavigation();
+      setIsloading(false);
+    }, 15);
   }
 
   const RocketRotate = useSharedValue(180);
@@ -60,21 +73,21 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
   const RocketTranslateY = useSharedValue(-1000);
   const RocketAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { rotate: `${RocketRotate.value}deg` },
-        { scale: RocketScale.value },
-      ],
+      transform: [{ rotate: `${RocketRotate.value}deg` }, { scale: RocketScale.value }],
     };
   });
 
   useEffect(() => {
-    StarScale.value = withRepeat(withSpring(1.15), isLastStarUnlocked ? -1 : 1, true);
+    StarScale.value = withRepeat(withSpring(1.15), isLastUnlockedStar ? -1 : 1, true);
 
     const timer = setTimeout(() => {
-      RocketRotate.value = withTiming(540, { duration: 800 });
+      RocketRotate.value = withTiming(540, { duration: animationDuration });
       RocketScale.value = withDelay(
         delay,
-        withSequence(withTiming(1.25, { duration: 800 }), withTiming(1, { duration: 800 }))
+        withSequence(
+          withTiming(1.25, { duration: animationDuration }),
+          withTiming(1, { duration: animationDuration })
+        )
       );
     }, delay);
     return () => clearTimeout(timer);
@@ -84,7 +97,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
     <C.Container
       animation={'bounceIn'}
       onLayout={event => {
-        if (isLastStarUnlocked) {
+        if (isLastUnlockedStar) {
           event.target.measure((x, y, width, height, pageX, pageY) => {
             setLastUnlockedStarYPosition(pageY);
           });
@@ -92,8 +105,8 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
       }}
     >
       <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
-      <C.StarButton onPress={HandleStarClick} disabled={isUnlocked}>
-        <C.StarContainer style={!isUnlocked && StarAnimatedStyle}>
+      <C.StarButton onPress={handleStarPress} disabled={isUnlocked}>
+        <C.StarContainer style={isLastUnlockedStar && StarAnimatedStyle}>
           {isUnlocked ? (
             <LockedStar width={100} height={85} />
           ) : (
@@ -104,18 +117,19 @@ export function Star({ id, name, number, isUnlocked, isChallenge }) {
               loop={false}
               duration={2500}
               style={{ width: 100, height: starHeight }}
-              colorFilters={[{ keypath: 'Star 1', color: 'red' }]}
             />
           )}
         </C.StarContainer>
-        <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>
+        <C.StarContent isUnlocked={isUnlocked}>
+          {isLoading ? <Loading /> : <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>}
+        </C.StarContent>
         <>
           <C.StarSign isUnlocked={isUnlocked}>
             <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>
           </C.StarSign>
-          {isLastStarUnlocked && (
+          {isLastUnlockedStar && rocket && (
             <C.Rocket style={RocketAnimatedStyle}>
-              <RocketImage width={75} height={75} />
+              <SvgUri uri={getImage('rockets', rocket.image)} width={75} height={75} />
             </C.Rocket>
           )}
         </>

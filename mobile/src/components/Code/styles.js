@@ -9,8 +9,8 @@ export const Container = styled.View`
 export const CodeButtons = styled.View`
   position: absolute;
   right: 0;
-  background-color: ${props => props.theme.colors.gray_900};
-  border: 0.6px solid ${props => props.theme.colors.green_700};
+  background-color: ${({ theme }) => theme.colors.gray_900};
+  border: 0.6px solid ${({ theme }) => theme.colors.green_700};
   width: 120px;
 `;
 
@@ -19,11 +19,11 @@ export const KeysList = styled.FlatList``;
 export const CodeButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 8px;
 `;
 
 export const Title = styled.Text`
   text-transform: uppercase;
-  color: ${props => (props.isRunButton ? props.theme.colors.green_500 : props.theme.colors.white)};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme, isRunButton }) => (isRunButton ? theme.colors.green_500 : theme.colors.white)};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;

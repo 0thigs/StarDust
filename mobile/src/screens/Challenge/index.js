@@ -10,44 +10,50 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import { challenges } from '../../utils/challenges';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 
 import * as C from './styles';
+import { useSharedValue } from 'react-native-reanimated';
+import { useChallenge } from '../../hooks/useChallenge';
 
 const earningsByDifficulty = {
   easy: {
-    coins: 50,
-    xp: 3000,
+    coins: 20,
+    xp: 125,
   },
   medium: {
-    coins: 100,
-    xp: 150,
+    coins: 30,
+    xp: 20,
   },
   hard: {
-    coins: 150,
-    xp: 200,
+    coins: 40,
+    xp: 30,
   },
 };
 
-export function Challenge() {
-  const { loggedUser } = useAuth();
-  const { title, texts, code, testCases, difficulty } = challenges.find(
-    challenge => challenge.starId === loggedUser.starId
-  );
+export function Challenge({ route }) {
+  // const challengeId = route.params.id;
+  const challengeId = 'bc9f8c6e-292d-46e6-b9b3-b27f6c04cdb3';
+  const { challenge } = useChallenge(challengeId);
+  const { id, title, texts, code, function_name, test_cases, difficulty, star_id, topic_id } =
+    challenge;
+  const { loggedUser, updateLoggedUser } = useAuth();
+
+  const [slides, setSlides] = useState([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userOutputs, setUserOutputs] = useState([]);
+
   const [isEnd, setIsEnd] = useState(false);
-  const [indicatorPositionX, setIndicatorPositionX] = useState(0);
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
   const sliderRef = useRef(null);
-  const slideWidth = useRef({ value: 0 });
-  const seconds = useRef({ value: 0 });
-  const userCode = useRef({ value: '' });
+  const seconds = useRef(0);
+  const userCode = useRef('');
 
-  function handleSliderScroll({ nativeEvent: { contentOffset, layoutMeasurement } }) {
-    setIndicatorPositionX(contentOffset.x);
-    slideWidth.current.value = layoutMeasurement.width;
+  const CurrentIndicatorPositionX = useSharedValue(0);
+
+  function handleSliderScroll({ nativeEvent: { contentOffset } }) {
+    CurrentIndicatorPositionX.value = contentOffset.x / 3;
   }
 
   function backToCode() {
@@ -64,41 +70,51 @@ export function Challenge() {
   }
 
   function addUserOutput(userOutput) {
-    if (userOutput) {
+    if (userOutput && !function_name) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
       });
     }
   }
 
-  function formatCode(code, input) {
+  function formatCode(code, inputValues) {
+    if (function_name) {
+      const paramsValues = inputValues.map(value =>
+        Array.isArray(value) ? `[${value.join(',')}]` : value
+      );
+      const params = '(' + paramsValues.join(',') + ')';
+      return code.concat(';' + function_name + params + ';');
+    }
+
+    if (!inputValues) return code;
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
-    if (matches.length !== input.length) {
+    if (matches.length !== inputValues.length) {
       return;
     }
 
-    input.forEach(input => (code = code.replace(regex, input)));
-    console.log(code);
+    inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
     return code;
   }
 
+  function handleResult(result) {
+    if (!result) return;
+    setUserOutputs(currentUserOutputs => {
+      return [...currentUserOutputs, JSON.parse(result).valor];
+    });
+  }
+
   async function verifyCase({ input }, index) {
-    let code = userCode.current.value;
-    if (input) {
-      code = formatCode(code, input);
-    }
+    let code = userCode.current;
+    code = formatCode(code, input);
 
     try {
-      console.log({ index });
       const { erros, resultado } = await execute(code, addUserOutput);
-
-      if (erros.length > 0) {
-        if (erros[0] instanceof Error) {
-          throw erros[0];
-        }
+      if (erros.length) {
+        if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
+      handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
     }
@@ -106,44 +122,50 @@ export function Challenge() {
 
   function handleUserCode() {
     setUserOutputs([]);
-    testCases.forEach(verifyCase);
+    test_cases.forEach(verifyCase);
   }
 
-  const slides = [
-    {
-      id: 1,
-      component: <Problem title={title} texts={texts} />,
-    },
-    {
-      id: 2,
-      component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
-    },
-    {
-      id: 3,
-      component: (
-        <Result
-          setIsEnd={setIsEnd}
-          testCases={testCases}
-          userOutputs={userOutputs}
-          backToCode={backToCode}
-        />
-      ),
-    },
-  ];
+  useEffect(() => {
+    if (!Object.entries(challenge).length) return;
+    const slides = [
+      {
+        id: 1,
+        component: <Problem title={title} texts={texts} />,
+      },
+      {
+        id: 2,
+        component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
+      },
+      {
+        id: 3,
+        component: (
+          <Result
+            challengeId={id}
+            setIsEnd={setIsEnd}
+            testCases={test_cases}
+            userOutputs={userOutputs}
+            backToCode={backToCode}
+          />
+        ),
+      },
+    ];
+    setSlides(slides);
+  }, [challenge, userOutputs]);
 
   useEffect(() => {
-    if (userOutputs.length > 0) {
+    if (userOutputs.length) {
       sliderRef.current.scrollToEnd();
+      setCurrentSlideIndex(2);
     }
   }, [userOutputs]);
 
   useEffect(() => {
     let timer = null;
     if (!isEnd) {
-      timer = setTimeout(() => seconds.current.value++, 1000);
+      timer = setTimeout(() => seconds.current++, 1000);
     }
     return () => clearTimeout(timer);
-  }, [seconds.current.value]);
+  }, [seconds.current]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
@@ -156,32 +178,31 @@ export function Challenge() {
         <TransitionScreenAnimation />
       ) : (
         <>
-          <ToastMenager
-            animationInTiming={700}
-            animationOutTiming={1000}
-            animationStyle={'rightInOut'}
-            width={320}
-            position="top"
-          />
-
           {!isEnd ? (
             <>
               <ChallengeHeader
                 title={title}
                 sliderRef={sliderRef}
-                slideWidth={slideWidth.current.value}
-                indicatorPositionX={indicatorPositionX}
+                setCurrentSlideIndex={setCurrentSlideIndex}
+                CurrentIndicatorPositionX={CurrentIndicatorPositionX}
+                currentSlideIndex={currentSlideIndex}
+                topicId={topic_id}
               />
 
-              <Slider sliderRef={sliderRef} slides={slides} onScroll={handleSliderScroll} />
+              <Slider
+                sliderRef={sliderRef}
+                slides={slides}
+                onScroll={handleSliderScroll}
+                setCurrentSlideIndex={setCurrentSlideIndex}
+              />
             </>
           ) : (
             <End
-              starId={loggedUser.starId}
-              isChallenge={true}
+              starId={star_id}
+              challengeId={id}
               _coins={earningsByDifficulty[difficulty].coins}
               _xp={earningsByDifficulty[difficulty].xp}
-              _seconds={seconds.current.value}
+              _seconds={seconds.current}
             />
           )}
         </>

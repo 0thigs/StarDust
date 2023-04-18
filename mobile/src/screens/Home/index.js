@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { usePlanet } from '../../hooks/usePlanet';
 import { useScroll } from '../../hooks/useScroll';
 import { useAchievement } from '../../hooks/useAchievement';
 import { useWindowDimensions } from 'react-native';
@@ -11,8 +12,8 @@ import { Achievement } from '../../components/Achievement';
 import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
+import { Meteor } from '../../components/Meteor';
 import { Animation } from '../../components/Animation';
-import { planets } from '../../utils/planets';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
@@ -23,23 +24,19 @@ import * as C from './styles';
 
 export function Home() {
   const { loggedUser } = useAuth();
-  const { unlockedAchievements } = useAchievement();
+  const { planets, lastUnlockedStarId } = usePlanet();
+  const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
   const { lastUnlockedStarYPosition } = useScroll();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isfirstScroll, setIsfirstScroll] = useState(true);
-  const [isFabButtonShown, setIsFabButtonShown] = useState(false);
+  const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [direction, setDirection] = useState('');
+  const [currentYOffset, setCurrentYOffset] = useState(0);
+  const visibleContentHeight = useRef(0);
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
-
-  function verifyIfIsStarUnlocked(star) {
-    if (loggedUser.unlocked_stars_ids.includes(star.id)) {
-      return { ...star, isUnlocked: true };
-    }
-    return star;
-  }
-
+ 
   function scrollToLastUnlockedStar() {
     scrollRef.current.scrollTo({
       x: 0,
@@ -49,6 +46,9 @@ export function Home() {
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
+    visibleContentHeight.current = layoutMeasurement.height;
+    setCurrentYOffset(contentOffset.y);
+
     if (isfirstScroll) {
       setIsfirstScroll(false);
       return;
@@ -60,14 +60,14 @@ export function Home() {
       (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
 
     setDirection(isLastUnlockedStarAboveLayout ? 'down' : 'up');
-    setIsFabButtonShown(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
+    setIsFabButtonVisible(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
   }
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsEndTransition(true);
-      setIsModalOpen(true);
-    }, 2500);
+      setIsModalVisible(true);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -105,13 +105,20 @@ export function Home() {
                 name={name}
                 icon={icon}
                 image={image}
-                stars={stars.map(verifyIfIsStarUnlocked)}
+                stars={stars}
+                lastUnlockedStarId={lastUnlockedStarId}
               />
             ))}
           </>
         )}
+        <Meteor
+          currentYOffset={currentYOffset}
+          visibleContentHeight={visibleContentHeight.current}
+          screenWidth={dimensions.width}
+        />
       </C.Container>
-      {isFabButtonShown && (
+
+      {isFabButtonVisible && (
         <FabButton
           onPress={scrollToLastUnlockedStar}
           icon={
@@ -124,15 +131,15 @@ export function Home() {
         />
       )}
 
-      {unlockedAchievements.length > 0 && (
+      {newUnlockedAchievements.length > 0 && (
         <Modal
-          isOpen={isModalOpen}
+          isVisible={isModalVisible}
           type={'earning'}
           title={'Uau! Parece que você ganhou recompensa(s)'}
           body={
             <C.Achievements>
-              {unlockedAchievements.map(
-                ({ id, title, icon, description, requiredCount, metric }) => (
+              {newUnlockedAchievements.map(
+                ({ id, name, icon, description, required_amount, metric }) => (
                   <C.AchievementContainer key={id}>
                     <Animation
                       source={RewardLight}
@@ -145,11 +152,11 @@ export function Home() {
                     />
                     <Achievement
                       key={id}
-                      title={title}
+                      name={name}
                       description={description}
                       icon={icon}
-                      requiredCount={requiredCount}
-                      metric={loggedUser[metric]}
+                      requiredAmount={required_amount}
+                      currentAmount={loggedUser[metric]}
                       isUnlocked={true}
                     />
                   </C.AchievementContainer>
@@ -162,7 +169,7 @@ export function Home() {
               title={'Entendido'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setIsModalOpen(false)}
+              onPress={() => setIsModalVisible(false)}
             />
           }
         />
@@ -170,3 +177,4 @@ export function Home() {
     </>
   );
 }
+

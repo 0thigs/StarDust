@@ -1,6 +1,4 @@
 import { createContext, useReducer } from 'react';
-import { useAuth } from '../hooks/useAuth';
-import { questions } from '../utils/questions';
 
 export const LessonContext = createContext();
 
@@ -11,14 +9,18 @@ const initialState = {
   questions: [],
   currentQuestion: 0,
   wrongsCount: 0,
-  livesCount: 0,
+  livesCount: 5,
   secondsCount: 0,
   time: '',
+  verifyAnswer: () => {},
+  isAnswerWrong: false,
+  isAnswerVerified: false,
+  isAnswered: false,
 };
 
 const LessonReducer = (state, action) => {
   switch (action.type) {
-    case 'changeStage':
+    case 'showQuiz':
       return {
         ...state,
         currentStage: stages[1],
@@ -33,9 +35,11 @@ const LessonReducer = (state, action) => {
         ...state,
         currentQuestion: nextQuestion,
         currentStage: isEnd ? stages[2] : state.currentStage,
+        isAnswered: false,
       };
-    case 'reorderQuestions':
-      const reorderedQuestions = state.questions.sort(() => {
+    case 'setQuestions':
+      const questions = action.payload;
+      const reorderedQuestions = questions.sort(() => {
         return Math.random() - 0.5;
       });
       return {
@@ -50,7 +54,7 @@ const LessonReducer = (state, action) => {
     case 'decrementLivesCount':
       return {
         ...state,
-        livesCount: state.livesCount - 1,
+        livesCount: state.livesCount === 0 ? state.livesCount : state.livesCount - 1,
       };
     case 'incrementSecondsCount':
       return {
@@ -62,6 +66,11 @@ const LessonReducer = (state, action) => {
         ...state,
         time: action.payload,
       };
+    case 'setState':
+      return {
+        ...state,
+        [action.payload.prop]: action.payload.value,
+      };
     case 'resetState':
       return initialState;
     default:
@@ -70,12 +79,6 @@ const LessonReducer = (state, action) => {
 };
 
 export const LessonProvider = ({ children }) => {
-  const { loggedUser } = useAuth();
-  const currentQuestions = questions.filter(question => question.starId === loggedUser.starId);
-
-  initialState.livesCount = loggedUser.lives;
-  initialState.questions = currentQuestions;
-
   const value = useReducer(LessonReducer, initialState);
 
   return <LessonContext.Provider value={value}>{children}</LessonContext.Provider>;

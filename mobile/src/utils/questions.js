@@ -27,7 +27,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de vestir um traje espacial (a ordem lógica é sempre de cima para baixo)',
+    stem: 'Ordene a sequência correta de se vestir um traje espacial (Pressione e segure item)',
     items: [
       {
         id: 1,
@@ -50,7 +50,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Segure e arraste cada elemento, de modo que fique logicamente correto a maneira de ligar um foguete (a ordem lógica é sempre de cima para baixo)',
+    stem: 'Ordene a sequência correta de se ligar um foguete (Pressione e segure item)',
     items: [
       {
         id: 1,
@@ -79,7 +79,7 @@ export const questions = [
   {
     starId: 2,
     type: 'selection',
-    stem: 'Como com que um programa escreva "que horas são?"',
+    stem: 'Como fazer que um programa escreva "que horas são?"',
     options: [
       'escreva(que horas são)',
       'imprima("que horas são")',
@@ -219,37 +219,37 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     stem: 'O nome do comando para declarar variáveis é',
     answer: 'var',
   },
-  //   {
-  //     starId: 5,
-  //     type: 'open',
-  //     stem: 'O nome que se dá para o ato de juntar textos em um programa é',
-  //     answer: 'concatenação',
-  //   },
-  //   {
-  //     starId: 5,
-  //     type: 'checkbox',
-  //     stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
-  //     options: ['letra', '"não é um texto"', '"100"', '2.5'],
-  //     correctOptions: ['"não é um texto"', '"100"'],
-  //   },
-  //   {
-  //     starId: 5,
-  //     type: 'selection',
-  //     stem: 'Qual será a saída do seguinte código',
-  //     code: `
-  //     var cor = "vermelho"
-  //     var nome = "Datahon"
-  //     var nome = "Planeta " + nome
+  {
+    starId: 5,
+    type: 'open',
+    stem: 'O nome que se dá para o ato de juntar textos em um programa é',
+    answer: 'concatenação',
+  },
+  {
+    starId: 5,
+    type: 'checkbox',
+    stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
+    options: ['letra', '"não é um texto"', '"100"', '2.5'],
+    correctOptions: ['"não é um texto"', '"100"'],
+  },
+  {
+    starId: 5,
+    type: 'selection',
+    stem: 'Qual será a saída do seguinte código',
+    code: `
+      var cor = "vermelho"
+      var nome = "Datahon"
+      var nome = "Planeta " + nome
 
-  //     escreva(nome, " tem a cor ", cor)`,
-  //     options: [
-  //       'Planeta Datahon tem a cor vermelha',
-  //       'Planeta Datahon tem a cor azul',
-  //       'Datahon tem a cor vermelha',
-  //       'Planeta tem a cor vermelha',
-  //     ],
-  //     answer: 'Planeta Datahon tem a cor vermelha',
-  //   },
+      escreva(nome, " tem a cor ", cor)`,
+    options: [
+      'Planeta Datahon tem a cor vermelha',
+      'Planeta Datahon tem a cor azul',
+      'Datahon tem a cor vermelha',
+      'Planeta tem a cor vermelha',
+    ],
+    answer: 'Planeta Datahon tem a cor vermelha',
+  },
   {
     starId: 5,
     type: 'drag-and-drop-click',
@@ -333,13 +333,13 @@ escreva("planeta encontrado: ", nomePlaneta)`,
         indentLevel: 0,
       },
       {
-        id: 1,
-        texts: ['var combustivelTotal = combustivelAtual ', 'dropZone'],
+        id: 2,
+        texts: ['var combustivelTotal', 'dropZone', 'combustivelAtual ', 'dropZone'],
         indentLevel: 0,
       },
       {
-        id: 2,
-        texts: ['escreva(`o foguete tem ${combustivelTotal} de combustível no total'],
+        id: 3,
+        texts: ['escreva(`o foguete tem  ${combustivelTotal} de combustível no total'],
         indentLevel: 0,
       },
     ],
@@ -380,7 +380,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 6,
     type: 'selection',
-    stem: 'Qual será o tipo do resultado da expressão 5 ÷ 2',
+    stem: 'Qual será o tipo do resultado de 5 ÷ 2',
     options: ['inteiro', '2.5', 'real', 'texto'],
     answer: 'real',
   },
@@ -472,5 +472,498 @@ fimalgoritmo
       },
     ],
     correctItemsIdsSequence: [2, 4],
+  },
+  {
+    starId: 8,
+    type: 'checkbox',
+    stem: 'Marque as opções que são operadores válidos para um programa',
+    options: ['/', '+', '÷', 'x'],
+    correctOptions: ['/', '+'],
+  },
+  {
+    starId: 8,
+    type: 'selection',
+    stem: 'Qual será o resultado de 5 + 3 * 2?',
+    options: ['11', '16', '13', '15'],
+    answer: '11',
+  },
+  {
+    starId: 8,
+    type: 'selection',
+    stem: 'Qual será o resultado de 50 % 2?',
+    options: ['0', '25', '1', '100'],
+    answer: '0',
+  },
+  {
+    starId: 8,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a 20',
+    lines: [
+      {
+        id: 1,
+        texts: ['5 ', 'dropZone', ' 2 ', 'dropZone', ' 4', ' = 13'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '/',
+      },
+      {
+        id: 2,
+        label: '+',
+      },
+      {
+        id: 3,
+        label: '*',
+      },
+      {
+        id: 4,
+        label: 'x',
+      },
+      {
+        id: 5,
+        label: '-',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3],
+  },
+  {
+    starId: 8,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a 20',
+    lines: [
+      {
+        id: 1,
+        texts: ['dropZone', ' + ', 'dropZone', ' / ', '2', ' = 10'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '4',
+      },
+      {
+        id: 2,
+        label: '12',
+      },
+      {
+        id: 3,
+        label: '6',
+      },
+      {
+        id: 4,
+        label: '-4',
+      },
+      {
+        id: 5,
+        label: '10',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 9,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `
+var altitudeAtual = 2000;
+var altitudeSegura = 1500;
+
+var altitudeSegura = altitudeSegura + 500
+escreva(altitudeSegura < altitudeAtual)
+    `,
+    options: ['falso', 'verdadeiro', '1500', '2000'],
+    answer: 'falso',
+  },
+  {
+    starId: 9,
+    type: 'open',
+    stem: 'Qual símbolo você usuaria para verificar se 9 é maior ou igual a 7?',
+    answer: '>=',
+  },
+  {
+    starId: 9,
+    type: 'selection',
+    stem: 'Qual o tipo de dado que se obtém ao usar operadores relacionais?',
+    options: ['falso', 'verdadeiro', 'lógico', 'texto'],
+    answer: 'lógico',
+  },
+  {
+    starId: 9,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var velocidadeLimite = 5000'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var velocidadeAtual ', 'dropZone', ' 2000'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (', 'velocidadeLimite ', 'dropZone', ' velocidadeAtual)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '=',
+      },
+      {
+        id: 2,
+        label: '!=',
+      },
+      {
+        id: 3,
+        label: '==',
+      },
+      {
+        id: 4,
+        label: '<',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 9,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var combustivelAtual = ', 'dropZone', ';'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var combustivelNecessario = ', 'dropZone', ';'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (combustivelAtual <= combustivelNecessario);'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '250',
+      },
+      {
+        id: 2,
+        label: '300',
+      },
+      {
+        id: 3,
+        label: 'verdadeiro',
+      },
+      {
+        id: 4,
+        label: '<',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 10,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código? (Se for muito grande, você pode scrollar o código para baixo):',
+    code: `var atmosfera = 7000;
+var altituteAtual = 4000;
+var fogueteDecolou = verdadeiro;
+var saiuDoPlaneta = altituteAtual > atmosfera e fogueteDecolou
+escreva(saiuDoPlaneta)
+    `,
+    options: ['falso', 'verdadeiro', '11000', 'lógico'],
+    answer: 'falso',
+  },
+  {
+    starId: 10,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a linha com os operadores para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var temOxigenio = verdadeiro;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var temComida = falso;'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva (', 'temOxigenio ', 'dropZone', ' temComida)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'e',
+      },
+      {
+        id: 2,
+        label: '!',
+      },
+      {
+        id: 3,
+        label: 'ou',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
+  {
+    starId: 10,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['var acimaVelocidadeLuz = ', 'dropZone', ' < 3600;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var fogueteTemResistencia = ', 'dropZone', ';'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['var seguranca = acimaVelocidadeLuz e fogueteTemResistencia'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '1200',
+      },
+      {
+        id: 2,
+        label: 'verdadeiro',
+      },
+      {
+        id: 3,
+        label: 'falso',
+      },
+      {
+        id: 4,
+        label: '3700',
+      },
+    ],
+    correctItemsIdsSequence: [4, 2],
+  },
+  {
+    starId: 10,
+    type: 'open',
+    stem: 'Qual o símbolo usado para inverter valores lógicos?',
+    answer: '!',
+  },
+  {
+    starId: 10,
+    type: 'checkbox',
+    stem: 'Marque as opções que são operadores lógicos',
+    options: ['>', 'e', '!', 'ou'],
+    correctOptions: ['e', '!', 'ou'],
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o programa para que ele fique na ordem correta',
+    items: [
+      {
+        id: 1,
+        label: 'var planeta = verdadeiro',
+      },
+      {
+        id: 2,
+        label: 'se (planeta) {',
+      },
+      {
+        id: 3,
+        label: '    escreva("De fato se trata de um planeta")',
+      },
+      {
+        id: 4,
+        label: '}',
+      },
+    ],
+  },
+  {
+    starId: 11,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `var planetaCor = "bege";
+var temAtmosferaBoa = 2022 > 2023;
+
+se (temAtmosferaBoa) {
+     planetaCor = "marrom";
+}
+escreva(planetaCor);
+    `,
+    options: ['bege', 'marrom', 'preto', 'indefinido'],
+    answer: 'bege',
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a "planeta grande"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var planetaDiametro = 1800'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['se (planetaDiametro ', 'dropZone' ,' 15000) {'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['escreva("planeta ', 'dropZone', ' ");'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '>',
+      },
+      {
+        id: 2,
+        label: '<=',
+      },
+      {
+        id: 3,
+        label: 'pequeno',
+      },
+      {
+        id: 4,
+        label: 'grande',
+      },
+    ],
+    correctItemsIdsSequence: [1, 4],
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['se ( ', 'dropZone', ' ) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreva(verdadeiro);'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'falso',
+      },
+      {
+        id: 2,
+        label: '1 > 2',
+      },
+      {
+        id: 3,
+        label: '!falso',
+      },
+      {
+        id: 4,
+        label: '!verdadeiro',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
+  {
+    starId: 12,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `var planetaPopulacao = 1000 * 1000;
+var temAtmosferaBoa = 2022 > 2023;
+var status = "pouca gente";
+
+se (planetaPopulacao > 1000) {
+    var status = "muita gente"
+}
+escreva(status);
+    `,
+    options: ['pouca gente', 'muita gente', 'gente', 'indefinido'],
+    answer: 'pouca gente',
+  },
+  {
+    starId: 12,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a "planeta rico"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var dinheiro = ', '2500 * 4'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['se (dinheiro > 10000) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(', 'dropZone', ')'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['} senao {'],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: ['escreva( ', 'dropZone', ' )'],
+        indentLevel: 1,
+      },
+      {
+        id: 6,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'planeta rico',
+      },
+      {
+        id: 2,
+        label: 'planeta pobre',
+      },
+    ],
+    correctItemsIdsSequence: [1],
   },
 ];

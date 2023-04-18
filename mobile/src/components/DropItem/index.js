@@ -2,8 +2,18 @@ import { useEffect, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming, FadeInDown } from 'react-native-reanimated';
+const animationDuration = 500;
 
-export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorderedItems }) {
+export function DropItem({
+  id,
+  label,
+  zones,
+  setZones,
+  isAnswerVerified,
+  reorderedItems,
+  isAnswerWrong,
+  linesWidth,
+}) {
   const [isItemInZone, setIsItemInZone] = useState(false);
   const [isFirstRendering, setisFirstRendering] = useState(false);
   const [itemWidth, setItemWidth] = useState(null);
@@ -22,8 +32,8 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
   const ItemAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
-        { translateX: withTiming(currentPosition.x.value, { duration: 500 }) },
-        { translateY: withTiming(currentPosition.y.value, { duration: 500 }) },
+        { translateX: withTiming(currentPosition.x.value, { duration: animationDuration }) },
+        { translateY: withTiming(currentPosition.y.value, { duration: animationDuration }) },
       ],
     };
   });
@@ -39,6 +49,16 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
     currentPosition.y.value = 0;
   }
 
+  function adjustPosition(id) {
+    const targetZone = zones.find(zone => zone.itemId === id);
+    if (!targetZone || !isItemInZone) return;
+
+    const difference = currentPosition.x.value + initialPosition.x.value - targetZone.x + 10;
+
+    if (difference === 0) return;
+    currentPosition.x.value += difference < 0 ? Math.abs(difference) : -difference;
+  }
+
   function removeItemInZone(id) {
     resetPosition();
     const targetZone = zones.find(zone => zone.itemId === id);
@@ -49,7 +69,7 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
   }
 
   function addItemInZone(id) {
-    for (let zone of zones) {
+    for (const zone of zones) {
       if (!zone.itemId) {
         currentPosition.x.value =
           zone.x - initialPosition.x.value - C.itemPadding - C.itemBorderWidth * 2;
@@ -74,11 +94,9 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
   }
 
   useEffect(() => {
-    if (isItemInZone) {
-      resetPosition();
-      setIsItemInZone(false);
-    }
-  }, [reorderedItems]);
+    if (isFirstRendering) return
+    adjustPosition(id);
+  }, [zones]);
 
   return (
     <C.DropItem
@@ -98,7 +116,9 @@ export function DropItem({ id, label, zones, setZones, isAnswerVerified, reorder
       onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick(id)}
       style={ItemAnimatedStyle}
     >
-      <C.Label isItemInZone={isItemInZone}>{label}</C.Label>
+      <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
+        {label}
+      </C.Label>
     </C.DropItem>
   );
 }

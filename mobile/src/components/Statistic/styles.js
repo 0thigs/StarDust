@@ -7,6 +7,7 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 12px;
+  margin-bottom: 24px;
 `;
 
 const StatisticPaddingBetween = 4;

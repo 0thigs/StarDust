@@ -9,6 +9,7 @@ import Asking from '../../assets/animations/asking-animation.json';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 import { ZoomIn, ZoomOut } from 'react-native-reanimated';
+import { useConfig } from '../../hooks/useConfig';
 
 const effects = [
   {
@@ -38,18 +39,21 @@ const effects = [
   },
 ];
 
-export function Modal({ isOpen, type = 'generic', title, body, footer }) {
+export function Modal({ isVisible, type = 'generic', playSong = true, title, body, footer }) {
+  const {
+    config: { canPlaySound },
+  } = useConfig();
   const { animation, sound } = effects.find(animation => animation.id === type.toLocaleLowerCase());
-  const soundRef = useRef();
+  const soundRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen && type !== 'generic') {
+    if (canPlaySound && playSong && isVisible && type !== 'generic') {
       soundRef.current.play();
     }
-  }, [isOpen]);
+  }, [isVisible]);
 
   return (
-    <C.Container transparent visible={isOpen}>
+    <C.Container transparent visible={isVisible}>
       <C.Fade>
         <C.Content entering={ZoomIn.duration(500)} exiting={ZoomOut.duration(500)}>
           <C.Header>
@@ -61,8 +65,8 @@ export function Modal({ isOpen, type = 'generic', title, body, footer }) {
           <C.Body>{body}</C.Body>
           <C.Footer>{footer}</C.Footer>
         </C.Content>
+        {type !== 'generic' && <Sound ref={soundRef} soundFile={sound} />}
       </C.Fade>
-      {type !== 'generic' && <Sound ref={soundRef} soundFile={sound} />}
     </C.Container>
   );
 }
