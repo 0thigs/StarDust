@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 import { BackHandler } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 import { useConfig } from '../../hooks/useConfig';
@@ -12,12 +14,13 @@ import * as Icon from 'react-native-feather';
 import * as C from './styles';
 import ToggleSwitch from 'toggle-switch-react-native';
 
-import { useForm, Controller } from 'react-hook-form';
+import { Toast } from 'toastify-react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TimePicker } from '../../components/TimePicker';
+import { Modal } from '../../components/Modal';
 
 export function Settings({ navigation: { goBack } }) {
-  const { loggedUser, updateAuthUserEmail } = useAuth();
+  const { loggedUser, updateAuthUserEmail, signOut } = useAuth();
   const { config, updateConfig } = useConfig();
   const [currentData, setCurrentData] = useState({
     name: loggedUser.name,
@@ -25,6 +28,8 @@ export function Settings({ navigation: { goBack } }) {
   });
   const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const SettingsSchema = yup.object({
     email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
@@ -41,7 +46,6 @@ export function Settings({ navigation: { goBack } }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
- 
   function handleExitButton() {
     if (isUpdatingPasswordForm) {
       setIsUpdatingPasswordForm(false);
@@ -67,6 +71,35 @@ export function Settings({ navigation: { goBack } }) {
   function handleToggle(configName, value) {
     updateConfig(configName, !value);
   }
+
+  async function handleSignOut() {
+    try {
+      await signOut();
+
+      navigation.reset({
+        routes: [{ name: 'SignIn' }],
+      });
+    } catch (error) {
+      console.log(error);
+      Toast.error('Falha ao tentar sair da conta');
+    }
+  }
+
+  async function handleDeleteAccount() {
+    try {
+      await signOut();
+
+      navigation.reset({
+        routes: [{ name: 'SignIn' }],
+      });
+    } catch (error) {
+      console.log(error);
+      Toast.error('Falha ao tentar sair da conta');
+    }
+  }
+
+
+  
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
@@ -184,6 +217,7 @@ export function Settings({ navigation: { goBack } }) {
           title={'Sair da conta'}
           background={theme.colors.green_500}
           color={theme.colors.black}
+          onPress={handleSignOut}
         />
         <Button
           title={'Deletar conta'}
@@ -191,6 +225,30 @@ export function Settings({ navigation: { goBack } }) {
           color={theme.colors.white}
         />
       </C.Content>
+
+      <Modal
+        isVisible={isModalVisible}
+        type={'crying'}
+        playSong={false}
+        title={'Calma aí! Deseja mesmo DELETAR A SUA CONTA 😢?'}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Deletar'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={handleDeleteAccount}
+            />
+            <Button
+              title={'Cancelar'}
+              color={theme.colors.black}
+              background={theme.colors.blue_300}
+              onPress={() => setIsModalVisible(false)}
+            />
+          </>
+        }
+      />
     </C.Container>
   );
 }

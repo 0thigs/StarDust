@@ -34,7 +34,7 @@ export default {
     const { data, error } = await supabase
       .from('planets')
       .select('*, stars (*)')
-      .order('order', { ascending: true })
+      .order('position', { ascending: true })
       .order('number', { foreignTable: 'stars', ascending: true });
     if (error) {
       throw new Error(error.message);

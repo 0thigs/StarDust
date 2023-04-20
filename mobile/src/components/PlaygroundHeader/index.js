@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
-import { ArrowLeft, Share2 } from 'react-native-feather';
+import { ArrowLeft, MoreVertical, Share2 } from 'react-native-feather';
 import { RangeInput } from '../RangeInput';
 import { Prompt } from '../Prompt';
 import { Modal } from '../Modal';
@@ -99,9 +99,9 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
 
       <C.Title>{title}</C.Title>
 
-      <C.HeaderButton activeOpacity={0.7}>
+      {/* <C.HeaderButton activeOpacity={0.7}>
         <Share2 color={iconColor} />
-      </C.HeaderButton>
+      </C.HeaderButton> */}
 
       <PopoverMenu
         ref={popoverMenuRef}

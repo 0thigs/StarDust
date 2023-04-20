@@ -74,31 +74,29 @@ export function LessonHeader() {
         )}
       </C.ProgressBar>
 
-      {isModalVisible && (
-        <Modal
-          isVisible={isModalVisible}
-          type={'crying'}
-          playSong={false}
-          title={'Deseja mesmo sair?'}
-          body={null}
-          footer={
-            <>
-              <Button
-                title={'Sair'}
-                color={theme.colors.white}
-                background={theme.colors.red_700}
-                onPress={handleCloseButton}
-              />
-              <Button
-                title={'Voltar'}
-                color={theme.colors.black}
-                background={theme.colors.blue_300}
-                onPress={() => setIsModalVisible(false)}
-              />
-            </>
-          }
-        />
-      )}
+      <Modal
+        isVisible={isModalVisible}
+        type={'crying'}
+        playSong={false}
+        title={'Deseja mesmo sair?'}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Sair'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={handleCloseButton}
+            />
+            <Button
+              title={'Voltar'}
+              color={theme.colors.black}
+              background={theme.colors.blue_300}
+              onPress={() => setIsModalVisible(false)}
+            />
+          </>
+        }
+      />
     </C.Container>
   );
 }

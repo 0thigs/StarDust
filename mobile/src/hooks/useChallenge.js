@@ -4,9 +4,6 @@ import api from '../services/api';
 
 export const useChallenge = challengeId => {
   const { loggedUser } = useAuth();
-  const {
-    loggedUser: { completed_challenges_ids },
-  } = useAuth();
   const [challenges, setChallenges] = useState([]);
   const [challenge, setChallenge] = useState({});
 

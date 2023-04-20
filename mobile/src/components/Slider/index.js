@@ -43,7 +43,7 @@ function SliderComponent({
       scrollEventThrottle={32}
       onScroll={onScroll}
       scrollEnabled={scrollEnabled}
-      onViewableItemsChanged={onViewableItemsChanged.current}
+      onViewableItemsChanged={setCurrentSlideIndex && onViewableItemsChanged.current}
       viewabilityConfig={viewabilityConfig}
     />
   );

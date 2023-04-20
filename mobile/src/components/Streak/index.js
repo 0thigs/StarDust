@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({ user: { streak, week_status, didCompleteSaturday, created_at } }) {
+export function Streak({ user: { streak, week_status, did_complete_saturday, created_at } }) {
   const { updateLoggedUser } = useAuth();
   const route = useRoute();
   const [weekStatus, setWeekStatus] = useState([]);
@@ -31,8 +31,8 @@ export function Streak({ user: { streak, week_status, didCompleteSaturday, creat
 
   async function updateStreak() {
     if (today !== 'todo') return;
-
-    if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && didCompleteSaturday)) {
+    if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && did_complete_saturday)) {
+      console.log({ did_complete_saturday });
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
       updateLoggedUser('streak', updatedStreak);
@@ -43,7 +43,7 @@ export function Streak({ user: { streak, week_status, didCompleteSaturday, creat
     }
     updateWeekStatus(todayIndex, 'done');
 
-    if (todayIndex !== 6 && didCompleteSaturday) updateLoggedUser('did_complete_saturday', false);
+    if (todayIndex !== 6 && did_complete_saturday) updateLoggedUser('did_complete_saturday', false);
   }
 
   function checkHasUndoneDay() {

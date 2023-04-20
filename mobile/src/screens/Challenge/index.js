@@ -33,12 +33,20 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = 'bc9f8c6e-292d-46e6-b9b3-b27f6c04cdb3';
+  const challengeId = '6602259c-4082-470e-9211-3740033b0271';
   const { challenge } = useChallenge(challengeId);
-  const { id, title, texts, code, function_name, test_cases, difficulty, star_id, topic_id } =
-    challenge;
-  const { loggedUser, updateLoggedUser } = useAuth();
-
+  const {
+    id,
+    title,
+    texts,
+    code,
+    function_name,
+    test_cases,
+    difficulty,
+    star_id,
+    topic_id,
+    isCompleted,
+  } = challenge;
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userOutputs, setUserOutputs] = useState([]);
@@ -203,6 +211,7 @@ export function Challenge({ route }) {
               _coins={earningsByDifficulty[difficulty].coins}
               _xp={earningsByDifficulty[difficulty].xp}
               _seconds={seconds.current}
+              isCompleted={isCompleted}
             />
           )}
         </>

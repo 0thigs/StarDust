@@ -119,7 +119,7 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
 
-      <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} />
+      <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} setCurrentSlideIndex={null} />
 
       <Modal
         type={'crying'}

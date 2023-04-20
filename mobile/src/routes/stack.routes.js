@@ -20,12 +20,12 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="Intro" component={Intro} />
-      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
-      <Stack.Screen name="Challenge" component={Challenge} />
       <Stack.Screen name="Lesson" component={Lesson} />
+      <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
+      <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="Challenge" component={Challenge} />
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="Playground" component={Playground} />
       <Stack.Screen name="Splash" component={Splash} />

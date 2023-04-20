@@ -8,6 +8,8 @@ import { PopoverMenu } from '../PopoverMenu';
 import { UserAvatar } from '../UserAvatar';
 import { Button } from '../Button';
 import { MoreHorizontal } from 'react-native-feather';
+import { Toast } from 'toastify-react-native';
+
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
