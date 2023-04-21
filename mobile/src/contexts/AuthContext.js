@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { supabase } from '../services/supabase';
 import api from '../services/api';
 
@@ -125,6 +125,38 @@ export function AuthProvider({ children }) {
     return success;
   }
 
+  async function refreshSession(accessToken, refreshToken) {
+    try {
+      const { data, error } = await supabase.auth.setSession({
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjgyMTAwNTk5LCJzdWIiOiJjYzcxYjI4ZC05MzY5LTQ3YmEtODBkNy1lNmUxOTNhZjczZDYiLCJlbWFpbCI6ImpvYW9wY2FydmFsaG8uY2RzQGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4MjA5Njk5OX1dLCJzZXNzaW9uX2lkIjoiMjAyNzcxMzMtNTNiNC00NWM4LTgyMzgtMzBhYjljMzY0YWQ4In0.taW_LOkVrFtl_Eo9GnIueQ9MflN1QLCHp5LfAiV8zMs',
+        refresh_token: 'uc1S2MWk4g64k19nn688SA',
+      });
+
+      console.log({ data });
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function updateUserPassword(newPassword, accessToken, refreshToken) {
+    refreshSession(accessToken, refreshToken);
+    return;
+    try {
+      const { data, error } = await supabase.auth.updateUser(accessToken, {
+        password: newPassword,
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function updateLoggedUser(prop, data, updateDatabase = true) {
     setLoggedUser(currentData => ({ ...currentData, [prop]: data }));
 
@@ -136,19 +168,6 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function updateAuthUserEmail(email) {
-    // const {
-    //   data: { user },
-    //   error,
-    // } = await supabase.auth.getUser();
-
-    const { data, error } = await supabase.auth.updateUser({ email });
-
-    if (error) throw new Error(error.message);
-
-    console.log(data);
-  }
-
   return (
     <AuthContext.Provider
       value={{
@@ -158,7 +177,7 @@ export function AuthProvider({ children }) {
         resetPassword,
         setUserInSession,
         updateLoggedUser,
-        updateAuthUserEmail,
+        updateUserPassword,
         loggedUser,
       }}
     >

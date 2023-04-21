@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Toast } from 'toastify-react-native';
+import ToastMenager, { Toast } from 'toastify-react-native';
 
 import { Input } from '../../components/Input';
 import { ErrorMessage } from '../../components/ErrorMessage';
@@ -12,16 +13,20 @@ import * as Icon from 'react-native-feather';
 import * as yup from 'yup';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { supabase } from '../../services/supabase';
+import { createURL } from 'expo-linking';
+import { Linking } from 'react-native';
 
 export const EmailSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
 });
 
 export function ChangePassword({ route }) {
+  const { resetPassword, updateUserPassword } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const navigation = useNavigation();
+  const url = createURL('change_password', {});
+  //   console.log('URL => ' + url);
 
   const {
     control,
@@ -33,13 +38,8 @@ export function ChangePassword({ route }) {
     setIsLoading(true);
     const { email } = data;
     console.log(email);
-
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email);
-      if (error) {
-        throw new Error(error.message);
-      }
-
+      resetPassword(email);
       Toast.success('E-mail enviado com sucesso');
       setIsSuccess(true);
     } catch (error) {
@@ -48,6 +48,19 @@ export function ChangePassword({ route }) {
       setIsLoading(false);
     }
   }
+
+  function handleDeepLink({ url }) {
+    console.log({ url });
+    const accessToken = url.split('access_token=')[1].split('&')[0];
+    const refreshtoken = url.split('refresh_token=')[1].split('&')[0];
+    updateUserPassword('654321', accessToken, refreshtoken);
+  }
+
+  useEffect(() => {
+    const subscription = Linking.addEventListener('url', handleDeepLink);
+    // updateUserCredential('password', '654123')
+    // console.log(route.params?.isEmailVerified);
+  }, []);
 
   return (
     <C.Container>
