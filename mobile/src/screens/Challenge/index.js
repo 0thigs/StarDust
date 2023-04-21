@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-
 import { ChallengeHeader } from '../../components/ChallengeHeader';
 import { Code } from '../../components/Code';
 import { Problem } from '../../components/Problem';

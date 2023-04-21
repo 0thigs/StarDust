@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { BackHandler } from 'react-native';
 import * as C from './styles';
 
 import HomeIcon from '../../assets/TabAssets/home-tab-icon.svg';
@@ -38,7 +36,7 @@ const screens = [
 ];
 const iconSize = 50;
 
-export function CustomTabBar({ state, navigation, route }) {
+export function CustomTabBar({ state, navigation }) {
   const { loggedUser } = useAuth();
 
   function goTo(screenName) {
@@ -47,7 +45,6 @@ export function CustomTabBar({ state, navigation, route }) {
     });
   }
 
- 
   return (
     <C.Container>
       {screens.map(({ name, label, Icon }, index) => (

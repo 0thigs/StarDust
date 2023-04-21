@@ -5,7 +5,7 @@ import { SignIn } from '../screens/SignIn';
 import { DrawerRoutes } from './drawer.routes';
 import { Lesson } from '../screens/Lesson';
 import { Settings } from '../screens/Settings';
-import { ForgotPassword } from '../screens/ForgotPassword';
+import { ChangePassword } from '../screens/ChangePassword/index';
 import { Challenge } from '../screens/Challenge';
 import { Codes } from '../screens/Codes';
 import { Playground } from '../screens/Playground';
@@ -20,8 +20,9 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Lesson" component={Lesson} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
+      <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Challenge" component={Challenge} />
@@ -29,7 +30,6 @@ export function StackRoutes() {
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="Playground" component={Playground} />
       <Stack.Screen name="Splash" component={Splash} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
     </Stack.Navigator>
   );
 }

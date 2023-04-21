@@ -98,9 +98,6 @@ export function Settings({ navigation: { goBack } }) {
     }
   }
 
-
-  
-
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
 
@@ -179,7 +176,7 @@ export function Settings({ navigation: { goBack } }) {
             </>
           )}
 
-          <C.ChangePasswordButton>
+          <C.ChangePasswordButton onPress={() => navigation.navigate('ChangePassword')}>
             <C.Text>Mudar senha</C.Text>
           </C.ChangePasswordButton>
 

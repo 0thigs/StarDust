@@ -23,9 +23,6 @@ export default {
       .from('users')
       .select('*')
       .eq('ranking_id', rankingId)
-<<<<<<< HEAD
-      .order('xp', { ascending: false });
-=======
       .order('weekly_xp', { ascending: false });
     if (error) {
       throw new Error(error.message);
@@ -60,7 +57,6 @@ export default {
       .from('users_unlocked_stars')
       .select('*')
       .eq('user_id', userId);
->>>>>>> a138bf2a4b3745b863ed2837f34339f8af5fa2d7
     if (error) {
       throw new Error(error.message);
     }
@@ -76,24 +72,6 @@ export default {
     return avatar.image;
   },
 
-<<<<<<< HEAD
-  getRankings: async () => {
-    const { data, error } = await supabase
-      .from('rankings')
-      .select('id, image, name, order')
-      .order('order', { ascending: true });
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
-  },
-
-  getRanking: async rankingId => {
-    const { data, error } = await supabase
-      .from('rankings')
-      .select('image, name, order')
-      .eq('id', rankingId);
-=======
   getAchievements: async () => {
     const { data, error } = await supabase
       .from('achievements')
@@ -128,7 +106,6 @@ export default {
 
   getRanking: async rankingId => {
     const { data, error } = await supabase.from('rankings').select('*').eq('id', rankingId);
->>>>>>> a138bf2a4b3745b863ed2837f34339f8af5fa2d7
     if (error) {
       throw new Error(error.message);
     }

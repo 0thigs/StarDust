@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 
 import { Input } from '../../components/Input';
 import { ErrorMessage } from '../../components/ErrorMessage';
@@ -17,9 +18,10 @@ export const EmailSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
 });
 
-export function ForgotPassword({ navigation: { goBack } }) {
+export function ChangePassword({ route }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const navigation = useNavigation();
 
   const {
     control,
@@ -49,13 +51,6 @@ export function ForgotPassword({ navigation: { goBack } }) {
 
   return (
     <C.Container>
-      <ToastMenager
-        animationInTiming={700}
-        animationOutTiming={1000}
-        animationStyle={'rightInOut'}
-        width={320}
-        position="top"
-      />
       <C.Title>{!isSuccess && 'Insira seu e-mail cadastrado para recuperar a senha'}</C.Title>
       <C.Form>
         <Controller
@@ -83,7 +78,7 @@ export function ForgotPassword({ navigation: { goBack } }) {
         </C.SuccessMessage>
       )}
       <Button
-        onPress={isSuccess ? () => goBack() : handleSubmit(handleSubmitEmail)}
+        onPress={isSuccess ? () => navigation.goBack() : handleSubmit(handleSubmitEmail)}
         title={isSuccess ? 'Voltar' : 'Enviar'}
         isLoading={isLoading}
         isDisabled={isLoading}

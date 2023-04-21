@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { Slider } from '../../components/Slider';
 import { IntroSlide } from '../../components/IntroSlide';
@@ -85,20 +84,12 @@ export function Intro() {
           <C.Footer>
             <C.PaginationDots>
               {slides.map((_, index) => {
-                // const dotWidth = useSharedValue(0);
                 const isActive = index === currentSlideIndex;
-                // const dotAnimatedStyle = useAnimatedStyle(() => {
-                //   return {
-                //     width: interpolate(dotWidth.value, [false, true], [16, 24]),
-                //   };
-                // });
-                // dotWidth.value = withTiming(isActive, 300);
                 return (
                   <C.Dot
                     key={`dot-${index}`}
                     isActive={isActive}
                     isFirst={index === 0}
-                    // style={dotAnimatedStyle}
                     activeOpacity={0.7}
                     onPress={() => scrollTo(index)}
                   />
