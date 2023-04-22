@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from 'react-hook-form';
-import { Linking } from 'react-native';
+import { Linking, Alert } from 'react-native';
 import { createURL } from 'expo-linking';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 
 import { Input } from '../../components/Input';
 import { ErrorMessage } from '../../components/ErrorMessage';
@@ -36,7 +36,6 @@ export function ChangePassword({ route }) {
   const [isLoading, setIsLoading] = useState(false);
   const [hasSendEmail, setHasSendEmail] = useState(false);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
-  const [isTimerOn, setIsTimerOn] = useState(false);
   const navigation = useNavigation();
   const url = createURL('change_password');
   const newPassword = useRef('');
@@ -63,10 +62,6 @@ export function ChangePassword({ route }) {
   }
 
   async function handleSubmitEmail({ email }) {
-    if (isTimerOn) {
-      Toast.error('Terá que esperar 60 segundos para uma próxima solicitação');
-      return;
-    }
     setIsLoading(true);
 
     try {
@@ -75,13 +70,14 @@ export function ChangePassword({ route }) {
       setHasSendEmail(true);
     } catch (error) {
       console.error(error);
+      Toast.error('Terá que esperar 60 segundos para uma próxima solicitação');
     } finally {
       setIsLoading(false);
     }
   }
 
   function onPromptCancel() {
-    Toast.error('Escreva sua nova senha');
+    Alert.alert('Erro', 'Por favor, escreva sua nova senha.');
   }
 
   async function handleDeepLink({ url }) {
@@ -103,6 +99,7 @@ export function ChangePassword({ route }) {
   }
 
   useEffect(() => {
+    setIsPromptVisible(true)
     Linking.addEventListener('url', handleDeepLink);
   }, []);
 
