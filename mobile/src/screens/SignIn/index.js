@@ -93,16 +93,6 @@ export function SignIn() {
     setIsLoading(true);
     try {
       await signUp(data);
-      const config = [
-        {
-          name: 'canPushNotification',
-          value: true,
-        },
-        {
-          name: 'canPlaySound',
-          value: true,
-        },
-      ];
 
       navigation.reset({
         routes: [{ name: 'Intro' }],
@@ -131,13 +121,6 @@ export function SignIn() {
   return (
     <C.Container onPress={Keyboard.dismiss}>
       <C.Content bevavior={'position'}>
-        <ToastMenager
-          animationInTiming={700}
-          animationOutTiming={1000}
-          animationStyle={'rightInOut'}
-          width={320}
-          position="top"
-        />
         {isToShowHeader ? (
           <C.Header>
             <C.Heading>

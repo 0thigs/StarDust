@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Button } from '../Button';
+import { Eye, EyeOff } from 'react-native-feather';
 import Modal from 'react-native-modal';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+const iconColor = theme.colors.green_300;
 
 export function Prompt({
   isVisible,
@@ -14,16 +16,12 @@ export function Prompt({
   isPassword = false,
 }) {
   const [text, setText] = useState('');
-
+  const [isFocus, setIsFocus] = useState(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   function handleChangeText(text) {
     value.current = text;
     setText(text);
-  }
-
-  function hideValue(value) {
-    promptRef?.current?.clear();
-    return value.split('').map(() => '*').join('');
   }
 
   useEffect(() => {
@@ -36,11 +34,20 @@ export function Prompt({
     <Modal isVisible={isVisible} animationIn={'slideInUp'} animationOut={'bounceOut'}>
       <C.Content>
         <C.Title>{title}</C.Title>
+        <C.EyeButton onPress={() => setIsPasswordVisible(!isPasswordVisible)} acitveOpacity={0.7}>
+          {isPassword && (
+            <>{!isPasswordVisible ? <Eye color={iconColor} /> : <EyeOff color={iconColor} />}</>
+          )}
+        </C.EyeButton>
         <C.Input
           ref={promptRef}
           onChangeText={handleChangeText}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          isFocus={isFocus}
           underlineColorAndroid={theme.colors.purple_700}
-          value={isPassword ? hideValue(value.current) : value.current}
+          secureTextEntry={isPassword && !isPasswordVisible}
+          autoCapitalize={'none'}
           autoFocus
         />
         <C.Buttons>

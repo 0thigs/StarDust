@@ -103,20 +103,11 @@ export function ChangePassword({ route }) {
   }
 
   useEffect(() => {
-    setIsPromptVisible(true);
     Linking.addEventListener('url', handleDeepLink);
   }, []);
 
   return (
     <C.Container>
-      <ToastMenager
-        animationInTiming={700}
-        animationOutTiming={1000}
-        animationStyle={'rightInOut'}
-        width={320}
-        position="top"
-      />
-
       <C.Title>{!hasSendEmail && 'Insira seu e-mail cadastrado para recuperar a senha'}</C.Title>
       <C.Form>
         <Controller
@@ -173,13 +164,13 @@ export function ChangePassword({ route }) {
 
       <Modal
         isVisible={isModalVisible}
-        title={'Sua senha deve conter'}
+        title={'Sua senha deve conter pelo menos'}
         type={'asking'}
         body={
           <C.List>
             {constrains.map(constraint => (
               <C.Item key={constraint}>
-                <Icon.Paperclip color={theme.colors.green_300} />
+                <Icon.Paperclip color={theme.colors.green_300} width={18} />
                 <C.Constraint>{constraint}</C.Constraint>
               </C.Item>
             ))}
@@ -193,7 +184,6 @@ export function ChangePassword({ route }) {
             onPress={() => setIsModalVisible(false)}
           />
         }
-        playSong={false}
       />
     </C.Container>
   );
