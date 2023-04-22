@@ -36,23 +36,20 @@ export function Home() {
   const visibleContentHeight = useRef(0);
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
- 
+
   function scrollToLastUnlockedStar() {
     scrollRef.current.scrollTo({
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
-      animated: true,
+      animated: false,
     });
+    setIsFabButtonVisible(false);
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
+    setIsFabButtonVisible(false);
     visibleContentHeight.current = layoutMeasurement.height;
     setCurrentYOffset(contentOffset.y);
-
-    if (isfirstScroll) {
-      setIsfirstScroll(false);
-      return;
-    }
 
     const isLastUnlockedStarAboveLayout =
       (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height;
@@ -64,12 +61,11 @@ export function Home() {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (planets.length) {
       setIsEndTransition(true);
       setIsModalVisible(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    }
+  }, [planets]);
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {
@@ -177,4 +173,3 @@ export function Home() {
     </>
   );
 }
-
