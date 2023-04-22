@@ -46,6 +46,6 @@ export const Body = styled.View`
 export const Footer = styled.View`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  padding: 8px;
+  padding: 8px 16px;
   background-color: ${props => props.theme.colors.black};
 `;

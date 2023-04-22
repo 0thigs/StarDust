@@ -7,6 +7,7 @@ import { PopoverMenu } from '../PopoverMenu';
 
 import { UserAvatar } from '../UserAvatar';
 import { Button } from '../Button';
+import { Modal } from '../Modal';
 import { MoreHorizontal } from 'react-native-feather';
 import { Toast } from 'toastify-react-native';
 
@@ -17,6 +18,7 @@ export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
   const { achievements, removeRecuedAchievement } = useAchievement(loggedUser.id);
   const [sortedAchievements, setSortedAchievements] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [sorter, setSorter] = useState('Ordem padrão');
   const navigation = useNavigation();
 
@@ -114,7 +116,7 @@ export function CustomDrawer() {
             title={'Sair'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={handleSignOut}
+            onPress={() => setIsModalVisible(true)}
             isSmall={true}
           />
         </C.ButtonWrapper>
@@ -159,6 +161,30 @@ export function CustomDrawer() {
             removeRecuedAchievement={removeRecuedAchievement}
           />
         )}
+      />
+
+      <Modal
+        isVisible={isModalVisible}
+        type={'crying'}
+        playSong={false}
+        title={`Calma aí! Deseja mesmo 'SAIR DA SUA CONTA 😢?`}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Sair'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={handleSignOut}
+            />
+            <Button
+              title={'Cancelar'}
+              color={theme.colors.black}
+              background={theme.colors.green_500}
+              onPress={() => setIsModalVisible(false)}
+            />
+          </>
+        }
       />
     </C.Container>
   );

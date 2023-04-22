@@ -30,6 +30,7 @@ export function Settings({ navigation: { goBack } }) {
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentAction, setCurrentAction] = useState('');
   const navigation = useNavigation();
 
   const SettingsSchema = yup.object({
@@ -101,18 +102,23 @@ export function Settings({ navigation: { goBack } }) {
 
   async function handleDeleteAccount() {
     try {
-      //   await signOut();
+      await signOut();
       await deleteLoggedUser(loggedUser.id);
 
-      //   navigation.reset({
-      //     routes: [{ name: 'SignIn' }],
-      //   });
+      navigation.reset({
+        routes: [{ name: 'SignIn' }],
+      });
     } catch (error) {
       console.error(error);
       Toast.error('Falha ao tentar deletar sua conta');
     } finally {
       setIsModalVisible(false);
     }
+  }
+
+  function handleAccountButtonPress(action) {
+    setCurrentAction(action);
+    setIsModalVisible(true);
   }
 
   useEffect(() => {
@@ -232,13 +238,13 @@ export function Settings({ navigation: { goBack } }) {
             title={'Sair da conta'}
             background={theme.colors.green_500}
             color={theme.colors.black}
-            onPress={handleSignOut}
+            onPress={() => handleAccountButtonPress('signout')}
           />
           <Button
             title={'Deletar conta'}
             background={theme.colors.red_700}
             color={theme.colors.white}
-            onPress={() => setIsModalVisible(true)}
+            onPress={() => handleAccountButtonPress('delete')}
           />
         </View>
       </C.Content>
@@ -247,20 +253,22 @@ export function Settings({ navigation: { goBack } }) {
         isVisible={isModalVisible}
         type={'crying'}
         playSong={false}
-        title={'Calma aí! Deseja mesmo DELETAR A SUA CONTA 😢?'}
+        title={`Calma aí! Deseja mesmo ${
+          currentAction === 'delete' ? 'DELETAR A SUA CONTA ' : 'SAIR DA SUA CONTA '
+        }😢?`}
         body={null}
         footer={
           <>
             <Button
-              title={'Deletar'}
+              title={currentAction === 'delete' ? 'Deletar' : 'Sair'}
               color={theme.colors.white}
               background={theme.colors.red_700}
-              onPress={handleDeleteAccount}
+              onPress={currentAction === 'delete' ? handleDeleteAccount : handleSignOut}
             />
             <Button
               title={'Cancelar'}
               color={theme.colors.black}
-              background={theme.colors.blue_300}
+              background={theme.colors.green_500}
               onPress={() => setIsModalVisible(false)}
             />
           </>
