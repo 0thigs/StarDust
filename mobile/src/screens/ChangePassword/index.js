@@ -18,7 +18,7 @@ import * as yup from 'yup';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 const constrains = [
-  '8 caracteres;',
+  '6 caracteres;',
   'uma letra maiúscula;',
   'uma letra minúscula;',
   'um número;',
@@ -48,7 +48,7 @@ export function ChangePassword({ route }) {
   } = useForm({ resolver: yupResolver(EmailSchema) });
 
   function onPromptConfirm() {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{8,}$/g;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g;
     const matches = newPassword.current.match(passwordRegex);
 
     if (matches?.length) {
@@ -81,7 +81,7 @@ export function ChangePassword({ route }) {
   }
 
   function onPromptCancel() {
-    Alert.alert('Erro', 'Por favor, escreva sua nova senha.');
+    Alert.alert('Mensagem', 'Por favor, escreva sua nova senha.');
   }
 
   async function handleDeepLink({ url }) {
@@ -103,7 +103,6 @@ export function ChangePassword({ route }) {
   }
 
   useEffect(() => {
-    setIsPromptVisible(true);
     Linking.addEventListener('url', handleDeepLink);
   }, []);
 

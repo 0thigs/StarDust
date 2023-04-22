@@ -34,7 +34,6 @@ export function Profile() {
       const user = await api.getUser(userId);
       setUser(user);
       const unlockedAchievements = achievements.filter(achivement => achivement.isUnlocked);
-      console.log(unlockedAchievements);
       setUnlockedAchievements(unlockedAchievements);
     } catch (error) {
       console.log(error);
@@ -61,7 +60,7 @@ export function Profile() {
       {isLoading || !user ? (
         <Loading isAnimation={true} />
       ) : (
-        <C.Content>
+        <C.Content showsVerticalScrollIndicator={false}>
           <ProfileStatus user={user} isFromLoggedUser={isFromLoggedUser} />
           <Statistic user={user} />
           {isFromLoggedUser && (

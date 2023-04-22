@@ -8,7 +8,7 @@ export const Fade = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export const Content = styled(Animated.View)`

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
-import { BackHandler } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 import { useConfig } from '../../hooks/useConfig';
 
@@ -18,17 +17,19 @@ import { Toast } from 'toastify-react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TimePicker } from '../../components/TimePicker';
 import { Modal } from '../../components/Modal';
+import { Keyboard, Linking, View } from 'react-native';
+import { Loading } from '../../components/Loading';
 
 export function Settings({ navigation: { goBack } }) {
-  const { loggedUser, updateUserEmail, signOut } = useAuth();
+  const { loggedUser, updateLoggedUser, updateUserEmail, signOut, deleteLoggedUser } = useAuth();
   const { config, updateConfig } = useConfig();
   const [currentData, setCurrentData] = useState({
     name: loggedUser.name,
     email: loggedUser.email,
   });
-  const [isUpdatingPasswordForm, setIsUpdatingPasswordForm] = useState(false);
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
   const SettingsSchema = yup.object({
@@ -43,29 +44,38 @@ export function Settings({ navigation: { goBack } }) {
     control,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
   function handleExitButton() {
-    if (isUpdatingPasswordForm) {
-      setIsUpdatingPasswordForm(false);
-      return;
-    }
     goBack();
   }
 
-  async function handleSaveButton({ name, email }) {
-    try {
-      console.log(email);
-      updateUserEmail(email);
-    } catch (error) {
-      console.log(error);
-    }
+  function handleUpdateNameError(error) {
+    console.log(error.message);
+    if (error.message === 'duplicate key value violates unique constraint "users_name_key"')
+      Toast.error('Nome de usuário já em uso');
   }
 
-  function handleBackEvent() {
-    setIsUpdatingPasswordForm(false);
-    return true;
+  async function handleSaveButton({ name, email }) {
+    setIsLoading(true);
+    try {
+      if (name !== loggedUser.name) {
+        const result = await updateLoggedUser('name', name);
+        console.log(result);
+        if (result instanceof Error) {
+          handleUpdateNameError(result);
+          return;
+        }
+      }
+
+      updateUserEmail(email);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleToggle(configName, value) {
@@ -85,43 +95,48 @@ export function Settings({ navigation: { goBack } }) {
     }
   }
 
+  async function handleDeepLink() {
+    Toast.error('Falha ao tentar sair da conta');
+  }
+
   async function handleDeleteAccount() {
     try {
-      await signOut();
+      //   await signOut();
+      await deleteLoggedUser(loggedUser.id);
 
-      navigation.reset({
-        routes: [{ name: 'SignIn' }],
-      });
+      //   navigation.reset({
+      //     routes: [{ name: 'SignIn' }],
+      //   });
     } catch (error) {
-      console.log(error);
-      Toast.error('Falha ao tentar sair da conta');
+      console.error(error);
+      Toast.error('Falha ao tentar deletar sua conta');
+    } finally {
+      setIsModalVisible(false);
     }
   }
 
   useEffect(() => {
     setValue('name', currentData.name);
     setValue('email', currentData.email);
+
+    Linking.addEventListener('url', handleDeepLink);
   }, []);
 
   return (
     <C.Container>
       <C.Header>
         <C.Button onPress={handleExitButton}>
-          {!isUpdatingPasswordForm ? (
-            <Icon.X color={theme.colors.green_500} width={28} height={28} />
-          ) : (
-            <Icon.ArrowLeft color={theme.colors.green_500} width={28} height={28} />
-          )}
+          <Icon.ArrowLeft color={theme.colors.green_500} width={28} height={28} />
         </C.Button>
         <C.Title>Configurações de conta</C.Title>
         <C.Button onPress={handleSubmit(handleSaveButton)}>
           <C.Text>Salvar</C.Text>
         </C.Button>
       </C.Header>
-      <C.Content>
-        <C.Form>
-          {!isUpdatingPasswordForm && (
-            <>
+      <C.Content onPress={Keyboard.dismiss}>
+        <View style={{ padding: 24 }}>
+          <C.Form>
+            <C.InputContainer>
               <Controller
                 control={control}
                 name="name"
@@ -142,12 +157,15 @@ export function Settings({ navigation: { goBack } }) {
                   />
                 )}
               />
+              {isLoading && (
+                <C.Loader>
+                  <Loading />
+                </C.Loader>
+              )}
               {errors.name && <C.ErrorMessage>{errors.name?.message}</C.ErrorMessage>}
-            </>
-          )}
+            </C.InputContainer>
 
-          {!isUpdatingPasswordForm && (
-            <>
+            <C.InputContainer>
               <Controller
                 control={control}
                 name="email"
@@ -168,55 +186,61 @@ export function Settings({ navigation: { goBack } }) {
                   />
                 )}
               />
+              {isLoading && (
+                <C.Loader>
+                  <Loading />
+                </C.Loader>
+              )}
               {errors.email && <C.ErrorMessage>{errors.email?.message}</C.ErrorMessage>}
-            </>
-          )}
+            </C.InputContainer>
 
-          <C.ChangePasswordButton onPress={() => navigation.navigate('ChangePassword')}>
-            <C.Text>Mudar senha</C.Text>
-          </C.ChangePasswordButton>
+            <C.ChangePasswordButton onPress={() => navigation.navigate('ChangePassword')}>
+              <C.Text>Mudar senha</C.Text>
+            </C.ChangePasswordButton>
 
-          <C.ToggleInput>
-            <C.Label>Efeitos sonoros</C.Label>
-            <ToggleSwitch
-              isOn={config.canPlaySound}
-              onColor={theme.colors.green_700}
-              offColor={theme.colors.green_900}
-              size="medium"
-              onToggle={isOn => handleToggle('canPlaySound', !isOn)}
-            />
-          </C.ToggleInput>
+            <C.ToggleInput>
+              <C.Label>Efeitos sonoros</C.Label>
+              <ToggleSwitch
+                isOn={config.canPlaySound}
+                onColor={theme.colors.green_700}
+                offColor={theme.colors.green_900}
+                size="medium"
+                onToggle={isOn => handleToggle('canPlaySound', !isOn)}
+              />
+            </C.ToggleInput>
 
-          <C.ToggleInput>
-            <C.Label>Noticação</C.Label>
-            <ToggleSwitch
-              isOn={config.canPushNotification}
-              onColor={theme.colors.green_700}
-              offColor={theme.colors.green_900}
-              size="medium"
-              onToggle={isOn => handleToggle('canPushNotification', !isOn)}
-            />
-          </C.ToggleInput>
-          <TimePicker isVisible={isTimePickerVisible} setIsVisible={setIsTimePickerVisible} />
+            <C.ToggleInput>
+              <C.Label>Noticação</C.Label>
+              <ToggleSwitch
+                isOn={config.canPushNotification}
+                onColor={theme.colors.green_700}
+                offColor={theme.colors.green_900}
+                size="medium"
+                onToggle={isOn => handleToggle('canPushNotification', !isOn)}
+              />
+            </C.ToggleInput>
+            <TimePicker isVisible={isTimePickerVisible} setIsVisible={setIsTimePickerVisible} />
 
-          <C.ToggleInput>
-            <C.Label>Noticação</C.Label>
-            <C.Button onPress={() => setIsTimePickerVisible(true)}>
-              <C.Time>{loggedUser.study_time}</C.Time>
-            </C.Button>
-          </C.ToggleInput>
-        </C.Form>
-        <Button
-          title={'Sair da conta'}
-          background={theme.colors.green_500}
-          color={theme.colors.black}
-          onPress={handleSignOut}
-        />
-        <Button
-          title={'Deletar conta'}
-          background={theme.colors.red_700}
-          color={theme.colors.white}
-        />
+            <C.ToggleInput>
+              <C.Label>Noticação</C.Label>
+              <C.Button onPress={() => setIsTimePickerVisible(true)}>
+                <C.Time>{loggedUser.study_time}</C.Time>
+              </C.Button>
+            </C.ToggleInput>
+          </C.Form>
+          <Button
+            title={'Sair da conta'}
+            background={theme.colors.green_500}
+            color={theme.colors.black}
+            onPress={handleSignOut}
+          />
+          <Button
+            title={'Deletar conta'}
+            background={theme.colors.red_700}
+            color={theme.colors.white}
+            onPress={() => setIsModalVisible(true)}
+          />
+        </View>
       </C.Content>
 
       <Modal

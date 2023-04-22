@@ -16,7 +16,7 @@ export const Header = styled.View`
   border-bottom-color: ${({ theme }) => theme.colors.green_500};
 `;
 
-export const Content = styled.View`
+export const Content = styled.TouchableWithoutFeedback`
   padding: 24px;
 `;
 
@@ -82,6 +82,16 @@ export const Time = styled.Text`
 
 export const Form = styled.View`
   margin-bottom: 20px;
+`;
+
+export const InputContainer = styled.View`
+  position: relative;
+`;
+
+export const Loader = styled.View`
+  position: absolute;
+  right: 12px;
+  top: 72px;
 `;
 
 export const ErrorMessage = styled.Text`

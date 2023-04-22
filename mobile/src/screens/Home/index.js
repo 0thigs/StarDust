@@ -41,7 +41,7 @@ export function Home() {
     scrollRef.current.scrollTo({
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
-      animated: false,
+      animated: true,
     });
     setIsFabButtonVisible(false);
   }

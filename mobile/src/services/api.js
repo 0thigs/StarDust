@@ -18,6 +18,32 @@ export default {
     return user;
   },
 
+  updateUser: async (column, data, userId) => {
+    const { success, error } = await supabase
+      .from('users')
+      .update({ [column]: data })
+      .eq('id', userId);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  deleteUser: async userId => {
+    try {
+      const { data, error } = await supabase.rpc('delete_user', {
+        userid: userId,
+      });
+      console.log(data);
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
   getUsersByCurrentRanking: async rankingId => {
     const { data, error } = await supabase
       .from('users')
@@ -437,18 +463,6 @@ export default {
 
   updateCode: async (codeId, data) => {
     const { success, error } = await supabase.from('codes').update(data).eq('id', codeId);
-    if (error) {
-      throw new Error(error.message);
-    }
-    return success;
-  },
-
-  updateUser: async (column, data, userId) => {
-    const { success, error } = await supabase
-      .from('users')
-      .update({ [column]: data })
-      .eq('id', userId);
-
     if (error) {
       throw new Error(error.message);
     }
