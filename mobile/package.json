@@ -22,6 +22,7 @@
     "@react-navigation/native-stack": "^6.9.6",
     "@rivascva/react-native-code-editor": "^1.2.2",
     "@supabase/supabase-js": "^2.2.3",
+    "buffer": "^6.0.3",
     "dayjs": "^1.11.7",
     "expo": "~47.0.14",
     "expo-av": "~13.0.3",

@@ -1,32 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from 'react-hook-form';
+import { Linking } from 'react-native';
+import { createURL } from 'expo-linking';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ToastMenager, { Toast } from 'toastify-react-native';
 
 import { Input } from '../../components/Input';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { Button } from '../../components/Button';
+import { Prompt } from '../../components/Prompt';
+import { Modal } from '../../components/Modal';
 
 import * as Icon from 'react-native-feather';
 import * as yup from 'yup';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { createURL } from 'expo-linking';
-import { Linking } from 'react-native';
+const constrains = [
+  '8 caracteres;',
+  'uma letra maiúscula;',
+  'uma letra minúscula;',
+  'um número;',
+  'um caractere especial como @, #, $, % etc.',
+];
 
 export const EmailSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
 });
 
 export function ChangePassword({ route }) {
-  const { resetPassword, updateUserPassword } = useAuth();
+  const { resetPassword, refreshSession, updateUserPassword } = useAuth();
+  const [isPromptVisible, setIsPromptVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [hasSendEmail, setHasSendEmail] = useState(false);
+  const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+  const [isTimerOn, setIsTimerOn] = useState(false);
   const navigation = useNavigation();
-  const url = createURL('change_password', {});
-  //   console.log('URL => ' + url);
+  const url = createURL('change_password');
+  const newPassword = useRef('');
+  const promptRef = useRef('');
 
   const {
     control,
@@ -34,37 +48,76 @@ export function ChangePassword({ route }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(EmailSchema) });
 
-  async function handleSubmitEmail(data) {
+  function onPromptConfirm() {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{8,}$/g;
+    const matches = newPassword.current.match(passwordRegex);
+
+    if (matches?.length) {
+      updateUserPassword(newPassword.current);
+      setIsPasswordChanged(true);
+      setIsPromptVisible(false);
+      return;
+    }
+
+    setIsModalVisible(true);
+  }
+
+  async function handleSubmitEmail({ email }) {
+    if (isTimerOn) {
+      Toast.error('Terá que esperar 60 segundos para uma próxima solicitação');
+      return;
+    }
     setIsLoading(true);
-    const { email } = data;
-    console.log(email);
+
     try {
       resetPassword(email);
-      Toast.success('E-mail enviado com sucesso');
-      setIsSuccess(true);
+      Toast.success('E-mail enviado com sucesso!');
+      setHasSendEmail(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
   }
 
-  function handleDeepLink({ url }) {
-    console.log({ url });
+  function onPromptCancel() {
+    Toast.error('Escreva sua nova senha');
+  }
+
+  async function handleDeepLink({ url }) {
+    if (!url || url.includes('expired')) {
+      setHasSendEmail(false);
+      Toast.error('Link de recuperação de senha expirado');
+      return;
+    }
     const accessToken = url.split('access_token=')[1].split('&')[0];
     const refreshtoken = url.split('refresh_token=')[1].split('&')[0];
-    updateUserPassword('654321', accessToken, refreshtoken);
+    if (!accessToken || !refreshtoken) {
+      Toast.error('Erro ao tentar mudar a senha');
+      return;
+    }
+    try {
+      const newSession = await refreshSession(accessToken, refreshtoken);
+      if (newSession.user.role === 'authenticated') setIsPromptVisible(true);
+    } catch (error) {}
   }
 
   useEffect(() => {
-    const subscription = Linking.addEventListener('url', handleDeepLink);
-    // updateUserCredential('password', '654123')
-    // console.log(route.params?.isEmailVerified);
+    setIsPromptVisible(true);
+    Linking.addEventListener('url', handleDeepLink);
   }, []);
 
   return (
     <C.Container>
-      <C.Title>{!isSuccess && 'Insira seu e-mail cadastrado para recuperar a senha'}</C.Title>
+      <ToastMenager
+        animationInTiming={700}
+        animationOutTiming={1000}
+        animationStyle={'rightInOut'}
+        width={320}
+        position="top"
+      />
+
+      <C.Title>{!hasSendEmail && 'Insira seu e-mail cadastrado para recuperar a senha'}</C.Title>
       <C.Form>
         <Controller
           control={control}
@@ -85,18 +138,62 @@ export function ChangePassword({ route }) {
         />
         {errors.email && <ErrorMessage message={errors.email?.message} />}
       </C.Form>
-      {isSuccess && (
+      {hasSendEmail && (
         <C.SuccessMessage>
-          Verifique a mensagem que enviamos para seu e-mail para recuperar a senha
+          {isPasswordChanged
+            ? 'Sua senha foi redefinida com sucesso!'
+            : 'Verifique a mensagem que enviamos para seu e-mail para recuperar a senha.'}
         </C.SuccessMessage>
       )}
+
       <Button
-        onPress={isSuccess ? () => navigation.goBack() : handleSubmit(handleSubmitEmail)}
-        title={isSuccess ? 'Voltar' : 'Enviar'}
+        onPress={
+          isPasswordChanged
+            ? () => navigation.goBack()
+            : !hasSendEmail
+            ? handleSubmit(handleSubmitEmail)
+            : () => Toast.success('Verifique seu e-mail')
+        }
+        title={isPasswordChanged ? 'Voltar' : 'Enviar'}
         isLoading={isLoading}
         isDisabled={isLoading}
         color={theme.colors.black}
         background={theme.colors.green_500}
+      />
+
+      <Prompt
+        isVisible={isPromptVisible}
+        title={'Digite sua nova senha'}
+        onConfirm={onPromptConfirm}
+        onCancel={onPromptCancel}
+        value={newPassword}
+        promptRef={promptRef}
+        isPassword={true}
+      />
+
+      <Modal
+        isVisible={isModalVisible}
+        title={'Sua senha deve conter'}
+        type={'asking'}
+        body={
+          <C.List>
+            {constrains.map(constraint => (
+              <C.Item key={constraint}>
+                <Icon.Paperclip color={theme.colors.green_300} />
+                <C.Constraint>{constraint}</C.Constraint>
+              </C.Item>
+            ))}
+          </C.List>
+        }
+        footer={
+          <Button
+            title={'OK'}
+            color={theme.colors.black}
+            background={theme.colors.blue_300}
+            onPress={() => setIsModalVisible(false)}
+          />
+        }
+        playSong={false}
       />
     </C.Container>
   );

@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../Button';
 import Modal from 'react-native-modal';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { useEffect } from 'react';
 
-export function Prompt({ isVisible, title, value, onConfirm, onCancel, promptRef }) {
+export function Prompt({
+  isVisible,
+  title,
+  value,
+  onConfirm,
+  onCancel,
+  promptRef,
+  isPassword = false,
+}) {
   const [text, setText] = useState('');
+
 
   function handleChangeText(text) {
     value.current = text;
     setText(text);
+  }
+
+  function hideValue(value) {
+    promptRef?.current?.clear();
+    return value.split('').map(() => '*').join('');
   }
 
   useEffect(() => {
@@ -27,7 +40,7 @@ export function Prompt({ isVisible, title, value, onConfirm, onCancel, promptRef
           ref={promptRef}
           onChangeText={handleChangeText}
           underlineColorAndroid={theme.colors.purple_700}
-          value={value.current}
+          value={isPassword ? hideValue(value.current) : value.current}
           autoFocus
         />
         <C.Buttons>

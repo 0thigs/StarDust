@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { supabase } from '../services/supabase';
 import api from '../services/api';
+import { Buffer } from 'buffer';
 
 export const AuthContext = createContext();
 
@@ -39,21 +40,20 @@ export function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
 
   async function setUserInSession() {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.getSession();
-
-    if (error) {
-      throw new Error(error.message);
-    }
-    const { user } = session;
-
     try {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+      const { user } = session;
       const userInSession = await api.getUser(user.id);
       setLoggedUser(userInSession);
     } catch (error) {
-      throw new Error(error);
+      console.error(error);
     }
   }
 
@@ -125,27 +125,26 @@ export function AuthProvider({ children }) {
     return success;
   }
 
-  async function refreshSession(accessToken, refreshToken) {
-    try {
-      const { data, error } = await supabase.auth.setSession({
-        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjgyMTAwNTk5LCJzdWIiOiJjYzcxYjI4ZC05MzY5LTQ3YmEtODBkNy1lNmUxOTNhZjczZDYiLCJlbWFpbCI6ImpvYW9wY2FydmFsaG8uY2RzQGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4MjA5Njk5OX1dLCJzZXNzaW9uX2lkIjoiMjAyNzcxMzMtNTNiNC00NWM4LTgyMzgtMzBhYjljMzY0YWQ4In0.taW_LOkVrFtl_Eo9GnIueQ9MflN1QLCHp5LfAiV8zMs',
-        refresh_token: 'uc1S2MWk4g64k19nn688SA',
-      });
+  async function refreshSession(access_token, refresh_token) {
+    global.Buffer = require('buffer').Buffer; // bug fix
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.setSession({
+      access_token,
+      refresh_token,
+    });
 
-      console.log({ data });
-      if (error) {
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      console.error(error);
+    if (error) {
+      throw new Error(error.message);
     }
+
+    return session;
   }
 
-  async function updateUserPassword(newPassword, accessToken, refreshToken) {
-    refreshSession(accessToken, refreshToken);
-    return;
+  async function updateUserPassword(newPassword) {
     try {
-      const { data, error } = await supabase.auth.updateUser(accessToken, {
+      const { data, error } = await supabase.auth.updateUser({
         password: newPassword,
       });
 
@@ -178,6 +177,7 @@ export function AuthProvider({ children }) {
         setUserInSession,
         updateLoggedUser,
         updateUserPassword,
+        refreshSession,
         loggedUser,
       }}
     >

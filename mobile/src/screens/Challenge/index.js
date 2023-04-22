@@ -110,7 +110,7 @@ export function Challenge({ route }) {
     });
   }
 
-  async function verifyCase({ input }, index) {
+  async function verifyCase({ input }) {
     let code = userCode.current;
     code = formatCode(code, input);
 
