@@ -19,25 +19,23 @@ import theme from '../../global/styles/theme';
 
 export function Profile() {
   const { loggedUser } = useAuth();
-  const { achievements } = useAchievement();
+  const route = useRoute();
+  const { userId } = route.params;
+  const { achievements } = useAchievement(userId);
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
-  const route = useRoute();
-  const { userId } = route.params;
   const isFromLoggedUser = userId === loggedUser.id;
 
   async function setProfileData() {
     try {
       setIsLoading(true);
       const user = await api.getUser(userId);
-      const unlockedAchievements = achievements.filter(achivement =>
-        user.unlocked_achievements_ids.includes(achivement.id)
-      );
-
-      setUnlockedAchievements(unlockedAchievements);
       setUser(user);
+      const unlockedAchievements = achievements.filter(achivement => achivement.isUnlocked);
+      console.log(unlockedAchievements);
+      setUnlockedAchievements(unlockedAchievements);
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,10 +49,11 @@ export function Profile() {
 
   useFocusEffect(
     useCallback(() => {
+      if (unlockedAchievements.length) return;
       setProfileData();
       const timer = setTimeout(() => setIsLoading(false), 1000);
       return () => clearTimeout(timer);
-    }, [userId])
+    }, [userId, unlockedAchievements])
   );
 
   return (
@@ -78,7 +77,7 @@ export function Profile() {
           <Streak user={user} />
           <C.Title>Conquistas</C.Title>
           <C.Achievements>
-            {unlockedAchievements?.length ? (
+            {unlockedAchievements.length ? (
               unlockedAchievements.map(({ id, name, description, icon, requiredCount, metric }) => (
                 <Achievement
                   key={id}

@@ -99,12 +99,8 @@ export function Settings({ navigation: { goBack } }) {
   }
 
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackEvent);
-
     setValue('name', currentData.name);
     setValue('email', currentData.email);
-
-    return () => backHandler.remove();
   }, []);
 
   return (

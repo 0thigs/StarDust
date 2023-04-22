@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../Button';
 import Lock from '../../assets/AchievementAssets/lock.svg';
@@ -43,10 +43,6 @@ export function Achievement({
     removeRecuedAchievement(id);
     updateLoggedUser('coins', coins + reward);
   }
-
-  useEffect(() => {
-    if (id === '75e91f6c-f25d-49da-b483-93863cd25f8a') console.log({ isRescuable });
-  }, []);
 
   return (
     <C.Container>
