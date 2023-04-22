@@ -75,7 +75,7 @@ export default {
   getAchievements: async () => {
     const { data, error } = await supabase
       .from('achievements')
-      .select('*, users_unlocked_achievements(user_id, achievement_id)')
+      .select('*')
       .order('position', { ascending: true });
     if (error) {
       throw new Error(error.message);
@@ -86,8 +86,18 @@ export default {
   getUserUnlockedAchievements: async userId => {
     const { data, error } = await supabase
       .from('users_unlocked_achievements')
-      .select('*')
+      .select('achievement_id')
       .eq('user_id', userId);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getUserAchievementsToRescue: async userId => {
+    const { data, error } = await supabase
+      .from('users_achievements_to_rescue')
+      .select('achievement_id');
     if (error) {
       throw new Error(error.message);
     }
@@ -98,6 +108,28 @@ export default {
     const { success, error } = await supabase
       .from('users_unlocked_achievements')
       .insert([{ achievement_id: achievementId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  addUserAchievementsToRescue: async (achievementId, userId) => {
+    const { success, error } = await supabase
+      .from('users_achievements_to_rescue')
+      .insert([{ achievement_id: achievementId, user_id: userId }]);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
+  },
+
+  deleteUserRescuedAchievement: async (achievementId, userId) => {
+    const { success, error } = await supabase
+      .from('users_achievements_to_rescue')
+      .delete()
+      .eq('achievement_id', achievementId)
+      .eq('user_id', userId);
     if (error) {
       throw new Error(error.message);
     }

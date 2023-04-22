@@ -23,7 +23,7 @@ export const Info = styled.View`
 `;
 
 export const Name = styled.Text`
-  color: ${({ isToRescue, theme }) => theme.colors[isToRescue ? 'green_500' : 'white']};
+  color: ${({ canRescue, theme }) => theme.colors[canRescue ? 'green_500' : 'white']};
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 14px;
 `;
@@ -72,7 +72,7 @@ export const Text = styled.Text`
 `;
 
 export const Reward = styled.Text`
-  color: ${({ theme }) => theme.colors.green_500};
+  color: ${({ theme, isCoins }) => theme.colors[isCoins ? 'yellow_300' : 'green_500']};
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 16px;
 `;

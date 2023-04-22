@@ -10,7 +10,7 @@ const fakeLoggedUser = {
   name: 'John Petros',
   email: 'joaopcarvalho.cds@gmail.com',
   coins: 225,
-  xp: 550,
+  xp: 1025,
   weekly_xp: 0,
   level: 1,
   unlocked_achievements_ids: [],
@@ -143,17 +143,29 @@ export function AuthProvider({ children }) {
   }
 
   async function updateUserPassword(newPassword) {
-    try {
-      const { data, error } = await supabase.auth.updateUser({
-        password: newPassword,
-      });
+    const { success, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
 
-      if (error) {
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      console.error(error);
+    if (error) {
+      throw new Error(error.message);
     }
+
+    return success;
+  }
+
+  async function updateUserEmail(newEmail) {
+    const { data, error } = await supabase.auth.updateUser({
+      email: newEmail,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    console.log(data);
+
+    return data;
   }
 
   async function updateLoggedUser(prop, data, updateDatabase = true) {
@@ -177,6 +189,7 @@ export function AuthProvider({ children }) {
         setUserInSession,
         updateLoggedUser,
         updateUserPassword,
+        updateUserEmail,
         refreshSession,
         loggedUser,
       }}

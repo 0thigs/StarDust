@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../Button';
 import Lock from '../../assets/AchievementAssets/lock.svg';
@@ -17,10 +17,12 @@ export function Achievement({
   currentAmount,
   isUnlocked,
   hasRescueFeat,
+  isRescuable,
   reward,
+  removeRecuedAchievement,
 }) {
   const {
-    loggedUser: { achievements_to_rescue, coins },
+    loggedUser: { coins },
     updateLoggedUser,
   } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,7 +30,7 @@ export function Achievement({
 
   const percentage = (currentAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
-  const isToRescue = achievements_to_rescue.includes(id) && hasRescueFeat;
+  const canRescue = isRescuable && hasRescueFeat;
 
   function getFormatedCurrentAmount() {
     return currentAmount >= requiredAmount ? requiredAmount : currentAmount;
@@ -38,20 +40,21 @@ export function Achievement({
     setRescuedAchievementName(name);
     setIsModalVisible(true);
 
-    updateLoggedUser(
-      'achievements_to_rescue',
-      achievements_to_rescue.filter(achievementId => achievementId !== id)
-    );
+    removeRecuedAchievement(id);
     updateLoggedUser('coins', coins + reward);
   }
+
+  useEffect(() => {
+    if (id === '75e91f6c-f25d-49da-b483-93863cd25f8a') console.log({ isRescuable });
+  }, []);
 
   return (
     <C.Container>
       {isUnlocked ? <SvgUri uri={getImage('achievements', icon)} width={45} /> : <Lock />}
 
       <C.Info>
-        <C.Name isToRescue={isToRescue}>{name}</C.Name>
-        {isToRescue ? (
+        <C.Name canRescue={canRescue}>{name}</C.Name>
+        {canRescue ? (
           <Button
             title={'Resgatar'}
             color={theme.colors.black}
@@ -84,7 +87,7 @@ export function Achievement({
         body={
           <C.Message>
             <C.Text>Parabéns! Você acabou de ganhar </C.Text>
-            <C.Reward>{reward} </C.Reward>
+            <C.Reward isCoins={true}>{reward} </C.Reward>
             <C.Text>de poeira estela pela conquista </C.Text>
             <C.Reward>{rescuedAchievementName}</C.Reward>
           </C.Message>

@@ -52,10 +52,14 @@ export function ChangePassword({ route }) {
     const matches = newPassword.current.match(passwordRegex);
 
     if (matches?.length) {
-      updateUserPassword(newPassword.current);
-      setIsPasswordChanged(true);
-      setIsPromptVisible(false);
-      return;
+      try {
+        updateUserPassword(newPassword.current);
+        setIsPasswordChanged(true);
+        setIsPromptVisible(false);
+        return;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     setIsModalVisible(true);
@@ -99,7 +103,7 @@ export function ChangePassword({ route }) {
   }
 
   useEffect(() => {
-    setIsPromptVisible(true)
+    setIsPromptVisible(true);
     Linking.addEventListener('url', handleDeepLink);
   }, []);
 

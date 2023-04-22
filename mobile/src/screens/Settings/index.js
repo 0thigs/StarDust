@@ -20,7 +20,7 @@ import { TimePicker } from '../../components/TimePicker';
 import { Modal } from '../../components/Modal';
 
 export function Settings({ navigation: { goBack } }) {
-  const { loggedUser, updateAuthUserEmail, signOut } = useAuth();
+  const { loggedUser, updateUserEmail, signOut } = useAuth();
   const { config, updateConfig } = useConfig();
   const [currentData, setCurrentData] = useState({
     name: loggedUser.name,
@@ -57,7 +57,7 @@ export function Settings({ navigation: { goBack } }) {
   async function handleSaveButton({ name, email }) {
     try {
       console.log(email);
-      updateAuthUserEmail(email);
+      updateUserEmail(email);
     } catch (error) {
       console.log(error);
     }

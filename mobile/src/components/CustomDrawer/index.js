@@ -15,7 +15,7 @@ import * as C from './styles';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
-  const { achievements } = useAchievement(loggedUser.id);
+  const { achievements, removeRecuedAchievement } = useAchievement(loggedUser.id);
   const [sortedAchievements, setSortedAchievements] = useState([]);
   const [sorter, setSorter] = useState('Ordem padrão');
   const navigation = useNavigation();
@@ -93,6 +93,7 @@ export function CustomDrawer() {
         routes: [{ name: 'SignIn' }],
       });
     } catch (error) {
+      console.error(error);
       Toast.error('Falha ao tentar sair da conta');
     }
   }
@@ -140,6 +141,7 @@ export function CustomDrawer() {
             isUnlocked,
             position,
             reward,
+            isRescuable,
           },
         }) => (
           <Achievement
@@ -152,7 +154,9 @@ export function CustomDrawer() {
             requiredAmount={required_amount}
             currentAmount={loggedUser[metric]}
             isUnlocked={isUnlocked}
+            isRescuable={isRescuable}
             hasRescueFeat={true}
+            removeRecuedAchievement={removeRecuedAchievement}
           />
         )}
       />

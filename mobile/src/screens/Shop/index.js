@@ -19,7 +19,7 @@ export function Shop() {
   const { loggedUser } = useAuth();
   const { avatars, addUserAcquiredAvatar } = useAvatar();
   const { rockets, addUserAcquiredRocket } = useRocket();
-  const { newUnlockedAchievements } = useAchievement();
+  const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
