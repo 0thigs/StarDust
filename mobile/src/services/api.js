@@ -270,6 +270,16 @@ export default {
     return data;
   },
 
+  getChallengeCategories: async challengeId => {
+    const { data, error } = await supabase
+      .from('challenges_categories')
+      .select('challenge_id, category_id');
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
   getChallenge: async challengeId => {
     const { data, error } = await supabase.from('challenges').select('*').eq('id', challengeId);
     if (error) {

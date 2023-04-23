@@ -1,5 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useChallenge } from '../../hooks/useChallenge';
+import { useCategory } from '../../hooks/useCategory';
 
 import { View } from 'react-native';
 import { Loading } from '../../components/Loading';
@@ -18,10 +19,16 @@ const difficultyTable = {
 
 export function Challenges() {
   const { challenges } = useChallenge();
+  const { categories } = useCategory();
   const [filteredChallenges, setFilteredChallenges] = useState([]);
   const [tags, setTags] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  function getCategoriesNames(challengeCategory) {
+    if (!challengeCategory) return [];
+    return categories.find(category => category.id === challengeCategory.category_id).name;
+  }
 
   function getDifficulty(difficultyName) {
     for (const difficulty in difficultyTable) {
@@ -33,15 +40,15 @@ export function Challenges() {
     return status ? 'Resolvido' : 'Não resolvido';
   }
 
-  function getCategories(newCategory) {
-    if (categories.some(category => category === newCategory)) {
-      const updatedCategories = categories.filter(category => category !== newCategory);
-      setCategories(updatedCategories);
+  function getSelectedCategories(newCategory) {
+    if (selectedCategories.some(category => category === newCategory)) {
+      const updatedCategories = selectedCategories.filter(category => category !== newCategory);
+      setSelectedCategories(updatedCategories);
       return updatedCategories;
     }
 
-    const newCategories = [...categories, newCategory];
-    setCategories(newCategories);
+    const newCategories = [...selectedCategories, newCategory];
+    setSelectedCategories(newCategories);
     return newCategories;
   }
 
@@ -52,18 +59,18 @@ export function Challenges() {
       case 'isCompleted':
         return tag === 'Resolvido';
       case 'categories':
-        return getCategories(tag);
+        return getSelectedCategories(tag);
       default:
         return;
     }
   }
 
   function filterChallenges(currentTags) {
-    let filteredChallenges = sortChallengesByDifficulty(challenges);
-
+    let filteredChallenges = sortChallengesByDifficulty(challenges).map(addCategories);
     for (const tag of currentTags) {
       filteredChallenges = filteredChallenges.filter(challenge => {
         if (tag.type === 'categories') {
+          console.log(tag.value);
           return tag.value.length === 0
             ? true
             : tag.value.some(tagValue => challenge[tag.type].includes(tagValue));
@@ -93,8 +100,8 @@ export function Challenges() {
     let updatedTags = [];
 
     if (type === 'categories') {
-      const updatedCategories = [...categories].filter(category => category !== value);
-      setCategories(updatedCategories);
+      const updatedCategories = [...selectedCategories].filter(category => category !== value);
+      setSelectedCategories(updatedCategories);
 
       const targetTag = tags.find(tag => tag.type === 'categories');
       targetTag.value = updatedCategories;
@@ -109,6 +116,12 @@ export function Challenges() {
     setFilteredChallenges(filteredChallenges);
   }
 
+  function addCategories(challenge) {
+    console.log(challenge);
+    const categories = challenge.categories.map(getCategoriesNames);
+    return { ...challenge, categories };
+  }
+
   function sortChallengesByDifficulty(challenges) {
     const easyChallenges = challenges.filter(challenge => challenge.difficulty === 'easy');
     const mediumChallenges = challenges.filter(challenge => challenge.difficulty === 'medium');
@@ -119,15 +132,14 @@ export function Challenges() {
 
   useEffect(() => {
     if (challenges.length) {
-      const sortedChallenges = sortChallengesByDifficulty(challenges);
-      setFilteredChallenges(sortChallengesByDifficulty(challenges));
+      setFilteredChallenges(sortChallengesByDifficulty(challenges).map(addCategories));
       setIsLoading(false);
     }
   }, [challenges, categories]);
 
   return (
     <C.Container>
-      {isLoading && !categories.length ? (
+      {isLoading || !categories.length > 0 || !challenges.length > 0 ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Loading isAnimation={true} />
         </View>
@@ -140,7 +152,8 @@ export function Challenges() {
                 type={type}
                 label={label}
                 options={options}
-                selectedCategories={categories}
+                categoriesFromDatabase={categories}
+                selectedCategories={selectedCategories}
                 handleSelectChange={handleSelectChange}
               />
             ))}

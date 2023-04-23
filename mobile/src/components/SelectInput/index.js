@@ -9,8 +9,15 @@ import * as C from './styles';
 const iconSize = 12;
 const iconColor = theme.colors.gray_500;
 
-export function SelectInput({ type, options, label, selectedCategories, handleSelectChange }) {
-  const [categories, setCategories] = useState([]);
+export function SelectInput({
+  type,
+  options,
+  label,
+  categoriesFromDatabase,
+  selectedCategories,
+  handleSelectChange,
+}) {
+  const [categories, setCategories] = useState(categoriesFromDatabase);
   const [searchText, setSearchText] = useState('');
   const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
     usePopover();
