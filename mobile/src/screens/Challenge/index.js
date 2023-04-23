@@ -31,7 +31,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '6602259c-4082-470e-9211-3740033b0271';
+  const challengeId = 'c5889520-146f-4d30-8f07-a330c1fe1177';
   const { challenge } = useChallenge(challengeId);
   const {
     id,
@@ -62,7 +62,7 @@ export function Challenge({ route }) {
     CurrentIndicatorPositionX.value = contentOffset.x / 3;
   }
 
-  function backToCode() {
+  function goToCode() {
     sliderRef.current.scrollToIndex({
       index: 1,
       animated: true,
@@ -89,7 +89,7 @@ export function Challenge({ route }) {
         Array.isArray(value) ? `[${value.join(',')}]` : value
       );
       const params = '(' + paramsValues.join(',') + ')';
-      return code.concat(';' + function_name + params + ';');
+      return code.concat('\n' + function_name + params + ';');
     }
 
     if (!inputValues) return code;
@@ -111,8 +111,8 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
-    let code = userCode.current;
-    code = formatCode(code, input);
+    const code = formatCode(userCode.current, input);
+    console.log(code);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
@@ -120,6 +120,7 @@ export function Challenge({ route }) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
+
       handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
@@ -136,7 +137,7 @@ export function Challenge({ route }) {
     const slides = [
       {
         id: 1,
-        component: <Problem title={title} texts={texts} />,
+        component: <Problem title={title} texts={texts} goToCode={goToCode} />,
       },
       {
         id: 2,
@@ -150,7 +151,7 @@ export function Challenge({ route }) {
             setIsEnd={setIsEnd}
             testCases={test_cases}
             userOutputs={userOutputs}
-            backToCode={backToCode}
+            goToCode={goToCode}
           />
         ),
       },
