@@ -155,18 +155,11 @@ export function AuthProvider({ children }) {
   }
 
   async function updateUserEmail(newEmail) {
-    const { data, error } = await supabase.auth.updateUser({
-      email: newEmail,
-      loggedUser,
-    });
-
-    if (error) {
-      throw new Error(error.message);
+    try {
+      await api.updateUserEmail(newEmail, loggedUser.id);
+    } catch (error) {
+      console.error(error);
     }
-
-    console.log(data);
-
-    return data;
   }
 
   async function updateLoggedUser(prop, data) {
@@ -181,7 +174,7 @@ export function AuthProvider({ children }) {
   async function deleteLoggedUser(userId) {
     try {
       await api.deleteUser(userId);
-    //   setLoggedUser(null);
+      //   setLoggedUser(null);
     } catch (error) {
       console.error(error);
     }

@@ -31,17 +31,24 @@ export default {
   },
 
   deleteUser: async userId => {
-    try {
-      const { data, error } = await supabase.rpc('delete_user', {
-        userid: userId,
-      });
-      console.log(data);
-      if (error) {
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      console.error(error);
+    const { success, error } = await supabase.rpc('delete_user', {
+      userid: userId,
+    });
+    if (error) {
+      throw new Error(error.message);
     }
+    return success;
+  },
+
+  updateUserEmail: async (newEmail, userId) => {
+    const { success, error } = await supabase.rpc('update_user_email', {
+      new_email: newEmail,
+      user_id: userId,
+    });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return success;
   },
 
   getUsersByCurrentRanking: async rankingId => {

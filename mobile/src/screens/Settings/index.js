@@ -55,7 +55,7 @@ export function Settings({ navigation: { goBack } }) {
 
   function handleUpdateNameError(error) {
     console.log(error.message);
-    if (error.message === 'duplicate key value violates unique constraint "users_name_key"')
+    if (error.message === 'duplicate key value violates unique constraint "users_name_key"');
       Toast.error('Nome de usuário já em uso');
   }
 
@@ -64,14 +64,21 @@ export function Settings({ navigation: { goBack } }) {
     try {
       if (name !== loggedUser.name) {
         const result = await updateLoggedUser('name', name);
-        console.log(result);
         if (result instanceof Error) {
           handleUpdateNameError(result);
           return;
         }
       }
 
-      updateUserEmail(email);
+      if (email !== loggedUser.email) {
+        const result = await updateUserEmail(email);
+        if (result instanceof Error) {
+          handleUpdateNameError(result);
+          return;
+        }
+      }
+
+      Toast.success('Dados atualizados com sucesso');
     } catch (error) {
       console.error(error.message);
     } finally {
