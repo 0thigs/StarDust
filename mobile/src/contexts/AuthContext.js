@@ -1,21 +1,17 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import { supabase } from '../services/supabase';
 import api from '../services/api';
-import { Buffer } from 'buffer';
 
 export const AuthContext = createContext();
 
 const fakeLoggedUser = {
-  id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
+  id: '8d2c2342-0e56-49ef-9650-c8ab47b03a53',
   name: 'John Petros',
-  email: 'joaopcarvalho.cds@gmail.com',
+  email: 'kauedanka@gmail.com',
   coins: 225,
   xp: 1025,
   weekly_xp: 0,
   level: 1,
-  unlocked_achievements_ids: [],
-  unlocked_stars_ids: [1],
-  acquired_rockets_ids: [1],
   selected_rocket_id: 2,
   ranking_id: 1,
   streak: 0,
@@ -156,9 +152,12 @@ export function AuthProvider({ children }) {
 
   async function updateUserEmail(newEmail) {
     try {
-      await api.updateUserEmail(newEmail, loggedUser.id);
+      const result = await api.updateUserEmail(newEmail, loggedUser.id);
+      setLoggedUser({ ...loggedUser, email: newEmail });
+      return result;
     } catch (error) {
       console.error(error);
+      return error;
     }
   }
 
@@ -174,7 +173,7 @@ export function AuthProvider({ children }) {
   async function deleteLoggedUser(userId) {
     try {
       await api.deleteUser(userId);
-      //   setLoggedUser(null);
+      setLoggedUser(null);
     } catch (error) {
       console.error(error);
     }
