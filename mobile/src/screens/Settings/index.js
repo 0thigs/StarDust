@@ -17,18 +17,15 @@ import { Toast } from 'toastify-react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TimePicker } from '../../components/TimePicker';
 import { Modal } from '../../components/Modal';
-import { Keyboard, Linking, View } from 'react-native';
+import { Alert, Keyboard, Linking, View } from 'react-native';
 import { Loading } from '../../components/Loading';
 
 export function Settings({ navigation: { goBack } }) {
   const { loggedUser, updateLoggedUser, updateUserEmail, signOut, deleteLoggedUser } = useAuth();
   const { config, updateConfig } = useConfig();
-  const [currentData, setCurrentData] = useState({
-    name: loggedUser.name,
-    email: loggedUser.email,
-  });
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isAskingModalVisible, setIsAskingModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentAction, setCurrentAction] = useState('');
   const navigation = useNavigation();
@@ -50,6 +47,11 @@ export function Settings({ navigation: { goBack } }) {
   } = useForm({ resolver: yupResolver(SettingsSchema) });
 
   function handleExitButton() {
+    const { name, email } = getValues();
+    if (loggedUser.name !== name || loggedUser.email !== email) {
+      setIsAskingModalVisible(true);
+      return;
+    }
     goBack();
   }
 
@@ -135,8 +137,8 @@ export function Settings({ navigation: { goBack } }) {
   }
 
   useEffect(() => {
-    setValue('name', currentData.name);
-    setValue('email', currentData.email);
+    setValue('name', loggedUser.name);
+    setValue('email', loggedUser.email);
 
     Linking.addEventListener('url', handleDeepLink);
   }, []);
@@ -152,6 +154,30 @@ export function Settings({ navigation: { goBack } }) {
           <C.Text>Salvar</C.Text>
         </C.Button>
       </C.Header>
+      <Modal
+        isVisible={isAskingModalVisible}
+        type={'asking'}
+        playSong={true}
+        title={`Deseja mesmo sair sem salvar?`}
+        body={null}
+        footer={
+          <>
+            <Button
+              title={'Sair'}
+              color={theme.colors.white}
+              background={theme.colors.red_700}
+              onPress={() => goBack()}
+            />
+            <Button
+              title={'Cancelar'}
+              color={theme.colors.black}
+              background={theme.colors.green_500}
+              onPress={() => setIsAskingModalVisible(false)}
+            />
+          </>
+        }
+      />
+
       <C.Content onPress={Keyboard.dismiss}>
         <View style={{ padding: 24 }}>
           <C.Form>
