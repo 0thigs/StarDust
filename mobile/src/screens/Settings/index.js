@@ -239,7 +239,9 @@ export function Settings({ navigation: { goBack } }) {
               {errors.email && <C.ErrorMessage>{errors.email?.message}</C.ErrorMessage>}
             </C.InputContainer>
 
-            <C.ChangePasswordButton onPress={() => navigation.navigate('ChangePassword')}>
+            <C.ChangePasswordButton
+              onPress={() => navigation.navigate('change_password', { prevScreen: 'Settings' })}
+            >
               <C.Text>Mudar senha</C.Text>
             </C.ChangePasswordButton>
 

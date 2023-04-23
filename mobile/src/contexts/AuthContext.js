@@ -109,6 +109,7 @@ export function AuthProvider({ children }) {
     if (error) {
       throw new Error(error.message);
     }
+    setLoggedUser(null);
     return success;
   }
 

@@ -40,6 +40,7 @@ export function ChangePassword({ route }) {
   const url = createURL('change_password');
   const newPassword = useRef('');
   const promptRef = useRef('');
+  const action = route.params.prevScreen === 'SignIn' ? 'recuperar' : 'mudar';
 
   const {
     control,
@@ -87,7 +88,7 @@ export function ChangePassword({ route }) {
   async function handleDeepLink({ url }) {
     if (!url || url.includes('expired')) {
       setHasSendEmail(false);
-      Toast.error('Link de recuperação de senha expirado');
+      Toast.error('Link de mudança de senha expirado');
       return;
     }
     const accessToken = url.split('access_token=')[1].split('&')[0];
@@ -108,7 +109,7 @@ export function ChangePassword({ route }) {
 
   return (
     <C.Container>
-      <C.Title>{!hasSendEmail && 'Insira seu e-mail cadastrado para recuperar a senha'}</C.Title>
+      <C.Title>{!hasSendEmail && `Insira seu e-mail cadastrado para ${action} a senha`}</C.Title>
       <C.Form>
         <Controller
           control={control}
@@ -133,7 +134,7 @@ export function ChangePassword({ route }) {
         <C.SuccessMessage>
           {isPasswordChanged
             ? 'Sua senha foi redefinida com sucesso!'
-            : 'Verifique a mensagem que enviamos para seu e-mail para recuperar a senha.'}
+            : `Verifique a mensagem que enviamos para seu e-mail para ${action} a senha.`}
         </C.SuccessMessage>
       )}
 

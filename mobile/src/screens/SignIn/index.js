@@ -246,7 +246,9 @@ export function SignIn() {
           </C.AccountButtons>
         ) : (
           <C.AccountButtons>
-            <C.AccountButton onPress={() => navigation.navigate('change_password')}>
+            <C.AccountButton
+              onPress={() => navigation.navigate('change_password', { prevScreen: 'Settings' })}
+            >
               <C.AccountButtonText>Esqueci minha senha</C.AccountButtonText>
             </C.AccountButton>
             <C.AccountButton onPress={handleSignUpForm}>
