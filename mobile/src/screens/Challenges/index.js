@@ -59,7 +59,7 @@ export function Challenges() {
   }
 
   function filterChallenges(currentTags) {
-    let filteredChallenges = challenges;
+    let filteredChallenges = sortChallengesByDifficulty(challenges);
 
     for (const tag of currentTags) {
       filteredChallenges = filteredChallenges.filter(challenge => {
@@ -104,13 +104,23 @@ export function Challenges() {
     }
 
     setTags(updatedTags);
+    console.log(updatedTags);
     const filteredChallenges = filterChallenges(updatedTags);
     setFilteredChallenges(filteredChallenges);
   }
 
+  function sortChallengesByDifficulty(challenges) {
+    const easyChallenges = challenges.filter(challenge => challenge.difficulty === 'easy');
+    const mediumChallenges = challenges.filter(challenge => challenge.difficulty === 'medium');
+    const hardChallenges = challenges.filter(challenge => challenge.difficulty === 'hard');
+
+    return easyChallenges.concat(mediumChallenges, hardChallenges);
+  }
+
   useEffect(() => {
     if (challenges.length) {
-      setFilteredChallenges(challenges);
+      const sortedChallenges = sortChallengesByDifficulty(challenges);
+      setFilteredChallenges(sortChallengesByDifficulty(challenges));
       setIsLoading(false);
     }
   }, [challenges, categories]);

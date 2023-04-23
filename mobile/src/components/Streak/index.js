@@ -51,11 +51,11 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
 
     const currentDate = new Date();
     const createdAtDate = new Date(created_at);
+    console.log({ did_complete_saturday });
 
     if (yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
       setStreakCount(0);
       updateLoggedUser('streak', 0);
-      updateWeekStatus(todayIndex);
 
       const yesterdayIndex = todayIndex - 1;
       updateWeekStatus(yesterdayIndex, 'undone');

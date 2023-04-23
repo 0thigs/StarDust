@@ -27,6 +27,10 @@ export function Shop() {
     if (avatars.length && rockets.length) setIsLoading(false);
   }, [avatars, rockets]);
 
+  useEffect(() => {
+    console.log({newUnlockedAchievements});
+  }, [newUnlockedAchievements]);
+
   return (
     <C.Container>
       <C.Content isLoading={isLoading}>

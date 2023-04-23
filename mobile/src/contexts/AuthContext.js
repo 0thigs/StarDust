@@ -5,7 +5,7 @@ import api from '../services/api';
 export const AuthContext = createContext();
 
 const fakeLoggedUser = {
-  id: '8d2c2342-0e56-49ef-9650-c8ab47b03a53',
+  id: 'cc71b28d-9369-47ba-80d7-e6e193af73d6',
   name: 'John Petros',
   email: 'kauedanka@gmail.com',
   coins: 225,

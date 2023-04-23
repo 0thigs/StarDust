@@ -109,6 +109,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
       <Modal
         isVisible={isModalOpen}
         type={modalType}
+        playSong={true}
         title={
           modalType === 'denying'
             ? 'Parece que você não tem poeira estelar o suficiente'

@@ -30,8 +30,6 @@ export function Avatar({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
-//   console.log(name === 'Apollo executivo' ? isAcquired : '');
-console.log(isAcquired);
 
   async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
     updateLoggedUser('coins', updatedCoins);

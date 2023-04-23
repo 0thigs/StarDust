@@ -415,6 +415,78 @@ var resitencia = 700`,
     difficulty: 'easy',
     categories: ['matemática', 'básico', 'números'],
   },
+  {
+    id: 16,
+    starId: null,
+    title: 'Quantos planetas habitados?',
+    texts: [
+      {
+        type: 'default',
+        body: 'Em uma galáxia distante, existem várias naves espaciais que estão explorando novos mundos.',
+      },
+      {
+        type: 'default',
+        body: 'Cada nave tem sensores que coletam dados sobre a presença de diferentes formas de vida nos planetas visitados.',
+      },
+      {
+        type: 'default',
+        body: 'Os sensores são controlados por um sistema de inteligência artificial que detecta a presença ou ausência de vida com base em diferentes fatores.',
+      },
+      {
+        type: 'default',
+        body: 'Você tem uma funcão que recebe um vetor de valores lógicos coletados pelos sensores de várias naves espaciais, representando a presença ou ausência de vida em diferentes planetas.',
+      },
+      {
+        type: 'default',
+        body: 'Seu dasafio é: fazer com que a função deve retorne o número de valores "verdadeiro" no vetor.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [verdadeiro, falso, falso, verdadeiro, falso]
+Resultado: 2
+
+Entrada: [falso, falso, falso, falso]
+Resultado: 0
+
+Entrada: []
+Resultado: 2`,
+      },
+      {
+        type: 'alert',
+        body: 'A função deve retornar 0 se o vetor for vazio.',
+      },
+      {
+        type: 'alert',
+        body: 'Não se preocupe, todos os valores dos vetores são do tipo lógico',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [100, 100, 100, 'verdadeiro'],
+        expectedOutput: 'verdadeiro',
+        isLocked: false,
+      },
+      {
+        input: [300, 400, 800, 'falso'],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+      {
+        input: [100, 500, 100, 'verdadeiro'],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+    ],
+
+    code: `
+function quantosPlanetasHabitados(planetas) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['matemática', 'básico', 'números'],
+  },
 ];
 
 [

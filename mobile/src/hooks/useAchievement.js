@@ -42,6 +42,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
 
   async function verifyHasNewUnlockedAchievements() {
     const newUnlockedAchievements = getNewUnlockedAchievements(achievements);
+    console.log(newUnlockedAchievements);
     if (!newUnlockedAchievements.length) return;
 
     setNewUnlockedAchievements(newUnlockedAchievements);
@@ -86,6 +87,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
   }
 
   useEffect(() => {
+    console.log('oi');
     if (!achievements.length) fetchAchievements();
     if (canGetNewUnlockedAchievements && achievements.length) verifyHasNewUnlockedAchievements();
   }, [achievements, loggedUser]);
