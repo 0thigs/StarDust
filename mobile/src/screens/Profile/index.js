@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useAchievement } from '../../hooks/useAchievement';
-import { useRoute, useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useRoute, useFocusEffect, useNavigation, useScrollToTop } from '@react-navigation/native';
 
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';
@@ -27,19 +27,23 @@ export function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const isFromLoggedUser = userId === loggedUser.id;
+  const contentScrollRef = useRef(null);
 
   async function setProfileData() {
     try {
       setIsLoading(true);
       const user = await api.getUser(userId);
       setUser(user);
-      const achievements = await fetchAchievements(userId)
+      const achievements = await fetchAchievements(userId);
       const unlockedAchievements = achievements.filter(achivement => achivement.isUnlocked);
       setUnlockedAchievements(unlockedAchievements);
     } catch (error) {
       console.error(error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        contentScrollRef.current.scrollTo({ x: 0, y: 0, animated: false });
+        setIsLoading(false);
+      }, 1000);
     }
   }
 
@@ -57,7 +61,11 @@ export function Profile() {
 
   return (
     <C.Container>
-      <C.Content showsVerticalScrollIndicator={false} scrollEnabled={!isLoading}>
+      <C.Content
+        ref={contentScrollRef}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={!isLoading}
+      >
         {isLoading && <Loading isAnimation={true} hasScroll={true} />}
         {user && (
           <>
