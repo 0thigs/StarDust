@@ -27,7 +27,7 @@ export function ChallengesGraph({ userId }) {
   function getCompletedChallengesPercentageByDifficulty(difficulty) {
     const totalChallenges = totalChallengesByDifficulty[difficulty];
     if (totalChallenges === 0) return 0;
-    return (getCompletedChallengesCountByDifficulty() / challenges.length) * 100;
+    return (getCompletedChallengesCountByDifficulty(difficulty) / totalChallenges) * 100;
   }
 
   function countChallengesByDifficulty() {
