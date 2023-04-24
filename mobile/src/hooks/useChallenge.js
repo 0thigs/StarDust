@@ -7,6 +7,14 @@ export const useChallenge = challengeId => {
   const [challenges, setChallenges] = useState([]);
   const [challenge, setChallenge] = useState({});
 
+  async function addUserCompletedChallenges(challengeId) {
+    try {
+      await api.addUserCompletedChallenges(challengeId, loggedUser.id);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function getAcceptanceRate(likes, votes) {
     return votes === 0 ? 0 : (likes / votes) * 100;
   }
@@ -42,19 +50,31 @@ export const useChallenge = challengeId => {
     }
   }
 
+  function verifyChallenge(challenge) {
+    const isCompleted = challenge.users_completed_challenges.some(
+      challenge => challenge.user_id === loggedUser.id
+    );
+    if (isCompleted) delete challenge.users_completed_challenges;
+    return { ...challenge, isCompleted };
+  }
+
   async function fetchCurrentChallenge() {
     try {
       const challenge = await api.getChallenge(challengeId);
-      setChallenge(challenge);
+      const verifiedChallenge = verifyChallenge(challenge);
+      setChallenge(verifiedChallenge);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    if (challengeId) fetchCurrentChallenge();
-    else fetchChallenges();
+    if (challengeId) {
+      fetchCurrentChallenge();
+      return;
+    }
+    fetchChallenges();
   }, []);
 
-  return { challenges, challenge };
+  return { challenges, challenge, addUserCompletedChallenges };
 };

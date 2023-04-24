@@ -26,9 +26,11 @@ const iconSize = 30;
 export function End({
   starId = 'e35bba41-f5cd-4a37-9b67-533171a086cc',
   challengeId,
-  _coins,
-  _xp,
-  _seconds,
+  challengeCoins,
+  challengeXp,
+  challengeSeconds,
+  isCompleted,
+  addUserCompletedChallenges,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const { planets, getCurrentPlanet, getNextStar, addUnlockedStar } = usePlanet();
@@ -61,10 +63,11 @@ export function End({
     const updatedXp = xp + loggedUser.xp;
     const updatedWeeklyXp = xp + loggedUser.weekly_xp;
     const updatedLevel = getUpdatedLevel(updatedXp);
-    let completedChallengesIds = loggedUser.completed_challenges_ids;
+    let completedChallenges = loggedUser.completed_challenges;
 
-    if (challengeId && !loggedUser.completed_challenges_ids.includes(challengeId)) {
-      completedChallengesIds.push(challengeId);
+    if (challengeId && !isCompleted) {
+      addUserCompletedChallenges(challengeId);
+      completedChallenges++;
     }
 
     if (!starId) {
@@ -73,7 +76,7 @@ export function End({
         xp: updatedXp,
         weekly_xp: updatedWeeklyXp,
         level: updatedLevel,
-        completed_challenges_ids: completedChallengesIds,
+        completed_challenges: completedChallenges,
       };
     }
 
@@ -104,7 +107,7 @@ export function End({
 
   async function updateUserData() {
     const newData = getUpdatedData();
-    for (key of Object.keys(newData)) {
+    for (let key of Object.keys(newData)) {
       updateLoggedUser(key, newData[key]);
     }
   }
@@ -162,9 +165,9 @@ export function End({
 
   useEffect(() => {
     if (challengeId) {
-      setCoins(_coins);
-      setXp(_xp);
-      setTime(convertSecondsToTime(_seconds));
+      setCoins(challengeCoins);
+      setXp(challengeXp);
+      setTime(convertSecondsToTime(challengeSeconds));
     } else {
       setCoins(getCoins());
       setXp(getXp());

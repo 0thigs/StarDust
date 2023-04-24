@@ -12,7 +12,7 @@ const sounds = {
   fail: require('../../assets/sounds/fail-sound.wav'),
 };
 
-export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered, showComments }) {
+export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerified, isAnswered, showComments, isChallenge }) {
   const soundRef = useRef();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function VerificationButton({ verifyAnswer, isAnswerWrong, isAnswerVerifi
     <C.Container isAnswerWrong={isAnswerVerified && isAnswerWrong}>
       {isAnswerVerified && (
         <C.Feedback>
-          {!isAnswerWrong && (
+          {!isAnswerWrong && isChallenge && (
             <C.CommentsButton onPress={showComments}>
               <C.Title>Mostrar comentários</C.Title>
             </C.CommentsButton>

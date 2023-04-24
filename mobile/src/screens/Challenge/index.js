@@ -17,7 +17,7 @@ import { useChallenge } from '../../hooks/useChallenge';
 const earningsByDifficulty = {
   easy: {
     coins: 20,
-    xp: 125,
+    xp: 10,
   },
   medium: {
     coins: 30,
@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
   const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
-  const { challenge } = useChallenge(challengeId);
+  const { challenge, addUserCompletedChallenges } = useChallenge(challengeId);
   const {
     id,
     title,
@@ -112,7 +112,6 @@ export function Challenge({ route }) {
 
   async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
-    console.log(code);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
@@ -176,6 +175,7 @@ export function Challenge({ route }) {
   }, [seconds.current]);
 
   useEffect(() => {
+    console.log({isCompleted});
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);
@@ -208,10 +208,11 @@ export function Challenge({ route }) {
             <End
               starId={star_id}
               challengeId={id}
-              _coins={earningsByDifficulty[difficulty].coins}
-              _xp={earningsByDifficulty[difficulty].xp}
-              _seconds={seconds.current}
+              challengeCoins={earningsByDifficulty[difficulty].coins / (isCompleted ? 2 : 1)}
+              challengeXp={earningsByDifficulty[difficulty].xp / (isCompleted ? 2 : 1)}
+              challengeSeconds={seconds.current}
               isCompleted={isCompleted}
+              addUserCompletedChallenges={addUserCompletedChallenges}
             />
           )}
         </>

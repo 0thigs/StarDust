@@ -149,6 +149,7 @@ export function Quiz() {
         isAnswerWrong={state.isAnswerWrong}
         isAnswerVerified={state.isAnswerVerified}
         isAnswered={state.isAnswered}
+        isChallenge={false}
       />
     </C.Container>
   );

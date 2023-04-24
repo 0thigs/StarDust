@@ -21,44 +21,51 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
   const today = week_status[todayIndex];
   const yesterday = week_status[todayIndex - 1];
 
-  function updateWeekStatus(dayIndex, newStatus) {
-    const updatedWeekStatus = week_status.map((status, index) =>
+  function updateWeekStatus(dayIndex, newStatus, currentWeekStatus) {
+    const updatedWeekStatus = currentWeekStatus.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
+    return updatedWeekStatus;
   }
 
-  async function updateStreak() {
+  async function updateStreak(currentWeekStatus) {
     if (today !== 'todo') return;
+    console.log(week_status, 'update');
+
     if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && did_complete_saturday)) {
-      console.log({ did_complete_saturday });
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
       updateLoggedUser('streak', updatedStreak);
-      if (todayIndex === 4) {
-        console.log({ todayIndex });
+      if (todayIndex === 6) {
         updateLoggedUser('did_complete_saturday', true);
       }
     }
-    updateWeekStatus(todayIndex, 'done');
+    updateWeekStatus(todayIndex, 'done', currentWeekStatus);
 
     if (todayIndex !== 6 && did_complete_saturday) updateLoggedUser('did_complete_saturday', false);
   }
 
   function checkHasUndoneDay() {
+    console.log(week_status, 'undone');
     if (today !== 'todo') return;
 
     const currentDate = new Date();
     const createdAtDate = new Date(created_at);
-    console.log({ did_complete_saturday });
+    let currentWeekStatus = week_status;
 
     if (yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
       setStreakCount(0);
       updateLoggedUser('streak', 0);
 
       const yesterdayIndex = todayIndex - 1;
-      updateWeekStatus(yesterdayIndex, 'undone');
+      currentWeekStatus = updateWeekStatus(yesterdayIndex, 'undone', currentWeekStatus);
+    }
+
+    if (route.name !== 'Profile') {
+      updateStreak(currentWeekStatus);
+      return;
     }
   }
 
@@ -66,26 +73,24 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
     setWeekStatus(week_status);
     setStreakCount(streak);
     checkHasUndoneDay();
-
-    if (route.name !== 'Profile') {
-      updateStreak();
-      return;
-    }
   }, []);
 
   return (
     <C.Container>
       <C.Title>Sequência de dias estudados</C.Title>
-      <C.WeekStatus>
-        {weekDays.map((weekDay, index) => (
-          <C.WeekDay key={weekDay}>
-            <C.WeekDayName>{weekDay}</C.WeekDayName>
-            {weekStatus[index] === 'done' && <SuccessIcon />}
-            {weekStatus[index] === 'undone' && <FailIcon />}
-            {weekStatus[index] === 'todo' && <PlaceholderIcon />}
-          </C.WeekDay>
-        ))}
-      </C.WeekStatus>
+      {weekStatus && (
+        <C.WeekStatus>
+          {weekDays.map((weekDay, index) => (
+            <C.WeekDay key={weekDay}>
+              <C.WeekDayName>{weekDay}</C.WeekDayName>
+              {weekStatus[index] === 'done' && <SuccessIcon />}
+              {weekStatus[index] === 'undone' && <FailIcon />}
+              {weekStatus[index] === 'todo' && <PlaceholderIcon />}
+            </C.WeekDay>
+          ))}
+        </C.WeekStatus>
+      )}
+
       <C.StreakStatus>
         <C.StreakAnimation
           source={StreakAnimation}

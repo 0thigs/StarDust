@@ -65,6 +65,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
         isAnswerVerified={isAnswerVerified}
         isAnswerWrong={isAnswerWrong}
         showComments={showComments}
+        isChallenge={true}
       />
 
       <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />

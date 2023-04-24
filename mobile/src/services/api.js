@@ -281,7 +281,10 @@ export default {
   },
 
   getChallenge: async challengeId => {
-    const { data, error } = await supabase.from('challenges').select('*').eq('id', challengeId);
+    const { data, error } = await supabase
+      .from('challenges')
+      .select('*, users_completed_challenges(user_id)')
+      .eq('id', challengeId);
     if (error) {
       throw new Error(error.message);
     }
@@ -298,10 +301,10 @@ export default {
     return challenge;
   },
 
-  addUserCompleteChallenges: async (achievementId, userId) => {
+  addUserCompletedChallenges: async (achievementId, userId) => {
     const { data, error } = await supabase
       .from('users_completed_challenges')
-      .insert([{ achievement_id: achievementId, user_id: userId }]);
+      .insert([{ challenge_id: achievementId, user_id: userId }]);
     if (error) {
       throw new Error(error.message);
     }

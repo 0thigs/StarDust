@@ -10,17 +10,17 @@ export const Container = styled.View`
 `;
 
 export const Message = styled(Animatable.Text)`
-  font-family: ${props => props.theme.fonts.bold};
-  color: ${props => props.theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
 `;
 
 export const CoinsContainer = styled.View`
   border-width: 1px;
-  border-color: ${props => props.theme.colors.yellow_300};
+  border-color: ${({ theme }) => theme.colors.yellow_300};
 `;
 export const CoinsHeader = styled.View`
-  background-color: ${props => props.theme.colors.yellow_300};
+  background-color: ${({ theme }) => theme.colors.yellow_300};
 `;
 export const CoinsHeaderText = styled.Text`
   font-size: 16px;
@@ -54,4 +54,3 @@ export const NewLevel = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 16px;
 `;
-
