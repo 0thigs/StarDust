@@ -9,7 +9,9 @@ import { RangeInput } from '../RangeInput';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { ArrowLeft, MoreVertical } from 'react-native-feather';
+import { Toast } from 'toastify-react-native';
 
+import * as Clipboard from 'expo-clipboard';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconSize = 25;
@@ -19,8 +21,8 @@ export function ChallengeHeader({
   sliderRef,
   CurrentIndicatorPositionX,
   currentSlideIndex,
-  setCurrentSlideIndex,
   topicId,
+  userCode,
 }) {
   const { isDarkMode, setIsDarkMode } = useEditor();
   const [isRangeInputVisible, setIsRangeInputVisible] = useState(false);
@@ -28,6 +30,15 @@ export function ChallengeHeader({
   const [isDictionaryVisible, setIsDictionaryVisible] = useState(false);
   const navigation = useNavigation();
   const popoverMenuRef = useRef(null);
+
+  async function copyCodeToClipboard() {
+    try {
+      await Clipboard.setStringAsync(userCode.current);
+    } catch (error) {
+      console.error(error);
+      Toast.error('Não foi possível copiar o código');
+    }
+  }
 
   const popoverMenuButtons = [
     {
@@ -47,6 +58,12 @@ export function ChallengeHeader({
       isToggle: false,
       value: null,
       action: () => setIsRangeInputVisible(true),
+    },
+    {
+      title: 'Copiar código',
+      isToggle: false,
+      value: null,
+      action: copyCodeToClipboard,
     },
   ];
 

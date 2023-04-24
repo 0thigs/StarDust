@@ -193,10 +193,10 @@ export function Challenge({ route }) {
               <ChallengeHeader
                 title={title}
                 sliderRef={sliderRef}
-                setCurrentSlideIndex={setCurrentSlideIndex}
                 CurrentIndicatorPositionX={CurrentIndicatorPositionX}
                 currentSlideIndex={currentSlideIndex}
                 topicId={topic_id}
+                userCode={userCode}
               />
 
               <Slider
