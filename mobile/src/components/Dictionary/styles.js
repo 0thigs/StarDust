@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Content = styled.View`
-  background-color: ${({ theme }) => theme.colors.blue_700};
+  background-color: ${({ theme }) => theme.colors.black};
   border-radius: 8px;
   padding: 12px;
 `;

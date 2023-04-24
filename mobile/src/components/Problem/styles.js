@@ -13,3 +13,15 @@ export const Title = styled(Animatable.Text)`
   margin-bottom: 4px;
   align-self: flex-start;
 `;
+
+export const Button = styled.TouchableOpacity`
+  margin-top: 12px;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  align-self: center;
+  background-color: ${props => props.theme.colors.green_700};
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+`;

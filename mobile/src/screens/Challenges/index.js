@@ -117,7 +117,6 @@ export function Challenges() {
   }
 
   function addCategories(challenge) {
-    console.log(challenge);
     const categories = challenge.categories.map(getCategoriesNames);
     return { ...challenge, categories };
   }
@@ -131,7 +130,7 @@ export function Challenges() {
   }
 
   useEffect(() => {
-    if (challenges.length) {
+    if (challenges.length && categories.length) {
       setFilteredChallenges(sortChallengesByDifficulty(challenges).map(addCategories));
       setIsLoading(false);
     }

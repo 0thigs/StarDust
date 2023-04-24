@@ -8,6 +8,5 @@ export async function execute(code, callback) {
   const interpretador = new InterpretadorBase('./src/libs', false, callback);
   const resultadoLexador = lexador.mapear([code]);
   const resultadoAvaliacaoSintatica = avaliadorSintatico.analisar(resultadoLexador);
-
   return await interpretador.interpretar(resultadoAvaliacaoSintatica.declaracoes, false);
 }

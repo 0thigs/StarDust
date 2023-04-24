@@ -31,7 +31,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '6602259c-4082-470e-9211-3740033b0271';
+  const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
   const { challenge } = useChallenge(challengeId);
   const {
     id,
@@ -62,7 +62,7 @@ export function Challenge({ route }) {
     CurrentIndicatorPositionX.value = contentOffset.x / 3;
   }
 
-  function backToCode() {
+  function goToCode() {
     sliderRef.current.scrollToIndex({
       index: 1,
       animated: true,
@@ -111,11 +111,11 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
-    let code = userCode.current;
-    code = formatCode(code, input);
+    const code = formatCode(userCode.current, input);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
+      console.log(resultado.splice(-1)[0]);
       if (erros.length) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
@@ -136,7 +136,7 @@ export function Challenge({ route }) {
     const slides = [
       {
         id: 1,
-        component: <Problem title={title} texts={texts} />,
+        component: <Problem title={title} texts={texts} goToCode={goToCode} />,
       },
       {
         id: 2,
@@ -150,7 +150,7 @@ export function Challenge({ route }) {
             setIsEnd={setIsEnd}
             testCases={test_cases}
             userOutputs={userOutputs}
-            backToCode={backToCode}
+            goToCode={goToCode}
           />
         ),
       },
