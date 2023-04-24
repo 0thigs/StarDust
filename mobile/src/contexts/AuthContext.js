@@ -109,7 +109,7 @@ export function AuthProvider({ children }) {
     if (error) {
       throw new Error(error.message);
     }
-    setLoggedUser(null);
+    setLoggedUser({});
     return success;
   }
 
@@ -174,7 +174,7 @@ export function AuthProvider({ children }) {
   async function deleteLoggedUser(userId) {
     try {
       await api.deleteUser(userId);
-      setLoggedUser(null);
+      setLoggedUser({});
     } catch (error) {
       console.error(error);
     }

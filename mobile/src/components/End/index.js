@@ -49,7 +49,7 @@ export function End({
   const navigation = useNavigation();
 
   function getUpdatedLevel(updatedXp) {
-    const hasNewLevel = updatedXp > 50 + (loggedUser.level - 1) * 25;
+    const hasNewLevel = updatedXp > 50 * loggedUser.level + 25;
     if (hasNewLevel) {
       const newLevel = loggedUser.level + 1;
       setNewLevel(newLevel);
@@ -84,7 +84,7 @@ export function End({
     let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
     let nextStar = getNextStar(starId);
 
-    if (!nextStar) {
+    if (nextStar) {
       completedPlanets += 1;
       const currentPlanet = getCurrentPlanet(starId);
       const nextPlanet = planets.find(planet => planet.order === currentPlanet.order + 1);

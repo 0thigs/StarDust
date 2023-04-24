@@ -40,14 +40,11 @@ const effects = [
 ];
 
 export function Modal({ isVisible, type = 'generic', playSong = true, title, body, footer }) {
-  const {
-    config: { canPlaySound },
-  } = useConfig();
   const { animation, sound } = effects.find(animation => animation.id === type.toLocaleLowerCase());
   const soundRef = useRef(null);
 
   useEffect(() => {
-    if (canPlaySound && playSong && isVisible && type !== 'generic') {
+    if (playSong && isVisible && type !== 'generic') {
       soundRef.current.play();
     }
   }, [isVisible]);
