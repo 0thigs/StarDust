@@ -463,10 +463,10 @@ export default {
     return success;
   },
 
-  addCode: async (title, code, userId) => {
+  addCode: async (codeId, codeTitle, code, userId) => {
     const { success, error } = await supabase
       .from('codes')
-      .insert([{ title, code, user_id: userId }]);
+      .insert([{ id: codeId, title: codeTitle, code, user_id: userId }]);
     if (error) {
       throw new Error(error.message);
     }

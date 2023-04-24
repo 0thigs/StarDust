@@ -9,10 +9,10 @@ import * as C from './styles';
 import { Prompt } from '../../components/Prompt';
 
 export function Playground({ route }) {
-  const codeId = useRef(route.params?.id ?? null);
+  const [codeId, setCodeId] = useState(route.params?.id ?? null);
   const {
     code: { code, title },
-  } = useCode(codeId.current);
+  } = useCode(codeId);
   const [codeTitle, setCodeTitle] = useState('');
   const [initialCode, setInitialCodeCode] = useState('');
   const [output, setOutput] = useState([]);
@@ -96,9 +96,8 @@ export function Playground({ route }) {
   }
 
   useEffect(() => {
-    setCodeTitle(codeId.current ? title : 'Playground');
-    setCodeTitle(codeId.current ? title : 'Playground');
-    setInitialCodeCode(codeId.current ? code : route.params?.code);
+    setCodeTitle(codeId ? title : 'Playground');
+    setInitialCodeCode(codeId ? code : route.params?.code);
   }, [code]);
 
   return (
@@ -107,6 +106,7 @@ export function Playground({ route }) {
         title={codeTitle}
         code={userCode}
         codeId={codeId}
+        setCodeId={setCodeId}
         setCodeTitle={setCodeTitle}
       />
 

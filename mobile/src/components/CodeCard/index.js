@@ -21,9 +21,6 @@ export function CodeCard({ id, title, onPress, navigation }) {
         <C.Button onPress={() => onPress('edit', id)}>
           <Edit3 color={iconColor} />
         </C.Button>
-        <C.Button onPress={() => onPress('share', id)}>
-          <Share2 color={iconColor} />
-        </C.Button>
       </C.Footer>
     </C.Container>
   );

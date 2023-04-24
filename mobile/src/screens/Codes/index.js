@@ -50,10 +50,9 @@ export function Codes() {
   function editCode(id) {
     currentCodeId.current = id;
     codeTitle.current = codes.find(code => code.id === id).title;
+    console.log(codeTitle.current);
     setIsPromptVisible(true);
   }
-
-  function shareCode(id) {}
 
   function handleCodeButtonPress(action, id) {
     switch (action) {
@@ -63,9 +62,6 @@ export function Codes() {
       case 'delete':
         currentCodeId.current = id;
         setIsModalVisible(true);
-        break;
-      case 'share':
-        shareCode(id);
         break;
     }
   }

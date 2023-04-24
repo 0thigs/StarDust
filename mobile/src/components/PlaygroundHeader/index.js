@@ -15,7 +15,7 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconColor = theme.colors.green_500;
 
-export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
+export function PlaygroundHeader({ title, code, codeId, setCodeId, setCodeTitle }) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
@@ -30,15 +30,16 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   function onPromptConfirm() {
     popoverMenuRef.current.closePopover();
 
-    if (codeId.current) {
-      updateCode(codeId.current, { code: code.current });
+    if (codeId) {
+      updateCode(codeId, { code: code.current });
       return;
     }
     const id = uuidv4();
+    console.log(id);
     addCode(id, codeTitle.current, code.current, loggedUser.id);
     setIsPromptVisible(false);
     setCodeTitle(codeTitle.current);
-    codeId.current = id;
+    setCodeId(id)
   }
 
   function onPromptCancel() {
@@ -47,7 +48,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
   }
 
   function handleDeleteButtonPress() {
-    deleteCode(codeId.current);
+    deleteCode(codeId);
     setIsModalVisible(false);
     navigation.goBack();
   }
@@ -61,8 +62,8 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
       {
         title: 'Salvar código',
         isToggle: false,
-        value: isDarkMode,
-        action: () => (codeId.current ? onPromptConfirm() : setIsPromptVisible(true)),
+        value: null,
+        action: () => (codeId ? onPromptConfirm() : setIsPromptVisible(true)),
       },
       {
         title: 'Dark Mode',
@@ -78,7 +79,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
       },
     ];
 
-    if (codeId.current) {
+    if (codeId) {
       const deleteButton = {
         title: 'Deletar',
         isToggle: false,
@@ -89,7 +90,7 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
     }
 
     setPopoverMenuButtons(popoverMenuButtons);
-  }, []);
+  }, [codeId]);
 
   return (
     <C.Container>
@@ -98,10 +99,6 @@ export function PlaygroundHeader({ title, code, codeId, setCodeTitle }) {
       </C.HeaderButton>
 
       <C.Title>{title}</C.Title>
-
-      {/* <C.HeaderButton activeOpacity={0.7}>
-        <Share2 color={iconColor} />
-      </C.HeaderButton> */}
 
       <PopoverMenu
         ref={popoverMenuRef}

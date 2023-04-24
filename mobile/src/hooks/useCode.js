@@ -5,9 +5,9 @@ export const useCode = (codeId, userId) => {
   const [codes, setCodes] = useState([]);
   const [code, setCode] = useState('');
 
-  async function addCode(codeId, code, userId) {
+  async function addCode(codeId, codeTitle, code, userId) {
     try {
-      await api.addCode(codeId, code, userId);
+      await api.addCode(codeId, codeTitle, code, userId);
     } catch (error) {
       console.log(error);
     }
