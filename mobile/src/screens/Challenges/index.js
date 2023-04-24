@@ -130,7 +130,7 @@ export function Challenges() {
   }
 
   useEffect(() => {
-    if (challenges.length && categories.length) {
+    if (challenges.length, categories.length) {
       setFilteredChallenges(sortChallengesByDifficulty(challenges).map(addCategories));
       setIsLoading(false);
     }

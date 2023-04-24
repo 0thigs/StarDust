@@ -89,7 +89,7 @@ export function Challenge({ route }) {
         Array.isArray(value) ? `[${value.join(',')}]` : value
       );
       const params = '(' + paramsValues.join(',') + ')';
-      return code.concat(';' + function_name + params + ';');
+      return code.concat('\n' + function_name + params + ';');
     }
 
     if (!inputValues) return code;
@@ -112,6 +112,7 @@ export function Challenge({ route }) {
 
   async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
+    console.log(code);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
@@ -120,6 +121,7 @@ export function Challenge({ route }) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
       }
+
       handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);

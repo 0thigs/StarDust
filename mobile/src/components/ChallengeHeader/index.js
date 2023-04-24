@@ -61,7 +61,6 @@ export function ChallengeHeader({
   }
 
   function handleNavButtonPress(index) {
-    setCurrentSlideIndex(index);
     sliderRef.current.scrollToIndex({ index });
   }
 

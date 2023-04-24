@@ -461,21 +461,21 @@ Resultado: 2`,
         body: 'Não se preocupe, todos os valores dos vetores são do tipo lógico',
       },
     ],
-    function: null,
+    functionName: 'quantosPlanetasHabitados',
     testCases: [
       {
-        input: [100, 100, 100, 'verdadeiro'],
-        expectedOutput: 'verdadeiro',
+        input: [['verdadeiro', 'falso', 'verdadeiro', 'verdadeiro', 'falso']],
+        expectedOutput: 3,
         isLocked: false,
       },
       {
-        input: [300, 400, 800, 'falso'],
-        expectedOutput: 'falso',
+        input: [['falso', 'falso', 'falso']],
+        expectedOutput: 0,
         isLocked: false,
       },
       {
-        input: [100, 500, 100, 'verdadeiro'],
-        expectedOutput: 'falso',
+        input: [['verdadeiro', 'verdadeiro', 'verdadeiro', 'verdadeiro']],
+        expectedOutput: 4,
         isLocked: false,
       },
     ],
@@ -485,7 +485,6 @@ function quantosPlanetasHabitados(planetas) {
     
 }`,
     difficulty: 'easy',
-    categories: ['matemática', 'básico', 'números'],
   },
 ];
 
