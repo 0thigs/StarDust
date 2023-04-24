@@ -23,7 +23,7 @@ export const slides = [
   },
   {
     title: 'Tenha constância na sua corrida espacial!',
-    image: require('../assets/IntroAssets/home-slide.png'),
+    image: require('../assets/IntroAssets/streak-slide.jpeg'),
     description: 'Matenha sua Cosmic Run intacta, estudando e praticando todos os dias.',
   },
   {

@@ -11,6 +11,7 @@ export const Container = styled.SafeAreaView`
 export const Badges = styled.ImageBackground`
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-bottom-color: ${({ theme }) => theme.colors.green_700};
+  height: 152px;
   padding-left: 8px;
 `;
 

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useAchievement } from '../../hooks/useAchievement';
 import { useRoute, useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -48,55 +48,58 @@ export function Profile() {
 
   useFocusEffect(
     useCallback(() => {
-      if (unlockedAchievements.length) return;
+      if (unlockedAchievements.length) {
+        return;
+      }
       setProfileData();
-      const timer = setTimeout(() => setIsLoading(false), 1000);
-      return () => clearTimeout(timer);
     }, [userId, unlockedAchievements])
   );
 
   return (
     <C.Container>
-      {isLoading || !user ? (
-        <Loading isAnimation={true} />
-      ) : (
-        <C.Content showsVerticalScrollIndicator={false}>
-          <ProfileStatus user={user} isFromLoggedUser={isFromLoggedUser} />
-          <Statistic user={user} />
-          {isFromLoggedUser && (
-            <Button
-              title={'Ver meus códigos'}
-              color={theme.colors.black}
-              background={theme.colors.green_500}
-              onPress={handleButtonPress}
-            />
-          )}
-          <C.Title>Desafios concluídos</C.Title>
-          <ChallengesGraph userId={user.id} />
-          <Streak user={user} />
-          <C.Title>Conquistas</C.Title>
-          <C.Achievements>
-            {unlockedAchievements.length ? (
-              unlockedAchievements.map(({ id, name, description, icon, requiredCount, metric }) => (
-                <Achievement
-                  key={id}
-                  name={name}
-                  description={description}
-                  icon={icon}
-                  requiredCount={requiredCount}
-                  currentCount={user[metric]}
-                  isUnlocked={true}
-                />
-              ))
-            ) : (
-              <>
-                <C.NoAchievements>Nenhuma consquista desbloquada ainda 😢</C.NoAchievements>
-                <Animation source={Missing} autoPlay={true} loop={true} size={220} />
-              </>
+      <C.Content showsVerticalScrollIndicator={false} scrollEnabled={!isLoading}>
+        {isLoading && <Loading isAnimation={true} hasScroll={true} />}
+        {user && (
+          <>
+            <ProfileStatus user={user} isFromLoggedUser={isFromLoggedUser} />
+            <Statistic user={user} />
+            {isFromLoggedUser && (
+              <Button
+                title={'Ver meus códigos'}
+                color={theme.colors.black}
+                background={theme.colors.green_500}
+                onPress={handleButtonPress}
+              />
             )}
-          </C.Achievements>
-        </C.Content>
-      )}
+            <C.Title>Desafios concluídos</C.Title>
+            <ChallengesGraph userId={user.id} />
+            <Streak user={user} />
+            <C.Title>Conquistas</C.Title>
+            <C.Achievements>
+              {unlockedAchievements.length ? (
+                unlockedAchievements.map(
+                  ({ id, name, description, icon, requiredCount, metric }) => (
+                    <Achievement
+                      key={id}
+                      name={name}
+                      description={description}
+                      icon={icon}
+                      requiredCount={requiredCount}
+                      currentCount={user[metric]}
+                      isUnlocked={true}
+                    />
+                  )
+                )
+              ) : (
+                <>
+                  <C.NoAchievements>Nenhuma consquista desbloquada ainda 😢</C.NoAchievements>
+                  <Animation source={Missing} autoPlay={true} loop={true} size={220} />
+                </>
+              )}
+            </C.Achievements>
+          </>
+        )}
+      </C.Content>
     </C.Container>
   );
 }

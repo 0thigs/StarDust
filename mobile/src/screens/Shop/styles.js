@@ -5,9 +5,8 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Content = styled.ScrollView.attrs(({ isLoading }) => ({
+export const Content = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
-    flex: isLoading ? 1 : 0,
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 48,

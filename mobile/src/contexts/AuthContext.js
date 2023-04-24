@@ -15,7 +15,7 @@ const fakeLoggedUser = {
   selected_rocket_id: 2,
   ranking_id: 1,
   streak: 0,
-  week_status: ['todo', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
+  week_status: ['done', 'done', 'done', 'todo', 'todo', 'todo', 'todo'],
   unlocked_stars: 2,
   achievements_to_rescue: [],
   avatar_id: 'c008e3a2-d79b-43f3-a1e2-77acdefeb909',

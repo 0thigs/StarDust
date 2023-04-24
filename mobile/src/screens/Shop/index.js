@@ -14,6 +14,7 @@ import { AvatarsList } from '../../components/AvatarsList';
 import * as C from './styles';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
+import { useRef } from 'react';
 
 export function Shop() {
   const { loggedUser } = useAuth();
@@ -22,21 +23,22 @@ export function Shop() {
   const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
   const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const timer = useRef(null);
 
   useEffect(() => {
-    if (avatars.length && rockets.length) setIsLoading(false);
+    if (avatars.length && rockets.length)
+      timer.current = setTimeout(() => setIsLoading(false), 1000);
   }, [avatars, rockets]);
 
   useEffect(() => {
-    console.log({newUnlockedAchievements});
+    console.log({ newUnlockedAchievements });
   }, [newUnlockedAchievements]);
 
   return (
     <C.Container>
-      <C.Content isLoading={isLoading}>
-        {isLoading ? (
-          <Loading isAnimation={true} />
-        ) : (
+      <C.Content showsVerticalScrollIndicator={false} scrollEnabled={!isLoading}>
+        {isLoading && <Loading isAnimation={true} hasScroll={true} />}
+        {rockets.length > 0 && avatars.length > 0 && (
           <>
             <C.Title>Foguetes</C.Title>
             <C.RocketList>
@@ -52,7 +54,6 @@ export function Shop() {
                 />
               ))}
             </C.RocketList>
-
             <C.Title>Avatares</C.Title>
             <AvatarsList avatars={avatars} addUserAcquiredAvatar={addUserAcquiredAvatar} />
           </>
