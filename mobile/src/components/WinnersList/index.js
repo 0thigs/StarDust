@@ -36,7 +36,6 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
   }
 
   useEffect(() => {
-    // console.log(winners);
     soundRef.current.play();
   }, []);
 

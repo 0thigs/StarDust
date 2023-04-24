@@ -21,7 +21,7 @@ export function Profile() {
   const { loggedUser } = useAuth();
   const route = useRoute();
   const { userId } = route.params;
-  const { achievements } = useAchievement(userId);
+  const { fetchAchievements } = useAchievement();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,10 +33,11 @@ export function Profile() {
       setIsLoading(true);
       const user = await api.getUser(userId);
       setUser(user);
+      const achievements = await fetchAchievements(userId)
       const unlockedAchievements = achievements.filter(achivement => achivement.isUnlocked);
       setUnlockedAchievements(unlockedAchievements);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -48,11 +49,10 @@ export function Profile() {
 
   useFocusEffect(
     useCallback(() => {
-      if (unlockedAchievements.length) {
-        return;
-      }
+      setUser(null);
+      fetchAchievements(userId);
       setProfileData();
-    }, [userId, unlockedAchievements])
+    }, [userId])
   );
 
   return (

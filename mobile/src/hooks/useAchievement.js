@@ -70,7 +70,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
     }
   }
 
-  async function fetchAchievements() {
+  async function fetchAchievements(userId) {
     try {
       const [achievements, userUnlockedAchievements, userAchievementsToRescue] = await Promise.all([
         api.getAchievements(),
@@ -81,14 +81,14 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
         verifyAchievement(achievement, userUnlockedAchievements, userAchievementsToRescue)
       );
       setAchievements(verifiedAchievements);
+      return verifiedAchievements;
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    console.log('oi');
-    if (!achievements.length) fetchAchievements();
+    if (!achievements.length && userId) fetchAchievements(userId);
     if (canGetNewUnlockedAchievements && achievements.length) verifyHasNewUnlockedAchievements();
   }, [achievements, loggedUser]);
 
@@ -96,5 +96,6 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
     achievements,
     newUnlockedAchievements,
     removeRecuedAchievement,
+    fetchAchievements,
   };
 }

@@ -10,7 +10,7 @@ const props = {
   inActiveStrokeOpacity: 0.2,
 };
 
-export function ChallengesGraph({userId}) {
+export function ChallengesGraph({ userId }) {
   const { challenges } = useChallenge(null, userId, true);
   const [totalChallengesByDifficulty, setTotalChallengesByDifficulty] = useState([]);
 
@@ -48,8 +48,6 @@ export function ChallengesGraph({userId}) {
 
   useEffect(() => {
     if (!challenges.length) return;
-    // console.log(getCompletedChallengesPercentageByDifficulty('hard'));
-
     countChallengesByDifficulty();
   }, [challenges]);
 
@@ -58,7 +56,7 @@ export function ChallengesGraph({userId}) {
       <C.Graph>
         <CircularProgressBase
           {...props}
-          value={60}
+          value={getCompletedChallengesPercentageByDifficulty('easy')}
           radius={80}
           activeStrokeColor={theme.colors.green_500}
           inActiveStrokeColor={theme.colors.green_500}

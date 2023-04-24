@@ -27,9 +27,9 @@ const fakeLoggedUser = {
   completed_challenges: 0,
   created_at: new Date('2023-01-23T03:01:00.000Z'),
   study_time: '13:00',
-  did_update_ranking: true,
-  did_complete_saturday: true,
-  last_position: 5,
+  did_update_ranking: false,
+  did_complete_saturday: false,
+  last_position: 2,
 };
 
 export function AuthProvider({ children }) {
