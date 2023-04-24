@@ -18,7 +18,8 @@ const difficultyTable = {
 };
 
 export function Challenges() {
-  const { challenges } = useChallenge();
+  const { loggedUser } = useAuth();
+  const { challenges } = useChallenge(null, loggedUser.id);
   const { categories } = useCategory();
   const [filteredChallenges, setFilteredChallenges] = useState([]);
   const [tags, setTags] = useState([]);
@@ -130,7 +131,7 @@ export function Challenges() {
   }
 
   useEffect(() => {
-    if (challenges.length, categories.length) {
+    if ((challenges.length, categories.length)) {
       setFilteredChallenges(sortChallengesByDifficulty(challenges).map(addCategories));
       setIsLoading(false);
     }

@@ -13,6 +13,7 @@ import { Toast } from 'toastify-react-native';
 import * as C from './styles';
 import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
+import { useAuth } from '../../hooks/useAuth';
 
 const earningsByDifficulty = {
   easy: {
@@ -32,7 +33,8 @@ const earningsByDifficulty = {
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
   const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
-  const { challenge, addUserCompletedChallenges } = useChallenge(challengeId);
+  const { loggedUser } = useAuth();
+  const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
     id,
     title,
@@ -175,7 +177,7 @@ export function Challenge({ route }) {
   }, [seconds.current]);
 
   useEffect(() => {
-    console.log({isCompleted});
+    console.log({ isCompleted });
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);

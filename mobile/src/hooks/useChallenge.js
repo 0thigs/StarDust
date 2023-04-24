@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from './useAuth';
 import api from '../services/api';
 
-export const useChallenge = challengeId => {
-  const { loggedUser } = useAuth();
+export const useChallenge = (challengeId, userId, shouldIncludeChallengeStars = false) => {
   const [challenges, setChallenges] = useState([]);
   const [challenge, setChallenge] = useState({});
 
   async function addUserCompletedChallenges(challengeId) {
     try {
-      await api.addUserCompletedChallenges(challengeId, loggedUser.id);
+      await api.addUserCompletedChallenges(challengeId, userId);
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +32,7 @@ export const useChallenge = challengeId => {
     try {
       const [challenges, userCompletedChallenges, challengeCategories] = await Promise.all([
         api.getChallenges(),
-        api.getUserCompletedChallenges(loggedUser.id),
+        api.getUserCompletedChallenges(userId),
         api.getChallengeCategories(),
       ]);
 
@@ -42,7 +40,7 @@ export const useChallenge = challengeId => {
         .map(challenge =>
           addCompletaryData(challenge, userCompletedChallenges, challengeCategories)
         )
-        .filter(challenge => !challenge.star_id);
+        .filter(challenge => (shouldIncludeChallengeStars ? true : !challenge.star_id));
 
       setChallenges(filteredChallenges);
     } catch (error) {
@@ -52,7 +50,7 @@ export const useChallenge = challengeId => {
 
   function verifyChallenge(challenge) {
     const isCompleted = challenge.users_completed_challenges.some(
-      challenge => challenge.user_id === loggedUser.id
+      challenge => challenge.user_id === userId
     );
     if (isCompleted) delete challenge.users_completed_challenges;
     return { ...challenge, isCompleted };

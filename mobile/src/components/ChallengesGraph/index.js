@@ -10,8 +10,8 @@ const props = {
   inActiveStrokeOpacity: 0.2,
 };
 
-export function ChallengesGraph() {
-  const { challenges } = useChallenge();
+export function ChallengesGraph({userId}) {
+  const { challenges } = useChallenge(null, userId, true);
   const [totalChallengesByDifficulty, setTotalChallengesByDifficulty] = useState([]);
 
   function getCompletedChallengesCount() {

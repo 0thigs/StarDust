@@ -72,7 +72,7 @@ export function Profile() {
             />
           )}
           <C.Title>Desafios concluídos</C.Title>
-          <ChallengesGraph />
+          <ChallengesGraph userId={user.id} />
           <Streak user={user} />
           <C.Title>Conquistas</C.Title>
           <C.Achievements>
