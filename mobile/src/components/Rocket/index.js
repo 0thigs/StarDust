@@ -22,7 +22,6 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
   const [isSelected, setIsSelected] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
   const isBuyable = loggedUser.coins > price;
@@ -44,17 +43,29 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
 
     const updatedCoins = loggedUser.coins - price;
     const updatedAcquiredRockets = loggedUser.acquired_rockets + 1;
-    addUserAcquiredRocket(id);
-    updateLoggedUser('coins', updatedCoins);
-    updateLoggedUser('acquired_rockets', updatedAcquiredRockets);
+    try {
+      await Promise.all([
+        addUserAcquiredRocket(id),
+        updateLoggedUser('coins', updatedCoins),
+        updateLoggedUser('acquired_rockets', updatedAcquiredRockets),
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
+
     selectRocket();
     setModalType('earning');
     setIsModalOpen(true);
   }
 
   async function selectRocket() {
-    updateLoggedUser('rocket_id', id);
-    setIsRequesting(false);
+    try {
+      await updateLoggedUser('rocket_id', id);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsRequesting(false);
+    }
     soundRef.current.play();
   }
 
@@ -86,12 +97,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
           </C.Price>
         )}
         <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <SvgUri
-            uri={getImage('rockets', image)}
-            width={125}
-            height={125}
-            onLoad={() => setIsImageLoaded(true)}
-          />
+          <SvgUri uri={getImage('rockets', image)} width={125} height={125} />
         </C.ImageContainer>
       </C.Background>
       <C.Info>

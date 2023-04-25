@@ -31,11 +31,6 @@ export function Avatar({
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
 
-  async function updateUserData(updatedCoins, updatedAcquiredAvatarsIds) {
-    updateLoggedUser('coins', updatedCoins);
-    updateLoggedUser('acquired_avatars_ids', updatedAcquiredAvatarsIds);
-  }
-
   async function buyAvatar() {
     setIsRequesting(true);
 
@@ -46,24 +41,34 @@ export function Avatar({
     }
 
     const updatedCoins = loggedUser.coins - price;
-    const updatedAcquiredAvatarsIds = [...loggedUser.acquired_avatars_ids, id];
-    updateUserData(updatedCoins, updatedAcquiredAvatarsIds);
-    updateLoggedUser('coins', updatedCoins);
+    try {
+      await updateLoggedUser('coins', updatedCoins);
+      await addUserAcquiredAvatar(id);
 
-    addUserAcquiredAvatar(id);
-
-    selectAvatar();
-    setModalType('earning');
-    setIsModalOpen(true);
+      selectAvatar();
+      setModalType('earning');
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsRequesting(false);
+    }
   }
 
   async function selectAvatar() {
-    updateLoggedUser('avatar_id', id);
-    setIsRequesting(false);
-    soundRef.current.play();
+    try {
+      await updateLoggedUser('avatar_id', id);
+      soundRef.current.play();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsRequesting(false);
+    }
   }
 
   function handleButtonPress() {
+    setIsRequesting(true);
+
     if (isAcquired) {
       selectAvatar();
       return;
@@ -74,7 +79,6 @@ export function Avatar({
   useEffect(() => {
     setIsSelected(id === loggedUser.avatar_id);
   }, [loggedUser.avatar_id]);
-
 
   return (
     <C.Container
@@ -118,7 +122,7 @@ export function Avatar({
         }
         body={
           modalType === 'denying' ? (
-            <C.Text>Você pode adquirir mais completando estrelas</C.Text>
+            <C.Text>Você pode adquirir mais completando estrelas ou resolvendo desafios</C.Text>
           ) : (
             <C.AcquiredAvatar>
               <Animation

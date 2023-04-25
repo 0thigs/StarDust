@@ -6,6 +6,8 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 const iconSize = 24;
 const iconColor = theme.colors.blue_300;
+const AVATAR_WIDTH = 330;
+const AVATAR_MARGIN_BETWEEN = 8;
 
 export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
   const { loggedUser } = useAuth();
@@ -81,9 +83,15 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         renderItem={renderItem}
         horizontal
         scrollEventThrottle={32}
+        initialNumToRender={3}
         viewabilityConfig={viewabilityConfig}
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}
+        getItemLayout={(_, index) => ({
+          length: 338,
+          offset: 338 * index,
+          index,
+        })}
         onScrollToIndexFailed={() => {
           const wait = new Promise(resolve => setTimeout(resolve, 100));
           wait.then(() => scrollToCurrentAvatar());
