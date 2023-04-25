@@ -84,12 +84,14 @@ export function End({
     let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
     let nextStar = getNextStar(starId);
 
-    if (nextStar) {
+    if (!nextStar) {
       completedPlanets += 1;
       const currentPlanet = getCurrentPlanet(starId);
-      const nextPlanet = planets.find(planet => planet.order === currentPlanet.order + 1);
-      nextStar = nextPlanet.stars[0];
+      const nextPlanet = planets.find(planet => planet.position === currentPlanet.position + 1);
+      nextStar = nextPlanet ? nextPlanet.stars[0] : null;
     }
+
+    // console.log(nextStar.isUnlocked);
 
     if (nextStar && !nextStar.isUnlocked) {
       addUnlockedStar(nextStar.id);
@@ -125,17 +127,17 @@ export function End({
   }
 
   function getCoins() {
-    let maxCoins = 20;
+    let maxCoins = !isCompleted ? 20 : 10;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxCoins -= 10;
+      maxCoins -= !isCompleted ? 5 : 2;
     }
     return maxCoins;
   }
 
   function getXp() {
-    let maxXp = 10;
+    let maxXp = !isCompleted ? 10 : 5;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxXp -= 10;
+      maxXp -= !isCompleted ? 2 : 1;
     }
     return maxXp;
   }

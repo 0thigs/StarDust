@@ -33,7 +33,7 @@ export const usePlanet = () => {
 
   function verifyStarUnlocking(planet, unlockedStars) {
     const { stars } = planet;
-    const verifiedStars = stars.map((star) => {
+    const verifiedStars = stars.map(star => {
       const isUnlocked = unlockedStars.some(unlockedStar => unlockedStar.star_id === star.id);
       if (isUnlocked) setLasUnlockedStarId(star.id);
       return { ...star, isUnlocked };

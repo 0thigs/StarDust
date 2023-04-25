@@ -36,7 +36,18 @@ export function Lesson({ route }) {
         <>
           {state.currentStage === 'theory' && <Theory title={star.name} allTexts={star.texts} />}
           {state.currentStage === 'quiz' && <Quiz />}
-          {state.currentStage === 'end' && <End starId={star.id} isChallenge={false} />}
+          {state.currentStage === 'end' && (
+            <End
+              starId={star.id}
+              isChallenge={false}
+              isCompleted={star.isUnlocked}
+              challengeId={null}
+              challengeSeconds={null}
+              challengeCoins={null}
+              challengeXp={null}
+              addUserCompletedChallenges={null}
+            />
+          )}
         </>
       )}
     </C.Container>
