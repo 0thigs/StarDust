@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useAchievement } from '../../hooks/useAchievement';
-import { useRoute, useFocusEffect, useNavigation, useScrollToTop } from '@react-navigation/native';
+import { useRoute, useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { ProfileStatus } from '../../components/ProfileStatus';
 import { Statistic } from '../../components/Statistic';

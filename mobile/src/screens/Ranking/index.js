@@ -92,7 +92,7 @@ export function Ranking() {
   return (
     <C.Container isLoading={isLoading}>
       {isLoading && <Loading isAnimation={true} />}
-      {winners.length > 0 && (
+      {winners.length > 0 ? (
         <WinnersList
           winners={winners}
           users={users}
@@ -100,32 +100,35 @@ export function Ranking() {
           setWinners={setWinners}
           isLoggedUserWinner={isLoggedUserWinner}
         />
-      )}
-      <C.Badges source={Background}>
-        <C.BadgesList
-          ref={badgesListRef}
-          data={rankings}
-          keyExtractor={ranking => ranking.id}
-          renderItem={({ item: { id, name, image }, index }) => (
-            <Badge
-              id={id}
-              name={name}
-              image={image}
-              index={index}
-              currentRankingIndex={currentRankingIndex}
+      ) : (
+        <>
+          <C.Badges source={Background}>
+            <C.BadgesList
+              ref={badgesListRef}
+              data={rankings}
+              keyExtractor={ranking => ranking.id}
+              renderItem={({ item: { id, name, image }, index }) => (
+                <Badge
+                  id={id}
+                  name={name}
+                  image={image}
+                  index={index}
+                  currentRankingIndex={currentRankingIndex}
+                />
+              )}
+              horizontal
+              showsVerticalScrollIndicator={false}
+              onScrollToIndexFailed={() => {
+                const wait = new Promise(resolve => setTimeout(resolve, 100));
+                wait.then(() => scrollToCurrentRanking());
+              }}
             />
-          )}
-          horizontal
-          showsVerticalScrollIndicator={false}
-          onScrollToIndexFailed={() => {
-            const wait = new Promise(resolve => setTimeout(resolve, 100));
-            wait.then(() => scrollToCurrentRanking());
-          }}
-        />
-      </C.Badges>
-      <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
-      <C.Days>{daysToGo} dias</C.Days>
-      <UsersList users={users} />
+          </C.Badges>
+          <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
+          <C.Days>{daysToGo} dias</C.Days>
+          <UsersList users={users} />
+        </>
+      )}
     </C.Container>
   );
 }

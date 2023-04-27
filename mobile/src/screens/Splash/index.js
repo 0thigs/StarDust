@@ -34,9 +34,9 @@ export function Splash() {
     }
   }
 
-  useEffect(() => {
-    verifySession();
-  }, []);
+//   useEffect(() => {
+//     verifySession();
+//   }, []);
 
   return (
     <C.Container>

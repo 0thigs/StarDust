@@ -8,7 +8,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
   const [newUnlockedAchievements, setNewUnlockedAchievements] = useState([]);
 
   function updateAchivement(achievement, newUnlockedAchievements) {
-    if (achievement.isUnlocked) return achievement;
+    // if (achievement.isUnlocked) return achievement
     const isUnlocked = newUnlockedAchievements.some(
       unlockedAchievement => unlockedAchievement.id === achievement.id
     );
@@ -55,6 +55,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
     const updatedAchievements = achievements.map(achievement =>
       updateAchivement(achievement, newUnlockedAchievements)
     );
+    console.log(updatedAchievements.find(a => a.position === 1).isRescuable);
     setAchievements(updatedAchievements);
   }
 

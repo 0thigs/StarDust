@@ -7,7 +7,7 @@ export const Container = styled.View`
   right: 0;
   bottom: 0;
   padding: 24px;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.black};
   z-index: 15;
 `;
 

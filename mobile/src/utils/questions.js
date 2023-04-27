@@ -72,12 +72,6 @@ export const questions = [
   },
   {
     starId: 2,
-    type: 'open',
-    stem: 'O nome do comando para um programa receber informações é',
-    answer: 'leia',
-  },
-  {
-    starId: 2,
     type: 'selection',
     stem: 'Como fazer que um programa escreva "que horas são?"',
     options: [
@@ -89,23 +83,100 @@ export const questions = [
     answer: 'escreva("que horas são")',
   },
   {
+    starId: 3,
+    type: 'checkbox',
+    stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
+    options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
+    correctOptions: ['_idade', 'altura_em_cm'],
+  },
+  {
     starId: 2,
+    type: 'open',
+    stem: 'O nome do comando para um programa receber informações é',
+    answer: 'leia',
+  },
+//   {
+//     starId: 2,
+//     type: 'drag-and-drop-list',
+//     stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
+//     items: [
+//       {
+//         id: 1,
+//         label: 'var quantidade',
+//       },
+//       {
+//         id: 2,
+//         label: 'quantidade = leia()',
+//       },
+//       {
+//         id: 3,
+//         label: 'escreva(quantidade)',
+//       },
+//     ],
+//   },
+{
+    starId: 11,
     type: 'drag-and-drop-list',
-    stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
+    stem: 'Reordene o programa para que ele fique na ordem correta',
     items: [
       {
         id: 1,
-        label: 'var quantidade',
+        label: 'var planeta = verdadeiro',
       },
       {
         id: 2,
-        label: 'quantidade = leia()',
+        label: 'se (planeta) {',
       },
       {
         id: 3,
-        label: 'escreva(quantidade)',
+        label: '    escreva("De fato se trata de um planeta")',
+      },
+      {
+        id: 4,
+        label: '}',
       },
     ],
+  },
+  {
+    starId: 11,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    lines: [
+      {
+        id: 1,
+        texts: ['se ( ', 'dropZone', ' ) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreva(verdadeiro);'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'falso',
+      },
+      {
+        id: 2,
+        label: '1 > 2',
+      },
+      {
+        id: 3,
+        label: '!falso',
+      },
+      {
+        id: 4,
+        label: '!verdadeiro',
+      },
+    ],
+    correctItemsIdsSequence: [3],
   },
   {
     starId: 2,
@@ -827,7 +898,7 @@ escreva(planetaCor);
       },
       {
         id: 2,
-        texts: ['se (planetaDiametro ', 'dropZone' ,' 15000) {'],
+        texts: ['se (planetaDiametro ', 'dropZone', ' 15000) {'],
         indentLevel: 1,
       },
       {

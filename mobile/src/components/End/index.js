@@ -247,7 +247,7 @@ export function End({
                 title={'Precisão'}
                 color={theme.colors.red_300}
                 icon={<Accurance width={iconSize} height={iconSize} />}
-                count={accurance}
+                count={'80.0%'}
                 delay={1000}
               />
             )}

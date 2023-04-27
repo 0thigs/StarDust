@@ -72,7 +72,7 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
   useEffect(() => {
     setWeekStatus(week_status);
     setStreakCount(streak);
-    checkHasUndoneDay();
+    // checkHasUndoneDay();
   }, []);
 
   return (

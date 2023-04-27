@@ -130,7 +130,8 @@ export default {
   getUserAchievementsToRescue: async userId => {
     const { data, error } = await supabase
       .from('users_achievements_to_rescue')
-      .select('achievement_id');
+      .select('achievement_id')
+      .eq('user_id', userId);
     if (error) {
       throw new Error(error.message);
     }

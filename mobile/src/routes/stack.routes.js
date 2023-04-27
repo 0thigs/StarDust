@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { DrawerRoutes } from './drawer.routes';
 import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
-import { DrawerRoutes } from './drawer.routes';
 import { Lesson } from '../screens/Lesson';
 import { Settings } from '../screens/Settings';
 import { ChangePassword } from '../screens/ChangePassword/index';
@@ -22,14 +22,14 @@ export function StackRoutes() {
     >
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Lesson" component={Lesson} />
+      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Challenge" component={Challenge} />
+      <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="change_password" component={ChangePassword} />
-      <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="Playground" component={Playground} />
-      <Stack.Screen name="Splash" component={Splash} />
     </Stack.Navigator>
   );
 }

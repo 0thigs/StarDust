@@ -40,66 +40,62 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
   }, []);
 
   return (
-    <>
-      <C.Container>
-        <C.Title>Resultado da semana</C.Title>
-        <C.Winners>
-          {winners.map(({ name, avatar_id, position, xp }) => (
-            <Winner
-              key={position}
-              name={name}
-              avatarId={avatar_id}
-              position={position}
-              xp={xp}
-              reward={reward}
-            />
-          ))}
-        </C.Winners>
+    <C.Container>
+      <C.Title>Resultado da semana</C.Title>
+      <C.Winners>
+        {winners.map(({ name, avatar_id, position, xp }) => (
+          <Winner
+            key={position}
+            name={name}
+            avatarId={avatar_id}
+            position={position}
+            xp={xp}
+            reward={reward}
+          />
+        ))}
+      </C.Winners>
 
-        <Button
-          title={'Continuar'}
-          onPress={handleWinnerListButtonPress}
-          color={theme.colors.black}
-          background={theme.colors.green_500}
-        />
+      <Button
+        title={'Continuar'}
+        onPress={handleWinnerListButtonPress}
+        color={theme.colors.black}
+        background={theme.colors.green_500}
+      />
 
-        {last_position && !isLoggedUserWinner ? (
-          <>
-            <C.Message>
-              Que pena! Você ficou na {last_position}º no ranking da última semana
-            </C.Message>
-            <User position={last_position} name={name} avatar_id={avatar_id} />
-          </>
-        ) : (
+      {last_position && !isLoggedUserWinner ? (
+        <>
           <C.Message>
-            Parabéns! Você ficou na {last_position}º no ranking da última semana
+            Que pena! Você ficou na {last_position}º no ranking da última semana
           </C.Message>
-        )}
+          <User position={last_position} name={name} avatar_id={avatar_id} />
+        </>
+      ) : (
+        <C.Message>Parabéns! Você ficou na {last_position}º no ranking da última semana</C.Message>
+      )}
 
-        <Sound ref={soundRef} soundFile={EarningSound} />
+      <Sound ref={soundRef} soundFile={EarningSound} />
 
-        <Modal
-          isVisible={isModalVisible}
-          type={'earning'}
-          title={'Recompensa resgatada!'}
-          body={
-            <C.RewardMessage>
-              <C.Text>Parabéns! Você acabou de ganhar </C.Text>
-              <C.Reward>{rewardByLastPosition}</C.Reward>
-              <C.Text>de poeira estela </C.Text>
-            </C.RewardMessage>
-          }
-          footer={
-            <Button
-              title={'Entendido'}
-              color={theme.colors.black}
-              background={theme.colors.green_500}
-              onPress={handleModalButtonPress}
-            />
-          }
-          playSong={false}
-        />
-      </C.Container>
-    </>
+      <Modal
+        isVisible={isModalVisible}
+        type={'earning'}
+        title={'Recompensa resgatada!'}
+        body={
+          <C.RewardMessage>
+            <C.Text>Parabéns! Você acabou de ganhar </C.Text>
+            <C.Reward>{rewardByLastPosition}</C.Reward>
+            <C.Text>de poeira estela </C.Text>
+          </C.RewardMessage>
+        }
+        footer={
+          <Button
+            title={'Entendido'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={handleModalButtonPress}
+          />
+        }
+        playSong={false}
+      />
+    </C.Container>
   );
 }

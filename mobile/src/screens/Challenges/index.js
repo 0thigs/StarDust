@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useChallenge } from '../../hooks/useChallenge';
 import { useCategory } from '../../hooks/useCategory';
 

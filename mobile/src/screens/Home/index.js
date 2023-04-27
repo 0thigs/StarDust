@@ -107,11 +107,11 @@ export function Home() {
             ))}
           </>
         )}
-        <Meteor
+        {/* <Meteor
           currentYOffset={currentYOffset}
           visibleContentHeight={visibleContentHeight.current}
           screenWidth={dimensions.width}
-        />
+        /> */}
       </C.Container>
 
       {isFabButtonVisible && (

@@ -16,17 +16,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import * as Icon from 'react-native-feather';
 
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g;
 
 const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
   password: yup
     .string()
-    .min(6, 'senha deve ter pelo menos 6 dígitos!')
+    .min(6, 'senha deve ter pelo menos 8 dígitos!')
     .required('Senha não pode estar vazia!'),
 });
 
-export const SingnUpSchema = yup.object({
+const SingnUpSchema = yup.object({
   name: yup
     .string()
     .min(2, 'Nome de usuário deve ter pelo menos 2 dígitos!')
@@ -34,12 +35,16 @@ export const SingnUpSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
   password: yup
     .string()
-    .min(6, 'senha deve ter pelo menos 6 dígitos!')
-    .required('Senha não pode estar vazia!'),
+    .min(6, 'Senha deve ter pelo menos 6 dígitos!')
+    .required('Senha não pode estar vazia!')
+    .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g,
+      'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.'
+    ),
   passwordConfirm: yup
     .string()
     .required('Senha não pode estar vazia!')
-    .oneOf([yup.ref('password'), null], 'Senha de confirmação não confere'),
+    .oneOf([yup.ref('password'), null], 'Senha de confirmação não confere.'),
 });
 
 export function SignIn() {
