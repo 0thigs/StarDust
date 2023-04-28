@@ -70,7 +70,6 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
 
   const RocketRotate = useSharedValue(180);
   const RocketScale = useSharedValue(1);
-  const RocketTranslateY = useSharedValue(-1000);
   const RocketAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ rotate: `${RocketRotate.value}deg` }, { scale: RocketScale.value }],

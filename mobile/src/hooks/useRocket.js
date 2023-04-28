@@ -55,7 +55,7 @@ export const useRocket = rocketId => {
       return;
     }
     fetchRocket();
-  }, [loggedUser.avatar_id, loggedUser.acquired_avatars_id]);
+  }, [loggedUser.rocket_id]);
 
   return { rocket, rockets, addUserAcquiredRocket };
 };

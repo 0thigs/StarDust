@@ -25,7 +25,6 @@ export const useRanking = (rankingId, canGetAllRankings) => {
 
   useEffect(() => {
     fetchRanking();
-
     if (canGetAllRankings) fetchAllRankings();
   }, []);
 

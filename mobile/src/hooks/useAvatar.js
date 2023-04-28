@@ -57,7 +57,7 @@ export const useAvatar = avatarId => {
       return;
     }
     fetchAvatar();
-  }, [loggedUser.avatar_id, loggedUser.acquired_avatars_id]);
+  }, [loggedUser.avatar_id]);
 
   return { avatar, avatars, addUserAcquiredAvatar };
 };
