@@ -41,7 +41,6 @@ export function Routes() {
 
   useEffect(() => {
     verifySession();
-    console.log({ loggedUser });
   }, []);
 
   if (isLoading) return <Loading isAnimation={true} />;

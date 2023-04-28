@@ -4,33 +4,33 @@ import api from '../services/api';
 
 export const AuthContext = createContext();
 
-// const fakeLoggedUser = {
-//   id: 'd1a90e87-3951-4b98-98e1-b808264c23e9',
-//   name: 'Kauee',
-//   email: 'kaue@etec.com',
-//   coins: 1000,
-//   xp: 1000,
-//   weekly_xp: 0,
-//   level: 1,
-//   streak: 3,
-//   week_status: ['done', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
-//   unlocked_stars: 1,
-//   achievements_to_rescue: [],
-//   avatar_id: 'ab7f9560-3fc4-42ba-8d55-9f434513d250',
-//   rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
-//   acquired_rockets: 0,
-//   ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
-//   completed_planets: 0,
-//   completed_challenges: 0,
-//   created_at: new Date('2023-01-23T03:01:00.000Z'),
-//   study_time: '13:00',
-//   did_update_ranking: true,
-//   did_complete_saturday: false,
-//   last_position: 2,
-// };
+const fakeLoggedUser = {
+  id: 'd1a90e87-3951-4b98-98e1-b808264c23e9',
+  name: 'Kauee',
+  email: 'kaue@etec.com',
+  coins: 1000,
+  xp: 101,
+  weekly_xp: 0,
+  level: 1,
+  streak: 3,
+  week_status: ['done', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
+  unlocked_stars: 1,
+  achievements_to_rescue: [],
+  avatar_id: 'ab7f9560-3fc4-42ba-8d55-9f434513d250',
+  rocket_id: '03f3f359-a0ee-42c1-bd5f-b2ad01810d47',
+  acquired_rockets: 0,
+  ranking_id: 'f542f61a-4e42-4914-88f6-9aa7c2358473',
+  completed_planets: 0,
+  completed_challenges: 0,
+  created_at: new Date('2023-01-23T03:01:00.000Z'),
+  study_time: '13:00',
+  did_update_ranking: true,
+  did_complete_saturday: false,
+  last_position: 2,
+};
 
 export function AuthProvider({ children }) {
-  const [loggedUser, setLoggedUser] = useState({});
+  const [loggedUser, setLoggedUser] = useState(fakeLoggedUser);
   const [isLoading, setIsLoading] = useState(true);
 
   async function setUserInSession() {

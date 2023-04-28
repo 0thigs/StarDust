@@ -8,19 +8,33 @@ import { PopoverMenu } from '../PopoverMenu';
 import { UserAvatar } from '../UserAvatar';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
+import { Animation } from '../../components/Animation';
 import { MoreHorizontal } from 'react-native-feather';
 import { Toast } from 'toastify-react-native';
 
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
-  const { achievements, removeRecuedAchievement } = useAchievement(loggedUser.id);
+  const {
+    achievements,
+    newUnlockedAchievements,
+    setNewUnlockedAchievements,
+    removeRecuedAchievement,
+  } = useAchievement(loggedUser.id, true);
+
   const [sortedAchievements, setSortedAchievements] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
+  const [isNewAchievementModalVisible, setIsNewAchievementModalVisible] = useState(false);
   const [sorter, setSorter] = useState('Ordem padrão');
   const navigation = useNavigation();
+
+  function handleCloseNewUnlockedAchievementModal() {
+    setNewUnlockedAchievements([]);
+    setIsNewAchievementModalVisible(false);
+  }
 
   function sortedAchievementsByLocking(a, b) {
     if (!a.isUnlocked && b.isUnlocked) {
@@ -102,12 +116,12 @@ export function CustomDrawer() {
 
   useEffect(() => {
     sortAchievements(sorter);
-  }, [achievements]);
+    if (newUnlockedAchievements.length) setIsNewAchievementModalVisible(true);
+  }, [achievements, newUnlockedAchievements]);
 
   return (
     <C.Container>
       <UserAvatar avatarId={loggedUser.avatar_id} size={100} />
-
       <C.Name>{loggedUser.name}</C.Name>
       <C.Email>{loggedUser.email}</C.Email>
       <C.Buttons>
@@ -116,7 +130,7 @@ export function CustomDrawer() {
             title={'Sair'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={() => setIsModalVisible(true)}
+            onPress={() => setIsSignOutModalVisible(true)}
             isSmall={true}
           />
         </C.ButtonWrapper>
@@ -164,7 +178,7 @@ export function CustomDrawer() {
       />
 
       <Modal
-        isVisible={isModalVisible}
+        isVisible={isSignOutModalVisible}
         type={'crying'}
         playSong={false}
         title={`Calma aí! Deseja mesmo 'SAIR DA SUA CONTA 😢?`}
@@ -181,9 +195,51 @@ export function CustomDrawer() {
               title={'Cancelar'}
               color={theme.colors.black}
               background={theme.colors.green_500}
-              onPress={() => setIsModalVisible(false)}
+              onPress={() => setIsSignOutModalVisible(false)}
             />
           </>
+        }
+      />
+
+      <Modal
+        isVisible={isNewAchievementModalVisible}
+        type={'earning'}
+        title={'Uau! Parece que você ganhou recompensa(s)'}
+        body={
+          <C.Achievements>
+            {newUnlockedAchievements?.map(
+              ({ id, name, icon, description, required_amount, metric }) => (
+                <C.AchievementContainer key={id}>
+                  <Animation
+                    source={RewardLight}
+                    autoPlay={true}
+                    loop={true}
+                    size={220}
+                    isAbsolute={true}
+                    top={-15}
+                    left={-10}
+                  />
+                  <Achievement
+                    key={id}
+                    name={name}
+                    description={description}
+                    icon={icon}
+                    requiredAmount={required_amount}
+                    currentAmount={loggedUser[metric]}
+                    isUnlocked={true}
+                  />
+                </C.AchievementContainer>
+              )
+            )}
+          </C.Achievements>
+        }
+        footer={
+          <Button
+            title={'Entendido'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={handleCloseNewUnlockedAchievementModal}
+          />
         }
       />
     </C.Container>

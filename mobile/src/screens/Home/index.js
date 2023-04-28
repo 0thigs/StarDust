@@ -1,34 +1,23 @@
 import { useEffect, useState, useRef } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 import { usePlanet } from '../../hooks/usePlanet';
 import { useScroll } from '../../hooks/useScroll';
-import { useAchievement } from '../../hooks/useAchievement';
 import { useWindowDimensions } from 'react-native';
 
 import { Planet } from '../../components/Planet';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
-import { Modal } from '../../components/Modal';
-import { Achievement } from '../../components/Achievement';
-import { Button } from '../../components/Button';
 import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
 import { Meteor } from '../../components/Meteor';
-import { Animation } from '../../components/Animation';
 
 import BackgroundImage from '../../assets/HomeAssets/background.svg';
-import RewardLight from '../../assets/animations/reward-light-animation.json';
 
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
 export function Home() {
-  const { loggedUser } = useAuth();
   const { planets, lastUnlockedStarId } = usePlanet();
-  const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
   const { lastUnlockedStarYPosition } = useScroll();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isfirstScroll, setIsfirstScroll] = useState(true);
   const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [direction, setDirection] = useState('');
@@ -63,7 +52,6 @@ export function Home() {
   useEffect(() => {
     if (planets.length) {
       setIsEndTransition(true);
-      setIsModalVisible(true);
     }
   }, [planets]);
 
@@ -107,11 +95,12 @@ export function Home() {
             ))}
           </>
         )}
-        {/* <Meteor
+
+        <Meteor
           currentYOffset={currentYOffset}
           visibleContentHeight={visibleContentHeight.current}
           screenWidth={dimensions.width}
-        /> */}
+        />
       </C.Container>
 
       {isFabButtonVisible && (
@@ -123,50 +112,6 @@ export function Home() {
             ) : (
               <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
             )
-          }
-        />
-      )}
-
-      {newUnlockedAchievements.length > 0 && (
-        <Modal
-          isVisible={isModalVisible}
-          type={'earning'}
-          title={'Uau! Parece que você ganhou recompensa(s)'}
-          body={
-            <C.Achievements>
-              {newUnlockedAchievements.map(
-                ({ id, name, icon, description, required_amount, metric }) => (
-                  <C.AchievementContainer key={id}>
-                    <Animation
-                      source={RewardLight}
-                      autoPlay={true}
-                      loop={true}
-                      size={220}
-                      isAbsolute={true}
-                      top={-15}
-                      left={-10}
-                    />
-                    <Achievement
-                      key={id}
-                      name={name}
-                      description={description}
-                      icon={icon}
-                      requiredAmount={required_amount}
-                      currentAmount={loggedUser[metric]}
-                      isUnlocked={true}
-                    />
-                  </C.AchievementContainer>
-                )
-              )}
-            </C.Achievements>
-          }
-          footer={
-            <Button
-              title={'Entendido'}
-              color={theme.colors.black}
-              background={theme.colors.green_500}
-              onPress={() => setIsModalVisible(false)}
-            />
           }
         />
       )}

@@ -127,9 +127,9 @@ export default {
     return data;
   },
 
-  getUserAchievementsToRescue: async userId => {
+  getUserRescuableAchievements: async userId => {
     const { data, error } = await supabase
-      .from('users_achievements_to_rescue')
+      .from('users_rescuable_achievements')
       .select('achievement_id')
       .eq('user_id', userId);
     if (error) {
@@ -148,9 +148,9 @@ export default {
     return success;
   },
 
-  addUserAchievementsToRescue: async (achievementId, userId) => {
+  addUserRescuableAchievements: async (achievementId, userId) => {
     const { success, error } = await supabase
-      .from('users_achievements_to_rescue')
+      .from('users_rescuable_achievements')
       .insert([{ achievement_id: achievementId, user_id: userId }]);
     if (error) {
       throw new Error(error.message);
@@ -160,7 +160,7 @@ export default {
 
   deleteUserRescuedAchievement: async (achievementId, userId) => {
     const { success, error } = await supabase
-      .from('users_achievements_to_rescue')
+      .from('users_rescuable_achievements')
       .delete()
       .eq('achievement_id', achievementId)
       .eq('user_id', userId);

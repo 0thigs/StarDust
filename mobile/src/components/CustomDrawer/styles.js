@@ -33,3 +33,13 @@ export const Menu = styled.View`
 `;
 
 export const AchievementList = styled.FlatList``;
+
+export const Achievements = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})``;
+
+export const AchievementContainer = styled.View`
+  position: relative;
+`;

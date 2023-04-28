@@ -14,7 +14,6 @@ export const ConfigProvider = ({ children }) => {
 
   async function updateConfig(name, payload) {
     const updatedConfig = { ...config, [name]: payload };
-    console.log(updatedConfig);
     setConfig(updatedConfig);
     try {
       await AsyncStorage.setItem('@stardust:config', JSON.stringify(updatedConfig));

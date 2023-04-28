@@ -13,12 +13,3 @@ export const Background = styled.View`
   bottom: 0;
 `;
 
-export const Achievements = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})``;
-
-export const AchievementContainer = styled.View`
-  position: relative;
-`;
