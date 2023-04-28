@@ -169,9 +169,7 @@ export function CustomDrawer() {
             reward={reward}
             position={position}
             requiredAmount={required_amount}
-            currentAmount={
-              metricsExceptions.includes(metric) ? loggedUser[metric] - 1 : loggedUser[metric]
-            }
+            currentAmount={loggedUser[metric]}
             isUnlocked={isUnlocked}
             isRescuable={isRescuable}
             hasRescueFeat={true}

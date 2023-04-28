@@ -24,7 +24,6 @@ export function Achievement({
   isRescuable,
   reward,
   removeRecuedAchievement,
-  metric
 }) {
   const {
     loggedUser: { coins },
@@ -47,9 +46,9 @@ export function Achievement({
     setIsLoading(true);
 
     try {
-      await Promise.all([removeRecuedAchievement(id), updateLoggedUser('coins', coins + reward)]);
       setRescuedAchievementName(name);
       setIsModalVisible(true);
+      await Promise.all([removeRecuedAchievement(id), updateLoggedUser('coins', coins + reward)]);
     } catch (error) {
       console.error(error);
       Toast.error('Erro ao resgatar a conquista');
@@ -121,6 +120,8 @@ export function Achievement({
             color={theme.colors.black}
             background={theme.colors.green_500}
             onPress={() => setIsModalVisible(false)}
+            isLoading={isLoading}
+            isDisabled={isLoading}
           />
         }
       />

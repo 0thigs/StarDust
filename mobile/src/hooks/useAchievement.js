@@ -22,11 +22,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
 
     const userCurrentAmount = loggedUser[achievement.metric];
 
-    const isNewAchievementUnlocked =
-      userCurrentAmount >=
-      (metricsExceptions.includes(achievement.metric)
-        ? achievement.required_amount + 1
-        : achievement.required_amount);
+    const isNewAchievementUnlocked = userCurrentAmount >= achievement.required_amount;
 
     return isNewAchievementUnlocked;
   }

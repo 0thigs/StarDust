@@ -17,22 +17,15 @@ import theme from '../../global/styles/theme';
 import { useRef } from 'react';
 
 export function Shop() {
-  const { loggedUser } = useAuth();
   const { avatars, addUserAcquiredAvatar } = useAvatar();
   const { rockets, addUserAcquiredRocket } = useRocket();
-  const { newUnlockedAchievements } = useAchievement(loggedUser.id, true);
-  const [isModalVisible, setIsModalVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const timer = useRef(null);
 
   useEffect(() => {
     if (avatars.length && rockets.length)
-      timer.current = setTimeout(() => setIsLoading(false), 1000);
+      timer.current = setTimeout(() => setIsLoading(false), 1500);
   }, [avatars, rockets]);
-
-  useEffect(() => {
-    console.log({ newUnlockedAchievements });
-  }, [newUnlockedAchievements]);
 
   return (
     <C.Container>
@@ -59,42 +52,6 @@ export function Shop() {
           </>
         )}
       </C.Content>
-
-      {newUnlockedAchievements.length > 0 && (
-        <Modal
-          isVisible={isModalVisible}
-          type={'earning'}
-          title={'Uau! Parece que você ganhou recompensa(s)'}
-          body={
-            <C.Achievements>
-              {newUnlockedAchievements.map(
-                ({ id, title, icon, description, requiredCount, metric }) => (
-                  <C.AchievementContainer key={id}>
-                    <C.Animation source={RewardLight} autoPlay={true} loop={true} />
-                    <Achievement
-                      key={id}
-                      title={title}
-                      description={description}
-                      icon={icon}
-                      requiredCount={requiredCount}
-                      metric={loggedUser[metric]}
-                      isUnlocked={true}
-                    />
-                  </C.AchievementContainer>
-                )
-              )}
-            </C.Achievements>
-          }
-          footer={
-            <Button
-              title={'Entendido'}
-              color={theme.colors.black}
-              background={theme.colors.green_500}
-              onPress={() => setIsModalVisible(false)}
-            />
-          }
-        />
-      )}
     </C.Container>
   );
 }
