@@ -15,6 +15,7 @@ import { Toast } from 'toastify-react-native';
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { metricsExceptions } from '../../utils/achievementsMetricsExceptions';
 
 export function CustomDrawer() {
   const { signOut, loggedUser } = useAuth();
@@ -168,7 +169,9 @@ export function CustomDrawer() {
             reward={reward}
             position={position}
             requiredAmount={required_amount}
-            currentAmount={loggedUser[metric]}
+            currentAmount={
+              metricsExceptions.includes(metric) ? loggedUser[metric] - 1 : loggedUser[metric]
+            }
             isUnlocked={isUnlocked}
             isRescuable={isRescuable}
             hasRescueFeat={true}
@@ -225,7 +228,11 @@ export function CustomDrawer() {
                     description={description}
                     icon={icon}
                     requiredAmount={required_amount}
-                    currentAmount={loggedUser[metric]}
+                    currentAmount={
+                      metricsExceptions.includes(metric)
+                        ? loggedUser[metric] - 1
+                        : loggedUser[metric]
+                    }
                     isUnlocked={true}
                   />
                 </C.AchievementContainer>

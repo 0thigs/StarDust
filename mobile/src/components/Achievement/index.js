@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../Button';
-import Lock from '../../assets/AchievementAssets/lock.svg';
-import theme from '../../global/styles/theme';
-import * as C from './styles';
 import { Modal } from '../Modal';
+import { Button } from '../Button';
+import { Animation } from '../Animation';
+
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
+import { Toast } from 'toastify-react-native';
+import Lock from '../../assets/AchievementAssets/lock.svg';
+import Lazy from '../../assets/animations/lazy-animation.json';
+import theme from '../../global/styles/theme';
+import * as C from './styles';
 
 export function Achievement({
   id,
@@ -20,6 +24,7 @@ export function Achievement({
   isRescuable,
   reward,
   removeRecuedAchievement,
+  metric
 }) {
   const {
     loggedUser: { coins },
@@ -27,7 +32,8 @@ export function Achievement({
   } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
-  const [isLoadEnd, setIsLoadEnd] = useState(false);
+  const [isIconLoadEnd, setIsIconLoadEnd] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const percentage = (currentAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
@@ -37,24 +43,32 @@ export function Achievement({
     return currentAmount >= requiredAmount ? requiredAmount : currentAmount;
   }
 
-  function handleRescueButtonPress() {
-    setRescuedAchievementName(name);
-    setIsModalVisible(true);
+  async function handleRescueButtonPress() {
+    setIsLoading(true);
 
-    removeRecuedAchievement(id);
-    updateLoggedUser('coins', coins + reward);
+    try {
+      await Promise.all([removeRecuedAchievement(id), updateLoggedUser('coins', coins + reward)]);
+      setRescuedAchievementName(name);
+      setIsModalVisible(true);
+    } catch (error) {
+      console.error(error);
+      Toast.error('Erro ao resgatar a conquista');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <C.Container>
       {isUnlocked ? (
-        isLoadEnd && (
+        <>
           <SvgUri
             uri={getImage('achievements', icon)}
-            width={45}
-            onLoad={() => setIsLoadEnd(true)}
+            width={isIconLoadEnd ? 45 : 0}
+            onLoad={() => setIsIconLoadEnd(true)}
           />
-        )
+          {!isIconLoadEnd && <Animation source={Lazy} autoPlay={true} loop={true} size={84} />}
+        </>
       ) : (
         <Lock />
       )}
@@ -69,6 +83,8 @@ export function Achievement({
             isSmall={true}
             hasAnimation={true}
             onPress={handleRescueButtonPress}
+            isLoading={isLoading}
+            isDisabled={isLoading}
           />
         ) : (
           <>

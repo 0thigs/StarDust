@@ -35,7 +35,7 @@ export function Button({
       style={hasAnimation && ButtonAnimatedStyle}
     >
       {isLoading ? (
-        <C.Loader size="large" color={theme.colors.green_900} />
+        <C.Loader size={isSmall ? 'small' : 'large'} color={theme.colors.green_900} />
       ) : (
         <C.Title color={color} isSmall={isSmall}>
           {title}
