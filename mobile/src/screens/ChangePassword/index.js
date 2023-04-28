@@ -165,7 +165,7 @@ export function ChangePassword({ route }) {
 
       <Modal
         isVisible={isModalVisible}
-        title={'Sua senha deve conter pelo menos'}
+        title={'Sua senha deve conter pelo menos:'}
         type={'asking'}
         body={
           <C.List>

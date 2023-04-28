@@ -19,7 +19,11 @@ import * as Icon from 'react-native-feather';
 import { Toast } from 'toastify-react-native';
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g;
 
-const SingnInSchema = yup.object({
+const SingnUpSchema = yup.object({
+  name: yup
+    .string()
+    .min(2, 'Nome de usuário deve ter pelo menos 2 dígitos!')
+    .required('Nome de usuário não pode estar vazio!'),
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
   password: yup
     .string()
@@ -29,19 +33,25 @@ const SingnInSchema = yup.object({
       passwordRegex,
       'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.'
     ),
+  passwordConfirm: yup
+    .string()
+    .required('Senha não pode estar vazia!')
+    .oneOf([yup.ref('password'), null], 'Senha de confirmação não confere.'),
 });
 
-export function SignIn() {
+export function SignOut() {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(SingnInSchema) });
-  const { signIn } = useAuth();
-  const [isSignUpForm, setIsSignUpForm] = useState(false);
+  } = useForm({ resolver: yupResolver(SingnUpSchema) });
+
+  const navigation = useNavigation();
+
   const [isToShowHeader, setIsToShowHeader] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const navigation = useNavigation();
+
+  const { signUp } = useAuth();
 
   function hideHeader() {
     setIsToShowHeader(false);
@@ -51,16 +61,18 @@ export function SignIn() {
     setIsToShowHeader(true);
   }
 
-  async function HandleSignIn(data) {
+  async function HandleSignUp(data) {
     setIsLoading(true);
     try {
-      await signIn(data);
+      await signUp(data);
 
       navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
+        routes: [{ name: 'Intro' }],
       });
     } catch (error) {
-      Toast.error('Usuário não encontrado');
+      console.log(error);
+      Toast.error('Usuário já cadastrado');
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
@@ -78,7 +90,7 @@ export function SignIn() {
           <C.Header>
             <C.Heading>
               <SignInIcon />
-              <C.HeaderTitle>Faça seu login</C.HeaderTitle>
+              <C.HeaderTitle>Faça seu cadastro</C.HeaderTitle>
             </C.Heading>
             <C.HeaderSubtitle>Entre com suas informações de cadastro</C.HeaderSubtitle>
           </C.Header>
@@ -86,6 +98,25 @@ export function SignIn() {
           <C.Top />
         )}
         <C.Form>
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label={'Nome de usuário'}
+                placeholder={'Digite seu nome de usuário'}
+                icon={
+                  <Icon.User color={errors.name ? theme.colors.red_700 : theme.colors.green_300} />
+                }
+                type={'text'}
+                value={value}
+                onChangeText={onChange}
+                error={errors.name}
+              />
+            )}
+          />
+          {errors.name && <ErrorMessage message={errors.name?.message} />}
+
           <Controller
             control={control}
             name="email"
@@ -125,10 +156,31 @@ export function SignIn() {
             )}
           />
           {errors.password && <ErrorMessage message={errors.password?.message} />}
+
+          <Controller
+            control={control}
+            name="passwordConfirm"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label={'Confirmar senha'}
+                placeholder={'Digite sua senha novamente'}
+                icon={
+                  <Icon.Lock
+                    color={errors.passwordConfirm ? theme.colors.red_700 : theme.colors.green_300}
+                  />
+                }
+                value={value}
+                type={'password'}
+                onChangeText={onChange}
+                error={errors.passwordConfirm}
+              />
+            )}
+          />
+          {errors.passwordConfirm && <ErrorMessage message={errors.passwordConfirm?.message} />}
         </C.Form>
         <Button
-          onPress={handleSubmit(HandleSignIn)}
-          title={'Entrar'}
+          onPress={handleSubmit(HandleSignUp)}
+          title={'Cadastrar'}
           isLoading={isLoading}
           isDisabled={isLoading}
           color={theme.colors.black}
@@ -136,13 +188,8 @@ export function SignIn() {
         />
 
         <C.AccountButtons>
-          <C.AccountButton
-            onPress={() => navigation.navigate('change_password', { prevScreen: 'Settings' })}
-          >
-            <C.AccountButtonText>Esqueci minha senha</C.AccountButtonText>
-          </C.AccountButton>
-          <C.AccountButton onPress={() => navigation.navigate('SignOut')}>
-            <C.AccountButtonText>Criar minha conta</C.AccountButtonText>
+          <C.AccountButton onPress={() => navigation.navigate('SignIn')}>
+            <C.AccountButtonText>Já tenho uma conta</C.AccountButtonText>
           </C.AccountButton>
         </C.AccountButtons>
       </C.Content>

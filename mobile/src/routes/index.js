@@ -13,7 +13,6 @@ const linking = {
     },
   },
   getStateFromPath: (path, options) => {
-    console.log({path});
     const accessiblePath = path.replace('#', '?');
 
     return getStateFromPath(accessiblePath, options);
