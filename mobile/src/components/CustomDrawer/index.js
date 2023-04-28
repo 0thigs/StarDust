@@ -29,6 +29,7 @@ export function CustomDrawer() {
   const [sortedAchievements, setSortedAchievements] = useState([]);
   const [isSignOutModalVisible, setIsSignOutModalVisible] = useState(false);
   const [isNewAchievementModalVisible, setIsNewAchievementModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [sorter, setSorter] = useState('Ordem padrão');
   const navigation = useNavigation();
 
@@ -103,6 +104,8 @@ export function CustomDrawer() {
   ];
 
   async function handleSignOut() {
+    setIsLoading(true);
+
     try {
       await signOut();
 
@@ -112,6 +115,8 @@ export function CustomDrawer() {
     } catch (error) {
       console.error(error);
       Toast.error('Falha ao tentar sair da conta');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -133,6 +138,8 @@ export function CustomDrawer() {
             background={theme.colors.green_500}
             onPress={() => setIsSignOutModalVisible(true)}
             isSmall={true}
+            isLoading={isLoading}
+            isDisabled={isLoading}
           />
         </C.ButtonWrapper>
       </C.Buttons>
