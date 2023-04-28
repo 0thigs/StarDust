@@ -27,6 +27,7 @@ export function Achievement({
   } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
+  const [isLoadEnd, setIsLoadEnd] = useState(false);
 
   const percentage = (currentAmount / requiredAmount) * 100;
   const barWidth = percentage > 100 ? 100 : percentage;
@@ -46,7 +47,17 @@ export function Achievement({
 
   return (
     <C.Container>
-      {isUnlocked ? <SvgUri uri={getImage('achievements', icon)} width={45} /> : <Lock />}
+      {isUnlocked ? (
+        isLoadEnd && (
+          <SvgUri
+            uri={getImage('achievements', icon)}
+            width={45}
+            onLoad={() => setIsLoadEnd(true)}
+          />
+        )
+      ) : (
+        <Lock />
+      )}
 
       <C.Info>
         <C.Name canRescue={canRescue}>{name}</C.Name>
