@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { View } from 'react-native';
 import { NavigationContainer, getStateFromPath } from '@react-navigation/native';
 import { StackRoutes } from './stack.routes';
-import { View } from 'react-native';
 import theme from '../global/styles/theme';
+import { AuthRoutes } from './auth.routes';
+import { AppRoutes } from './app.routes';
+import { Loading } from '../components/Loading';
 
 const linking = {
   prefixes: ['exp://192.168.1.11:19000/--/stardust'],
@@ -20,10 +25,31 @@ const linking = {
 };
 
 export function Routes() {
+  const { setUserInSession, loggedUser, isLoading } = useAuth();
+
+  function isUserLogged() {
+    return Object.entries(loggedUser).length;
+  }
+
+  async function verifySession() {
+    try {
+      await setUserInSession();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    verifySession();
+    console.log({ loggedUser });
+  }, []);
+
+  if (isLoading) return <Loading isAnimation={true} />;
+
   return (
     <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
       <NavigationContainer linking={linking}>
-        <StackRoutes />
+        {isUserLogged() ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
     </View>
   );

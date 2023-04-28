@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { Animation } from '../../components/Animation';
@@ -10,7 +9,6 @@ import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function Splash() {
-  const { setUserInSession } = useAuth();
   const [isRocketLauched, setIsRocketLauched] = useState(false);
   const navigation = useNavigation();
 
@@ -24,19 +22,6 @@ export function Splash() {
     setIsRocketLauched(true);
     setTimeout(() => goTo('SignIn'), 3000);
   }
-
-  async function verifySession() {
-    try {
-      await setUserInSession();
-      goTo('DrawerRoutes');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-//   useEffect(() => {
-//     verifySession();
-//   }, []);
 
   return (
     <C.Container>
