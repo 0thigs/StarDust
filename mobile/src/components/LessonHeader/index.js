@@ -49,13 +49,12 @@ export function LessonHeader() {
 
   return (
     <C.Container>
-
       <C.Main>
         <C.CloseButton onPress={() => setIsModalVisible(true)}>
-          <Icon.X color={theme.colors.red_700} width={35} height={35} />
+          <Icon.X color={theme.colors.red_700} width={28} height={28} />
         </C.CloseButton>
         <C.Lives>
-          <LifeIcon width={30} height={30} />
+          <LifeIcon width={28} height={28} />
           <C.LivesCount>{state.livesCount}</C.LivesCount>
         </C.Lives>
       </C.Main>
@@ -90,7 +89,7 @@ export function LessonHeader() {
             <Button
               title={'Voltar'}
               color={theme.colors.black}
-              background={theme.colors.blue_300}
+              background={theme.colors.green_300}
               onPress={() => setIsModalVisible(false)}
             />
           </>

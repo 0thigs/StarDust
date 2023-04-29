@@ -9,7 +9,7 @@ import { Button } from '../../components/Button';
 import { Prompt } from '../../components/Prompt';
 import { Modal } from '../../components/Modal';
 
-import { Plus } from 'react-native-feather';
+import { ArrowLeft, Plus } from 'react-native-feather';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 
@@ -72,6 +72,9 @@ export function Codes() {
 
   return (
     <C.Container>
+      <C.BackButton onPress={() => navigation.goBack()}>
+        <ArrowLeft color={theme.colors.green_500} width={48} />
+      </C.BackButton>
       <C.Button onPress={handleCreateCodePress} activeOpacity={0.7}>
         <C.Icon>
           <Plus color={theme.colors.green_500} />

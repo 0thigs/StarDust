@@ -7,6 +7,12 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
+export const BackButton = styled.TouchableOpacity`
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 0 0;
+`;
+
 export const Button = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.green_500};
   align-items: center;
