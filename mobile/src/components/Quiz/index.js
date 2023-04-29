@@ -57,6 +57,7 @@ export function Quiz() {
               stem={question.stem}
               options={question.options}
               correctOptions={question.correctOptions}
+              code={question.code}
               index={index}
             />
           ),
@@ -119,7 +120,12 @@ export function Quiz() {
     <C.Container>
       <LessonHeader />
 
-      <Slider sliderRef={sliderRef} slides={forms} scrollEnabled={false} setCurrentSlideIndex={null} />
+      <Slider
+        sliderRef={sliderRef}
+        slides={forms}
+        scrollEnabled={false}
+        setCurrentSlideIndex={null}
+      />
 
       <Modal
         type={'crying'}

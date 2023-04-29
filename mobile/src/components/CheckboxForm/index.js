@@ -3,13 +3,14 @@ import { useLesson } from '../../hooks/useLesson';
 import Animated, { RotateInDownRight, RotateOutDownRight } from 'react-native-reanimated';
 
 import { reorderItems } from '../../utils/reorderItems';
-import { QuestionStem } from '../Quiz/styles';
+import { QuestionCode, QuestionStem } from '../Quiz/styles';
+import { Editor } from '../Editor';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
 const delay = 200;
 
-export function CheckboxForm({ stem, options, correctOptions, index }) {
+export function CheckboxForm({ stem, options, correctOptions, code, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
@@ -87,6 +88,11 @@ export function CheckboxForm({ stem, options, correctOptions, index }) {
   return (
     <C.Container>
       <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+      {code && (
+        <QuestionCode>
+          <Editor value={code} />
+        </QuestionCode>
+      )}
       <C.Options>
         {reorderedOptions.map((option, index) => (
           <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>

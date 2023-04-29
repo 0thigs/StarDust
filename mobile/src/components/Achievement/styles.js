@@ -9,6 +9,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
+  border-color: transparent;
   border-bottom-color: ${props => props.theme.colors.green_500};
   margin-top: 12px;
   z-index: 10;
