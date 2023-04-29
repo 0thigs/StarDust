@@ -32,7 +32,10 @@ export function CheckboxForm({ stem, options, correctOptions, index }) {
   }
 
   function isUserAnswerCorrect() {
-    return userOptions.every(userOption => correctOptions.includes(userOption));
+    return (
+      userOptions.length === correctOptions.length &&
+      userOptions.every(userOption => correctOptions.includes(userOption))
+    );
   }
 
   function handleVerifyAnswer() {
@@ -102,7 +105,18 @@ export function CheckboxForm({ stem, options, correctOptions, index }) {
               >
                 {userOptions.includes(option) && (
                   <Animated.View entering={RotateInDownRight} exiting={RotateOutDownRight}>
-                    <Icon.Check color={theme.colors.blue_300} width={18} />
+                    <Icon.Check
+                      color={
+                        theme.colors[
+                          isAnswerVerified && isAnswerWrong
+                            ? 'red_300'
+                            : isAnswerVerified && isUserAnswerCorrect()
+                            ? 'green_300'
+                            : 'blue_300'
+                        ]
+                      }
+                      width={18}
+                    />
                   </Animated.View>
                 )}
               </C.Box>

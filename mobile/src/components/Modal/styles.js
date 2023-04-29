@@ -20,7 +20,7 @@ export const Header = styled.View`
   background-color: ${props => props.theme.colors.blue_700};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  padding: 16px 16px 0;
+  padding: 16px;
 `;
 
 export const Animation = styled(LottieView)`
@@ -33,12 +33,13 @@ export const Title = styled.Text`
   font-family: ${props => props.theme.fonts.semibold};
   font-size: 16px;
   text-align: center;
+  width: 90%;
 `;
 
 export const Body = styled.View`
   justify-content: center;
   align-items: center;
-  padding: 8px 0 8px;
+  padding: 8px 12px 8px;
   background-color: ${props => props.theme.colors.black};
   max-height: 300px;
 `;

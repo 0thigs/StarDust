@@ -7,16 +7,18 @@ export const Container = styled.View`
 
 export const Select = styled.TouchableOpacity`
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.gray_900};
   border: 1px solid ${({ theme }) => theme.colors.gray_700};
   border-radius: 4px;
-  padding: 8px;
+  padding: 4px;
 `;
 
 export const Label = styled.Text`
   color: ${({ theme }) => theme.colors.green_300};
   font-family: ${({ theme }) => theme.fonts.medium};
-  margin-right: 8px;
+  
 `;
 
 export const Option = styled.TouchableOpacity`

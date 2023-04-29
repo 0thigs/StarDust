@@ -1336,4 +1336,128 @@ escreva(planetaNome);
       },
     ],
   },
+  {
+    starId: 12,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Já que você está indo em direção ao planeta, é bom regular a velocidade do foguete para fazer um pouso seguro.',
+      },
+      {
+        type: 'default',
+        title: 'Como fazer isso?',
+        body: 'A velocidade atual do foguete é 50, caso a força da gravidade seja maior que 10, a velocidade deverá diminuir em 20, caso contrário precisará aumentar em 20.',
+      },
+      {
+        type: 'code',
+        body: `
+var velFoguete = 50;
+var gravidade = 11;
+
+se (gravidade > 10) {
+  velFoguete -= 20;
+}
+
+se (gravidade < 10) {
+  velFoguete += 20;
+}
+ 
+escreva(velFoguete);
+// Resultado: 30`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Perceba que usei += e -= para alterar o valor de velFoguete. Isso é a mesma coisa que escrever: velFoguete = velFoguete + 20 e velFoguete = velFoguete - 20, só que de um jeito mais curto.',
+      },
+      {
+        type: 'alert',
+        body: 'Esse operador especial é chamado de operador de atribuição aritmética, ou seja, ele pode ser usado para fazer qualquer uma das quatros operações aritméticas (+=, -=, *=, /=)',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Voltando ao código, você pode achar ele cumpre o seu papel perfeitamente, o que de fato é verdade.',
+      },
+      {
+        type: 'default',
+        title: 'Mas, então?',
+        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais o eficiente.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: "Neste caso, em vez de usar dois 'se', é possível usar outra estrutura, chamada se-senão, veja só:",
+      },
+      {
+        type: 'code',
+        body: `
+var velFoguete = 50;
+var gravidade = 11;
+
+se (gravidade > 10) {
+  velFoguete -= 20;
+} senao {
+  velFoguete += 20;
+}
+
+escreva(velFoguete);
+// Resultado: 70
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como o nome implica, caso a primeira condição não seja verdadeira, apenas o código contido em senao é executado.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ou seja, se for verdadeiro faça algo, senão faça outra coisa.',
+      },
+      {
+        type: 'default',
+        title: 'Entendi',
+        body: 'Agora que a velocidade está regulada, é preciso verificar se o ar é respirável ou não.',
+      },
+      {
+        type: 'default',
+        title: 'Como?',
+        body: 'Basta checar se a atmosfera tem níveis de oxigênio adequado e se têm ausência de gases tóxicos',
+      },
+      {
+        type: 'code',
+        body: `
+var oxigenioLevel = 20; /* nível de oxigênio */
+var nitrogenioLevel = 78; /* nível de nitrogênio */
+var outrosGasesLevel = 2; /* níveis de outros gases */
+
+se (
+    oxigenioLevel >= 19 e 
+    oxigenioLevel <= 23 e 
+    nitrogenioLevel >= 75 e 
+    nitrogenioLevel <= 81 e 
+    outrosGasesLevel <= 5
+    ) {
+  escreva("A atmosfera é respirável!");
+} senao {
+  escreva("A atmosfera não é respirável!");
+}
+
+// Resultado: A atmosfera é repirável!`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Acho que você já deve ter percebido, mas como visto no código acima, é possível usar mais de um operador lógico para formar uma condição, como também escrever uma condição debaixo da outra, que o programa será executado normalmente.',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'Agora com a confirmação de que a atmosfera é respirável, podemos aterrissar no planeta de forma segura, mas não antes de praticar o que vimos.',
+      },
+    ],
+  },
 ];

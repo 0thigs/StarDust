@@ -14,7 +14,7 @@ export const Container = styled.View`
 `;
 
 export const Lines = styled(Animated.View)`
-  width: 350px;
+  width: 90%;
   margin-bottom: 32px;
 `;
 
@@ -30,7 +30,7 @@ export const Line = styled.View`
 export const Content = styled.View``;
 
 export const Text = styled.Text`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.gray_500};
   font-family: ${({ theme }) => theme.fonts.code};
 `;
 

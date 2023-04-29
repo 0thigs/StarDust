@@ -21,18 +21,17 @@ export const Tag = styled.View`
   flex-flow: row;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray_900};
-  padding: 4px;
   border: 1px solid ${({ theme }) => theme.colors.gray_500};
   border-radius: 8px;
   margin-right: 8px;
   margin-bottom: 8px;
+  padding: 0 8px;
 `;
 
 export const TagName = styled.Text`
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
   color: ${({ theme, color }) => (color ? color : theme.colors.gray_500)};
-  margin: 0 4px;
 `;
 
 export const RemoveTagButton = styled.TouchableOpacity`

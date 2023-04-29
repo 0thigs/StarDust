@@ -56,7 +56,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth === 0 ? 15 : zoneWidth}
+      width={zoneWidth === 0 ? 50 : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

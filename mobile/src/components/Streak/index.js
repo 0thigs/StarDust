@@ -32,7 +32,6 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
 
   async function updateStreak(currentWeekStatus) {
     if (today !== 'todo') return;
-    console.log(week_status, 'update');
 
     if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && did_complete_saturday)) {
       const updatedStreak = streak + 1;
@@ -47,32 +46,10 @@ export function Streak({ user: { streak, week_status, did_complete_saturday, cre
     if (todayIndex !== 6 && did_complete_saturday) updateLoggedUser('did_complete_saturday', false);
   }
 
-  function checkHasUndoneDay() {
-    console.log(week_status, 'undone');
-    if (today !== 'todo') return;
-
-    const currentDate = new Date();
-    const createdAtDate = new Date(created_at);
-    let currentWeekStatus = week_status;
-
-    if (yesterday && yesterday === 'todo' && currentDate !== createdAtDate) {
-      setStreakCount(0);
-      updateLoggedUser('streak', 0);
-
-      const yesterdayIndex = todayIndex - 1;
-      currentWeekStatus = updateWeekStatus(yesterdayIndex, 'undone', currentWeekStatus);
-    }
-
-    if (route.name !== 'Profile') {
-      updateStreak(currentWeekStatus);
-      return;
-    }
-  }
-
   useEffect(() => {
     setWeekStatus(week_status);
     setStreakCount(streak);
-    // checkHasUndoneDay();
+    if (route.name === 'Lesson') updateStreak();
   }, []);
 
   return (

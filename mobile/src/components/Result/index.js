@@ -68,7 +68,9 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
         isChallenge={true}
       />
 
-      <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />
+      {canFetchComments && (
+        <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />
+      )}
     </C.Container>
   );
 }

@@ -12,6 +12,8 @@ export const Options = styled.View`
 
 export const OptionContainer = styled(Animatable.View)`
   align-items: center;
+  width: 90%;
+
 `;
 
 export const Option = styled.TouchableOpacity`
@@ -26,10 +28,10 @@ export const Option = styled.TouchableOpacity`
       ? theme.colors.blue_300
       : theme.colors.white};
   min-height: 48px;
-  width: 350px;
+  width: 100%;
 
   border-radius: 4px;
-  margin-top: 20px;
+  margin-top: 8px;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -39,6 +41,7 @@ export const Box = styled.View`
   width: 20px;
   height: 20px;
   border-width: 1px;
+  border-radius: 2px;
   border-color: ${({ theme, isSelected, isAnswerWrong, isAnswerCorrect }) =>
     isAnswerWrong && isSelected
       ? theme.colors.red_300

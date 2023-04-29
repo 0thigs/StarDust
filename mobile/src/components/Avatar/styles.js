@@ -31,6 +31,7 @@ export const Coins = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 18px;
   margin-bottom: -8px;
+  margin-left: 4px;
 `;
 
 export const Name = styled.Text`
@@ -42,7 +43,6 @@ export const Name = styled.Text`
   margin: 8px 0 0;
   margin-bottom: 12px;
 `;
-
 
 export const Image = styled.Image`
   width: 55%;

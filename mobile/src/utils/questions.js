@@ -95,26 +95,26 @@ export const questions = [
     stem: 'O nome do comando para um programa receber informações é',
     answer: 'leia',
   },
-//   {
-//     starId: 2,
-//     type: 'drag-and-drop-list',
-//     stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
-//     items: [
-//       {
-//         id: 1,
-//         label: 'var quantidade',
-//       },
-//       {
-//         id: 2,
-//         label: 'quantidade = leia()',
-//       },
-//       {
-//         id: 3,
-//         label: 'escreva(quantidade)',
-//       },
-//     ],
-//   },
-{
+  //   {
+  //     starId: 2,
+  //     type: 'drag-and-drop-list',
+  //     stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
+  //     items: [
+  //       {
+  //         id: 1,
+  //         label: 'var quantidade',
+  //       },
+  //       {
+  //         id: 2,
+  //         label: 'quantidade = leia()',
+  //       },
+  //       {
+  //         id: 3,
+  //         label: 'escreva(quantidade)',
+  //       },
+  //     ],
+  //   },
+  {
     starId: 11,
     type: 'drag-and-drop-list',
     stem: 'Reordene o programa para que ele fique na ordem correta',
@@ -974,7 +974,7 @@ escreva(planetaCor);
     correctItemsIdsSequence: [3],
   },
   {
-    starId: 12,
+    starId: 11,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código:',
     code: `var planetaPopulacao = 1000 * 1000;
@@ -1035,6 +1035,190 @@ escreva(status);
         label: 'planeta pobre',
       },
     ],
-    correctItemsIdsSequence: [1],
+    correctItemsIdsSequence: [2, 1],
   },
+  {
+    starId: 12,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que seja possível formar um sistema solar',
+    lines: [
+      {
+        id: 0,
+        texts: ['var planetas = ', '8'],
+        indentLevel: 0,
+      },
+      {
+        id: 1,
+        texts: ['var temSol = ', 'verdadeiro'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['se ('],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['temSol ', 'dropZone',],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['planetas >', 'dropZone',],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: [')'],
+        indentLevel: 1,
+      },
+      {
+        id: 6,
+        texts: ['escreva("É possível formar um sistema solar")'],
+        indentLevel: 1,
+      },
+      {
+        id: 7,
+        texts: ['} senao {'],
+        indentLevel: 0,
+      },
+      {
+        id: 8,
+        texts: ['escreva("Não é possível formar um sistema solar")'],
+        indentLevel: 1,
+      },
+      {
+        id: 9,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'ou',
+      },
+      {
+        id: 2,
+        label: 'e',
+      },
+      {
+        id: 3,
+        label: '0',
+      },
+      {
+        id: 4,
+        label: '-8',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3],
+  },
+  {
+    starId: 12,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o programa para que o resultado seja menor que 10',
+    items: [
+      {
+        id: 1,
+        label: 'var energiaNegativa = 10',
+      },
+      {
+        id: 2,
+        label: 'se (verdadeiro) {',
+      },
+      {
+        id: 3,
+        label: 'energiaNegativa -= 5',
+      },
+      {
+        id: 4,
+        label: '} senao {',
+      },
+      {
+        id: 5,
+        label: 'energiaNegativa += 5',
+      },
+      {
+        id: 6,
+        label: '}',
+      },
+    ],
+  },
+  {
+    starId: 12,
+    type: 'checkbox',
+    stem: 'Quais as opções válidas para a variável radiacao para que o resultado seja "Seguro"?',
+    code: `var radiacao = ?
+se (radiacao > 500) {
+  escreva("Não seguro");
+} senao {
+   escreva("Seguro");
+}`,
+    options: ['100', '200', '600', '700'],
+    correctOptions: ['100', '200'],
+  },
+  {
+    starId: 12,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que a variavel qualOSentidoDaVida seja igual a "42"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var qualOSentidoDaVida = ', '2'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['qualOSentidoDaVida ', 'dropZone', ' 21'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(qualOSentidoDaVida)'],
+        indentLevel: 1,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '+=',
+      },
+      {
+        id: 2,
+        label: '-=',
+      },
+      {
+        id: 3,
+        label: '*=',
+      },
+      {
+        id: 3,
+        label: '/=',
+      },
+    ],
+    correctItemsIdsSequence: [3],
+  },
+  {
+    starId: 13,
+    type: 'checkbox',
+    stem: 'Qual das seguintes opções são relacionadas a condições:',
+    options: ['enquanto', 'se', 'senao se', 'senao'],
+    correctOptions: ['se', 'senao se', 'senao'],
+  },
+  //   {
+//     starId: 13,
+//     type: 'selection',
+//     stem: 'Qual será o resultado do seguinte código:',
+//     code: `var qtdPlanetas = 0
+// var temSistemaSolar
+// se (planetas > 0) {
+//   temSistemaSolar = verdadeiro
+// } senao {
+//   temSistemaSolar = falso
+// }
+// temSistemaSolar = verdadeiro
+// escreva(temSistemaSolar)`,
+//     options: ['verdadeiro', 'falso', 'indefinido', 'temSistemaSolar'],
+//     answer: 'verdadeiro',
+//   },
 ];

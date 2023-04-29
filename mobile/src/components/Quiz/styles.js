@@ -10,20 +10,21 @@ export const Container = styled.View`
 `;
 
 export const QuestionStem = styled(Animatable.Text)`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
-  font-size: 16px;
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
   max-width: ${lessonContainerWidth};
   margin: 8px 0 16px;
+  letter-spacing: .8px;
+  line-height: 30px;
   align-self: center;
 `;
 
 export const QuestionCode = styled.ScrollView`
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 16px;
   align-self: center;
-  width: 350px;
+  width: 90%;
   max-height: 220px;
   margin-bottom: 8px;
 `;

@@ -5,18 +5,18 @@ export const LessonContext = createContext();
 const stages = ['theory', 'quiz', 'end'];
 
 const _questions = [
-  {
-    starId: 2,
-    type: 'selection',
-    stem: 'Como fazer que um programa escreva "que horas são?"',
-    options: [
-      'escreva(que horas são)',
-      'imprima("que horas são")',
-      'escreva("que horas são")',
-      'escreva("14:52am")',
-    ],
-    answer: 'escreva("que horas são")',
-  },
+//   {
+//     starId: 2,
+//     type: 'selection',
+//     stem: 'Como fazer que um programa escreva "que horas são?"',
+//     options: [
+//       'escreva(que horas são)',
+//       'imprima("que horas são")',
+//       'escreva("que horas são")',
+//       'escreva("14:52am")',
+//     ],
+//     answer: 'escreva("que horas são")',
+//   },
 //   {
 //     starId: 3,
 //     type: 'checkbox',
@@ -98,7 +98,6 @@ const initialState = {
   wrongsCount: 0,
   livesCount: 5,
   secondsCount: 0,
-  time: '',
   verifyAnswer: () => {},
   isAnswerWrong: false,
   isAnswerVerified: false,
@@ -131,7 +130,7 @@ const LessonReducer = (state, action) => {
       });
       return {
         ...state,
-        questions: _questions,
+        questions: reorderedQuestions,
       };
     case 'incrementWrongsCount':
       return {

@@ -8,8 +8,9 @@ import { Loading } from '../../components/Loading';
 import { Challenge } from '../../components/Challenge';
 import { SelectInput } from '../../components/SelectInput';
 import { filters } from '../../utils/filters';
-
 import { X } from 'react-native-feather';
+const xSize = 16;
+
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 const difficultyTable = {
@@ -161,13 +162,13 @@ export function Challenges() {
           </C.FiltersList>
           <C.TagsList>
             {tags.map(({ type, value, icon, color }) => (
-              <View key={value}>
+              <View key={value} style={{ flexDirection: 'row' }}>
                 {Array.isArray(value) ? (
                   value.map(value => (
                     <C.Tag key={value}>
                       <C.TagName>{value}</C.TagName>
                       <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
-                        <X width={22} color={theme.colors.gray_500} />
+                        <X width={xSize} color={theme.colors.gray_500} />
                       </C.RemoveTagButton>
                     </C.Tag>
                   ))
@@ -178,7 +179,7 @@ export function Challenges() {
                       {type === 'difficulty' ? difficultyTable[value] : getStatusName(value)}
                     </C.TagName>
                     <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
-                      <X width={22} color={theme.colors.gray_500} />
+                      <X width={xSize} color={theme.colors.gray_500} />
                     </C.RemoveTagButton>
                   </C.Tag>
                 )}

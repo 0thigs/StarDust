@@ -27,12 +27,12 @@ export function Home() {
   const dimensions = useWindowDimensions();
 
   function scrollToLastUnlockedStar() {
+    setIsFabButtonVisible(false);
     scrollRef.current.scrollTo({
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
       animated: true,
     });
-    setIsFabButtonVisible(false);
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
