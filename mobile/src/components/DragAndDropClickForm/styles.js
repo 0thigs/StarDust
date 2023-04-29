@@ -30,7 +30,7 @@ export const Line = styled.View`
 export const Content = styled.View``;
 
 export const Text = styled.Text`
-  color: ${({ theme }) => theme.colors.gray_500};
+  color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.code};
 `;
 

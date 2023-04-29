@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import * as C from '../DragAndDropClickForm/styles';
 
@@ -8,8 +8,8 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
 
   useEffect(() => {
     if (zones.length) {
-      const targetZone = zones.find(zone => zone && zone.id === id);
-      if (targetZone) setZoneWidth(targetZone?.width);
+      const targetZone = zones.find(zone => zone.id === id);
+      if (targetZone) setZoneWidth(targetZone.width);
     }
   }, [zones]);
 
@@ -26,14 +26,17 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     });
   }, [linesWidth]);
 
-
-//   useEffect(() => {
-//     setZoneWidth(minZoneWidth)
-//   }, [])
+  //   useEffect(() => {
+  //     setZoneWidth(minZoneWidth)
+  //   }, [])
 
   function updateZone({ id, x, y, width }) {
     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
   }
+
+//   const updateZone = useCallback(({ id, x, y, width }) => {
+//     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
+//   }, [zones]);
 
   function registerZone({ target }) {
     target.measure((x, y, width, height, pageX, pageY) => {
@@ -56,7 +59,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth === 0 ? 50 : zoneWidth}
+      width={zoneWidth === 0 ? 15 : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

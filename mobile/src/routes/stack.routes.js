@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { Lesson } from '../screens/Lesson';
 import { DrawerRoutes } from './drawer.routes';
 import { SignIn } from '../screens/SignIn';
 import { SignOut } from '../screens/SignOut';
-import { Lesson } from '../screens/Lesson';
 import { Settings } from '../screens/Settings';
 import { ChangePassword } from '../screens/ChangePassword/index';
 import { Challenge } from '../screens/Challenge';

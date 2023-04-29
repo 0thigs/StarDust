@@ -43,8 +43,19 @@ function SliderComponent({
       scrollEventThrottle={32}
       onScroll={onScroll}
       scrollEnabled={scrollEnabled}
+      maxToRenderPerBatch={1}
       onViewableItemsChanged={setCurrentSlideIndex && onViewableItemsChanged.current}
       viewabilityConfig={viewabilityConfig}
+      initialNumToRender={1}
+      windowSize={5}
+      updateCellsBatchingPeriod={30}
+      removeClippedSubviews={false}
+      onEndReachedThreshold={0.1}
+      getItemLayout={(_, index) => ({
+        length: width,
+        offset: width * index,
+        index,
+      })}
     />
   );
 }

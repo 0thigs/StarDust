@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
-import { useAnimatedStyle, useSharedValue, withTiming, FadeInDown } from 'react-native-reanimated';
-const animationDuration = 500;
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+const animationDuration = 350;
 
 export function DropItem({
   id,
@@ -10,9 +10,7 @@ export function DropItem({
   zones,
   setZones,
   isAnswerVerified,
-  reorderedItems,
   isAnswerWrong,
-  linesWidth,
 }) {
   const [isItemInZone, setIsItemInZone] = useState(false);
   const [isFirstRendering, setisFirstRendering] = useState(false);
@@ -63,9 +61,9 @@ export function DropItem({
     resetPosition();
     const targetZone = zones.find(zone => zone.itemId === id);
     targetZone.itemId = null;
-    targetZone.width = minZoneWidth;
-    updateZone(targetZone);
+    targetZone.width = 20;
     setIsItemInZone(false);
+    updateZone(targetZone);
   }
 
   function addItemInZone(id) {
@@ -77,8 +75,8 @@ export function DropItem({
           zone.y - initialPosition.y.value - (C.itemHeight / 2 + characterHeight);
         zone.itemId = id;
         zone.width = itemWidth - 20;
-        updateZone(zone);
         setIsItemInZone(true);
+        updateZone(zone);
         break;
       }
     }

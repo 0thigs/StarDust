@@ -58,59 +58,61 @@ export function End({
     return loggedUser.level;
   }
 
-  function getUpdatedData() {
-    const updatedCoins = coins + loggedUser.coins;
-    const updatedXp = xp + loggedUser.xp;
-    const updatedWeeklyXp = xp + loggedUser.weekly_xp;
-    const updatedLevel = getUpdatedLevel(updatedXp);
-    let completedChallenges = loggedUser.completed_challenges;
+  async function getUpdatedData() {
+    try {
+      const updatedCoins = coins + loggedUser.coins;
+      const updatedXp = xp + loggedUser.xp;
+      const updatedWeeklyXp = xp + loggedUser.weekly_xp;
+      const updatedLevel = getUpdatedLevel(updatedXp);
+      let completedChallenges = loggedUser.completed_challenges;
 
-    if (challengeId && !isCompleted) {
-      addUserCompletedChallenges(challengeId);
-      completedChallenges++;
-    }
+      if (challengeId && !isCompleted) {
+        await addUserCompletedChallenges(challengeId);
+        completedChallenges++;
+      }
 
-    if (!starId) {
+      if (!starId) {
+        return {
+          coins: updatedCoins,
+          xp: updatedXp,
+          weekly_xp: updatedWeeklyXp,
+          level: updatedLevel,
+          completed_challenges: completedChallenges,
+        };
+      }
+
+      let completedPlanets = loggedUser.completed_planets;
+      let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
+      let nextStar = getNextStar(starId);
+
+      if (!nextStar) {
+        completedPlanets += 1;
+        const currentPlanet = getCurrentPlanet(starId);
+        const nextPlanet = planets.find(planet => planet.position === currentPlanet.position + 1);
+        nextStar = nextPlanet ? nextPlanet.stars[0] : null;
+      }
+
+      if (nextStar && !nextStar.isUnlocked) {
+        await addUnlockedStar(nextStar.id);
+      }
+
       return {
         coins: updatedCoins,
         xp: updatedXp,
         weekly_xp: updatedWeeklyXp,
         level: updatedLevel,
-        completed_challenges: completedChallenges,
+        unlocked_stars: updatedUnlockedStars,
+        completed_planets: completedPlanets,
       };
+    } catch (error) {
+      console.error(error);
     }
-
-    let completedPlanets = loggedUser.completed_planets;
-    let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
-    let nextStar = getNextStar(starId);
-
-    if (!nextStar) {
-      completedPlanets += 1;
-      const currentPlanet = getCurrentPlanet(starId);
-      const nextPlanet = planets.find(planet => planet.position === currentPlanet.position + 1);
-      nextStar = nextPlanet ? nextPlanet.stars[0] : null;
-    }
-
-    // console.log(nextStar.isUnlocked);
-
-    if (nextStar && !nextStar.isUnlocked) {
-      addUnlockedStar(nextStar.id);
-    }
-
-    return {
-      coins: updatedCoins,
-      xp: updatedXp,
-      weekly_xp: updatedWeeklyXp,
-      level: updatedLevel,
-      unlocked_stars: updatedUnlockedStars,
-      completed_planets: completedPlanets,
-    };
   }
 
   async function updateUserData() {
-    const newData = getUpdatedData();
+    const newData = await getUpdatedData();
     for (let key of Object.keys(newData)) {
-      updateLoggedUser(key, newData[key]);
+      await updateLoggedUser(key, newData[key]);
     }
   }
 

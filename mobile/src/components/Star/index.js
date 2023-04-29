@@ -37,7 +37,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const navigation = useNavigation();
-  
+
   const StarScale = useSharedValue(1);
   const StarAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -104,7 +104,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
       }}
     >
       <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
-      <C.StarButton onPress={handleStarPress} disabled={isUnlocked}>
+      <C.StarButton onPress={handleStarPress} isLoading={false} disabled={isUnlocked}>
         <C.StarContainer style={isLastUnlockedStar && StarAnimatedStyle}>
           {isUnlocked ? (
             <LockedStar width={100} height={85} />

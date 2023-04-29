@@ -27,17 +27,17 @@ export const Lives = styled.View`
 `;
 
 export const LivesCount = styled.Text`
-  color: ${props => props.theme.colors.red_700};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.red_700};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 18px;
   margin-left: 4px;
 `;
 
 export const ProgressBar = styled.View`
-  background-color: ${props => props.theme.colors.purple_700};
+  background-color: ${({ theme }) => theme.colors.purple_700};
   width: 100%;
   height: 20px;
-  margin: 24px 0;
+  margin: 8px 0 24px;
   border-radius: 4px;
   flex-direction: row;
 `;
@@ -45,5 +45,5 @@ export const ProgressBar = styled.View`
 export const Bar = styled(Animated.View)`
   height: 100%;
   align-items: flex-end;
-  background-color: ${props => props.theme.colors.green_500};
+  background-color: ${({ theme }) => theme.colors.green_500};
 `;

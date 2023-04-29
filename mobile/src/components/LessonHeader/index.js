@@ -4,10 +4,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
-import { rockets } from '../../utils/rockets';
-
 import LifeIcon from '../../assets/GlobalAssets/life-icon.svg';
-
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
 import * as Speech from 'expo-speech';
@@ -23,8 +20,8 @@ export function LessonHeader() {
   const { rocket } = useRocket(loggedUser.rocket_id);
   const [state, dispatch] = useLesson();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
-
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
 

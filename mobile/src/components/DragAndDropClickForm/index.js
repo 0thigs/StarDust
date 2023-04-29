@@ -79,7 +79,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   }, [zones]);
 
   useEffect(() => {
-    reorderItems(dropItems, setReorderedItems);
+     reorderItems(dropItems, setReorderedItems);
   }, [dropItems]);
 
   useEffect(() => {

@@ -12,38 +12,33 @@ import dayjs from 'dayjs';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({ user: { streak, week_status, did_complete_saturday, created_at } }) {
+export function Streak({ user: { streak, week_status } }) {
   const { updateLoggedUser } = useAuth();
   const route = useRoute();
   const [weekStatus, setWeekStatus] = useState([]);
   const [streakCount, setStreakCount] = useState(0);
   const todayIndex = dayjs().day();
   const today = week_status[todayIndex];
-  const yesterday = week_status[todayIndex - 1];
 
-  function updateWeekStatus(dayIndex, newStatus, currentWeekStatus) {
-    const updatedWeekStatus = currentWeekStatus.map((status, index) =>
+  function updateWeekStatus(dayIndex, newStatus) {
+    const updatedWeekStatus = weekStatus.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
     setWeekStatus(updatedWeekStatus);
     updateLoggedUser('week_status', updatedWeekStatus);
-    return updatedWeekStatus;
   }
 
-  async function updateStreak(currentWeekStatus) {
+  async function updateStreak() {
     if (today !== 'todo') return;
 
-    if ((!!yesterday && yesterday === 'done') || (todayIndex === 0 && did_complete_saturday)) {
+    try {
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
-      updateLoggedUser('streak', updatedStreak);
-      if (todayIndex === 6) {
-        updateLoggedUser('did_complete_saturday', true);
-      }
+      await updateLoggedUser('streak', updatedStreak);
+      updateWeekStatus(todayIndex, 'done');
+    } catch (error) {
+      console.error(error);
     }
-    updateWeekStatus(todayIndex, 'done', currentWeekStatus);
-
-    if (todayIndex !== 6 && did_complete_saturday) updateLoggedUser('did_complete_saturday', false);
   }
 
   useEffect(() => {

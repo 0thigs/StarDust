@@ -26,7 +26,7 @@ export const QuestionCode = styled.ScrollView`
   align-self: center;
   width: 90%;
   max-height: 220px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 `;
 
 export const Text = styled.Text`
