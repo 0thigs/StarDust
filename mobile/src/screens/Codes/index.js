@@ -50,7 +50,6 @@ export function Codes() {
   function editCode(id) {
     currentCodeId.current = id;
     codeTitle.current = codes.find(code => code.id === id).title;
-    console.log(codeTitle.current);
     setIsPromptVisible(true);
   }
 
@@ -79,8 +78,8 @@ export function Codes() {
         </C.Icon>
         <C.Title>Criar novo código</C.Title>
       </C.Button>
-      {isLoading ? (
-        <Loading />
+      {!codes.length ? (
+        <C.Message>Parece que você não tem nenhum código salvo 😢.</C.Message>
       ) : (
         <C.CodesList
           data={codes}

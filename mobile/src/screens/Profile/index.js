@@ -43,7 +43,7 @@ export function Profile() {
       setTimeout(() => {
         contentScrollRef.current.scrollTo({ x: 0, y: 0, animated: false });
         setIsLoading(false);
-      }, 1000);
+      }, 1500);
     }
   }
 

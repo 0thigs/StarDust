@@ -9,7 +9,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
   useEffect(() => {
     if (zones.length) {
       const targetZone = zones.find(zone => zone.id === id);
-      if (targetZone) setZoneWidth(targetZone.width);
+      if (targetZone) setZoneWidth(targetZone?.width);
     }
   }, [zones]);
 
@@ -30,13 +30,13 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
   //     setZoneWidth(minZoneWidth)
   //   }, [])
 
-  function updateZone({ id, x, y, width }) {
-    setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
-  }
-
-//   const updateZone = useCallback(({ id, x, y, width }) => {
+//   function updateZone({ id, x, y, width }) {
 //     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
-//   }, [zones]);
+//   }
+
+  const updateZone = useCallback(({ id, x, y, width }) => {
+    setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
+  }, [zones]);
 
   function registerZone({ target }) {
     target.measure((x, y, width, height, pageX, pageY) => {

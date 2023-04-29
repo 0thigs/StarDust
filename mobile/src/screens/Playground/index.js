@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useCode } from '../../hooks/useCode';
 import { Code } from '../../components/Code';
 import { Output } from '../../components/Output';
+import { Prompt } from '../../components/Prompt';
 import { PlaygroundHeader } from '../../components/PlaygroundHeader';
 import { execute } from '../../libs/delegua.mjs';
-import { Toast } from 'toastify-react-native';
+import ToastMenager, { Toast } from 'toastify-react-native';
 import * as C from './styles';
-import { Prompt } from '../../components/Prompt';
 
 export function Playground({ route }) {
   const [codeId, setCodeId] = useState(route.params?.id ?? null);
@@ -102,6 +102,14 @@ export function Playground({ route }) {
 
   return (
     <C.Container>
+      <ToastMenager
+        animationInTiming={700}
+        animationOutTiming={1000}
+        animationStyle={'rightInOut'}
+        width={320}
+        position={'top'}
+      />
+
       <PlaygroundHeader
         title={codeTitle}
         code={userCode}

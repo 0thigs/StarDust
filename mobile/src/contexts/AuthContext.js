@@ -12,7 +12,7 @@ const fakeLoggedUser = {
   xp: 101,
   weekly_xp: 0,
   level: 1,
-  streak: 3,
+  streak: 0,
   week_status: ['done', 'todo', 'todo', 'todo', 'todo', 'todo', 'todo'],
   unlocked_stars: 1,
   achievements_to_rescue: [],

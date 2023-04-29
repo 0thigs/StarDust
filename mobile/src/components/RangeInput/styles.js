@@ -25,7 +25,7 @@ export const Content = styled(Animated.View)`
   background-color: ${({ theme }) => theme.colors.green_900};
   width: 320px;
   height: 220px;
-  padding: 24px;
+  padding: 16px;
   border-radius: 8px;
   justify-content: space-between;
 `;
@@ -60,7 +60,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.green_700};
 `;

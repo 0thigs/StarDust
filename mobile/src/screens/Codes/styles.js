@@ -34,4 +34,10 @@ export const Icon = styled.View`
   margin-right: 12px;
 `;
 
+export const Message = styled.Text`
+  color: ${({ theme }) => theme.colors.gray_500};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  text-align: center;
+`;
+
 export const CodesList = styled.FlatList``;

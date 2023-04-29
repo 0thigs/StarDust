@@ -14,13 +14,14 @@ import { getImage } from '../../utils/getImage';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { useRocket } from '../../hooks/useRocket';
+import { Loading } from '../Loading';
 
 export function LessonHeader() {
   const { loggedUser } = useAuth();
   const { rocket } = useRocket(loggedUser.rocket_id);
   const [state, dispatch] = useLesson();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
@@ -48,6 +49,7 @@ export function LessonHeader() {
 
   return (
     <C.Container>
+
       <C.Main>
         <C.CloseButton onPress={() => setIsModalVisible(true)}>
           <Icon.X color={theme.colors.red_700} width={35} height={35} />
