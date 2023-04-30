@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 import api from '../../services/api';
 import * as C from './styles';
 const today = dayjs().day();
-
 const sunday = 0;
 const daysToGo = today === sunday ? 7 : 7 - today;
 
@@ -125,7 +124,7 @@ export function Ranking() {
             />
           </C.Badges>
           <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
-          <C.Days>{daysToGo} dias</C.Days>
+          <C.Days>{`${daysToGo} ${daysToGo > 1 ? ' dias' : ' dia'}`}</C.Days>
           <UsersList users={users} />
         </>
       )}

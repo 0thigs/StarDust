@@ -1383,7 +1383,7 @@ escreva(velFoguete);
       {
         type: 'default',
         title: 'Mas, então?',
-        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais o eficiente.',
+        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais o eficiente e limpo.',
       },
       {
         type: 'default',
@@ -1457,6 +1457,137 @@ se (
         type: 'default',
         title: 'Sim',
         body: 'Agora com a confirmação de que a atmosfera é respirável, podemos aterrissar no planeta de forma segura, mas não antes de praticar o que vimos.',
+      },
+    ],
+  },
+  {
+    starId: 13,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Enfim, pousamos com segurança!',
+      },
+      {
+        type: 'default',
+        title: 'Ufa!',
+        body: 'Parece que várias pessoas desse planeta já começaram a rodear o foguete.',
+      },
+      {
+        type: 'default',
+        title: 'O que fazer?',
+        body: 'É bom dizer oi para eles, mas como eles não falam a nossa língua, será preciso usar um tradutor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por padrão ele traduz 2 línguas estrangeiras: Xanxiriano e Krynnishiano. Porém, caso não seja nenhuma das duas, o tradutor procurará outro idioma em seu banco de dados',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer um programa disso, utilizaremos a terceira variação da estrutura condicional: senão-se.',
+      },
+      {
+        type: 'default',
+        title: 'Mas não já vimos isso antes?',
+        body: 'Não confunda com um simples senão. Neste caso, o senão-se (escrito no código como senao se) sempre virá depois do primeiro se e antes de senão:',
+      },
+      {
+        type: 'code',
+        body: `
+var idioma = 'Vortaxiano'
+
+se (idioma = 'Xanxiriano') {
+  escreva("Traduzir de Xanxiriano");
+} senao se (idioma = 'Krynnishiano') {
+  escreva("Traduzir de Krynnishiano");
+} senao {
+  escreva("Traduzir de outro idioma");
+}
+
+// Resultado: Traduzir de outro idioma`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Perceba que o senao se funciona como um se normal, exigindo que passemos uma condição, que caso seja verdadeira seu bloco de código será executado em vez o do senao.',
+      },
+      {
+        type: 'default',
+        title: 'Legal',
+        body: 'Além disso, a estrutura senão-se também é conhecido como "se aninhado", justamente porque podemos colocar vários senao se dentro de uma estrura condicional.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Isso será convenientemente útil, pois para você abrir a saída do foguete, você precisará de uma senha correta.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'A senha é composta por 4 números, e dependendo da combinação pode abrir um compartimento diferente do foguete, veja só:',
+      },
+      {
+        type: 'code',
+        body: `
+var senha = 9713;
+
+se (senha = 2222) {
+  escreva("Abrir cozinha");
+} senao se (senha = 4567) {
+  escreva("Abrir banheiro");
+} senao se (senha = 7568) {
+  escreva("Abrir quarto de dormir");
+} senao se (senha = 5781) {
+  escreva("Abrir sala de controle");
+}
+...
+} senao
+  escreva("Senha não existe");
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Existe uma forma mais fácil de fazer isso usando outro tipo de estrutura, mas podemos falar sobre ela depois.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por enquanto quero que você perceba que agora podemos fazer estruturas de se complexos, colando se dentro se.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, você pode quere desconfiar se os alienígenas lá fora são verdadeiramente amigáveis',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste caso, podemos usar uma condição dentro de outra condição:',
+      },
+      {
+        type: 'code',
+        body: `
+se (povoAmigavel == falso) {
+    se (povoArmado == verdadeiro) {
+        escreva('Fugir para longe')
+    } senao  {
+        escreva('Cair na porrada')
+    }
+} senao {
+    escreva('Tentar conversar') 
+}
+`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não.',
       },
     ],
   },

@@ -32,8 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '17ba01ec-7aa6-4971-9760-537127e03b4d';
-//   const challengeId = '62fef857-42fa-4602-8483-4dc4a446927d';
+  const challengeId = 'c5889520-146f-4d30-8f07-a330c1fe1177';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {

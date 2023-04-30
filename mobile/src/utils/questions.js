@@ -1059,12 +1059,12 @@ escreva(status);
       },
       {
         id: 3,
-        texts: ['temSol ', 'dropZone',],
+        texts: ['temSol ', 'dropZone'],
         indentLevel: 1,
       },
       {
         id: 4,
-        texts: ['planetas >', 'dropZone',],
+        texts: ['planetas >', 'dropZone'],
         indentLevel: 1,
       },
       {
@@ -1202,23 +1202,154 @@ se (radiacao > 500) {
     starId: 13,
     type: 'checkbox',
     stem: 'Qual das seguintes opções são relacionadas a condições:',
-    options: ['enquanto', 'se', 'senao se', 'senao'],
+    options: ['portanto', 'se', 'senao se', 'senao'],
     correctOptions: ['se', 'senao se', 'senao'],
   },
-  //   {
-//     starId: 13,
-//     type: 'selection',
-//     stem: 'Qual será o resultado do seguinte código:',
-//     code: `var qtdPlanetas = 0
-// var temSistemaSolar
-// se (planetas > 0) {
-//   temSistemaSolar = verdadeiro
-// } senao {
-//   temSistemaSolar = falso
-// }
-// temSistemaSolar = verdadeiro
-// escreva(temSistemaSolar)`,
-//     options: ['verdadeiro', 'falso', 'indefinido', 'temSistemaSolar'],
-//     answer: 'verdadeiro',
-//   },
+  {
+    starId: 13,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte código:',
+    code: `var planetas = 0
+var temSistemaSolar
+se (planetas > 0) {
+  temSistemaSolar = verdadeiro
+} senao se (planetas < 0) {
+  temSistemaSolar = falso
+} senao {
+  temSistemaSolar = verdadeiro
+}
+escreva(temSistemaSolar)`,
+    options: ['verdadeiro', 'falso', 'indefinido', 'temSistemaSolar'],
+    answer: 'verdadeiro',
+  },
+  {
+    starId: 13,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que ele esteja correto',
+    lines: [
+      {
+        id: 1,
+        texts: ['se (meteoros > 10) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['dropZone', '(escudoAtivo) {'],
+        indentLevel: 1,
+      },
+      {
+        id: 3,
+        texts: ['escreva("Seguro")'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['}', 'dropZone', '(resistencia > 10) {'],
+        indentLevel: 1,
+      },
+      {
+        id: 5,
+        texts: ['escreva("Mais ou menos seguro") {'],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['} senao {'],
+        indentLevel: 1,
+      },
+      {
+        id: 7,
+        texts: ['escreva("Não seguro")'],
+        indentLevel: 2,
+      },
+      {
+        id: 8,
+        texts: ['}', 'dropZone', ' {'],
+        indentLevel: 0,
+      },
+      {
+        id: 9,
+        texts: ['escreva("Totalmente seguro")'],
+        indentLevel: 1,
+      },
+      {
+        id: 10,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'se',
+      },
+      {
+        id: 2,
+        label: 'senao',
+      },
+      {
+        id: 3,
+        label: 'senao se',
+      },
+      {
+        id: 4,
+        label: 'seguro',
+      },
+    ],
+    correctItemsIdsSequence: [1, 3, 2],
+  },
+  {
+    starId: 13,
+    type: 'drag-and-drop-list',
+    stem: 'Coloque os itens ordem de acordo com uma estrutura condional do tipo aninhada',
+    items: [
+      {
+        id: 1,
+        label: 'se',
+      },
+      {
+        id: 2,
+        label: 'senao se',
+      },
+      {
+        id: 3,
+        label: 'senao',
+      },
+    ],
+  },
+  {
+    starId: 13,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o programa para que o resultado seja "Médio"',
+    items: [
+      {
+        id: 1,
+        label: 'se (tamanhoNave < 20) {',
+      },
+      {
+        id: 2,
+        label: '    escreva("pequeno")',
+      },
+      {
+        id: 3,
+        label: '} senao se (tamanhoNave < 200) {',
+      },
+      {
+        id: 4,
+        label: '    escreva("médio")',
+      },
+      {
+        id: 5,
+        label: '} senao se (tamanhoNave < 2000)  {',
+      },
+      {
+        id: 6,
+        label: '    escreva("enorme")',
+      },
+      {
+        id: 7,
+        label: '}',
+      },
+    ],
+  },
 ];
