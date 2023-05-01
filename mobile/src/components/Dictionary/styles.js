@@ -51,7 +51,7 @@ export const Icon = styled.View`
 `;
 
 export const Texts = styled.ScrollView`
-  height: 400px;
+  height: 500px;
 `;
 
 export const Back = styled.TouchableOpacity``;
