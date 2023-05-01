@@ -13,15 +13,18 @@ export const Message = styled(Animatable.Text)`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
+  text-align: center;
 `;
 
 export const CoinsContainer = styled.View`
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.yellow_300};
 `;
+
 export const CoinsHeader = styled.View`
   background-color: ${({ theme }) => theme.colors.yellow_300};
 `;
+
 export const CoinsHeaderText = styled.Text`
   font-size: 16px;
 `;

@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/core';
 import { Metric } from '../Metric';
 import { Button } from '../Button';
 import { Streak } from '../Streak';
+import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 
@@ -20,7 +21,7 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { Modal } from '../Modal';
+import dayjs from 'dayjs';
 const iconSize = 30;
 
 export function End({
@@ -37,7 +38,7 @@ export function End({
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
-  const [newLevel, setNewLevel] = useState(0);
+  const [hasNewLevel, setHasNewLevel] = useState(false);
   const [time, setTime] = useState('');
   const [accurance, setAccurance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +53,7 @@ export function End({
     const hasNewLevel = updatedXp > 50 * loggedUser.level + 25;
     if (hasNewLevel) {
       const newLevel = loggedUser.level + 1;
-      setNewLevel(newLevel);
+      setHasNewLevel(hasNewLevel);
       return newLevel;
     }
     return loggedUser.level;
@@ -151,9 +152,12 @@ export function End({
   }
 
   function handleButtonClick() {
+    const todayIndex = dayjs().day();
+    const today = loggedUser.week_status[todayIndex];
+
     if (isFirstClick) {
       setIsModalVisible(true);
-      setIsStreakVisible(true);
+      setIsStreakVisible(today === 'todo');
       setIsFirstClick(false);
       return;
     }
@@ -190,19 +194,7 @@ export function End({
 
   return (
     <C.Container>
-      {isStreakVisible ? (
-        <>
-          <Animation
-            source={StreakAnimation}
-            autoPlay={true}
-            duration={3500}
-            loop={false}
-            size={250}
-            colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
-          />
-          <Streak user={loggedUser} updateLoggedUser={updateLoggedUser} isToUpdateStreak={true} />
-        </>
-      ) : (
+      {isFirstClick ? (
         <>
           <C.Message animation={'fadeInDown'}>Fase completada!</C.Message>
           <Animation
@@ -249,12 +241,26 @@ export function End({
                 title={'Precisão'}
                 color={theme.colors.red_300}
                 icon={<Accurance width={iconSize} height={iconSize} />}
-                count={'80.0%'}
+                count={accurance}
                 delay={1000}
               />
             )}
           </C.Metrics>
         </>
+      ) : isStreakVisible ? (
+        <>
+          <Animation
+            source={StreakAnimation}
+            autoPlay={true}
+            duration={3500}
+            loop={false}
+            size={250}
+            colorFilters={[{ keypath: '모양 레이어 1', color: theme.colors.green_500 }]}
+          />
+          <Streak user={loggedUser} updateLoggedUser={updateLoggedUser} isToUpdateStreak={true} />
+        </>
+      ) : (
+        <C.Message animation={'fadeInDown'}>Parabéns, continue assim 😉!</C.Message>
       )}
 
       <Button
@@ -265,28 +271,26 @@ export function End({
         background={theme.colors.green_500}
       />
 
-      {newLevel > 0 && (
-        <Modal
-          isVisible={isModalVisible}
-          type={'earning'}
-          title={'Parabéns! Você alcançou um novo nível!'}
-          body={
-            <C.NewLevelMessage>
-              <C.Text>Você acaba de chegar no </C.Text>
-              <C.NewLevel>Nível {newLevel} 😀</C.NewLevel>
-              <C.Text>Continue assim!</C.Text>
-            </C.NewLevelMessage>
-          }
-          footer={
-            <Button
-              title={'Legal'}
-              color={theme.colors.black}
-              background={theme.colors.green_500}
-              onPress={() => setIsModalVisible(false)}
-            />
-          }
-        />
-      )}
+      <Modal
+        isVisible={isModalVisible && hasNewLevel}
+        type={'earning'}
+        title={'Parabéns! Você alcançou um novo nível!'}
+        body={
+          <C.NewLevelMessage>
+            <C.Text>Você acaba de chegar no </C.Text>
+            <C.NewLevel>Nível {loggedUser.level} 😀</C.NewLevel>
+            <C.Text>Continue assim!</C.Text>
+          </C.NewLevelMessage>
+        }
+        footer={
+          <Button
+            title={'Legal'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={() => setIsModalVisible(false)}
+          />
+        }
+      />
 
       <Sound ref={soundRef} soundFile={require('../../assets/sounds/end-sound.mp3')} />
     </C.Container>
