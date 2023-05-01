@@ -15,6 +15,9 @@ export const Heading = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.bold};
   margin-bottom: 8px;
+  align-self: center;
+  text-align: center;
+  width: 80%;
 `;
 
 export const SortWrapper = styled.View`

@@ -42,14 +42,14 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
   const popoverMenuSortButtons = [
     {
       title: 'Mais recentes',
-      isToggle: false,
-      value: null,
+      isToggle: true,
+      value: sorter === 'date',
       action: () => handleSorterComments('date'),
     },
     {
       title: 'Mais curtidos',
-      isToggle: false,
-      value: null,
+      isToggle: true,
+      value: sorter === 'likes',
       action: () => handleSorterComments('likes'),
     },
   ];
@@ -108,6 +108,9 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
             </C.SortWrapper>
           </C.Header>
 
+          {comments.length === 0 && (
+            <C.Heading>Esse desafio ainda não tem comentários. Seja o primeiro a comentar 😉.</C.Heading>
+          )}
           <C.Content ref={contentRef}>
             {comments.map(
               ({

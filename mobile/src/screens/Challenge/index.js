@@ -10,10 +10,10 @@ import { TransitionScreenAnimation } from '../../components/TransitionScreenAnim
 import { execute } from '../../libs/delegua.mjs';
 import { Toast } from 'toastify-react-native';
 
-import * as C from './styles';
 import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
 import { useAuth } from '../../hooks/useAuth';
+import * as C from './styles';
 
 const earningsByDifficulty = {
   easy: {
@@ -111,8 +111,6 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
-    console.log(result);
-
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, JSON.parse(result).valor];
     });

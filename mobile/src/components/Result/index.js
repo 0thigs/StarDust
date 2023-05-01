@@ -16,6 +16,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
 
     const isAnswerCorrect = results.length && results.every(result => !!result);
     if (isAnswerCorrect) {
+      setCanFetchComments(true);
       setIsAnswerWrong(false);
       if (isAnswerVerified) setIsEnd(true);
       return;
@@ -28,13 +29,12 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
   }
 
   function verifyResult({ expectedOutput }, index) {
-      if (userOutputs[index] || userOutputs[index] === 0) {
+    if (userOutputs[index] || userOutputs[index] === 0) {
       return expectedOutput.toString().trim() === userOutputs[index].toString().trim();
     }
   }
 
   function showComments() {
-    setCanFetchComments(true);
     bottomSheetRef.current.expand();
   }
 
@@ -69,7 +69,11 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
       />
 
       {canFetchComments && (
-        <CommentsList bottomSheetRef={bottomSheetRef} challengeId={challengeId} />
+        <CommentsList
+          bottomSheetRef={bottomSheetRef}
+          challengeId={challengeId}
+          canFetchComments={canFetchComments}
+        />
       )}
     </C.Container>
   );
