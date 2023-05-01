@@ -28,7 +28,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
   }
 
   function verifyResult({ expectedOutput }, index) {
-    if (userOutputs[index]) {
+      if (userOutputs[index] || userOutputs[index] === 0) {
       return expectedOutput.toString().trim() === userOutputs[index].toString().trim();
     }
   }

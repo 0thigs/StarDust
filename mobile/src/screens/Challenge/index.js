@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = 'b6cddf94-9f4b-4d23-869e-f83c8dff9226';
+  const challengeId = 'c5889520-146f-4d30-8f07-a330c1fe1177';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -111,22 +111,23 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
+    console.log(result);
+
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, JSON.parse(result).valor];
     });
   }
 
-  async function verifyCase({ input }, index) {
+  async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
-    console.log(index);
-    setIsRunning(true);
+
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
-        if (erros[0] instanceof Error) throw erros[0];
-        throw erros[0].erroInterno;
+        const error = erros[0];
+        if (error instanceof Error) throw error;
+        throw error.erroInterno;
       }
-
       handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
@@ -135,9 +136,11 @@ export function Challenge({ route }) {
 
   async function handleUserCode() {
     setUserOutputs([]);
+
     for (const testCase of test_cases) {
       await verifyCase(testCase);
     }
+    setIsRunning(false);
   }
 
   useEffect(() => {
