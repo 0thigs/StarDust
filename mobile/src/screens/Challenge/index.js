@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = 'c5889520-146f-4d30-8f07-a330c1fe1177';
+  const challengeId = 'b6cddf94-9f4b-4d23-869e-f83c8dff9226';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -53,6 +53,7 @@ export function Challenge({ route }) {
 
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
 
   const sliderRef = useRef(null);
   const seconds = useRef(0);
@@ -79,6 +80,8 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
+    console.log({ userOutput });
+
     if (userOutput && !function_name) {
       setUserOutputs(currentUserOutputs => {
         return [...currentUserOutputs, userOutput];
@@ -113,12 +116,12 @@ export function Challenge({ route }) {
     });
   }
 
-  async function verifyCase({ input }) {
+  async function verifyCase({ input }, index) {
     const code = formatCode(userCode.current, input);
-
+    console.log(index);
+    setIsRunning(true);
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
-      console.log(resultado);
       if (erros.length) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;
@@ -130,9 +133,11 @@ export function Challenge({ route }) {
     }
   }
 
-  function handleUserCode() {
+  async function handleUserCode() {
     setUserOutputs([]);
-    test_cases.forEach(verifyCase);
+    for (const testCase of test_cases) {
+      await verifyCase(testCase);
+    }
   }
 
   useEffect(() => {
@@ -144,7 +149,14 @@ export function Challenge({ route }) {
       },
       {
         id: 2,
-        component: <Code code={code} handleUserCode={handleUserCode} userCode={userCode} />,
+        component: (
+          <Code
+            code={code}
+            handleUserCode={handleUserCode}
+            userCode={userCode}
+            isRunning={isRunning}
+          />
+        ),
       },
       {
         id: 3,
@@ -178,7 +190,6 @@ export function Challenge({ route }) {
   }, [seconds.current]);
 
   useEffect(() => {
-    console.log({ isCompleted });
     const timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);

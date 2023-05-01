@@ -225,7 +225,7 @@ export function CustomDrawer() {
                     size={220}
                     isAbsolute={true}
                     top={-15}
-                    left={-10}
+                    left={-12}
                   />
                   <Achievement
                     key={id}

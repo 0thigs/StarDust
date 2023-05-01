@@ -7,8 +7,9 @@ import { default as Keyboard } from '@gorhom/bottom-sheet';
 import * as C from './styles';
 import { View } from 'react-native';
 import theme from '../../global/styles/theme';
+import { Loading } from '../Loading';
 
-export function Code({ code, userCode, handleUserCode }) {
+export function Code({ code, userCode, handleUserCode, isRunning }) {
   //   const [currentCode, setCurrentCode] = useState(code);
   const soundRef = useRef(null);
   const keyboardRef = useRef(null);
@@ -52,7 +53,7 @@ export function Code({ code, userCode, handleUserCode }) {
             horizontal
           /> */}
             <C.CodeButton onPress={handleRunPress}>
-              <C.Title isRunButton={true}>executar</C.Title>
+              {isRunning ? <Loading /> : <C.Title isRunButton={true}>executar</C.Title>}
             </C.CodeButton>
           </C.Container>
         }

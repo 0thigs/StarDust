@@ -117,7 +117,7 @@ export function Quiz() {
   }, [state.currentQuestion]);
 
   return (
-    <C.Container>
+    <C.Container showsVerticalScrollIndicator={false}>
       <LessonHeader />
 
       <Slider

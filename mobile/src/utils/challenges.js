@@ -491,57 +491,92 @@ function quantosPlanetasHabitados(planetas) {
 [
   {
     starId: null,
-    title: 'Retorne o primeiro planeta destino',
+    title: 'Reconhecendo raça alienígena',
     texts: [
       {
         type: 'default',
-        body: 'Você é um comandante espacial em uma missão para explorar o universo em busca de planetas habitáveis.',
+        title: null,
+        body: 'Conseguimos passar pelo portal roxo 🚀! Só que agora paramos em um planeta desconhecido.',
       },
       {
         type: 'default',
-        body: 'Para ajudá-lo em sua missão, sua equipe de cientistas coletou dados de vários planetas e armazenou-os em um vetor.',
+        title: null,
+        body: 'Está vindo uma raça estranha em nossa direção, e o foguete está com problema em reconhecê-la. Contudo, ela possui caracteríscas comuns com outras raças no banco de dados (várias olhos e cor diferenciada)',
       },
       {
         type: 'default',
-        body: 'Sua tarefa é retornar o primeiro elemento desse vetor, que será o próximo destino de sua equipe de exploração.',
+        title: null,
+        body: 'Existem 3 raças com esse fenótipo:',
+      },
+      {
+        type: 'list',
+        body: 'Trox: se tiver 3 olhos e cor verde',
+      },
+      {
+        type: 'list',
+        body: 'Blonk: se tiver 2 olhos e cor laranja',
+      },
+      {
+        type: 'list',
+        body: 'Plimp: se tiver 6 olhos e cor marrom',
+      },
+      {
+        type: 'default',
+        title: 'O que fazer?',
+        body: 'O seu desafio é escrever um programa que escreva o nome da raça de acordo com esses dados. Se não não se encaixarem em nenhuma das raças conhecidas, o programa deve escrever "desconhecido".',
       },
       {
         type: 'code',
-        body: `Entrada: ["Tatooine", "Endor", "Naboo", "Alderaan"]
-Resultado: Tatooine`,
+        body: `Entrada: 3, "verde"
+Resultado: Trox
+
+Entrada: 2, "laranja"
+Resultado: Blonk
+
+Entrada: 6, "marrom"
+Resultado: Plimp`,
       },
       {
         type: 'alert',
-        body: 'Lembre-se sobre os índices de vetores',
+        body: 'Você resolver esse desafio usando tanto estrutura "se senao se e senao", quanto "escolha caso"',
       },
       {
         type: 'alert',
-        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
+        body: 'Não remova os comando leia() do programa',
       },
     ],
-    function: 'pegarPrimeiroPlaneta',
+    function: null,
     testCases: [
       {
-        input: [['Marte', 'Vênus', 'Terra', 'Júpiter']],
-        expectedOutput: 'Marte',
+        input: [3, "'verde'"],
+        expectedOutput: 'Trox',
         isLocked: false,
       },
       {
-        input: [['Pandora', 'Hoth', 'Terra', 'Dagobah']],
-        expectedOutput: 'Pandora',
+        input: [2, "'laranja'"],
+        expectedOutput: 'Blonk',
         isLocked: false,
       },
       {
-        input: [['Krypton', 'Tatooine', 'Asgard', 'Gallifrey']],
-        expectedOutput: 22.5,
+        input: [6, "'marrom'"],
+        expectedOutput: 'Plimp',
+        isLocked: false,
+      },
+      {
+        input: [4, "'preto'"],
+        expectedOutput: 'desconhecido',
         isLocked: false,
       },
     ],
 
-    code: `
-funcao pegarPrimeiroPlaneta(planetas) {
-    
-}`,
+    code: `/*
+Trox: se tiver 3 olhos e cor verde
+Blonk: se tiver 2 olhos e cor laranja
+Plimp: se tiver 6 olhos e cor marrom
+ */
+
+var olhos = leia();
+var cor = leia();`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },

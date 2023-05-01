@@ -49,6 +49,7 @@ export function LessonHeader() {
 
   return (
     <C.Container>
+        
       <C.Main>
         <C.CloseButton onPress={() => setIsModalVisible(true)}>
           <Icon.X color={theme.colors.red_700} width={28} height={28} />
@@ -68,6 +69,7 @@ export function LessonHeader() {
             style={{
               transform: [{ rotate: '90deg' }, { translateX: -15 }, { translateY: 15 }],
             }}
+            onLoad={() => setIsLoading(false)}
           />
         )}
       </C.ProgressBar>

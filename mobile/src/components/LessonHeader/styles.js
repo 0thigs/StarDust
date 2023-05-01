@@ -37,7 +37,7 @@ export const ProgressBar = styled.View`
   background-color: ${({ theme }) => theme.colors.purple_700};
   width: 100%;
   height: 20px;
-  margin: 8px 0 24px;
+  margin: 4px 0 16px;
   border-radius: 4px;
   flex-direction: row;
 `;
