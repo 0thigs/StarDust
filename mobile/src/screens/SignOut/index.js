@@ -81,6 +81,11 @@ export function SignOut() {
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', hideHeader);
     Keyboard.addListener('keyboardDidHide', showHeader);
+
+    return () => {
+      Keyboard.removeAllListeners('keyboardDidShow');
+      Keyboard.removeAllListeners('keyboardDidHide');
+    };
   }, []);
 
   return (

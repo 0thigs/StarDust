@@ -1,18 +1,19 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { View, Keyboard } from 'react-native';
 import { Editor } from '../Editor';
 import { Sound } from '../Sound';
-// import { keys } from '../../utils/keys';
-import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
-import { default as Keyboard } from '@gorhom/bottom-sheet';
-import * as C from './styles';
-import { View } from 'react-native';
-import theme from '../../global/styles/theme';
 import { Loading } from '../Loading';
+// import { keys } from '../../utils/keys';
+import { default as BottomSheet } from '@gorhom/bottom-sheet';
+import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
+import theme from '../../global/styles/theme';
+import * as C from './styles';
 
 export function Code({ code, userCode, handleUserCode, isRunning }) {
   //   const [currentCode, setCurrentCode] = useState(code);
+  const [bottomSheetHeight, setBottomSheetHeight] = useState(100);
   const soundRef = useRef(null);
-  const keyboardRef = useRef(null);
+  const bottomSheetRef = useRef(null);
 
   function handleCodeChange(code) {
     userCode.current = code;
@@ -23,8 +24,14 @@ export function Code({ code, userCode, handleUserCode, isRunning }) {
     handleUserCode();
   }
 
+  function getBottomSheetHeight(event) {
+    const { height } = event.endCoordinates;
+    setBottomSheetHeight(height / 4);
+  }
+
   useEffect(() => {
-    // keyboardRef.current.collapse();
+    Keyboard.addListener('keyboardDidShow', getBottomSheetHeight);
+    return () => Keyboard.removeAllListeners('keyboardDidShow');
   }, []);
 
   return (
@@ -33,9 +40,9 @@ export function Code({ code, userCode, handleUserCode, isRunning }) {
         <Editor value={code} isReadOnly={false} onChange={handleCodeChange} />
       </View>
 
-      <Keyboard
-        ref={keyboardRef}
-        snapPoints={['1%', '18%']}
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={['10%', bottomSheetHeight]}
         index={1}
         backgroundStyle={{ backgroundColor: theme.colors.black }}
         enableContentPanningGesture={false}
