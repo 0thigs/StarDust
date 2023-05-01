@@ -1073,11 +1073,12 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     "to-fast-properties" "^2.0.0"
 
-"@designliquido/delegua@^0.14.5":
-  "integrity" "sha512-1L6zKDSkpeDTaz2oT5EvAljkFe2KqgfjpZL+OrHRs2mRdOqg50gHJRbmKBZEehW9be/pSfWaXyXMyOqB7iWgsw=="
-  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.14.5.tgz"
-  "version" "0.14.5"
+"@designliquido/delegua@^0.17.5":
+  "integrity" "sha512-I943rkbNRjCCykFN3gkY+gc2sBmrTYN3Kp7Mt1ZSZ1NFsqLMScdymkduzD+r3moncOL2iA0Zu5kKo3cxZlTSAg=="
+  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.17.5.tgz"
+  "version" "0.17.5"
   dependencies:
+    "antlr4ts" "^0.5.0-alpha.4"
     "browser-process-hrtime" "^1.0.0"
     "esprima" "^4.0.1"
 
@@ -2304,6 +2305,11 @@
   "version" "4.3.0"
   dependencies:
     "color-convert" "^2.0.1"
+
+"antlr4ts@^0.5.0-alpha.4":
+  "integrity" "sha512-WPQDt1B74OfPv/IMS2ekXAKkTZIHl88uMetg6q3OTqgFxZ/dxDXI0EWLyZid/1Pe6hTftyg5N7gel5wNAGxXyQ=="
+  "resolved" "https://registry.npmjs.org/antlr4ts/-/antlr4ts-0.5.0-alpha.4.tgz"
+  "version" "0.5.0-alpha.4"
 
 "any-promise@^1.0.0":
   "integrity" "sha512-7UvmKalWRt1wgjL1RrGxoSJW/0QZFIegpeGvZG9kjp8vrRu55XTHbwnqq2GpXm9uLbcuhxm3IqX9OB4MZR1b2A=="

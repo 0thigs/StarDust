@@ -80,7 +80,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
 
   useEffect(() => {
      reorderItems(dropItems, setReorderedItems);
-  }, [dropItems]);
+  }, []);
 
   useEffect(() => {
     if (isCurrentQuestion) {
@@ -114,7 +114,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                         setZones={setZones}
                         totalDropZones={totalDropZones}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
-                        linesWidth={linesWidth}
+                        lineWidth={linesWidth}
                       />
                     )}
                   </C.Content>

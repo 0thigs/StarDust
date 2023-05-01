@@ -4,7 +4,9 @@ import * as C from '../DragAndDropClickForm/styles';
 
 export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, linesWidth }) {
   const [zoneWidth, setZoneWidth] = useState(0);
+  const [isFirstRendering, setIsFirstRendering] = useState(true);
   const zoneRef = useRef(null);
+  const canRegisterZone = zones.length < totalDropZones;
 
   useEffect(() => {
     if (zones.length) {
@@ -26,17 +28,13 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     });
   }, [linesWidth]);
 
-  //   useEffect(() => {
-  //     setZoneWidth(minZoneWidth)
-  //   }, [])
-
-//   function updateZone({ id, x, y, width }) {
-//     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
-//   }
-
-  const updateZone = useCallback(({ id, x, y, width }) => {
+  function updateZone({ id, x, y, width }) {
     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
-  }, [zones]);
+  }
+
+  //   const updateZone = useCallback(({ id, x, y, width }) => {
+  //     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
+  //   }, [zones]);
 
   function registerZone({ target }) {
     target.measure((x, y, width, height, pageX, pageY) => {
@@ -47,7 +45,8 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
         width,
         itemId: null,
       };
-      if (zones.length < totalDropZones) {
+      if (canRegisterZone) {
+        setIsFirstRendering(false);
         setZones(zones => [...zones, zone]);
       } else {
         updateZone(zone);
@@ -59,7 +58,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth === 0 ? 15 : zoneWidth}
+      width={isFirstRendering || zoneWidth === 0 ? 15 : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

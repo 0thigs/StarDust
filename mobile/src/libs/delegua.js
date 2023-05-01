@@ -12,4 +12,6 @@ async function execute(code, callback) {
   const resultadoAvaliacaoSintatica = avaliadorSintatico.analisar(resultadoLexador);
   return await interpretador.interpretar(resultadoAvaliacaoSintatica.declaracoes, false);
 }
+
+execute()
 module.exports = execute;

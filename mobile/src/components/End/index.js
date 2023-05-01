@@ -185,7 +185,7 @@ export function End({
 
   useEffect(() => {
     if (!planets.length) return;
-    updateUserData();
+    setTimeout(() => updateUserData(), 2000);
   }, [planets]);
 
   return (

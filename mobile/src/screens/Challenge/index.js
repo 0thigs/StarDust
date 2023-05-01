@@ -73,6 +73,7 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
+      console.error(error);
       Toast.error(error.includes('null') ? 'código inválido' : error);
     }
   }
@@ -117,7 +118,7 @@ export function Challenge({ route }) {
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
-      console.log(resultado.splice(-1)[0]);
+      console.log(resultado);
       if (erros.length) {
         if (erros[0] instanceof Error) throw erros[0];
         throw erros[0].erroInterno;

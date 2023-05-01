@@ -21,7 +21,7 @@ export function Streak({ user: { streak, week_status, did_complete_saturday } })
   const today = week_status[todayIndex];
 
   function updateWeekStatus(dayIndex, newStatus) {
-    const updatedWeekStatus = weekStatus.map((status, index) =>
+    const updatedWeekStatus = week_status.map((status, index) =>
       index === dayIndex ? newStatus : status
     );
     setWeekStatus(updatedWeekStatus);
@@ -32,14 +32,15 @@ export function Streak({ user: { streak, week_status, did_complete_saturday } })
     if (today !== 'todo') return;
 
     try {
+      const updatedWeekStatus = updateWeekStatus(todayIndex, 'done');
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
       await updateLoggedUser('streak', updatedStreak);
       if (todayIndex === 6) {
         await updateLoggedUser('did_complete_saturday', true);
       }
-      
-      const updatedWeekStatus = updateWeekStatus(todayIndex, 'done');
+
+      console.log({ updatedWeekStatus });
       await updateLoggedUser('week_status', updatedWeekStatus);
 
       if (todayIndex !== 6 && did_complete_saturday)

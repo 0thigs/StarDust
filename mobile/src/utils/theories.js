@@ -1512,7 +1512,7 @@ se (idioma = 'Xanxiriano') {
       {
         type: 'default',
         title: null,
-        body: 'Perceba que o senao se funciona como um se normal, exigindo que passemos uma condição, que caso seja verdadeira seu bloco de código será executado em vez o do senao.',
+        body: 'Perceba que o senao se funciona como um se normal, exigindo que passemos uma condição, que caso seja verdadeira, seu bloco de código será executado em vez o do senao.',
       },
       {
         type: 'default',
@@ -1557,7 +1557,7 @@ se (senha = 2222) {
       {
         type: 'default',
         title: null,
-        body: 'Por enquanto quero que você perceba que agora podemos fazer estruturas de se complexos, colando se dentro se.',
+        body: 'Por enquanto quero que você perceba que agora podemos construir estruturas complexas, colando se dentro de se.',
       },
       {
         type: 'default',
@@ -1572,22 +1572,26 @@ se (senha = 2222) {
       {
         type: 'code',
         body: `
+var povoAmigavel = verdadeiro;
+var povoArmado = falso;
+        
 se (povoAmigavel == falso) {
     se (povoArmado == verdadeiro) {
         escreva('Fugir para longe')
-    } senao  {
+    } senao {
         escreva('Cair na porrada')
     }
 } senao {
     escreva('Tentar conversar') 
 }
-`,
-        isRunnable: false,
+
+// Resultado: Tentar conversar`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não.',
+        body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não. Caso seja de fato executado, o computador sai do se e depois executa tudo que está fora dele.',
       },
     ],
   },

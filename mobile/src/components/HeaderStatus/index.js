@@ -7,10 +7,26 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 import theme from '../../global/styles/theme.js';
 import * as C from './styles.js';
 import { Button } from '../Button/index.js';
+import { Toast } from 'toastify-react-native';
 
 export function HeaderStatus() {
-  const { loggedUser } = useAuth();
+  const { loggedUser, updateLoggedUser } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function onModalClose() {
+    setIsLoading(true);
+
+    try {
+      await updateLoggedUser('did_break_streak', false);
+      setIsModalVisible(false);
+    } catch (error) {
+      console.error(error);
+      Toast.error('Falha interna no sistema');
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
     if (loggedUser.did_break_streak) setIsModalVisible(true);
@@ -38,7 +54,9 @@ export function HeaderStatus() {
             title={'Ok'}
             background={theme.colors.green_300}
             color={theme.colors.black}
-            onPress={() => setIsModalVisible(false)}
+            isDisabled={isLoading}
+            isLoading={isLoading}
+            onPress={onModalClose}
           />
         }
       />
