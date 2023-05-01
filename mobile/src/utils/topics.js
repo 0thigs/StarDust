@@ -125,4 +125,238 @@ var variavel0 = falso;`,
       },
     ],
   },
+  {
+    title: 'Operadores',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Operadores, assim como na matemática, são símbolos ou palavras reservadas que indicam uma operação a ser realizada em um ou mais valores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Eles podem ser classificados em diferentes categorias, como operadores aritméticos, operadores de atribuição, operadores de comparação (relacionais), operadores lógicos e operadores de pertencimento.',
+      },
+      {
+        type: 'default',
+        title: 'Operadores aritiméticos',
+        body: 'Realizam operações matemáticas em valores numéricos, como adição (+), subtração (-), multiplicação (*), divisão (/), resto (%) e incremento/decremento (++/--).',
+      },
+      {
+        type: 'list',
+        title: 'Adição (+)',
+        body: 'Se ambos os operandos são inteiros, o resultado será inteiro.\n Se um dos operandos é um número real, o resultado será um número real',
+      },
+      {
+        type: 'code',
+        body: `escreva(2 + 2); 
+Resultdo: 4`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Também há o operador de adição que incrementa 1 a uma variável',
+      },
+      {
+        type: 'code',
+        body: `var numero = 2; 
+numero++;
+escreva(numero)
+Resultdo: 3`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Subtração (-)',
+        body: '. Se ambos os operandos são inteiros, o resultado será inteiro.\n. Se um dos operandos é um número real (ponto flutuante), o resultado será em ponto flutuante.',
+      },
+      {
+        type: 'code',
+        body: `escreva(10 - 7); 
+Resultdo: 3`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Também há o operador de subtração que decrementa 1 a uma variável',
+      },
+      {
+        type: 'code',
+        body: `var numero = 2; 
+numero--;
+escreva(numero)
+Resultdo: 1`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Multiplicação (*)',
+        body: '. Se ambos os operandos são inteiros, o resultado será inteiro.\n. Se um dos operandos é um número real (ponto flutuante), o resultado será em ponto flutuante.',
+      },
+      {
+        type: 'code',
+        body: `escreva(10 * 3); 
+Resultdo: 30`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Divisão (/)',
+        body: '. Se o resto da divisão é zero, o valor retornado será inteiro.\n. Caso contrário, o valor retornado será em ponto flutuante.',
+      },
+      {
+        type: 'code',
+        body: `escreva(100 / 5); 
+Resultdo: 20`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Resto da divisão/módulo (%)',
+        body: '. Retorna o resto da divisão entre dois números',
+      },
+      {
+        type: 'code',
+        body: `escreva(25 / 4); 
+Resultdo: 1`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Exponenciação (**)',
+        body: '. Retorna o primeiro operando elevado à potência do segundo operando.',
+      },
+      {
+        type: 'code',
+        body: `escreva(2 ** 5); 
+Resultdo: 32`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Operadores de atribuição',
+        body: 'São usados para atribuir valores a variáveis, como o operador de atribuição simples (=), operadores de atribuição combinados com operações aritméticas (+=, -=, *=, /=, %=).',
+      },
+      {
+        type: 'code',
+        body: `var soma = 2; 
+soma += 2
+
+var subtracao = 10;
+subtracao -= 3;
+
+var multiplicacao = 7;
+multiplicacao *= 3;
+
+var divisao = 50;
+divisao /= 5;
+
+var modulo = 12;
+modulo %= 2;
+
+escreva(soma);
+escreva(subtracao);
+escreva(multiplicacao);
+escreva(divisao);
+escreva(modulo);
+
+// Resultdo: 4 7 21 10 0`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Operadores relacionais',
+        body: 'São usados para comparar valores, retornando um valor booleano (true ou false). Alguns exemplos de operadores de comparação são ==, !=, <, <=, >, >=.',
+      },
+      {
+        type: 'code',
+        body: `
+== - Igual a
+1 == 1 // verdadeiro
+1 == 2 // falso
+
+!= - Diferente de
+1 != 1 // falso
+1 != 2 // verdadeiro
+
+>= - Maior ou igual que
+1 >= 1 // verdadeiro
+1 >= 2 // falso
+
+<= - Menor ou igual que
+1 <= 1 // verdadeiro
+1 <= 2 // verdadeiro
+
+> - Maior que
+1 > 1 // falso
+1 > 2 // falso
+
+< - Menor que
+1 < 1 // falso
+1 < 2 // verdadeiro`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Avaliação da verdade em variáveis não lógicas',
+        body: 'Todos os tipos de dados, exceto nulos e falsos, possuem valor lógico verdadeiro',
+      },
+      {
+        type: 'code',
+        body: `{} // verdadeiro
+1 // verdadeiro
+verdadeiro // verdadeiro
+[] // verdadeiro
+
+1 == '1' // falso, devido a disparidade de tipos
+nulo // falso
+falso // falso`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Operadores lógicos',
+        body: 'São usados para combinar expressões, resultando em um valor lógico (verdadeiro ou falso). Alguns exemplos de operadores lógicos são e, ou e ! (negação).',
+      },
+      {
+        type: 'code',
+        body: `8 > 2 e 2 < 8 // verdadeiro
+4 > 0 ou 2 > 4 // verdadeiro
+!4 == 2 // verdadeiro`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Operadores de pertencimento',
+        body: '. Retorna verdadeiro se o valor da esquerda estiver incluído no valor da direita, caso o valor da direita seja um vetor (Por definição, variáveis e literais de texto são vetores). Caso contrário, retorna falso.\n. Retorna verdadeiro se o valor da esquerda é uma chave dentro do valor da direita, caso o valor da direita seja um objeto. Caso contrário, retorna falso.',
+      },
+      {
+        type: 'code',
+        body: `'a' em ['b']; // falso
+'b' em ['b']; // verdadeiro
+'c' em 'abc'; // verdadeiro
+'chave' em {'chave': 'valor'}; // verdadeiro
+'valor' em {'chave': 'valor'}; // falso`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Prioridade dos operadores',
+        body: 'Os operadores têm uma ordem clara de prioridade, semelhante à matemática, na qual as operações são realizadas em uma ordem específica (ordenadas de cima para baixo com a maior precedência no topo):',
+      },
+      {
+        type: 'code',
+        body: `// **
+\\, /, * e %
++ e -
+> e <
+== e !=
+em, e e ou`,
+        isRunnable: false,
+      },
+    ],
+  },
 ];
