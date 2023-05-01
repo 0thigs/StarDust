@@ -86,9 +86,10 @@ export function Playground({ route }) {
       setOutput([]);
       const { erros, resultado } = await execute(code, handleOutput);
       if (erros.length) {
-        if (erros[0] instanceof Error) throw erros[0];
+        const error = erros[0];
+        if (error instanceof Error) throw error;
         bottomSheetRef.current.close();
-        throw erros[0].erroInterno;
+        throw error.erroInterno;
       }
     } catch (error) {
       handleError(error.message);

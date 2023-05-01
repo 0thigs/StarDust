@@ -1383,7 +1383,7 @@ escreva(velFoguete);
       {
         type: 'default',
         title: 'Mas, então?',
-        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais o eficiente e limpo.',
+        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais eficiente e limpo.',
       },
       {
         type: 'default',
@@ -1408,12 +1408,12 @@ escreva(velFoguete);
         isRunnable: true,
       },
       {
-        type: 'default',
+        type: 'list',
         title: null,
         body: 'Como o nome implica, caso a primeira condição não seja verdadeira, apenas o código contido em senao é executado.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: null,
         body: 'Ou seja, se for verdadeiro faça algo, senão faça outra coisa.',
       },
@@ -1491,7 +1491,7 @@ se (
       {
         type: 'default',
         title: 'Mas não já vimos isso antes?',
-        body: 'Não confunda com um simples senão. Neste caso, o senão-se (escrito no código como senao se) sempre virá depois do primeiro se e antes de senão:',
+        body: 'Não confunda com um simples senão. Neste caso, o senão-se (escrito no código como senao se) sempre virá depois do primeiro se e antes de senão (caso tenha):',
       },
       {
         type: 'code',
@@ -1592,6 +1592,176 @@ se (povoAmigavel == falso) {
         type: 'default',
         title: null,
         body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não. Caso seja de fato executado, o computador sai do se e depois executa tudo que está fora dele.',
+      },
+    ],
+  },
+  {
+    starId: 14,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Pela conversa que estamos tendo com esse povo, parece que não estão muito felizes de termos acabado de pousar em um jardim importante para eles.',
+      },
+      {
+        type: 'default',
+        title: 'Mas e agora?',
+        body: 'Eles querem nos levar para seu rei para termos uma conversa, então resta obedecer.',
+      },
+      {
+        type: 'default',
+        title: 'Vish...',
+        body: 'Chegando ao palácio, o rei aparece furioso, e logo encarrega-se de pedir que escolhemos uma entre 4 pílulas (verde, amarelo, azul e vermelho).',
+      },
+      {
+        type: 'default',
+        title: 'Do que se trata disso?',
+        body: 'Envolve escolher o tipo de morte que desejamos ter 😨.',
+      },
+      {
+        type: 'default',
+        title: 'Putz',
+        body: 'Podemos fazer um programa a partir disso, colocando a cor da pílula escolhida em uma variável e verificando qual tipo de morte ela corresponde.',
+      },
+      {
+        type: 'code',
+        body: `
+var cor = 'verde';
+var morte = '';
+
+se (cor == 'azul') {
+  morte = 'Morrer asfixiado';
+} senao se (cor == 'amarelo') {
+  morte = 'Morrer de dor de cabeça';
+} senao se (cor == 'verde') {
+  morte = 'Morrer de diarreia';
+} senao se (cor == 'vermelho') {
+  morte = 'morrer de ataque cardíaco';
+} senao {
+  morte = 'Não morrer';
+}
+
+escreva(morte);
+// Resultado: Morrer de diarreia`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja que é bem parecido com o programa de verificar a senha correta para abrir a saída do foguete.',
+      },
+      {
+        type: 'default',
+        title: 'Verdade',
+        body: 'Tanto nesse caso quanto no outro é melhor usar outro tipo de estrutura condicional, que é chamado de "Escolha caso"',
+      },
+      {
+        type: 'default',
+        title: 'Queee?',
+        body: 'Essa é uma estrutura condicional bastante diferenciada. Nela, em vez de usar instruções que já vimos ("se", "senao se" e "se"), devemos utilizar apenas 3, que são completamente diferentes: "escolha", "caso", "padrao"',
+      },
+      {
+        type: 'default',
+        title: 'Não entendi',
+        body: 'Preste atenção, a estrutura escolha caso permite que você execute diferentes blocos de código com base no valor de algo.',
+      },
+      {
+        type: 'default',
+        title: 'Ok',
+        body: 'Esse valor de algo é avaliado uma vez e, em seguida, é comparado com cada um dos casos no bloco escolha, veja:',
+      },
+      {
+        type: 'code',
+        body: `
+var cor = 'verde';
+var morte = '';
+
+escolha (cor) {
+  caso 'azul': 
+    morte = 'Morrer asfixiado';
+  caso 'amarelo': 
+    morte = 'Morrer de dor de cabeça';
+  caso 'verde': 
+    morte = 'Morrer de diarreia';
+  caso 'vermelho': 
+    morte = 'Morrer de ataque cardíaco';
+  padrao:
+    morte = 'Não morrer';
+}
+
+escreva(morte);
+// Resultado: Morrer de diarreia`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        body: 'O resultado é o mesmo que antes. O valor de cor entre parêntese é comparado com os valores de cada caso dentro do bloco escolha.',
+      },
+      {
+        type: 'list',
+        body: 'Se corresponder com um, então será executado tudo que estiver dentro do bloco deste caso, não precisando mais comparar com os casos restantes, ou seja, o programa para de executar o "escolha caso" a partir do momento em que é encontrado um caso conrrespondente.',
+      },
+      {
+        type: 'list',
+        body: 'Agora se o valor de cor não corresponder a nenhum caso, então será executado o que estiver no bloco "padrao", ou seja, se o valor de cor não for igual a nenhum caso específico, execute o que for padrão.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, é claro que não queremos morrer de diarreia, então saímos correndo em direção ao foguete para fujirmos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Os guardas estão na nossa cola, resta entrar em uma caverna para despistá-los.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Dentro da caverna é possível ver portais abrindo e fechando.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Eu ouvi falar que se você entrar em um portal roxo você pode parar em um lugar fantástico, mas caso seja vermelho ou azul, ele te pode levar a um limbo sem fim, e se for de qualquer outra cor ele não leva para lugar nenhum.',
+      },
+      {
+        type: 'default',
+        title: 'Sério?',
+        body: 'Sim, então essa é mais uma situação para usarmos a estrutura de escolha caso',
+      },
+      {
+        type: 'code',
+        body: `
+var cor = 'roxo';
+var destino = '';
+
+escolha (cor) {
+  caso 'azul': 
+  caso 'vermelho': 
+    destino = 'Limbo';
+  caso 'roxo': 
+    destino = 'Lugar fantástico';
+  padrao:
+    destino = 'nenhum';
+}
+
+escreva(destino);
+// Resultado: Lugar fantástico`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Não expliquei antes, porém dois ou mais casos podem ter o mesmo bloco, isto é, podem excutar um mesmo bloco de código.',
+      },
+      {
+        type: 'alert',
+        body: 'Ou seja, nesta situação se um portal for tanto azul ou vermelho, o destino será o limbo',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas como encontramos um portal roxo, resta entrar nele e ver o que nos aguarda.',
       },
     ],
   },

@@ -1320,7 +1320,7 @@ escreva(temSistemaSolar)`,
   {
     starId: 13,
     type: 'drag-and-drop-list',
-    stem: 'Reordene o programa para que o resultado seja "Médio"',
+    stem: 'Reordene o programa para que o resultado da condicional seja "Médio"',
     items: [
       {
         id: 1,
@@ -1351,5 +1351,140 @@ escreva(temSistemaSolar)`,
         label: '}',
       },
     ],
+  },
+  {
+    starId: 14,
+    type: 'selection',
+    stem: 'Qual será o resultado deste escolha caso:',
+    code: `var planeta = "Tatooine"
+    
+escolha (planeta) {
+    caso 'Coruscant': 
+        escreva("Planeta central da galáxia");
+    caso 'Tatooine':
+        escreva("Planeta desértico"); 
+    caso 'roxo': 
+        escreva("Planeta idílico"); 
+    padrao:
+        escreva("Planeta desconhecido");   
+}`,
+    options: [
+      'Planeta idílico',
+      'Planeta desértico',
+      'Planeta central da galáxia',
+      'Planeta desconhecido',
+    ],
+    answer: 'Planeta desértico',
+  },
+  {
+    starId: 14,
+    type: 'checkbox',
+    stem: 'Quais casos podem resultar em "Clica agradável" ?',
+    code: `escolha (planetaEstacao) {
+    caso 'Outono':
+    caso 'Inverno': 
+        escreva("Clima frio"); 
+    caso 'Verão': 
+    caso 'Primavera': 
+        escreva("Clima agradável");
+    padrao:
+        escreva("Estação desconhecida");   
+}`,
+    options: ['Outono', 'Verão', 'Inverno', 'Primavera'],
+    correctOptions: ['Verão', 'Primavera'],
+  },
+  {
+    starId: 14,
+    type: 'open',
+    stem: 'Qual o nome do bloco do "escolha caso" que sempre será executado quando o valor de escolha não conrresponder a nenhum caso?',
+    answer: 'padrao',
+  },
+  {
+    starId: 14,
+    type: 'selection',
+    stem: 'Quail o valor possível para variável nave, de modo que resulte em "Nave desconhecida"?',
+    code: `escolha (nave) {
+    caso 'X-wing':
+        escreva("Nave de combate usada pela Aliança Rebelde"); 
+    caso 'TIE Fighter': 
+        escreva("Nave de combate usada pelo Império Galáctico"); 
+    caso 'Millennium Falcon': 
+        escreva("Nave lendária pilotada por dois vagabundos famosos");
+    padrao:
+        escreva("Nave desconhecida");
+}`,
+    options: ['X-wing', 'TIE Fighter', 'Verão', 'Star Destroyer'],
+    answer: 'Star Destroyer',
+  },
+  {
+    starId: 13,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a estrutura escolha caso corretamente, de modo que ele resulte em "Sistema de armas desativado"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var comando = ', 'dropZone'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['dropZone', '(comando) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['caso', 'dropZone', ':'],
+        indentLevel: 1,
+      },
+      {
+        id: 4,
+        texts: ['escreva("Sistema de armas ativado")'],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['dropZone', ' "desativarArmas": '],
+        indentLevel: 1,
+      },
+      {
+        id: 6,
+        texts: ['escreva("Sistema de armas desativado")'],
+        indentLevel: 2,
+      },
+      {
+        id: 7,
+        texts: ['dropZone', ':'],
+        indentLevel: 1,
+      },
+      {
+        id: 8,
+        texts: ['escreva("Comando inválido")'],
+        indentLevel: 2,
+      },
+      {
+        id: 9,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'escolha',
+      },
+      {
+        id: 2,
+        label: 'caso',
+      },
+      {
+        id: 3,
+        label: 'padrao',
+      },
+      {
+        id: 4,
+        label: 'ativarArmas',
+      },
+    ],
+    correctItemsIdsSequence: [1, 4, 2, 3],
   },
 ];
