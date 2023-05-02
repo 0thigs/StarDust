@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '87bfa7a9-48b4-4ffd-b8ae-4ea437d9573a';
+  const challengeId = '56373af2-ac24-4bcd-a312-7d01bd7b5f53';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -111,7 +111,7 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
-    const userResult = JSON.parse(result);
+    const userResult = typeof result == 'string' ? result : JSON.parse(result);
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, userResult.valor ? userResult.valor : userResult];
     });
@@ -119,6 +119,7 @@ export function Challenge({ route }) {
 
   async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
+    console.log(code);
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {

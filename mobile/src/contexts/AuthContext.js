@@ -52,7 +52,8 @@ export function AuthProvider({ children }) {
       setLoggedUser(userInSession);
       return userInSession;
     } catch (error) {
-      console.error(error);
+      setLoggedUser({})
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

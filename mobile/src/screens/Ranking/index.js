@@ -123,7 +123,7 @@ export function Ranking() {
               }}
             />
           </C.Badges>
-          <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
+          <C.Warning>Os 3 primeiros avançam para o próximo ranking</C.Warning>
           <C.Days>{`${daysToGo} ${daysToGo > 1 ? ' dias' : ' dia'}`}</C.Days>
           <UsersList users={users} />
         </>

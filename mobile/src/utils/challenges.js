@@ -545,6 +545,258 @@ Resultado: 22`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },
+  {
+    starId: null,
+    title: '',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Você tem uma lista de naves espaciais no formato de objetos. Converta cada objeto em um vetor e retorne uma lista de vetores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada objeto possui as seguintes propriedades.',
+      },
+      {
+        type: 'default',
+        body: '. nome: o nome da nave (texto)\n. tripulacao: o número de tripulantes da nave(inteiro)',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: {nome: 'USS Enterprise', tripulacao: 449}
+Resultado: [['nome', 'USS Enterprise'], ['tripulacao', 449]]
+
+Entrada: {nome: 'Millennium Falcon', tripulacao: 5}
+Resultado: [['nome', 'Millennium Falcon'], ['tripulacao', 5]]
+
+Entrada: {nome: 'Light Freighter', tripulacao: 24}
+Resultado: [['nome', 'Light Freighter'], ['tripulacao', 24]]
+
+Entrada: {}
+Resultado: []`,
+      },
+      {
+        type: 'alert',
+        body: 'Caso a entrada seja um objeto vazio, o retorno deverá ser um vetor vazio também.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["{ nome: 'Serenity', tripulacao: 9 }"],
+        expectedOutput: '[name: "Serenity", tripulacao: 9]',
+        isLocked: false,
+      },
+      {
+        input: ["{ nome: 'vashta nerada', tripulacao: 530 }"],
+        expectedOutput: '[name: "vashta nerada", tripulacao: 530]',
+        isLocked: false,
+      },
+      {
+        input: ["{}"],
+        expectedOutput: '[]',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Amostras de planetas',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Você é o comandante de uma nave espacial que está coletando amostras de vários planetas ao redor da galáxia.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para cada planeta, você coletou diferentes tipos de amostras, como rochas, líquidos, gases, organismos, etc.',
+      },
+      {
+        type: 'list',
+        body: 'Cada tipo de amostra é armazenado em um vetor separado e agora você precisa concatenar todos esses vetores em um único vetor para enviá-los de volta à base.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: ["Granito", "Mármore", "Obsidiana"], ["Água", "Metano", "Lava"]
+Resultado: ["Granito", "Mármore", "Obsidiana", "Água", "Metano", "Lava"]
+
+Entrada: ["Oxigênio", "Hélio", "Metano"], ["Bactérias", "Algas"]
+Resultado: ["Oxigênio", "Hélio", "Metano", "Bactérias", "Algas"]`,
+      },
+      {
+        type: 'alert',
+        body: 'Os vetores devem ser concatenados na ordem dos argumentos, que são todos vetores.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["['rochas','água','grama'], ['hélio','sulfeto']"],
+        expectedOutput: "['rochas','água','grama','hélio','sulfeto']",
+        isLocked: false,
+      },
+      {
+        input: ["['neônio','argônio'], ['metano','criptônio','radônio']"],
+        expectedOutput: "['neônio','argônio','metano','criptônio','radônio']",
+        isLocked: false,
+      },
+      {
+        input: ["['gelo','ferro'], ['brone','diamante'], ['obsidian','ouro']"],
+        expectedOutput: "['gelo','ferro','brone','diamante','obsidian','ouro']",
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao concatenarAmostras(amostras) {
+    
+}`,
+    difficulty: 'medium',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Amostras de planetas',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Suponha que uma equipe de astronautas tenha descoberto uma nave alienígena e está tentando decifrar o código de segurança para acessá-la.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Eles descobriram que o código de segurança consiste em um número repdigit, ou seja, um número positivo em que todos os dígitos são iguais.',
+      },
+      {
+        type: 'list',
+        body: 'Seu dever é recebe um número e verificar se ele é um repdigit. Seu programa deve retornar verdadeiro se o número for de fato um repdigit e falso caso contrário.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: 66
+Resultado: verdadeiro
+Explicacao: 66 tem dois dígitos, que são todos iguais 
+
+Entrada: 113
+Resultado: falso
+Explicacao: 113 tem dois três, mas nem todos são iguais 
+
+Entrada: -11
+Resultado: falso
+Explicacao: Um repdigit tem que ser um número positivo
+`,
+      },
+      {
+        type: 'alert',
+        body: 'Caso o número seja 0, o programa deve retornar verdadeiro.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [666],
+        expectedOutput: "verdadeiro",
+        isLocked: false,
+      },
+      {
+        input: [12345],
+        expectedOutput: "falso",
+        isLocked: false,
+      },
+      {
+        input: [11111111],
+        expectedOutput: "verdadeiro",
+        isLocked: false,
+      },
+      {
+        input: [0],
+        expectedOutput: "verdadeiro",
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao concatenarAmostras(amostras) {
+    
+}`,
+    difficulty: 'medium',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: '',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Você tem uma lista de naves espaciais no formato de objetos. Converta cada objeto em um vetor e retorne uma lista de vetores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada objeto possui as seguintes propriedades.',
+      },
+      {
+        type: 'list',
+        body: '. nome: o nome da nave (texto)\n. tripulacao: o número de tripulantes da nave(inteiro)',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: {nome: 'USS Enterprise', tripulacao: 449}
+Resultado: [['nome', 'USS Enterprise'], ['tripulacao', 449]]
+
+Entrada: {nome: 'Millennium Falcon', tripulacao: 5}
+Resultado: [['nome', 'Millennium Falcon'], ['tripulacao', 5]]
+
+Entrada: {nome: 'Light Freighter', tripulacao: 24}
+Resultado: [['nome', 'Light Freighter'], ['tripulacao', 24]]
+
+Entrada: {}
+Resultado: []`,
+      },
+      {
+        type: 'alert',
+        body: 'Caso a entrada seja um objeto vazio, o retorno deverá ser um vetor vazio também.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["{ nome: 'Serenity', tripulacao: 9 }"],
+        expectedOutput: '[name: "Serenity", tripulacao: 9]',
+        isLocked: false,
+      },
+      {
+        input: ["{ nome: 'vashta nerada', tripulacao: 530 }"],
+        expectedOutput: '[name: "vashta nerada", tripulacao: 530]',
+        isLocked: false,
+      },
+      {
+        input: ["{}"],
+        expectedOutput: '[]',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  }
 ];
 
 [

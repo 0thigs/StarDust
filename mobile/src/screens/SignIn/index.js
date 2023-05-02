@@ -23,7 +23,7 @@ const SingnInSchema = yup.object({
   email: yup.string().required('E-mail não pode estar vazio!').email('E-mail inválido!'),
   password: yup
     .string()
-    .min(8, 'Senha deve ter pelo menos 6 dígitos!')
+    .min(8, 'Senha deve ter pelo menos 8 dígitos!')
     .required('Senha não pode estar vazia!')
     .matches(
       passwordRegex,
