@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = 'c5889520-146f-4d30-8f07-a330c1fe1177';
+  const challengeId = '87bfa7a9-48b4-4ffd-b8ae-4ea437d9573a';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -111,14 +111,14 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
+    const userResult = JSON.parse(result);
     setUserOutputs(currentUserOutputs => {
-      return [...currentUserOutputs, JSON.parse(result).valor];
+      return [...currentUserOutputs, userResult.valor ? userResult.valor : userResult];
     });
   }
 
   async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
-
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
@@ -126,7 +126,8 @@ export function Challenge({ route }) {
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }
-      handleResult(resultado.splice(-1)[0]); // {"valor":1,"tipo":"número"};
+      console.log(resultado.slice(-1)[0]);
+      handleResult(resultado.slice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
     }

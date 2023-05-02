@@ -244,7 +244,7 @@ Saida: 6`,
       },
       {
         type: 'alert',
-        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos',
+        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos.',
       },
       {
         type: 'alert',
@@ -485,6 +485,65 @@ function quantosPlanetasHabitados(planetas) {
     
 }`,
     difficulty: 'easy',
+  },
+  {
+    starId: null,
+    title: 'Perímetro espacial',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Você é um engenheiro espacial responsável por construir uma nave em forma de retângulo.',
+      },
+      {
+        type: 'list',
+        body: 'Sua missão é calcular o perímetro desse retângulo em unidades espaciais, cosiderando sua largura e altura.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: 6, 7
+Resultado: 26
+
+Entrada: 20, 10
+Resultado: 60
+
+Entrada: 2, 9
+Resultado: 22`,
+      },
+      {
+        type: 'alert',
+        body: 'Não são se esqueça de usar o "retorna" na função e também não alterar o nome da função que colocamos.',
+      },
+      {
+        type: 'alert',
+        body: 'Considere que o retângulo espacial não possui cantos arredondados e que as unidades espaciais são números inteiros.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [10, 30],
+        expectedOutput: 80,
+        isLocked: false,
+      },
+      {
+        input: [20, 20],
+        expectedOutput: 80,
+        isLocked: false,
+      },
+      {
+        input: [5, 8],
+        expectedOutput: 18,
+        isLocked: false,
+      },
+    ],
+
+    code: `function calcularPerimetro(altura, largura) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
   },
 ];
 
