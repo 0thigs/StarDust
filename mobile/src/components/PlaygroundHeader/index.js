@@ -13,9 +13,18 @@ import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+import { Alert } from 'react-native';
 const iconColor = theme.colors.green_500;
 
-export function PlaygroundHeader({ title, code, codeId, setCodeId, setCodeTitle }) {
+export function PlaygroundHeader({
+  title,
+  code,
+  codeId,
+  initialCode,
+  setInitialCode,
+  setCodeId,
+  setCodeTitle,
+}) {
   const { loggedUser } = useAuth();
   const { addCode, updateCode, deleteCode } = useCode();
   const { isDarkMode, setIsDarkMode } = useEditor();
@@ -27,19 +36,24 @@ export function PlaygroundHeader({ title, code, codeId, setCodeId, setCodeTitle 
   const codeTitle = useRef('');
   const popoverMenuRef = useRef(null);
 
-  function onPromptConfirm() {
+  async function onPromptConfirm() {
     popoverMenuRef.current.closePopover();
 
-    if (codeId) {
-      updateCode(codeId, { code: code.current });
-      return;
+    try {
+      setInitialCode(code.current);
+
+      if (codeId) {
+        await updateCode(codeId, { code: code.current });
+        return;
+      }
+      const id = uuidv4();
+      await addCode(id, codeTitle.current, code.current, loggedUser.id);
+      setCodeTitle(codeTitle.current);
+      setCodeId(id);
+      setIsPromptVisible(false);
+    } catch (error) {
+      console.error(error);
     }
-    const id = uuidv4();
-    console.log(id);
-    addCode(id, codeTitle.current, code.current, loggedUser.id);
-    setIsPromptVisible(false);
-    setCodeTitle(codeTitle.current);
-    setCodeId(id)
   }
 
   function onPromptCancel() {
@@ -54,6 +68,19 @@ export function PlaygroundHeader({ title, code, codeId, setCodeId, setCodeTitle 
   }
 
   function handleBackButtonPress() {
+    if (codeId && initialCode !== code.current) {
+      Alert.alert('Alterações não salvas', 'Tem certeza que deseja sair sem salvar seu código?', [
+        {
+          text: 'Sim',
+          onPress: () => navigation.goBack(),
+        },
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Pressed'),
+        },
+      ]);
+      return;
+    }
     navigation.goBack();
   }
 

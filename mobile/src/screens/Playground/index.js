@@ -14,7 +14,7 @@ export function Playground({ route }) {
     code: { code, title },
   } = useCode(codeId);
   const [codeTitle, setCodeTitle] = useState('');
-  const [initialCode, setInitialCodeCode] = useState('');
+  const [initialCode, setInitialCode] = useState('');
   const [output, setOutput] = useState([]);
   const [isPromptVisible, setisPromptVisible] = useState(false);
   const [isRunnig, setIsRunnig] = useState(false);
@@ -102,7 +102,7 @@ export function Playground({ route }) {
 
   useEffect(() => {
     setCodeTitle(codeId ? title : 'Playground');
-    setInitialCodeCode(codeId ? code : route.params?.code);
+    setInitialCode(codeId ? code : route.params?.code);
   }, [code]);
 
   return (
@@ -119,6 +119,8 @@ export function Playground({ route }) {
         title={codeTitle}
         code={userCode}
         codeId={codeId}
+        initialCode={initialCode}
+        setInitialCode={setInitialCode}
         setCodeId={setCodeId}
         setCodeTitle={setCodeTitle}
       />

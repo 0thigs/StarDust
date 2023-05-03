@@ -15,7 +15,6 @@ export const useCode = (codeId, userId) => {
 
   async function updateCode(codeId, data) {
     try {
-        console.log(data);
       await api.updateCode(codeId, data);
     } catch (error) {
       console.log(error);

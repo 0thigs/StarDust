@@ -15,5 +15,5 @@ export const Title = styled.Text`
 `;
 
 export const HeaderButton = styled.TouchableOpacity`
-  padding: 4px;
+  padding: 4px 8px;
 `;
