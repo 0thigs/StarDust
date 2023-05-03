@@ -4,7 +4,6 @@ import { useCode } from '../../hooks/useCode';
 import { useAuth } from '../../hooks/useAuth';
 
 import { CodeCard } from '../../components/CodeCard';
-import { Loading } from '../../components/Loading';
 import { Button } from '../../components/Button';
 import { Prompt } from '../../components/Prompt';
 import { Modal } from '../../components/Modal';
@@ -72,7 +71,7 @@ export function Codes() {
 
   return (
     <C.Container>
-      <C.BackButton onPress={() => navigation.goBack()}>
+      <C.BackButton onPress={() => navigation.goBack()} activeOpacity={0.7}>
         <ArrowLeft color={theme.colors.green_500} width={48} />
       </C.BackButton>
       <C.Button onPress={handleCreateCodePress} activeOpacity={0.7}>

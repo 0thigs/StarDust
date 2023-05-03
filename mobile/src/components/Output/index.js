@@ -3,7 +3,7 @@ import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Loading } from '../Loading';
 
-export function Output({ bottomSheetRef, result, isRunnig }) {
+export function Output({ bottomSheetRef, result }) {
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -16,7 +16,9 @@ export function Output({ bottomSheetRef, result, isRunnig }) {
           <C.Header>
             <C.Heading>Resultado</C.Heading>
           </C.Header>
-          <C.Content>{isRunnig ? <Loading /> : <C.Result>{result}</C.Result>}</C.Content>
+          <C.Content>
+            <C.Result>{result}</C.Result>
+          </C.Content>
         </>
       }
     />

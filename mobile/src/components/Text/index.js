@@ -42,7 +42,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
           <C.Title>Exemplo</C.Title>
           {isRunnable && (
             <C.CodeButton onPress={() => handleCodeButtonPress(body)}>
-              <C.CodeButtonTitle>Testar</C.CodeButtonTitle>
+              <C.CodeButtonTitle>Executar</C.CodeButtonTitle>
             </C.CodeButton>
           )}
 

@@ -1487,4 +1487,290 @@ escolha (planeta) {
     ],
     correctItemsIdsSequence: [1, 4, 2, 3],
   },
+  {
+    starId: 14,
+    type: 'selection',
+    stem: 'Quail o valor possível para variável nave, de modo que resulte em "Nave desconhec',
+    code: `escolha (nave) {
+    caso 'X-wing':
+        escreva("Nave de combate usada pela Aliança Rebelde"); 
+    caso 'TIE Fighter': 
+        escreva("Nave de combate usada pelo Império Galáctico"); 
+    caso 'Millennium Falcon': 
+        escreva("Nave lendária pilotada por dois vagabundos famosos");
+    padrao:
+        escreva("Nave desconhecida");
+}`,
+    options: ['X-wing', 'TIE Fighter', 'Verão', 'Star Destroyer'],
+    answer: 'Star Destroyer',
+  },
+  {
+    starId: 15,
+    type: 'selection',
+    stem: 'Qual é a estrutura correta de um laço?',
+    options: [
+      'para (var i = 0; i < 100; i++)',
+      'para (i < 100; var i = 0; i++)',
+      'para (i++; var i = 0; i < 100)',
+      'para (var i = 0; i++; var i = 0)',
+    ],
+    answer: 'para (var i = 0; i < 100; i++)',
+  },
+  {
+    starId: 15,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o laço a seguir, de modo que ele escreva 5 vezes a frase "Que a lógica esteja com você!" ',
+    lines: [
+      {
+        id: 1,
+        texts: ['var msg = "Que a lógica esteja com você!"'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: [
+          'dropZone',
+          '(var contador = ',
+          'dropZone',
+          '; contador < ',
+          'dropZone',
+          '; contador++) {',
+        ],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(msg)'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'se',
+      },
+      {
+        id: 2,
+        label: 'para',
+      },
+      {
+        id: 3,
+        label: '0',
+      },
+      {
+        id: 4,
+        label: '5',
+      },
+      {
+        id: 4,
+        label: 'contador',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3, 5],
+  },
+  {
+    starId: 15,
+    type: 'selection',
+    stem: 'Qual será o resultado do seguinte laço?',
+    code: `para (var numero = 1; numero <= 10; numero++) {
+    se (numero % 2 === 0) {
+        escreva(numero);
+    }
+} 
+    `,
+    options: ['1, 3, 5, 7, 9', '2, 4, 6, 8, 10', '2, 5, 8', '1, 4, 7, 10'],
+    answer: 'para (var contador = 0; contador < 100; contador++)',
+  },
+  {
+    starId: 15,
+    type: 'selection',
+    stem: 'Quantas vezes a frase "Não se preocupe, é apenas um bug em um milhão!" será escrito pelo laço',
+    code: `para (var vezes = 2; vezes <= 10; vezes += 2) {
+    escreva("Não se preocupe, é apenas um bug em um milhão!")
+} 
+    `,
+    options: ['2', '5', '4', '10'],
+    answer: '5',
+  },
+  {
+    starId: 15,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o laço a seguir, de modo que a variavel energia seja igual a 50',
+    lines: [
+      {
+        id: 1,
+        texts: ['var energia = 0'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['para (var contador = 1; contador', 'dropZone', '50;', 'dropZone', '++) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['dropZone', '++'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['escreva(energia)'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '<',
+      },
+      {
+        id: 2,
+        label: '<=',
+      },
+      {
+        id: 3,
+        label: 'contador',
+      },
+      {
+        id: 4,
+        label: 'energia',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3, 4],
+  },
+  {
+    starId: 16,
+    type: 'open',
+    stem: 'Qual o nome do laço que eu tenho que usar, caso eu não saiba o número de repetições dele?',
+    answer: 'enquanto',
+  },
+  {
+    starId: 16,
+    type: 'selection',
+    stem: 'Quantas vezes a frase "Brilha, brilha, estrelinha" será escrito na tela?',
+    code: `para (var vezes = 1; vezes < 5; vezez++) {
+    se (vezes == 3) {
+        pausa;
+    }
+    escreva("Brilha, brilha, estrelinha")
+} 
+    `,
+    options: ['5', '1', '2', '3'],
+    answer: '2',
+  },
+  {
+    starId: 16,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o laço, de modo que no final do programa a variável frase seja igual a "Planeta nº5"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var numero = 1;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var frase = "";'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['dropZone', '(numero ', 'dropZone', '1'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['dropZone', '= `Planeta nº, ', '${', 'dropZone', '}`;'],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['numero--;'],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 7,
+        texts: ['escreva(frase);'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'frase',
+      },
+      {
+        id: 2,
+        label: 'enquanto',
+      },
+      {
+        id: 3,
+        label: '<',
+      },
+      {
+        id: 4,
+        label: '>',
+      },
+      {
+        id: 5,
+        label: 'numero',
+      },
+    ],
+    correctItemsIdsSequence: [2, 4, 1, 5],
+  },
+  {
+    starId: 16,
+    type: 'selection',
+    stem: 'enquanto ()',
+    code: `var combustivel = 20
+enquanto (combustivel > 0) {
+    escreva(\`Tenho \${combustivel} de combustível\`);
+}
+combustivel--;
+}`,
+    options: ['0', 'Tenho 20 de combustível', 'Tenho 19 de combustível', 'laço infinito'],
+    answer: 'laço infinito',
+  },
+  {
+    starId: 16,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o laço para que ele escreva do 1 ao 4, ou seja, "Já visitei o planeta 1", "Já visitei o planeta 2", "Já visitei o planeta 3", "Já visitei o planeta 4".',
+    items: [
+      {
+        id: 1,
+        label: 'var numero = 1;',
+      },
+      {
+        id: 2,
+        label: 'enquanto(numero > 4) {',
+      },
+      {
+        id: 3,
+        label: '    escreva(`Já visitei o planeta ${numero}`)',
+      },
+      {
+        id: 4,
+        label: '    numero++',
+      },
+      {
+        id: 5,
+        label: '}',
+      },
+    ],
+  },
 ];

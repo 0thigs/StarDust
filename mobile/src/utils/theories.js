@@ -1998,7 +1998,7 @@ escreva(totalAmostras)
       {
         type: 'default',
         title: 'Ok',
-        body: 'Contudo, para o foguete fazer à analise ele precisa abrir conexão com o analisador. Além disso, a conexão em si precisa estar ativa enquanto ocorre a análise.',
+        body: 'Contudo, para o foguete fazer à análise ele precisa abrir conexão com o analisador. Além disso, a conexão em si precisa estar ativa enquanto ocorre a análise.',
       },
       {
         type: 'default',
@@ -2012,6 +2012,7 @@ escreva(totalAmostras)
       },
       {
         type: 'list',
+        title: 'enquanto',
         body: 'O "enquanto" apenas precisa da condição, que enquanto for verdadeira será executado o seu bloco de código repetidas vezes.',
       },
       {
@@ -2142,7 +2143,163 @@ escreva(totalAmostras)
         type: 'default',
         title: 'Entendi',
         body: 'Agora com as amostras devidamente analisadas, já temos a reposta de qual planeta estamos.',
-      }, 
+      },
+    ],
+  },
+  {
+    starId: 17,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Tenho más notícias. De acordo com a análise das amostras, estamos em um planeta com o núcleo bastante instável.',
+      },
+      {
+        type: 'default',
+        title: 'E?',
+        body: 'Acontece que planeta não tem mais vida longa, o que quer dizer que é bom sairmos desse lugar imediatamente!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para começar, podemos aumentar a potência dos motores até chegarem ao máximo da sua capacidade limite.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer isso, podemos criar um programa que enquanto os motores não chegarem ao seu limte (100), continuaremos a aumentar sua potência em 10.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, ao começar aumentar a potência, é ligado apenas depois a vetoinha para evitar superaquecimento. Só que só podemos parar de aumentar a potência apenas depois que a ventoinha for desligada.',
+      },
+      {
+        type: 'code',
+        body: `var potencia = 20; 
+var limite = 100;
+var ventoinhaLigada = falso;
+
+enquanto (ventoinhaLigada) {
+    potencia++;
+    se (potencia == 100) {
+        ventoinhaLigada = falso;
+    }
+    ventoinhaLigada = verdadeiro
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Percebeu que a conta não fecha? O processo de aumentar a potência só para quando ventoinhaLigada for verdadeiro, mas o valor dela, que começa em falso, só muda a partir do momento em que eu começo aumentar a potência 🤨.',
+      },
+      {
+        type: 'default',
+        title: 'Putz...',
+        body: 'Para resolver esse problema podemos usar o terceiro tipo de laço: o "faca enquanto"',
+      },
+      {
+        type: 'list',
+        title: 'Faça enquanto',
+        body: 'O "faca enquanto" é um laço que permite executar um bloco de código pelo menos uma vez e depois repetir a execução do bloco enquanto uma condição especificada for verdadeira.',
+      },
+      {
+        type: 'default',
+        title: 'Hmm...',
+        body: 'No nosso caso vai cair com uma luva, pois a condição do laço é verificada apenas após ser executado uma vez pelo menos, permitindo que a condição (ventoinhaLigada) seja falsa em um primeiro momento, veja:',
+      },
+      {
+        type: 'code',
+        body: `var potencia = 20; 
+var limite = 100;
+var ventoinhaLigada = falso;
+
+faca {
+    potencia++;
+    se (potencia == 100) {
+        ventoinhaLigada = falso;
+    }
+    ventoinhaLigada = verdadeiro;
+} enquanto (ventoinhaLigada)
+
+escreva(potencia);
+// Resultado: 100`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Então essa é a diferença entre "enquanto" e "faca enquanto": o "faca enquanto" garante que o bloco de código seja executado pelo menos uma vez, mesmo se a condição do laço inicialmente for falsa, o que pode ser bastante últil em algumas situações como essa agora.',
+      },
+      {
+        type: 'alert',
+        body: 'Em contrapartida, o "enquanto" não executa o bloco de código se a condição especificada for falsa desde o início.',
+      },
+      {
+        type: 'default',
+        title: 'É cada uma meu',
+        body: 'Está tudo muito bonito, mas ainda temos que cair fora desse planeta.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'A medida que subimos, estamos aumentando de velocidade e diminuindo a distância até o espaço.',
+      },
+      {
+        type: 'code',
+        body: `var velocidade = 50; 
+var distanciaEspaco = 1500;
+
+enquanto (distanciaEspaco > 0) {
+    velocidade++;
+    distanciaEspaco--;
+}
+
+escreva(distanciaAteAtmosfera);
+escreva(velocidade);
+// Resultado: 1000 1050`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém no momento que conseguirmos entrarmos na atmosfera, temos que estabilizar a velocidade em um valor fixo para entrar em órbita do planeta e então acelerar denovo para pegar mais impulso para ir mais longe.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Sabe como resolver isso?',
+      },
+      {
+        type: 'default',
+        title: 'Usando se senao?',
+        body: 'Pode ser uma boa, mas tem um jeito mais elegante de fazer isso em um laço.',
+      },
+      {
+        type: 'default',
+        title: 'De que jeito?',
+        body: 'Usando outra instrução especial dos laços: o "continue"',
+      },
+      {
+        type: 'list',
+        title: 'Continue',
+        body: 'O "continue" é uma instrução usado dentro de laços, como o "pause", só ele permite pular a interação atual e ir para a próxima.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Quando o "continue" é executado dentro de um laço, o código abaixo da instrução não é executado e a próxima iteração do laço é iniciada.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Isso pode ser útil em situações em que você deseja parte de um bloco de código em uma determinada situação.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, no nosso caso queremos que a variável velocidade pare de ser incrementada após uma distancia ',
+      },
     ],
   },
 ];
