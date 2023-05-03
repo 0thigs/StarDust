@@ -107,7 +107,7 @@ export function DropItem({
           if (!isFirstRendering) {
             initialPosition.x.value = pageX;
             initialPosition.y.value = pageY;
-            setisFirstRendering(true);
+            setisFirstRendering(false);
           }
         });
       }}

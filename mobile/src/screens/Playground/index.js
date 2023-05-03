@@ -17,6 +17,7 @@ export function Playground({ route }) {
   const [initialCode, setInitialCodeCode] = useState('');
   const [output, setOutput] = useState([]);
   const [isPromptVisible, setisPromptVisible] = useState(false);
+  const [isRunnig, setIsRunnig] = useState(false);
   const [promptTitle, setPromptTitle] = useState('');
   const input = useRef('');
   const userCode = useRef('');
@@ -75,6 +76,7 @@ export function Playground({ route }) {
   }
 
   async function handleUserCode() {
+    setIsRunnig(true);
     const code = userCode.current;
 
     if (hasInput(code)) {
@@ -93,6 +95,8 @@ export function Playground({ route }) {
       }
     } catch (error) {
       handleError(error.message);
+    } finally {
+      setIsRunnig(false);
     }
   }
 
@@ -130,7 +134,7 @@ export function Playground({ route }) {
         promptRef={promptRef}
       />
 
-      <Output bottomSheetRef={bottomSheetRef} result={output} input={input} />
+      <Output bottomSheetRef={bottomSheetRef} result={output} input={input} isRunnig={isRunnig} />
     </C.Container>
   );
 }

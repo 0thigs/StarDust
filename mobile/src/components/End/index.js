@@ -267,6 +267,7 @@ export function End({
         title={'Continuar'}
         onPress={handleButtonClick}
         isLoading={isLoading}
+        isDisabled={isLoading}
         color={theme.colors.black}
         background={theme.colors.green_500}
       />

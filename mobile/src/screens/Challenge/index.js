@@ -119,7 +119,6 @@ export function Challenge({ route }) {
 
   async function verifyCase({ input }) {
     const code = formatCode(userCode.current, input);
-    console.log(code);
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {

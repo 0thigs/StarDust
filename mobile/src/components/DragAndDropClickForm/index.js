@@ -114,7 +114,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                         setZones={setZones}
                         totalDropZones={totalDropZones}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
-                        lineWidth={linesWidth}
+                        linesWidth={linesWidth}
                       />
                     )}
                   </C.Content>

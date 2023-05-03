@@ -12,8 +12,8 @@ export function Editor({ value, isReadOnly = true, onChange = null }) {
       ref={editoRef}
       style={{
         fontSize: fontSize,
-        inputLineHeight: 26,
-        highlighterLineHeight: 26,
+        inputLineHeight: 20,
+        highlighterLineHeight: 20,
       }}
       language={theme}
       showLineNumbers

@@ -40,8 +40,7 @@ export const QuestionCode = styled.ScrollView`
   font-size: 16px;
   align-self: center;
   width: 90%;
-  max-height: 280px;
-  margin-bottom: 4px;
+  max-height: 250px;
 `;
 
 export const Text = styled.Text`

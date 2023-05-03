@@ -1765,4 +1765,384 @@ escreva(destino);
       },
     ],
   },
+  {
+    starId: 15,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Ufa, parace que aqueles aliens estranhos foram para outra direção.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Contudo, agora estamos em um planeta completamente desconhecido.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para começar tentar descobrir, podemos fazer uma varredura do local em que estamos, coletando amostras do solo.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Toda vez que o fogute coleta uma amostra, podemos fazer um programa que incremente 1 a uma variavel do tipo número com o nome "totalAmostras".',
+      },
+      {
+        type: 'code',
+        body: `
+var totalAmostras = 0;
+totalAmostras++;
+
+escreva(totalAmostras)
+
+// Resultado: 1`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Eu não te contei, mas esse é outro operador especial, chamado "operador de incremento" (++), que se colocado após uma variável do tipo número ele acrescenta 1 ao seu valor atual.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, o foguete possui 10 lotes disponíveis para armazenar amostras. Então, devemos incrementar a variável totalAmostras 10 vezes.',
+      },
+      {
+        type: 'code',
+        body: `
+var totalLotes = 10;
+var totalAmostras = 0;
+
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+totalAmostras++;
+
+escreva(totalAmostras)
+
+// Resultado: 10`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Pronto',
+        body: 'É claro que existe uma maneira muuuuuuito mais fácil de fazer isso.',
+      },
+      {
+        type: 'default',
+        title: 'Como?',
+        body: 'Usando estrutura de repetição, ou para os mais íntimos, laço de repetição ou apenas laço.',
+      },
+      {
+        type: 'default',
+        title: 'Laço?',
+        body: 'Sim!! Os laços são usados para executar um conjunto de instruções várias vezes. Isso ajuda a reduzir o código e evitar repetições desnecessárias.',
+      },
+      {
+        type: 'default',
+        title: 'Interessante',
+        body: 'Existem 3 maneiras de usar laços, mas considerando esse nosso caso, iremos utilizar a instrução "para"',
+      },
+      {
+        type: 'list',
+        title: 'Para',
+        body: 'A instrução "para" é o tipo de laço mais comum, e é usado para executar um bloco de código por um número específico de vezes. Para escrevê-la, a sintaxe é a seguinte:',
+      },
+      {
+        type: 'code',
+        body: `
+var totalLotes = 10;
+var totalAmostras = 0;
+
+para (var contador = 0; contador < totalLotes; contador++) {
+    totalAmostras++
+}
+
+escreva(totalAmostras)
+
+// Resultado: 10`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Não entendi nada',
+        body: 'Vamos por partes: todo laço "para" tem que ter 3 parâmetros, que são as expressões separadas por ponto e vírgula e que estão entre parênteses após a palavra para.',
+      },
+      {
+        type: 'list',
+        title: 'Inicialização',
+        body: 'A primeira é a inicialização, que é a primeira coisa a ser executada antes do "para" fazer o seu trabalho de fato.',
+      },
+      {
+        type: 'alert',
+        body: 'A inicialização serve para iniciar a variável de controle do laço, que explicarei mais sobre depois.',
+      },
+      {
+        type: 'list',
+        title: 'Condição',
+        body: 'A segunda é a condição, que é a expressão lógica avaliada no início de cada iteração do laço. Se a condição for verdadeira, o bloco de código dentro do laço é executado; caso contrário, o laço é encerrado.',
+      },
+      {
+        type: 'alert',
+        body: 'Iteração do laço refere-se quantas vezes o bloco de código será executado, ou seja, 10 iterações significam 10 repetições.',
+      },
+      {
+        type: 'list',
+        title: 'Expressão final',
+        body: 'A última é a Expressão final, que é a instrução executada no final de cada iteração do laço. Geralmente é usada para atualizar a variável de controle citada anteriormente.',
+      },
+      {
+        type: 'alert',
+        body: 'A variável de controle é uma variável que é utilizada para determinar quando a execução do laço irá parar. Geralmente, o valor dela é atualizada a cada iteração e esse novo valor é usada na condição do laço antes que uma nova execução seja feita.',
+      },
+      {
+        type: 'default',
+        title: 'Expressão final',
+        body: 'Agora voltando ao código que acabamos de fazer:',
+      },
+      {
+        type: 'code',
+        body: `
+var totalLotes = 10;
+var totalAmostras = 0;
+
+para (var contador = 0; contador < totalLotes; contador++) {
+    totalAmostras++
+}
+
+escreva(totalAmostras)
+
+// Resultado: 10`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nesse caso específico, na inicialização do "para" declaramos uma variável contador iniciando com 0 e ela fará o papel de controlar o laço.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'A condição será verificar se o valor de contador é menor que o valor de totalLotes, que é 10.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Na expressão final o contador será incrementado em 1 a cada iteração.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: ' No bloco de código, definimos que a variável totalAmostras também dever ser incrementada em 1 a cada iteração.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Dessa forma, se a variável totalAmostras for igual ou maior que totalLotes, o para é encerrado, totalizando 10 iterações, ou seja, o valor de totalAmostras foi icrementada em 1 por 10 vezes seguidas.',
+      },
+      {
+        type: 'default',
+        title: 'Acho que comecei a entender',
+        body: 'É claro que podemos colocar qualquer código válido dentro do bloco do "para", inclusive outras estruturas.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Por exemplo, se quisermos que ao coletar 5 amostras seja escrito "Já coletei 5 amostras", podemos colocar uma estrutura condicional dentro do para.',
+      },
+      {
+        type: 'code',
+        body: `
+var totalLotes = 10;
+var totalAmostras = 0;
+
+para (var contador = 0; contador < totalLotes; contador++) {
+    se (contador == 5) {
+        escreva("Já coletei 5 amostras")
+    }
+    totalAmostras++
+}
+
+escreva(totalAmostras)
+
+// Resultado: Já coletei 5 amostras 10`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Legal!',
+        body: 'Também podemos colocar laço dentro de outro laço, mas podemos falar sobre isso em outra hora.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que já temos amostras coletadas, podemos ver o que nesse novo planeta pode nos surpreender.',
+      },
+    ],
+  },
+  {
+    starId: 16,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Com as amostras coletadas, resta analisá-las.',
+      },
+      {
+        type: 'default',
+        title: 'Ok',
+        body: 'Contudo, para o foguete fazer à analise ele precisa abrir conexão com o analisador. Além disso, a conexão em si precisa estar ativa enquanto ocorre a análise.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer o programa a partir disso podemos usar outro tipo de laço, conhecido como "enquanto"',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para escrever esse laço será mais facil que o "para".',
+      },
+      {
+        type: 'list',
+        body: 'O "enquanto" apenas precisa da condição, que enquanto for verdadeira será executado o seu bloco de código repetidas vezes.',
+      },
+      {
+        type: 'default',
+        title: 'Por que?',
+        body: 'No nosso caso, como temos no total 10 amostras, sempre que uma for analisada, será subtraído 1 do total.',
+      },
+      {
+        type: 'code',
+        body: `var conexaoAtiva = verdadeiro; 
+var totalAmostras = 10;
+
+enquanto(conexaoAtiva){
+    totalAmostras--;
+}
+
+escreva(totalAmostras)`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Perceba que foi utilizado outro operador especial, no caso o operador de decremento, ou seja, ao contrario do de incremento, ele subtrai 1 do valor atual de uma variavel. ',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como dito a instrução enquanto executará tudo que estiver no seu bloco enquanto sua condição for verdadeira.',
+      },
+      {
+        type: 'default',
+        title: 'Eu vi',
+        body: 'Porém, neste caso a execução nunca terminará, pois a variável conexaoAtiva sempre sera verdadeira até o fim do programa.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Chamamos isso de laço infinito, o que sempre deve ser evitado em qualquer programa. Para evitar isso podemos modificar a condição, de modo que haja uma variável de controle.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste caso, podemos colocar a variavel totalAmosras na condição, dizendo que enquanto ela for maior que zero continue executando o bloco.',
+      },
+      {
+        type: 'code',
+        body: `var conexaoAtiva = verdadeiro; 
+var totalAmostras = 10;
+
+enquanto(conexaoAtiva e totalAmostras > 0) {
+    totalAmostras--;
+}                        
+ 
+escreva(totalAmostras)
+// Resultado: 0`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim, a partir do momento em que totalAmostras for igual a zero, o enquanto é encerrado. ',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'É possivel tambem forçar o enquanto parar de executar. Para isso, é preciso usar uma instrução especial chamada pausa.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, caso queiramos que apenas cinco amostras sejam analisadas, podemos colocar o pausa quando a variável totalAmostras for igual a esse valor:',
+      },
+      {
+        type: 'code',
+        body: `var conexaoAtiva = verdadeiro; 
+var totalAmostras = 10;
+
+enquanto(conexaoAtiva e totalAmostras > 0) {
+    se (totalAmostras == 5) {
+      pausa;
+    }
+    totalAmostras--;
+}                        
+ 
+escreva(totalAmostras)
+// Resultado: 5`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Legal',
+        body: 'É claro que isso também funciona para outros tipos de laço, como o para.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, é totalmente possível realizar o que acabamos de fazer, usando um simples para.',
+      },
+      {
+        type: 'code',
+        body: `var conexaoAtiva = verdadeiro; 
+var totalAmostras = 10;
+
+para (; totalAmostras > 0 e conexaoAtiva; totalAmostras--) {
+    se (totalAmostras == 5) {
+        pausa;
+    }
+}                        
+
+escreva(totalAmostras)
+// Resultado: 5`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Veja que não há inicialização nesse para, pois a variável de controle, no caso totalAmostras, foi declarada fora dele, e ao invés de incremetá-la na expressão final, estamos decrementando-a.',
+      },
+      {
+        type: 'default',
+        title: 'Mas quando usar para ou enquanto',
+        body: 'Muito bem, usamos o enquanto apenas em situações que não sabemos quantas repetições o laço irá ter, e o para quando já sabemos disso.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, caso não soubéssemos se a conexão está ativa ou não, teríamos que usar apenas o laço enquanto, pois como a variável conexaoAtiva tem valor lógico, não teria como mudar o valor dela a cada iteração na expressão final do laço para.',
+      },
+      {
+        type: 'default',
+        title: 'Entendi',
+        body: 'Agora com as amostras devidamente analisadas, já temos a reposta de qual planeta estamos.',
+      }, 
+    ],
+  },
 ];

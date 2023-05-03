@@ -11,6 +11,7 @@ export const BackButton = styled.TouchableOpacity`
   align-items: flex-start;
   justify-content: center;
   padding: 24px 0 0;
+  margin-bottom: auto;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -43,7 +44,9 @@ export const Icon = styled.View`
 export const Message = styled.Text`
   color: ${({ theme }) => theme.colors.gray_500};
   font-family: ${({ theme }) => theme.fonts.regular};
-  text-align: center;
+  align-self: center;
+  max-width: 250px;
+  margin-bottom: auto;
 `;
 
 export const CodesList = styled.FlatList``;
