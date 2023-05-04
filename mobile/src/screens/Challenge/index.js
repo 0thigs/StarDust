@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '56373af2-ac24-4bcd-a312-7d01bd7b5f53';
+  const challengeId = 'a4955476-76f9-432f-877b-418e89c5022d';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -58,6 +58,7 @@ export function Challenge({ route }) {
   const sliderRef = useRef(null);
   const seconds = useRef(0);
   const userCode = useRef('');
+  const userOutputArray = useRef([]);
 
   const CurrentIndicatorPositionX = useSharedValue(0);
 
@@ -80,13 +81,7 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
-    console.log({ userOutput });
-
-    if (userOutput && !function_name) {
-      setUserOutputs(currentUserOutputs => {
-        return [...currentUserOutputs, userOutput];
-      });
-    }
+    userOutputArray.current.push(userOutput.trim());
   }
 
   function formatCode(code, inputValues) {
@@ -101,9 +96,7 @@ export function Challenge({ route }) {
     if (!inputValues) return code;
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
-    if (matches.length !== inputValues.length) {
-      return;
-    }
+    if (!matches) throw new Error('Não remova o comando Leia()!');
 
     inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
     return code;
@@ -118,6 +111,8 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
+    userOutputArray.current = [];
+
     const code = formatCode(userCode.current, input);
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
@@ -126,7 +121,15 @@ export function Challenge({ route }) {
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }
-      console.log(resultado.slice(-1)[0]);
+
+      if (userOutputArray.current && !function_name) {
+        setUserOutputs(currentUserOutputs => {
+          return [...currentUserOutputs, userOutputArray.current];
+        });
+      }
+
+      return;
+      console.log('teste', resultado.slice(-1)[0]);
       handleResult(resultado.slice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);

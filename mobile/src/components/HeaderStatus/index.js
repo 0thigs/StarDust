@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth.js';
 import { Modal } from '../Modal';
+import { Button } from '../Button/index.js';
+import { Toast } from 'toastify-react-native';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
 import StreakAnimation from '../../assets/animations/streak-animation.json';
 import theme from '../../global/styles/theme.js';
 import * as C from './styles.js';
-import { Button } from '../Button/index.js';
-import { Toast } from 'toastify-react-native';
 
 export function HeaderStatus() {
   const { loggedUser, updateLoggedUser } = useAuth();

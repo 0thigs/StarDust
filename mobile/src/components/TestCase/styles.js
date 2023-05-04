@@ -44,7 +44,6 @@ export const Body = styled.View`
 
 export const Put = styled.View`
   width: 100%;
-
   margin-bottom: 16px;
 `;
 
@@ -53,12 +52,15 @@ export const Label = styled.Text`
   color: ${props => props.theme.colors.gray_500};
 `;
 
-export const Value = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.medium};
-  color: ${({ from, theme }) => theme.colors[from === 'user' ? 'black' : 'gray_700']};
-
+export const Value = styled.View`
   background-color: ${({ from, theme }) =>
     from === 'user' ? theme.colors.gray_700 : theme.colors.black};
   padding: 4px 8px;
   border-radius: 4px;
+  flex-direction: ${({ isInput }) => (isInput ? 'row' : 'column')};
+`;
+
+export const ValueText = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ from, theme }) => theme.colors[from === 'user' ? 'black' : 'gray_700']};
 `;

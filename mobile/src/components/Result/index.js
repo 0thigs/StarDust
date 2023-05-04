@@ -3,6 +3,7 @@ import { TestCase } from '../TestCase';
 import { VerificationButton } from '../VerificationButton';
 import { CommentsList } from '../CommentsList';
 import * as C from './styles';
+import { compareSenquences } from '../../utils/compareSenquences';
 
 export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode }) {
   const [results, setResults] = useState([]);
@@ -29,9 +30,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
   }
 
   function verifyResult({ expectedOutput }, index) {
-    if (userOutputs[index] || userOutputs[index] === 0) {
-      return expectedOutput.toString().trim() === userOutputs[index].toString().trim();
-    }
+    return compareSenquences(userOutputs[index], expectedOutput);
   }
 
   function showComments() {
@@ -39,7 +38,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
   }
 
   useEffect(() => {
-    if (userOutputs.length) {
+    if (userOutputs.length === testCases.length) {
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);
@@ -54,7 +53,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
             input={input}
             expectedOutput={expectedOutput}
             isLocked={isLocked}
-            userOutput={userOutputs[index]}
+            userOutput={userOutputs[index] ?? []}
             isCorrect={results[index]}
           />
         ))}

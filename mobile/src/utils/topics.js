@@ -533,4 +533,101 @@ escolha (nivelPermissao){
       },
     ],
   },
+  {
+    title: 'Laços',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Laços de repetição, também conhecidos como apenas laços, são estruturas de controle de fluxo em programação que permitem executar um conjunto de instruções repetidamente até que uma determinada condição seja atendida.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'As três principais estruturas de repetição são o "para", "enquanto" e "fazer-enquanto".',
+      },
+      {
+        type: 'list',
+        title: 'Para',
+        body: 'O "para" é um laço que permite executar um bloco de código repetidamente enquanto uma condição for verdadeira. A sua sintaxe consiste em três expressões separadas por ponto e vírgula, dentro de parênteses, que são:',
+      },
+      {
+        type: 'list',
+        title: 'Inicialização',
+        body: 'É primeira parte, sendo executada apenas uma vez, no início do laço. Ela serve para inicializar uma variável de controle. Por exemplo: var i = 0;',
+      },
+      {
+        type: 'list',
+        title: 'Condição',
+        body: 'É a segunda parte, sendo a condição que será avaliada a cada iteração do laço. Enquanto essa condição for verdadeira, o laço continuará executando. Por exemplo: i < 10;',
+      },
+      {
+        type: 'list',
+        title: 'Passo',
+        body: 'É a terceira parte, sendo executada ao final de cada iteração do laço e é usada para atualizar a variável de controle. Por exemplo: i++.',
+      },
+      {
+        type: 'code',
+        body: `para (var i = 0; i < 5; i = i + 1) {
+  escreva(i);
+}
+// Resultado: 0
+              1
+              2
+              3
+              4
+              5
+
+// Exemplo com inicializador e Passo omitidos.
+para (; verdadeiro; ) {
+  escreva("Olá, mundo");
+}
+// Resutado: Laço infinito devido à condição ser sempre verdadeira.`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Enquanto',
+        body: 'O enquanto também é um laço que executa um bloco de código repetidamente enquanto uma condição for verdadeira.',
+      },
+      {
+        type: 'code',
+        body: `enquanto (verdadeiro) {
+            escreva("Olá mundo");
+}
+// Resultado: Laço infinito`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Fazer ... enquanto',
+        body: 'O "fazer-enquanto" é um laço muito parecido com o "enquanto", só com uma diferença crucial: a condição de execução é verificada no final do bloco de código ao invés no início.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Isso significa que o bloco de código dentro do "fazer-enquanto" será executado pelo menos uma vez, independentemente de a condição ser verdadeira ou falsa. Se a condição for verdadeira, o bloco de código será executado novamente, caso contrário, a execução do laço será interrompida.',
+      },
+      {
+        type: 'code',
+        body: `fazer {
+    escreva("Olá, mundo");
+} enquanto (falso)
+// Resultado: "Olá, mundo" é escrito uma única vez
+
+var i = 0;
+fazer {
+  escreva(i);
+  i = i + 1;
+} enquanto (i < 5)
+// Resultado: 0
+              1
+              2
+              3
+              4
+              5`,
+        isRunnable: false,
+      },
+    ],
+  },
 ];

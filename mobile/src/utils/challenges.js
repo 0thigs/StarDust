@@ -547,6 +547,79 @@ Resultado: 22`,
   },
   {
     starId: null,
+    title: 'Planetas encontrados',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Escapamos da explosão por um triz. Só que agora resta procurar outro planeta para explorar.',
+      },
+      {
+        type: 'list',
+        body: 'Enquanto o radar do foguete identifica planetas o seu papel é mostrar quantos planetas são encontrados em tempo real escrevendo a mensagem "planetas encontrados: 1", "planetas encontrados: 2", "planetas encontrados: 3" etc...',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: 3
+Resultado: planetas encontrados: 1
+           planetas encontrados: 2
+           planetas encontrados: 3
+
+Entrada: 5
+Resultado: planetas encontrados: 1
+           planetas encontrados: 2
+           planetas encontrados: 3
+           planetas encontrados: 4
+           planetas encontrados: 5
+
+Entrada: 1
+Resultado: planetas encontrados: 1`,
+      },
+      {
+        type: 'alert',
+        body: 'Para resolver esse desafio, você pode usar qualquer um dos 3 tipos de laço (para, enquanto ou fazer enquanto)',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [4],
+        expectedOutput: [
+          'Planetas encontrados: 1',
+          'Planetas encontrados: 2',
+          'Planetas encontrados: 3',
+          'Planetas encontrados: 4',
+        ],
+        isLocked: false,
+      },
+      {
+        input: [6],
+        expectedOutput: [
+          'Planetas encontrados: 1',
+          'Planetas encontrados: 2',
+          'Planetas encontrados: 3',
+          'Planetas encontrados: 4',
+          'Planetas encontrados: 5',
+          'Planetas encontrados: 6',
+        ],
+        isLocked: false,
+      },
+      {
+        input: [1],
+        expectedOutput: ['Planetas encontrados: 1'],
+        isLocked: false,
+      },
+    ],
+
+    code: `function calcularPerimetro(altura, largura) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
     title: '',
     texts: [
       {
@@ -596,7 +669,7 @@ Resultado: []`,
         isLocked: false,
       },
       {
-        input: ["{}"],
+        input: ['{}'],
         expectedOutput: '[]',
         isLocked: true,
       },
@@ -708,22 +781,22 @@ Explicacao: Um repdigit tem que ser um número positivo
     testCases: [
       {
         input: [666],
-        expectedOutput: "verdadeiro",
+        expectedOutput: 'verdadeiro',
         isLocked: false,
       },
       {
         input: [12345],
-        expectedOutput: "falso",
+        expectedOutput: 'falso',
         isLocked: false,
       },
       {
         input: [11111111],
-        expectedOutput: "verdadeiro",
+        expectedOutput: 'verdadeiro',
         isLocked: false,
       },
       {
         input: [0],
-        expectedOutput: "verdadeiro",
+        expectedOutput: 'verdadeiro',
         isLocked: true,
       },
     ],
@@ -785,7 +858,7 @@ Resultado: []`,
         isLocked: false,
       },
       {
-        input: ["{}"],
+        input: ['{}'],
         expectedOutput: '[]',
         isLocked: true,
       },
@@ -796,7 +869,7 @@ Resultado: []`,
 }`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
-  }
+  },
 ];
 
 [

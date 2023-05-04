@@ -82,17 +82,33 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
         <C.Body>
           <C.Put>
             <C.Label>Entrada</C.Label>
-            <C.Value>{input ? input.join(', ') : 'Sem entrada'}</C.Value>
+            <C.Value isInput={true}>
+              {input.map(input => (
+                <C.ValueText key={input}>{input ?? 'Sem entrada'}</C.ValueText>
+              ))}
+            </C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Seu resultado</C.Label>
             <C.Value from={'user'}>
-              {userOutput || userOutput === 0 ? userOutput : 'Sem resultado'}
+              {userOutput.lenght > 0 ? (
+                userOutput.map(output => (
+                  <C.ValueText key={output} from={'user'}>
+                    {output === 0 ? 0 : output}
+                  </C.ValueText>
+                ))
+              ) : (
+                <C.ValueText from={'user'}>Sem resultado</C.ValueText>
+              )}
             </C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Resultado esperado</C.Label>
-            <C.Value>{expectedOutput}</C.Value>
+            <C.Value>
+              {expectedOutput.map(output => (
+                <C.ValueText key={output}>{output}</C.ValueText>
+              ))}
+            </C.Value>
           </C.Put>
         </C.Body>
       )}

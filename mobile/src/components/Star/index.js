@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
-import { useAuth } from '../../hooks/useAuth';
 import { useScroll } from '../../hooks/useScroll';
-import { useRocket } from '../../hooks/useRocket';
 
 import LockedStar from '../../assets/StarAssets/locked-star.svg';
 import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
@@ -25,6 +23,7 @@ import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
 import { Loading } from '../Loading';
+import { Toast } from 'toastify-react-native';
 import * as C from './styles';
 import api from '../../services/api';
 const animationDuration = 800;
@@ -51,6 +50,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
         const challengeId = await api.getChallengeId(id);
         navigation.navigate('Challenge', { id: challengeId });
       } catch (error) {
+        Toast.error("Falha ao tentar acessar o desafio");
         console.log(error);
       }
     } else {
