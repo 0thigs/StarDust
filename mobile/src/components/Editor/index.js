@@ -4,7 +4,7 @@ import { useEditor } from '../../hooks/useEditor';
 
 export function Editor({ value, isReadOnly = true, onChange = null }) {
   const { fontSize, isDarkMode } = useEditor();
-  const theme = isDarkMode ? 'apache' : 'stackoverflowLight';
+  const theme = isDarkMode ? 'tomorrowNightBright' : 'stackoverflowLight';
   const editoRef = useRef(null);
 
   return (
@@ -15,7 +15,7 @@ export function Editor({ value, isReadOnly = true, onChange = null }) {
         inputLineHeight: 20,
         highlighterLineHeight: 20,
       }}
-      language={theme}
+      language={'javascript'}
       showLineNumbers
       autoFocus={false}
       onChange={onChange}

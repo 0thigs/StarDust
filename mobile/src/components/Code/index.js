@@ -9,8 +9,9 @@ import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
-export function Code({ code, userCode, handleUserCode, isRunning }) {
+export function Code({ code, userCode, handleUserCode }) {
   //   const [currentCode, setCurrentCode] = useState(code);
+  const [isRunning, setIsRunning] = useState(false);
   const [bottomSheetHeight, setBottomSheetHeight] = useState(100);
   const soundRef = useRef(null);
   const bottomSheetRef = useRef(null);
@@ -19,9 +20,16 @@ export function Code({ code, userCode, handleUserCode, isRunning }) {
     userCode.current = code;
   }
 
-  function handleRunPress() {
-    soundRef.current.play();
-    handleUserCode();
+  async function handleRunPress() {
+    setIsRunning(true);
+    try {
+      soundRef.current.play();
+      await handleUserCode();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsRunning(false);
+    }
   }
 
   function getBottomSheetHeight(event) {

@@ -1,9 +1,9 @@
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { Loading } from '../Loading';
 
 export function Output({ bottomSheetRef, result }) {
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -17,7 +17,9 @@ export function Output({ bottomSheetRef, result }) {
             <C.Heading>Resultado</C.Heading>
           </C.Header>
           <C.Content>
-            <C.Result>{result}</C.Result>
+            {result.map(result => (
+              <C.Result key={result}>{result}</C.Result>
+            ))}
           </C.Content>
         </>
       }

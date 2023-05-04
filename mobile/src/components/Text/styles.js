@@ -41,6 +41,8 @@ export const CodeButton = styled.TouchableOpacity`
 export const CodeButtonTitle = styled.Text`
   color: ${({ theme }) => theme.colors.green_700};
   text-transform: uppercase;
+  font-size: 12px;
+  padding: 2px;
 `;
 
 const ListContainer = css`

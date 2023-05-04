@@ -1773,4 +1773,134 @@ combustivel--;
       },
     ],
   },
+  {
+    starId: 17,
+    type: 'open',
+    stem: 'Qual o nome da instrução que permite pular uma iteração?',
+    answer: 'continua',
+  },
+  {
+    starId: 17,
+    type: 'selection',
+    stem: 'Qual será o resultado da variável energia?',
+    code: `var energia = 100;
+faca { 
+    combustivel -= 10;
+} enquanto (energia > 1000)`,
+    options: ['0', '90', '100', '1000'],
+    answer: '90',
+  },
+  {
+    starId: 17,
+    type: 'selection',
+    stem: 'Quantas vezes esse laço será executado?',
+    code: `var nivelOxigenio = 100;
+faca { 
+    escreva("O oxigênio está em " + nivelOxigenio + "%")
+} enquanto (nivelOxigenio < 100)`,
+    options: ['10', '100', '1', 'infinitamente'],
+    answer: 'infinitamente',
+  },
+  {
+    starId: 17,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o laço para que o programa escreva a mensagem "Esse planeta tem 4 estrelas".',
+    items: [
+      {
+        id: 1,
+        label: 'var numero = 1;',
+      },
+      {
+        id: 2,
+        label: 'faca {',
+      },
+      {
+        id: 3,
+        label: '    escreva(`Esse planeta tem ${numero} estrelas.`)',
+      },
+      {
+        id: 4,
+        label: '    numero++',
+      },
+      {
+        id: 5,
+        label: '} enquanto (numero < 4)',
+      },
+    ],
+  },
+
+  {
+    starId: 17,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o laço, de modo que no final do programa a variável frase seja igual a "Planeta nº5"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var temperatura = 50;'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['dropZone', '{'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['se (temperatura == ', 'dropZone', ') {'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['dropZone'],
+        indentLevel: 4,
+      },
+      {
+        id: 5,
+        texts: ['}'],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['temperatura -= 5;'],
+        indentLevel: 2,
+      },
+      {
+        id: 7,
+        texts: ['} enquanto (temperatura != 25)'],
+        indentLevel: 0,
+      },
+      {
+        id: 8,
+        texts: ['escreva(`A temperatura está no nível ideal, que é 25`);'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'faca',
+      },
+      {
+        id: 2,
+        label: 'enquanto',
+      },
+      {
+        id: 3,
+        label: 'pausa',
+      },
+      {
+        id: 4,
+        label: 'continua',
+      },
+      {
+        id: 5,
+        label: '50',
+      },
+      {
+        id: 6,
+        label: '25',
+      },
+    ],
+    correctItemsIdsSequence: [1, 5, 3],
+  },
 ];

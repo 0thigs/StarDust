@@ -2054,7 +2054,7 @@ escreva(totalAmostras)`,
       {
         type: 'default',
         title: null,
-        body: 'Neste caso, podemos colocar a variavel totalAmosras na condição, dizendo que enquanto ela for maior que zero continue executando o bloco.',
+        body: 'Neste caso, podemos colocar a variavel totalAmosras na condição, dizendo que enquanto ela for maior que zero continua executando o bloco.',
       },
       {
         type: 'code',
@@ -2157,7 +2157,7 @@ escreva(totalAmostras)
       {
         type: 'default',
         title: 'E?',
-        body: 'Acontece que planeta não tem mais vida longa, o que quer dizer que é bom sairmos desse lugar imediatamente!',
+        body: 'Acontece que esse planeta não tem mais vida longa, o que quer dizer que é bom sairmos desse lugar imediatamente!',
       },
       {
         type: 'default',
@@ -2167,12 +2167,22 @@ escreva(totalAmostras)
       {
         type: 'default',
         title: null,
-        body: 'Para fazer isso, podemos criar um programa que enquanto os motores não chegarem ao seu limte (100), continuaremos a aumentar sua potência em 10.',
+        body: 'Para fazer isso, podemos criar um programa que, enquanto os motores não chegarem ao seu limte (100), continuaremos a aumentar sua potência em 10.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Porém, ao começar aumentar a potência, é ligado apenas depois a vetoinha para evitar superaquecimento. Só que só podemos parar de aumentar a potência apenas depois que a ventoinha for desligada.',
+        body: 'Porém, ao começar aumentar a potência, é ligado a vetoinha para evitar superaquecimento, mas apenas depois que a potência é aumentada por pelo menos uma vez.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Só que só podemos parar de aumentar a potência apenas depois que a ventoinha for desligada.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então temos uma situação complicada.',
       },
       {
         type: 'code',
@@ -2181,11 +2191,12 @@ var limite = 100;
 var ventoinhaLigada = falso;
 
 enquanto (ventoinhaLigada) {
-    potencia++;
-    se (potencia == 100) {
+    potencia += 10;
+    se (potencia == limite) {
         ventoinhaLigada = falso;
+    } senao {
+        ventoinhaLigada = verdadeiro;
     }
-    ventoinhaLigada = verdadeiro
 }`,
         isRunnable: false,
       },
@@ -2207,7 +2218,7 @@ enquanto (ventoinhaLigada) {
       {
         type: 'default',
         title: 'Hmm...',
-        body: 'No nosso caso vai cair com uma luva, pois a condição do laço é verificada apenas após ser executado uma vez pelo menos, permitindo que a condição (ventoinhaLigada) seja falsa em um primeiro momento, veja:',
+        body: 'No nosso caso vai cair com uma luva, pois a condição do laço é verificada apenas após seu bloco de código ser executado pelo menos uma vez, permitindo que a condição (ventoinhaLigada) seja falsa em um primeiro momento, veja:',
       },
       {
         type: 'code',
@@ -2216,16 +2227,17 @@ var limite = 100;
 var ventoinhaLigada = falso;
 
 faca {
-    potencia++;
+    potencia += 10;
     se (potencia == 100) {
         ventoinhaLigada = falso;
+    } senao {
+        ventoinhaLigada = verdadeiro;
     }
-    ventoinhaLigada = verdadeiro;
 } enquanto (ventoinhaLigada)
 
 escreva(potencia);
 // Resultado: 100`,
-        isRunnable: false,
+        isRunnable: true,
       },
       {
         type: 'alert',
@@ -2247,23 +2259,20 @@ escreva(potencia);
       },
       {
         type: 'code',
-        body: `var velocidade = 50; 
-var distanciaEspaco = 1500;
+        body: `var velocidade = 0; 
+var distanciaAteEspaco = 1500;
+var comprimentoDaOrbita = 500;
 
-enquanto (distanciaEspaco > 0) {
+enquanto (distanciaAteEspaco > 0) {
     velocidade++;
-    distanciaEspaco--;
-}
-
-escreva(distanciaAteAtmosfera);
-escreva(velocidade);
-// Resultado: 1000 1050`,
+    distanciaAteEspaco--;
+}`,
         isRunnable: false,
       },
       {
         type: 'default',
         title: null,
-        body: 'Porém no momento que conseguirmos entrarmos na atmosfera, temos que estabilizar a velocidade em um valor fixo para entrar em órbita do planeta e então acelerar denovo para pegar mais impulso para ir mais longe.',
+        body: 'Porém no momento que conseguirmos sairmos da atmosfera, temos que estabilizar a velocidade em um valor fixo para entrar em órbita do planeta e então acelerar denovo para pegar mais impulso para ir ainda mais longe.',
       },
       {
         type: 'default',
@@ -2278,27 +2287,117 @@ escreva(velocidade);
       {
         type: 'default',
         title: 'De que jeito?',
-        body: 'Usando outra instrução especial dos laços: o "continue"',
+        body: 'Usando outra instrução especial: o "continua"',
       },
       {
         type: 'list',
-        title: 'Continue',
-        body: 'O "continue" é uma instrução usado dentro de laços, como o "pause", só ele permite pular a interação atual e ir para a próxima.',
+        title: 'Continua',
+        body: 'O "continua" é uma instrução usada dentro de laços, como o "pause", só que ele permite pular a interação atual e ir para a próxima imediatamente.',
       },
       {
         type: 'default',
         title: 'Como assim?',
-        body: 'Quando o "continue" é executado dentro de um laço, o código abaixo da instrução não é executado e a próxima iteração do laço é iniciada.',
+        body: 'Quando o "continua" é executado dentro de um laço, o código abaixo da instrução não é executado e a próxima iteração do laço é iniciada.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Isso pode ser útil em situações em que você deseja parte de um bloco de código em uma determinada situação.',
+        body: 'Isso pode ser útil em situações em que você deseja que parte de um bloco de código seja ignorada em uma determinada situação.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, no nosso caso queremos que a variável velocidade pare de ser incrementada após uma distancia ',
+        body: 'Por exemplo, no nosso caso queremos que a variável velocidade pare de ser incrementada enquanto estivermos em órbita do planeta, o que ocorre enquanto distanciaAteEspaco for menor ou igual 1000 e comprimentoDaOrbita for maior que 0',
+      },
+      {
+        type: 'code',
+        body: `var velocidade = 50; 
+var distanciaAteEspaco = 1500;
+var comprimentoDaOrbita = 500;
+
+enquanto (distanciaAteEspaco > 0) {
+  se (distanciaAteEspaco <= 1000 e comprimentoDaOrbita > 0) {
+      comprimentoDaOrbita--
+      continua;
+  }
+  velocidade++;
+  distanciaAteEspaco--;
+}
+
+escreva("distanciaAteAtmosfera: " + distanciaAteAtmosfera);
+escreva("comprimentoDaOrbita: " + comprimentoDaOrbita);
+escreva("velocidade: " + velocidade);
+/* Resultado: 
+distanciaAteAtmosfera: 0
+comprimentoDaOrbita: 0
+velocidade: 1500
+*/
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Dessa forma, sempre que distanciaAteEspaco e comprimentoDaOrbita for maior que 500, tudo o que estiver após isso, no caso velocidade++; e distanciaAteEspaco--; não é executado.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E a partir do momento em que a condição do se não for mais verdadeira, a segunda parte mencionada do bloco (velocidade++; e distanciaAteEspaco--;) volta a ser executada.',
+      },
+      {
+        type: 'default',
+        title: 'Complicado isso',
+        body: 'Vou colocar uma variável "vezes" para ajudar você a entender melhor o que está acontecendo.',
+      },
+      {
+        type: 'code',
+        body: `var velocidade = 50; 
+var distanciaAteEspaco = 1500;
+var comprimentoDaOrbita = 500;
+var vezes = 0;
+
+enquanto (distanciaAteEspaco > 0) {
+  vezes++;
+  se (distanciaAteEspaco <= 1000 e comprimentoDaOrbita > 0) {
+      comprimentoDaOrbita--
+      continua;
+  }
+  velocidade++;
+  distanciaAteEspaco--;
+}
+
+escreva("distanciaAteAtmosfera: " + distanciaAteAtmosfera);
+escreva("comprimentoDaOrbita: " + comprimentoDaOrbita);
+escreva("velocidade: " + velocidade);
+escreva("vezes: " + vezes);
+/* Resultado: 
+distanciaAteAtmosfera: 0
+comprimentoDaOrbita: 0
+velocidade: 1500
+vezes: 2000
+*/`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja que a variável vezes indica que o enquanto foi executada 2000 vezes, porém a velocidade só foi aumentada em 1500 vezes.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ou seja, nas vezes em que "continua" foi executado, velocidade++ não foi, justamente porque essa instrução fez com que o laço começasse outra iteração antes que ela fosse incrementada.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então, resumidamente, o "continua" serve para pular uma repetição do laço em um dado ponto do seu bloco de código.',
+      },
+      {
+        type: 'default',
+        title: 'Acho que entendi, talvez...',
+        body: 'Com o tempo você pega o jeito, agora é hora de se concentra na fuga.',
       },
     ],
   },
