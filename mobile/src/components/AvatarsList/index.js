@@ -88,8 +88,8 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}
         getItemLayout={(_, index) => ({
-          length: 338,
-          offset: 338 * index,
+          length: 330,
+          offset: 330 * index,
           index,
         })}
         onScrollToIndexFailed={() => {

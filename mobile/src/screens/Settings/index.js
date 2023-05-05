@@ -266,6 +266,7 @@ export function Settings({ navigation: { goBack } }) {
                 onToggle={isOn => handleToggle('canPushNotification', !isOn)}
               />
             </C.ToggleInput>
+            
             <TimePicker isVisible={isTimePickerVisible} setIsVisible={setIsTimePickerVisible} />
 
             <C.ToggleInput>

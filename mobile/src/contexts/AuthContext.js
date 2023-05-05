@@ -52,7 +52,7 @@ export function AuthProvider({ children }) {
       setLoggedUser(userInSession);
       return userInSession;
     } catch (error) {
-      setLoggedUser({})
+      setLoggedUser({});
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -116,7 +116,7 @@ export function AuthProvider({ children }) {
       throw new Error(error.message);
     }
     setLoggedUser({});
-    setIsLoading(true);
+    setIsLoading(false);
     return success;
   }
 
@@ -182,6 +182,7 @@ export function AuthProvider({ children }) {
     try {
       await api.deleteUser(userId);
       setLoggedUser({});
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }

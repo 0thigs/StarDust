@@ -66,7 +66,7 @@ export function Achievement({
             width={isIconLoadEnd ? 45 : 0}
             onLoad={() => setIsIconLoadEnd(true)}
           />
-          {!isIconLoadEnd && <Animation source={Lazy} autoPlay={true} loop={true} size={90} />}
+          {!isIconLoadEnd && <Animation source={Lazy} autoPlay={true} loop={true} size={75} />}
         </>
       ) : (
         <Lock />

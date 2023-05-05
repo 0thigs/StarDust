@@ -74,7 +74,7 @@ export function Ranking() {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsloading(false);
+      setTimeout(() => setIsloading(false), 2000);
     }
   }
 

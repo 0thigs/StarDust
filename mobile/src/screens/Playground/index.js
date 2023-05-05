@@ -5,7 +5,7 @@ import { Output } from '../../components/Output';
 import { Prompt } from '../../components/Prompt';
 import { PlaygroundHeader } from '../../components/PlaygroundHeader';
 import { execute } from '../../libs/delegua.mjs';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 import * as C from './styles';
 
 export function Playground({ route }) {
@@ -84,7 +84,7 @@ export function Playground({ route }) {
 
     try {
       setOutput([]);
-      const { erros, resultado } = await execute(code, handleOutput);
+      const { erros } = await execute(code, handleOutput);
       if (erros.length) {
         const error = erros[0];
         if (error instanceof Error) throw error;
@@ -103,14 +103,6 @@ export function Playground({ route }) {
 
   return (
     <C.Container>
-      <ToastMenager
-        animationInTiming={700}
-        animationOutTiming={1000}
-        animationStyle={'rightInOut'}
-        width={320}
-        position={'top'}
-      />
-
       <PlaygroundHeader
         title={codeTitle}
         code={userCode}

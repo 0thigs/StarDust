@@ -41,7 +41,7 @@ export function End({
   const [hasNewLevel, setHasNewLevel] = useState(false);
   const [time, setTime] = useState('');
   const [accurance, setAccurance] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isStreakVisible, setIsStreakVisible] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
@@ -61,7 +61,6 @@ export function End({
 
   async function getUpdatedData() {
     try {
-      console.log({ xp });
       const updatedCoins = coins + loggedUser.coins;
       const updatedXp = xp + loggedUser.xp;
       const updatedWeeklyXp = xp + loggedUser.weekly_xp;
@@ -112,9 +111,15 @@ export function End({
   }
 
   async function updateUserData() {
-    const newData = await getUpdatedData();
-    for (let key of Object.keys(newData)) {
-      await updateLoggedUser(key, newData[key]);
+    try {
+      const newData = await getUpdatedData();
+      for (let key of Object.keys(newData)) {
+        await updateLoggedUser(key, newData[key]);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -176,7 +181,7 @@ export function End({
           params: { screen: 'Challenges' },
         });
       }
-    }, 1500);
+    }, 500);
   }
 
   useEffect(() => {
@@ -196,8 +201,9 @@ export function End({
   }, []);
 
   useEffect(() => {
+    setIsLoading(true)
     if (!planets.length) return;
-    setTimeout(() => updateUserData(), 2000);
+    setTimeout(() => updateUserData(), 750);
   }, [planets]);
 
   return (

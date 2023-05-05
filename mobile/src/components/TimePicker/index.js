@@ -1,21 +1,34 @@
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { times } from '../../utils/times';
+import { Toast } from 'toastify-react-native';
 import Modal from 'react-native-modal';
 import WheelPicker from 'react-native-wheely';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { useNotification } from '../../hooks/useNotification';
+import { Loading } from '../Loading';
 
 export function TimePicker({ isVisible, setIsVisible }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const { setNotification } = useNotification();
   const [selectedTime, setSelectedTime] = useState(loggedUser.study_time);
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleOkPress() {
-    updateLoggedUser('study_time', selectedTime);
-    setIsVisible(false);
-    setNotification('studyTime', selectedTime);
+  async function handleOkPress() {
+    setIsLoading(true);
+    try {
+      await Promise.all([
+        updateLoggedUser('study_time', selectedTime),
+        setNotification('studyTime', selectedTime),
+      ]);
+      setIsVisible(false);
+    } catch (error) {
+      console.error(error);
+      Toast.error('Falha ao tentar salvar horário')
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleCancelPress() {
@@ -41,8 +54,8 @@ export function TimePicker({ isVisible, setIsVisible }) {
           }}
         />
         <C.Footer>
-          <C.Button onPress={handleOkPress}>
-            <C.Text>Ok</C.Text>
+          <C.Button onPress={handleOkPress} disabled={isLoading}>
+            {isLoading ? <Loading /> : <C.Text>Ok</C.Text>}
           </C.Button>
           <C.Button onPress={handleCancelPress}>
             <C.Text>Cancelar</C.Text>

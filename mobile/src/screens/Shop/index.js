@@ -24,7 +24,7 @@ export function Shop() {
 
   useEffect(() => {
     if (avatars.length && rockets.length)
-      timer.current = setTimeout(() => setIsLoading(false), 1500);
+      timer.current = setTimeout(() => setIsLoading(false), 2000);
   }, [avatars, rockets]);
 
   return (

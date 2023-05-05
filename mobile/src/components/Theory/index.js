@@ -98,12 +98,12 @@ export function Theory({ title, allTexts }) {
         </>
       )}
 
-      {isFabButtonVisible && (
+      {/* {isFabButtonVisible && (
         <FabButton
           onPress={scrollToEnd}
           icon={<Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />}
         />
-      )}
+      )} */}
 
       <Modal
         isVisible={isModalVisible}

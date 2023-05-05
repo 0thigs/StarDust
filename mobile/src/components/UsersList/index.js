@@ -24,7 +24,7 @@ export function UsersList({ users, initialPosition = 0 }) {
               xp={weekly_xp}
               isLoggedUser={id === loggedUser.id}
             />
-            {position === 5 && (
+            {position === 3 && (
               <C.Divider>
                 <ArrowUp width={iconSize} height={iconSize} color={theme.colors.green_500} />
                 <C.Message>Zona de promoção</C.Message>
