@@ -8,11 +8,14 @@ import { Loading } from '../../components/Loading';
 import { Challenge } from '../../components/Challenge';
 import { SelectInput } from '../../components/SelectInput';
 import { filters } from '../../utils/filters';
+import { Layout } from 'react-native-reanimated';
 import { X } from 'react-native-feather';
 const xSize = 16;
 
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+import { FadeIn } from 'react-native-reanimated';
+import { FadeOut } from 'react-native-reanimated';
 const difficultyTable = {
   easy: 'Fácil',
   medium: 'Médio',
@@ -162,10 +165,10 @@ export function Challenges() {
           </C.FiltersList>
           <C.TagsList>
             {tags.map(({ type, value, icon, color }) => (
-              <View key={value} style={{ flexDirection: 'row' }}>
+              <View key={value} style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 {Array.isArray(value) ? (
                   value.map(value => (
-                    <C.Tag key={value}>
+                    <C.Tag key={value} entering={FadeIn} exiting={FadeOut} layout={Layout}>
                       <C.TagName>{value}</C.TagName>
                       <C.RemoveTagButton onPress={() => handleTagButtonPress(type, value)}>
                         <X width={xSize} color={theme.colors.gray_500} />
@@ -173,7 +176,7 @@ export function Challenges() {
                     </C.Tag>
                   ))
                 ) : (
-                  <C.Tag key={value}>
+                  <C.Tag key={value} entering={FadeIn} exiting={FadeOut} layout={Layout}>
                     {icon && icon}
                     <C.TagName color={color}>
                       {type === 'difficulty' ? difficultyTable[value] : getStatusName(value)}

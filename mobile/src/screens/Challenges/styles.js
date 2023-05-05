@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
+
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -17,7 +19,7 @@ export const TagsList = styled.View`
   margin: 12px 0;
 `;
 
-export const Tag = styled.View`
+export const Tag = styled(Animated.View)`
   flex-flow: row;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray_900};
