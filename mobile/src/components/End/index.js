@@ -154,7 +154,7 @@ export function End({
   function handleButtonClick() {
     const todayIndex = dayjs().day();
     const today = loggedUser.week_status[todayIndex];
-    console.log({today});
+
     if (isFirstClick) {
       setIsModalVisible(true);
       setIsStreakVisible(today === 'todo');

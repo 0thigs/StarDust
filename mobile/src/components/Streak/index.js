@@ -53,7 +53,7 @@ export function Streak({ user: { streak, week_status, did_complete_saturday } })
   useEffect(() => {
     setWeekStatus(week_status);
     setStreakCount(streak);
-    if (route.name === 'Lesson') updateStreak();
+    if (route.name === 'Lesson' || route.name === 'Challenge') updateStreak();
   }, []);
 
   return (
