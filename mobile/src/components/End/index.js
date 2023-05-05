@@ -25,7 +25,7 @@ import dayjs from 'dayjs';
 const iconSize = 30;
 
 export function End({
-  starId = 'e35bba41-f5cd-4a37-9b67-533171a086cc',
+  starId,
   challengeId,
   challengeCoins,
   challengeXp,
@@ -164,10 +164,17 @@ export function End({
 
     setIsLoading(true);
     setTimeout(() => {
-      dispatch({ type: 'resetState' });
-      navigation.reset({
-        routes: [{ name: 'DrawerRoutes' }],
-      });
+      if (starId) {
+        dispatch({ type: 'resetState' });
+        navigation.reset({
+          routes: [{ name: 'DrawerRoutes' }],
+        });
+      } else {
+        navigation.navigate('DrawerRoutes', {
+          screen: 'TabRoutes',
+          params: { screen: 'Challenges' },
+        });
+      }
     }, 1500);
   }
 
