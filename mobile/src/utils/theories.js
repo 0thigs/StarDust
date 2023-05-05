@@ -2401,4 +2401,210 @@ vezes: 2000
       },
     ],
   },
+  {
+    starId: 18,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que já encontramos vários planetas para explorar, podemos configurar para a rota o mais próximo.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas ainda mais importante que isso é verificar se os suprimentos do foguete estão tudo ok.',
+      },
+      {
+        type: 'default',
+        title: 'Como fazer isso',
+        body: 'Primeiro, vejamos o que temos de comida no momento.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+escreva(alimentos)
+  
+// Resultado: maçã, batata, bife, geleia`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas o que é isso na variável alimentos?',
+        body: 'Isso nada mais é do que um vetor.',
+      },
+      {
+        type: 'list',
+        title: 'Vetores',
+        body: 'Vetores são uma coleção ordenada de valores, onde cada valor é identificado por um índice. Em outras palavras, um vetor é um conjunto de elementos que podem ser acessados ​​por sua posição numérica dentro do vetor.',
+      },
+      {
+        type: 'default',
+        title: 'Acesso por posição numérica?',
+        body: 'Sim! Por exemplo, caso queiramos pegar a maçã da variável "alimentos" devemos fazer da seguinte forma:',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+escreva(alimentos[0])
+  
+// Resultado: maçã`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Como dito, para acessar qualquer elemento dentro de uma variável que é um vetor, temos que colocar entre colchetes ([]) ao lado da vriável o número do seu índice, isto é, sua posição na lista de elementos conforme a ordem normal com direção de esquerda para direita.',
+      },
+      {
+        type: 'alert',
+        body: 'Veja que foi escrito apenas maçã, em vez de todos os alimentos, visto que estamos acessando apenas o primeiro elemento, o que possível por meio do número que corresponde a sua posição no vetor, no caso, o zero.',
+      },
+      {
+        type: 'default',
+        title: 'Mas por que zero',
+        body: 'Isso porque a posicao dos elementos sempre começa pelo zero, ou seja, se você quisesse pegar o segundo elemento de qualquer vetor, teríamos que colocar 1 entre colchetes.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+escreva(alimentos[1])
+  
+// Resultado: batata`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Dica: É possível acessar o último elemento de qualquer vetor, independentemente quantos elementos ele tenha. Para isso, basta colocar 1 negativo (-1)',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+escreva(alimentos[-1])
+  
+// Resultado: geleia`,
+        isRunnable: true,
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5, 6, 7]
+ 
+escreva(alimentos[-1])
+  
+// Resultado: 7`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas por que um negativo?',
+        body: 'Isso porque se você colocar números negativos como índice, você estará invertendo a ordem de direção normal de acesso (esquerda para direita) para direita a esquerda.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, caso colocássemos -2 como índice, estaríamos pegando o penúltimo elemento de um vetor.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+escreva(alimentos[-2])
+  
+// Resultado: bife`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora você pode pergutar, como eu faço para adicionar um novo elemento ao vetor.',
+      },
+      {
+        type: 'default',
+        title: 'o que eu posso fazer para adicionar um novo elemento ao vetor?',
+        body: 'Para fazer isso, basta colocar o elemento na posição que queremos que ele tenha dentro do vetor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como no momento temos 4 alimentos, podemos colocar uma goiabada na quinta posição desse vetor, então colocaríamos qual índice?',
+      },
+      {
+        type: 'default',
+        title: '5?',
+        body: 'Não! Lembre-se os índices/posições de um vetor sempre começam do 0, logo o quinto índice corresponde a 4',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+alimentos[4] = 'goiabada'
+      
+escreva(alimentos)
+  
+// Resultado: maçã, batata, bife, geleia, goiabada`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Cuidado, dependendo da posição em que você colocar o novo elemento, poderá haver espaços vazios no vetor.',
+      },
+      {
+        type: 'alert',
+        body: 'Por exemplo, se tivéssemos colocado a goiabada no índice 7, as posições 4, 5 e 6 ficariam vagas.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+alimentos[7] = 'goiabada'
+      
+escreva(alimentos)
+  
+// Resultado: maçã, batata, bife, geleia, , , , goiabada`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Caso isso aconteça, podemos substituir essas posíções por alimentos de verdade.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora você pode pergutar denovo, como eu faço para substituir um elemento de um vetor?',
+      },
+      {
+        type: 'default',
+        title: 'como eu faço para substituir um elemento de um vetor?',
+        body: 'Da mesma forma que colocamos novos elementos em um vetor. Caso já exista algum elemento na posição que especificarmos, esse elemento será substituído pelo novo.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+ 
+alimentos[2] = 'iogurte'
+      
+escreva(alimentos)
+  
+// Resultado: maçã, batata, iogurte, geleia`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Existem outras formas de acrescentar novos elementos a um vetor, mas por agora já estamos bem em conhecimento novo.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora você pode pergutar denovo, como eu faço para remover um elemento de um vetor?',
+      },
+      {
+        type: 'default',
+        title: 'Como eu faço para remover um elemento de um vetor?',
+        body: 'Como disse, já estamos bem em conhecimento novo, até a próxima.',
+      },
+    ],
+  },
 ];

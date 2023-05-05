@@ -1903,4 +1903,99 @@ faca {
     ],
     correctItemsIdsSequence: [1, 5, 3],
   },
+  {
+    starId: 18,
+    type: "selection",
+    stem: "Qual serão os elementos do vetor numerosDaSorte",
+    code: `var numerosDaSorte = [2, 7, 2];
+    numerosDaSorte[3] = 3`,
+    options: ["2, 7, 2, 3", "2, 7, 3", "2, 7, 3, 3", "3, 7, 2"],
+    answer: "2, 7, 2, 3",
+  },
+  {
+    starId: 18,
+    type: "checkbox",
+    stem: 'Quais os possíveis números índice eu posso usar para pegar o elemento "Cruzador" no vetor tiposDeNave?',
+    code: `var tiposDeNave = ['Cargueiro', 'Caça',  'Explorador', 'Cruzador']`,
+    options: ["3", "-1", "-3", "4"],
+    correctOptions: ["3", "-1"],
+  },
+  {
+    starId: 18,
+    type: "open",
+    stem: 'Qual o número da posição do planeta "Mercúrio" no vetor planetas',
+    code: `var planetas = ['Mercúrio', 'Vênus',  'Terra', 'Marte']`,
+    answer: "0",
+  },
+  {
+    starId: 18,
+    type: "drag-and-drop-click",
+    stem: 'Complete o código abaixo para que seja escrito "Europa"',
+    lines: [
+      {
+        id: 1,
+        texts: ["var Luas = ['Titã', 'Europa', 'Mimas', 'Fobos', 'Dione']"],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ["escreava(luas[", "dropZone", "])"],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: "2",
+      },
+      {
+        id: 2,
+        label: "1",
+      },
+      {
+        id: 3,
+        label: "0",
+      },
+      {
+        id: 4,
+        label: "3",
+      },
+      {
+        id: 5,
+        label: "4",
+      },
+    ],
+    correctItemsIdsSequence: [2],
+  },
+  {
+    starId: 18,
+    type: "drag-and-drop-list",
+    stem: 'Reordene os elementos do vetor, de modo que a constelação "Cão Maior" tenha índice 0, "Cassiopéia" tenha índice 1, "Águia" tenha índice 2 e "Órion" índice 3',
+    items: [
+      {
+        id: 1,
+        label: "var constelacoes = [",
+      },
+      {
+        id: 2,
+        label: "   'Cão Maior'",
+      },
+      {
+        id: 3,
+        label: "    'Cassiopéia'",
+      },
+      {
+        id: 4,
+        label: "    'Águia'",
+      },
+      {
+        id: 5,
+        label: "    'Órion'",
+      },
+      {
+        id: 6,
+        label: "]",
+      },
+    ],
+  },
 ];

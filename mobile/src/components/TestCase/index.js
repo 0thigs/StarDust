@@ -91,7 +91,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           <C.Put>
             <C.Label>Seu resultado</C.Label>
             <C.Value from={'user'}>
-              {userOutput.lenght > 0 ? (
+              {userOutput.length > 0 ? (
                 userOutput.map(output => (
                   <C.ValueText key={output} from={'user'}>
                     {output === 0 ? 0 : output}

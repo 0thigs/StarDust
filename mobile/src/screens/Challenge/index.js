@@ -112,8 +112,8 @@ export function Challenge({ route }) {
 
   async function verifyCase({ input }) {
     userOutputArray.current = [];
-
     const code = formatCode(userCode.current, input);
+    
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
@@ -126,10 +126,9 @@ export function Challenge({ route }) {
         setUserOutputs(currentUserOutputs => {
           return [...currentUserOutputs, userOutputArray.current];
         });
+        return;
       }
 
-      return;
-      console.log('teste', resultado.slice(-1)[0]);
       handleResult(resultado.slice(-1)[0]); // {"valor":1,"tipo":"número"};
     } catch (error) {
       handleError(error.message);
