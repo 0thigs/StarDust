@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  //   const challengeId = route.params.id;
-  const challengeId = 'a4955476-76f9-432f-877b-418e89c5022d';
+    const challengeId = route.params.id;
+//   const challengeId = '6602259c-4082-470e-9211-3740033b0271';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -77,6 +77,7 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
+      console.error(error);
       Toast.error(error.includes('null') ? 'código inválido' : error);
     }
   }
@@ -108,7 +109,7 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
-    const userResult = /^[a-zA-Z]+$/.test(result) ? result : JSON.parse(result);
+    const userResult = result.includes('{') ? JSON.parse(result) : result;
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, userResult.valor ? userResult.valor : userResult];
     });

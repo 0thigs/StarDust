@@ -32,7 +32,7 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
   function verifyResult({ expectedOutput }, index) {
     return compareSenquences(
       userOutputs[index],
-      Array.isArray(expectedOutput) ? expectedOutput : [expectedOutput]
+      Array.isArray(expectedOutput) ? expectedOutput : expectedOutput.toString()
     );
   }
 
@@ -56,7 +56,7 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
             input={input}
             expectedOutput={expectedOutput}
             isLocked={isLocked}
-            userOutput={userOutputs[index] ?? []}
+            userOutput={userOutputs[index]}
             isCorrect={results[index]}
             isOutputArray={isOutputArray.current[index] ?? false}
           />
