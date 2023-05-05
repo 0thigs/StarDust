@@ -50,7 +50,7 @@ export function End({
   const navigation = useNavigation();
 
   function getUpdatedLevel(updatedXp) {
-    const hasNewLevel = updatedXp > 50 * loggedUser.level + 25;
+    const hasNewLevel = updatedXp >= 50 * loggedUser.level + 25;
     if (hasNewLevel) {
       const newLevel = loggedUser.level + 1;
       setHasNewLevel(hasNewLevel);
@@ -61,6 +61,7 @@ export function End({
 
   async function getUpdatedData() {
     try {
+      console.log({ xp });
       const updatedCoins = coins + loggedUser.coins;
       const updatedXp = xp + loggedUser.xp;
       const updatedWeeklyXp = xp + loggedUser.weekly_xp;
