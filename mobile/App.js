@@ -16,7 +16,7 @@ import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
 import { EditorProvider } from './src/contexts/EditorContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import ToastMenager from 'toastify-react-native';
+import { default as Toast } from 'toastify-react-native';
 import './src/libs/dayjs';
 
 export default function App() {
@@ -44,7 +44,7 @@ export default function App() {
           </ConfigProvider>
         </AuthProvider>
       </ThemeProvider>
-      <ToastMenager
+      <Toast
         animationInTiming={700}
         animationOutTiming={1000}
         animationStyle={'rightInOut'}

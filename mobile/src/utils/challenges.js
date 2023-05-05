@@ -609,7 +609,7 @@ Resultado: [4, 5, 1, 3, 3, 3, 3, 3]`,
   },
   {
     starId: null,
-    title: 'Planetas encontrados',
+    title: 'Planetas pares encontrados',
     texts: [
       {
         type: 'default',
@@ -617,61 +617,60 @@ Resultado: [4, 5, 1, 3, 3, 3, 3, 3]`,
         body: 'Escapamos da explosão por um triz. Só que agora resta procurar outro planeta para explorar.',
       },
       {
+        type: 'default',
+        title: null,
+        body: 'O radar do foguete indentificou uma quantidade de planetas, porém ele diz que apenas os planetas pares realmente são seguros',
+      },
+      {
         type: 'list',
-        body: 'Enquanto o radar do foguete identifica planetas o seu papel é mostrar quantos planetas são encontrados em tempo real escrevendo a mensagem "planetas encontrados: 1", "planetas encontrados: 2", "planetas encontrados: 3" etc...',
+        title: 'Desafio',
+        body: 'Da quantidade total de planetas identificados (começando pelo 1) o seu papel é mostrar a quantidade de planetas são seguros.',
       },
       {
         type: 'code',
         body: `
-Entrada: 3
-Resultado: planetas encontrados: 1
-           planetas encontrados: 2
-           planetas encontrados: 3
+Entrada: 8
+Resultado: 4
+Explicacao: entre 1 e 8 há 4 números pares
 
-Entrada: 5
-Resultado: planetas encontrados: 1
-           planetas encontrados: 2
-           planetas encontrados: 3
-           planetas encontrados: 4
-           planetas encontrados: 5
+Entrada: 13
+Resultado: entre 1 e 13 há 6 números pares
 
 Entrada: 1
-Resultado: planetas encontrados: 1`,
+Resultado: 0
+Explicacao: entre 1 e 1 não há números pares`,
       },
       {
         type: 'alert',
         body: 'Para resolver esse desafio, você pode usar qualquer um dos 3 tipos de laço (para, enquanto ou fazer enquanto)',
       },
+      {
+        type: 'alert',
+        body: 'Dica: para saber se um número é par, você pode pegar o módulo do número por 2, usando o operador "%", ou seja, dividir por dois e verificar se há resto de divisão. Por exemplo: 4 é par, pois 4 módulo 2 (4 % 2) é igual a zero; 5 é ímpar, pois 5 módulo 2 é diferente de zero (5 % 2).',
+      },
     ],
     function: null,
     testCases: [
       {
-        input: [4],
-        expectedOutput: [
-          'Planetas encontrados: 1',
-          'Planetas encontrados: 2',
-          'Planetas encontrados: 3',
-          'Planetas encontrados: 4',
-        ],
+        input: [10],
+        expectedOutput: 5,
         isInputArray: true,
         isLocked: false,
       },
       {
-        input: [6],
-        expectedOutput: [
-          'Planetas encontrados: 1',
-          'Planetas encontrados: 2',
-          'Planetas encontrados: 3',
-          'Planetas encontrados: 4',
-          'Planetas encontrados: 5',
-          'Planetas encontrados: 6',
-        ],
+        input: [7],
+        expectedOutput: 3,
         isArray: true,
         isLocked: false,
       },
       {
         input: [1],
-        expectedOutput: ['Planetas encontrados: 1'],
+        expectedOutput: 0,
+        isLocked: false,
+      },
+      {
+        input: [0],
+        expectedOutput: 0,
         isLocked: false,
       },
     ],

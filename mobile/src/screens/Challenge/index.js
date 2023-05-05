@@ -9,7 +9,7 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import ToastMenager, { Toast } from 'toastify-react-native';
+import Container, { Toast } from 'toastify-react-native';
 
 import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  const challengeId = route.params.id;
-//   const challengeId = '6ba6061e-fc70-4c02-9ed8-4b8edb0e3623';
+  //   const challengeId = route.params.id;
+  const challengeId = 'a4955476-76f9-432f-877b-418e89c5022d';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -77,7 +77,6 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
-      console.error(error);
       Toast.error(error.includes('null') ? 'código inválido' : error);
     }
   }
@@ -98,7 +97,10 @@ export function Challenge({ route }) {
     if (!inputValues) return code;
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
-    if (!matches) throw new Error('Não remova o comando Leia()!');
+    if (!matches) {
+      Toast.error('Não remova o comando Leia()!');
+      throw new Error('Não remova o comando Leia()!');
+    }
 
     inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
     return code;
@@ -212,13 +214,6 @@ export function Challenge({ route }) {
 
   return (
     <C.Container>
-      <ToastMenager
-        animationInTiming={700}
-        animationOutTiming={1000}
-        animationStyle={'rightInOut'}
-        width={320}
-        position={'top'}
-      />
       {!isEndTrasition ? (
         <TransitionScreenAnimation />
       ) : (
