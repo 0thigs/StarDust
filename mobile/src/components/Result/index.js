@@ -5,7 +5,7 @@ import { CommentsList } from '../CommentsList';
 import * as C from './styles';
 import { compareSenquences } from '../../utils/compareSenquences';
 
-export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode }) {
+export function Result({ challengeId, testCases, userOutputs, isOutputArray, setIsEnd, goToCode }) {
   const [results, setResults] = useState([]);
   const [isAnswerWrong, setIsAnswerWrong] = useState(false);
   const [isAnswerVerified, setIsAnswerVerified] = useState(false);
@@ -30,7 +30,10 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
   }
 
   function verifyResult({ expectedOutput }, index) {
-    return compareSenquences(userOutputs[index], expectedOutput);
+    return compareSenquences(
+      userOutputs[index],
+      Array.isArray(expectedOutput) ? expectedOutput : [expectedOutput]
+    );
   }
 
   function showComments() {
@@ -55,6 +58,7 @@ export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode
             isLocked={isLocked}
             userOutput={userOutputs[index] ?? []}
             isCorrect={results[index]}
+            isOutputArray={isOutputArray.current[index] ?? false}
           />
         ))}
       </C.TestCases>

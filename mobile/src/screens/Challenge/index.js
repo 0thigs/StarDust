@@ -8,7 +8,7 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import { Toast } from 'toastify-react-native';
+import ToastMenager, { Toast } from 'toastify-react-native';
 
 import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
@@ -32,7 +32,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = 'a4955476-76f9-432f-877b-418e89c5022d';
+  const challengeId = '6ba6061e-fc70-4c02-9ed8-4b8edb0e3623';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -59,6 +59,7 @@ export function Challenge({ route }) {
   const seconds = useRef(0);
   const userCode = useRef('');
   const userOutputArray = useRef([]);
+  const isOutputArray = useRef([]);
 
   const CurrentIndicatorPositionX = useSharedValue(0);
 
@@ -104,16 +105,17 @@ export function Challenge({ route }) {
 
   function handleResult(result) {
     if (!result) return;
-    const userResult = typeof result == 'string' ? result : JSON.parse(result);
+    const userResult = /^[a-zA-Z]+$/.test(result) ? result : JSON.parse(result);
     setUserOutputs(currentUserOutputs => {
       return [...currentUserOutputs, userResult.valor ? userResult.valor : userResult];
     });
+    isOutputArray.current.push(!!userResult.valor);
   }
 
   async function verifyCase({ input }) {
     userOutputArray.current = [];
     const code = formatCode(userCode.current, input);
-    
+
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
@@ -121,6 +123,8 @@ export function Challenge({ route }) {
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }
+
+      if (erros.length) return;
 
       if (userOutputArray.current && !function_name) {
         setUserOutputs(currentUserOutputs => {
@@ -170,6 +174,7 @@ export function Challenge({ route }) {
             setIsEnd={setIsEnd}
             testCases={test_cases}
             userOutputs={userOutputs}
+            isOutputArray={isOutputArray}
             goToCode={goToCode}
           />
         ),
@@ -200,6 +205,13 @@ export function Challenge({ route }) {
 
   return (
     <C.Container>
+      <ToastMenager
+        animationInTiming={700}
+        animationOutTiming={1000}
+        animationStyle={'rightInOut'}
+        width={320}
+        position={'top'}
+      />
       {!isEndTrasition ? (
         <TransitionScreenAnimation />
       ) : (

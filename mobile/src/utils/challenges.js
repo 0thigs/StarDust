@@ -486,6 +486,7 @@ function quantosPlanetasHabitados(planetas) {
 }`,
     difficulty: 'easy',
   },
+
   {
     starId: null,
     title: 'Perímetro espacial',
@@ -547,6 +548,67 @@ Resultado: 22`,
   },
   {
     starId: null,
+    title: 'Perímetro espacial',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Em um futuro distante, várias espécies alienígenas se unem para explorar o espaço. Cada espécie possui uma lista de espaçonaves identificadas por números, letras ou combinações.',
+      },
+      {
+        type: 'list',
+        body: 'Para facilitar a união, você deve unir as listas/vetores de cada espécie em uma só, para que todos possam explorar juntos.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [1, 3, 5], [2, 6, 8]
+Resultado: [1, 3, 5, 2, 6, 8]
+
+Entrada: [7, 8], [10, 9, 1, 1, 2]
+Resultado: [7, 8, 10, 9, 1, 1, 2]
+
+Entrada: [4, 5, 1], [3, 3, 3, 3, 3]
+Resultado: [4, 5, 1, 3, 3, 3, 3, 3]`,
+      },
+      {
+        type: 'alert',
+        body: 'Dica: Você pode resolver esse desafio usando dois laços "para", um para cada vetor e então juntar em um vetor único.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [
+          [1, 2, 3],
+          [4, 5, 6],
+        ],
+        expectedOutput: [[1, 2, 3, 4, 5, 6]],
+        isLocked: false,
+      },
+      {
+        input: [
+          [0, 7, 8],
+          [100, 200],
+        ],
+        expectedOutput: [[0, 7, 8, 100, 200]],
+        isLocked: false,
+      },
+      {
+        input: [[], [1, 2, 3]],
+        expectedOutput: [[1, 2, 3]],
+        isLocked: false,
+      },
+    ],
+
+    code: `function calcularPerimetro(altura, largura) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
     title: 'Planetas encontrados',
     texts: [
       {
@@ -591,6 +653,7 @@ Resultado: planetas encontrados: 1`,
           'Planetas encontrados: 3',
           'Planetas encontrados: 4',
         ],
+        isInputArray: true,
         isLocked: false,
       },
       {
@@ -603,6 +666,7 @@ Resultado: planetas encontrados: 1`,
           'Planetas encontrados: 5',
           'Planetas encontrados: 6',
         ],
+        isArray: true,
         isLocked: false,
       },
       {

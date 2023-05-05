@@ -38,6 +38,10 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
     ButtonRotation.value = withTiming(isOpen, { duration: 500 });
   }
 
+  function formatArray(array) {
+    return '[' + array.join(', ') + ']';
+  }
+
   function handlePressButton() {
     if (isLocked) {
       return;
@@ -83,31 +87,37 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           <C.Put>
             <C.Label>Entrada</C.Label>
             <C.Value isInput={true}>
-              {input.map(input => (
-                <C.ValueText key={input}>{input ?? 'Sem entrada'}</C.ValueText>
-              ))}
+              {input.map((input, index, inputArray) => {
+                const isLastInput = index === inputArray.length - 1;
+                return (
+                  <C.ValueText key={input}>
+                    {Array.isArray(input) ? formatArray(input) : input ?? 'Sem entrada'}
+                    {!isLastInput && ', '}
+                  </C.ValueText>
+                );
+              })}
             </C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Seu resultado</C.Label>
             <C.Value from={'user'}>
-              {userOutput.length > 0 ? (
-                userOutput.map(output => (
-                  <C.ValueText key={output} from={'user'}>
-                    {output === 0 ? 0 : output}
-                  </C.ValueText>
-                ))
-              ) : (
-                <C.ValueText from={'user'}>Sem resultado</C.ValueText>
-              )}
+              <C.ValueText from={'user'}>
+                {userOutput.length > 1
+                  ? formatArray(userOutput)
+                  : userOutput === 0
+                  ? 0
+                  : userOutput[0]
+                  ? userOutput[0]
+                  : 'Sem resultado'}
+              </C.ValueText>
             </C.Value>
           </C.Put>
           <C.Put>
             <C.Label>Resultado esperado</C.Label>
             <C.Value>
-              {expectedOutput.map(output => (
-                <C.ValueText key={output}>{output}</C.ValueText>
-              ))}
+              <C.ValueText>
+                {Array.isArray(expectedOutput) ? formatArray(expectedOutput) : expectedOutput}
+              </C.ValueText>
             </C.Value>
           </C.Put>
         </C.Body>
