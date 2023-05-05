@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { View } from 'react-native';
 import { NavigationContainer, getStateFromPath } from '@react-navigation/native';
-import { StackRoutes } from './stack.routes';
-import theme from '../global/styles/theme';
 import { AuthRoutes } from './auth.routes';
 import { AppRoutes } from './app.routes';
 import { Loading } from '../components/Loading';
+import theme from '../global/styles/theme';
 
 const linking = {
   prefixes: ['exp://192.168.1.11:19000/--/stardust'],

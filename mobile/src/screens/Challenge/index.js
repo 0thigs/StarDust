@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { ChallengeHeader } from '../../components/ChallengeHeader';
 import { Code } from '../../components/Code';
 import { Problem } from '../../components/Problem';
@@ -31,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  // const challengeId = route.params.id;
-  const challengeId = '6ba6061e-fc70-4c02-9ed8-4b8edb0e3623';
+  const challengeId = route.params.id;
+//   const challengeId = '6ba6061e-fc70-4c02-9ed8-4b8edb0e3623';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -148,6 +149,12 @@ export function Challenge({ route }) {
     setIsRunning(false);
   }
 
+  useFocusEffect(
+    useCallback(() => {
+      setIsEnd(false);
+    }, [])
+  );
+
   useEffect(() => {
     if (!Object.entries(challenge).length) return;
     const slides = [
@@ -199,7 +206,7 @@ export function Challenge({ route }) {
   }, [seconds.current]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsEndTransition(true), 3000);
+    let timer = setTimeout(() => setIsEndTransition(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 

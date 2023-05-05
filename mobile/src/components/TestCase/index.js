@@ -87,15 +87,19 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           <C.Put>
             <C.Label>Entrada</C.Label>
             <C.Value isInput={true}>
-              {input.map((input, index, inputArray) => {
-                const isLastInput = index === inputArray.length - 1;
-                return (
-                  <C.ValueText key={input}>
-                    {Array.isArray(input) ? formatArray(input) : input ?? 'Sem entrada'}
-                    {!isLastInput && ', '}
-                  </C.ValueText>
-                );
-              })}
+              {!input.length ? (
+                <C.ValueText>Sem entrada</C.ValueText>
+              ) : (
+                input.map((input, index, inputArray) => {
+                  const isLastInput = index === inputArray.length - 1;
+                  return (
+                    <C.ValueText key={input}>
+                      {!input ? 'Sem entrada' : Array.isArray(input) ? formatArray(input) : input}
+                      {!isLastInput && ', '}
+                    </C.ValueText>
+                  );
+                })
+              )}
             </C.Value>
           </C.Put>
           <C.Put>
