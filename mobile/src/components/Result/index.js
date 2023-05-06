@@ -42,6 +42,7 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
 
   useEffect(() => {
     if (userOutputs.length === testCases.length) {
+      console.log(userOutputs);
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);

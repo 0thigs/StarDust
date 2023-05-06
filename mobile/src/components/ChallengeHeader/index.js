@@ -34,6 +34,7 @@ export function ChallengeHeader({
   async function copyCodeToClipboard() {
     try {
       await Clipboard.setStringAsync(userCode.current);
+      Toast.success('Código copiado')
     } catch (error) {
       console.error(error);
       Toast.error('Não foi possível copiar o código');

@@ -9,7 +9,7 @@ import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
 
 import { execute } from '../../libs/delegua.mjs';
-import Container, { Toast } from 'toastify-react-native';
+import { Toast } from 'toastify-react-native';
 
 import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
@@ -27,13 +27,13 @@ const earningsByDifficulty = {
   },
   hard: {
     coins: 40,
-    xp: 30,
+    xp: 30, 
   },
 };
 
 export function Challenge({ route }) {
-    const challengeId = route.params.id;
-//   const challengeId = '6602259c-4082-470e-9211-3740033b0271';
+    // const challengeId = route.params.id;
+  const challengeId = '56373af2-ac24-4bcd-a312-7d01bd7b5f53';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
