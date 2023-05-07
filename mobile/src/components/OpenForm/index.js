@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { VerificationButton } from '../VerificationButton';
 import { useLesson } from '../../hooks/useLesson';
-import { QuestionStem } from '../Quiz/styles';
+import { QuestionCode, QuestionStem } from '../Quiz/styles';
+import { Editor } from '../Editor';
+import { getCodeHeight } from '../../utils/getCodeHeight';
 import * as C from './styles';
 
-export function OpenForm({ stem, answer, index }) {
+export function OpenForm({ stem, answer, code, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [userAnswer, setUserAnswer] = useState('');
   const [isIncremented, setIsncremented] = useState(false);
@@ -33,7 +34,6 @@ export function OpenForm({ stem, answer, index }) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) dispatch({ type: 'changeQuestion' });
-
       return;
     }
 
@@ -65,17 +65,17 @@ export function OpenForm({ stem, answer, index }) {
       {isCurrentQuestion && (
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          {code && (
+            <QuestionCode height={getCodeHeight(code, 'open')}>
+              <Editor value={code} />
+            </QuestionCode>
+          )}
           <C.Input
             value={userAnswer}
             onChangeText={setUserAnswer}
             isAnswerWrong={isAnswerVerified && isAnswerWrong}
           />
-          <VerificationButton
-            verifyAnswer={handleVerifyAnswer}
-            isAnswerVerified={isAnswerVerified}
-            isAnswerWrong={isAnswerWrong}
-            isAnswered={userAnswer}
-          />
+        
         </>
       )}
     </C.Container>

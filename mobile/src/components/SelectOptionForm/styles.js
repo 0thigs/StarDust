@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
+import { lessonContainerWidth } from '../../screens/Lesson/styles';
 
 export const Container = styled.View`
   flex: 1;
@@ -12,6 +13,7 @@ export const Options = styled.View`
 
 export const OptionContainer = styled(Animatable.View)`
   align-items: center;
+  width: ${lessonContainerWidth};
 `;
 
 export const Option = styled.TouchableOpacity`
@@ -26,7 +28,7 @@ export const Option = styled.TouchableOpacity`
       ? theme.colors.blue_300
       : theme.colors.white};
   height: 48px;
-  width: 350px;
+  width: 100%;
   border-radius: 4px;
   margin-top: 8px;
   align-items: center;

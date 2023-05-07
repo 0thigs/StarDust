@@ -3,12 +3,14 @@ import { useLesson } from '../../hooks/useLesson';
 import Animated, { RotateInDownRight, RotateOutDownRight } from 'react-native-reanimated';
 
 import { reorderItems } from '../../utils/reorderItems';
+import { getCodeHeight } from '../../utils/getCodeHeight';
 import { QuestionCode, QuestionStem } from '../Quiz/styles';
 import { Editor } from '../Editor';
+
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import * as Icon from 'react-native-feather';
-const delay = 200;
+const delay = 500;
 
 export function CheckboxForm({ stem, options, correctOptions, code, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
@@ -89,13 +91,13 @@ export function CheckboxForm({ stem, options, correctOptions, code, index }) {
     <C.Container>
       <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
       {code && (
-        <QuestionCode>
+        <QuestionCode height={getCodeHeight(code, 'checkbox')}>
           <Editor value={code} />
         </QuestionCode>
       )}
       <C.Options>
         {reorderedOptions.map((option, index) => (
-          <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
+          <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index / 2 + 1)}>
             <C.Option
               onPress={() => handleCheckOption(option)}
               disabled={isAnswerVerified}
@@ -137,12 +139,6 @@ export function CheckboxForm({ stem, options, correctOptions, code, index }) {
           </C.OptionContainer>
         ))}
       </C.Options>
-      {/* <VerificationButton
-        verifyAnswer={handleVerifyAnswer}
-        isAnswerWrong={isAnswerWrong}
-        isAnswerVerified={isAnswerVerified}
-        isAnswered={!!userOptions}
-      /> */}
     </C.Container>
   );
 }

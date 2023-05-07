@@ -34,7 +34,7 @@ export function End({
   addUserCompletedChallenges,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const { planets, getCurrentPlanet, getNextStar, addUnlockedStar } = usePlanet();
+  const { planets, getCurrentPlanet, getCurrentStar, getNextStar, addUnlockedStar } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -83,14 +83,15 @@ export function End({
       }
 
       let completedPlanets = loggedUser.completed_planets;
-      let updatedUnlockedStars = loggedUser.unlocked_stars + 1;
+      const isCurrentStarUnlocked = getCurrentStar(starId).isUnlocked;
+      let updatedUnlockedStars = loggedUser.unlocked_stars + isCurrentStarUnlocked ? 1 : 0;
       let nextStar = getNextStar(starId);
 
       if (!nextStar) {
-        completedPlanets += 1;
         const currentPlanet = getCurrentPlanet(starId);
         const nextPlanet = planets.find(planet => planet.position === currentPlanet.position + 1);
         nextStar = nextPlanet ? nextPlanet.stars[0] : null;
+        completedPlanets += nextPlanet ? 1 : 0;
       }
 
       if (nextStar && !nextStar.isUnlocked) {
@@ -134,7 +135,7 @@ export function End({
   }
 
   function getCoins() {
-    let maxCoins = !isCompleted ? 20 : 10;
+    let maxCoins = !isCompleted ? 10 : 5;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxCoins -= !isCompleted ? 5 : 2;
     }
@@ -142,7 +143,7 @@ export function End({
   }
 
   function getXp() {
-    let maxXp = !isCompleted ? 10 : 5;
+    let maxXp = !isCompleted ? 20 : 10;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxXp -= !isCompleted ? 2 : 1;
     }
@@ -158,6 +159,7 @@ export function End({
   function handleButtonClick() {
     const todayIndex = dayjs().day();
     const today = loggedUser.week_status[todayIndex];
+    console.log(today === 'todo');
 
     if (isFirstClick) {
       setIsModalVisible(true);

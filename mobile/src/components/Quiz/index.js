@@ -29,7 +29,7 @@ export function Quiz() {
     });
   }
 
-  function getForm(question, index) {
+  function getForms(question, index) {
     switch (question.type) {
       case 'selection':
         return {
@@ -47,7 +47,9 @@ export function Quiz() {
       case 'open':
         return {
           id: index,
-          component: <OpenForm stem={question.stem} answer={question.answer} index={index} />,
+          component: (
+            <OpenForm stem={question.stem} answer={question.answer} code={question.code} index={index} />
+          ),
         };
       case 'checkbox':
         return {
@@ -94,7 +96,7 @@ export function Quiz() {
 
   useEffect(() => {
     if (forms.length) return;
-    setForms(state.questions.map(getForm));
+    setForms(state.questions.map(getForms));
   }, []);
 
   useEffect(() => {

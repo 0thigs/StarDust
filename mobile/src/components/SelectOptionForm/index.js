@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { reorderItems } from '../../utils/reorderItems';
+import { getCodeHeight } from '../../utils/getCodeHeight';
 import { Editor } from '../Editor';
 import { QuestionStem, QuestionCode } from '../Quiz/styles';
 import * as C from './styles';
-const delay = 200;
+const delay = 500;
 
 export function SelectOptionForm({ stem, code, options, answer, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
@@ -78,13 +79,13 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
           {code && (
-            <QuestionCode>
+            <QuestionCode height={getCodeHeight(code, 'selection')}>
               <Editor value={code} />
             </QuestionCode>
           )}
           <C.Options>
             {reorderedOptions.map((option, index) => (
-              <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index + 1)}>
+              <C.OptionContainer key={index} animation={'fadeInLeft'} delay={delay * (index / 2 + 1)}>
                 <C.Option
                   onPress={() => handleSelectOption(option)}
                   disabled={isAnswerVerified}

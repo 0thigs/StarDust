@@ -1905,76 +1905,96 @@ faca {
   },
   {
     starId: 18,
-    type: "selection",
-    stem: "Qual serão os elementos do vetor numerosDaSorte",
+    type: 'selection',
+    stem: 'Qual serão os elementos do vetor numerosDaSorte',
     code: `var numerosDaSorte = [2, 7, 2];
-    numerosDaSorte[3] = 3`,
-    options: ["2, 7, 2, 3", "2, 7, 3", "2, 7, 3, 3", "3, 7, 2"],
-    answer: "2, 7, 2, 3",
+numerosDaSorte[3] = 3
+escreva(numerosDaSorte)`,
+    options: ['2, 7, 2, 3', '2, 7, 3', '2, 7, 3, 3', '3, 7, 2'],
+    answer: '2, 7, 2, 3',
   },
   {
     starId: 18,
-    type: "checkbox",
+    type: 'checkbox',
     stem: 'Quais os possíveis números índice eu posso usar para pegar o elemento "Cruzador" no vetor tiposDeNave?',
-    code: `var tiposDeNave = ['Cargueiro', 'Caça',  'Explorador', 'Cruzador']`,
-    options: ["3", "-1", "-3", "4"],
-    correctOptions: ["3", "-1"],
+    code: `var tiposDeNave = [
+    'Cargueiro',
+    'Caça',  
+    'Explorador', 
+    'Cruzador'
+]`,
+    options: ['3', '-1', '-3', '4'],
+    correctOptions: ['3', '-1'],
   },
   {
     starId: 18,
-    type: "open",
+    type: 'open',
     stem: 'Qual o número da posição do planeta "Mercúrio" no vetor planetas',
     code: `var planetas = ['Mercúrio', 'Vênus',  'Terra', 'Marte']`,
-    answer: "0",
+    answer: '0',
   },
   {
     starId: 18,
-    type: "drag-and-drop-click",
-    stem: 'Complete o código abaixo para que seja escrito "Europa"',
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código abaixo para que seja escrito nessa ordem "Europa, Fobos, Titã"',
     lines: [
       {
         id: 1,
-        texts: ["var Luas = ['Titã', 'Europa', 'Mimas', 'Fobos', 'Dione']"],
+        texts: ['var luas = ["Titã", "Europa", "Mimas", "Fobos", "Dione"]'],
         indentLevel: 0,
       },
       {
         id: 2,
-        texts: ["escreava(luas[", "dropZone", "])"],
+        texts: ['escreava(luas[ ', 'dropZone', ' ])'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreava(luas[ ', 'dropZone', ' ])'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['escreava(luas[ ', 'dropZone', ' ])'],
         indentLevel: 0,
       },
     ],
     dropItems: [
       {
         id: 1,
-        label: "2",
+        label: '2',
       },
       {
         id: 2,
-        label: "1",
+        label: '1',
       },
       {
         id: 3,
-        label: "0",
+        label: '0',
       },
       {
         id: 4,
-        label: "3",
+        label: '3',
       },
       {
         id: 5,
-        label: "4",
+        label: '4',
+      },
+      {
+        id: 6,
+        label: '5',
       },
     ],
-    correctItemsIdsSequence: [2],
+    correctItemsIdsSequence: [2, 4, 3],
   },
   {
     starId: 18,
-    type: "drag-and-drop-list",
+    type: 'drag-and-drop-list',
     stem: 'Reordene os elementos do vetor, de modo que a constelação "Cão Maior" tenha índice 0, "Cassiopéia" tenha índice 1, "Águia" tenha índice 2 e "Órion" índice 3',
     items: [
       {
         id: 1,
-        label: "var constelacoes = [",
+        label: 'var constelacoes = [',
       },
       {
         id: 2,
@@ -1994,7 +2014,7 @@ faca {
       },
       {
         id: 6,
-        label: "]",
+        label: ']',
       },
     ],
   },

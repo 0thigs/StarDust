@@ -9,44 +9,28 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const Content = styled.ScrollView`
- 
-`;
-
-
-
-// export const Container = styled.ScrollView.attrs(() => ({
-//     contentContainerStyle: {
-//       flex: 1,
-//       alignItems: 'center',
-//       marginTop: 40,
-//       width: '100%',
-//     },
-//   }))``;
+export const Content = styled.ScrollView``;
 
 export const QuestionStem = styled(Animatable.Text)`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.regular};
   max-width: ${lessonContainerWidth};
-  margin: 8px 0 12px;
-  letter-spacing: .8px;
+  margin: 8px 0 16px;
+  letter-spacing: 0.8px;
   line-height: 24px;
   align-self: center;
 `;
 
 export const QuestionCode = styled.ScrollView`
-  color: ${({ theme }) => theme.colors.white};
-  font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: 16px;
   align-self: center;
-  width: 90%;
-  max-height: 250px;
+  width: ${lessonContainerWidth};
+  max-height: ${({ height }) => height}px;
 `;
 
 export const Text = styled.Text`
   text-align: center;
-  color: ${props => props.theme.colors.white};
-  font-family: ${props => props.theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 16px;
 `;
 

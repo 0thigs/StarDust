@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Volume2, VolumeX } from 'react-native-feather';
+import { Editor } from '../Editor';
+
 import TypeWriter from 'react-native-typewriter';
 import theme from '../../global/styles/theme';
 import AlertIcon from '../../assets/GlobalAssets/alert-icon.svg';
-import { Volume2, VolumeX } from 'react-native-feather';
-import { Editor } from '../Editor';
+
 import * as C from './styles';
 import * as Speech from 'expo-speech';
+const iconSize = 25;
 
 export function Text({ type, title, body, isRendered, isRunnable }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();
-  const iconSize = 25;
   const iconColor =
     theme.colors[type === 'default' ? 'white' : type === 'alert' ? 'black' : 'blue_300'];
 

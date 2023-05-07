@@ -9,7 +9,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
   const canRegisterZone = zones.length < totalDropZones;
 
   useEffect(() => {
-    if (zones.length) {
+    if (zones.length && !isFirstRendering) {
       const targetZone = zones.find(zone => zone.id === id);
       if (targetZone) setZoneWidth(targetZone?.width);
     }
@@ -46,8 +46,8 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
         itemId: null,
       };
       if (canRegisterZone) {
-        setIsFirstRendering(false);
         setZones(zones => [...zones, zone]);
+        setIsFirstRendering(false);
       } else {
         updateZone(zone);
       }
@@ -58,7 +58,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={isFirstRendering || zoneWidth === 0 ? 15 : zoneWidth}
+      width={zoneWidth === 0 ? 15 : zoneWidth}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );
