@@ -11,7 +11,7 @@ export const Graph = styled.View``;
 export const Count = styled.Text`
   position: absolute;
   top: 42%;
-  left: 39%;
+  left: ${({ currentCount }) => (currentCount > 10 ? '36%' : '39%')};
   font-size: 20px;
   font-family: ${({ theme }) => theme.fonts.code};
   color: ${({ theme }) => theme.colors.white};

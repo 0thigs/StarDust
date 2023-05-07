@@ -77,7 +77,9 @@ export function ChallengesGraph({ userId }) {
             />
           </CircularProgressBase>
         </CircularProgressBase>
-        <C.Count>{getCompletedChallengesCount()}</C.Count>
+        <C.Count currentCount={getCompletedChallengesCount()}>
+          {getCompletedChallengesCount()}
+        </C.Count>
       </C.Graph>
       <C.Legends>
         <C.Legend>
