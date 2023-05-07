@@ -50,8 +50,12 @@ export const Icon = styled.View`
   right: 8px;
 `;
 
-export const Texts = styled.ScrollView`
+export const TextsContainer = styled.View`
   height: 500px;
 `;
 
-export const Back = styled.TouchableOpacity``;
+export const Texts = styled.FlatList``;
+
+export const Back = styled.TouchableOpacity`
+  margin-bottom: 8px;
+`;

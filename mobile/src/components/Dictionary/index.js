@@ -80,17 +80,15 @@ export function Dictionary({ isVisible, setIsVisible, topicId }) {
             <C.Back onPress={handleBackButtonPress}>
               <ArrowLeft color={theme.colors.green_300} />
             </C.Back>
-            <C.Texts>
-              {texts.map(({ type, title, body }, index) => (
-                <Text
-                  key={`text-${index}`}
-                  type={type}
-                  title={title}
-                  body={body}
-                  isRendered={true}
-                />
-              ))}
-            </C.Texts>
+            <C.TextsContainer>
+              <C.Texts
+                data={texts}
+                keyExtractor={(_, index) => `text-${index}`}
+                renderItem={({ item: { type, title, body } }) => (
+                  <Text type={type} title={title} body={body} isRendered={true} />
+                )}
+              />
+            </C.TextsContainer>
           </>
         ) : (
           <C.TopicsList
