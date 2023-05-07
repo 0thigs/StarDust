@@ -1,17 +1,24 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import * as C from '../DragAndDropClickForm/styles';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, linesWidth }) {
-  const [zoneWidth, setZoneWidth] = useState(0);
   const [isFirstRendering, setIsFirstRendering] = useState(true);
+  const zoneWidth = useSharedValue(15);
   const zoneRef = useRef(null);
   const canRegisterZone = zones.length < totalDropZones;
+
+  const zoneAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      width: zoneWidth.value,
+    };
+  });
 
   useEffect(() => {
     if (zones.length && !isFirstRendering) {
       const targetZone = zones.find(zone => zone.id === id);
-      if (targetZone) setZoneWidth(targetZone?.width);
+      if (targetZone) zoneWidth.value = withTiming(targetZone.width, { duration: 200 });
     }
   }, [zones]);
 
@@ -58,7 +65,7 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
     <C.DropZone
       ref={zoneRef}
       onLayout={registerZone}
-      width={zoneWidth === 0 ? 15 : zoneWidth}
+      style={zoneAnimatedStyle}
       isAnswerWrong={isAnswerWrong}
     ></C.DropZone>
   );

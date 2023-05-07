@@ -35,7 +35,7 @@ export const Text = styled.Text`
 `;
 
 export const DropZone = styled(Animated.View)`
-  width: ${({ width }) => width}px;
+  /* width: ${({ width }) => width}px; */
   border-width: 1px;
   border-bottom-color: ${({ theme, isAnswerWrong }) =>
     theme.colors[isAnswerWrong ? 'red_700' : 'green_500']};
