@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -15,7 +15,7 @@ export function DropItem({
 }) {
   const [isItemInZone, setIsItemInZone] = useState(false);
   const [isFirstRendering, setisFirstRendering] = useState(false);
-  const [itemWidth, setItemWidth] = useState(null);
+  const itemWidth = useRef(0);
   const characterHeight = 8;
 
   const initialPosition = {
@@ -76,7 +76,7 @@ export function DropItem({
         currentPosition.y.value =
           zone.y - initialPosition.y.value - (C.itemHeight / 2 + characterHeight);
         zone.itemId = id;
-        zone.width = itemWidth - 20;
+        zone.width = itemWidth.current - 20;
         setIsItemInZone(true);
         updateZone(zone);
         break;
@@ -99,27 +99,29 @@ export function DropItem({
   }, [zones]);
 
   return (
-    <C.DropItem
-      key={id}
-      activeOpacity={0.7}
-      isItemInZone={isItemInZone}
-      onLayout={event => {
-        event.target.measure((x, y, width, height, pageX, pageY) => {
-          if (!isFirstRendering) {
-            initialPosition.x.value = pageX;
-            initialPosition.y.value = pageY;
-            setItemWidth(width);
-            setisFirstRendering(false);
-          }
-        });
-      }}
-      onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick(id)}
-      style={ItemAnimatedStyle}
-    >
-      <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
-        {label}
-      </C.Label>
-      {/* <C.Placeholder itemWidth={itemWidth} /> */}
-    </C.DropItem>
+    <C.ItemContainer>
+      <C.DropItem
+        key={id}
+        activeOpacity={0.7}
+        isItemInZone={isItemInZone}
+        onLayout={event => {
+          event.target.measure((x, y, width, height, pageX, pageY) => {
+            if (!isFirstRendering) {
+              initialPosition.x.value = pageX;
+              initialPosition.y.value = pageY;
+              itemWidth.current = width;
+              setisFirstRendering(false);
+            }
+          });
+        }}
+        onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick(id)}
+        style={ItemAnimatedStyle}
+      >
+        <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
+          {label}
+        </C.Label>
+      </C.DropItem>
+     {isItemInZone && <C.Placeholder itemWidth={itemWidth.current} />}
+    </C.ItemContainer>
   );
 }

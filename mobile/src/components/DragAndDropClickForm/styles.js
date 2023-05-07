@@ -52,8 +52,11 @@ export const DropItems = styled.View`
   justify-content: center;
 `;
 
-export const DropItem = styled(Animated.View)`
+export const ItemContainer = styled.View`
   position: relative;
+`;
+
+export const DropItem = styled(Animated.View)`
   margin-left: 12px;
   margin-bottom: 12px;
   min-width: 40px;
@@ -64,6 +67,7 @@ export const DropItem = styled(Animated.View)`
   border-color: transparent;
   border-radius: 4px;
   height: ${itemHeight}px;
+  z-index: 20;
 
   ${({ isItemInZone }) =>
     !isItemInZone &&
@@ -74,9 +78,15 @@ export const DropItem = styled(Animated.View)`
     `}
 `;
 export const Placeholder = styled.View`
+  z-index: -20;
+  position: absolute;
+  right: 0;
   background-color: transparent;
+  border-radius: 4px;
   border: dashed 1px ${({ theme }) => theme.colors.white};
   width: ${({ itemWidth }) => (itemWidth ? itemWidth : 40)}px;
+  height: 40px;
+  pointer-events: none;
 `;
 
 export const Label = styled.Text`
