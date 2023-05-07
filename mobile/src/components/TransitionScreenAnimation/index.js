@@ -1,14 +1,14 @@
 import { useRoute } from '@react-navigation/native';
 import { Animation } from '../Animation';
-import Transition from '../../assets/animations/transition-animation.json';
 import { tips } from '../../utils/tips';
+import Transition from '../../assets/animations/transition-animation.json';
 import * as C from './styles';
 
 export function TransitionScreenAnimation() {
   const route = useRoute();
 
   function getRandomTip() {
-    const randomNumber = Math.floor(Math.random() * (tips.length - 1 - 1 + 1)) + 1;
+    const randomNumber = Math.floor(Math.random() * tips.length - 1) + 1;
     return tips[randomNumber];
   }
 

@@ -34,7 +34,7 @@ export const CodeButton = styled.TouchableOpacity`
   padding: 4px;
   position: absolute;
   right: 0;
-  top: 32px;
+  bottom: 8px;
   z-index: 5;
 `;
 
@@ -47,7 +47,7 @@ export const CodeButtonTitle = styled.Text`
 
 const ListContainer = css`
   background-color: ${({ theme }) => theme.colors.blue_700};
-  border-width: 2px;
+  border-left-width: 2px;
   border-left-color: ${({ theme }) => theme.colors.blue_300};
   width: 100%;
 `;
@@ -59,7 +59,7 @@ const AlertContainer = css`
 `;
 
 export const Body = styled.View`
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 16px;
   ${({ type }) => type === 'default' && DefaultContainer}
   ${({ type }) => type === 'list' && ListContainer}

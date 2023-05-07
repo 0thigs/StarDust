@@ -19,9 +19,9 @@ export function AppRoutes() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Challenge" component={Challenge} />
-      <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Intro" component={Intro} />

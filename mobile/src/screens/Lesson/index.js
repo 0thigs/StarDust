@@ -9,8 +9,8 @@ import { TransitionScreenAnimation } from '../../components/TransitionScreenAnim
 import * as C from './styles';
 
 export function Lesson({ route }) {
-    const starId = route?.params?.id;
-//   const starId = 'ff16187f-0754-4548-9362-250f0d216fcc';
+    // const starId = route?.params.id;
+  const starId = '10fb460c-2dea-4ff9-ac2b-8dbd57d5e271';
   const { planets, getCurrentStar } = usePlanet();
   const [star, setStar] = useState(null);
   const [state, dispatch] = useLesson();

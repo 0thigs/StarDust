@@ -2582,7 +2582,12 @@ escreva(alimentos)
       },
       {
         type: 'code',
-        body: `var alimentos = ['maçã', 'batata', 'bife', 'geleia']
+        body: `var alimentos = [
+    'maçã',
+    'batata',
+    'bife',
+    'geleia'
+]
  
 alimentos[2] = 'iogurte'
       
@@ -2593,6 +2598,11 @@ escreva(alimentos)
       },
       {
         type: 'alert',
+        body: 'Perceba que escrevi o vetor de um jeito diferenciado: Em vez de colocar os elementos um do lado do outro, coloquei um em baixo do outro separados por vírgulas, o que também é totalmente possível',
+      },
+      {
+        type: 'default',
+        title: null,
         body: 'Existem outras formas de acrescentar novos elementos a um vetor, mas por agora já estamos bem em conhecimento novo.',
       },
       {
