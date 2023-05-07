@@ -113,9 +113,7 @@ export function End({
   async function updateUserData() {
     try {
       const newData = await getUpdatedData();
-      for (let key of Object.keys(newData)) {
-        await updateLoggedUser(key, newData[key]);
-      }
+      await updateLoggedUser(_, _, newData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -201,7 +199,7 @@ export function End({
   }, []);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (!planets.length) return;
     setTimeout(() => updateUserData(), 750);
   }, [planets]);

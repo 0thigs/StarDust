@@ -169,7 +169,7 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function updateLoggedUser(prop, data) {
+  async function updateLoggedUser(prop, data, objectData = false) {
     try {
       await api.updateUser(prop, data, loggedUser.id);
       setLoggedUser(currentData => ({ ...currentData, [prop]: data }));
