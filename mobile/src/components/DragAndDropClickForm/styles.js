@@ -53,6 +53,7 @@ export const DropItems = styled.View`
 `;
 
 export const DropItem = styled(Animated.View)`
+  position: relative;
   margin-left: 12px;
   margin-bottom: 12px;
   min-width: 40px;
@@ -61,6 +62,7 @@ export const DropItem = styled(Animated.View)`
   padding: 0 ${itemPadding}px;
   border-width: ${itemBorderWidth}px;
   border-color: transparent;
+  border-radius: 4px;
   height: ${itemHeight}px;
 
   ${({ isItemInZone }) =>
@@ -71,9 +73,14 @@ export const DropItem = styled(Animated.View)`
       border-radius: 4px;
     `}
 `;
+export const Placeholder = styled.View`
+  background-color: transparent;
+  border: dashed 1px ${({ theme }) => theme.colors.white};
+  width: ${({ itemWidth }) => (itemWidth ? itemWidth : 40)}px;
+`;
 
 export const Label = styled.Text`
   color: ${({ theme, isItemInZone, isAnswerWrong }) =>
     theme.colors[isItemInZone && isAnswerWrong ? 'red_300' : isItemInZone ? 'green_500' : 'white']};
-  font-family: ${({ theme }) => theme.fonts.code};  
+  font-family: ${({ theme }) => theme.fonts.code};
 `;

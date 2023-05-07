@@ -14,6 +14,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   const [reorderedItems, setReorderedItems] = useState([]);
   const [linesWidth, setLinesWidth] = useState([]);
   const [zones, setZones] = useState([]);
+  const [targetZone, setTargetZone] = useState(null);
 
   function getTotalDropZones(total, text) {
     return (total += text === 'dropZone' ? 1 : 0);
@@ -113,6 +114,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                         zones={zones}
                         setZones={setZones}
                         totalDropZones={totalDropZones}
+                        targetZone={targetZone}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
                         linesWidth={linesWidth}
                       />
@@ -131,6 +133,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 label={label}
                 zones={zones}
                 setZones={setZones}
+                setTargetZone={setTargetZone}
                 totalDropZones={totalDropZones}
                 reorderedItems={reorderedItems}
                 isAnswerVerified={isAnswerVerified}

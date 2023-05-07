@@ -3,7 +3,15 @@ import { minZoneWidth } from '../DragAndDropListForm/styles';
 import * as C from '../DragAndDropClickForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, linesWidth }) {
+export function DropZone({
+  id,
+  zones,
+  setZones,
+  totalDropZones,
+  targetZone,
+  isAnswerWrong,
+  linesWidth,
+}) {
   const [isFirstRendering, setIsFirstRendering] = useState(true);
   const zoneWidth = useSharedValue(15);
   const zoneRef = useRef(null);
@@ -16,9 +24,8 @@ export function DropZone({ id, zones, setZones, totalDropZones, isAnswerWrong, l
   });
 
   useEffect(() => {
-    if (zones.length && !isFirstRendering) {
-      const targetZone = zones.find(zone => zone.id === id);
-      if (targetZone) zoneWidth.value = withTiming(targetZone.width, { duration: 200 });
+    if (targetZone && id === targetZone.id && targetZone.width !== zoneWidth.value) {
+      zoneWidth.value = withTiming(targetZone.width, { duration: 200 });
     }
   }, [zones]);
 

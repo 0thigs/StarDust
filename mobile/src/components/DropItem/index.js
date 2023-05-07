@@ -9,6 +9,7 @@ export function DropItem({
   label,
   zones,
   setZones,
+  setTargetZone,
   isAnswerVerified,
   isAnswerWrong,
 }) {
@@ -40,6 +41,7 @@ export function DropItem({
     setZones(currentZones =>
       currentZones.map(currentZone => (currentZone.id === targetZone.id ? targetZone : currentZone))
     );
+    setTargetZone({ id: targetZone.id, width: targetZone.width });
   }
 
   function resetPosition() {
@@ -61,7 +63,7 @@ export function DropItem({
     resetPosition();
     const targetZone = zones.find(zone => zone.itemId === id);
     targetZone.itemId = null;
-    targetZone.width = 20;
+    targetZone.width = 15;
     setIsItemInZone(false);
     updateZone(targetZone);
   }
@@ -92,7 +94,7 @@ export function DropItem({
   }
 
   useEffect(() => {
-    if (isFirstRendering) return
+    if (isFirstRendering) return;
     adjustPosition(id);
   }, [zones]);
 
@@ -103,10 +105,10 @@ export function DropItem({
       isItemInZone={isItemInZone}
       onLayout={event => {
         event.target.measure((x, y, width, height, pageX, pageY) => {
-          setItemWidth(width);
           if (!isFirstRendering) {
             initialPosition.x.value = pageX;
             initialPosition.y.value = pageY;
+            setItemWidth(width);
             setisFirstRendering(false);
           }
         });
@@ -117,6 +119,7 @@ export function DropItem({
       <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
         {label}
       </C.Label>
+      {/* <C.Placeholder itemWidth={itemWidth} /> */}
     </C.DropItem>
   );
 }
