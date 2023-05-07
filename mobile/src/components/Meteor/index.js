@@ -42,7 +42,7 @@ export function Meteor({ currentYOffset, screenWidth }) {
   });
 
   function handleMeteorPress() {
-    updateLoggedUser('coins', loggedUser.coins + coins);
+    updateLoggedUser({coins: loggedUser.coins + coins});
     setIsModalVisible(true);
   }
 

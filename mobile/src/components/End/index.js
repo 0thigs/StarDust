@@ -113,7 +113,7 @@ export function End({
   async function updateUserData() {
     try {
       const newData = await getUpdatedData();
-      await updateLoggedUser(_, _, newData);
+      await updateLoggedUser(newData);
     } catch (error) {
       console.error(error);
     } finally {

@@ -18,7 +18,7 @@ export function HeaderStatus() {
     setIsLoading(true);
 
     try {
-      await updateLoggedUser('did_break_streak', false);
+      await updateLoggedUser({ did_break_streak: false });
       setIsModalVisible(false);
     } catch (error) {
       console.error(error);

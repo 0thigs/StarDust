@@ -42,8 +42,7 @@ export function Avatar({
 
     const updatedCoins = loggedUser.coins - price;
     try {
-      await updateLoggedUser('coins', updatedCoins);
-      await addUserAcquiredAvatar(id);
+      await Promise.all([updateLoggedUser({ coins: updatedCoins }), addUserAcquiredAvatar(id)]);
 
       selectAvatar();
       setModalType('earning');
@@ -57,7 +56,7 @@ export function Avatar({
 
   async function selectAvatar() {
     try {
-      await updateLoggedUser('avatar_id', id);
+      await updateLoggedUser({ avatar_id: id });
       soundRef.current.play();
     } catch (error) {
       console.error(error);

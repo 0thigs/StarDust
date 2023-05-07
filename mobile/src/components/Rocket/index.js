@@ -46,8 +46,8 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
     try {
       await Promise.all([
         addUserAcquiredRocket(id),
-        updateLoggedUser('coins', updatedCoins),
-        updateLoggedUser('acquired_rockets', updatedAcquiredRockets),
+        updateLoggedUser({ coins: updatedCoins, acquired_rockets: updatedAcquiredRockets }),
+        updateLoggedUser(),
       ]);
     } catch (error) {
       console.error(error);
@@ -60,7 +60,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
 
   async function selectRocket() {
     try {
-      await updateLoggedUser('rocket_id', id);
+      await updateLoggedUser({ rocket_id: id });
     } catch (error) {
       console.error(error);
     } finally {

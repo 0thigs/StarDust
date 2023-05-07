@@ -169,10 +169,10 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function updateLoggedUser(prop, data, objectData = false) {
+  async function updateLoggedUser(newData) {
     try {
-      await api.updateUser(prop, data, loggedUser.id);
-      setLoggedUser(currentData => ({ ...currentData, [prop]: data }));
+      await api.updateUser(newData, loggedUser.id);
+      setLoggedUser(currentData => ({ ...currentData, ...newData }));
     } catch (error) {
       console.error(error);
     }

@@ -18,17 +18,26 @@ export default {
     return user;
   },
 
-  updateUser: async (column, data, userId) => {
-    const { success, error } = await supabase
-      .from('users')
-      .update({ [column]: data })
-      .eq('id', userId);
+  updateUser: async (newData, userId) => {
+    const { success, error } = await supabase.from('users').update(newData).eq('id', userId);
 
     if (error) {
       throw new Error(error.message);
     }
     return success;
   },
+
+  //   updateUser: async (newData, userId) => {
+  //     const { success, error } = await supabase
+  //       .from('users')
+  //       .update({ [column]: data })
+  //       .eq('id', userId);
+
+  //     if (error) {
+  //       throw new Error(error.message);
+  //     }
+  //     return success;
+  //   },
 
   deleteUser: async userId => {
     const { success, error } = await supabase.rpc('delete_user', {

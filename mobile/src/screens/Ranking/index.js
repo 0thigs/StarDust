@@ -58,7 +58,7 @@ export function Ranking() {
         return orderedWinners;
       });
 
-      updateLoggedUser('did_update_ranking', false);
+      updateLoggedUser({ did_update_ranking: false });
     } catch (error) {
       console.log(error);
     }

@@ -91,7 +91,6 @@ export function ReplyComment({
     }
     setLikesCount(updatedLikes);
     updateComment(id, { likes: updatedLikes });
-    updateLoggedUser('liked_comments_ids', updatedLikedCommentsIds);
   }
 
   return (

@@ -48,7 +48,7 @@ export function Achievement({
     try {
       setRescuedAchievementName(name);
       setIsModalVisible(true);
-      await Promise.all([removeRecuedAchievement(id), updateLoggedUser('coins', coins + reward)]);
+      await Promise.all([removeRecuedAchievement(id), updateLoggedUser({ coins: coins + reward })]);
     } catch (error) {
       console.error(error);
       Toast.error('Erro ao resgatar a conquista');

@@ -35,10 +35,8 @@ export function Streak({ user: { streak, week_status } }) {
       const updatedWeekStatus = updateWeekStatus(todayIndex, 'done');
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
-      
-      await updateLoggedUser('streak', updatedStreak);
-      await updateLoggedUser('week_status', updatedWeekStatus);
 
+      await updateLoggedUser({ streak: updatedStreak, week_status: updatedWeekStatus });
     } catch (error) {
       console.error(error);
     }

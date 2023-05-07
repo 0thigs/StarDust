@@ -29,7 +29,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
   function handleWinnerListButtonPress() {
     if (isLoggedUserWinner) {
       setIsModalVisible(true);
-      updateLoggedUser('coins', coins + rewardByLastPosition);
+      updateLoggedUser({ coins: coins + rewardByLastPosition });
       return;
     }
     setWinners([]);

@@ -19,13 +19,13 @@ export function TimePicker({ isVisible, setIsVisible }) {
     setIsLoading(true);
     try {
       await Promise.all([
-        updateLoggedUser('study_time', selectedTime),
+        updateLoggedUser({ study_time: selectedTime }),
         setNotification('studyTime', selectedTime),
       ]);
       setIsVisible(false);
     } catch (error) {
       console.error(error);
-      Toast.error('Falha ao tentar salvar horário')
+      Toast.error('Falha ao tentar salvar horário');
     } finally {
       setIsLoading(false);
     }

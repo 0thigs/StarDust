@@ -16,11 +16,10 @@ export const useAvatar = avatarId => {
   async function addUserAcquiredAvatar(avatarId) {
     try {
       await api.addUserAcquiredAvatar(avatarId, loggedUser.id);
-
       const updatedAvatar = avatars.find(avatar => avatar.id === avatarId);
       setAvatars(currentAvatars => updateAvatars(currentAvatars, updatedAvatar));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -40,11 +39,10 @@ export const useAvatar = avatarId => {
     return { ...avatar, isAcquired };
   }
 
-
   async function fetchAvatars() {
     try {
       const avatars = await api.getAvatars();
-      const verifiedAvatars = avatars.map(verifyAvatarAcquirement)
+      const verifiedAvatars = avatars.map(verifyAvatarAcquirement);
       setAvatars(verifiedAvatars);
     } catch (error) {
       console.log(error);
@@ -56,7 +54,7 @@ export const useAvatar = avatarId => {
       fetchAvatars();
       return;
     }
-    fetchAvatar();
+    if (avatarId) fetchAvatar();
   }, [loggedUser.avatar_id]);
 
   return { avatar, avatars, addUserAcquiredAvatar };

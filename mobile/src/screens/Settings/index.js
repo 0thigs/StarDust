@@ -71,7 +71,7 @@ export function Settings({ navigation: { goBack } }) {
     setIsLoading(true);
     try {
       if (name !== loggedUser.name) {
-        const result = await updateLoggedUser('name', name);
+        const result = await updateLoggedUser({ name });
         if (result instanceof Error) {
           handleUpdateNameError(result);
           return;
@@ -266,7 +266,7 @@ export function Settings({ navigation: { goBack } }) {
                 onToggle={isOn => handleToggle('canPushNotification', !isOn)}
               />
             </C.ToggleInput>
-            
+
             <TimePicker isVisible={isTimePickerVisible} setIsVisible={setIsTimePickerVisible} />
 
             <C.ToggleInput>
