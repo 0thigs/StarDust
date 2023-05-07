@@ -8,10 +8,6 @@ export const useChallenge = (challengeId, userId, shouldIncludeChallengeStars = 
   async function addUserCompletedChallenges(challengeId) {
     try {
       await api.addUserCompletedChallenges(challengeId, userId);
-      const updatedChallenges = challenges.map(challenge =>
-        challenge.id === challengeId ? { ...challenge, isCompleted: true } : challenge
-      );
-      setChallenges(updatedChallenges);
     } catch (error) {
       console.error(error);
     }
@@ -78,5 +74,5 @@ export const useChallenge = (challengeId, userId, shouldIncludeChallengeStars = 
     fetchChallenges();
   }, []);
 
-  return { challenges, challenge, addUserCompletedChallenges };
+  return { challenges, challenge, fetchChallenges, addUserCompletedChallenges };
 };

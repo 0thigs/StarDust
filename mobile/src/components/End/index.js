@@ -181,7 +181,7 @@ export function End({
           params: { screen: 'Challenges' },
         });
       }
-    }, 500);
+    }, 250);
   }
 
   useEffect(() => {

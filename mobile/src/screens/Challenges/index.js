@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { useChallenge } from '../../hooks/useChallenge';
 import { useCategory } from '../../hooks/useCategory';
@@ -24,7 +25,7 @@ const difficultyTable = {
 
 export function Challenges() {
   const { loggedUser } = useAuth();
-  const { challenges } = useChallenge(null, loggedUser.id);
+  const { challenges, fetchChallenges } = useChallenge(null, loggedUser.id);
   const { categories } = useCategory();
   const [filteredChallenges, setFilteredChallenges] = useState([]);
   const [tags, setTags] = useState([]);
@@ -141,6 +142,12 @@ export function Challenges() {
       setIsLoading(false);
     }
   }, [challenges, categories]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchChallenges();
+    }, [])
+  );
 
   return (
     <C.Container>

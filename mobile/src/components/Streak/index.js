@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
-export function Streak({ user: { streak, week_status, did_complete_saturday } }) {
+export function Streak({ user: { streak, week_status } }) {
   const { updateLoggedUser } = useAuth();
   const route = useRoute();
   const [weekStatus, setWeekStatus] = useState([]);
@@ -35,16 +35,10 @@ export function Streak({ user: { streak, week_status, did_complete_saturday } })
       const updatedWeekStatus = updateWeekStatus(todayIndex, 'done');
       const updatedStreak = streak + 1;
       setStreakCount(updatedStreak);
+      
       await updateLoggedUser('streak', updatedStreak);
-      if (todayIndex === 6) {
-        await updateLoggedUser('did_complete_saturday', true);
-      }
-
-      console.log({ updatedWeekStatus });
       await updateLoggedUser('week_status', updatedWeekStatus);
 
-      if (todayIndex !== 6 && did_complete_saturday)
-        await updateLoggedUser('did_complete_saturday', false);
     } catch (error) {
       console.error(error);
     }

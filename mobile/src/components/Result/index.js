@@ -31,7 +31,7 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
 
   function verifyResult({ expectedOutput }, index) {
     return compareSenquences(
-      userOutputs[index],
+      Array.isArray(userOutputs[index]) ? userOutputs[index] : userOutputs[index].toString(),
       Array.isArray(expectedOutput) ? expectedOutput : expectedOutput.toString()
     );
   }
