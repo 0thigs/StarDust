@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Animation } from '../Animation';
 import Transition from '../../assets/animations/transition-animation.json';
-import * as C from './styles';
 import { tips } from '../../utils/tips';
+import * as C from './styles';
 
 export function TransitionScreenAnimation() {
   const route = useRoute();
@@ -13,9 +12,6 @@ export function TransitionScreenAnimation() {
     return tips[randomNumber];
   }
 
-  useEffect(() => {
-    console.log(route);
-  }, []);
   return (
     <C.Container>
       <Animation
