@@ -62,7 +62,7 @@ export function Meteor({ currentYOffset, screenWidth }) {
     setTimeout(() => resetPosition(), animationDuration);
   }
 
-  function getRandomNumber(min, max) {
+ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
