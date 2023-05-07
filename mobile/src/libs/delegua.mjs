@@ -6,7 +6,7 @@ export async function execute(code, callback) {
   const lexador = new Lexador(false);
   const avaliadorSintatico = new AvaliadorSintatico();
   const interpretador = new InterpretadorBase('./src/libs', false, callback, callback);
-  const resultadoLexador = lexador.mapear([code]);
+  const resultadoLexador = lexador.mapear(code.split('\n'), -1);
   const resultadoAvaliacaoSintatica = avaliadorSintatico.analisar(resultadoLexador);
   return await interpretador.interpretar(resultadoAvaliacaoSintatica.declaracoes, false);
 }

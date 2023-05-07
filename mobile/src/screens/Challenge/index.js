@@ -27,13 +27,13 @@ const earningsByDifficulty = {
   },
   hard: {
     coins: 40,
-    xp: 30, 
+    xp: 30,
   },
 };
 
 export function Challenge({ route }) {
-    const challengeId = route.params.id;
-//   const challengeId = '0a088952-b63e-4053-9f41-e748e51fd156';
+  // const challengeId = route.params.id;
+  const challengeId = '36ee46f0-4123-42ff-a186-5ce8f378e8e0';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {

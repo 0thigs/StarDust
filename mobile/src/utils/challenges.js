@@ -737,7 +737,6 @@ Resultado: []`,
         isLocked: true,
       },
     ],
-
     code: `funcao converterObjetosNavesEmVetores(naves) {
     
 }`,
@@ -746,55 +745,70 @@ Resultado: []`,
   },
   {
     starId: null,
-    title: 'Amostras de planetas',
+    title: 'Vetor de múltiplos',
     texts: [
       {
         type: 'default',
         title: null,
-        body: 'Você é o comandante de uma nave espacial que está coletando amostras de vários planetas ao redor da galáxia.',
+        body: 'Em uma galáxia distante, a tripulação de uma nave espacial precisa calcular uma lista de múltiplos de um determinado número para ajudar em seus cálculos de navegação.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Para cada planeta, você coletou diferentes tipos de amostras, como rochas, líquidos, gases, organismos, etc.',
+        body: 'Então, o desafio é: retornar um vetor',
+      },
+      {
+        type: 'default',
+        title: 'Só isso?',
+        body: 'Não qualquer tipo de vetor. Você receberá dois valores: numero e tamanho.',
       },
       {
         type: 'list',
-        body: 'Cada tipo de amostra é armazenado em um vetor separado e agora você precisa concatenar todos esses vetores em um único vetor para enviá-los de volta à base.',
+        body: 'O vetor em questão deve ter a quantidades de números igual a "tamanho", contendo múltiplos do valor "numero".',
       },
       {
         type: 'code',
         body: `
-Entrada: ["Granito", "Mármore", "Obsidiana"], ["Água", "Metano", "Lava"]
-Resultado: ["Granito", "Mármore", "Obsidiana", "Água", "Metano", "Lava"]
+Entrada: 7, 5
+Resultado: [7, 14, 21, 28, 35]
+Explicacao: o vetor tem cinco números, pois tamanho é igual a 5, e todos eles são múltiplos de 7
 
-Entrada: ["Oxigênio", "Hélio", "Metano"], ["Bactérias", "Algas"]
-Resultado: ["Oxigênio", "Hélio", "Metano", "Bactérias", "Algas"]`,
+Entrada: 12, 2
+Resultado: [12, 24]
+Explicacao: o vetor tem dois números, pois tamanho é igual a 10, e todos eles são múltiplos de 12
+
+Entrada: 17, 6
+Resultado: [17, 34, 51, 68, 85, 102]
+Explicacao: o vetor tem seis números, pois tamanho é igual a 6, e todos eles são múltiplos de 17`,
       },
       {
         type: 'alert',
-        body: 'Os vetores devem ser concatenados na ordem dos argumentos, que são todos vetores.',
+        body: 'Note que o valor "numero" também está presente no vetor.',
       },
     ],
     function: null,
     testCases: [
       {
-        input: ["['rochas','água','grama'], ['hélio','sulfeto']"],
-        expectedOutput: "['rochas','água','grama','hélio','sulfeto']",
+        input: [7, 5],
+        expectedOutput: [7, 14, 21, 28, 35],
         isLocked: false,
       },
       {
-        input: ["['neônio','argônio'], ['metano','criptônio','radônio']"],
-        expectedOutput: "['neônio','argônio','metano','criptônio','radônio']",
+        input: [17, 6],
+        expectedOutput: [17, 34, 51, 68, 85, 102],
         isLocked: false,
       },
       {
-        input: ["['gelo','ferro'], ['brone','diamante'], ['obsidian','ouro']"],
-        expectedOutput: "['gelo','ferro','brone','diamante','obsidian','ouro']",
+        input: [3, 1],
+        expectedOutput: [3],
+        isLocked: false,
+      },
+      {
+        input: [2, 0],
+        expectedOutput: [],
         isLocked: true,
       },
     ],
-
     code: `funcao concatenarAmostras(amostras) {
     
 }`,
