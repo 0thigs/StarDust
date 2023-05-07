@@ -49,7 +49,7 @@ export function LessonHeader() {
 
   return (
     <C.Container>
-        
+      {/* {isLoading && <Loading isAnimation={true} />} */}
       <C.Main>
         <C.CloseButton onPress={() => setIsModalVisible(true)}>
           <Icon.X color={theme.colors.red_700} width={28} height={28} />

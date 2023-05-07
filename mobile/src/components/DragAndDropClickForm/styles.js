@@ -67,7 +67,6 @@ export const DropItem = styled(Animated.View)`
   border-color: transparent;
   border-radius: 4px;
   height: ${itemHeight}px;
-  z-index: 20;
 
   ${({ isItemInZone }) =>
     !isItemInZone &&

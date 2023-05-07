@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useCallback } from 'react';
 const animationDuration = 350;
 
 export function DropItem({
@@ -9,13 +10,14 @@ export function DropItem({
   label,
   zones,
   setZones,
+  targetZone,
   setTargetZone,
   isAnswerVerified,
   isAnswerWrong,
 }) {
   const [isItemInZone, setIsItemInZone] = useState(false);
-  const [isFirstRendering, setisFirstRendering] = useState(false);
-  const itemWidth = useRef(0);
+  const [isFirstRendering, setisFirstRendering] = useState(true);
+  const [itemWidth, setItemWidth] = useState(null);
   const characterHeight = 8;
 
   const initialPosition = {
@@ -49,9 +51,9 @@ export function DropItem({
     currentPosition.y.value = 0;
   }
 
-  function adjustPosition(id) {
+  function adjustPosition() {
     const targetZone = zones.find(zone => zone.itemId === id);
-    if (!targetZone || !isItemInZone) return;
+    if (!targetZone) return;
 
     const difference = currentPosition.x.value + initialPosition.x.value - targetZone.x + 10;
 
@@ -59,7 +61,7 @@ export function DropItem({
     currentPosition.x.value += difference < 0 ? Math.abs(difference) : -difference;
   }
 
-  function removeItemInZone(id) {
+  function removeItemInZone() {
     resetPosition();
     const targetZone = zones.find(zone => zone.itemId === id);
     targetZone.itemId = null;
@@ -68,7 +70,7 @@ export function DropItem({
     updateZone(targetZone);
   }
 
-  function addItemInZone(id) {
+  function addItemInZone() {
     for (const zone of zones) {
       if (!zone.itemId) {
         currentPosition.x.value =
@@ -76,7 +78,8 @@ export function DropItem({
         currentPosition.y.value =
           zone.y - initialPosition.y.value - (C.itemHeight / 2 + characterHeight);
         zone.itemId = id;
-        zone.width = itemWidth.current - 20;
+        console.log(itemWidth);
+        zone.width = itemWidth - 20;
         setIsItemInZone(true);
         updateZone(zone);
         break;
@@ -84,18 +87,34 @@ export function DropItem({
     }
   }
 
-  function HandleItemClick(id) {
+  function HandleItemClick() {
+    console.log(id);
+
     if (isItemInZone) {
-      removeItemInZone(id);
+      removeItemInZone();
       return;
     }
 
-    addItemInZone(id);
+    addItemInZone();
+  }
+
+  function handleLayout(event) {
+    event.target.measure((x, y, width, height, pageX, pageY) => {
+      console.log({ width });
+      if (isFirstRendering || !itemWidth) {
+        initialPosition.x.value = pageX;
+        initialPosition.y.value = pageY;
+        setItemWidth(width);
+        setisFirstRendering(false);
+      }
+    });
   }
 
   useEffect(() => {
-    if (isFirstRendering) return;
-    adjustPosition(id);
+    if (isFirstRendering || !isItemInZone) return;
+    console.log({ id });
+
+    adjustPosition();
   }, [zones]);
 
   return (
@@ -104,24 +123,15 @@ export function DropItem({
         key={id}
         activeOpacity={0.7}
         isItemInZone={isItemInZone}
-        onLayout={event => {
-          event.target.measure((x, y, width, height, pageX, pageY) => {
-            if (!isFirstRendering) {
-              initialPosition.x.value = pageX;
-              initialPosition.y.value = pageY;
-              itemWidth.current = width;
-              setisFirstRendering(false);
-            }
-          });
-        }}
-        onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick(id)}
+        onLayout={handleLayout}
+        onStartShouldSetResponder={() => !isAnswerVerified && HandleItemClick()}
         style={ItemAnimatedStyle}
       >
         <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
           {label}
         </C.Label>
       </C.DropItem>
-     {isItemInZone && <C.Placeholder itemWidth={itemWidth.current} />}
+      {isItemInZone && <C.Placeholder itemWidth={itemWidth} />}
     </C.ItemContainer>
   );
 }

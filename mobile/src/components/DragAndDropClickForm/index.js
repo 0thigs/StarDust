@@ -117,6 +117,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                         targetZone={targetZone}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
                         linesWidth={linesWidth}
+                        setLinesWidth={setLinesWidth}
                       />
                     )}
                   </C.Content>
@@ -132,7 +133,9 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 id={id}
                 label={label}
                 zones={zones}
+                linesWidth={linesWidth}
                 setZones={setZones}
+                targetZone={targetZone}
                 setTargetZone={setTargetZone}
                 totalDropZones={totalDropZones}
                 reorderedItems={reorderedItems}

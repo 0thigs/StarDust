@@ -9,6 +9,7 @@ export function DropZone({
   setZones,
   totalDropZones,
   targetZone,
+  setLinesWidth,
   isAnswerWrong,
   linesWidth,
 }) {
@@ -24,10 +25,19 @@ export function DropZone({
   });
 
   useEffect(() => {
+    if (linesWidth.some(line => !!line.zoneId))
+    setLinesWidth(currentLines =>
+      currentLines.map(line =>
+        line.id.toString().includes(id) && !line.zoneId ? { ...line, zoneId: id } : line
+      )
+    );
+  }, []);
+
+  useEffect(() => {
     if (targetZone && id === targetZone.id && targetZone.width !== zoneWidth.value) {
-      zoneWidth.value = withTiming(targetZone.width, { duration: 200 });
+      zoneWidth.value = withTiming(targetZone.width, { duration: 350 });
     }
-  }, [zones]);
+  }, [targetZone]);
 
   useEffect(() => {
     zoneRef?.current.measure((x, y, width, height, pageX, pageY) => {
@@ -45,10 +55,6 @@ export function DropZone({
   function updateZone({ id, x, y, width }) {
     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
   }
-
-  //   const updateZone = useCallback(({ id, x, y, width }) => {
-  //     setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
-  //   }, [zones]);
 
   function registerZone({ target }) {
     target.measure((x, y, width, height, pageX, pageY) => {

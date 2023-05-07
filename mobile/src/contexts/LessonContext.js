@@ -170,7 +170,7 @@ const LessonReducer = (state, action) => {
       });
       return {
         ...state,
-        questions: _questions,
+        questions: reorderedQuestions,
       };
     case 'incrementWrongsCount':
       return {
