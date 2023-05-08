@@ -2617,4 +2617,319 @@ escreva(alimentos)
       },
     ],
   },
+  {
+    starId: 19,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que nós conseguimos vizualizar o que temos de alimentos na nave, percebemos que temos poucos alimentos para uma viagem longa.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para a nossa sorte, estamos perto de um mercadão espacial, que é uma estação gigante onde é possível comprar qualquer tipo de coisa que você pode imaginar.',
+      },
+      {
+        type: 'default',
+        title: '#PatiuMercadao',
+        body: 'Agora que estamos no mercadão, podemos colocar os itens no carrinho.',
+      },
+      {
+        type: 'default',
+        title: '#PatiuMercadao',
+        body: 'É claro que nosso carrinho se trata de um vetor, então vejamos o que temos por enquanto:',
+      },
+      {
+        type: 'code',
+        title: null,
+        body: `var carrinho = [];
+    
+escreva(carrinho);
+// Resultado: Nada`,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Absolutamente nada, ou seja, temos um vetor completamente vazio',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Anteriormente você aprendeu como adicionar um item em um vetor usando os números de índice de vetor.',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'Como prometido vou explicar outro método para adicionar itens, que é bem mais fácil na minha opinião.',
+      },
+      {
+        type: 'default',
+        title: 'Qual???',
+        body: 'Para isso usaremos o método "adicionar"',
+      },
+      {
+        type: 'default',
+        title: 'Método?',
+        body: 'Sim! Métodos são funções para manipular vetores, o que inclui adicionar ou remover elementos, classificar os itens em ordem crescente ou decrescente, pesquisar um elemento específico e muito mais!',
+      },
+      {
+        type: 'default',
+        title: 'Não sei se entendi direito',
+        body: 'Métodos, em programação, são ações que um objeto pode executar. Pense em um objeto do mundo real, como um carro. Um carro tem métodos, como "ligar", "acelerar" e "frear". Esses métodos permitem que o carro execute ações específicas.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Da mesma forma, em programação, um objeto (no nosso caso um vetor) também tem métodos que podem ser executados para realizar tarefas específicas.',
+      },
+      {
+        type: 'default',
+        title: 'Adicionar()',
+        body: 'Um desses métodos é o "adicionar()", que permite, obviamente, adicionar um novo elemento a um vetor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para usá-lo, basta colocar o novo item entre os parâmetese do método, e para executá-lo, basta colocá-lo ao lado do vetor separado por um ponto (.).',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+
+escreva(carrinho)
+// Resultado: castanhas do planeta Parávion`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'É através do ponto (.) é que você poderá usar os métodos, e alguns podem necessitar de passar alguns valores entre os seus parênteses.',
+      },
+      {
+        type: 'alert',
+        body: 'Como tinha dito, métodos são funções, e veremos mais sobre eles futuramente, não se preocupe :).',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, é claro que algumas castanhas não serão sufuciente para uma viagem longa, então vamos adicionar mais alguns itens.',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+escreva(carrinho);`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Tudo isso meu?',
+        body: 'Sim, tudo isso. Acontece é que o próximo planeta é puramente glacial, então é bom você bem estar preparado.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Podemos ver quantos itens já temos no carrinho, utilizando outro método de vetor: "tamanho()"',
+      },
+      {
+        type: 'list',
+        title: 'Tamanho()',
+        body: 'O método "tamanho()" literalmente retorna o tamanho de um vetor, no sentido de quantos itens há atualmente nele.',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('botas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+escreva(carrinho.tamanho());
+// Resultado: 12`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como esperado, o carrinho atualmente tem 12 itens. Ao passar no caixa teremos que remover cada um.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas agora é claro que utilizaremos um método para facilitar esse trabalho, no caso utilizaremos o método remover().',
+      },
+      //   {
+      //     type: 'list',
+      //     title: 'remover()',
+      //     body: 'Você já deve ter percebido que os métodos possuem nomes óbvios, e é assim como deve ser. Lembre-se disso quando criar suas próprias funções (sim, é possível criar novos métodos).',
+      //   },
+      {
+        type: 'list',
+        title: 'remover()',
+        body: 'Para remover um determinado item de um vetor, você terá que colocar o valor desse item entre os parênteses, veja o exemplo.',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('botas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+carrinho.remover('lanterna')
+carrinho.remover('casacos')
+carrinho.remover('cobertores')
+carrinho.remover('luvas')
+
+escreva(carrinho.tamanho());
+// Resultado: 8`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Dica: existem outros métodos para remover um iten de um vetor, como o removerPrimeiro(), que como o nome implica, ele remove o primeiro elemento de um vetor.',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('botas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+carrinho.remover('lanterna')
+carrinho.remover('casacos')
+carrinho.remover('cobertores')
+carrinho.remover('luvas')
+
+carrinho.removerPrimeiro()
+
+escreva(carrinho.tamanho());
+// Resultado: 7`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Você pode me perguntar: se existe removerPrimeiro(), então existe removerUltimo(). De fato, você está certo, e esse método sempre remove o último item de qualquer vetor.',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('botas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+carrinho.remover('lanterna')
+carrinho.remover('casacos')
+carrinho.remover('cobertores')
+carrinho.remover('luvas')
+
+carrinho.removerPrimeiro()
+carrinho.removerUltimo()
+
+escreva(carrinho.tamanho());
+// Resultado: 6`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title:
+          'Será que não dá para usar laço para agilizar no trabalho de remover todos esses itens?',
+        body: 'De fato temos um gênio. Sim, na maioria das vezes usamos laços para trabalhar com vetores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, para remover todos os itens rapidamentem podemos usar o removerUltimo() e o tamanho do vetor, veja:',
+      },
+      {
+        type: 'code',
+        body: `var carrinho = [];
+    
+carrinho.adicionar('castanhas do planeta Parávion')
+carrinho.adicionar('carregador solar')
+carrinho.adicionar('kit de primeiros socorros')
+carrinho.adicionar('barras de cereais')
+carrinho.adicionar('baterias')
+carrinho.adicionar('lanterna')
+carrinho.adicionar('casacos')
+carrinho.adicionar('cobertores')
+carrinho.adicionar('luvas')
+carrinho.adicionar('botas')
+carrinho.adicionar('cordas')
+carrinho.adicionar('aquecedor')
+
+enquanto (carrinho.tamanho() > 0) {
+    carrinho.removerUltimo()
+}
+
+escreva(carrinho.tamanho());
+// Resultado: 0`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste exemplo, enquanto o tamanho do vetor for maior que 0, continuaremos removendo o último item dele.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que já terminamos as compras, boa sorte tentando levar tudo isso ao foguete.',
+      },
+    ],
+  },
 ];
