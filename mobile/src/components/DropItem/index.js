@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useCallback } from 'react';
 const animationDuration = 350;
 
 export function DropItem({
@@ -18,6 +17,7 @@ export function DropItem({
   const [isItemInZone, setIsItemInZone] = useState(false);
   const [isFirstRendering, setisFirstRendering] = useState(true);
   const [itemWidth, setItemWidth] = useState(null);
+  const itemRef = useRef();
   const characterHeight = 8;
 
   const initialPosition = {
@@ -88,8 +88,6 @@ export function DropItem({
   }
 
   function HandleItemClick() {
-    console.log(id);
-
     if (isItemInZone) {
       removeItemInZone();
       return;
@@ -101,7 +99,7 @@ export function DropItem({
   function handleLayout(event) {
     event.target.measure((x, y, width, height, pageX, pageY) => {
       console.log({ width });
-      if (isFirstRendering || !itemWidth) {
+      if (isFirstRendering && !itemWidth) {
         initialPosition.x.value = pageX;
         initialPosition.y.value = pageY;
         setItemWidth(width);
@@ -112,14 +110,23 @@ export function DropItem({
 
   useEffect(() => {
     if (isFirstRendering || !isItemInZone) return;
-    console.log({ id });
-
     adjustPosition();
   }, [zones]);
+
+  useEffect(() => {
+    if (itemWidth) return;
+    itemRef?.current.measure((x, y, width, height, pageX, pageY) => {
+      initialPosition.x.value = pageX;
+      initialPosition.y.value = pageY;
+      console.log(width);
+      setItemWidth(width);
+    });
+  }, [isFirstRendering]);
 
   return (
     <C.ItemContainer>
       <C.DropItem
+        ref={itemRef}
         key={id}
         activeOpacity={0.7}
         isItemInZone={isItemInZone}

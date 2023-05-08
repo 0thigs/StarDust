@@ -2638,7 +2638,7 @@ escreva(alimentos)
       {
         type: 'default',
         title: '#PatiuMercadao',
-        body: 'É claro que nosso carrinho se trata de um vetor, então vejamos o que temos por enquanto:',
+        body: 'E é claro que nosso carrinho se trata de um vetor, então vejamos o que temos por enquanto:',
       },
       {
         type: 'code',
@@ -2651,12 +2651,12 @@ escreva(carrinho);
       {
         type: 'default',
         title: null,
-        body: 'Absolutamente nada, ou seja, temos um vetor completamente vazio',
+        body: 'Absolutamente nada, ou seja, temos um vetor completamente vazio.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Anteriormente você aprendeu como adicionar um item em um vetor usando os números de índice de vetor.',
+        body: 'Anteriormente você aprendeu como adicionar um item em um vetor usando os números de índice.',
       },
       {
         type: 'default',
@@ -2706,7 +2706,7 @@ escreva(carrinho)
       {
         type: 'default',
         title: null,
-        body: 'É através do ponto (.) é que você poderá usar os métodos, e alguns podem necessitar de passar alguns valores entre os seus parênteses.',
+        body: 'É através do ponto (.) que você poderá usar os métodos, e alguns podem exigir que você passe alguns valores entre os seus parênteses.',
       },
       {
         type: 'alert',
@@ -2740,7 +2740,7 @@ escreva(carrinho);`,
       {
         type: 'default',
         title: 'Tudo isso meu?',
-        body: 'Sim, tudo isso. Acontece é que o próximo planeta é puramente glacial, então é bom você bem estar preparado.',
+        body: 'Sim, tudo isso. O que acontece é que o próximo planeta é puramente glacial, então é bom você estar bem preparado.',
       },
       {
         type: 'default',
@@ -2750,7 +2750,7 @@ escreva(carrinho);`,
       {
         type: 'list',
         title: 'Tamanho()',
-        body: 'O método "tamanho()" literalmente retorna o tamanho de um vetor, no sentido de quantos itens há atualmente nele.',
+        body: 'O método "tamanho()" literalmente retorna o tamanho de um vetor, isto é, o número de itens que há atualmente nele.',
       },
       {
         type: 'code',
@@ -2821,7 +2821,18 @@ escreva(carrinho.tamanho());
       },
       {
         type: 'alert',
-        body: 'Dica: existem outros métodos para remover um iten de um vetor, como o removerPrimeiro(), que como o nome implica, ele remove o primeiro elemento de um vetor.',
+        body: 'Dica: existem outros métodos para remover um iten de um vetor, como o removerPrimeiro(), que como o nome implica, ele remove sempre o primeiro elemento de um vetor.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4];
+    
+
+carrinho.removerPrimeiro()
+
+escreva(numeros);
+// Resultado: 2, 3, 4`,
+        isRunnable: true,
       },
       {
         type: 'code',
@@ -2854,6 +2865,17 @@ escreva(carrinho.tamanho());
       {
         type: 'alert',
         body: 'Você pode me perguntar: se existe removerPrimeiro(), então existe removerUltimo(). De fato, você está certo, e esse método sempre remove o último item de qualquer vetor.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4];
+    
+
+carrinho.removerUltimo()
+
+escreva(numeros);
+// Resultado: 1, 2, 3`,
+        isRunnable: true,
       },
       {
         type: 'code',
@@ -2893,7 +2915,7 @@ escreva(carrinho.tamanho());
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, para remover todos os itens rapidamentem podemos usar o removerUltimo() e o tamanho do vetor, veja:',
+        body: 'Por exemplo, para remover todos os itens de uma vez podemos usar o removerUltimo() e o tamanho do vetor dentro de um laço enquanto, veja:',
       },
       {
         type: 'code',

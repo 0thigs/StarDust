@@ -2018,5 +2018,133 @@ escreva(numerosDaSorte)`,
       },
     ],
   },
-  
+  {
+    starId: 19,
+    type: 'selection',
+    stem: 'O que será escrito por esse código?',
+    code: `var numeros = [2, 4, 6];
+
+numeros.remover(4);
+numeros.adicionar(8);
+
+escreva(numeros)`,
+    options: ['2, 6, 8', '2, 4, 8', '2, 8, 6', '2, 4, 6, 8'],
+    answer: '2, 6, 8',
+  },
+  {
+    starId: 19,
+    type: 'checkbox',
+    stem: 'Quais são os métodos para deletar um item de um vetor?',
+    options: ['deletar()', 'remover()', 'removerPrimeiro()', 'removerUltimo()', 'removerSegundo()'],
+    correctOptions: ['remover()', 'removerPrimeiro()', 'removerUltimo()', 'removerSegundo()'],
+  },
+  {
+    starId: 19,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código com os métodos adequados, de modo que o resultado seja igual a 2',
+    lines: [
+      {
+        id: 1,
+        texts: ['var aliens = ["Andromedans", "Borgs", "Draconians"]'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['aliens.', 'dropZone', '(Draconians)'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(aliens.', 'dropZone', '()'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'adicionar',
+      },
+      {
+        id: 2,
+        label: 'tamanho',
+      },
+      {
+        id: 3,
+        label: 'remover',
+      },
+      {
+        id: 4,
+        label: '4',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2, 3],
+  },
+  {
+    starId: 19,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código abaixo, de modo que seja escrito nessa ordem "sabre de luz, canhão de plasma"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var armas = ['],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['dropZone'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['dropZone'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['armas.removerPrimeiro()'],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: [']'],
+        indentLevel: 0,
+      },
+      {
+        id: 6,
+        texts: ['armas.adicionar(', 'dropZone', ')'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'blaster',
+      },
+      {
+        id: 2,
+        label: 'sabre de luz',
+      },
+      {
+        id: 3,
+        label: 'canhão de plasma',
+      },
+    ],
+    correctItemsIdsSequence: [1, 2, 3],
+  },
+  {
+    starId: 19,
+    type: 'selection',
+    stem: 'Qual será o tamanho do vetor planetasDestruidos',
+    code: `var planetasDestruidos = [
+        "Alderaan", 
+        "Krypton", 
+        "Vulcan", 
+];
+
+numeros.removerPrimeiro();
+numeros.removerUltimo();
+numeros.adicionar("Taris");`,
+    options: ['2', '0', '4', '6'],
+    answer: '2',
+  },
 ];
