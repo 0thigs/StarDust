@@ -3136,9 +3136,9 @@ escreva(qtdAlimentos);
         title: 'ordenar()',
         body: 'O método ordenar() é usado para colocar os elementos de um vetor em ordem alfabética caso ele tenha textos, ou numérica, caso tenha números. Esse método já não cria um novo vetor, mas sim modifica o vetor original.',
       },
-        {
-            type: 'code',
-            body: `var alimentos = [
+      {
+        type: 'code',
+        body: `var alimentos = [
                 "garrafa d'água", 
                 "barra de cereal", 
                 "carne enlatada", 
@@ -3155,8 +3155,8 @@ escreva(qtdAlimentos);
     /* Resultado: barra de cereal, carne enlatada, fruta, garrafa d'água
                 2, 3, 4, 7
     */`,
-            isRunnable: true,
-        },
+        isRunnable: true,
+      },
       {
         type: 'alert',
         body: 'É possível definir a forma de ordenação do ordernar(). Por exemplo, e se quiséssemos colocar quantidades em ordem descrecente? Mas isso podemos deixar para depois.',
@@ -3165,6 +3165,96 @@ escreva(qtdAlimentos);
         type: 'default',
         title: null,
         body: 'Agora que temos tudo organizado, podemos partir para a exploração.',
+      },
+    ],
+  },
+  {
+    starId: 21,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Muito bem, já faz algum tempo que estamos andando nesse planeta e já adquirimos alguns itens:',
+      },
+      {
+        type: 'code',
+        body: `var itens = [
+            "fruta",
+            "bastão laser", 
+            "cristal", 
+            "ovo de Icelope", 
+            "pelagem de urso gigante",
+            "meteorito congelado"
+]
+
+var qtdItens = [24, 1, 57, 8, 11, 2]
+`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim como fizemos com os alimentos, separamos os nomes dos itens das quantidades de cada um.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E se quiséssemos saber o quantidade total somando todos os itens?',
+      },
+      {
+        type: 'default',
+        title: 'Usando o método tamanho()?',
+        body: 'Na verdade o método "tamanho()" retornaria quantos itens há no vetor, que no nosso caso é 6.',
+      },
+      {
+        type: 'default',
+        title: 'Então somar()?',
+        body: 'Isso!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Muito bem, já faz algum tempo que estamos andando nesse planeta e já adquirimos alguns itens:',
+      },
+      {
+        type: 'code',
+        body: ` 
+var qtdItens = [24, 1, 57, 8, 11, 2];
+
+var soma = qtdItens.somar();
+
+escreva(soma);
+// Resultado: 107`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        title: 'Somar()',
+        body: 'O método "somar()" gera um número sendo a soma de todos os números presente no vetor',
+      },
+      {
+        type: 'alert',
+        body: 'Você percebeu que eu coloquei o resultado de "somar()" em uma variável, o que também seria possível usando o método "inclui()".',
+      },
+      {
+        type: 'default',
+        title: 'Mas e se o vetor tivesso texto?',
+        body: 'Boa pergunta! Nesse caso todos os itens do vetor se juntariam para formar um texto.',
+      },
+      {
+        type: 'code',
+        body: ` 
+var qtdItens = [24, 1, "texto", 57, 8, 11, 2];
+
+var soma = qtdItens.somar();
+
+escreva(soma);
+// Resultado: 25texto578112`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Mas isso não o que a gente quer usando o método "somar()" não é?',
       },
     ],
   },
