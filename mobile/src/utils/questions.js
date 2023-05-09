@@ -2150,7 +2150,7 @@ numeros.adicionar("Taris");`,
   {
     starId: 20,
     type: 'selection',
-    stem: 'Qual será escrito no seguinte código?',
+    stem: 'O que será escrito no seguinte código?',
     code: `var tecnologias = [
         "propulsor", 
         "motor iônico", 
@@ -2174,7 +2174,7 @@ se (tecnologias.inclui("propulsor")) {
   {
     starId: 20,
     type: 'drag-and-drop-click',
-    stem: 'Complete o vetor para o vetor droids seja igual a \nR2-D2, C-3PO, BB-8, K-250',
+    stem: 'Complete o código para o vetor droids seja igual a \nR2-D2, C-3PO, BB-8, K-250',
     lines: [
       {
         id: 1,
@@ -2183,12 +2183,12 @@ se (tecnologias.inclui("propulsor")) {
       },
       {
         id: 2,
-        texts: ['"R2-D2"'],
+        texts: ['"R2-D2",'],
         indentLevel: 2,
       },
       {
         id: 3,
-        texts: ['dropZone'],
+        texts: ['dropZone', ','],
         indentLevel: 2,
       },
       {
@@ -2198,7 +2198,7 @@ se (tecnologias.inclui("propulsor")) {
       },
       {
         id: 5,
-        texts: ['var droids = droids.', 'dropZone', '()'],
+        texts: ['var droids = droids.', 'dropZone', '(', 'dropZone' ,')'],
         indentLevel: 0,
       },
       {
@@ -2238,18 +2238,18 @@ se (tecnologias.inclui("propulsor")) {
   {
     starId: 20,
     type: 'selection',
-    stem: 'Qual será o valor de viloes[-1]',
+    stem: 'Qual será o valor viloes',
     code: `var viloes = ["Darth Vader", "Kylo Ren", "Boba Fett", "Jabba"]
     
 viloes.ordenar()
 escreva(viloes[-1])`,
     options: [
-      'Boba Fett',
-      'Kylo Ren',
-      'Jabba',
-      'Darth Vader',
+      'Darth Vader, Kylo Ren, Boba Fett, Jabba',
+      'Kylo Ren, Jabba, Darth Vader, Boba Fett',
+      'Boba Fett, Darth Vader, Jabba, Kylo Ren',
+      'Boba Fett, Jabba, Kylo Ren, Darth Vader',
     ],
-    answer: 'Kylo Ren',
+    answer: 'Boba Fett, Darth Vader, Jabba, Kylo Ren',
   },
   {
     starId: 20,
@@ -2268,7 +2268,7 @@ escreva(viloes[-1])`,
       },
       {
         id: 3,
-        texts: ['dropZone'],
+        texts: ['dropZone', ','],
         indentLevel: 2,
       },
       {
@@ -2277,7 +2277,7 @@ escreva(viloes[-1])`,
         indentLevel: 0,
       },
       {
-        id: 4,
+        id: 5,
         texts: ['escreva(planetas.', 'dropZone', '("Terra")'],
         indentLevel: 0,
       },
@@ -2292,15 +2292,15 @@ escreva(viloes[-1])`,
         label: '"Saturno"',
       },
       {
-        id: 5,
+        id: 3,
         label: 'inclui',
       },
       {
-        id: 6,
+        id: 4,
         label: 'ordenar',
       },
       {
-        id: 7,
+        id: 5,
         label: 'concatenar',
       },
     ],

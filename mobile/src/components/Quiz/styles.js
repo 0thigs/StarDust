@@ -21,10 +21,9 @@ export const QuestionStem = styled(Animatable.Text)`
   align-self: center;
 `;
 
-export const QuestionCode = styled.ScrollView`
+export const QuestionCode = styled.View`
   align-self: center;
   width: ${lessonContainerWidth};
-  max-height: ${({ height }) => height}px;
 `;
 
 export const Text = styled.Text`
