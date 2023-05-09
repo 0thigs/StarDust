@@ -2147,4 +2147,174 @@ numeros.adicionar("Taris");`,
     options: ['2', '0', '4', '6'],
     answer: '2',
   },
+  {
+    starId: 20,
+    type: 'selection',
+    stem: 'Qual será escrito no seguinte código?',
+    code: `var tecnologias = [
+        "propulsor", 
+        "motor iônico", 
+        "campo de força", 
+];
+tecnologias.removerPrimeiro();
+
+se (tecnologias.inclui("propulsor")) {
+    escreva("Sim, temos um propulsor")
+} senao {
+    escreva("Não, falta um propulsor")
+}`,
+    options: [
+      'Sim, temos um propulsor',
+      'Não, temos um propulsor',
+      'Sim, falta um propulsor',
+      'Não, falta um propulsor',
+    ],
+    answer: 'Não, falta um propulsor',
+  },
+  {
+    starId: 20,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o vetor para o vetor droids seja igual a \nR2-D2, C-3PO, BB-8, K-250',
+    lines: [
+      {
+        id: 1,
+        texts: ['var droid = ['],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"R2-D2"'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['dropZone'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: [']'],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: ['var droids = droids.', 'dropZone', '()'],
+        indentLevel: 0,
+      },
+      {
+        id: 6,
+        texts: ['escreva(droids)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '["BB-8", "K-250"]',
+      },
+      {
+        id: 2,
+        label: 'inclui',
+      },
+      {
+        id: 3,
+        label: '"BB-8", "K-250"',
+      },
+      {
+        id: 4,
+        label: '"K-250"',
+      },
+      {
+        id: 5,
+        label: '"C-3PO"',
+      },
+      {
+        id: 6,
+        label: 'concatenar',
+      },
+    ],
+    correctItemsIdsSequence: [5, 6, 1],
+  },
+  {
+    starId: 20,
+    type: 'selection',
+    stem: 'Qual será o valor de viloes[-1]',
+    code: `var viloes = ["Darth Vader", "Kylo Ren", "Boba Fett", "Jabba"]
+    
+viloes.ordenar()
+escreva(viloes[-1])`,
+    options: [
+      'Boba Fett',
+      'Kylo Ren',
+      'Jabba',
+      'Darth Vader',
+    ],
+    answer: 'Kylo Ren',
+  },
+  {
+    starId: 20,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o vetor para o resultado do código seja falso',
+    lines: [
+      {
+        id: 1,
+        texts: ['var planetas = ['],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"Marte"'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['dropZone'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: [']'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['escreva(planetas.', 'dropZone', '("Terra")'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '"Terra"',
+      },
+      {
+        id: 2,
+        label: '"Saturno"',
+      },
+      {
+        id: 5,
+        label: 'inclui',
+      },
+      {
+        id: 6,
+        label: 'ordenar',
+      },
+      {
+        id: 7,
+        label: 'concatenar',
+      },
+    ],
+    correctItemsIdsSequence: [2, 5],
+  },
+  {
+    starId: 20,
+    type: 'checkbox',
+    stem: 'Quais valores eu poderia colocar no inclui() para que o código resultasse em verdadeiro?',
+    code: `var especies = ['Wookiee', 'Jawa'];
+var alvos = especies.concatenar(['Ewok', 'Zabrak', 'Rodians']);
+
+escreva(alvos.inclui());`,
+    options: ['Ewok', 'Jawa', 'Zabrak', 'Gugan'],
+    correctOptions: ['Ewok', 'Jawa', 'Zabrak'],
+  },
 ];

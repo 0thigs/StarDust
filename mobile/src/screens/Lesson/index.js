@@ -10,7 +10,7 @@ import * as C from './styles';
 
 export function Lesson({ route }) {
     // const starId = route?.params.id;
-  const starId = '2e58aa01-a355-421f-9c29-8b63ef62e0ef';
+  const starId = '98633c62-9619-4280-94cc-18c933adeda1';
   const { planets, getCurrentStar } = usePlanet();
   const [star, setStar] = useState(null);
   const [state, dispatch] = useLesson();

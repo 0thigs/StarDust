@@ -3,17 +3,19 @@ import { useAuth } from '../../hooks/useAuth';
 import { useCode } from '../../hooks/useCode';
 import { useEditor } from '../../hooks/useEditor';
 import { useNavigation } from '@react-navigation/native';
-import { ArrowLeft, MoreVertical, Share2 } from 'react-native-feather';
+import { Alert } from 'react-native';
+import { Toast } from 'toastify-react-native';
+import { ArrowLeft, MoreVertical } from 'react-native-feather';
 import { RangeInput } from '../RangeInput';
 import { Prompt } from '../Prompt';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { PopoverMenu } from '../PopoverMenu';
-import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import 'react-native-get-random-values';
+import * as Clipboard from 'expo-clipboard';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { Alert } from 'react-native';
 const iconColor = theme.colors.green_500;
 
 export function PlaygroundHeader({
@@ -35,6 +37,16 @@ export function PlaygroundHeader({
   const navigation = useNavigation();
   const codeTitle = useRef('');
   const popoverMenuRef = useRef(null);
+
+  async function copyCodeToClipboard() {
+    try {
+      await Clipboard.setStringAsync(code.current);
+      Toast.success('Código copiado')
+    } catch (error) {
+      console.error(error);
+      Toast.error('Não foi possível copiar o código');
+    }
+  }
 
   async function onPromptConfirm() {
     popoverMenuRef.current.closePopover();
@@ -103,6 +115,12 @@ export function PlaygroundHeader({
         isToggle: false,
         value: null,
         action: () => setIsRangeInputVisible(true),
+      },
+      {
+        title: 'Copiar código',
+        isToggle: false,
+        value: null,
+        action: copyCodeToClipboard,
       },
     ];
 

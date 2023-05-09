@@ -6,7 +6,7 @@ export function Output({ bottomSheetRef, result }) {
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      snapPoints={['25%', '100%']}
+      snapPoints={['25%', '90%']}
       index={-1}
       enablePanDownToClose
       backgroundStyle={{ backgroundColor: theme.colors.black }}
