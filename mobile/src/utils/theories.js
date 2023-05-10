@@ -3258,4 +3258,272 @@ escreva(soma);
       },
     ],
   },
+  {
+    starId: 21,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Muito bem, já faz algum tempo que estamos andando nesse planeta e já adquirimos alguns itens:',
+      },
+      {
+        type: 'code',
+        body: `var itens = [
+        "fruta",
+        "ovo de Icelope", 
+        "amêndua"
+        "cristal", 
+        "pirita", 
+        "bastão laser quebrado", 
+        "fóssil de urso anão",
+        "meteorito congelado"
+]
+
+var qtdItens = [9, 1, 27, 12, 1, 2, 1]
+`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim como fizemos com os alimentos, separamos os nomes dos itens das quantidades de cada um.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E se quiséssemos saber o quantidade total somando todos os itens?',
+      },
+      {
+        type: 'default',
+        title: 'Usando o método tamanho()?',
+        body: 'Na verdade o método "tamanho()" retornaria quantos itens há no vetor, que no nosso caso é 6.',
+      },
+      {
+        type: 'default',
+        title: 'Então somar()?',
+        body: 'Isso!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Muito bem, já faz algum tempo que estamos andando nesse planeta e já adquirimos alguns itens:',
+      },
+      {
+        type: 'code',
+        body: ` 
+var qtdItens = [24, 1, 57, 8, 11, 2];
+
+var soma = qtdItens.somar();
+
+escreva(soma);
+// Resultado: 107`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        title: 'Somar()',
+        body: 'O método "somar()" gera um número sendo a soma de todos os números presente no vetor',
+      },
+      {
+        type: 'alert',
+        body: 'Você percebeu que eu coloquei o resultado de "somar()" em uma variável, o que também seria possível usando o método "inclui()".',
+      },
+      {
+        type: 'default',
+        title: 'Mas e se o vetor tivesso texto?',
+        body: 'Boa pergunta! Nesse caso todos os itens do vetor se juntariam para formar um texto.',
+      },
+      {
+        type: 'code',
+        body: ` 
+var qtdItens = [24, 1, "texto", 57, 8, 11, 2];
+
+var soma = qtdItens.somar();
+
+escreva(soma);
+// Resultado: 25texto578112`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Mas isso não o que a gente quer usando o método "somar()" não é?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ok, contudo esse vetor itens está muito bagunçado! Podemos organizá-lo melhor separando os itens por categoria.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim?',
+        body: 'Por exemplo, podemos pegar os itens que são alimentos e colocá-los em um vetor separado.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então teríamos que criar um novo vetor contendo parte dos itens de um vetor principal.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E como fazer isso? Claro, usando um método.',
+      },
+      {
+        type: 'default',
+        title: 'Fatiar()',
+        body: 'Com o método "fatiar()" literalmente pegaremos uma fatia de um vetor. Para usá-lo é preciso passar dois valores entres os seus parênteses: índice inicial e ínidice final.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim índice inicial e final?',
+        body: 'O índice refere-se o índice de vetor mesmo. Primeiramente definiremos a partir de qual índice/posição do vetor, começaremos a fatiá-lo. Após isso, definimos em qual posição ele deve parar.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim, os itens nessa fatia, serão aqueles que tenham os índices presentes nessa faixa.',
+      },
+      {
+        type: 'default',
+        title: 'Como assim índice inicial e final',
+        body: 'Por exemplo, os alimentos do vetor itens são os três primeiros, ou seja, índices 0, 1, e 2. Logo para pegar uma fatia contendo esses itens, definiremos o índice inicial como 0 e o índice final como 3.',
+      },
+      {
+        type: 'code',
+        body: `var itens = [
+        "fruta",
+        "ovo de Icelope", 
+        "amêndua"
+        "cristal", 
+        "pirita", 
+        "bastão laser quebrado", 
+        "fóssil de urso anão",
+        "meteorito congelado"
+];
+
+var alimentos = itens.fatiar(0, 3);
+
+escreva(alimentos);
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas por que 3??',
+        body: 'Isso porque o item que tenha o seu índice igual ao índice final nunca não estará presente nessa fatia.',
+      },
+      {
+        type: 'alert',
+        body: 'Como deve ter percebido, o método "fatiar()" gera um novo vetor, mas não altera o vetor original.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Esse método é um pouco mais complicado de entender, então continuaremos usando-o para organizar os demais itens.',
+      },
+      {
+        type: 'code',
+        body: `var itens = [
+          "fruta",
+          "ovo de Icelope", 
+          "amêndua"
+          "cristal", 
+          "pirita", 
+          "bastão laser quebrado", 
+          "fóssil de urso anão",
+          "meteorito congelado"
+]
+
+var alimentos = itens.fatiar(0, 3);
+var minerais = itens.fatiar(4, 6);
+var ferramentas = itens.fatiar(5, 6);
+var exoticos = itens.fatiar(7);
+
+escreva(alimentos)
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'assim, temos:\n(0, 3) - Primeiro item até o segundo item\n(4, 6) - Terceiro item até o quinto item\n(5, 6) - Quarto item até ele mesmo\n(7) - Sexto item até o último item',
+      },
+      {
+        type: 'default',
+        title: 'Mas espera aí! no útimo, o fatiar só tem um valor!',
+        body: 'Bem observado. Não te contei, mas é possível omitir o índice final. Caso você faça isso, o índice final será sempre o útimo índice do vetor. ',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'O que quer dizer que se apenas o índice inicial for definido, o fatiar() retornará o item com esse índice e todos os demais itens do vetor após ele.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5]
+
+var fatia = numeros.fatiar(2);
+
+escreva(numeros)
+// Resultado: 3, 4, 5
+// fatiar(2) = Terceiro item até o último item do vetor`,
+        isRunnable: true,
+      },
+        {
+          type: 'default',
+          title: 'Tá mas, o que fazemos com vetor itens?',
+          body: 'Sim, agora temos itens duplicados em vetores diferentes, justo porque o "fatiar()" não modifica o vetor originial.',
+        },
+        {
+          type: 'default',
+          title: null,
+          body: 'Contudo, entretanto, todavia, há um método que faz exatamente o que "fatiar()" faz, porém ele altera o vetor original.',
+        },
+        {
+            type: 'default',
+            title: 'Qual?',
+            body: '',
+          },
+      {
+        type: 'default',
+        title: null,
+        body: 'Como bônus por você ter chego até aqui, vou te ensinar um método extra',
+      },
+      {
+        type: 'default',
+        title: 'Qual?',
+        body: 'O método "reverso()"',
+      },
+      {
+        type: 'list',
+        title: 'Reverso()',
+        body: 'O método "reverso()" é usado para inverter a ordem dos elementos de um vetor. Ele não cria um novo vetor, mas sim modifica o vetor original.',
+      },
+      {
+        type: 'list',
+        title: 'Reverso()',
+        body: 'E estou falando de inverter mesmo, ou seja, ao aplicar o método "reverso()" em um vetor, o último elemento passa a ser o primeiro, o penúltimo passa a ser o segundo, e assim por diante',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = [
+          "fruta",
+          "ovo de Icelope", 
+          "amêndua"
+        
+]
+
+alimentos.reverso(0, 3);
+
+escreva(alimentos)
+// Resultado: fruta, ovo de Icelope, amêndua`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        title: 'Ah...',
+        body: 'Pode não parecer muito útil, mas vai que né.',
+      },
+    ],
+  },
 ];

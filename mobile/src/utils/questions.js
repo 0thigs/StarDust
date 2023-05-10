@@ -2198,7 +2198,7 @@ se (tecnologias.inclui("propulsor")) {
       },
       {
         id: 5,
-        texts: ['var droids = droids.', 'dropZone', '(', 'dropZone' ,')'],
+        texts: ['var droids = droids.', 'dropZone', '(', 'dropZone', ')'],
         indentLevel: 0,
       },
       {
@@ -2308,6 +2308,17 @@ escreva(viloes[-1])`,
   },
   {
     starId: 20,
+    type: 'checkbox',
+    stem: 'Quais valores eu poderia colocar no inclui() para que o código resultasse em verdadeiro?',
+    code: `var especies = ['Wookiee', 'Jawa'];
+var alvos = especies.concatenar(['Ewok', 'Zabrak', 'Rodians']);
+
+escreva(alvos.inclui());`,
+    options: ['Ewok', 'Jawa', 'Zabrak', 'Gugan'],
+    correctOptions: ['Ewok', 'Jawa', 'Zabrak'],
+  },
+  {
+    starId: 21,
     type: 'checkbox',
     stem: 'Quais valores eu poderia colocar no inclui() para que o código resultasse em verdadeiro?',
     code: `var especies = ['Wookiee', 'Jawa'];
