@@ -1,7 +1,7 @@
 const spacings = {
-    selection: 25,
-    open: 125,
-    checkbox: 30,
+    selection: 35,
+    open: 70,
+    checkbox: 25,
 }
 
 export function getCodeHeight(code, questionType) {

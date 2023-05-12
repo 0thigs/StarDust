@@ -75,7 +75,6 @@ export function OpenForm({ stem, answer, code, index }) {
             onChangeText={setUserAnswer}
             isAnswerWrong={isAnswerVerified && isAnswerWrong}
           />
-        
         </>
       )}
     </C.Container>

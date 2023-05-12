@@ -70,7 +70,6 @@ export function PlaygroundHeader({
 
   function onPromptCancel() {
     setIsPromptVisible(false);
-    closePopover();
   }
 
   function handleDeleteButtonPress() {

@@ -2319,13 +2319,186 @@ escreva(alvos.inclui());`,
   },
   {
     starId: 21,
+    type: 'selection',
+    stem: 'Qual será o valor de particulas[-1]',
+    code: `var particulas = ["Elétron", "Próton", "Nêutron", "Quarks"]
+    
+particulas.reverso()
+escreva(particulas[-1])`,
+    options: ['Elétron', 'Nêutron', 'Próton', 'Quarks'],
+    answer: 'Elétron',
+  },
+  {
+    starId: 21,
     type: 'checkbox',
-    stem: 'Quais valores eu poderia colocar no inclui() para que o código resultasse em verdadeiro?',
-    code: `var especies = ['Wookiee', 'Jawa'];
-var alvos = especies.concatenar(['Ewok', 'Zabrak', 'Rodians']);
+    stem: 'Quais itens estarão no vetor fatia?',
+    code: `var elementos = [
+      'Hidrogênio', 
+      'Carbono',
+      'Oxigênio',
+      'Urânio',
+];
+var fatia = elementos.fatiar(2);
 
-escreva(alvos.inclui());`,
-    options: ['Ewok', 'Jawa', 'Zabrak', 'Gugan'],
-    correctOptions: ['Ewok', 'Jawa', 'Zabrak'],
+escreva(fatia);`,
+    options: ['Hidrogênio', 'Carbono', 'Oxigênio', 'Urânio'],
+    correctOptions: ['Oxigênio', 'Urânio'],
+  },
+  {
+    starId: 21,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código a fim de que o vetor radioativos tenha 3 itens, ou seja o resultado final seja igual a 3',
+    lines: [
+      {
+        id: 1,
+        texts: ['var elementos = ['],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"Hélio"'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['"Estrôncio"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['"Rádio"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['"Césio"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['"Polônio"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 7,
+        texts: [']'],
+        indentLevel: 0,
+      },
+      {
+        id: 8,
+        texts: ['var radioativos = ', 'elementos.', 'dropZone', '(1,', 'dropZone', ')'],
+        indentLevel: 0,
+      },
+      {
+        id: 9,
+        texts: ['escreva(radioativos.', 'dropZone', '( )'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'tamanho',
+      },
+      {
+        id: 2,
+        label: 'fatiar',
+      },
+      {
+        id: 3,
+        label: 'somar',
+      },
+      {
+        id: 4,
+        label: '3',
+      },
+      {
+        id: 5,
+        label: '4',
+      },
+      {
+        id: 6,
+        label: 'inverter',
+      },
+    ],
+    correctItemsIdsSequence: [2, 5, 1],
+  },
+  {
+    starId: 21,
+    type: 'open',
+    stem: 'O que será escrito por esse código?',
+    code: `var uns = [1, 1, 1, 1]
+escreva(uns.somar())`,
+    answer: '4',
+  },
+  {
+    starId: 21,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o método fatiar para que a fatia contenha:\nVia Láctea e Alfa Centauri',
+    lines: [
+      {
+        id: 1,
+        texts: ['var galaxias = ['],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"Andrômeda"'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['"Via Láctea"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['"Alfa Centauri"', ','],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['"Betelgeuse"'],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['];'],
+        indentLevel: 0,
+      },
+      {
+        id: 7,
+        texts: ['var fatia = ', 'galaxias.fatiar', '(', 'dropZone', ',', 'dropZone', ');'],
+        indentLevel: 0,
+      },
+      {
+        id: 8,
+        texts: ['escreva(fatia)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '0',
+      },
+      {
+        id: 2,
+        label: '1',
+      },
+      {
+        id: 3,
+        label: '3',
+      },
+      {
+        id: 4,
+        label: '4',
+      },
+      {
+        id: 5,
+        label: '2',
+      },
+    ],
+    correctItemsIdsSequence: [2, 3],
   },
 ];

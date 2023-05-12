@@ -11,7 +11,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
-  const [codeHeith, setCodeHeith] = useState(0);
+  const [codeHeight, setCodeHeight] = useState(0);
   const [isIncremented, setIsncremented] = useState(false);
   const isCurrentQuestion = index === currentQuestion;
 
@@ -57,7 +57,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
 
   useEffect(() => {
     reorderItems(options, setReorderedOptions);
-    setCodeHeith(getCodeHeight(code, 'selection'));
+    setCodeHeight(getCodeHeight(code, 'selection'));
   }, []);
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
           {code && (
-            <QuestionCode height={codeHeith}>
+            <QuestionCode height={getCodeHeight(code, 'selection')}>
               <Editor value={code} />
             </QuestionCode>
           )}

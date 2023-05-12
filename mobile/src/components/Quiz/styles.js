@@ -24,6 +24,7 @@ export const QuestionStem = styled(Animatable.Text)`
 export const QuestionCode = styled.View`
   align-self: center;
   width: ${lessonContainerWidth};
+  height: ${({ height }) => height}px;
 `;
 
 export const Text = styled.Text`
