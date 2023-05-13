@@ -1,6 +1,6 @@
 const spacings = {
     selection: 35,
-    open: 70,
+    open: 55,
     checkbox: 25,
 }
 

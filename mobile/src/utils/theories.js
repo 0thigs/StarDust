@@ -3460,7 +3460,7 @@ escreva(alimentos)
       },
       {
         type: 'default',
-        title: 'E agora',
+        title: 'E agora?',
         body: 'A nossa sorte que é existe um método que pode fazer a mesma coisa que o "fatiar()" faz, mas alterando o vetor original.',
       },
       {
@@ -3475,26 +3475,27 @@ escreva(alimentos)
       },
       {
         type: 'list',
-        body: 'Nos parênteses do "encaixar()" é necessário colocar 2 números obrigatórios.\nO primeiro indica qual índice/posição do vetor a partir do qual devem ser removidos os elementos.\n O segundo indica quantos elementos devem ser removidos.',
+        body: 'Nos parênteses do "encaixar()" é necessário colocar 2 números obrigatórios.\nO primeiro indica a partir de qual índice/posição do vetor devem ser removidos os elementos.\n O segundo indica quantos elementos devem ser removidos.',
       },
       {
         type: 'code',
         body: `var itens = [
         "fruta",
         "ovo de Icelope", 
-        "amêndua"
+        "amêndua",
         "cristal", 
         "pirita", 
         "bastão laser quebrado", 
         "fóssil de urso anão",
         "meteorito congelado"
 ];
-    
+  
+// encaixar(0, 3) = Começar a remoção a partir da posição 0 e remover 3 elementos
 itens.encaixar(0, 3);
     
 escreva(itens);
-escreva(itens.tamanho());
-// Resultado: 
+escreva('Temos agora ' + itens.tamanho());
+// Execute e veja o resultado
     `,
         isRunnable: true,
       },
@@ -3506,7 +3507,7 @@ escreva(itens.tamanho());
       {
         type: 'default',
         title: 'Mas e quanto aos alimentos?',
-        body: 'Para pegar os alimentos removidos pelo "encaixar()" será preciso criar uma nova varíavel.',
+        body: 'É método "encaixar()" retorna os elementos removidos por ele. Então, para pegar os alimentos removidos pelo "encaixar()" será preciso criar uma nova varíavel.',
       },
       {
         type: 'code',
@@ -3521,7 +3522,7 @@ escreva(itens.tamanho());
         "meteorito congelado"
 ];
     
-// encaixar(0, 3) = Começar a partir da posição 0 e remover 3 elementos
+// encaixar(0, 3) = Começar a remoção a partir da posição 0 e remover 3 elementos
 var alimentos = itens.encaixar(0, 3);
 escreva(alimentos);
 // Resultado: fruta, ovo de Icelope, amêndua`,
@@ -3566,7 +3567,7 @@ escreva(exoticos);
       {
         type: 'default',
         title: 'Pera aí, mas agora deu tudo errado!',
-        body: 'Sim. Acontece que toda vez que o "encaixar()" é executado, os itens são removidos do vetor, restando o que sobrou para o próxima categoria',
+        body: 'Sim. Acontece que toda vez que o "encaixar()" é executado, os itens são removidos do vetor original, correto? Então na próxima execução, o vetor itens terá menos elementos do que o esperado.',
       },
       {
         type: 'default',
@@ -3574,14 +3575,13 @@ escreva(exoticos);
         body: 'Isso é para mostrar que o "encaixar()" não fuciona da mesma maneira que o "fatiar()".',
       },
       {
-        type: 'default',
-        title: null,
-        body: 'Lembre-se: A diferença entre os dois é que o segundo número do "encaixar()" indica a QUANTIDADE de elementos que serão removidos, enquanto o do "fatiar()" indica o ponto de parada da fatia. E apenas o "encaixar()" consegue alterar o vetor original',
+        type: 'alert',
+        body: 'Lembre-se: A diferença entre os dois é que o segundo número do "encaixar()" indica a QUANTIDADE de elementos que serão removidos, enquanto o do "fatiar()" indica o ponto de parada da fatia. E apenas o "encaixar()" consegue alterar o vetor original.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Agora vamos fazer do jeito certo. Nesse caso, basta começarmos sempre da posição zero, já que estamos sempre removendo os primeiros itens do vetor.',
+        body: 'Agora vamos fazer do jeito certo. Nesse caso, basta começarmos sempre da posição zero, já que estamos sempre removendo os primeiros itens do vetor itens.',
       },
       {
         type: 'code',
@@ -3606,7 +3606,9 @@ escreva(minerais);
 escreva(ferramentas);
 escreva(exoticos);
 
-escreva(itens)`,
+escreva(itens)
+
+// Aperte em executar para ver o resultado mágico`,
         isRunnable: true,
       },
       {
@@ -3658,11 +3660,16 @@ var textos = ["é", "daí", "perigoso"];`,
       {
         type: 'default',
         title: 'E daí?',
-        body: 'Lembra que eu disse que o "encaixar()" tem várias funções? Você deve ter se perguntado, por que "encaixar" tem esse nome?. É porque com ele podemos remontar qualquer vetor, removendo ou adicionando itens.',
+        body: 'Lembra que eu disse que o "encaixar()" pode ser usado de várias maneiras?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Você deve ter se perguntado, por que "encaixar" tem esse nome? É porque com ele podemos remontar qualquer vetor, removendo ou adicionando itens.',
       },
       {
         type: 'list',
-        body: 'Para adicionar itens usando o "encaixar()", deve-se passar um terceiro valor, mas não um número e sim o item que você queira adicionar.',
+        body: 'Sim, podemos adicionar itens usando "encaixar()". Para isso, deve-se passar um terceiro valor, mas não necessariamente um número, pode ser um texto, um lógico ou ainda outro vetor.',
       },
       {
         type: 'default',
@@ -3679,9 +3686,8 @@ var textos = ["é", "daí", "perigoso"];`,
         body: `var mensagem = ["Saia", 1, "planeta", 3];
 
 var textos = ["perigoso", "daí"];
-var subtexto = textos[1];
 
-// encaixar(1, 1, subtexto) = A partir do índice 1 do vetor mensagem remover um elemento e colocar o valor da variável subtexto ("daí")
+// encaixar(1, 1, "daí") = A partir do índice 1 do vetor mensagem remover um elemento e adicionar o texto "daí"
 mensagem.encaixar(1, 1, "daí");
 
 escreva(mensagem);
@@ -3690,26 +3696,25 @@ escreva(mensagem);
       },
       {
         type: 'alert',
-        body: 'Se o número do meio fosse zero, nenhum elemento seria removido, ou seja, o resultado seria: Saia, 1, daí, planeta, 3.',
+        body: 'Se o número do meio fosse zero, nenhum elemento seria removido, ou seja, o resultado seria:\nSaia, 1, daí, planeta, 3.',
       },
       {
         type: 'alert',
-        body: 'Mas ao colocarr 1, o método "encaixar()" torna-se uma boa maneira também de substituir um valor de um vetor por outro.',
+        body: 'Mas ao colocar 1, o método "encaixar()" torna-se uma boa maneira também de substituir um valor de um vetor por outro.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Agora colocaremos a outra palavras: Agora vai ser mais fácil',
+        body: 'Agora colocaremos a outra palavra.',
       },
       {
         type: 'code',
         body: `var mensagem = ["Saia", "daí", "planeta", 3];
 
 var textos = ["perigoso", "daí"];
-var subtexto = textos[0]
 
-// encaixar(3, 1, subtexto) = A partir do índice 3 remover um elemento e colocar o valor da variável subtexto ("perigoso")
-mensagem.encaixar(3, 1, subtexto);
+// encaixar(3, 1, "perigoso") = A partir do índice 3 remover um elemento e colocar o texto "perigoso"
+mensagem.encaixar(3, 1, "perigoso");
 
 escreva(mensagem);
 // Resultado: Saia, daí, planeta, perigoso`,
@@ -3718,12 +3723,12 @@ escreva(mensagem);
       {
         type: 'default',
         title: null,
-        body: 'Agora temos uma resultado: Saia, daí, planeta, perigoso',
+        body: 'Agora temos uma resultado:\nSaia, daí, planeta, perigoso',
       },
       {
         type: 'default',
         title: null,
-        body: 'Ok... Então esse planeta deve ser mais perigoso do que eu pensava. Mas quem será que mandou essa mensagem?',
+        body: 'Ok... Então esse planeta deve ser mais perigoso do que eu pensava. Mas agora eu pergunto: quem será que mandou essa mensagem?',
       },
     ],
   },

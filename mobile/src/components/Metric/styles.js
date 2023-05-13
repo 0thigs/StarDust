@@ -7,7 +7,7 @@ export const Container = styled(Animatable.View)`
   border-radius: 8px;
   width: ${props => (props.isLarge ? 80 : 30)}%;
   overflow: hidden;
-  margin: 0 auto 12px;
+  margin: 8px auto 12px;
 `;
 
 export const Header = styled.View`
@@ -27,13 +27,13 @@ export const Body = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px;
+  padding: 8px;
 `;
 
 export const Count = styled.Text`
   font-family: ${props => props.theme.fonts.regular};
   color: ${props => props.theme.colors.white};
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 4px;
   margin-bottom: -8px;
 `;

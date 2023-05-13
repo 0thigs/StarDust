@@ -16,8 +16,8 @@ export function Output({ bottomSheetRef, result }) {
             <C.Heading>Resultado</C.Heading>
           </C.Header>
           <C.Content>
-            {result.map(result => (
-              <C.Result key={result}>
+            {result.map((result, index) => (
+              <C.Result key={`result-${index}`}>
                 {result.includes(',') ? result.split(',').join(', ').trim() : result.trim()}
               </C.Result>
             ))}

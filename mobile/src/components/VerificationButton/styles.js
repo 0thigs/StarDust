@@ -7,7 +7,7 @@ export const Container = styled.View`
   border-color: ${({ theme, isAnswerWrong }) =>
     theme.colors[isAnswerWrong ? 'red_700' : 'green_300']};
   align-items: center;
-  padding: 12px;
+  padding: 8px 12px;
   position: absolute;
   bottom: 0;
   left: 0;

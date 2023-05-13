@@ -22,7 +22,7 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
-const iconSize = 30;
+const iconSize = 25;
 
 export function End({
   starId,
@@ -226,7 +226,7 @@ export function End({
               { keypath: 'star5', color: theme.colors.yellow_300 },
             ]}
           />
-          <Animation source={Astronaut} autoPlay={true} loop={true} size={350} />
+          <Animation source={Astronaut} autoPlay={true} loop={true} size={300} />
           <C.Metrics>
             <Metric
               title={'Poeira estelar'}

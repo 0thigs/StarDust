@@ -48,7 +48,7 @@ export default function App() {
         animationInTiming={700}
         animationOutTiming={1000}
         animationStyle={'rightInOut'}
-        width={320}
+        width={335}
         position={'top'}
       />
     </GestureHandlerRootView>
