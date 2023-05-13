@@ -3,6 +3,8 @@ import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
 
 export function Output({ bottomSheetRef, result }) {
+  console.log(result);
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -18,7 +20,9 @@ export function Output({ bottomSheetRef, result }) {
           <C.Content>
             {result.map((result, index) => (
               <C.Result key={`result-${index}`}>
-                {result.includes(',') ? result.split(',').join(', ').trim() : result.trim()}
+                {result.includes(',')
+                  ? '[ ' + result.split(',').join(', ').trim() + ' ]'
+                  : result.trim()}
               </C.Result>
             ))}
           </C.Content>

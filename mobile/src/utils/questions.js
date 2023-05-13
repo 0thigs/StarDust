@@ -2504,7 +2504,7 @@ escreva(uns.somar())`,
   {
     starId: 22,
     type: 'drag-and-drop-click',
-    stem: 'Complete o encaixar para que a variável satelitesNaturais tenha os seguintes satelites:\nLua e Titâ',
+    stem: 'Complete o encaixar para que a variável satelitesNaturais tenha os seguintes satelites:\nLua e Titã',
     lines: [
       {
         id: 1,
@@ -2669,5 +2669,126 @@ escreva(asteroides[0]);`,
     code: `var agenciasEspaciais = ["NASA", "ESA", "JAXA"]
   escreva(agenciasEspaciais.encaixar())`,
     answer: '1',
+  },
+  {
+    starId: 23,
+    type: 'selection',
+    stem: 'Que frase será escrita por esse código?',
+    code: `var textos = [
+        "Apollo",
+        "é", 
+        "legal",
+]
+  
+var frase = textos.juntar("/");
+escreva(frase);`,
+    options: ['Apollo é legal', 'Apollo/é/legal', 'Apollo-é-legal', 'Apolloélegal'],
+    answer: 'Apollo/é/legal',
+  },
+  {
+    starId: 23,
+    type: 'selection',
+    stem: 'Quantos itens posso ter no vetor ao dividir a palavra "galáxia" usando a palavra "a" como separador',
+    code: `var palavra = "galáxia";
+
+var vetor = palavra.dividir("a")
+escrever(vetor.tamanho());`,
+    options: ['1', '2', '3', '4'],
+    answer: '3',
+  },
+  {
+    starId: 23,
+    type: 'drag-and-drop-click',
+    stem: 'Coloque o método e o separador correto para que o vetor astrônomos tenha três itens:\nCopérnico, Kepler, Newton',
+    lines: [
+      {
+        id: 1,
+        texts: ['var nomes = "Copérnico, Kepler, Newton";'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var astronomos = ', 'nomes.', 'dropZone', '(', 'dropZone', ');'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['escreva(astronomos);'],
+        indentLevel: 2,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'dividir',
+      },
+      {
+        id: 2,
+        label: 'juntar',
+      },
+      {
+        id: 3,
+        label: '", "',
+      },
+      {
+        id: 4,
+        label: '"; "',
+      },
+      {
+        id: 5,
+        label: '"a"',
+      },
+      {
+        id: 6,
+        label: '" "',
+      },
+    ],
+    correctItemsIdsSequence: [1, 3],
+  },
+  {
+    starId: 23,
+    type: 'checkbox',
+    stem: 'Quais estrelas estarão presentes no vetor estrelas?',
+    code: `var nomes = "Sol, Polaris, Antares, Sirius";
+
+var estrelas = dividir(", ", 2);
+escreva(estrelas);`,
+    options: ['Sol', 'Polaris', 'Antares', 'Sirius'],
+    correctOptions: ['Sol', 'Polaris', 'Long March 5'],
+  },
+  {
+    starId: 23,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o código para que seja formada a frase:\n"O espaço é imenso"',
+    items: [
+      {
+        id: 1,
+        label: 'var palavras = [',
+      },
+      {
+        id: 2,
+        label: "   'O'",
+      },
+      {
+        id: 3,
+        label: "    'espaço'",
+      },
+      {
+        id: 4,
+        label: "    'é'",
+      },
+      {
+        id: 5,
+        label: "    'imenso'",
+      },
+      {
+        id: 6,
+        label: ']',
+      },
+      {
+        id: 7,
+        label: 'escreva(palavras.juntar(" "))',
+      },
+    ],
   },
 ];

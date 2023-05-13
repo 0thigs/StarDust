@@ -3732,4 +3732,221 @@ escreva(mensagem);
       },
     ],
   },
+  {
+    starId: 23,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Acabamos de receber mais de uma mensagem no nosso radar:',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Preciso", "de", "ajuda"];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Já que todas as mensagens estão sendo recebidas como vetor, podemos juntar os itens para formar um texto.',
+      },
+      {
+        type: 'list',
+        title: 'juntar()',
+        body: 'O método juntar() permite unir os elementos de um vetor, transformando em um único texto.',
+      },
+      {
+        type: 'list',
+        title: null,
+        body: 'Só que para usar o "juntar()", é preciso passar um elemento de texto nos parênteses para que ele use esse texto como separador para cada elemento.',
+      },
+      {
+        type: 'list',
+        title: null,
+        body: 'Além disso, o método juntar() não altera o vetor original, então será preciso colocar o texto gerado em uma nova variável.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Preciso", "de", "ajuda"];
+                
+var mensagemCerta = mensagem.juntar("");
+
+escreva(mensagemCerta);
+// Resultado: Precisodeajuda
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Não é exatamente isso que queremos. Isso aconteceu porque colocamos o separador como um texto vazio.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas queremos que as palavras estejam separadas por um espaço, correto?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então, por exemplo, se colocarmos um traço (-) no "juntar()":',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Preciso", "de", "ajuda"];
+                
+var mensagemCerta = mensagem.juntar("-");
+
+escreva(mensagemCerta);
+// Resultado: Preciso-de-ajuda
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada palavra será inserido um traço separando elas.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Logo, para separar cada palavra adequadamente, usando espaço, basta colocar um texto que seja um espaço no "juntar()".',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Preciso", "de", "ajuda"];
+                
+var mensagemCerta = mensagem.juntar(" ");
+
+escreva(mensagemCerta);
+// Resultado: Preciso de ajuda
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim fica bem melhor para ler as mensagens.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Algum desconhecido está querendo que saiamos desse planeta para ajudá-lo. Então, mande uma mensagem para o foguete vir nos pegar.',
+      },
+      {
+        type: 'default',
+        title: 'Ok',
+        body: 'Só que, como radar está tranformando as mensagens recebidas em vetores, então é de se presumir que ele também transformará as que serão enviadas quando chegar ao foguete.',
+      },
+      {
+        type: 'default',
+        title: 'Vish...',
+        body: 'Então podemos tentar engenharia reversa. Talvez se mandarmos a mensagem já como vetor, ele se transformará em texto quando chegar ao foguete.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para nossa sorte (de novo), existe um método que faz literalmente isso: o método "dividir()".',
+      },
+      {
+        type: 'list',
+        title: 'Dividir()',
+        body: 'O método "dividir()" divide um texto em subtextos, transformando-o em um vetor.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha já aqui";
+
+var mensagemCerta = mensagem.dividir();       
+
+escreva(mensagemCerta);
+// Resultado: Venha já aqui
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas não aconteceu nada!',
+        body: 'Isso porque é também é preciso passar nos parênteses do "juntar()" um texto que servirá como separador da divisão.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, se passarmos a letra "a" como separador:',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha já aqui";
+
+var mensagemCerta = mensagem.dividir("a");       
+
+escreva(mensagemCerta);
+// Resultado: [ Venh, já, qui ]
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja que toda letra "a" foi removida do texto, e os textos que estavam envolta de cada letra "a" se tranformaram em um elemento de um vetor.',
+      },
+      {
+        type: 'alert',
+        body: 'O caractere "à" não foi removido por causa do acento, ou seja, "à" é diferente de "a", então cuidado com isso.',
+      },
+      {
+        type: 'default',
+        title: 'Mas como separar as palavras da forma correta?',
+        body: 'Para isso, definiremos o separador como um espaço vazio (" ");',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha já aqui";
+
+var mensagemCerta = mensagem.dividir(" ");       
+
+escreva(mensagemCerta);
+// Resultado: [ Venha, já, aqui ]
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora temos um vetor decente.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas, para chamar o foguete, podemos encurtar a mensagem, mandando apenas "Venha".',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para facilitar podemos dizer para o "dividir()" que apenas gere um vetor com apenas 1 elemento.',
+      },
+      {
+        type: 'default',
+        title: 'Mas, como fazer isso?',
+        body: 'Através do segundo valor passado nos parênteses do "dividir()", que difine quantos itens o vetor gerado deve conter.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha já aqui";
+
+// Nesse caso, vetor gerado por dividir() terá apenas 1 palavra
+var mensagemCerta = mensagem.dividir(" ", 1);       
+
+escreva(mensagemCerta);
+// Resultado: [ Venha ]
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora sim! Só resta esperar que o foguete venha, caso ele tenha recebido a mensagem, é claro.',
+      },
+    ],
+  },
 ];

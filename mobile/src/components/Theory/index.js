@@ -33,6 +33,7 @@ export function Theory({ title, allTexts }) {
 
   function handleContinueButton() {
     if (!allTexts[nextTextIndex]) return;
+    scrollToEnd();
 
     setNextTextIndex(index => index + 1);
     setTexts(texts => {
