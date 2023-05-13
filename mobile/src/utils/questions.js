@@ -2501,4 +2501,177 @@ escreva(uns.somar())`,
     ],
     correctItemsIdsSequence: [2, 3],
   },
+  {
+    starId: 22,
+    type: "drag-and-drop-click",
+    stem: "Complete o encaixar para que a variável satelitesNaturais tenha os seguintes satelites:\nLua e Titâ",
+    lines: [
+      {
+        id: 1,
+        texts: ["var cometas = ["],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"Lua"', ","],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['"Titã"'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ["];"],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: [
+          "var satelitesNaturais = ",
+          "satelites.encaixar",
+          "(",
+          "dropZone",
+          ",",
+          "dropZone",
+          ");",
+        ],
+        indentLevel: 0,
+      },
+      {
+        id: 6,
+        texts: ["escreva(satelitesNaturais);"],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: "0",
+      },
+      {
+        id: 2,
+        label: "1",
+      },
+      {
+        id: 3,
+        label: "3",
+      },
+      {
+        id: 4,
+        label: "4",
+      },
+      {
+        id: 5,
+        label: "2",
+      },
+    ],
+    correctItemsIdsSequence: [1, 2],
+  },
+  {
+    starId: 22,
+    type: "checkbox",
+    stem: "Quais itens sobrarão na variável foguetes",
+    code: `var foguetes = [
+        'Soyuz', 
+        'Atlas V',
+        'Falcon 9',
+        'Long March 5',
+  ];
+
+foguetes.encaixar(1, 1);`,
+    options: ["Soyuz", "Falcon 9", "Atlas V", "Long March 5"],
+    correctOptions: ["Soyuz", "Falcon 9", "Long March 5"],
+  },
+  {
+    starId: 22,
+    type: "drag-and-drop-click",
+    stem: "Adicione o cometa Lovejoy na posição 1 no vetor cometas",
+    lines: [
+      {
+        id: 1,
+        texts: ["var satelites = ["],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['"Hubble"', ","],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['"Encke"', ","],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['"Hyakutake"', ","],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ["];"],
+        indentLevel: 0,
+      },
+      {
+        id: 7,
+        texts: [
+          "cometas.encaixar",
+          "(",
+          "dropZone",
+          ",",
+          "dropZone",
+          ",",
+          "dropZone",
+          ");",
+        ],
+        indentLevel: 0,
+      },
+      {
+        id: 8,
+        texts: [";"],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: "0",
+      },
+      {
+        id: 2,
+        label: "1",
+      },
+      {
+        id: 3,
+        label: "Lovejoy",
+      },
+    ],
+    correctItemsIdsSequence: [2, 1, 3],
+  },
+  {
+    starId: 22,
+    type: "selection",
+    stem: "Qual asteroide estará na posição zero do vetor asteroides",
+    code: `var asteroides = [
+        "Ceres",
+        "Vesta", 
+        "Pallas", 
+        "Hygiea"
+]
+      
+asteroides.encaixar(0, 3);
+escreva(asteroides[0]);`,
+    options: ["Ceres", "Vesta", "Pallas", "Hygiea"],
+    answer: "Hygiea",
+  },
+  {
+    starId: 22,
+    type: "open",
+    stem: "Qual o único numéro seria necessário colocar como primeiro valor no encaixar() para pegar os dois últimos itens do vetor agenciasEspaciais",
+    code: `var agenciasEspaciais = ["NASA", "ESA", "JAXA"]
+  escreva(agenciasEspaciais.encaixar())`,
+    answer: "1",
+  },
 ];
