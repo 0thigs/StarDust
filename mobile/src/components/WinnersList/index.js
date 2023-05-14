@@ -1,37 +1,49 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
+import { SvgUri } from 'react-native-svg';
+import { Animation } from '../Animation';
 import { Button } from '../Button';
 import { Winner } from '../Winner';
 import { Sound } from '../Sound';
+import { Modal } from '../Modal';
 import { User } from '../User';
 
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 import EarningSound from '../../assets/sounds/earning-sound.wav';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { Modal } from '../Modal';
+import { getImage } from '../../utils/getImage';
 
-export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward }) {
+export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRanking }) {
   const {
     loggedUser: { last_position, name, avatar_id, coins },
     updateLoggedUser,
   } = useAuth();
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRewardModalVisible, setIsRewardModalVisible] = useState(false);
+  const [isRankingModalVisible, setIsRankingModalVisible] = useState(false);
   const soundRef = useRef(null);
   const rewardByLastPosition =
-    reward + 5 * (last_position === 1 ? 3 : last_position === 3 ? 1 : last_position);
+    currentRanking.reward + 5 * (last_position === 1 ? 3 : last_position === 3 ? 1 : last_position);
 
-  function handleModalButtonPress() {
-    setIsModalVisible(false);
+  function handleModalButtonPress(type) {
+    if (type === 'reward') {
+      setIsRewardModalVisible(false);
+      setIsRankingModalVisible(true);
+      return;
+    }
+
+    setIsRankingModalVisible(false);
     setWinners([]);
   }
 
   function handleWinnerListButtonPress() {
     if (isLoggedUserWinner) {
-      setIsModalVisible(true);
+      setIsRewardModalVisible(true);
       updateLoggedUser({ coins: coins + rewardByLastPosition });
       return;
     }
+    setIsRankingModalVisible(true);
     setWinners([]);
   }
 
@@ -50,7 +62,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
             avatarId={avatar_id}
             position={position}
             xp={xp}
-            reward={reward}
+            reward={currentRanking.reward}
           />
         ))}
       </C.Winners>
@@ -76,14 +88,14 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
       <Sound ref={soundRef} soundFile={EarningSound} />
 
       <Modal
-        isVisible={isModalVisible}
+        isVisible={isRewardModalVisible}
         type={'earning'}
         title={'Recompensa resgatada!'}
         body={
           <C.RewardMessage>
             <C.Text>Parabéns! Você acabou de ganhar </C.Text>
             <C.Reward>{rewardByLastPosition}</C.Reward>
-            <C.Text>de poeira estela </C.Text>
+            <C.Text>de poeira estela por ter ficado em os três primeiros</C.Text>
           </C.RewardMessage>
         }
         footer={
@@ -91,7 +103,40 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, reward })
             title={'Entendido'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={handleModalButtonPress}
+            onPress={() => handleModalButtonPress('reward')}
+          />
+        }
+        playSong={false}
+      />
+
+      <Modal
+        isVisible={isRankingModalVisible}
+        type={'earning'}
+        title={'Recompensa resgatada!'}
+        body={
+          <>
+            <Animation
+              source={RewardLight}
+              autoPlay={true}
+              loop={true}
+              size={220}
+              isAbsolute={true}
+              top={-15}
+              left={13}
+            />
+            <SvgUri uri={getImage('rankings', currentRanking.image)} width={100} height={100} />
+            <C.RewardMessage>
+              <C.Text>Parabéns! Você acaba de chegar no ranking: </C.Text>
+              <C.Reward>{currentRanking.name}</C.Reward>
+            </C.RewardMessage>
+          </>
+        }
+        footer={
+          <Button
+            title={'Entendido'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={() => handleModalButtonPress('ranking')}
           />
         }
         playSong={false}

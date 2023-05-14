@@ -15,7 +15,6 @@ import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { Image } from '../Image';
 
 export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRocket }) {
   const { loggedUser, updateLoggedUser } = useAuth();
