@@ -4,7 +4,7 @@ export const Container = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.green_900};
   flex-direction: row;
-  padding: 16px 0;
+  padding: 16px 0 8px;
 `;
 
 export const Title = styled.Text`

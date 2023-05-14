@@ -2791,4 +2791,165 @@ escreva(estrelas);`,
       },
     ],
   },
+  {
+    starId: 24,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que o tamanho da variável palavra seja igual a seis, ou seja, que o código resulte em 6',
+    lines: [
+      {
+        id: 1,
+        texts: ['var palavra = "    Cosmos   ";'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['palavra.', 'dropZone', '( );'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(astronomos.', 'dropZone', '( ));'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'aparar',
+      },
+      {
+        id: 2,
+        label: 'dividir',
+      },
+      {
+        id: 3,
+        label: 'subtexto',
+      },
+      {
+        id: 4,
+        label: 'tamanho',
+      },
+      {
+        id: 5,
+        label: 'fatiar',
+      },
+    ],
+    correctItemsIdsSequence: [1, 4],
+  },
+  {
+    starId: 24,
+    type: 'selection',
+    stem: 'Qual será o valor da variável planeta?',
+    code: `var frase = "Terra é redonda";
+var novaFrase = frase.maiusculo();
+var planeta = novaFrase.subtexto(0, 5)
+escrever(planeta);`,
+    options: ['Terra', 'TERRA', 'terra', 'redonda'],
+    answer: 'TERRA',
+  },
+  {
+    starId: 24,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o subtexto para que a variável primeiraPalavra seja igual a "UNIVERSO"',
+    lines: [
+      {
+        id: 1,
+        texts: ['var palavra = "Universo infinito";'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: [
+          'var primeiraPalavra = ',
+          'palavra.subtexto',
+          '(',
+          'dropZone',
+          ',',
+          'dropZone',
+          ');',
+        ],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['escreva(primeiraPalavra.', 'dropZone', '( ));'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'maiusculo',
+      },
+      {
+        id: 2,
+        label: 'minusculo',
+      },
+      {
+        id: 3,
+        label: '0',
+      },
+      {
+        id: 4,
+        label: '8',
+      },
+      {
+        id: 5,
+        label: '7',
+      },
+    ],
+    correctItemsIdsSequence: [3, 4, 1],
+  },
+  {
+    starId: 24,
+    type: 'checkbox',
+    stem: 'Quais caractares da palavra "estrela" estarão contidas na variável caracteres?',
+    code: `var estrela = "estrela";
+
+var carcacteres = estrela.subtexto(2, 4);
+escreva(estrelas);`,
+    options: ['e', 's', 't', 'r'],
+    correctOptions: ['t', 'r'],
+  },
+  {
+    starId: 24,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para o resultado seja igual a falso',
+    lines: [
+      {
+        id: 1,
+        texts: ['var planeta = "Planeta vermelho: Marte";'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var planeta = ', 'planeta.', 'dropZone', '(', 'dropZone', ',', 'dropZone', ');'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['escreva(planeta.inclui("Marte"));'],
+        indentLevel: 2,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '"Marte"',
+      },
+      {
+        id: 2,
+        label: 'remover',
+      },
+      {
+        id: 3,
+        label: 'substituir',
+      },
+      {
+        id: 4,
+        label: '"Vênus"',
+      },
+    ],
+    correctItemsIdsSequence: [3, 1, 4],
+  },
 ];

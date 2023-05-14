@@ -3949,4 +3949,350 @@ escreva(mensagemCerta);
       },
     ],
   },
+  {
+    starId: 24,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Estamos esperando a um tempão, e nada do foguete.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Talvez ter usado engenharia reversa não tenha dado certo.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Acho que o radar só transforma mensagens recebidas em vetores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então, podemos tranquilamente enviar mensagens em texto mesmo.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "   Venha aqui, por f4vor   ";`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Espera aí, o texto da mensagem tem espaços em branco.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mais um caso onde podemos solucionar usando um método de vetor.',
+      },
+      {
+        type: 'default',
+        title: 'Vetor? Mas estamos usando texto',
+        body: 'Isso pode explodir sua cabeça, mas textos também podem ser vetores.',
+      },
+      {
+        type: 'default',
+        title: 'Que??',
+        body: 'Textos em variáveis podem ser tratados como vetores, veja só:',
+      },
+      {
+        type: 'code',
+        body: `var texto = "abc";
+
+escreva(texto[0]);
+// Resultado: a
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Então, quer dizer que podemos usar os métodos de vetor que vimos anteriormente em textos?',
+        body: 'A resposta é sim! Obviamente nem todos, como o "remover()", "adicionar()", "ordenar()", nem mesmo o "inverter()"',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas podemos usar alguns como tamanho, inclui e concatenar',
+      },
+      {
+        type: 'code',
+        body: `var texto = "abc";
+
+escreva(texto.tamanho());
+escreva(texto.inclui("b"));
+escreva(texto.concatenar("d"));
+/* Resultado: 3
+              verdadeiro
+              abcd
+*/
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, existem métodos própios para textos.',
+      },
+      {
+        type: 'default',
+        title: 'Sério?',
+        body: 'Por exemplo, nesse caso para retirar os espaços em branco da mensagem, podemos utilizar o método "aparar()".',
+      },
+      {
+        type: 'list',
+        title: 'aparar()',
+        body: 'O método "aparar()" é usado para remover os espaços em branco do início e do final de um texto, ou aparar as pontas do texto.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "   Venha aqui, por f4vor   ";
+        
+mensagem.aparar();
+
+escreva(mensagem);
+// Resultado: Venha aqui, por f4vor`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora sim!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas espera aí de novo, há um número quatro na palavra "favor".',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'É melhor substituir o 4 pela letra "a".',
+      },
+      {
+        type: 'list',
+        title: 'substituir()',
+        body: 'O método de texto "substituir()" procura um subtexto dentro de um texto e o substitui por outro.',
+      },
+      {
+        type: 'list',
+        title: 'substituir()',
+        body: 'Para usá-lo é simples: é preciso passar dois valores, o primeiro indica qual subtexto deve ser procurado e substituido, enquanto o segundo é o subtexto que deve ser colocado como substituto.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha aqui, por f4vor";
+        
+mensagem.substituir("4", "a");
+
+escreva(mensagem);
+// Resultado: Venha aqui, por f4vor`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Aviso: o método "substituir()" só substitui o primeiro subtexto que ele encontrar. Quer dizer que se a mensagem tivesse mais números quatros, apenas o primeiro número quatro seria substituido.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venh4 4qui, por f4vor";
+        
+mensagem.substituir("4", "a");
+
+escreva(mensagem);
+// Resultado: Venha 4qui, por f4vor`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora está bem melhor, mas podemos melhorar ainda mais.',
+      },
+      {
+        type: 'default',
+        title: 'Como?',
+        body: 'Tirando esse texto "aqui, por favor". Eu disse antes que apenas a palavra "Venha" basta, assim poupamos memória desse radar mequetrefe.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Se cada caractere da mensagem fosse um item de um vetor, poderíamos usar o método "fatiar()".',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas já que estamos usando texto, podemo usar o método subtexto() que literalmente consegue fazer o que o "fatiar()" faz, só que para textos.',
+      },
+      {
+        type: 'list',
+        title: 'subtexto()',
+        body: 'O método "subtexto()" permite extrair uma parte de um texto a partir de um índice inicial até um índice final.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada índice de um texto corresponde a um caractere. Então se quisermos pegarmos só a palavra "Venha" da mensagem:',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha aqui, por favor";
+         
+// subtexto(0, 5) = começar a extrair do primeiro caractere até o quinto caractere
+var novaMensagem = mensagem.subtexto(0, 5);
+
+escreva(novaMensagem);
+// Resultado: Venha`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Essa parte dos índices do "subtexto()" é bem igual ao "fatiar()" mesmo, ou seja, será extraido todos os caracteres nas posições que estão entre o primeiro e segundo indíces definidos entre parênteses, mas não contando o caractere que corresponde ao índice final.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja eu extraindo a palavra "aqui"',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha aqui, por favor";
+         
+// subtexto(6, 10) = começar a extrair do quinto caractere até o décimo caractere
+var aqui = mensagem.subtexto(6, 10);
+
+escreva(aqui);
+// Resultado: aqui`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Se índice final não for passado, o subtexto começará do indíce inicial e terminará até o último índice do vetor, como no "fatiar()"',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Venha aqui, por favor";
+         
+// subtexto(8) = começar a extrair do sétimo caractere até o último caractere
+var subtexto = mensagem.subtexto(8);
+
+escreva(subtexto);
+// Resultado: por favor`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'E sim, o "subtexto()" não altera o texto original.'
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Opa! Acabamos de receber uma mensagem do foguete.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Não", "quero"];
+escreva(mensagem.juntar(" "));
+// Resultado: Não quero`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'O foguete disse que não quer vir aqui?',
+        body: 'Pode não parecer, mas o foguete é bem espertinho.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Então é melhor mandar uma mensagem mais educada mesmo.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Por favor, venha até aqui"`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Recebemos outra mensagem dele.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = ["Já", "falei", "que", "não", "quero"];
+escreva(mensagem.juntar(" "));
+// Resultado: Já falei que não quero`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'É, parece que esse fogute está bem afoito.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mande assim: Se não vier agora, irei te mandar para o ferro-velho!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas antes, tranforme o texto em caixa alta, isto é, coloque tudo em letra MAIÚSCULA para ele entender bem.',
+      },
+      {
+        type: 'list',
+        title: 'maiusculo()',
+        body: 'o método maiusculo() é bem simples: gera um texto com carecteres em maiúsculo a partir de outro texto.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = "Se não vier agora, irei te mandar para o ferro-velho!";
+
+var novaMensagem = mensagem.maiusculo()
+
+escreva(novaMensagem);
+// Resultado: SE NÃO VIER AGORA, IREI TE MANDAR PARA O FERRO-VELHO!`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Antes que pergunte, também existe o método "minusculo()".',
+      },
+      {
+        type: 'code',
+        body: `var texto = "TUDO EM MAIÚSCULO";
+
+escreva(texto.minusculo());
+// Resultado: tudo em maiúsculo`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Acabamos de receber mais uma mensagem do foguete.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = [
+            "não", 
+            "vou", 
+            "porque", 
+            "não", 
+            "faço", 
+            "ideia", 
+            "onde",
+            "você",
+            "está"
+];
+
+escreva(mensagem.juntar(" "));
+// Resultado: não vou porque não faço ideia onde você está`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'É, agora o foguete tem um ponto.',
+      },
+    ],
+  },
 ];
