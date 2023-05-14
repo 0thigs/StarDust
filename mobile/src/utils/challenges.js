@@ -947,6 +947,88 @@ Resultado: []`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },
+  {
+    starId: null,
+    title: 'Removendo sapos',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Enfim, são e salvos em nosso foguete. Está com fome?',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'O foguete no caminho ao resgate pegou vários alimentos para fazer nosso jantar, veja alguns:',
+      },
+      {
+        type: 'code',
+        body: `
+var alimentos = [
+    "lentilha lunar"
+    "sapo lunar"
+    "iogurte de gelo"
+    "sapo lácteo"
+];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Sapo?',
+        body: 'Por algum motivo o foguete incluiu sapos entre os alimentos, eca!',
+      },
+      {
+        type: 'list',
+        title: 'Desafio:',
+        body: 'Seu papel é remover todos os itens do vetor alimentos que incluam a palavra "sapo" no nome.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [pimentão, sapo de só, melancia]
+Resultado: [pimentão, melancia]
+
+Entrada: [sapo de caju, sapo kiwi, milho de ricota]
+Resultado: [milho de ricota]
+
+Entrada: [cevada, tamarindo, sapo coalhado]
+Resultado: [cevada, tamarindo]`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Para facilitar seu trabalho já coloquei um laço "para-cada" no seu código.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se dos métodos de vetor, caso esqueça algum você pode conferir no dicionário no menu superior.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+    input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
+        expectedOutput: 'manga,berinjela',
+        isLocked: false,
+      },
+      {
+        input: [["'sapo condensado'", "'cebola doce'", "'camarão de batata'", "'sapo de morango'"]],
+        expectedOutput: 'cebola doce,camarão de batata',
+        isLocked: false,
+      },
+      {
+        input: [["'sorvete de sapo'", "'requeijão'"]],
+        expectedOutput: 'requeijão',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
 ];
 
 [
@@ -1042,3 +1124,13 @@ var cor = leia();`,
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },
 ];
+
+`var alimentos = leia();
+var alimentosSemSapos = [];
+para cada alimento em alimentos {
+    // Escreva seu código aqui abaixo
+
+}
+
+escreva(alimentosSemSapos);
+`;

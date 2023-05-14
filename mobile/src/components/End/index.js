@@ -152,7 +152,7 @@ export function End({
 
   function setStarsAnimation() {
     const AnimationUnitInSeconds = 15.4;
-    const totalStars = starId ? (parseInt(getAccurance()) * 5) / 100 : 100;
+    const totalStars = starId && !challengeId ? (parseInt(getAccurance()) * 5) / 100 : 100;
     starsRef.current.play(0, AnimationUnitInSeconds * totalStars);
   }
 

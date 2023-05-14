@@ -33,7 +33,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '36ee46f0-4123-42ff-a186-5ce8f378e8e0';
+  const challengeId = '00084ae7-14ec-447c-a1fb-43e060816c46';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -83,7 +83,7 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
-    userOutputArray.current.push(userOutput.trim());
+    userOutputArray.current = userOutput;
   }
 
   function formatCode(code, inputValues) {
@@ -95,7 +95,7 @@ export function Challenge({ route }) {
       return code.concat('\n' + function_name + params + ';');
     }
 
-    if (!inputValues) return code;
+    if (!inputValues.length) return code;
     const regex = /(leia\(\))/g;
     const matches = code.match(regex);
     if (!matches) {
@@ -103,7 +103,9 @@ export function Challenge({ route }) {
       throw new Error('Não remova o comando Leia()!');
     }
 
-    inputValues.forEach(value => (code = code.replace(/(leia\(\))/, value)));
+    inputValues.forEach(
+      value => (code = code.replace(/(leia\(\))/, Array.isArray(value) ? `[${value}]` : value))
+    );
     return code;
   }
 
@@ -117,7 +119,7 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
-    userOutputArray.current = [];
+    userOutputArray.current = '';
     const code = formatCode(userCode.current, input);
 
     try {

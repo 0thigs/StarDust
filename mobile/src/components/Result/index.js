@@ -30,9 +30,11 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
   }
 
   function verifyResult({ expectedOutput }, index) {
+    console.log(userOutputs[index]);
+    console.log({ expectedOutput });
     return compareSenquences(
-      Array.isArray(userOutputs[index]) ? userOutputs[index] : userOutputs[index].toString(),
-      Array.isArray(expectedOutput) ? expectedOutput : expectedOutput.toString()
+      Array.isArray(userOutputs[index]) ? userOutputs[index] : [userOutputs[index].toString().trim()],
+      Array.isArray(expectedOutput) ? expectedOutput : [expectedOutput.toString().trim()]
     );
   }
 
@@ -42,7 +44,6 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
 
   useEffect(() => {
     if (userOutputs.length === testCases.length) {
-      console.log(userOutputs);
       setResults(testCases.map(verifyResult));
     }
   }, [userOutputs]);

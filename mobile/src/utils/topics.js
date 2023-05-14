@@ -630,4 +630,262 @@ fazer {
       },
     ],
   },
+  {
+    title: 'Vetores',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Vetores são variáveis com capacidade de armazenar 0 ou mais valores. São úteis em ocasiões em que é necessário executar uma lógica com múltiplos valores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'São úteis em ocasiões em que é necessário executar uma lógica com múltiplos valores.',
+      },
+      {
+        type: 'list',
+        body: 'vetores são declarados usando colchetes [] e podem conter qualquer tipo de dado, como números, strings e objetos..',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada um desses valores é acessado por meio de um índice numérico, que começa em zero e segue até o tamanho do vetor menos um.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];
+        
+escreva(vetor[0]); // 1
+escreva(vetor[2]); // 3
+escreva(vetor[4]); // 5`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Métodos de vetor',
+        body: 'Métodos de vetor são funções pré-definidas que permitem manipular vetores ',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Os métodos de vetor são chamados diretamente no vetor usando a sintaxe de ponto (.) e podem ser encadeados para executar várias operações em sequência. Eles também podem receber argumentos para especificar o que fazer com os elementos do vetor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'OS métodos de vetor incluem:',
+      },
+      {
+        type: 'list',
+        title: 'adicionar()',
+        body: 'Adiciona um ou mais elementos ao final do vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+vetor.adicionar(4);
+escreva(vetor);
+
+// Resultado: 1, 2, 3, 4`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'removerUltimo()',
+        body: 'Remove o último elemento do vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+vetor.removerUltimo();
+escreva(vetor);
+
+// Resultado: 1, 2, 3`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'removerPrimeiro()',
+        body: 'Remove o primeiro elemento de um vetor',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+vetor.removerPrimeiro();
+escreva(vetor);
+
+// Resultado: 2, 3`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'remover()',
+        body: 'Remove o primeiro um elemento específico de um vetor',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+vetor.remover(2);
+escreva(vetor);
+
+// Resultado: 1, 3`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'fatiar()',
+        body: 'Retorna uma cópia de uma parte de um vetor. Possui dois parâmetros:\nO primeiro indica de qual índice do vetor o fatiamento deve começar.\nO segundo indica em qual índice a fatia deve terminar. Se o segundo parâmetro não for passado, o fatiamente irá até o último índice do vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];
+var novoVetor = vetor.fatiar(2, 4);
+escreva(novoVetor);
+// Resultado: [ 3, 4 ]
+
+var novoVetor = vetor.fatiar(2);
+escreva(novoVetor);
+// Resultado: [ 3, 4, 5 ]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'encaixar()',
+        body: 'Adiciona ou remove elementos de um vetor. Possui três parâmetros:\nO primeiro indica de qual índice do vetor a remoção deve começar.\nO segundo (opcional) indica quantos elementos deve ser removidos.\nO terceiro (opcional) indica o elemento que deve ser adicionado no índice inicial definido. Se o segundo parâmetro não for passado, serão removidos todos os itens do vetor partindo do índice inicial até o último. Além disso o encaixar também pode retornar os elementos removidos do vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];
+var elementosRemovidos = vetor.encaixar(2, 4);
+escreva(vetor);
+escreva(elementosRemovidos);
+// Resultado: [ 1, 2 ]
+              [ 3, 4, 5 ]
+
+vetor.encaixar(2);
+escreva(novoVetor);
+// Resultado: [ 1, 2 ]
+
+vetor.encaixar(2, 1, 'texto');
+escreva(vetor);
+// Resultado: [ 1, 2, 'texto', 4, 5 ]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'concatenar()',
+        body: 'Retorna um novo vetor com os elementos do vetor original mais os elementos adicionados.',
+      },
+      {
+        type: 'code',
+        body: `var vetor1 = [1, 2, 3];
+var vetor2 = [4, 5, 6];
+var novoVetor = vetor1.concatenar(vetor2);
+escreva(novoVetor); 
+// Resultado: [1, 2, 3, 4, 5, 6]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'inclui()',
+        body: 'Verifica se um valor específico está presente no vetor, retornando um valor lógico.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+escreva(vetor.inclui(2));
+// Resultado: verdadeiro`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'substituir()',
+        body: 'Procura um elemento específico em um vetor e o substitui por outro, retornando um novo vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3];
+var novoAtor = vetor.substituir(2, 4);
+escreva(novoAtor);
+// Resultado: [ 1, 4, 3 ]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Laços e vetores',
+        body: 'Os laços são muito úteis para trabalhar com vetores, permitindo percorrer todos os seus elementos e realizar uma ação específica em cada um deles.',
+      },
+      {
+        type: 'list',
+        title: 'Laço para',
+        body: 'O laço for é o mais tradicional deles e permite controlar o índice do vetor manualmente. A estrutura do laço for é a seguinte:',
+      },
+      {
+        type: 'code',
+        body: `para (var i = 0; i < vetor.tamanho(); i++) {
+        // código a ser executado em cada elemento
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Onde',
+        body: 'i é o índice do elemento atual do vetor.\nvetor é o vetor a ser percorrido.\nvetor.tamanho() é a quantidade de elementos no vetor.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];
+
+para (var i = 0; i < vetor.tamanho(); i++) {
+    escreva(vetor[i]);
+}
+/* Resultado: 1
+              2
+              3
+              4
+              5 
+*/`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Laço para-cada',
+        body: 'O laço para...cada foi introduzido permite percorrer todos os elementos de um vetor sem precisar controlar o índice manualmente:',
+      },
+      {
+        type: 'code',
+        body: `para cada elemento em vetor {
+    // código a ser executado em cada elemento
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Onde',
+        body: 'elemento é o valor atual do elemento do vetor.\nvetor é o vetor a ser percorrido.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+para cada numero em numeros {
+    escreva(numero);
+}
+/* Resultado: 1
+              2
+              3
+              4
+              5 
+*/
+`,
+        isRunnable: false,
+      },
+    ],
+  },
 ];
