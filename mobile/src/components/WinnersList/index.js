@@ -126,7 +126,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
             />
             <SvgUri uri={getImage('rankings', currentRanking.image)} width={100} height={100} />
             <C.RewardMessage>
-              <C.Text>Parabéns! Você acaba de chegar no ranking: </C.Text>
+              <C.Text>Parabéns! Você acaba de chegar no ranking:</C.Text>
               <C.Reward>{currentRanking.name}</C.Reward>
             </C.RewardMessage>
           </>

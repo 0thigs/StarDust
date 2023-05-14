@@ -3348,7 +3348,7 @@ escreva(alimentos);
         "bastão laser quebrado", 
         "fóssil de urso anão",
         "meteorito congelado"
-]
+];
 
 var alimentos = itens.fatiar(0, 3);
 var minerais = itens.fatiar(3, 5);
@@ -4010,7 +4010,8 @@ escreva(texto[0]);
       },
       {
         type: 'default',
-        title: 'Então, quer dizer que podemos usar os métodos de vetor que vimos anteriormente em textos?',
+        title:
+          'Então, quer dizer que podemos usar os métodos de vetor que vimos anteriormente em textos?',
         body: 'A resposta é sim! Obviamente nem todos, como o "remover()", "adicionar()", "ordenar()", nem mesmo o "inverter()"',
       },
       {
@@ -4184,7 +4185,7 @@ escreva(subtexto);
       },
       {
         type: 'alert',
-        body: 'E sim, o "subtexto()" não altera o texto original.'
+        body: 'E sim, o "subtexto()" não altera o texto original.',
       },
       {
         type: 'default',
@@ -4294,6 +4295,506 @@ escreva(mensagem.juntar(" "));
         type: 'default',
         title: null,
         body: 'É, agora o foguete tem um ponto.',
+      },
+    ],
+  },
+  {
+    starId: 25,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Temos um vetor com várias coordenadas diferentes:',
+      },
+      {
+        type: 'code',
+        body: `var coordenadas = [
+            "x:12;y:6", 
+            "x:70;y:32", 
+            "x:25;y:18", 
+            "x:8;y:40", 
+];
+
+escreva(coordenadas);`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'O nosso trabalho é achar a coordenada correta dentro desse vetor, que no caso é "x:25;y:18", e colocá-lo em uma mensagem para enviar ao foguete.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para isso, podemos usar o poder dos laços.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Eu disse antes que a forma mais comum para trabalhar com vetores é usando laços, então vamos aprender mais sobre isso.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer a primeira tarefa, vamos começar por partes.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Primeiramente montamos um "para", com a variável de controle (i) iniciando com 0, já que os índices de vetor começam do zero e não do um.',
+      },
+      {
+        type: 'code',
+        body: `
+para (var i = 0;) {
+
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Depois colocamos a condição do laço como i menor que o tamanho do vetor coordenadas, ou seja, indicamos que o "para" execute algo até que a variável i seja igual ou maior que a quantidade de coordenadas.',
+      },
+      {
+        type: 'code',
+        body: `
+para (var i = 0; i < coordenadas.tamanho();) {
+
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por fim, incrementamos a variável i a cada nova iteração.',
+      },
+      {
+        type: 'code',
+        body: `
+para (var i = 0; i < coordenadas.tamanho(); i++) {
+
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora no bloco do "para" colocamos a variável i como índice do vetor coordenadas.',
+      },
+      {
+        type: 'code',
+        body: `var coordenadas = [
+            "x:12;y:6", 
+            "x:70;y:32", 
+            "x:25;y:18", 
+            "x:8;y:40", 
+];
+
+para (var i = 0; i < coordenadas.tamanho(); i++) {
+    coordenadas[i];
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Se escrevermos "coordenadas[i]" em cada iteração:',
+      },
+      {
+        type: 'code',
+        body: `var coordenadas = [
+            "x:12;y:6", 
+            "x:70;y:32", 
+            "x:25;y:18", 
+            "x:8;y:40", 
+];
+
+para (var i = 0; i < coordenadas.tamanho(); i++) {
+    escreva(coordenadas[i]);
+}
+
+/* Resultado:  x:12;y:6, 
+               x:70;y:32, 
+               x:25;y:18, 
+               x:8;y:40,
+*/ `,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Percebeu a mágica? A cada iteração o i é um número diferente. Dessa forma podemos pegar cada valor do vetor usando essa variável como índice.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora podemos verificar se o valor atual do vetor é igual ao que buscamos.',
+      },
+      {
+        type: 'code',
+        body: `var coordenadas = [
+            "x:12;y:6", 
+            "x:70;y:32", 
+            "x:25;y:18", 
+            "x:8;y:40", 
+];
+
+para (var i = 0; i < coordenadas.tamanho(); i++) {
+    se (coordenadas[i] == "x:25;y:18") {
+        escreva("Achei a coordenada certa: "+coordenadas[i]);
+    }
+}
+
+// Resultado: Achei a coordenada certa: x:25;y:18`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Aí sim! Agora, só colocar a coordenada certa em uma variável a parte e concatenar com a mensagem:',
+      },
+      {
+        type: 'code',
+        body: `var coordenadas = [
+            "x:12;y:6", 
+            "x:70;y:32", 
+            "x:25;y:18", 
+            "x:8;y:40", 
+];
+
+var coordenadaCerta = "";
+para (var i = 0; i < coordenadas.tamanho(); i++) {
+    se (coordenadas[i] == "x:25;y:18") {
+        coordenadaCerta = coordenadas[i];
+    }
+}
+
+var mensagem = "Essas são minhas coordenadas: \${coordenadaCerta}";
+escreva(mensagem);
+// Resultado: Essas são minhas coordenadas: x:25;y:18`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'A variável coordenadaCerta foi colocada para fora do laço porque senão ela seria reiniciada toda vez a cada iteração do laço. E também porque ela não poderia ser acessada de fora do escopo do "para" ou do "se", lembra?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ok, mas podemos treinar mais essa questão de usar laços com vetores.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por exemplo, e se quiséssemos adicionar todos os alimentos que adiquirimos na exploração na nossa mochila?',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ["fruta", "ovo de Icelope", "amêndua"];
+
+var mochila = [];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Será um trabalho bem mais fácil usando laço.',
+      },
+      {
+        type: 'code',
+        body: `var alimentos = ["fruta", "ovo de Icelope", "amêndua"];
+
+var mochila = [];
+para (var i = 0; i < alimentos.tamanho(); i++) {
+    var alimentoAtual = alimentos[i];
+    mochila.adicionar(alimentoAtual);
+}
+
+escreva(mochila);
+// Resultado: fruta, ovo de Icelope, amêndua`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas podemos não usar apenas o "para", mas qualquer outro tipo de laço que já vimos, como o "enquanto".',
+      },
+      {
+        type: 'code',
+        body: `var minerais = ["cristal", "pirita"];
+
+var i = 0;
+var mochila = [];
+
+enquanto (i < minerais.tamanho()) {
+    var mineralAtual = minerais[i];
+    mochila.adicionar(mineralAtual);
+
+    i++;
+}
+
+escreva(mochila);
+// Resultado: cristal, pirita`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E o "fazer-enquanto".',
+      },
+      {
+        type: 'code',
+        body: `var exoticos = ["fóssil de urso anão", "meteorito congelado"];
+var mochila = [];
+var i = 0;
+
+fazer {
+    var exoticoAtual = exoticos[i];
+    mochila.adicionar(exoticoAtual);
+
+    i++;
+} enquanto (i < exoticos.tamanho())
+
+escreva(mochila);
+// Resultado: fóssil de urso anão, meteorito congelado`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora só resta colocar o vetor que tem as quantidades de cada item.',
+      },
+      {
+        type: 'code',
+        body: `var mochila = [
+            "fruta",
+            "ovo de Icelope", 
+            "amêndua",
+            "cristal", 
+            "pirita", 
+            "bastão laser quebrado", 
+            "fóssil de urso anão",
+            "meteorito congelado"
+];
+
+var qtdItens = [9, 4, 20, 37, 12, 1, 2, 1];
+
+mochila.adicionar(qtdItens);
+escreva(mochila);`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas aí não estaríamos colocando um vetor dentro de outro?',
+        body: 'Sim! é possível colocar vetores dentro de um vetor sem problema algum. Na verdade é possível colocar qualquer tipo de dado dentro um vetor, seja texto, número ou lógico.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Espera, tem algo vindo em nossa direção!',
+      },
+      {
+        type: 'default',
+        title: 'É um pássaro gigante?',
+        body: 'Aquilo é um pássaro Icelope!!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nós tínhamos pegado 4 quatro ovos de Icelope durante a exploração, lembra?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Provavelmente essa seja a mãe deles.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Rápido, pegue aqueles ovos de volta da mochila.',
+      },
+      {
+        type: 'code',
+        body: `var mochila = [
+            "fruta",
+            "ovo de Icelope", 
+            "amêndua",
+            "cristal", 
+            "pirita", 
+            "bastão laser quebrado", 
+            "fóssil de urso anão",
+            "meteorito congelado",
+            [9, 4, 20, 37, 12, 1, 2, 1]
+];
+
+para cada item em mochila {
+    se (item == "ovo de Icelope") {
+        escreva(item);
+    }
+}
+
+// Resultado: ovo de Icelope`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas que espécie de para é esse?',
+        body: 'Apresento-lhe o "para-cada"',
+      },
+      {
+        type: 'list',
+        title: 'Para cada',
+        body: 'O laço "para-cada" faz a mesma coisa que um simples "para" só que com um código mais bonito.',
+      },
+      {
+        type: 'list',
+        body: 'Ele é especialmente útil para fazer laço com vetores.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4]
+            
+para cada numero em numeros {
+    escreva(numero);
+}
+
+/* Resultado: 1
+              2
+              3
+              4
+*/`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Neste exemplo, numeros é o vetor que está sendo usado no laço, e numero é a variável que assume um valor de numeros a cada iteração do laço.',
+      },
+      {
+        type: 'alert',
+        body: 'E detalhe, a variável que vai ao lado de "para cada" não precisa ser declarada antes e você pode dar o nome que você quiser.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Veja mais alguns exemplos de "para-cada" para entender bem.',
+      },
+      {
+        type: 'code',
+        body: `var valores = [falso, verdadeiro, falso];
+          
+para cada valor em valores {
+  escreva(valor);
+}
+
+/* Resultado: falso
+              verdadeiro
+              falso
+*/`,
+        isRunnable: true,
+      },
+      {
+        type: 'code',
+        body: `var palavras = ['Petros', 'Kaue', '0Thigs'];
+          
+para cada palavra em palavras {
+  escreva(palavra);
+}
+
+/* Resultado: Petros
+              Kaue
+              0Thigs
+*/`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas voltando para o urgente: temos que devolver os ovos para a mãe deles.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Já temos o item ovo, só precisamos multiplicar pelo quantidade que pegamos.',
+      },
+      {
+        type: 'code',
+        body: `var mochila = [
+        "fruta",
+        "ovo de Icelope", 
+        "amêndua",
+        "cristal", 
+        "pirita", 
+        "bastão laser quebrado", 
+        "fóssil de urso anão",
+        "meteorito congelado",
+        [9, 4, 20, 37, 12, 1, 2, 1]
+];
+
+var ovos = [];
+para cada item em mochila {
+    se (item == "ovo de Icelope") {
+        var qtdOvos = mochila[-1][1];
+        escreva('Quantidade de ovos: '+qtdOvos)
+    }
+}
+
+// Resultado: 'Quantidade de ovos: 4`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Um vetor com dois índices?',
+        body: 'Lembra que agora o último item da mochila é um vetor? Então, podemos pegar um elemento de um vetor dentro de outro através de índice também.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'escrever mochila[-1][1] quer dizer:\n[-1] = Pegar o último item de mochila, que no caso é um vetor.\n[1] = Pegar o segundo valor desse vetor interno, que no caso é quatro.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que temos o número 4, multiplicamos com o item "ovo de Icelope"',
+      },
+      {
+        type: 'code',
+        body: `var mochila = [
+        "fruta",
+        "ovo de Icelope", 
+        "amêndua",
+        "cristal", 
+        "pirita", 
+        "bastão laser quebrado", 
+        "fóssil de urso anão",
+        "meteorito congelado",
+        [9, 4, 20, 37, 12, 1, 2, 1]
+];
+
+var ovos = [];
+para cada item em mochila {
+    se (item == "ovo de Icelope") {
+        var qtdOvos = mochila[-1][1];
+        para (var i = 0; i < qtdOvos; i++) {
+            ovos.adicionar(item);
+        }
+    }
+}
+
+escreva(ovos);
+// Resultado: ovo de Icelope, ovo de Icelope, ovo de Icelope, ovo de Icelope`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Não disse que é possível usar laço dentro de laço? Agora sim estamos começando a escrever códigos mais complexos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que a mãe pássaro está com seus ovos, resta apenas esperar o foguete chegar.',
       },
     ],
   },

@@ -2952,4 +2952,172 @@ escreva(estrelas);`,
     ],
     correctItemsIdsSequence: [3, 1, 4],
   },
+  {
+    starId: 25,
+    type: 'checkbox',
+    stem: 'Quais textos serão substituídos por "Apollo"?',
+    code: `var textos = ["Petros", "Suga", "Kaue", "0Thigs"];
+var maiusculos = [];
+para (var i = 0; i < textos.tamanho(); i++) {
+    se (i == 2) {
+        continua;
+    }
+    var textoAtual = textos[i].maiusculo();
+    maiusculos.adicionar(textoAtual);
+}
+escreva(maiusculos);`,
+    options: ['Petros', 'Suga', 'Kaue', '0Thigs'],
+    correctOptions: ['Petros', 'Suga'],
+  },
+  {
+    starId: 25,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que seja escrito:\nOlá, mundo, como vai?',
+    lines: [
+      {
+        id: 1,
+        texts: ['var palavras = ["Olá, ", "mundo, ", "como ", "vai", "?"];'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var frase = ""'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['para ', '(var i = 0;', 'i <', ' palavras.', 'dropZone', '( );', 'i++ {'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['frase.', 'dropZone', '(palavras[', 'dropZone', '])'],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 6,
+        texts: ['escreva(frase);'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'i',
+      },
+      {
+        id: 2,
+        label: 'remover',
+      },
+      {
+        id: 3,
+        label: 'tamanho',
+      },
+      {
+        id: 5,
+        label: 'inclui',
+      },
+      {
+        id: 6,
+        label: 'concatenar',
+      },
+    ],
+    correctItemsIdsSequence: [3, 6, 1],
+  },
+  {
+    starId: 25,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o laço "para-cada" adequadamente',
+    lines: [
+      {
+        id: 1,
+        texts: ['var animais = ["Astrogato", "Peixonauta", "Krypto", "Porg"];'],
+        indentLevel: 0,
+      },
+      {
+        id: 3,
+        texts: ['dropZone', 'cada', 'dropZone', 'em', 'dropZone', '{'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['escreva(animal)'],
+        indentLevel: 2,
+      },
+      {
+        id: 5,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'para',
+      },
+      {
+        id: 2,
+        label: 'enquanto',
+      },
+      {
+        id: 3,
+        label: 'animal',
+      },
+      {
+        id: 5,
+        label: 'animais',
+      },
+    ],
+    correctItemsIdsSequence: [1, 3, 5],
+  },
+  {
+    starId: 25,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o código para que seja escrito apenas números menores que 6',
+    items: [
+      {
+        id: 1,
+        label: 'var numeros = [2, 4, 6, 8]',
+      },
+      {
+        id: 2,
+        label: "para cada numero em numeros {",
+      },
+      {
+        id: 3,
+        label: "    se (numero < 6)",
+      },
+      {
+        id: 4,
+        label: "        escreva(numero)",
+      },
+      {
+        id: 5,
+        label: "    }",
+      },
+      {
+        id: 6,
+        label: "}",
+      },
+    ],
+  },
+  {
+    starId: 25,
+    type: 'selection',
+    stem: 'Qual será o tipo de dado de vetores[2][0]',
+    code: `var vetores = [
+        ['a', 'b', 'c'],
+        [1, 2, 3, 4],
+        [falso, verdadeiro]
+];
+
+escreva(vetores[2][0]);`,
+    options: ['lógico', 'texto', 'número', 'vetor'],
+    answer: 'lógico',
+  },
 ];
