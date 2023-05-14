@@ -1073,14 +1073,15 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     "to-fast-properties" "^2.0.0"
 
-"@designliquido/delegua@^0.20.5":
-  "integrity" "sha512-4boEPDGWsRdwUMFVw6mFhm8dDIIV6QC1uNaaim1K5LNKSwQmx/4eBIkTk3UCA85L1ermDfUwQvHxBBj1Zn72uA=="
-  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.20.5.tgz"
-  "version" "0.20.5"
+"@designliquido/delegua@^0.20.9":
+  "integrity" "sha512-bbJanHYIicJRshQMlXB5FZuro44CchL+hQ7TYl1rUqxsz76N7rA+h1B/gzTAC4AbrjBPa3UOHNJ/nU/8d3AuHQ=="
+  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.20.9.tgz"
+  "version" "0.20.9"
   dependencies:
     "antlr4ts" "^0.5.0-alpha.4"
     "browser-process-hrtime" "^1.0.0"
     "esprima" "^4.0.1"
+    "lodash.clonedeep" "^4.5.0"
 
 "@egjs/hammerjs@^2.0.17":
   "integrity" "sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A=="
@@ -5896,6 +5897,11 @@
   "integrity" "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw=="
   "resolved" "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz"
   "version" "4.17.21"
+
+"lodash.clonedeep@^4.5.0":
+  "integrity" "sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ=="
+  "resolved" "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  "version" "4.5.0"
 
 "lodash.debounce@^4.0.8":
   "integrity" "sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow=="

@@ -3938,7 +3938,7 @@ escreva(mensagemCerta);
 var mensagemCerta = mensagem.dividir(" ", 1);       
 
 escreva(mensagemCerta);
-// Resultado: [ Venha ]
+// Resultado: Venha
 `,
         isRunnable: true,
       },
@@ -3974,8 +3974,10 @@ escreva(mensagemCerta);
       },
       {
         type: 'code',
-        body: `var mensagem = "   Venha aqui, por f4vor   ";`,
-        isRunnable: false,
+        body: `var mensagem = "   Venha aqui, por f4vor   ";
+
+escreva(mensagem)        `,
+        isRunnable: true,
       },
       {
         type: 'default',
@@ -4014,7 +4016,7 @@ escreva(texto[0]);
       {
         type: 'default',
         title: null,
-        body: 'Mas podemos usar alguns como tamanho, inclui e concatenar',
+        body: 'Mas podemos usar alguns como "tamanho()", "inclui()" e "concatenar()"',
       },
       {
         type: 'code',
@@ -4043,15 +4045,15 @@ escreva(texto.concatenar("d"));
       {
         type: 'list',
         title: 'aparar()',
-        body: 'O método "aparar()" é usado para remover os espaços em branco do início e do final de um texto, ou aparar as pontas do texto.',
+        body: 'O método "aparar()" é usado para remover os espaços em branco do início e do final de um texto, ou seja aparar as pontas do texto.',
       },
       {
         type: 'code',
         body: `var mensagem = "   Venha aqui, por f4vor   ";
         
-mensagem.aparar();
+var novaMensagem = mensagem.aparar();
 
-escreva(mensagem);
+escreva(novaMensagem);
 // Resultado: Venha aqui, por f4vor`,
         isRunnable: true,
       },
@@ -4073,7 +4075,7 @@ escreva(mensagem);
       {
         type: 'list',
         title: 'substituir()',
-        body: 'O método de texto "substituir()" procura um subtexto dentro de um texto e o substitui por outro.',
+        body: 'O método de texto "substituir()" procura um subtexto dentro de um texto e o substitui por outro. Assim, um novo texto é gerado.',
       },
       {
         type: 'list',
@@ -4084,23 +4086,23 @@ escreva(mensagem);
         type: 'code',
         body: `var mensagem = "Venha aqui, por f4vor";
         
-mensagem.substituir("4", "a");
+var novaMensagem = mensagem.substituir("4", "a");
 
-escreva(mensagem);
+escreva(novaMensagem);
 // Resultado: Venha aqui, por f4vor`,
         isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Aviso: o método "substituir()" só substitui o primeiro subtexto que ele encontrar. Quer dizer que se a mensagem tivesse mais números quatros, apenas o primeiro número quatro seria substituido.',
+        body: 'Aviso: o método "substituir()" só substitui o primeiro subtexto que ele encontrar. Isso quer dizer que se a mensagem tivesse mais números quatro, apenas o primeiro 4 seria substituido.',
       },
       {
         type: 'code',
         body: `var mensagem = "Venh4 4qui, por f4vor";
         
-mensagem.substituir("4", "a");
+var novaMensagem = mensagem.substituir("4", "a");
 
-escreva(mensagem);
+escreva(novaMensagem);
 // Resultado: Venha 4qui, por f4vor`,
         isRunnable: true,
       },
@@ -4122,7 +4124,7 @@ escreva(mensagem);
       {
         type: 'default',
         title: null,
-        body: 'Mas já que estamos usando texto, podemo usar o método subtexto() que literalmente consegue fazer o que o "fatiar()" faz, só que para textos.',
+        body: 'Mas já que estamos usando texto, podemos usar o método subtexto() que literalmente consegue fazer o que o "fatiar()" faz, só que para textos.',
       },
       {
         type: 'list',
@@ -4132,13 +4134,13 @@ escreva(mensagem);
       {
         type: 'default',
         title: null,
-        body: 'Cada índice de um texto corresponde a um caractere. Então se quisermos pegarmos só a palavra "Venha" da mensagem:',
+        body: 'Cada índice de um texto corresponde a um caractere. Então se quisermos pegar só a palavra "Venha" da mensagem:',
       },
       {
         type: 'code',
         body: `var mensagem = "Venha aqui, por favor";
          
-// subtexto(0, 5) = começar a extrair do primeiro caractere até o quinto caractere
+// subtexto(0, 5) = extrair do primeiro caractere até o quinto caractere
 var novaMensagem = mensagem.subtexto(0, 5);
 
 escreva(novaMensagem);
@@ -4167,14 +4169,14 @@ escreva(aqui);
       },
       {
         type: 'alert',
-        body: 'Se índice final não for passado, o subtexto começará do indíce inicial e terminará até o último índice do vetor, como no "fatiar()"',
+        body: 'Se o índice final não for passado, o subtexto começará do indíce inicial e terminará até o último índice do vetor, assim como acontece no "fatiar()"',
       },
       {
         type: 'code',
         body: `var mensagem = "Venha aqui, por favor";
          
-// subtexto(8) = começar a extrair do sétimo caractere até o último caractere
-var subtexto = mensagem.subtexto(8);
+// subtexto(12) = começar a extrair do décimo segundo caractere até o último caractere
+var subtexto = mensagem.subtexto(12);
 
 escreva(subtexto);
 // Resultado: por favor`,
@@ -4226,7 +4228,7 @@ escreva(mensagem.juntar(" "));
       {
         type: 'default',
         title: null,
-        body: 'É, parece que esse fogute está bem afoito.',
+        body: 'É, parece que esse foguete está bem afoito.',
       },
       {
         type: 'default',
@@ -4241,7 +4243,7 @@ escreva(mensagem.juntar(" "));
       {
         type: 'list',
         title: 'maiusculo()',
-        body: 'o método maiusculo() é bem simples: gera um texto com carecteres em maiúsculo a partir de outro texto.',
+        body: 'o método maiusculo() é bem simples: gera um texto com carecteres em maiúsculo a partir do texto original.',
       },
       {
         type: 'code',

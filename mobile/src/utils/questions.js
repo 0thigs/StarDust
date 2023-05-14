@@ -2924,12 +2924,12 @@ escreva(estrelas);`,
       {
         id: 2,
         texts: ['var planeta = ', 'planeta.', 'dropZone', '(', 'dropZone', ',', 'dropZone', ');'],
-        indentLevel: 2,
+        indentLevel: 0,
       },
       {
         id: 3,
         texts: ['escreva(planeta.inclui("Marte"));'],
-        indentLevel: 2,
+        indentLevel: 0,
       },
     ],
     dropItems: [
