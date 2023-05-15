@@ -66,7 +66,7 @@ export function OpenForm({ stem, answer, code, index }) {
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
           {code && (
-            <QuestionCode height={getCodeHeight(code, 'open')}>
+            <QuestionCode height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 24)}>
               <Editor value={code} />
             </QuestionCode>
           )}

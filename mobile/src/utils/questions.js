@@ -3086,23 +3086,23 @@ escreva(maiusculos);`,
       },
       {
         id: 2,
-        label: "para cada numero em numeros {",
+        label: 'para cada numero em numeros {',
       },
       {
         id: 3,
-        label: "    se (numero < 6)",
+        label: '    se (numero < 6)',
       },
       {
         id: 4,
-        label: "        escreva(numero)",
+        label: '        escreva(numero)',
       },
       {
         id: 5,
-        label: "    }",
+        label: '    }',
       },
       {
         id: 6,
-        label: "}",
+        label: '}',
       },
     ],
   },
@@ -3112,12 +3112,133 @@ escreva(maiusculos);`,
     stem: 'Qual será o tipo de dado de vetores[2][0]',
     code: `var vetores = [
         ['a', 'b', 'c'],
-        [1, 2, 3, 4],
-        [falso, verdadeiro]
+        [verdadeiro, 3, 4],
+        ["falso", verdadeiro]
 ];
 
 escreva(vetores[2][0]);`,
     options: ['lógico', 'texto', 'número', 'vetor'],
-    answer: 'lógico',
+    answer: 'texto',
+  },
+  {
+    starId: 26,
+    type: 'drag-and-drop-list',
+    stem: 'Coloque o código na ordem para que a função seja executada corretamente',
+    items: [
+      {
+        id: 1,
+        label: 'funcao escreverMensagem() {',
+      },
+      {
+        id: 2,
+        label: "    escreva('Sonhe com as estrelas.')",
+      },
+      {
+        id: 3,
+        label: '}',
+      },
+      {
+        id: 4,
+        label: 'escreverMensagem()',
+      },
+    ],
+  },
+  {
+    starId: 26,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a função "mostrarLancamento()"',
+    lines: [
+      {
+        id: 1,
+        texts: ['dropZone', 'mostrarLancamento(', 'data', ',', 'dropZone', ') {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: [
+          'escreva("O foguete será lançado em ${',
+          'dropZone',
+          '}',
+        ],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: [
+          'escreva("Em direção ao ${destino}");',
+        ],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 5,
+        texts: ['dropZone', '("21/12/2012", "Planeta Kobos")'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'data',
+      },
+      {
+        id: 2,
+        label: 'destino',
+      },
+      {
+        id: 3,
+        label: 'funcao',
+      },
+      {
+        id: 4,
+        label: 'mostrarLancamento',
+      },
+    ],
+    correctItemsIdsSequence: [3, 2, 1, 4],
+  },
+  {
+    starId: 26,
+    type: 'checkbox',
+    stem: 'Quais são os parâmetros da função "mostrarPeso()"?',
+    code: `funcao mostrarPeso(massa, gravidade);
+    peso = massa * gravidade
+    escreva("Seu peso é \${peso}.");
+}
+mostrarPeso(72, 9.8);`,
+    options: ['massa', 'gravidade', 'peso', 'mostrarPeso'],
+    correctOptions: ['massa', 'gravidade'],
+  },
+  {
+    starId: 26,
+    type: 'open',
+    stem: 'Quantas vezes será escrito "Planeta grande"?',
+    code: `funcao mostrarPlanetaGrande(diametro);
+    se (diametro > 25000) {
+        escreva("Planeta grande");
+    }
+}
+mostrarPlanetaGrande(400000);
+mostrarPlanetaGrande(100);
+mostrarPlanetaGrande(8000000);`,
+    answer: '2',
+  },
+  {
+    starId: 26,
+    type: 'selection',
+    stem: 'Qual variável nesse código tem escopo local?',
+    code: `funcao mostrarDistancia(velocidade, tempo) {
+    var distancia = velocidade * tempo;
+    escreva("Foguete percorreu \${distancia}km");
+}
+
+var velocidade = 180;
+var tempo = 200;
+mostrarDistancia(velocidade, tempo);`,
+    options: ['velocidade', 'tempo', 'distancia', 'mostrarDistancia'],
+    answer: 'distancia',
   },
 ];

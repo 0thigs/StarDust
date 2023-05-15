@@ -4798,4 +4798,407 @@ escreva(ovos);
       },
     ],
   },
+  {
+    starId: 26,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Aqui estamos mais uma vez no espaço.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Só que agora temos que procurar quem mandou aquela mensagem de ajuda.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E agora com o radar do próprio foguete não precimos mais daquele que compramos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E por falar em mensagem, acabamos de receber mais uma.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para visualizar a mensagem é necessário fazer alguns passos.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: '1. ligar todos sensores do radar;\n2. Aumentar a resolução em 20;\nVerificar se a mensagem contém script malicioso;\n3. Verificar se a tela está acesa;\n4. Escrever a mensagem.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = 'Por favor, me ajundem!'
+        
+var sensores = [falso, falso, falso];
+var resolucao = 10;
+var telaAcesa = verdadeiro;
+
+para (var i = 0; i < sensores.tamanho(); i++) {
+    sensores[i] = verdadeiro;
+}
+
+resolucao += 20;
+
+se (!mensagem.inclui('script') e telaAcesa) {
+    escreva(mensagem);
+}
+// Resultado: Por favor, me ajundem!`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ok, já entendemos que essa pessoa precisa da nossa ajuda, mas porque ela não fala onde ela está?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Só resta perguntar isso, mande uma mensagem escrito: "Quais são suas coordenadas?"',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Só que para mandar uma mensagem com o radar é preciso seguir os mesmos passos de receber uma mensagem, por motivos de segurança, é claro.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = 'Quais são suas coordenadas?'
+        
+var sensores = [falso, falso, falso];
+var resolucao = 10;
+var telaAcesa = verdadeiro;
+
+para (var i = 0; i < sensores.tamanho(); i++) {
+    sensores[i] = verdadeiro;
+}
+
+resolucao += 20;
+
+se (!mensagem.inclui('script') e telaAcesa) {
+    escreva(mensagem);
+}
+// Resultado: Quais são suas coordenadas?`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Isso, acabamos de receber uma resposta.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = 'Mas por que você quer saber?'
+        
+var sensores = [falso, falso, falso];
+var resolucao = 10;
+var telaAcesa = verdadeiro;
+
+para (var i = 0; i < sensores.tamanho(); i++) {
+    sensores[i] = verdadeiro;
+}
+
+resolucao += 20;
+
+se (!mensagem.inclui('script') e telaAcesa) {
+    escreva(mensagem);
+}
+// Resultado: Mas por que você quer saber?`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Tá, responda que é para saber onde ela está.',
+      },
+      {
+        type: 'code',
+        body: `var mensagem = 'É para saber onde você está';
+        
+var sensores = [falso, falso, falso];
+var resolucao = 10;
+var telaAcesa = verdadeiro;
+
+para (var i = 0;i < sensores.tamanho(); i++) {
+    sensores[i] = verdadeiro;
+}
+
+resolucao += 20;
+
+se (!mensagem.inclui('script') e telaAcesa) {
+    escreva(mensagem);
+}
+// Resultado: É para saber onde você está
+
+var mensagem = 'Tem certeza?'
+        
+var sensores = [falso, falso, falso];
+var resolucao = 10;
+var telaAcesa = verdadeiro;
+
+para (var i = 0;i < sensores.tamanho(); i++) {
+    sensores[i] = verdadeiro;
+}
+
+resolucao += 20;
+
+se (!mensagem.inclui('script') e telaAcesa) {
+    escreva(mensagem);
+}
+// Resultado: Tem certeza?`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Ok, isso já está ficando chato.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Percebeu que estamos repetindo um monte de código?',
+      },
+      {
+        type: 'default',
+        title: 'Sim...',
+        body: 'Então, essa é uma boa ocasição para explicar um conceito importantíssemo na programação.',
+      },
+      {
+        type: 'default',
+        title: 'Funções?',
+        body: 'Isso... É, o nome desse módulo já entregou tudo.',
+      },
+      {
+        type: 'default',
+        title: 'Funções?',
+        body: 'Mas como prometido vou explicar o que são funções 🎉.',
+      },
+      {
+        type: 'list',
+        title: 'Funções',
+        body: 'Funções nada mais são do que blocos de código que executam uma determinada tarefa e que podem ser reutilizados em diferentes partes de um programa.',
+      },
+      {
+        type: 'list',
+        body: 'As funções são escrita utilizando a palavra-chave "funcao" (sem ~)',
+      },
+      {
+        type: 'code',
+        body: `funcao`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        body: 'seguida pelo nome da função e um conjunto de parênteses.',
+      },
+      {
+        type: 'code',
+        body: `funcao usarRadar()`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'O nome da função pode ser qualquer coisa, mas é ideal que seja algo relacionado ao o que ela faz, né?',
+      },
+      {
+        type: 'list',
+        body: 'Por fim, é só colocar todo o bloco de código que a funcão executará entre chaves.',
+      },
+      {
+        type: 'code',
+        body: `funcao usarRadar() {
+    var mensagem = 'Mande suas coordenadas, por favor';
+
+    var sensores = [falso, falso, falso];
+    var resolucao = 10;
+    var telaAcesa = verdadeiro;
+    
+    para (var i = 0;i < sensores.tamanho(); i++) {
+        sensores[i] = verdadeiro;
+    }
+    
+    resolucao += 20;
+    
+    se (!mensagem.inclui('script') e telaAcesa) {
+        escreva(mensagem);
+    }
+}`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Mas não aconteceu absolutamente nada!',
+        body: 'Isso porque não falamos para a função "usarRadar()" executar o seu bloco de código.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para fazer isso, devemos fazer o que chamamos de "chamar uma função", que é escrever o nome dela depois que a criamos.',
+      },
+      {
+        type: 'code',
+        body: `funcao usarRadar() {
+    var mensagem = 'Mande suas coordenadas, por favor';
+
+    var sensores = [falso, falso, falso];
+    var resolucao = 10;
+    var telaAcesa = verdadeiro;
+    
+    para (var i = 0;i < sensores.tamanho(); i++) {
+        sensores[i] = verdadeiro;
+    }
+    
+    resolucao += 20;
+    
+    se (!mensagem.inclui('script') e telaAcesa) {
+        escreva(mensagem);
+    }
+}
+
+usarRadar();
+// Resultado: Mande suas coordenadas, por favor`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Aí sim! Temos nossa primeira função criada.',
+      },
+      {
+        type: 'alert',
+        body: 'Cuidado: funções também tem o seu próprio escopo, o que quer dizer que variáveis criadas dentro de uma função não pode ser acessadas de fora dela.',
+      },
+      {
+        type: 'code',
+        body: `funcao minhaFuncao() {
+    var minhaVariavel = ['Petros']
+}
+
+escreva(minhaVariavel[0])
+// Resultado: Erro`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Tudo bem, mas podemos melhor nossa função.',
+      },
+      {
+        type: 'default',
+        title: 'Como?',
+        body: 'Sabe para que servem os parênteses de uma função? Servem para passar valores para código dentro dela.',
+      },
+      {
+        type: 'default',
+        title: 'Oi?',
+        body: 'É isso mesmo! Ao chamar uma função, podemos passar qualquer valor entre seus parênteses.',
+      },
+      {
+        type: 'code',
+        body: `funcao mostrarMensagem() {
+
+}
+
+mostrarMensagem("Olá, mundo!");`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Para usar esse "Olá, mundo!" dentro da função "mostrarMensagem()", devemos criar variáveis entre os parênteses da função',
+      },
+      {
+        type: 'code',
+        body: `funcao mostrarMensagem(mensagem) {
+            escreva(mensagem);
+}
+
+mostrarMensagem("Olá, mundo!");
+// Resultado: Olá, mundo!
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Essas variáveis entre parênteses se chamam parâmetros de função e elas podem ter qualquer nome, e caso você queira passar mais valores para a função, você terá que criar mais parâmetros.',
+      },
+      {
+        type: 'code',
+        body: `funcao somar(numero1, numero2, numero3) {
+        var soma = numero1 + numero2 + numero3;
+        escreva(soma);
+}
+
+mostrarMensagem(1, 2, 3);
+// Resultado: 6
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por meio dos parâmetros é que podemos criar resultados dinâmicos com uma mesma função.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'No nosso caso, podemos passar a mensagem que queremos como parâmetro da função "usarRadar()"',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Assim, a função ira fazer todo o trabalho de configurar o radar usando qualquer tipo de mensagem, seja de resposta ou de envio, veja:',
+      },
+      {
+        type: 'code',
+        body: `funcao usarRadar(mensagem) {
+    var sensores = [falso, falso, falso];
+    var resolucao = 10;
+    var telaAcesa = verdadeiro;
+
+    para (var i = 0;i < sensores.tamanho(); i++) {
+        sensores[i] = verdadeiro;
+    }
+
+    resolucao += 20;
+
+    se (!mensagem.inclui('script') e telaAcesa) {
+        escreva(mensagem);
+    }
+}
+
+usarRadar("Ok, vou procurar");
+usarRadar("Tudo bem, vou estar te esperando");
+usarRadar("Minhas coordenadas são: x:42;y:84");
+usarRadar("Muito obrigado!");
+/* Resultado: Ok, vou procurar
+            Tudo bem, vou estar te esperando
+            Minhas coordenadas são: x:42;y:84
+            Muito obrigado!
+*/`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Viu só, enviamos e recebemos várias mensagens diferentes, e precisamos escrever o código de configuração do radar apenas uma vez.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Isso não é incrível? Agora temos um código bem mais limpo e organizado.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Mas voltando... Agora vamos em direção a essa pessoa desconhecida.',
+      },
+    ],
+  },
 ];

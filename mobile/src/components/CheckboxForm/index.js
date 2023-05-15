@@ -91,7 +91,7 @@ export function CheckboxForm({ stem, options, correctOptions, code, index }) {
     <C.Container>
       <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
       {code && (
-        <QuestionCode height={getCodeHeight(code, 'checkbox')}>
+        <QuestionCode height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 26)}>
           <Editor value={code} />
         </QuestionCode>
       )}
