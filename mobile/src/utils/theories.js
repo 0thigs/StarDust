@@ -5201,4 +5201,305 @@ usarRadar("Muito obrigado!");
       },
     ],
   },
+  {
+    starId: 27,
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora que temos as coordenadas certas, podemos saber para qual planeta temos que ir.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém antes, precisamos reabastecer nosso foguete né?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Por sorte, temos um posto espacial aqui perto.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'No posto, ele disponibilizam uma função para calcular o preço do combustível com base em quantos litros queremos',
+      },
+      {
+        type: 'code',
+        body: `funcao calcularPreco(litros) {
+    var preco = 2;
+    var precoTotal = litros * preco;
+    retorna precoTotal
+}
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'O que é esse retorna?',
+        body: 'Você se lembra que eu falava que ao executar um método de vetor era retornado determinado valor?.',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'Isso porque métodos são funções. E agora que você aprendeu a criar suas próprias funções que retornam valores, usando a palavra-chave "retorna".',
+      },
+      {
+        type: 'list',
+        title: 'Retorna',
+        body: 'O retorna é uma instrução usada em funções para retornar um determinado valor.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E esse valor retornado pode ser usado para fora da função.',
+      },
+      {
+        type: 'default',
+        title: 'Como?',
+        body: 'Colocando esse valor retornado em uma variável.',
+      },
+      {
+        type: 'code',
+        body: `funcao calcularPreco(litros) {
+    var preco = 2;
+    var precoTotal = preco * litros;
+    retorna precoTotal
+}
+
+var preco = calcularPreco(24);
+escreva(preco);
+// Resultado: 48
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Viu só? O valor de precoTotal vou retornado pela função, e esse valor retornado foi colocado na variável preco.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'ATENÇÃO: No código, há duas variáveis preco, porém elas não são iguais, porque possuem escopo diferente.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Contudo, podemo melhorar a escrita dessa função: Te vendo que a variável precoTotal é igual a multiplicação de preco e litros?',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'Podemos retornar diretamente essa multiplicação sem a necessidade de colocar o resultado final em uma variável.',
+      },
+      {
+        type: 'code',
+        body: `funcao calcularPreco(litros) {
+    var preco = 2;
+    retorna preco * litros
+}
+
+var preco = calcularPreco(24);
+escreva(preco);
+// Resultado: 48
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Parece mágica, mas não, é possível retornar qualquer valor que é resultado de uma expressão, seja de um cálculo ou comparação, como no código abaixo.',
+      },
+      {
+        type: 'code',
+        body: `funcao conferirSeEMaior(numero1, numero2) {
+    retorna numero1 > numero2;
+}
+
+var resultado = conferirSeEMaior(2, 8);
+escreva(resultado);
+// Resultado: falso
+`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Porém, voltando, o preço desse combustível tá bem salgado, mas é o que temos para hoje, né?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Com o combustível comprado, temos que colocá-la no tanque.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Na verdade eu criei uma função que faz isso para gente. Basta colocar o novo combustível e ele retorna quanto litros tem agora.',
+      },
+      {
+        type: 'code',
+        body: `var reabastecer = funcao (litros) {
+    // Reabastecendo
+    var totalLitros = 4 + litros;
+    escreva("Agora há \${totalLitros} litros.");
+}`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Mas que espécie de função é',
+        body: 'Isso se trata de uma função anônima.',
+      },
+      {
+        type: 'list',
+        title: 'Função anônimas',
+        body: 'funções anônimas são o que o nome diz, funções que não tem um nome, simplesmente isso.',
+      },
+      {
+        type: 'list',
+        body: 'Geralmente elas são usadas para serem colocadas em varíaveis. Elas não tem diferença com funções com nomes, podendo serem usadas como uma função qualquer, como usar parâmetros e retornar valores',
+      },
+      {
+        type: 'code',
+        body: `var reabastecer = funcao (litros) {
+    // Reabastecendo
+    var totalLitros = litros;
+    escreva("Agora há \${litros} litros.");
+}
+
+reabastecer(24);`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Caso a função anônima seja associada a uma variável, para chamar essa função, deverá ser usado o nome dessa variável.',
+      },
+      {
+        type: 'default',
+        title: 'Então, porque usar funções anônimas, já que não há diferença?',
+        body: 'As funções anônimas permitem serem usadas para parâmetros, mas isso é assunto para outra hora.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nas redondezas, há apenas 3 planetas diferentes, mas achar o correto por meio de uma função.',
+      },
+      {
+        type: 'code',
+        body: `funcao acharPlaneta(coordenadas) {
+    se (coordenadas == "x:20;y:10") {
+        retorna "Planeta Xalax";
+    } senao se (coordenadas == "x:72;y:36") {
+        retorna "Planeta Valtor";
+    } senao {
+        retorna "Planeta Kyron";
+    }
+}
+
+escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
+// Resultado "O Planeta Kyron é para onde temos que ir!"`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nessa função, utilizamos colocamos três "retorna" diferentes, o que também é totalmente possível.',
+      },
+      {
+        type: 'alert',
+        body: 'Quando um retorna é executado, a função para de executar o resto de código.',
+      },
+      {
+        type: 'code',
+        body: `funcao mostrarAlgo() {
+    retorna
+    escreva("Escrevendo algo.")
+}
+
+mostrarAlgo()
+// Resultado Nada`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Também é possível uma função não retornar nada. Isso pode ser útil em uma estrutura condicional, por exemplo.',
+      },
+      {
+        type: 'code',
+        body: `funcao verificarIdade(idade) {
+    se (idade > 18) {
+        escreva("Pode pilotar um foguete");
+        retorna;
+    } 
+    escreva("Não pode pilotar um foguete");
+}
+
+verificarIdade(999);
+// Resultado Pode pilotar um foguete`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Nesse exemplo, o escreva de baixo não foi executado, por que o retorna para a execução da função.',
+      },
+      {
+        type: 'code',
+        body: `funcao acharPlaneta(coordenadas) {
+    se (coordenadas == "x:20;y:10") {
+        retorna "Planeta Xalax";
+    } senao se (coordenadas == "x:72;y:36") {
+        retorna "Planeta Valtor";
+    } senao {
+        retorna "Planeta Kyron";
+    }
+}
+
+escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
+// Resultado "O Planeta Kyron é para onde temos que ir!"`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Viu que no exemplo acima eu usei a função como se fosse uma variável? Esse é o poder do "retorna".',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'já que a função está tendo um valor, você não precisa necessariamente colocar esse valor em uma variável para usá-lo.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'A mesma coisa que eu fazia com os métodos de vetor, lembra? Às vezes colocava o valor retornado do método em uma variável ou usava diretamente.',
+      },
+      {
+        type: 'code',
+        body: `var letras = ['a', 'b', 'c'];
+var numeros = [1, 2, 3]
+        
+var qtdLetras = letras.tamanho();
+escreva(numeros.tamanho());
+
+escreva(numeros);
+/* Resultado: 3
+              3
+/*
+}`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora tudo está se encaixando!',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Com as coordenadas definidas, chegaremos ao planeta rapidinho!',
+      },
+    ],
+  },
 ];
