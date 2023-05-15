@@ -26,11 +26,11 @@ export function Home() {
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
-  function scrollToLastUnlockedStar() {
+  function scrollToLastUnlockedStar(animated = true) {
     scrollRef.current.scrollTo({
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
-      animated: true,
+      animated
     });
     setIsFabButtonVisible(false);
   }
@@ -57,7 +57,7 @@ export function Home() {
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {
-      scrollToLastUnlockedStar();
+      scrollToLastUnlockedStar(false);
     }
   }, [lastUnlockedStarYPosition]);
 

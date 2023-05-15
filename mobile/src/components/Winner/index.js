@@ -34,7 +34,6 @@ const podium = [
 
 export function Winner({ name, avatarId, xp, position }) {
   const { color, order, Icon } = podium.find(color => color.position === position);
-
   return (
     <C.Container color={color} order={order}>
       {position === 1 && (
@@ -45,7 +44,7 @@ export function Winner({ name, avatarId, xp, position }) {
           size={220}
           isAbsolute={true}
           top={-15}
-          left={-14}
+          left={-14.5}
         />
       )}
       <UserAvatar avatarId={avatarId} size={70} />

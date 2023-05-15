@@ -15,7 +15,7 @@ export const Title = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme }) => theme.colors.green_300};
-  margin: 12px auto 24px;
+  margin: 0 auto 12px;
 `;
 
 export const Winners = styled.View`

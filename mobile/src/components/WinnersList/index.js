@@ -23,6 +23,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
   const [isRewardModalVisible, setIsRewardModalVisible] = useState(false);
   const [isRankingModalVisible, setIsRankingModalVisible] = useState(false);
   const soundRef = useRef(null);
+  const isLoggedUserTopWinner = [1, 2, 3].includes(last_position);
   const rewardByLastPosition =
     currentRanking.reward + 5 * (last_position === 1 ? 3 : last_position === 3 ? 1 : last_position);
 
@@ -38,7 +39,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
   }
 
   function handleWinnerListButtonPress() {
-    if (isLoggedUserWinner) {
+    if (isLoggedUserTopWinner) {
       setIsRewardModalVisible(true);
       updateLoggedUser({ coins: coins + rewardByLastPosition });
       return;
@@ -55,7 +56,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
     <C.Container>
       <C.Title>Resultado da semana</C.Title>
       <C.Winners>
-        {winners.map(({ name, avatar_id, position, xp }) => (
+        {winners.slice(0, 3).map(({ name, avatar_id, position, xp }) => (
           <Winner
             key={position}
             name={name}
@@ -112,7 +113,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
       <Modal
         isVisible={isRankingModalVisible}
         type={'earning'}
-        title={'Recompensa resgatada!'}
+        title={'Novo ranking!'}
         body={
           <>
             <Animation

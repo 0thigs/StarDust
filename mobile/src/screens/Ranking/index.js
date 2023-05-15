@@ -23,7 +23,7 @@ export function Ranking() {
   const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
   const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
-  const isLoggedUserWinner = [1, 2, 3].includes(loggedUser.last_position);
+  const isLoggedUserWinner = !!loggedUser.last_position && loggedUser.last_position <= 5;
 
   function scrollToCurrentRanking() {
     badgesListRef.current?.scrollToIndex({
@@ -46,21 +46,21 @@ export function Ranking() {
       const winnersByLastWeekRankingId = winners.filter(
         winner => winner.ranking_id === lastWeekRankingId
       );
-      setWinners(() => {
-        let orderedWinners = [];
-        winnersByLastWeekRankingId.forEach(winner => {
-          if (winner.position === 2) {
-            orderedWinners.unshift(winner);
-            return;
-          }
-          orderedWinners.push(winner);
-        });
-        return orderedWinners;
+
+      winnersByLastWeekRankingId.sort((a, b) => {
+        if (a.position === 2) return -1;
+        if (a.position === 1) return b.position === 2 ? 1 : -1;
+        if (a.position === 3) return b.position === 2 || b.position === 1 ? 1 : -1;
+        return 1;
       });
+
+      setWinners(winnersByLastWeekRankingId);
 
       updateLoggedUser({ did_update_ranking: false });
     } catch (error) {
       console.log(error);
+    } finally {
+      setTimeout(() => setIsloading(false), 2000);
     }
   }
 
@@ -69,11 +69,13 @@ export function Ranking() {
       const users = await api.getUsersByCurrentRanking(loggedUser.ranking_id);
       const rankingUsers = users.map(setPosition);
       setUsers(rankingUsers);
-
-      if (loggedUser.did_update_ranking) showWinners();
     } catch (error) {
       console.log(error);
     } finally {
+      if (loggedUser.did_update_ranking) {
+        showWinners();
+        return;
+      }
       setTimeout(() => setIsloading(false), 2000);
     }
   }
@@ -84,14 +86,14 @@ export function Ranking() {
       const currentRankingIndex = currentRanking.position - 1;
       setCurrentRankingIndex(currentRankingIndex);
       scrollToCurrentRanking(currentRankingIndex);
-      setData();
+     if (!users.length) setData();
     }
   }, [currentRanking, rankings]);
 
   return (
     <C.Container isLoading={isLoading}>
       {isLoading && <Loading isAnimation={true} />}
-      {winners.length > 0 ? (
+      {winners.length > 0 && !isLoading ? (
         <WinnersList
           winners={winners}
           users={users}
@@ -125,7 +127,7 @@ export function Ranking() {
           </C.Badges>
           <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
           <C.Days>{`${daysToGo} ${daysToGo > 1 ? ' dias' : ' dia'}`}</C.Days>
-          <UsersList users={users} />
+          <UsersList users={users} userId={loggedUser.id} />
         </>
       )}
     </C.Container>

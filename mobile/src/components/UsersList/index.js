@@ -1,14 +1,11 @@
 import { FlatList } from 'react-native';
 import { User } from '../User';
 import { ArrowUp } from 'react-native-feather';
-import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 const iconSize = 25;
 
-export function UsersList({ users, initialPosition = 0 }) {
-  const { loggedUser } = useAuth();
-
+export function UsersList({ users, userId, initialPosition = 0 }) {
   return (
     <FlatList
       data={users}
@@ -22,9 +19,9 @@ export function UsersList({ users, initialPosition = 0 }) {
               name={name}
               avatar_id={avatar_id}
               xp={weekly_xp}
-              isLoggedUser={id === loggedUser.id}
+              isLoggedUser={id === userId}
             />
-            {position === 3 && (
+            {position === 5 && (
               <C.Divider>
                 <ArrowUp width={iconSize} height={iconSize} color={theme.colors.green_500} />
                 <C.Message>Zona de promoção</C.Message>
