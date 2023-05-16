@@ -6,7 +6,7 @@ export function Editor({ value, isReadOnly = true, onChange = null }) {
   const { fontSize, isDarkMode } = useEditor();
   const theme = isDarkMode ? 'tomorrowNightBright' : 'stackoverflowLight';
   const editoRef = useRef(null);
-
+//tomorrowNightBright
   return (
     <CodeEditor
       ref={editoRef}

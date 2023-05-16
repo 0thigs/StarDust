@@ -3155,18 +3155,12 @@ escreva(vetores[2][0]);`,
       },
       {
         id: 2,
-        texts: [
-          'escreva("O foguete será lançado em ${',
-          'dropZone',
-          '}',
-        ],
+        texts: ['escreva("O foguete será lançado em ${', 'dropZone', '}'],
         indentLevel: 2,
       },
       {
         id: 3,
-        texts: [
-          'escreva("Em direção ao ${destino}");',
-        ],
+        texts: ['escreva("Em direção ao ${destino}");'],
         indentLevel: 2,
       },
       {
@@ -3241,4 +3235,160 @@ mostrarDistancia(velocidade, tempo);`,
     options: ['velocidade', 'tempo', 'distancia', 'mostrarDistancia'],
     answer: 'distancia',
   },
+  {
+    starId: 27,
+    type: 'open',
+    stem: 'Qual será o resultado desse código?',
+    code: `funcao subtrair(numero1, numero2) {
+    retorna numero1 - numero2;
+}
+var subtracao = subtrair(12, 2);
+escreva(subtracao * 2)`,
+    answer: '20',
+  },
+  {
+    starId: 27,
+    type: 'checkbox',
+    stem: 'Quais os possíveis valores que o parâmetro robo poderia ter para que fosse escrito "Isso é um robô"?',
+    code: `funcao verificarRobo(robo) {
+    retorna robo.inclui("Robô");
+}
+
+se (verificarRobo(robo)) {
+    escreva("Isso é um robô");
+}`,
+    options: ['AstroRobô', 'RobôCop', 'Blitz', 'Wall-E'],
+    correctOptions: ['AstroRobô', 'RobôCop', 'Wall-E'],
+  },
+  {
+    starId: 27,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a função para que ela retorne "Habitável"',
+    lines: [
+      {
+        id: 1,
+        texts: ['funcao verificarPlaneta(', 'dropZone', ') {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['var planetaHabitaveis = ["Terra", "Marte"];'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['se (planetaHabitaveis.inclui(planeta)) {'],
+        indentLevel: 2,
+      },
+      {
+        id: 4,
+        texts: ['dropZone', '"Habitável";'],
+        indentLevel: 4,
+      },
+      {
+        id: 5,
+        texts: ['}'],
+        indentLevel: 2,
+      },
+      {
+        id: 6,
+        texts: ['retorna', ' dropZone'],
+        indentLevel: 2,
+      },
+      {
+        id: 7,
+        texts: ['escreva(verificarPlaneta(', 'dropZone', '));'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'retorna',
+      },
+      {
+        id: 2,
+        label: '"Não habitável"',
+      },
+      {
+        id: 3,
+        label: 'planeta',
+      },
+      {
+        id: 4,
+        label: '"Vênus"',
+      },
+    ],
+    correctItemsIdsSequence: [3, 1, 2, 4],
+  },
+  {
+    starId: 27,
+    type: 'checkbox',
+    stem: 'Quais dessas funções SÃO anônimas',
+    code: `var pegarNomeEstrela = funcao() {
+        retorna "Órion";
+}
+funcao removerX (vetor) {
+    retorna vetor.remover("x");
+}
+var adicionarPlanetas = funcao(vetor) {
+    retorna vetor.concatenar(["Arrakis", "Gallifrey"]);
+}`,
+    options: ['removerX', 'adicionarPlanetas', 'pegarNomeEstrela', 'calcularGravidade'],
+    correctOptions: ['adicionarPlanetas', 'pegarNomeEstrela'],
+  },
+  {
+    starId: 27,
+    type: 'drag-and-drop-click',
+    stem: 'Complete a função anônima adequadamente',
+    lines: [
+      {
+        id: 1,
+        texts: ['dropZone', 'verificarPar', 'dropZone', 'funcao(num) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['dropZone', 'num % 2 == 0;'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'retorna',
+      },
+      {
+        id: 2,
+        label: 'funcao',
+      },
+      {
+        id: 3,
+        label: 'var',
+      },
+      {
+        id: 4,
+        label: '=',
+      },
+    ],
+    correctItemsIdsSequence: [3, 4, 1],
+  },
+//   {
+//     starId: 27,
+//     type: 'checkbox',
+//     stem: 'Quais robôs estarão no vetor robos?',
+//     code: `funcao retornarRobos() {
+//         retorna ["Wall-E", "Bender"];
+// }
+// var robos = ["Gundam"];
+// robos.concatenar(retornarRobos());
+// `,
+//     options: ['Gundam', 'Bender', 'Wall-E', 'RoboCop'],
+//     correctOptions: ['Gundam', 'Bender', 'Wall-E'],
+//   },
 ];

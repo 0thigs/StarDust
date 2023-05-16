@@ -5212,17 +5212,17 @@ usarRadar("Muito obrigado!");
       {
         type: 'default',
         title: null,
-        body: 'Porém antes, precisamos reabastecer nosso foguete né?',
+        body: 'Porém, antes, precisamos reabastecer nosso foguete né?',
       },
       {
         type: 'default',
         title: null,
-        body: 'Por sorte, temos um posto espacial aqui perto.',
+        body: 'Por sorte temos um posto espacial aqui perto.',
       },
       {
         type: 'default',
         title: null,
-        body: 'No posto, ele disponibilizam uma função para calcular o preço do combustível com base em quantos litros queremos',
+        body: 'No posto, ele disponibilizam uma função para calcular o preço do combustível com base em quantos litros queremos.',
       },
       {
         type: 'code',
@@ -5232,17 +5232,17 @@ usarRadar("Muito obrigado!");
     retorna precoTotal
 }
 `,
-        isRunnable: true,
+        isRunnable: false,
       },
       {
         type: 'default',
         title: 'O que é esse retorna?',
-        body: 'Você se lembra que eu falava que ao executar um método de vetor era retornado determinado valor?.',
+        body: 'Você se lembra que eu falava que ao executar um método de vetor era retornado determinado valor?',
       },
       {
         type: 'default',
         title: 'Sim',
-        body: 'Isso porque métodos são funções. E agora que você aprendeu a criar suas próprias funções que retornam valores, usando a palavra-chave "retorna".',
+        body: 'Isso porque métodos também são funções. E agora que você aprendeu a criar suas próprias funções, precisa saber a usar a palavra-chave "retorna".',
       },
       {
         type: 'list',
@@ -5257,7 +5257,7 @@ usarRadar("Muito obrigado!");
       {
         type: 'default',
         title: 'Como?',
-        body: 'Colocando esse valor retornado em uma variável.',
+        body: 'Colocando esse valor retornado em uma variável. Olhe:',
       },
       {
         type: 'code',
@@ -5279,14 +5279,13 @@ escreva(preco);
         body: 'Viu só? O valor de precoTotal vou retornado pela função, e esse valor retornado foi colocado na variável preco.',
       },
       {
-        type: 'default',
-        title: null,
+        type: 'alert',
         body: 'ATENÇÃO: No código, há duas variáveis preco, porém elas não são iguais, porque possuem escopo diferente.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Contudo, podemo melhorar a escrita dessa função: Te vendo que a variável precoTotal é igual a multiplicação de preco e litros?',
+        body: 'Contudo, podemos melhorar a escrita dessa função. Está vendo que a variável precoTotal é igual a multiplicação de preco e litros?',
       },
       {
         type: 'default',
@@ -5309,15 +5308,15 @@ escreva(preco);
       {
         type: 'default',
         title: null,
-        body: 'Parece mágica, mas não, é possível retornar qualquer valor que é resultado de uma expressão, seja de um cálculo ou comparação, como no código abaixo.',
+        body: 'Parece mágica, mas não é. Além disso, é possível retornar qualquer valor que é resultado de uma expressão, seja um cálculo ou comparação, como no código abaixo.',
       },
       {
         type: 'code',
-        body: `funcao conferirSeEMaior(numero1, numero2) {
+        body: `funcao conferirMaior(numero1, numero2) {
     retorna numero1 > numero2;
 }
 
-var resultado = conferirSeEMaior(2, 8);
+var resultado = conferirMaior(2, 8);
 escreva(resultado);
 // Resultado: falso
 `,
@@ -5331,12 +5330,12 @@ escreva(resultado);
       {
         type: 'default',
         title: null,
-        body: 'Com o combustível comprado, temos que colocá-la no tanque.',
+        body: 'Com o combustível comprado, temos que colocá-lo no tanque.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Na verdade eu criei uma função que faz isso para gente. Basta colocar o novo combustível e ele retorna quanto litros tem agora.',
+        body: 'Na verdade eu criei uma função que faz isso para gente. Basta colocar o novo combustível e ele retorna quantos litros tem agora.',
       },
       {
         type: 'code',
@@ -5344,22 +5343,25 @@ escreva(resultado);
     // Reabastecendo
     var totalLitros = 4 + litros;
     escreva("Agora há \${totalLitros} litros.");
-}`,
-        isRunnable: false,
+}
+
+reabastecer(48);
+// Resultado: Agora há 52 litros`,
+        isRunnable: true,
       },
       {
         type: 'default',
-        title: 'Mas que espécie de função é',
+        title: 'Mas que espécie de função é essa?',
         body: 'Isso se trata de uma função anônima.',
       },
       {
         type: 'list',
-        title: 'Função anônimas',
+        title: 'Função anônima',
         body: 'funções anônimas são o que o nome diz, funções que não tem um nome, simplesmente isso.',
       },
       {
         type: 'list',
-        body: 'Geralmente elas são usadas para serem colocadas em varíaveis. Elas não tem diferença com funções com nomes, podendo serem usadas como uma função qualquer, como usar parâmetros e retornar valores',
+        body: 'Geralmente elas são usadas para serem colocadas em varíaveis. Elas não tem diferença com funções com nomes, e podem ser usadas como uma função qualquer, ou seja, elas também podem usar parâmetros e retornar valores.',
       },
       {
         type: 'code',
@@ -5367,9 +5369,13 @@ escreva(resultado);
     // Reabastecendo
     var totalLitros = litros;
     escreva("Agora há \${litros} litros.");
+    retorna litros;
 }
 
-reabastecer(24);`,
+escreva(reabastecer(48));
+/* Resultado: Agora há 52 litros
+              48
+*/`,
         isRunnable: true,
       },
       {
@@ -5377,14 +5383,34 @@ reabastecer(24);`,
         body: 'Caso a função anônima seja associada a uma variável, para chamar essa função, deverá ser usado o nome dessa variável.',
       },
       {
+        type: 'code',
+        body: `var calcularArea = funcao(base, altura) {
+    retorna base * altura;
+};
+
+escreva(calcularArea(2, 5));
+// Resultado: 10`,
+        isRunnable: true,
+      },
+      {
         type: 'default',
         title: 'Então, porque usar funções anônimas, já que não há diferença?',
-        body: 'As funções anônimas permitem serem usadas para parâmetros, mas isso é assunto para outra hora.',
+        body: 'Embora também seja possível com funcções nomeadas, as funções anônimas permitem serem usadas como parâmetros para outras funções mais facilmente.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Nas redondezas, há apenas 3 planetas diferentes, mas achar o correto por meio de uma função.',
+        body: 'Sim, usar função dentro de outra função. Mas, isso é assunto para outra hora.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Agora com o tanque cheio, falta localizar o planeta pelas coordenadas.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Nas redondezas, há apenas 3 planetas diferentes, podemos achar o correto por meio de uma função.',
       },
       {
         type: 'code',
@@ -5398,18 +5424,18 @@ reabastecer(24);`,
     }
 }
 
-escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
+escreva("O \${acharPlaneta('x:42;y:84')} é para onde temos que ir!");
 // Resultado "O Planeta Kyron é para onde temos que ir!"`,
         isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Nessa função, utilizamos colocamos três "retorna" diferentes, o que também é totalmente possível.',
+        body: 'Nessa função, colocamos três "retorna" diferentes, o que também é totalmente possível.',
       },
       {
         type: 'alert',
-        body: 'Quando um retorna é executado, a função para de executar o resto de código.',
+        body: 'Quando um retorna é executado, a função para de executar o resto do código dentro dela.',
       },
       {
         type: 'code',
@@ -5419,7 +5445,7 @@ escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
 }
 
 mostrarAlgo()
-// Resultado Nada`,
+// Resultado: Nada`,
         isRunnable: true,
       },
       {
@@ -5442,7 +5468,7 @@ verificarIdade(999);
       },
       {
         type: 'alert',
-        body: 'Nesse exemplo, o escreva de baixo não foi executado, por que o retorna para a execução da função.',
+        body: 'No exemplo acima, o escreva de baixo não foi executado, por que o retorna encerrou a execução da função, impedindo que o escreva de baixo fosse executado.',
       },
       {
         type: 'code',
@@ -5456,7 +5482,7 @@ verificarIdade(999);
     }
 }
 
-escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
+escreva("O \${acharPlaneta('x:42;y:84')} é para onde temos que ir!")
 // Resultado "O Planeta Kyron é para onde temos que ir!"`,
         isRunnable: true,
       },
@@ -5473,7 +5499,7 @@ escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
       {
         type: 'default',
         title: null,
-        body: 'A mesma coisa que eu fazia com os métodos de vetor, lembra? Às vezes colocava o valor retornado do método em uma variável ou usava diretamente.',
+        body: 'A mesma coisa que fazíamos com os métodos de vetor, lembra? Às vezes colocávamos o valor retornado do método em uma variável ou usávamos diretamente.',
       },
       {
         type: 'code',
@@ -5481,13 +5507,13 @@ escreva("O \${acharPlaneta("x:42;y:84")} é para onde temos que ir!")
 var numeros = [1, 2, 3]
         
 var qtdLetras = letras.tamanho();
+
+escreva(qtdLetras);
 escreva(numeros.tamanho());
 
-escreva(numeros);
 /* Resultado: 3
               3
-/*
-}`,
+*/`,
         isRunnable: true,
       },
       {

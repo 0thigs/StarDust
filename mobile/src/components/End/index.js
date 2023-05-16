@@ -135,17 +135,17 @@ export function End({
   }
 
   function getCoins() {
-    let maxCoins = !isCompleted ? 10 : 5;
+    let maxCoins = isCompleted ? 5 : 10;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxCoins -= !isCompleted ? 5 : 2;
     }
     return maxCoins;
   }
-
   function getXp() {
-    let maxXp = !isCompleted ? 20 : 10;
+    console.log({ isCompleted });
+    let maxXp = isCompleted ? 10 : 20;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxXp -= !isCompleted ? 2 : 1;
+      maxXp -= isCompleted ? 1 : 2;
     }
     return maxXp;
   }
