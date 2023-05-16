@@ -3378,17 +3378,71 @@ var adicionarPlanetas = funcao(vetor) {
     ],
     correctItemsIdsSequence: [3, 4, 1],
   },
-//   {
-//     starId: 27,
-//     type: 'checkbox',
-//     stem: 'Quais robôs estarão no vetor robos?',
-//     code: `funcao retornarRobos() {
-//         retorna ["Wall-E", "Bender"];
-// }
-// var robos = ["Gundam"];
-// robos.concatenar(retornarRobos());
-// `,
-//     options: ['Gundam', 'Bender', 'Wall-E', 'RoboCop'],
-//     correctOptions: ['Gundam', 'Bender', 'Wall-E'],
-//   },
+  {
+    starId: 28,
+    type: 'checkbox',
+    stem: 'Quais os possíveis números podem ser retornados pelo "aleatorioEntre(1, 4)"?',
+    options: ['1', '2', '3', '4'],
+    correctOptions: ['1', '2', '3'],
+  },
+  {
+    starId: 28,
+    type: 'checkbox',
+    stem: 'Quais funções nativas posso utilizar para converter um dado em um número?',
+    options: ['texto()', 'numero()', 'inteiro()', 'real()'],
+    correctOptions: ['inteiro()', 'real()'],
+  },
+  {
+    starId: 28,
+    type: 'checkbox',
+    stem: 'Quais os dados abaixo podem ser convertidos para número?',
+    options: ['"24"', 'verdadeiro', '"9999"', '[42]'],
+    correctOptions: ['1', '2', '3'],
+  },
+  {
+    starId: 28,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que seja retornado um texto.',
+    lines: [
+      {
+        id: 1,
+        texts: ['funcao converterEmTexto(dado) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['retorna ', 'dropZone', '(dado)'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['converterEmTexto(', 'dropZone', ');'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: '500',
+      },
+      {
+        id: 2,
+        label: 'texto',
+      },
+      {
+        id: 3,
+        label: 'numero',
+      },
+      {
+        id: 4,
+        label: 'real',
+      },
+    ],
+    correctItemsIdsSequence: [2, 1],
+  },
 ];
