@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { QuestionCode, QuestionStem } from '../Quiz/styles';
 import { Editor } from '../Editor';
-import { getCodeHeight } from '../../utils/getCodeHeight';
 import * as C from './styles';
 
 export function OpenForm({ stem, answer, code, index }) {

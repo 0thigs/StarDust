@@ -5882,7 +5882,7 @@ souOutraFuncao(cumprimentar);
       {
         type: 'list',
         title: null,
-        body: 'Uma função avançada também é aquela que retorna uma função passada que foi passada como parâmetro.',
+        body: 'Uma função avançada também é aquela que retorna uma função que foi passada como parâmetro.',
       },
       {
         type: 'code',
@@ -5916,17 +5916,17 @@ escreva(executarSomar(1, 2, somar))
       {
         type: 'default',
         title: null,
-        body: 'Parece complicado? Tealvez seja.',
+        body: 'Parece complicado? Com certeza é.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Mas você percebeu que a forma de escrever uma função desse tipo não é diferente de escrever uma função normal.',
+        body: 'Mas, você percebeu que a forma de escrever uma função desse tipo não é diferente de escrever uma função normal.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Então no final das contas, "função de ordem superior" acaba sendo um nome chique de funções que recebem ou que retornam outras funções.',
+        body: 'Então, no final das contas, "função de ordem superior" acaba sendo um nome chique de funções que recebem ou que retornam outras funções.',
       },
       {
         type: 'default',
@@ -5960,7 +5960,7 @@ escreva(executarSomar(1, 2, somar))
       {
         type: 'default',
         title: null,
-        body: 'Quando o "mapear()" for executado essa função transformadora será aplicada a cada elemento do vetor original.',
+        body: 'Quando o "mapear()" for executado essa função transformadora será aplicada a cada elemento do vetor original. E cada retorno dessa função será incluído em um novo vetor.',
       },
       {
         type: 'default',
@@ -5989,7 +5989,7 @@ escreva(novosNumeros);
       {
         type: 'default',
         title: null,
-        body: 'Lembra que eu disse que a mapear faz uma laço no vetor passado como primeiro parâmetro?',
+        body: 'Lembra que eu disse que a mapear faz um laço no vetor original passado como primeiro parâmetro?',
       },
       {
         type: 'default',
@@ -6006,7 +6006,7 @@ escreva(novosNumeros);
         body: `funcao meuMapear(vetor, funcaoTrasnformadora) {
     var novoVetor = [];
           
-    para (var i = 0; i < vetor.tamanho(); i++) {
+    para (var i = 0;i<vetor.tamanho();i++) {
         var elementoTransformado = funcaoTrasnformadora(vetor[i]);
         novoVetor.adicionar(elementoTransformado);
     }
@@ -6105,7 +6105,45 @@ escreva(numerosFiltrados);
       {
         type: 'default',
         title: null,
-        body: 'Talvez você ache que o nome da função filtradora grande demais (o que não é problema nenhum), você pode usar uma função anônima no lugar.',
+        body: 'Por exemplo se em outra situação o retorno da função filtradora fosse sempre verdadeiro, nenhum elemento do vetor original seria excluído',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [5, 10, 15, 20];
+
+funcao verificarSeMaiorQue10(numero) {
+    retorna verdadeiro;
+};
+                
+var numerosFiltrados = filtrarPor(numeros, verificarSeMaiorQue10);
+        
+escreva(numerosFiltrados);
+// Resultado: 5, 10, 15, 20`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'E se fosse falso...',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [5, 10, 15, 20];
+
+funcao verificarSeMaiorQue10(numero) {
+    retorna falso;
+};
+                
+var numerosFiltrados = filtrarPor(numeros, verificarSeMaiorQue10);
+        
+escreva(numerosFiltrados);
+// Resultado: Nada`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Talvez você ache que o nome da função filtradora grande demais (o que não é problema nenhum). Então, você pode usar uma função anônima no lugar.',
       },
       {
         type: 'default',
@@ -6132,7 +6170,7 @@ escreva(numerosFiltrados);
       {
         type: 'default',
         title: null,
-        body: 'E antes que pergunte, sim, também dá para usar função anônima no "mapear()".',
+        body: 'E antes que pergunte, sim, também dá para usar uma função anônima no "mapear()".',
       },
       {
         type: 'code',

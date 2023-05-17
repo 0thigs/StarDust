@@ -3,7 +3,6 @@ import { useLesson } from '../../hooks/useLesson';
 import Animated, { RotateInDownRight, RotateOutDownRight } from 'react-native-reanimated';
 
 import { reorderItems } from '../../utils/reorderItems';
-import { getCodeHeight } from '../../utils/getCodeHeight';
 import { QuestionCode, QuestionStem } from '../Quiz/styles';
 import { Editor } from '../Editor';
 

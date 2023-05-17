@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { reorderItems } from '../../utils/reorderItems';
-import { getCodeHeight } from '../../utils/getCodeHeight';
 import { Editor } from '../Editor';
 import { QuestionStem, QuestionCode } from '../Quiz/styles';
 import * as C from './styles';
@@ -11,7 +10,6 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
-  const [codeHeight, setCodeHeight] = useState(0);
   const [isIncremented, setIsncremented] = useState(false);
   const isCurrentQuestion = index === currentQuestion;
 
@@ -57,7 +55,6 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
 
   useEffect(() => {
     reorderItems(options, setReorderedOptions);
-    setCodeHeight(getCodeHeight(code, 'selection'));
   }, []);
 
   useEffect(() => {
