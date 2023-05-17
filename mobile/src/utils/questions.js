@@ -3380,6 +3380,16 @@ var adicionarPlanetas = funcao(vetor) {
   },
   {
     starId: 28,
+    type: 'selection',
+    stem: 'Qual será o resultado desse código?',
+    code: `var numero = texto(22);
+
+escreva(22 + numero);`,
+    options: ['44', '"2222"', '22', '"2244"'],
+    answer: '"2222"',
+  },
+  {
+    starId: 28,
     type: 'checkbox',
     stem: 'Quais os possíveis números podem ser retornados pelo "aleatorioEntre(1, 4)"?',
     options: ['1', '2', '3', '4'],
@@ -3397,7 +3407,7 @@ var adicionarPlanetas = funcao(vetor) {
     type: 'checkbox',
     stem: 'Quais os dados abaixo podem ser convertidos para número?',
     options: ['"24"', 'verdadeiro', '"9999"', '[42]'],
-    correctOptions: ['1', '2', '3'],
+    correctOptions: ['"24"', '"9999"'],
   },
   {
     starId: 28,
@@ -3436,7 +3446,7 @@ var adicionarPlanetas = funcao(vetor) {
       },
       {
         id: 3,
-        label: 'numero',
+        label: 'inteiro',
       },
       {
         id: 4,
@@ -3444,5 +3454,146 @@ var adicionarPlanetas = funcao(vetor) {
       },
     ],
     correctItemsIdsSequence: [2, 1],
+  },
+  {
+    starId: 29,
+    type: 'selection',
+    stem: 'Qual das funções abaixo é uma função avançada (alta ordem)?',
+    code: `funcao fazerSaudacao(nome) {
+    retorna "Olá, \${nome}! Tudo bem?";
+}
+    
+  funcao retornarSaudacao(nome) {
+    retorna fazerSaudacao(nome);
+}
+
+escreva(retornarSaudacao("John"));`,
+    options: ['fazerSaudacao', 'escreva', 'retornarSaudacao', 'anônima'],
+    answer: 'retornarSaudacao',
+  },
+  {
+    starId: 29,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o código para que todos nomes do vetor nomes estejam em maiúscula.',
+    lines: [
+      {
+        id: 1,
+        texts: ['var nomes = ["Star Yarts", "Doctor Boo", "The Hunger Aliens"]'],
+        indentLevel: 0,
+      },
+      {
+        id: 1,
+        texts: ['funcao colocarEmMaiuscula(nome) {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['retorna ', 'nome.', 'dropZone', '()'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['var novosNomes = ', 'dropZone', '(nomes, colocarEmMaiuscula)'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'mapear',
+      },
+      {
+        id: 2,
+        label: 'filtrarPor',
+      },
+      {
+        id: 3,
+        label: 'maiuscula',
+      },
+      {
+        id: 4,
+        label: 'minuscula',
+      },
+    ],
+    correctItemsIdsSequence: [3, 2],
+  },
+  {
+    starId: 29,
+    type: 'drag-and-drop-click',
+    stem: 'Complete o "filtrarPor()" para que apenas números ímpares estejam no vetor impares.',
+    lines: [
+      {
+        id: 1,
+        texts: ['var numeros = [11, 22, 33, 44, 55]'],
+        indentLevel: 0,
+      },
+      {
+        id: 1,
+        texts: ['funcao verificarImpar(', 'dropZone' ,') {'],
+        indentLevel: 0,
+      },
+      {
+        id: 2,
+        texts: ['retorna numero % 2 !== 0;'],
+        indentLevel: 2,
+      },
+      {
+        id: 3,
+        texts: ['}'],
+        indentLevel: 0,
+      },
+      {
+        id: 4,
+        texts: ['var impares = filtrarPor(', 'dropZone', ',', 'dropZone', ')'],
+        indentLevel: 0,
+      },
+    ],
+    dropItems: [
+      {
+        id: 1,
+        label: 'verificarImpar',
+      },
+      {
+        id: 2,
+        label: 'numeros',
+      },
+      {
+        id: 3,
+        label: 'numero',
+      },
+      {
+        id: 4,
+        label: 'verificarPar',
+      },
+    ],
+    correctItemsIdsSequence: [3, 2, 1],
+  },
+  {
+    starId: 29,
+    type: 'open',
+    stem: 'QUANTOS itens terão no vetor racasComXeno?',
+    code: `var racas = [
+        "Xenomorfo", 
+        "Zogxenon", 
+        "Alien", 
+        "Troxenor"
+];
+var racasComXeno = filtrarPor(racas, funcao(raca) {
+    raca.minusculo();
+    retorna raca.inclui("xeno");
+});`,
+    answer: '3',
+  },
+  {
+    starId: 29,
+    type: 'selection',
+    stem: 'Qual função avançada de vetor eu teria que usar se eu quisesse que a quantidade de itens do vetor original se mantivesse?',
+    options: ['mapear()', 'filtrarPor()', 'inclui()', 'numerar()'],
+    answer: 'mapear()',
   },
 ];

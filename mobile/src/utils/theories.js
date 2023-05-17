@@ -5539,7 +5539,7 @@ escreva(numeros.tamanho());
       {
         type: 'default',
         title: null,
-        body: 'O que falta agora? Achar a pessoa, é claro',
+        body: 'O que falta agora? Achar a pessoa, é claro.',
       },
       {
         type: 'default',
@@ -5574,17 +5574,17 @@ escreva(numeros.tamanho());
       {
         type: 'default',
         title: null,
-        body: 'O grandão, vamos chamar assim, gerará um número aleatório por meio de uma função nativa',
+        body: 'O grandão, vamos chamar ele assim, vai gerar um número aleatório por meio de uma função nativa.',
       },
       {
         type: 'default',
-        title: 'Função nativa',
-        body: 'Sim, também conhecida funções internas',
+        title: 'Função nativa?',
+        body: 'Sim, também conhecida como funções internas.',
       },
       {
         type: 'list',
         title: 'Função nativa',
-        body: 'São funções pré-criadas, que já vem prontas para usar em qualquer programa sem a necessidade de você mesmo criá-las.',
+        body: 'São funções pré-criadas, que já vem prontas para serem usadas em qualquer programa sem a necessidade de você mesmo criá-las.',
       },
       {
         type: 'default',
@@ -5594,18 +5594,18 @@ escreva(numeros.tamanho());
       {
         type: 'default',
         title: null,
-        body: 'Só que há outras funções nativas, como o "aleatorio()"',
+        body: 'Só que, há outras funções nativas, como o "aleatorio()".',
       },
       {
         type: 'list',
         title: 'aleatorio()',
-        body: 'A função "aleatorio()" retorna um número aleatório. Mas não qualquer número aleatório, mas um entre 0 e 0.99999999999...',
+        body: 'A função "aleatorio()" apenas retorna um número aleatório. Mas não qualquer número aleatório, mas um entre 0 e 0.99999999999...',
       },
       {
         type: 'code',
-        body: `var numeroAleatorio = aleatorio()
+        body: `var numeroAleatorio = aleatorio();
         
-escreva(numeroAleatorio)
+escreva(numeroAleatorio);
 // Resultado: Um número aleatório entre 0 e 0.99999...`,
         isRunnable: true,
       },
@@ -5620,11 +5620,11 @@ escreva(numeroAleatorio)
       {
         type: 'list',
         title: 'aleatorioEntre()',
-        body: 'a função "aleatorioEntre()" também gera um número aleatório, porém entre os valores passado para a função',
+        body: 'a função "aleatorioEntre()" também gera um número aleatório. Porém, o número gerado estará sempre entre os valores passado para a função.',
       },
       {
         type: 'list',
-        body: 'O primeiro parâmetro é o número "mínimo" e o segundo é "máximo"',
+        body: 'O primeiro parâmetro é o número "mínimo" e o segundo é o "máximo", o número aleatório deverá estar entre esses dois números.',
       },
       {
         type: 'code',
@@ -5636,8 +5636,8 @@ escreva(numeroAleatorio)
       },
       {
         type: 'default',
-        title: 'Não era para ser um número aleatório entre 0 e 9',
-        body: 'a função aleatorioEntre(0, 9) tem um porém: O valor gerado aleatoriamente nunca será igual ao número máximo passado para a função, ou seja, sempre será um a menos que o máximo.',
+        title: 'Não era para ser um número aleatório entre 1 e 9?',
+        body: 'a função aleatorioEntre(0, 9) tem um porém: o valor gerado aleatoriamente nunca será igual ao número máximo passado para a função, mas pode ser igual ao mínimo.',
       },
       {
         type: 'code',
@@ -5650,7 +5650,7 @@ escreva(numero);
       {
         type: 'default',
         title: null,
-        body: 'Agora vamos resilver o desafio do grandão.',
+        body: 'Agora vamos resolver o desafio do grandão.',
       },
       {
         type: 'code',
@@ -5659,7 +5659,7 @@ var minimo = 4 * 2 + 1;
 
 var numero = aleatorioEntre(minimo, maximo);
         
-// Qual será o resultado de número?
+// Qual será o valor de numero?
 escreva(numero);`,
         isRunnable: false,
       },
@@ -5692,7 +5692,7 @@ escreva(numero);
       {
         type: 'default',
         title: null,
-        body: 'E o desafio é: Criar uma função que transforma um número em um texto!',
+        body: 'E o desafio é: criar uma função que transforma um número em um texto!',
       },
       {
         type: 'code',
@@ -5708,18 +5708,18 @@ escreva(numero);
       },
       {
         type: 'default',
-        title: 'Mas como transformar um número em texto',
+        title: 'Mas como transformar um número em texto?',
         body: 'Essa vai ser fácil também, pois existem funções nativas que convertem um tipo de dado para outro.',
       },
       {
         type: 'default',
-        title: 'Mas como transformar um número em texto',
-        body: 'Essas funções nativas são quatro, um para cada tipo, é claro.',
+        title: null,
+        body: 'Essas funções nativas são 3:',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'texto()',
-        body: 'a função "texto()" converte um número, real ou não, para texto, retornando esse texto.',
+        body: 'a função "texto()" converte um número, real ou inteiro, para texto, retornando esse novo texto.',
       },
       {
         type: 'code',
@@ -5728,8 +5728,8 @@ escreva(numero);
 var texto = texto(numero);
 
 escreva(texto)
-Resultado: 42;`,
-        isRunnable: false,
+// Resultado: 42;`,
+        isRunnable: true,
       },
       {
         type: 'default',
@@ -5760,17 +5760,17 @@ escreva(111 + inteiro(numTexto));
 
 escreva(0.01 + real(numTexto));
 
-Resultado: 504.7`,
+// Resultado: 504.7`,
         isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Viu? Os números foram somados! Caso fosse texto, aconteceria uma concatenação',
+        body: 'Viu? Os números foram somados! Caso fosse texto, aconteceria uma concatenação.',
       },
       {
         type: 'alert',
-        body: 'Só que para converter para número (inteiro ou real), o texto precisa necessariamente conter apenas números. Caso contrário vai dar erro.',
+        body: 'Só que, como eu disse, para converter para número (inteiro ou real), o texto precisa necessariamente conter apenas números. Caso contrário vai dar erro.',
       },
       {
         type: 'code',
@@ -5778,21 +5778,13 @@ Resultado: 504.7`,
 
 escreva(real(texto));
 
-Resultado: Erro`,
+// Resultado: Erro`,
         isRunnable: true,
       },
       {
         type: 'default',
         title: null,
         body: 'Então, para resolver o desafio do grandão:',
-      },
-      {
-        type: 'code',
-        body: `var numTexto = "111";
-
-escreva(111 + inteiro(numTexto));
-// Resultado: 222`,
-        isRunnable: true,
       },
       {
         type: 'code',
@@ -5807,11 +5799,11 @@ escreva(transformarNumero(999));
       {
         type: 'default',
         title: null,
-        body: 'Sim, estamos retornando o retorno de outra função, e essa é uma das coisas mais belas que existe na programação!',
+        body: 'Sim, estamos retornando o retorno de outra função. Então, acabamos de criar uma função de alta ordem 😀!',
       },
       {
         type: 'default',
-        title: null,
+        title: 'Alta o que?',
         body: 'Porém, o grandão acabou de dizer que isso foi só um aperitivo, e que os verdadeiros desafios começam agora.',
       },
       {
@@ -5832,7 +5824,7 @@ escreva(transformarNumero(999));
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, um vetor sendo [1, 2, 3, 4], retornar um vetor com [2, 4, 6, 8];',
+        body: 'Por exemplo, um vetor sendo [1, 2, 3, 4], deve gerar um vetor com [2, 4, 6, 8].',
       },
       {
         type: 'code',
@@ -5845,7 +5837,7 @@ para (var i = 0; i < numeros.tamanho(); i++) {
 }
 
 escreva(novoVetor);
-Resultado: 2, 4, 6, 8`,
+// Resultado: 2, 4, 6, 8`,
         isRunnable: true,
       },
       {
@@ -5866,7 +5858,7 @@ Resultado: 2, 4, 6, 8`,
       {
         type: 'list',
         title: 'Funções de alta ordem',
-        body: 'Funções de alta ordem ou funções de ordem superior (vamos chamar de apenas funções avançadas) são funções que recebem outras funções como parâmetro.',
+        body: 'Funções de alta ordem ou funções de ordem superior (vamos chamar de apenas funções avançadas), são funções que recebem outras funções como parâmetro.',
       },
       {
         type: 'code',
@@ -5881,17 +5873,17 @@ funcao souOutraFuncao(funcaoCumprimentar) {
 souOutraFuncao(cumprimentar);
 // Resultado: Olá!`,
         isRunnable: true,
-      },   
+      },
       {
         type: 'list',
         title: null,
-        body: 'Nesse exemplo, a função "cumprimentar()" foi passado como parâmetro para a funcao "souOutraFuncao()". Assim, "cumprimentar()" foi executada dentro de "souOutraFuncao()".',
-      }, 
+        body: 'Nesse exemplo, a função "cumprimentar()" foi passado como parâmetro para a funcao "souOutraFuncao()". Assim, a função "cumprimentar()" foi executada dentro de "souOutraFuncao()".',
+      },
       {
         type: 'list',
         title: null,
-        body: 'Também é possível retornar uma função passada como parâmetro.',
-      }, 
+        body: 'Uma função avançada também é aquela que retorna uma função passada que foi passada como parâmetro.',
+      },
       {
         type: 'code',
         body: `funcao somar(num1, num2) {
@@ -5905,27 +5897,27 @@ funcao executarSomar(num1, num2, somar) {
 escreva(executarSomar(1, 2, somar))
 // Resultado: 3`,
         isRunnable: true,
-      },   
+      },
       {
         type: 'default',
         title: null,
-        body: 'Neste exemplo, a funcao "executarSomar()" recebe 3 parâmetros. Os dois primeiros são números e o terceiro é uma função que somadois  números.',
-      }, 
+        body: 'Neste exemplo, a funcao "executarSomar()" recebe 3 parâmetros. Os dois primeiros são números e o terceiro é uma função que soma dois números.',
+      },
       {
         type: 'default',
         title: null,
         body: 'A função "soma()" é executada dentro da funcao "executarSomar()" usando os parâmetros que foram originalmente passados para a funcao "executarSomar()".',
-      }, 
+      },
       {
         type: 'default',
         title: null,
         body: 'E o retorno de "somar()" é retornado pela funcao "executarSomar()".',
-      }, 
+      },
       {
         type: 'default',
         title: null,
         body: 'Parece complicado? Tealvez seja.',
-      }, 
+      },
       {
         type: 'default',
         title: null,
@@ -5935,52 +5927,55 @@ escreva(executarSomar(1, 2, somar))
         type: 'default',
         title: null,
         body: 'Então no final das contas, "função de ordem superior" acaba sendo um nome chique de funções que recebem ou que retornam outras funções.',
-      }, 
+      },
       {
         type: 'default',
         title: null,
         body: 'Mas porque eu estou explicando isso? Porque a função nativa que iremos usar agora é uma função desse tipo.',
-      }, 
+      },
       {
         type: 'default',
         title: null,
-        body: 'Existem alguns métodos de vetor que são funções avançadas, e uma delas é o "mapear()".',
-      }, 
+        body: 'Existem algumas funções avançadas de são usadas especificamente para vetores, e uma delas é o "mapear()".',
+      },
       {
         type: 'list',
         title: 'mapear()',
-        body: 'O método "mapear()" transforma cada elemento de um vetor através de um laço.',
-      }, 
+        body: 'A função "mapear()" transforma cada elemento de um vetor através de um laço, retornando um novo vetor.',
+      },
       {
         type: 'default',
         title: null,
         body: 'Para escrevê-la é simples:',
-      }, 
+      },
       {
         type: 'code',
-        body: `var novoVetor = vetorOriginal.mapear(funcaoTranformadora);`,
+        body: `var novoVetor = mapear(vetorOriginal, funcaoTranformadora);`,
         isRunnable: false,
-      }, 
+      },
+      {
+        type: 'list',
+        body: 'O "mapear()" recebe dois parâmetros, o primeiro é o vetor original e o segundo é a função transformadora, ou seja, a que transformará cada elemento do vetor original.',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Quando o "maper()" for executado essa função transformadora será aplicada a cada elemento do vetor original.',
-      }, 
+        body: 'Quando o "mapear()" for executado essa função transformadora será aplicada a cada elemento do vetor original.',
+      },
       {
         type: 'default',
         title: null,
-        body: 'No nosso caso, a função transformadora será função que dobre um número. Então vamos criá-la.',
-      }, 
+        body: 'No nosso caso, a função transformadora será função que dobra um número. Então vamos criá-la.',
+      },
       {
         type: 'code',
-        body: ` // Desafio: Criar um vetor de números onde cada número é o dobro de cada número de outro vetor de números
-var numeros = [1, 2, 3, 4];
+        body: ` var numeros = [1, 2, 3, 4];
 
-funcao dobrar(num) {
-    retorna num * 2;
+funcao dobrar(numero) {
+    retorna numero * 2;
 };
         
-var novosNumeros = numeros.mapear(dobrar);
+var novosNumeros = mapear(numeros, dobrar);
 
 escreva(novosNumeros);
 // Resultado: 2, 4, 6, 8`,
@@ -5990,24 +5985,29 @@ escreva(novosNumeros);
         type: 'default',
         title: null,
         body: 'A função transformadora, no caso "somar()", está recebendo um parâmetro. Mas de onde ele está vindo?',
-      }, 
+      },
       {
         type: 'default',
         title: null,
-        body: 'Lembra que eu disse que a mapear faz uma laço no vetor que executa ele? A cada iteração desse laço a função "dobrar()" é executada recebendo como parâmetro o número atual do vetor números.',
-      }, 
+        body: 'Lembra que eu disse que a mapear faz uma laço no vetor passado como primeiro parâmetro?',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'A cada iteração desse laço a função "dobrar()" é executada recebendo como parâmetro o número atual do vetor números.',
+      },
       {
         type: 'default',
         title: 'Que?',
         body: 'Bugou agora? Aqui temos uma função que mostra o funcionamento do "mapear()" por baixo dos panos.',
-      }, 
+      },
       {
         type: 'code',
         body: `funcao meuMapear(vetor, funcaoTrasnformadora) {
     var novoVetor = [];
           
     para (var i = 0; i < vetor.tamanho(); i++) {
-        var elementoTransformado = funcaoDeTransformacao(vetor[i]);
+        var elementoTransformado = funcaoTrasnformadora(vetor[i]);
         novoVetor.adicionar(elementoTransformado);
     }
           
@@ -6019,17 +6019,16 @@ escreva(novosNumeros);
         type: 'default',
         title: 'Hmm...',
         body: 'É bem parecido com o laço que criamos logo no começo, não é? Só que o "mapear()" faz isso automaticamente, veja de novo.',
-      }, 
+      },
       {
         type: 'code',
-        body: `// Desafio: Criar um vetor de números onde cada número é o dobro de cada número de outro vetor de números
-var numeros = [1, 2, 3, 4];
+        body: `var numeros = [1, 2, 3, 4];
 
-funcao dobrar(num) {
-    retorna num * 2;
+funcao dobrar(numero) {
+    retorna numero * 2;
 };
         
-var novosNumeros = numeros.mapear(dobrar);
+var novosNumeros = mapear(numeros, dobrar);
 
 escreva(novosNumeros);
 // Resultado: 2, 4, 6, 8`,
@@ -6038,57 +6037,57 @@ escreva(novosNumeros);
       {
         type: 'default',
         title: null,
-        body: 'Pronto para mais um desafio? O próximo é criar um vetor com os números de outro vetor que são maiores que 10.',
-      }, 
+        body: 'Muito bem, pronto para mais um desafio? O próximo é criar um vetor com os números de outro vetor que são maiores que 10.',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, um vetor [1, 4, 9, 12, 45, 60] gerará um vetor [12, 45, 60].',
-      }, 
+        body: 'Por exemplo, um vetor [1, 4, 9, 12, 45, 60] deve gerar um vetor [12, 45, 60].',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Não será possível fazer com o "mapear()", porque esse método retorna obrigatoriamente um vetor com a mesma quantidade de itens do vetor original. O vetor gerado nesse desafio pode ter menos não é?',
-      }, 
+        body: 'Não será possível fazer com o "mapear()", porque esse método retorna obrigatoriamente um vetor com a mesma quantidade de itens do vetor original. O vetor gerado nesse desafio pode ter bem menos, não é?',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Então teremos que usar outro método avançado, no caso que filtre os elementos de um vetor.',
-      }, 
+        body: 'Então teremos que usar outra função avançada, no caso que filtre os elementos de um vetor.',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Esse é um trabalho para o método "filtrarPor()".',
-      }, 
+        body: 'Esse é um trabalho para a função "filtrarPor()".',
+      },
       {
         type: 'list',
         title: 'filtrarPor()',
         body: 'Esse método cria outro vetor contendo apenas os elementos do vetor original que passem em uma condição fornecida.',
-      }, 
+      },
       {
         type: 'list',
-        body: 'E já que ele é uma função avançada, assim como o mapear ele cria um laço no vetor, onde cada elemento na iteração é passado como parâmetro para função filtradora.',
-      }, 
+        body: 'E já que ele é uma função avançada, assim como o mapear, ele cria um laço no vetor, onde cada elemento na iteração é passado como parâmetro para função filtradora.',
+      },
       {
         type: 'code',
-        body: `var novoVetor = vetorOriginal.filtrarPor(funcaoFiltradora);`,
+        body: `var novoVetor = filtrarPor(vetorOriginal, funcaoFiltradora);`,
         isRunnable: false,
-      }, 
+      },
       {
         type: 'default',
         title: null,
         body: 'Então, no nosso caso:',
-      }, 
+      },
       {
         type: 'code',
-        body: `var  = [5, 10, 15, 20];
+        body: `var numeros = [5, 10, 15, 20];
 
-funcao verificarSeMaiorQue10(num) {
-    retorna num > 10;
+funcao verificarSeMaiorQue10(numero) {
+    retorna numero > 10;
 };
+                
+var numerosFiltrados = filtrarPor(numeros, verificarSeMaiorQue10);
         
-var numerosFiltrados = numeros.filtrarPor(verificarSeMaiorQue10);
-
 escreva(numerosFiltrados);
 // Resultado: 15, 20`,
         isRunnable: true,
@@ -6096,26 +6095,31 @@ escreva(numerosFiltrados);
       {
         type: 'default',
         title: null,
-        body: 'Está vendo que a função "verificarSeMaiorQue10()" retorna um lógico? Isso porque a função filtradora deve obrigatoriamente retornar um lógico, que:\nse for verdadeiro, o elemento atual é colocado no novo vetor, caso falso ele é excluído.',
-      }, 
+        body: 'Está vendo que a função "verificarSeMaiorQue10()" retorna um lógico?',
+      },
       {
         type: 'default',
         title: null,
-        body: 'Talvez, você ache que o nome da função filtradora grande demais (o que não é problema nenhum), você pode usar uma função anônima no lugar.',
-      }, 
+        body: 'Isso porque a função filtradora deve obrigatoriamente retornar um lógico, que:\nse for verdadeiro, o elemento atual é colocado no novo vetor, caso falso ele é excluído.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Talvez você ache que o nome da função filtradora grande demais (o que não é problema nenhum), você pode usar uma função anônima no lugar.',
+      },
       {
         type: 'default',
         title: null,
         body: 'Assim ó:',
-      }, 
+      },
       {
         type: 'code',
-        body: `var  = [5, 10, 15, 20];
-        
-var numerosFiltrados = numeros.filtrarPor(funcao {
-    retorna num > 10;
-});
+        body: `var numeros = [5, 10, 15, 20];
 
+var numerosFiltrados = filtrarPor(numeros, funcao(numero) {
+        retorna numero > 10;
+});
+        
 escreva(numerosFiltrados);
 // Resultado: 15, 20`,
         isRunnable: true,
@@ -6123,21 +6127,21 @@ escreva(numerosFiltrados);
       {
         type: 'default',
         title: null,
-        body: 'Essa é uma das vantagens da função anônima que eu disse antes, de usar a função diretamente como parâmetro de outra função.',
+        body: 'Essa é uma das vantagens da função anônima que eu disse antes, de criar a função diretamente como parâmetro de outra função.',
       },
       {
         type: 'default',
         title: null,
-        body: 'E antes que pergunte, sim, dá para usar função anônima no "mapear()".',
-      },  
+        body: 'E antes que pergunte, sim, também dá para usar função anônima no "mapear()".',
+      },
       {
         type: 'code',
         body: `
 var numeros = [1, 2, 3, 4];
 
-var novosNumeros = numeros.mapear(funcao(num) {
+var novosNumeros = mapear(numeros, funcao(num) {
     retorna num * 2;
-};);
+});
 
 escreva(novosNumeros);
 // Resultado: 2, 4, 6, 8`,
@@ -6146,13 +6150,24 @@ escreva(novosNumeros);
       {
         type: 'default',
         title: null,
-        body: 'Com mais um desafio concluído, só resta o último: Ordenar um vetor de números em ordem crescente.',
+        body: 'Acabamos todos os desafios do grandão, e ele disse que já estamos aptos a encontrar com a pessoa desconhecida.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, um vetor [8, 2, 6, 12, 1] gerará um vetor [1, 2, 6, 8, 12]',
+        body: 'Quem será que é essa pessoa?',
       },
+
+      //   {
+      //     type: 'default',
+      //     title: null,
+      //     body: 'Com mais um desafio concluído, só resta o último: Ordenar um vetor de números em ordem crescente.',
+      //   },
+      //   {
+      //     type: 'default',
+      //     title: null,
+      //     body: 'Por exemplo, um vetor [8, 2, 6, 12, 1] gerará um vetor [1, 2, 6, 8, 12]',
+      //   },
     ],
   },
 ];
