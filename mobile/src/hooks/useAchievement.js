@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
-
 import api from '../services/api';
-import { metricsExceptions } from '../utils/achievementsMetricsExceptions';
 
 export function useAchievement(userId, canGetNewUnlockedAchievements) {
   const { loggedUser } = useAuth();
@@ -21,9 +19,7 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
     if (achievement.isUnlocked) return;
 
     const userCurrentAmount = loggedUser[achievement.metric];
-
     const isNewAchievementUnlocked = userCurrentAmount >= achievement.required_amount;
-
     return isNewAchievementUnlocked;
   }
 

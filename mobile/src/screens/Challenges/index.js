@@ -77,7 +77,6 @@ export function Challenges() {
     for (const tag of currentTags) {
       filteredChallenges = filteredChallenges.filter(challenge => {
         if (tag.type === 'categories') {
-          console.log(tag.value);
           return tag.value.length === 0
             ? true
             : tag.value.some(tagValue => challenge[tag.type].includes(tagValue));
@@ -85,7 +84,6 @@ export function Challenges() {
         return challenge[tag.type] === tag.value;
       });
     }
-
     return filteredChallenges;
   }
 

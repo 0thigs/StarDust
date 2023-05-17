@@ -156,7 +156,7 @@ const _questions = [
 ];
 
 const initialState = {
-  currentStage: stages[0],
+  currentStage: stages[1],
   questions: [],
   currentQuestion: 0,
   wrongsCount: 0,

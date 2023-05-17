@@ -81,10 +81,9 @@ export function AuthProvider({ children }) {
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);
-
       setLoggedUser(signedUser);
     } catch (error) {
-      throw new Error(error);
+      return error;
     }
   }
 

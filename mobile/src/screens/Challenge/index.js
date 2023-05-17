@@ -33,7 +33,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   // const challengeId = route.params.id;
-  const challengeId = '00084ae7-14ec-447c-a1fb-43e060816c46';
+  const challengeId = '4403fafc-6c0e-46dc-bd78-38bab584d1d7';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -59,7 +59,7 @@ export function Challenge({ route }) {
   const sliderRef = useRef(null);
   const seconds = useRef(0);
   const userCode = useRef('');
-  const userOutputArray = useRef([]);
+  const userOutputContent = useRef([]);
   const isOutputArray = useRef([]);
 
   const CurrentIndicatorPositionX = useSharedValue(0);
@@ -83,7 +83,7 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
-    userOutputArray.current = userOutput;
+    userOutputContent.current = userOutput;
   }
 
   function formatCode(code, inputValues) {
@@ -119,9 +119,8 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
-    userOutputArray.current = '';
+    userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
@@ -129,17 +128,16 @@ export function Challenge({ route }) {
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }
-
       if (erros.length) return;
 
-      if (userOutputArray.current && !function_name) {
+      if (userOutputContent.current && !function_name) {
         setUserOutputs(currentUserOutputs => {
-          return [...currentUserOutputs, userOutputArray.current];
+          return [...currentUserOutputs, userOutputContent.current];
         });
         return;
       }
 
-      handleResult(resultado.slice(-1)[0]); // {"valor":1,"tipo":"número"};
+      handleResult(resultado.slice(-1)[0]);
     } catch (error) {
       handleError(error.message);
     }

@@ -29,13 +29,14 @@ export const Rocket = styled(Animated.View)``;
 export const StarContent = styled.View`
   position: absolute;
   top: 40%;
-  left: ${({ isUnlocked }) => (isUnlocked ? 16.6 : 17.4)}%;
+  left: ${({ isUnlocked }) => (isUnlocked ? 16.4 : 17)}%;
 `;
 
 export const StarNumber = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${({ isUnlocked, theme }) => (isUnlocked ? theme.colors.white : theme.colors.yellow_500)};
-  font-family: ${({ theme }) => theme.fonts.bold};
+  font-family: ${({ theme }) => theme.fonts.code};
+  font-weight: bold;
 `;
 
 export const StarSign = styled.View`

@@ -1029,6 +1029,219 @@ Resultado: [cevada, tamarindo]`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },
+    {
+    starId: null,
+    title: 'Removendo sapos',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Enfim, são e salvos em nosso foguete. Está com fome?',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'O foguete no caminho ao resgate pegou vários alimentos para fazer nosso jantar, veja alguns:',
+      },
+      {
+        type: 'code',
+        body: `
+var alimentos = [
+    "lentilha lunar"
+    "sapo lunar"
+    "iogurte de gelo"
+    "sapo lácteo"
+];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Sapo?',
+        body: 'Por algum motivo o foguete incluiu sapos entre os alimentos, eca!',
+      },
+      {
+        type: 'list',
+        title: 'Desafio:',
+        body: 'Seu papel é remover todos os itens do vetor alimentos que incluam a palavra "sapo" no nome.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [pimentão, sapo de só, melancia]
+Resultado: [pimentão, melancia]
+
+Entrada: [sapo de caju, sapo kiwi, milho de ricota]
+Resultado: [milho de ricota]
+
+Entrada: [cevada, tamarindo, sapo coalhado]
+Resultado: [cevada, tamarindo]`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Para facilitar seu trabalho já coloquei um laço "para-cada" no seu código.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se dos métodos de vetor, caso esqueça algum você pode conferir no dicionário no menu superior.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+    input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
+        expectedOutput: 'manga,berinjela',
+        isLocked: false,
+      },
+      {
+        input: [["'sapo condensado'", "'cebola doce'", "'camarão de batata'", "'sapo de morango'"]],
+        expectedOutput: 'cebola doce,camarão de batata',
+        isLocked: false,
+      },
+      {
+        input: [["'sorvete de sapo'", "'requeijão'"]],
+        expectedOutput: 'requeijão',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'O Castelo',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Chegamos ao castelo.',
+      },
+      {
+        type: 'default',
+        title: 'Que castelo meu?',
+        body: 'Por que castelo? Porque a pessoa que estava pedindo a nossa ajuda é na verdade uma princesa.',
+      },
+      {
+        type: 'default',
+        body: 'Contudo, não fazemos a menor ideia onde ela está, e o desafio é encontrar ela no castelo.',
+      },
+      {
+        type: 'default',
+        body: 'O castelo em questão tem trê partes, representado por três vetores: topo, meio e baixo',
+      },
+      {
+        type: 'code',
+        body: `var castelo = [
+    [1, 1, 1], // Parte do topo do castelo
+    [1, 1, 1], // Parte do meio castelo
+    [1, 1, 1], // Parte de baixo do castelo 
+];`,
+      },
+      {
+        type: 'default',
+        body: 'Cada parte do castelo possui cômodos, que são representados por números, como você bem deve ter percebido.',
+      },
+      {
+        type: 'default',
+        body: 'Logo, o castelo é um vetor de vetores',
+      },
+      {
+        type: 'default',
+        body: 'Só que a parte do meio pode ter mais vetores, assim como cada parte pode ter mais ou menos números (cômodos).',
+      },
+      {
+        type: 'code',
+        body: `var castelo = [
+    [1, 1], // Parte do topo do castelo
+    [1, 1, 1], // Parte do meio castelo
+    [1, 1, 1], // Parte do meio castelo
+    [1, 1, 1, 1, 1], // Parte de baixo do castelo 
+];`,
+      },
+      {
+        type: 'default',
+        body: 'A princesa é representada pelo número 0. Então o vetor que tiver o número será onde está a princesa.',
+      },
+      {
+        type: 'code',
+        body: `var castelo = [
+    [1, 1], 
+    [1, 1, 1],
+    [1, 0, 1], // É aqui onde está a princesa
+    [1, 1, 1, 1],  
+];`,
+      },
+      {
+        type: 'list',
+        title: 'Desafio',
+        body: 'A sua missão é indicar onde está a princesa. Você deve pegar o vetor correto e substituir o número zero pelo texto "princesa" em minúsculo, e por fim retornar esse vetor transformado.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [[1,1,1], [1,0,1], [1,1,1]]
+Resultado: [1, "princesa", 1]
+
+Entrada: [[1,1,1], [1,1,1], [0,1,1,1]]
+Resultado: ["princesa", 1, 1, 1]
+
+Entrada: [[1,1,1], [1,1,1], [0,1,1]]
+Resultado: ["princesa", 1, 1,]
+ 
+Entrada: [[1,0], [1,1], [1,1], [1]]
+Resultado: [1, "princesa"]`,
+      },
+      {
+        type: 'alert',
+        body: 'Você pode resolver esse desafio usando apenas laço, mas recomendo usar a função "filtrarPor()" e sem seguida "mapear()", pois assim será mais fácil.',
+      },
+      {
+        type: 'alert',
+        body: 'Já armei a função "procurarPrincesa()" onde você deve colocar o "retorna" do vetor de resultado. Então, por favor, não altere o nome dessa função.',
+      },
+      {
+        type: 'alert',
+        body: 'Dica: Você pode criar suas próprias funções em qualquer lugar do programa, desde que cada uma respeite o escopo da outra.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se: o retorno de uma função de alta ordem que usa vetores, como "filtrarPor" e "mapear" sempre será um vetor.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ['[[1,1,1], [1,0,1], [1,1,1]]'],
+        expectedOutput: [[1, "princesa", 1]],
+        isLocked: false,
+      },
+      {
+        input: ['[[1,1,1], [1,1,1], [0,1,1,1]]'],
+        expectedOutput: [["princesa", 1, 1, 1]],
+        isLocked: false,
+      },
+      {
+        input: ['[[1,1,1], [1,1,1], [0,1,1]]'],
+        expectedOutput: [["princesa", 1, 1,]],
+        isLocked: false,    
+      },
+      {
+        input: ['[[1,0], [1,1], [1,1], [1]]'],
+        expectedOutput: [[1, "princesa"]],
+        isLocked: false,
+      },
+    ],
+
+    code: `funcao concatenarAmostras(amostras) {
+    
+}`,
+    difficulty: 'medium',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
 ];
 
 [

@@ -56,13 +56,11 @@ export function Settings({ navigation: { goBack } }) {
   }
 
   function handleUpdateNameError(error) {
-    console.log(error.message);
     if (error.message === 'duplicate key value violates unique constraint "users_name_key"');
     Toast.error('Nome de usuário já em uso');
   }
 
   function handleUpdateEmailError(error) {
-    console.log(error.message);
     if (error.message === 'duplicate key value violates unique constraint "users_email_key"');
     Toast.error('E-mail já em uso');
   }
