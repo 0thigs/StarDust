@@ -189,7 +189,7 @@ export function CustomDrawer() {
         isVisible={isSignOutModalVisible}
         type={'crying'}
         playSong={false}
-        title={`Calma aí! Deseja mesmo 'SAIR DA SUA CONTA 😢?`}
+        title={`Calma aí! Deseja mesmo\nSAIR DA SUA CONTA 😢?`}
         body={null}
         footer={
           <>

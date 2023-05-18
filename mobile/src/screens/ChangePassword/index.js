@@ -70,7 +70,7 @@ export function ChangePassword({ route }) {
     setIsLoading(true);
 
     try {
-      resetPassword(email);
+     await resetPassword(email);
       Toast.success('E-mail enviado com sucesso!');
       setHasSendEmail(true);
     } catch (error) {
