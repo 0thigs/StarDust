@@ -9,7 +9,7 @@ import { starHeight } from '../../components/Star';
 import { FabButton } from '../../components/FabButton';
 import { Meteor } from '../../components/Meteor';
 
-import BackgroundImage from '../../assets/HomeAssets/background.svg';
+import BackgroundSpace from '../../assets/HomeAssets/background.png';
 
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
@@ -30,7 +30,7 @@ export function Home() {
     scrollRef.current.scrollTo({
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
-      animated
+      animated,
     });
     setIsFabButtonVisible(false);
   }
@@ -50,6 +50,7 @@ export function Home() {
   }
 
   useEffect(() => {
+    console.log(dimensions.width);
     if (planets.length) {
       setTimeout(() => setIsEndTransition(true), 1500);
     }
@@ -62,27 +63,26 @@ export function Home() {
   }, [lastUnlockedStarYPosition]);
 
   return (
-    <>
-      <C.Container
-        ref={scrollRef}
-        onScroll={event => showFabButton(event.nativeEvent)}
-        scrollEventThrottle={16}
-        showsVerticalScrollIndicator={false}
-        isEndTrasition={isEndTrasition}
-        contentContainerStyle={{
-          flex: isEndTrasition ? 0 : 1,
-          alignItems: 'center',
-          paddingTop: 32,
-          backgroundColor: theme.colors.background,
-        }}
-      >
+    <C.Container
+      ref={scrollRef}
+      onScroll={event => showFabButton(event.nativeEvent)}
+      scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
+      isEndTrasition={isEndTrasition}
+      contentContainerStyle={{
+        flex: isEndTrasition ? 0 : 1,
+        alignItems: 'center',
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <C.Background source={BackgroundSpace} resizeMode='repeat'>
         {!isEndTrasition ? (
           <TransitionScreenAnimation />
         ) : (
           <>
-            <C.Background>
-              <BackgroundImage />
-            </C.Background>
+            {/* <C.Background>
+              <BackgroundImage resizeMode={'repeat'}/>
+            </C.Background> */}
             {planets.map(({ id, name, icon, image, stars }) => (
               <Planet
                 key={id}
@@ -101,7 +101,7 @@ export function Home() {
           visibleContentHeight={visibleContentHeight.current}
           screenWidth={dimensions.width}
         />
-      </C.Container>
+      </C.Background>
 
       {isFabButtonVisible && (
         <FabButton
@@ -115,6 +115,6 @@ export function Home() {
           }
         />
       )}
-    </>
+    </C.Container>
   );
 }

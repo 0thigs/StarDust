@@ -71,6 +71,7 @@ export function ChangePassword({ route }) {
 
     try {
      await resetPassword(email);
+     console.log(email);
       Toast.success('E-mail enviado com sucesso!');
       setHasSendEmail(true);
     } catch (error) {
@@ -105,6 +106,7 @@ export function ChangePassword({ route }) {
 
   useEffect(() => {
     Linking.addEventListener('url', handleDeepLink);
+    console.log(url);
   }, []);
 
   return (
@@ -142,9 +144,7 @@ export function ChangePassword({ route }) {
         onPress={
           isPasswordChanged
             ? () => navigation.goBack()
-            : !hasSendEmail
-            ? handleSubmit(handleSubmitEmail)
-            : () => Toast.success('Verifique seu e-mail')
+            :  handleSubmit(handleSubmitEmail)
         }
         title={isPasswordChanged ? 'Voltar' : 'Enviar'}
         isLoading={isLoading}

@@ -29,7 +29,7 @@ export const Rocket = styled(Animated.View)``;
 export const StarContent = styled.View`
   position: absolute;
   top: 40%;
-  left: ${({ isUnlocked }) => (isUnlocked ? 16.4 : 17)}%;
+  left: ${({ isUnlocked }) => (isUnlocked ? 15.5 : 16)}%;
 `;
 
 export const StarNumber = styled.Text`
@@ -46,8 +46,8 @@ export const StarSign = styled.View`
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 8px;
+  margin-left: 8px;
   max-width: 180px;
 `;
 

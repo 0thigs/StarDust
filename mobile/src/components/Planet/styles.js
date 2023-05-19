@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
+import { Dimensions } from 'react-native';
+const { width } = Dimensions.get('screen');
 
 export const Container = styled.View`
-  width: 300px;
   margin-bottom: 40px;
+  width: ${width - 100}px;
 `;
 
 export const PlanetInfo = styled(Animated.View)`
