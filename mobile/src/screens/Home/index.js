@@ -51,7 +51,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    console.log(dimensions.width);
+    // console.log(dimensions.width);
     if (planets.length) {
       setTimeout(() => setIsEndTransition(true), 1500);
     }
@@ -82,9 +82,6 @@ export function Home() {
         resizeMode="repeat"
         onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
       >
-        {/* <C.Background>
-              <BackgroundImage resizeMode={'repeat'}/>
-            </C.Background> */}
         {planets.map(({ id, name, icon, image, stars }) => (
           <Planet
             key={id}
@@ -95,26 +92,26 @@ export function Home() {
             lastUnlockedStarId={lastUnlockedStarId}
           />
         ))}
-      </C.Background>
 
-      <Meteor
-        currentYOffset={currentYOffset}
-        visibleContentHeight={visibleContentHeight.current}
-        screenWidth={dimensions.width}
-      />
-
-      {isFabButtonVisible && (
-        <FabButton
-          onPress={scrollToLastUnlockedStar}
-          icon={
-            direction === 'up' ? (
-              <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
-            ) : (
-              <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
-            )
-          }
+        <Meteor
+          currentYOffset={currentYOffset}
+          visibleContentHeight={visibleContentHeight.current}
+          screenWidth={dimensions.width}
         />
-      )}
+
+        {isFabButtonVisible && (
+          <FabButton
+            onPress={scrollToLastUnlockedStar}
+            icon={
+              direction === 'up' ? (
+                <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
+              ) : (
+                <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
+              )
+            }
+          />
+        )}
+      </C.Background>
     </C.Container>
   );
 }
