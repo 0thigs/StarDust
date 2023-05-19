@@ -20,6 +20,7 @@ export function Home() {
   const { lastUnlockedStarYPosition } = useScroll();
   const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
+  const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false);
   const [direction, setDirection] = useState('');
   const [currentYOffset, setCurrentYOffset] = useState(0);
   const visibleContentHeight = useRef(0);
@@ -75,33 +76,32 @@ export function Home() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <C.Background source={BackgroundSpace} resizeMode='repeat'>
-        {!isEndTrasition ? (
-          <TransitionScreenAnimation />
-        ) : (
-          <>
-            {/* <C.Background>
+      {!isEndTrasition && !isBackgroundLoaded && <TransitionScreenAnimation />}
+      <C.Background
+        source={BackgroundSpace}
+        resizeMode="repeat"
+        onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
+      >
+        {/* <C.Background>
               <BackgroundImage resizeMode={'repeat'}/>
             </C.Background> */}
-            {planets.map(({ id, name, icon, image, stars }) => (
-              <Planet
-                key={id}
-                name={name}
-                icon={icon}
-                image={image}
-                stars={stars}
-                lastUnlockedStarId={lastUnlockedStarId}
-              />
-            ))}
-          </>
-        )}
-
-        <Meteor
-          currentYOffset={currentYOffset}
-          visibleContentHeight={visibleContentHeight.current}
-          screenWidth={dimensions.width}
-        />
+        {planets.map(({ id, name, icon, image, stars }) => (
+          <Planet
+            key={id}
+            name={name}
+            icon={icon}
+            image={image}
+            stars={stars}
+            lastUnlockedStarId={lastUnlockedStarId}
+          />
+        ))}
       </C.Background>
+
+      <Meteor
+        currentYOffset={currentYOffset}
+        visibleContentHeight={visibleContentHeight.current}
+        screenWidth={dimensions.width}
+      />
 
       {isFabButtonVisible && (
         <FabButton
