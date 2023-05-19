@@ -6,17 +6,15 @@ import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reani
 export function DropZone({
   id,
   zones,
-  setZones,
   totalDropZones,
   targetZone,
   setLinesWidth,
   isAnswerWrong,
   linesWidth,
 }) {
-  const [isFirstRendering, setIsFirstRendering] = useState(true);
   const zoneWidth = useSharedValue(15);
   const zoneRef = useRef(null);
-  const canRegisterZone = zones.length < totalDropZones;
+  const canRegisterZone = zones.current.length < totalDropZones;
 
   const zoneAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -26,16 +24,16 @@ export function DropZone({
 
   useEffect(() => {
     if (linesWidth.some(line => !!line.zoneId))
-    setLinesWidth(currentLines =>
-      currentLines.map(line =>
-        line.id.toString().includes(id) && !line.zoneId ? { ...line, zoneId: id } : line
-      )
-    );
+      setLinesWidth(currentLines =>
+        currentLines.map(line =>
+          line.id.toString().includes(id) && !line.zoneId ? { ...line, zoneId: id } : line
+        )
+      );
   }, []);
 
   useEffect(() => {
     if (targetZone && id === targetZone.id && targetZone.width !== zoneWidth.value) {
-      zoneWidth.value = withTiming(targetZone.width, { duration: 350 });
+      zoneWidth.value = withTiming(targetZone.width, { duration: 300 });
     }
   }, [targetZone]);
 
@@ -53,7 +51,7 @@ export function DropZone({
   }, [linesWidth]);
 
   function updateZone({ id, x, y, width }) {
-    setZones(zones => zones.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone)));
+    zones.current = zones.current.map(zone => (zone.id === id ? { ...zone, x, y, width } : zone));
   }
 
   function registerZone({ target }) {
@@ -66,8 +64,7 @@ export function DropZone({
         itemId: null,
       };
       if (canRegisterZone) {
-        setZones(zones => [...zones, zone]);
-        setIsFirstRendering(false);
+        zones.current = [...zones.current, zone];
       } else {
         updateZone(zone);
       }

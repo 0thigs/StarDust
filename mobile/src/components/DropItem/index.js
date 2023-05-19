@@ -9,7 +9,6 @@ export function DropItem({
   label,
   zones,
   setZones,
-  targetZone,
   setTargetZone,
   isAnswerVerified,
   isAnswerWrong,
@@ -40,8 +39,11 @@ export function DropItem({
   });
 
   function updateZone(targetZone) {
-    setZones(currentZones =>
-      currentZones.map(currentZone => (currentZone.id === targetZone.id ? targetZone : currentZone))
+    // setZones(currentZones =>
+    //   currentZones.map(currentZone => (currentZone.id === targetZone.id ? targetZone : currentZone))
+    // );
+    zones.current = zones.current.map(currentZone =>
+      currentZone.id === targetZone.id ? targetZone : currentZone
     );
     setTargetZone({ id: targetZone.id, width: targetZone.width });
   }
@@ -52,7 +54,7 @@ export function DropItem({
   }
 
   function adjustPosition() {
-    const targetZone = zones.find(zone => zone.itemId === id);
+    const targetZone = zones.current.find(zone => zone.itemId === id);
     if (!targetZone) return;
 
     const difference = currentPosition.x.value + initialPosition.x.value - targetZone.x + 10;
@@ -63,7 +65,7 @@ export function DropItem({
 
   function removeItemInZone() {
     resetPosition();
-    const targetZone = zones.find(zone => zone.itemId === id);
+    const targetZone = zones.current.find(zone => zone.itemId === id);
     targetZone.itemId = null;
     targetZone.width = 15;
     setIsItemInZone(false);
@@ -71,14 +73,13 @@ export function DropItem({
   }
 
   function addItemInZone() {
-    for (const zone of zones) {
+    for (const zone of zones.current) {
       if (!zone.itemId) {
         currentPosition.x.value =
           zone.x - initialPosition.x.value - C.itemPadding - C.itemBorderWidth * 2;
         currentPosition.y.value =
           zone.y - initialPosition.y.value - (C.itemHeight / 2 + characterHeight);
         zone.itemId = id;
-        // console.log(itemWidth);
         zone.width = itemWidth - 20;
         setIsItemInZone(true);
         updateZone(zone);
@@ -109,10 +110,9 @@ export function DropItem({
   }
 
   useEffect(() => {
-    console.log('oi');
     if (isFirstRendering || !isItemInZone) return;
     adjustPosition();
-  }, [zones]);
+  }, [zones.current]);
 
   useEffect(() => {
     if (itemWidth) return;

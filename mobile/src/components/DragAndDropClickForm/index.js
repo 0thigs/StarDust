@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
-
 import { DropItem } from '../DropItem';
 import { DropZone } from '../DropZone';
 import { compareSenquences } from '../../utils/compareSenquences';
@@ -13,7 +12,8 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
   const [linesWidth, setLinesWidth] = useState([]);
-  const [zones, setZones] = useState([]);
+  //   const [zones, setZones] = useState([]);
+  const zones = useRef([]);
   const [targetZone, setTargetZone] = useState(null);
 
   function getTotalDropZones(total, text) {
@@ -37,7 +37,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const userItemsIdsSequence = zones.map(zone => zone.itemId);
+    const userItemsIdsSequence = zones.current.map(zone => zone.itemId);
     const areTheTwoSequencesEqual = compareSenquences(
       userItemsIdsSequence,
       correctItemsIdsSequence
@@ -47,7 +47,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) {
-        setZones([]);
+        zones.current = [];
         dispatch({ type: 'changeQuestion' });
       }
       return;
@@ -73,14 +73,14 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   }
 
   useEffect(() => {
-    if (zones.length && isCurrentQuestion) {
-      const areAllZonesFilled = zones.every(zone => zone.itemId !== null);
+    if (zones.current.length && isCurrentQuestion) {
+      const areAllZonesFilled = zones.current.every(zone => zone.itemId !== null);
       dispatch({ type: 'setState', payload: { prop: 'isAnswered', value: areAllZonesFilled } });
     }
-  }, [zones]);
+  }, [zones.current]);
 
   useEffect(() => {
-     reorderItems(dropItems, setReorderedItems);
+    reorderItems(dropItems, setReorderedItems);
   }, []);
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
         payload: { prop: 'verifyAnswer', value: handleVerifyAnswer },
       });
     }
-  }, [isAnswerVerified, zones]);
+  }, [isAnswerVerified, zones.current]);
 
   return (
     <C.Container>
@@ -112,7 +112,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                         key={index}
                         id={`${index}-${id}`}
                         zones={zones}
-                        setZones={setZones}
+                        // setZones={setZones}
                         totalDropZones={totalDropZones}
                         targetZone={targetZone}
                         isAnswerWrong={isAnswerWrong && isAnswerVerified}
@@ -134,7 +134,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 label={label}
                 zones={zones}
                 linesWidth={linesWidth}
-                setZones={setZones}
+                // setZones={setZones}
                 targetZone={targetZone}
                 setTargetZone={setTargetZone}
                 totalDropZones={totalDropZones}
