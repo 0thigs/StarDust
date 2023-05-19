@@ -17,7 +17,7 @@ export const Title = styled.Text`
 
 export const Input = styled.TextInput`
   width: 70%;
-  padding: 12px 8px;
+  padding: 8px;
   border-radius: 4px;
   border: 1px solid ${({ theme, isFocus }) => theme.colors[isFocus ? 'green_300' : 'white']};
   background: ${({ theme }) => theme.colors.purple_700};

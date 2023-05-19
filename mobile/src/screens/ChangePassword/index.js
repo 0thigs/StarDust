@@ -70,8 +70,8 @@ export function ChangePassword({ route }) {
     setIsLoading(true);
 
     try {
-     await resetPassword(email);
-     console.log(email);
+      await resetPassword(email);
+      console.log(email);
       Toast.success('E-mail enviado com sucesso!');
       setHasSendEmail(true);
     } catch (error) {
@@ -106,11 +106,13 @@ export function ChangePassword({ route }) {
 
   useEffect(() => {
     Linking.addEventListener('url', handleDeepLink);
-    console.log(url);
   }, []);
 
   return (
     <C.Container>
+      <C.BackButton onPress={navigation.goBack}>
+        <Icon.ArrowLeft color={theme.colors.green_300} />
+      </C.BackButton>
       <C.Title>{!hasSendEmail && `Insira seu e-mail cadastrado para ${action} a senha`}</C.Title>
       <C.Form>
         <Controller
@@ -141,11 +143,7 @@ export function ChangePassword({ route }) {
       )}
 
       <Button
-        onPress={
-          isPasswordChanged
-            ? () => navigation.goBack()
-            :  handleSubmit(handleSubmitEmail)
-        }
+        onPress={isPasswordChanged ? () => navigation.goBack() : handleSubmit(handleSubmitEmail)}
         title={isPasswordChanged ? 'Voltar' : 'Enviar'}
         isLoading={isLoading}
         isDisabled={isLoading}
@@ -181,10 +179,11 @@ export function ChangePassword({ route }) {
           <Button
             title={'OK'}
             color={theme.colors.black}
-            background={theme.colors.blue_300}
+            background={theme.colors.green_300}
             onPress={() => setIsModalVisible(false)}
           />
         }
+        playSong={false}
       />
     </C.Container>
   );

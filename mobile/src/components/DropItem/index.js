@@ -78,7 +78,7 @@ export function DropItem({
         currentPosition.y.value =
           zone.y - initialPosition.y.value - (C.itemHeight / 2 + characterHeight);
         zone.itemId = id;
-        console.log(itemWidth);
+        // console.log(itemWidth);
         zone.width = itemWidth - 20;
         setIsItemInZone(true);
         updateZone(zone);
@@ -109,6 +109,7 @@ export function DropItem({
   }
 
   useEffect(() => {
+    console.log('oi');
     if (isFirstRendering || !isItemInZone) return;
     adjustPosition();
   }, [zones]);

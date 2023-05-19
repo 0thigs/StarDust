@@ -4,7 +4,13 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
   justify-content: center;
-  padding: 0 32px;
+  padding: 0 24px;
+`;
+
+export const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 40px;
+  left: 24px;
 `;
 
 export const Title = styled.Text`

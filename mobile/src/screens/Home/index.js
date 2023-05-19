@@ -24,6 +24,7 @@ export function Home() {
   const [direction, setDirection] = useState('');
   const [currentYOffset, setCurrentYOffset] = useState(0);
   const visibleContentHeight = useRef(0);
+  const canCalculateOffset = useRef(true);
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
 
@@ -33,11 +34,9 @@ export function Home() {
       y: lastUnlockedStarYPosition - dimensions.height / 2,
       animated,
     });
-    setIsFabButtonVisible(false);
   }
 
   function showFabButton({ contentOffset, layoutMeasurement }) {
-    setIsFabButtonVisible(false);
     visibleContentHeight.current = layoutMeasurement.height;
     setCurrentYOffset(contentOffset.y);
 
@@ -50,12 +49,16 @@ export function Home() {
     setIsFabButtonVisible(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
   }
 
+  function hanldeFabButtonClick() {
+    setIsFabButtonVisible(false);
+    scrollToLastUnlockedStar();
+  }
+
   useEffect(() => {
-    // console.log(dimensions.width);
-    if (planets.length) {
+    if (planets.length && isBackgroundLoaded) {
       setTimeout(() => setIsEndTransition(true), 1500);
     }
-  }, [planets]);
+  }, [planets, isBackgroundLoaded]);
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {
@@ -64,54 +67,56 @@ export function Home() {
   }, [lastUnlockedStarYPosition]);
 
   return (
-    <C.Container
-      ref={scrollRef}
-      onScroll={event => showFabButton(event.nativeEvent)}
-      scrollEventThrottle={16}
-      showsVerticalScrollIndicator={false}
-      isEndTrasition={isEndTrasition}
-      contentContainerStyle={{
-        flex: isEndTrasition ? 0 : 1,
-        alignItems: 'center',
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      {!isEndTrasition && !isBackgroundLoaded && <TransitionScreenAnimation />}
-      <C.Background
-        source={BackgroundSpace}
-        resizeMode="repeat"
-        onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
+    <>
+      <C.Container
+        ref={scrollRef}
+        onScroll={event => showFabButton(event.nativeEvent)}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        isEndTrasition={isEndTrasition}
+        contentContainerStyle={{
+          flex: isEndTrasition ? 0 : 1,
+          alignItems: 'center',
+          backgroundColor: theme.colors.background,
+        }}
       >
-        {planets.map(({ id, name, icon, image, stars }) => (
-          <Planet
-            key={id}
-            name={name}
-            icon={icon}
-            image={image}
-            stars={stars}
-            lastUnlockedStarId={lastUnlockedStarId}
-          />
-        ))}
+        {!isEndTrasition && <TransitionScreenAnimation />}
+        <C.Background
+          source={BackgroundSpace}
+          resizeMode="repeat"
+          onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
+        >
+          {planets.map(({ id, name, icon, image, stars }) => (
+            <Planet
+              key={id}
+              name={name}
+              icon={icon}
+              image={image}
+              stars={stars}
+              lastUnlockedStarId={lastUnlockedStarId}
+            />
+          ))}
+        </C.Background>
 
         <Meteor
           currentYOffset={currentYOffset}
           visibleContentHeight={visibleContentHeight.current}
           screenWidth={dimensions.width}
         />
+      </C.Container>
 
-        {isFabButtonVisible && (
-          <FabButton
-            onPress={scrollToLastUnlockedStar}
-            icon={
-              direction === 'up' ? (
-                <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
-              ) : (
-                <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
-              )
-            }
-          />
-        )}
-      </C.Background>
-    </C.Container>
+      {isFabButtonVisible && (
+        <FabButton
+          onPress={hanldeFabButtonClick}
+          icon={
+            direction === 'up' ? (
+              <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
+            ) : (
+              <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
+            )
+          }
+        />
+      )}
+    </>
   );
 }
