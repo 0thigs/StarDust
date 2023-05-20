@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useEffect, useState, useRef } from 'react';
 import { useRocket } from '../../hooks/useRocket';
 import { useAvatar } from '../../hooks/useAvatar';
-import { useAchievement } from '../../hooks/useAchievement';
 
-import { Modal } from '../../components/Modal';
-import { Achievement } from '../../components/Achievement';
-import { Button } from '../../components/Button';
 import { Rocket } from '../../components/Rocket';
 import { Loading } from '../../components/Loading';
 import { AvatarsList } from '../../components/AvatarsList';
 
 import * as C from './styles';
-import RewardLight from '../../assets/animations/reward-light-animation.json';
-import theme from '../../global/styles/theme';
-import { useRef } from 'react';
 
 export function Shop() {
   const { avatars, addUserAcquiredAvatar } = useAvatar();

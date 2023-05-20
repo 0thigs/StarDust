@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  // const challengeId = route.params.id;
-  const challengeId = '4403fafc-6c0e-46dc-bd78-38bab584d1d7';
+  const challengeId = route.params.id;
+  //   const challengeId = '60a86d70-7888-4f8b-ad8d-348f91d9bdd3';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -61,6 +61,7 @@ export function Challenge({ route }) {
   const userCode = useRef('');
   const userOutputContent = useRef([]);
   const isOutputArray = useRef([]);
+  const errorLine = useRef(0);
 
   const CurrentIndicatorPositionX = useSharedValue(0);
 
@@ -77,8 +78,8 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
-      console.error(error);
-      Toast.error(error.includes('null') ? 'código inválido' : error);
+    //   console.error(error);
+      Toast.error(error.includes('null') ? 'código inválido' : error + `\nLinha: ${errorLine.current}`);
     }
   }
 
@@ -113,7 +114,10 @@ export function Challenge({ route }) {
     if (!result) return;
     const userResult = result.includes('{') ? JSON.parse(result) : result;
     setUserOutputs(currentUserOutputs => {
-      return [...currentUserOutputs, userResult.valor ? userResult.valor : userResult];
+      return [
+        ...currentUserOutputs,
+        userResult.valor || userResult.valor === 0 ? userResult.valor : userResult,
+      ];
     });
     isOutputArray.current.push(!!userResult.valor);
   }
@@ -121,10 +125,12 @@ export function Challenge({ route }) {
   async function verifyCase({ input }) {
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
+    
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
         const error = erros[0];
+        errorLine.current = error.linha;
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }

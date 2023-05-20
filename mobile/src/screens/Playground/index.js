@@ -22,11 +22,12 @@ export function Playground({ route }) {
   const userCode = useRef('');
   const promptRef = useRef(null);
   const bottomSheetRef = useRef(null);
+  const errorLine = useRef(0);
   const leiaRegex = /(leia\(.*\))/;
 
   function handleError(error) {
     if (error) {
-      Toast.error(error.includes('null') ? 'código inválido' : error);
+      Toast.error(error.includes('null') ? 'código inválido' : error + `\nLinha: ${errorLine.current}`);
     }
   }
 
@@ -87,6 +88,7 @@ export function Playground({ route }) {
       const { erros } = await execute(code, handleOutput);
       if (erros.length) {
         const error = erros[0];
+        errorLine.current = error.linha;
         if (error instanceof Error) throw error;
         bottomSheetRef.current.close();
         throw error.erroInterno;

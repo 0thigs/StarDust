@@ -16,4 +16,6 @@ export const Tip = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.medium};
   line-height: 24px;
+  width: 90%;
+  text-align: center;
 `;

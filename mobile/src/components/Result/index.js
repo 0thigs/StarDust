@@ -30,8 +30,6 @@ export function Result({ challengeId, testCases, userOutputs, isOutputArray, set
   }
 
   function verifyResult({ expectedOutput }, index) {
-    console.log(userOutputs[index]);
-    console.log({ expectedOutput });
     return compareSenquences(
       Array.isArray(userOutputs[index]) ? userOutputs[index] : [userOutputs[index].toString().trim()],
       Array.isArray(expectedOutput) ? expectedOutput : [expectedOutput.toString().trim()]

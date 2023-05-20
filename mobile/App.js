@@ -16,8 +16,10 @@ import { LessonProvider } from './src/contexts/LessonContext';
 import { ScrollProvider } from './src/contexts/ScrollContext';
 import { EditorProvider } from './src/contexts/EditorContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Dimensions } from 'react-native';
 import { default as Toast } from 'toastify-react-native';
 import './src/libs/dayjs';
+const { width } = Dimensions.get('screen');
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -48,7 +50,7 @@ export default function App() {
         animationInTiming={700}
         animationOutTiming={1000}
         animationStyle={'rightInOut'}
-        width={335}
+        width={width * 0.9}
         position={'top'}
       />
     </GestureHandlerRootView>

@@ -675,6 +675,75 @@ Explicacao: entre 1 e 1 não há números pares`,
       },
     ],
 
+    code: `function somarResistências(altura, largura) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Resistências em circuitos',
+    texts: [
+      {
+        type: 'default',
+        body: 'No planeta X-23, uma equipe de engenheiros espaciais precisa calcular a soma das resistências em uma série de circuitos de energia que alimentam as espaçonaves.',
+      },
+      {
+        type: 'default',
+        body: ' No entanto, eles enfrentam um problema único: as resistências são representadas por cristais mágicos encontrados apenas em planetas distantes.',
+      },
+      {
+        type: 'default',
+        title: null,
+        body: 'Cada cristal mágico tem um valor de resistência associado a ele, medido em unidades místicas chamadas "ohms". A equipe de engenheiros precisa somar todas as X-resistências em uma série de cristais para determinar a resistência total do circuito.',
+      },
+      {
+        type: 'list',
+        title: 'Desafio',
+        body: 'Sua tarefa é retornar a soma total das resistências de um vetor contendo valores de resistência (ohms) dos cristais mágicos em um circuito.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [3, 5, 2, 8]
+Resultado: "18 ohms"
+
+Entrada: [16, 3.5, 6]
+Resultado: "25.5 ohms"
+
+Entrada: [0.5, 0.5]
+Resultado: "1 ohm"`,
+      },
+      {
+        type: 'alert',
+        body: 'O sigular de ohms é ohm, ou seja, se a soma do vetor for 1, o "ohm" tem que estar no singular.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [[2, 4, 6, 8, 10]],
+        expectedOutput: "30 ohms",
+        isLocked: false,
+      },
+      {
+        input: [[0.8, 1.2, 2.6, 3.4, 0.5]],
+        expectedOutput: "8.5 ohms",
+        isLocked: false,
+      },
+      {
+        input: [[2.5, 1.5, 3.2, 4.8]],
+        expectedOutput: "12 ohms",
+        isLocked: false,
+      },
+      {
+        input: [[0.5, 0.3, 0.1, 0.1]],
+        expectedOutput: "1 ohm",
+        isLocked: false,
+      },
+    ],
+
     code: `function calcularPerimetro(altura, largura) {
     
 }`,
@@ -949,17 +1018,82 @@ Resultado: []`,
   },
   {
     starId: null,
-    title: 'Removendo sapos',
+    title: 'Contando batatas',
     texts: [
       {
         type: 'default',
-        title: null,
-        body: 'Enfim, são e salvos em nosso foguete. Está com fome?',
+        body: 'No distante planeta Nebulosa Potatonia, uma civilização de seres espaciais com uma predileção por batatas criou uma variedade especial de batatas intergalácticas.',
+      },
+      {
+        type: 'list',
+        title: 'Desafio',
+        body: 'Sua tarefa é retornar a quantidade de batatas de um dado texto contendo diferentes tipos de ingredientes separadas por vírgulas.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: "Batata,Feijão,Batata"
+Resultado: 2
+
+Entrada: "Arroz,Batata,Batata,Batata,Tomate"
+Resultado: 3
+
+Entrada: "Cenoura,Feijão,Alface"
+Resultado: 0`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Dica matadora: Você pode transformar o texto em um vetor e contar quantas batatas tem.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ['\"Batata,Arroz,Batata,Feijão,Batata\"'],
+        expectedOutput: 3,
+        isLocked: false,
+      },
+      {
+        input: ['\"Cenoura,Arroz,Tomate,Batata,Alface\"'],
+        expectedOutput: 1,
+        isLocked: false,
+      },
+      {
+        input: ['\"Batata,Batata,Batata,Batata\"'],
+        expectedOutput: 4,
+        isLocked: false,
+      },
+      {
+        input: ['\"Arroz,Feijão,Cenoura,Tomate\"'],
+        expectedOutput: 0,
+        isLocked: false,
+      },
+    ],
+
+    code: `funcao contarBatatas(alimentos) {
+
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Removendo textos',
+    texts: [
+      {
+        type: 'default',
+        body: 'No planeta Alpha Centauri, os habitantes são seres de diferentes espécies, incluindo criaturas mágicas e seres extraterrestres avançados',
       },
       {
         type: 'default',
-        title: 'Sim',
-        body: 'O foguete no caminho ao resgate pegou vários alimentos para fazer nosso jantar, veja alguns:',
+        title: 'Legal!',
+        body: 'Eles precisam de sua ajuda para filtrar uma lista de elementos em um vetor, contendo elementos de diferentes tipos, como números, textos e lógicos.',
+      },
+      {
+        type: 'list',
+        title: 'Desafio',
+        body: 'Sua tarefa é retornar esse vetor mantendo apenas os elementos que não são do tipo texto.',
       },
       {
         type: 'code',
@@ -1007,7 +1141,7 @@ Resultado: [cevada, tamarindo]`,
     function: null,
     testCases: [
       {
-    input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
+        input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
         expectedOutput: 'manga,berinjela',
         isLocked: false,
       },
@@ -1029,7 +1163,7 @@ Resultado: [cevada, tamarindo]`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],
   },
-    {
+  {
     starId: null,
     title: 'Removendo sapos',
     texts: [
@@ -1089,7 +1223,89 @@ Resultado: [cevada, tamarindo]`,
     function: null,
     testCases: [
       {
-    input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
+        input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
+        expectedOutput: 'manga,berinjela',
+        isLocked: false,
+      },
+      {
+        input: [["'sapo condensado'", "'cebola doce'", "'camarão de batata'", "'sapo de morango'"]],
+        expectedOutput: 'cebola doce,camarão de batata',
+        isLocked: false,
+      },
+      {
+        input: [["'sorvete de sapo'", "'requeijão'"]],
+        expectedOutput: 'requeijão',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Removendo sapos',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Enfim, são e salvos em nosso foguete. Está com fome?',
+      },
+      {
+        type: 'default',
+        title: 'Sim',
+        body: 'O foguete no caminho ao resgate pegou vários alimentos para fazer nosso jantar, veja alguns:',
+      },
+      {
+        type: 'code',
+        body: `
+var alimentos = [
+    "lentilha lunar"
+    "sapo lunar"
+    "iogurte de gelo"
+    "sapo lácteo"
+];`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Sapo?',
+        body: 'Por algum motivo o foguete incluiu sapos entre os alimentos, eca!',
+      },
+      {
+        type: 'list',
+        title: 'Desafio:',
+        body: 'Seu papel é remover todos os itens do vetor alimentos que incluam a palavra "sapo" no nome.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: [pimentão, sapo de só, melancia]
+Resultado: [pimentão, melancia]
+
+Entrada: [sapo de caju, sapo kiwi, milho de ricota]
+Resultado: [milho de ricota]
+
+Entrada: [cevada, tamarindo, sapo coalhado]
+Resultado: [cevada, tamarindo]`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Para facilitar seu trabalho já coloquei um laço "para-cada" no seu código.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se dos métodos de vetor, caso esqueça algum você pode conferir no dicionário no menu superior.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: [["'manga'", "'sapo gasoso'", "'berinjela'"]],
         expectedOutput: 'manga,berinjela',
         isLocked: false,
       },
@@ -1216,22 +1432,22 @@ Resultado: [1, "princesa"]`,
     testCases: [
       {
         input: ['[[1,1,1], [1,0,1], [1,1,1]]'],
-        expectedOutput: [[1, "princesa", 1]],
+        expectedOutput: [[1, 'princesa', 1]],
         isLocked: false,
       },
       {
         input: ['[[1,1,1], [1,1,1], [0,1,1,1]]'],
-        expectedOutput: [["princesa", 1, 1, 1]],
+        expectedOutput: [['princesa', 1, 1, 1]],
         isLocked: false,
       },
       {
         input: ['[[1,1,1], [1,1,1], [0,1,1]]'],
-        expectedOutput: [["princesa", 1, 1,]],
-        isLocked: false,    
+        expectedOutput: [['princesa', 1, 1]],
+        isLocked: false,
       },
       {
         input: ['[[1,0], [1,1], [1,1], [1]]'],
-        expectedOutput: [[1, "princesa"]],
+        expectedOutput: [[1, 'princesa']],
         isLocked: false,
       },
     ],
@@ -1347,3 +1563,11 @@ para cada alimento em alimentos {
 
 escreva(alimentosSemSapos);
 `;
+
+`
+var multiplos = [];
+para (var i = 1; i <= tamanho; i++) {
+  multiplos.empilhar(numero * i);
+}
+retorna multiplos;
+`

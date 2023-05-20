@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
 import { Dimensions } from 'react-native';
 const { width } = Dimensions.get('screen');
-console.log(width);
 
 export const Container = styled(Animatable.View)`
   border-width: 1px;

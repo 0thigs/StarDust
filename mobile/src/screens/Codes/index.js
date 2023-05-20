@@ -11,6 +11,7 @@ import { Modal } from '../../components/Modal';
 import { ArrowLeft, Plus } from 'react-native-feather';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
+import { Loading } from '../../components/Loading';
 
 export function Codes() {
   const { loggedUser } = useAuth();
@@ -69,8 +70,14 @@ export function Codes() {
     if (codes.length) setIsLoading(false);
   }, [codes]);
 
+  //   useEffect(() => {
+  //     if (avatars.length && rockets.length)
+  //       timer.current = setTimeout(() => setIsLoading(false), 2000);
+  //   }, [avatars, rockets]);
+
   return (
     <C.Container>
+      {isLoading && <Loading isAnimation={true} />}
       <C.BackButton onPress={() => navigation.goBack()} activeOpacity={0.7}>
         <ArrowLeft color={theme.colors.green_500} width={48} />
       </C.BackButton>
