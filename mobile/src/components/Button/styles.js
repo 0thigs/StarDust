@@ -6,12 +6,12 @@ const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const Container = styled(AnimatedButton)`
   width: 100%;
-  height: ${({ isSmall }) => (isSmall ? 32 : 48)}px;
+  height: ${({ isSmall }) => (isSmall ? 32 : 40)}px;
   margin: 8px 0;
 
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: ${({ background }) => background};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;

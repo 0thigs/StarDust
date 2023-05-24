@@ -44,7 +44,7 @@ export function Planet({ name, image, icon, stars, lastUnlockedStarId }) {
             id={id}
             name={name}
             number={number}
-            isUnlocked={!isUnlocked}
+            isUnlocked={isUnlocked}
             isChallenge={isChallenge}
             isLastUnlockedStar={id === lastUnlockedStarId}
           />

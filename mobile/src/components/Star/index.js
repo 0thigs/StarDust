@@ -50,7 +50,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
         const challengeId = await api.getChallengeId(id);
         navigation.navigate('Challenge', { id: challengeId });
       } catch (error) {
-        Toast.error("Falha ao tentar acessar o desafio");
+        Toast.error('Falha ao tentar acessar o desafio');
         console.log(error);
       }
     } else {
@@ -77,6 +77,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
   });
 
   useEffect(() => {
+    console.log(isUnlocked);
     StarScale.value = withRepeat(withSpring(1.15), isLastUnlockedStar ? -1 : 1, true);
 
     const timer = setTimeout(() => {
@@ -103,12 +104,10 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
         }
       }}
     >
-      <C.StarDust>{isUnlocked ? <LockedStarDust /> : <UnlockedStarDust />}</C.StarDust>
+      <C.StarDust>{isUnlocked ? <UnlockedStarDust /> : <LockedStarDust />}</C.StarDust>
       <C.StarButton onPress={handleStarPress} isLoading={false} disabled={isUnlocked}>
         <C.StarContainer style={isLastUnlockedStar && StarAnimatedStyle}>
           {isUnlocked ? (
-            <LockedStar width={100} height={85} />
-          ) : (
             <LottieView
               ref={starAnimation}
               source={UnlockedStar}
@@ -117,11 +116,13 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
               duration={2500}
               style={{ width: 100, height: starHeight }}
             />
+          ) : (
+            <LockedStar width={100} height={85} />
           )}
+          <C.StarContent isUnlocked={isUnlocked}>
+            <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>
+          </C.StarContent>
         </C.StarContainer>
-        <C.StarContent isUnlocked={isUnlocked}>
-          {isLoading ? <Loading /> : <C.StarNumber isUnlocked={isUnlocked}>{number}</C.StarNumber>}
-        </C.StarContent>
         <>
           <C.StarSign isUnlocked={isUnlocked}>
             <C.StarName isUnlocked={isUnlocked}>{name}</C.StarName>

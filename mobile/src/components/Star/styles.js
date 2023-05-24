@@ -4,7 +4,6 @@ import * as Animatable from 'react-native-animatable';
 
 export const Container = styled(Animatable.View)`
   align-items: center;
-  position: relative;
 `;
 
 export const StarDust = styled.View`
@@ -13,7 +12,9 @@ export const StarDust = styled.View`
   opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
 `;
 
-export const StarContainer = styled(Animated.View)``;
+export const StarContainer = styled(Animated.View)`
+  position: relative;
+`;
 
 export const StarButton = styled.TouchableOpacity`
   width: 100%;
@@ -21,28 +22,25 @@ export const StarButton = styled.TouchableOpacity`
   align-items: center;
   padding-left: 3px;
   opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
-  position: relative;
 `;
 
 export const Rocket = styled(Animated.View)``;
 
 export const StarContent = styled.View`
-  position: absolute;
-  top: 40%;
-  left: ${({ isUnlocked }) => (isUnlocked ? 15.5 : 16)}%;
+  top: -50%;
+  left: ${({ isUnlocked }) => (isUnlocked ? 46 : 45)}%;
 `;
 
 export const StarNumber = styled.Text`
   font-size: 18px;
-  color: ${({ isUnlocked, theme }) => (isUnlocked ? theme.colors.white : theme.colors.yellow_500)};
+  color: ${({ isUnlocked, theme }) => theme.colors[isUnlocked ? 'yellow_500' : 'white']};
   font-family: ${({ theme }) => theme.fonts.code};
   font-weight: bold;
 `;
 
 export const StarSign = styled.View`
   border-width: 2px;
-  border-color: ${({ isUnlocked, theme }) =>
-    isUnlocked ? theme.colors.gray_500 : theme.colors.yellow_300};
+  border-color: ${({ isUnlocked, theme }) => theme.colors[isUnlocked ? 'yellow_300' : 'gray_500']};
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
@@ -52,7 +50,6 @@ export const StarSign = styled.View`
 `;
 
 export const StarName = styled.Text`
-  color: ${({ isUnlocked, theme }) =>
-    isUnlocked ? theme.colors.gray_500 : theme.colors.yellow_300};
+  color: ${({ isUnlocked, theme }) => theme.colors[isUnlocked ? 'yellow_300' : 'gray_500']};
   flex-wrap: wrap;
 `;

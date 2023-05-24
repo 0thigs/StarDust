@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
 const screenHorizontalPadding = 24;
-const rockteMarginBetween = 8;
+const rockteMarginBetween = 4;
 const rocketWidth =
-  Dimensions.get('screen').width / 2 - screenHorizontalPadding - rockteMarginBetween;
+  411 / 2 - 24 - 8;
 
 export const Container = styled.SafeAreaView`
   width: ${rocketWidth}px;
@@ -54,7 +54,6 @@ export const Name = styled.Text`
   color: ${({ theme, isSelected }) => theme.colors[isSelected ? 'yellow_300' : 'white']};
 
   text-align: center;
-  font-size: 16px;
   margin: 8px 0 0;
 `;
 
