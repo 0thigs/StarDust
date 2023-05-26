@@ -41,7 +41,7 @@ export const Name = styled.Text`
 
   text-align: center;
   font-size: 16px;
-  margin: 8px 0 0;
+  align-self: center;
   margin-bottom: 12px;
 `;
 

@@ -43,9 +43,10 @@ export function Avatar({
 
     const updatedCoins = loggedUser.coins - price;
     try {
-      await Promise.all([updateLoggedUser({ coins: updatedCoins }), addUserAcquiredAvatar(id)]);
-
+      await addUserAcquiredAvatar(id);
+      await updateLoggedUser({ coins: updatedCoins });
       selectAvatar();
+      updateLoggedUser({ coins: updatedCoins });
       setModalType('earning');
       setIsModalOpen(true);
     } catch (error) {
@@ -66,11 +67,11 @@ export function Avatar({
     }
   }
 
-  function handleButtonPress() {
+  async function handleButtonPress() {
     setIsRequesting(true);
 
     if (isAcquired) {
-      selectAvatar();
+      await selectAvatar();
       return;
     }
     buyAvatar();
@@ -133,7 +134,7 @@ export function Avatar({
                 size={350}
                 isAbsolute={true}
                 top={-15}
-                left={-15}
+                left={-12}
               />
               <C.AcquiredAvatarImage source={{ uri: getImage('avatars', image) }} />
               <C.Name>{name}</C.Name>

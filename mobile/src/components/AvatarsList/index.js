@@ -53,7 +53,7 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
   const renderItem = useCallback(({ item: { id, name, image, price, isAcquired }, index }) => {
     const isSelected = index === selectedAvatarIndex;
     const isFirstItem = index === 0;
-    const isBuyable = loggedUser.coins > price;
+    const isBuyable = loggedUser.coins >= price;
     return (
       <Avatar
         id={id}

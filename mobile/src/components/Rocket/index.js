@@ -23,7 +23,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
   const soundRef = useRef();
-  const isBuyable = loggedUser.coins > price;
+  const isBuyable = loggedUser.coins >= price;
 
   const RocketPosition = useSharedValue(-5);
 
@@ -43,36 +43,34 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
     const updatedCoins = loggedUser.coins - price;
     const updatedAcquiredRockets = loggedUser.acquired_rockets + 1;
     try {
-      await Promise.all([
-        addUserAcquiredRocket(id),
-        updateLoggedUser({ coins: updatedCoins, acquired_rockets: updatedAcquiredRockets }),
-        updateLoggedUser(),
-      ]);
-    } catch (error) {
-      console.error(error);
-    }
-
-    selectRocket();
-    setModalType('earning');
-    setIsModalOpen(true);
-  }
-
-  async function selectRocket() {
-    try {
-      await updateLoggedUser({ rocket_id: id });
+      await updateLoggedUser({ coins: updatedCoins, acquired_rockets: updatedAcquiredRockets });
+      await addUserAcquiredRocket(id);
+      selectRocket();
+      setModalType('earning');
+      setIsModalOpen(true);
     } catch (error) {
       console.error(error);
     } finally {
       setIsRequesting(false);
     }
-    soundRef.current.play();
   }
 
-  function handleButtonPress() {
+  async function selectRocket() {
+    try {
+      await updateLoggedUser({ rocket_id: id });
+      soundRef.current.play();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsRequesting(false);
+    }
+  }
+
+  async function handleButtonPress() {
     setIsRequesting(true);
 
     if (isAcquired) {
-      selectRocket();
+      await selectRocket();
       return;
     }
     buyRocket();
@@ -122,7 +120,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
         }
         body={
           modalType === 'denying' ? (
-            <C.Text>Você pode adquirir mais completando estrelas</C.Text>
+            <C.Text>Você pode adquirir mais completando estrelas ou resolvendo desafios.</C.Text>
           ) : (
             <C.AcquiredRocket>
               <Animation
@@ -145,6 +143,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
             onPress={() => setIsModalOpen(false)}
             color={theme.colors.black}
             background={theme.colors.green_500}
+            isDisabled={modalType === 'denying' && isRequesting}
           />
         }
       />
