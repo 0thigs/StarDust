@@ -23,6 +23,7 @@ export function Avatar({
   isAcquired,
   isFirstItem,
   addUserAcquiredAvatar,
+  width,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
   const [isSelected, setIsSelected] = useState(false);
@@ -84,6 +85,7 @@ export function Avatar({
       isSelected={isSelected}
       isAvailable={isAcquired || isBuyable}
       isFirstItem={isFirstItem}
+      width={width}
     >
       <C.Info>
         {!isAcquired && price > 0 && (

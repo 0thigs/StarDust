@@ -26,8 +26,8 @@ export function User({ position, id, name, avatar_id, xp, isLoggedUser, lastPosi
   const { avatar } = useAvatar(avatar_id);
   const navigation = useNavigation();
   const isInPodium = position <= 3;
-  const isInSafeArea = position <= lastPositions;
-  const isInDangerArea = position >= lastPositions;
+  const isInSafeArea = position <= 5;
+  const isInDangerArea = position > lastPositions;
 
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  width: 330px;
+  width: ${({ width }) => width}px;
   height: 200px;
   flex-direction: row;
   margin-left: ${({ isFirstItem }) => (isFirstItem ? 0 : 8)}px;

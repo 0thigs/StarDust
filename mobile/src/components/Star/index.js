@@ -7,7 +7,6 @@ import UnlockedStar from '../../assets/animations/unlocked-star-animation.json';
 import UnlockedStarDust from '../../assets/StarAssets/unlocked-stardust.svg';
 import LockedStarDust from '../../assets/StarAssets/locked-stardust.svg';
 import StarSound from '../../assets/sounds/star-sound.wav';
-
 import LottieView from 'lottie-react-native';
 import {
   useAnimatedStyle,
@@ -22,7 +21,6 @@ import {
 import { SvgUri } from 'react-native-svg';
 import { Sound } from '../Sound';
 import { getImage } from '../../utils/getImage';
-import { Loading } from '../Loading';
 import { Toast } from 'toastify-react-native';
 import * as C from './styles';
 import api from '../../services/api';
@@ -104,7 +102,7 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
       }}
     >
       <C.StarDust>{isUnlocked ? <UnlockedStarDust /> : <LockedStarDust />}</C.StarDust>
-      <C.StarButton onPress={handleStarPress} isLoading={false} disabled={isUnlocked}>
+      <C.StarButton onPress={handleStarPress} isLoading={false} disabled={!isUnlocked}>
         <C.StarContainer style={isLastUnlockedStar && StarAnimatedStyle}>
           {isUnlocked ? (
             <LottieView

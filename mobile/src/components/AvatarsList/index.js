@@ -65,6 +65,7 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         isBuyable={isBuyable}
         isFirstItem={isFirstItem}
         addUserAcquiredAvatar={addUserAcquiredAvatar}
+        width={AVATAR_WIDTH}
       />
     );
   }, []);
@@ -88,8 +89,8 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}
         getItemLayout={(_, index) => ({
-          length: 330,
-          offset: 330 * index,
+          length: AVATAR_WIDTH,
+          offset: (AVATAR_WIDTH + AVATAR_MARGIN_BETWEEN) * index,
           index,
         })}
         onScrollToIndexFailed={() => {

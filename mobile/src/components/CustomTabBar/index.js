@@ -41,14 +41,14 @@ export function CustomTabBar({ state, navigation }) {
 
   function goTo(screenName) {
     navigation.navigate(screenName, {
-      userId: screenName === 'Profile' ? loggedUser.id : undefined,
+      userId: screenName === 'Profile' ? loggedUser.id : null,
     });
   }
 
   return (
     <C.Container>
       {screens.map(({ name, label, Icon }, index) => (
-        <C.TabButton key={name} onPress={() => goTo(name)}>
+        <C.TabButton key={name} onPress={() => goTo(name)} activeOpacity={0.7}>
           <Icon
             style={{ opacity: state.index === index ? 1 : 0.8 }}
             width={iconSize}
