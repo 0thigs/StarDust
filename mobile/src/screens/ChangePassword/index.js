@@ -71,12 +71,15 @@ export function ChangePassword({ route }) {
 
     try {
       await resetPassword(email);
-      console.log(email);
       Toast.success('E-mail enviado com sucesso!');
       setHasSendEmail(true);
     } catch (error) {
       console.error(error);
-      Toast.error('Terá que esperar 60 segundos para uma próxima solicitação');
+      Toast.error(
+        error.message.includes('60')
+          ? 'Terá que esperar 60 segundos para uma próxima solicitação'
+          : error.message
+      );
     } finally {
       setIsLoading(false);
     }

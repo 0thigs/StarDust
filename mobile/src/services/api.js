@@ -18,6 +18,15 @@ export default {
     return user;
   },
 
+  getUserByEmail: async email => {
+    const { data, error } = await supabase.from('users').select('email').eq('email', email).limit(1);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const user = data[0];
+    return user;
+  },
+
   updateUser: async (newData, userId) => {
     const { success, error } = await supabase.from('users').update(newData).eq('id', userId);
 
@@ -26,18 +35,6 @@ export default {
     }
     return success;
   },
-
-  //   updateUser: async (newData, userId) => {
-  //     const { success, error } = await supabase
-  //       .from('users')
-  //       .update({ [column]: data })
-  //       .eq('id', userId);
-
-  //     if (error) {
-  //       throw new Error(error.message);
-  //     }
-  //     return success;
-  //   },
 
   deleteUser: async userId => {
     const { success, error } = await supabase.rpc('delete_user', {
