@@ -77,7 +77,6 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
   });
 
   useEffect(() => {
-    console.log(isUnlocked);
     StarScale.value = withRepeat(withSpring(1.15), isLastUnlockedStar ? -1 : 1, true);
 
     const timer = setTimeout(() => {

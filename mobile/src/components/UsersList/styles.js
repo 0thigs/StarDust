@@ -11,6 +11,5 @@ export const Divider = styled.View`
 export const Message = styled.Text`
   text-align: center;
   font-family: ${props => props.theme.fonts.medium};
-  color: ${props => props.theme.colors.green_500};
   margin: 0 8px;
 `;

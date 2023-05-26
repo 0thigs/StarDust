@@ -8,9 +8,11 @@ export const Container = styled(AnimatedTouchableOpacity)`
   position: absolute;
   bottom: 20px;
   right: 20px;
-  padding: 12px;
+  /* padding: 12px; */
   border-radius: 8px;
   border-bottom-width: 4px;
+  align-items: center;
+  justify-content: center;
   border-bottom-color: ${props => props.theme.colors.green_500};
   background-color: ${props => props.theme.colors.background};
 `;

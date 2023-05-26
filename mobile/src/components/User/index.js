@@ -22,10 +22,13 @@ const podium = [
   },
 ];
 
-export function User({ position, id, name, avatar_id, xp, isLoggedUser }) {
+export function User({ position, id, name, avatar_id, xp, isLoggedUser, lastPositions }) {
   const { avatar } = useAvatar(avatar_id);
   const navigation = useNavigation();
   const isInPodium = position <= 3;
+  const isInSafeArea = position <= lastPositions;
+  const isInDangerArea = position >= lastPositions;
+
   const Icon = isInPodium && podium.find(place => place.position === position).icon;
 
   function handleUserPress() {
@@ -35,7 +38,9 @@ export function User({ position, id, name, avatar_id, xp, isLoggedUser }) {
 
   return (
     <C.Container activeOpacity={0.7} onPress={handleUserPress} isLoggedUser={isLoggedUser}>
-      <C.Position>{isInPodium ? <Icon /> : position}</C.Position>
+      <C.Position color={isInSafeArea ? 'green_700' : isInDangerArea ? 'red_700' : 'gray_700'}>
+        {isInPodium ? <Icon /> : position}
+      </C.Position>
       <C.Avatar source={{ uri: getImage('avatars', avatar) }} />
       <C.Name isLoggedUser={isLoggedUser}>{name}</C.Name>
       <C.Xp>{xp} XP</C.Xp>

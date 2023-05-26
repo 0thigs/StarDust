@@ -121,7 +121,6 @@ export function AuthProvider({ children }) {
 
   async function resetPassword(email) {
     const user = await api.getUserByEmail(email);
-    console.log(user);
     if (!user) {
       throw new Error("Usuário não encontrado");
     }

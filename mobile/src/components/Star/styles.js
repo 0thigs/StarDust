@@ -44,7 +44,7 @@ export const StarSign = styled.View`
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
-  margin-top: 8px;
+  margin-top: 2px;
   margin-left: 8px;
   max-width: 180px;
 `;

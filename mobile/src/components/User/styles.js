@@ -14,8 +14,10 @@ export const Container = styled.TouchableOpacity`
 export const Position = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.semibold};
-  color: ${({ theme }) => theme.colors.green_700};
-  width: 20px;
+  color: ${({ theme, color }) => theme.colors[color]};
+  width: 28px;
+  align-items: flex-start;
+  padding-left: 8px;
 `;
 
 export const Avatar = styled.Image`

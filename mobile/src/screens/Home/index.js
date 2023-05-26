@@ -14,25 +14,48 @@ import BackgroundSpace from '../../assets/HomeAssets/background.png';
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 export function Home() {
   const { planets, lastUnlockedStarId } = usePlanet();
   const { lastUnlockedStarYPosition } = useScroll();
-  const [isFabButtonVisible, setIsFabButtonVisible] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false);
-  const [direction, setDirection] = useState('');
   const [currentYOffset, setCurrentYOffset] = useState(0);
   const visibleContentHeight = useRef(0);
-  const canCalculateOffset = useRef(true);
   const scrollRef = useRef(null);
   const dimensions = useWindowDimensions();
+  const isFabButtonVisible = useSharedValue(false);
+  const isFabIconRotation = useSharedValue(false);
+
+  const fabButtonAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      width: interpolate(isFabButtonVisible.value, [false, true], [0, 40]),
+      height: interpolate(isFabButtonVisible.value, [false, true], [0, 40]),
+    };
+  });
+
+  const fabIconAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          rotate: `${interpolate(isFabIconRotation.value, [true, false], [1, 180])}deg`,
+        },
+      ],
+      opacity: interpolate(isFabButtonVisible.value, [true, false], [1, 0]),
+    };
+  });
 
   function scrollToLastUnlockedStar(animated = true) {
     scrollRef.current.scrollTo({
+      animated,
       x: 0,
       y: lastUnlockedStarYPosition - dimensions.height / 2,
-      animated,
     });
   }
 
@@ -45,18 +68,16 @@ export function Home() {
     const isLastUnlockedStarBellowLayout =
       (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
 
-    setDirection(isLastUnlockedStarAboveLayout ? 'down' : 'up');
-    setIsFabButtonVisible(isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout);
-  }
-
-  function hanldeFabButtonClick() {
-    setIsFabButtonVisible(false);
-    scrollToLastUnlockedStar();
+    isFabIconRotation.value = isLastUnlockedStarAboveLayout;
+    isFabButtonVisible.value = withTiming(
+      isLastUnlockedStarAboveLayout || isLastUnlockedStarBellowLayout,
+      { duration: 300 }
+    );
   }
 
   useEffect(() => {
     if (planets.length && isBackgroundLoaded) {
-      setTimeout(() => setIsEndTransition(true), 1500);
+      setTimeout(() => setIsEndTransition(true), 1000);
     }
   }, [planets, isBackgroundLoaded]);
 
@@ -64,7 +85,7 @@ export function Home() {
     if (lastUnlockedStarYPosition) {
       scrollToLastUnlockedStar(false);
     }
-  }, [lastUnlockedStarYPosition]);
+  }, [lastUnlockedStarYPosition, isEndTrasition]);
 
   return (
     <>
@@ -105,18 +126,16 @@ export function Home() {
         />
       </C.Container>
 
-      {isFabButtonVisible && (
-        <FabButton
-          onPress={hanldeFabButtonClick}
-          icon={
-            direction === 'up' ? (
-              <Icon.ArrowUp color={theme.colors.green_300} fontSize={20} />
-            ) : (
-              <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
-            )
-          }
-        />
-      )}
+      <FabButton
+        animatedStyle={fabButtonAnimatedStyle}
+        onPress={scrollToLastUnlockedStar}
+        icon={
+          <Animated.View style={fabIconAnimatedStyle}>
+            <Icon.ArrowDown color={theme.colors.green_300} fontSize={20} />
+          </Animated.View>
+        }
+      />
+      {/* )} */}
     </>
   );
 }
