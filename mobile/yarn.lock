@@ -1073,10 +1073,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     "to-fast-properties" "^2.0.0"
 
-"@designliquido/delegua@^0.20.12":
-  "integrity" "sha512-Q/06J5efqP+JgDz45HEQHtrreUJO4f61vmUNOJ+6HqR1GC8pfMj4afJ177ZO/PcPpADmwm+zOyqXR+rCSjMRtw=="
-  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.20.12.tgz"
-  "version" "0.20.12"
+"@designliquido/delegua@^0.20.16":
+  "integrity" "sha512-hUuAt5M56KNIkqQCvREzo5DpDZMxWTx+mjnJ6aSXIXjYQEh1MqbdImRP41e9Ys48DI/9Nry8AfM3BEoFyXXqZw=="
+  "resolved" "https://registry.npmjs.org/@designliquido/delegua/-/delegua-0.20.16.tgz"
+  "version" "0.20.16"
   dependencies:
     "antlr4ts" "^0.5.0-alpha.4"
     "browser-process-hrtime" "^1.0.0"
