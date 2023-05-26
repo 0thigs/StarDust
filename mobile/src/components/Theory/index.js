@@ -10,7 +10,6 @@ import { FabButton } from '../FabButton';
 import { Modal } from '../Modal';
 import { LessonHeader } from '../LessonHeader';
 
-import * as Icon from 'react-native-feather';
 import * as C from './styles';
 
 export function Theory({ title, allTexts }) {

@@ -6,6 +6,7 @@ import { Loading } from '../Loading';
 // import { keys } from '../../utils/keys';
 import { default as BottomSheet } from '@gorhom/bottom-sheet';
 import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
+import RunningErrorCodeSound from '../../assets/sounds/crying-sound.wav';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
@@ -23,8 +24,8 @@ export function Code({ code, userCode, handleUserCode }) {
   async function handleRunPress() {
     setIsRunning(true);
     try {
-      soundRef.current.play();
       await handleUserCode();
+      soundRef.current.play();
     } catch (error) {
       console.error(error);
     } finally {

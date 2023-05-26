@@ -8,9 +8,10 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  align-items: flex-start;
+  align-self: flex-start;
   justify-content: center;
   padding: 24px 0 0;
+  margin-right: auto;
   margin-bottom: auto;
 `;
 

@@ -20,7 +20,7 @@ export const StarButton = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  padding-left: 3px;
+  padding-left: 4px;
   opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
 `;
 
@@ -44,8 +44,7 @@ export const StarSign = styled.View`
   border-style: dotted;
   border-radius: 10px;
   padding: 16px 12px;
-  margin-top: 2px;
-  margin-left: 8px;
+  margin-left: 4px;
   max-width: 180px;
 `;
 

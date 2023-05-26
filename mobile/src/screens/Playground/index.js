@@ -27,7 +27,9 @@ export function Playground({ route }) {
 
   function handleError(error) {
     if (error) {
-      Toast.error(error.includes('null') ? 'código inválido' : error + `\nLinha: ${errorLine.current}`);
+      Toast.error(
+        error.includes('null') ? 'código inválido' : error + `\nLinha: ${errorLine.current}`
+      );
     }
   }
 

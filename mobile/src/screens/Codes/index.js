@@ -7,11 +7,11 @@ import { CodeCard } from '../../components/CodeCard';
 import { Button } from '../../components/Button';
 import { Prompt } from '../../components/Prompt';
 import { Modal } from '../../components/Modal';
-
+import { Loading } from '../../components/Loading';
 import { ArrowLeft, Plus } from 'react-native-feather';
+
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { Loading } from '../../components/Loading';
 
 export function Codes() {
   const { loggedUser } = useAuth();
@@ -69,11 +69,6 @@ export function Codes() {
     fetchCodes();
     if (codes.length) setIsLoading(false);
   }, [codes]);
-
-  //   useEffect(() => {
-  //     if (avatars.length && rockets.length)
-  //       timer.current = setTimeout(() => setIsLoading(false), 2000);
-  //   }, [avatars, rockets]);
 
   return (
     <C.Container>
