@@ -146,7 +146,7 @@ export function SignIn() {
           >
             <C.AccountButtonText>Esqueci minha senha</C.AccountButtonText>
           </C.AccountButton>
-          <C.AccountButton onPress={() => navigation.navigate('SignOut')}>
+          <C.AccountButton onPress={() => navigation.navigate('SignUp')}>
             <C.AccountButtonText>Criar minha conta</C.AccountButtonText>
           </C.AccountButton>
         </C.AccountButtons>

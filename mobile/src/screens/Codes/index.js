@@ -16,7 +16,7 @@ import theme from '../../global/styles/theme';
 export function Codes() {
   const { loggedUser } = useAuth();
   const { codes, updateCode, deleteCode, fetchCodes } = useCode(null, loggedUser.id);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isPromptVisible, setIsPromptVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const codeTitle = useRef('');
@@ -67,7 +67,7 @@ export function Codes() {
 
   useEffect(() => {
     fetchCodes();
-    if (codes.length) setIsLoading(false);
+    // if (codes.length) setIsLoading(false);
   }, [codes]);
 
   return (

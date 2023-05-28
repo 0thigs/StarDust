@@ -39,7 +39,7 @@ const SingnUpSchema = yup.object({
     .oneOf([yup.ref('password'), null], 'Senha de confirmação não confere.'),
 });
 
-export function SignOut() {
+export function SignUp() {
   const {
     control,
     handleSubmit,

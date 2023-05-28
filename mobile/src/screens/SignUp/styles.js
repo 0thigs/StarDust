@@ -65,7 +65,7 @@ export const SubmitButtonText = styled.Text`
 
 export const AccountButtons = styled.View`
   width: 100%;
-  margin-top: 18px;
+  margin-top: 8px;
   flex-direction: row;
   justify-content: ${props =>
     Children.toArray(props.children).length < 2 ? 'center' : 'space-between'};

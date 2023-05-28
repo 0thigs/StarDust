@@ -18,8 +18,8 @@ import { EditorProvider } from './src/contexts/EditorContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Dimensions } from 'react-native';
 import { default as Toast } from 'toastify-react-native';
-import './src/libs/dayjs';
 const { width } = Dimensions.get('screen');
+import './src/libs/dayjs';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

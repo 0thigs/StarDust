@@ -68,8 +68,8 @@ export function Input({
           onBlur={handleInputBlur}
           value={value}
           onChangeText={onChangeText}
-          keyboardType={type}
-          autoCapitalize={(type === 'email-address' || type === 'password') && 'none'}
+        //   keyboardType={type}
+          autoCapitalize={'none'}
           secureTextEntry={type === 'password' && secureTextEntry}
           error={error}
           isFocus={isFocus}
