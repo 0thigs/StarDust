@@ -22,6 +22,7 @@ export function Ranking() {
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState([]);
   const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
+  const [finalTime, setFinalTime] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
   const lastRankingPosition = rankings.length;
@@ -36,6 +37,16 @@ export function Ranking() {
 
   function setPosition(user, index) {
     return { ...user, position: index + 1 };
+  }
+
+  function getFinalTime() {
+    const now = dayjs();
+    const deadline = dayjs().startOf('D').add(1, 'day');
+    const diff = deadline.diff(now);
+    const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+    const minutes = Math.floor(diff / 1000 / 60) % 60;
+    const seconds = Math.floor(diff / 1000) % 60;
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   async function showWinners() {
@@ -60,9 +71,9 @@ export function Ranking() {
 
       setWinners(winners);
 
-      await Promise.all([updateLoggedUser({ did_update_ranking: true })]);
+      await updateLoggedUser({ did_update_ranking: false });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setTimeout(() => setIsloading(false), 2000);
     }
@@ -74,7 +85,7 @@ export function Ranking() {
       const rankingUsers = users.map(setPosition);
       setUsers(rankingUsers);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       if (loggedUser.did_update_ranking) {
         showWinners();
@@ -95,6 +106,12 @@ export function Ranking() {
       }
     }, [currentRanking, rankings])
   );
+
+  useEffect(() => {
+    if (daysToGo !== 1) return;
+    const timer = setInterval(() => setFinalTime(getFinalTime()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <C.Container isLoading={isLoading}>
@@ -133,7 +150,7 @@ export function Ranking() {
             />
           </C.Badges>
           <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
-          <C.Days>{`${daysToGo} ${daysToGo > 1 ? ' dias' : ' dia'}`}</C.Days>
+          <C.Days>{daysToGo === 1 ? finalTime : `${daysToGo} dias`}</C.Days>
           <UsersList users={users} userId={loggedUser.id} />
         </>
       )}

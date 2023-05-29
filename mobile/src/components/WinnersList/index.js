@@ -14,7 +14,6 @@ import RewardLight from '../../assets/animations/reward-light-animation.json';
 import EarningSound from '../../assets/sounds/earning-sound.wav';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import api from '../../services/api';
 
 export function WinnersList({
   winners,

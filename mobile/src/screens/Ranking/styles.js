@@ -24,9 +24,10 @@ export const Warning = styled.Text`
 
 export const Days = styled.Text`
   text-align: center;
-  font-family: ${({ theme }) => theme.fonts.semibold};
+  font-family: ${({ theme }) => theme.fonts.code};
   color: ${({ theme }) => theme.colors.green_300};
   font-size: 16px;
+  font-weight: 700;
 `;
 
 export const BadgesList = styled.FlatList``;
