@@ -8,11 +8,6 @@ export const filters = [
     label: 'status',
     options: [
       {
-        title: 'Todos',
-        icon: <Minus fontSize={iconSize} color={theme.colors.white} />,
-        color: null,
-      },
-      {
         title: 'Resolvido',
         icon: <CheckCircle fontSize={iconSize} color={theme.colors.green_300} />,
         color: null,

@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
-
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
@@ -34,6 +33,7 @@ export const TagName = styled.Text`
   font-size: 12px;
   font-weight: 600;
   color: ${({ theme, color }) => (color ? color : theme.colors.gray_500)};
+  margin-left: 4px;
 `;
 
 export const RemoveTagButton = styled.TouchableOpacity`
@@ -42,5 +42,5 @@ export const RemoveTagButton = styled.TouchableOpacity`
 
 export const ChallengesList = styled.FlatList`
   flex: 1;
-  background-color: ${prop => prop.theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background};
 `;
