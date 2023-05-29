@@ -13,10 +13,10 @@ export const Container = styled.TouchableOpacity`
 
 export const Position = styled.Text`
   font-size: 16px;
-  font-family: ${({ theme }) => theme.fonts.semibold};
+  font-family: ${({ theme }) => theme.fonts.code};
   color: ${({ theme, color }) => theme.colors[color]};
   width: 28px;
-  align-items: flex-start;
+  text-align: center;
   padding-left: 8px;
 `;
 
@@ -24,7 +24,7 @@ export const Avatar = styled.Image`
   height: 50px;
   width: 50px;
   border-radius: 25px;
-  margin-left: 12px;
+  margin-left: 8px;
 `;
 
 export const Name = styled.Text`

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useRanking } from '../../hooks/useRanking';
 
@@ -11,6 +11,7 @@ import Background from '../../assets/GlobalAssets/background.png';
 import dayjs from 'dayjs';
 import api from '../../services/api';
 import * as C from './styles';
+import { useFocusEffect } from '@react-navigation/native';
 const today = dayjs().day();
 const sunday = 0;
 const daysToGo = today === sunday ? 7 : 7 - today;
@@ -23,6 +24,7 @@ export function Ranking() {
   const [currentRankingIndex, setCurrentRankingIndex] = useState(0);
   const [isLoading, setIsloading] = useState(false);
   const badgesListRef = useRef(null);
+  const lastRankingPosition = rankings.length;
   const isLoggedUserWinner = !!loggedUser.last_position && loggedUser.last_position <= 5;
 
   function scrollToCurrentRanking() {
@@ -38,25 +40,27 @@ export function Ranking() {
 
   async function showWinners() {
     try {
-      const winners = await api.getWinners();
-      const lastWeekRankingId =
-        isLoggedUserWinner && currentRanking.position !== rankings.length
-          ? rankings.find(({ position }) => (position - 1 === 0 ? 1 : position - 1)).id
-          : currentRanking.id;
-      const winnersByLastWeekRankingId = winners.filter(
-        winner => winner.ranking_id === lastWeekRankingId
-      );
+      const targetPosition =
+        isLoggedUserWinner && currentRanking.position !== lastRankingPosition
+          ? currentRanking.position - 1
+          : loggedUser.is_loser
+          ? currentRanking.position + 1
+          : currentRanking.position;
 
-      winnersByLastWeekRankingId.sort((a, b) => {
+      const lastWeekRankingId = rankings.find(({ position }) => position === targetPosition).id;
+
+      const winners = await api.getWinners(lastWeekRankingId);
+
+      winners.sort((a, b) => {
         if (a.position === 2) return -1;
         if (a.position === 1) return b.position === 2 ? 1 : -1;
         if (a.position === 3) return b.position === 2 || b.position === 1 ? 1 : -1;
         return 1;
       });
 
-      setWinners(winnersByLastWeekRankingId);
+      setWinners(winners);
 
-      updateLoggedUser({ did_update_ranking: false });
+      await Promise.all([updateLoggedUser({ did_update_ranking: true })]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,15 +84,17 @@ export function Ranking() {
     }
   }
 
-  useEffect(() => {
-    setIsloading(true);
-    if (currentRanking && rankings.length) {
-      const currentRankingIndex = currentRanking.position - 1;
-      setCurrentRankingIndex(currentRankingIndex);
-      scrollToCurrentRanking(currentRankingIndex);
-     if (!users.length) setData();
-    }
-  }, [currentRanking, rankings]);
+  useFocusEffect(
+    useCallback(() => {
+      setIsloading(true);
+      if (currentRanking && rankings.length) {
+        const currentRankingIndex = currentRanking.position - 1;
+        setCurrentRankingIndex(currentRankingIndex);
+        scrollToCurrentRanking(currentRankingIndex);
+        if (!users.length) setData();
+      }
+    }, [currentRanking, rankings])
+  );
 
   return (
     <C.Container isLoading={isLoading}>
@@ -100,6 +106,7 @@ export function Ranking() {
           currentRanking={currentRanking}
           setWinners={setWinners}
           isLoggedUserWinner={isLoggedUserWinner}
+          lastRankingPosition={lastRankingPosition}
         />
       ) : (
         <>

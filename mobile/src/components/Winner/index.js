@@ -1,4 +1,3 @@
-
 import { Animation } from '../Animation';
 import { useAvatar } from '../../hooks/useAvatar';
 import { UserAvatar } from '../UserAvatar';

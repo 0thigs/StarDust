@@ -8,20 +8,28 @@ import { Winner } from '../Winner';
 import { Sound } from '../Sound';
 import { Modal } from '../Modal';
 import { User } from '../User';
+import { getImage } from '../../utils/getImage';
 
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import EarningSound from '../../assets/sounds/earning-sound.wav';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
-import { getImage } from '../../utils/getImage';
+import api from '../../services/api';
 
-export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRanking }) {
+export function WinnersList({
+  winners,
+  setWinners,
+  isLoggedUserWinner,
+  currentRanking,
+  lastRankingPosition,
+}) {
   const {
-    loggedUser: { last_position, name, avatar_id, coins },
+    loggedUser: { last_position, name, avatar_id, coins, is_loser },
     updateLoggedUser,
   } = useAuth();
   const [isRewardModalVisible, setIsRewardModalVisible] = useState(false);
-  const [isRankingModalVisible, setIsRankingModalVisible] = useState(false);
+  const [isFailModalVisible, setIsFailModalVisible] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const soundRef = useRef(null);
   const isLoggedUserTopWinner = [1, 2, 3].includes(last_position);
   const rewardByLastPosition =
@@ -30,21 +38,34 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
   function handleModalButtonPress(type) {
     if (type === 'reward') {
       setIsRewardModalVisible(false);
-      setIsRankingModalVisible(true);
+      currentRanking.position === lastRankingPosition
+        ? handleModalButtonPress(null)
+        : setIsSuccessModalVisible(true);
       return;
     }
 
-    setIsRankingModalVisible(false);
+    setIsSuccessModalVisible(false);
     setWinners([]);
   }
 
-  function handleWinnerListButtonPress() {
+  async function handleWinnerListButtonPress() {
     if (isLoggedUserTopWinner) {
       setIsRewardModalVisible(true);
-      updateLoggedUser({ coins: coins + rewardByLastPosition });
+      await updateLoggedUser({ coins: coins + rewardByLastPosition });
       return;
     }
-    setIsRankingModalVisible(true);
+
+    if (isLoggedUserWinner) {
+      setIsSuccessModalVisible(true);
+      return;
+    }
+
+    if (is_loser) {
+      setIsFailModalVisible(true);
+      await updateLoggedUser({ is_loser: false });
+      return;
+    }
+
     setWinners([]);
   }
 
@@ -111,7 +132,7 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
       />
 
       <Modal
-        isVisible={isRankingModalVisible}
+        isVisible={isSuccessModalVisible}
         type={'earning'}
         title={'Novo ranking!'}
         body={
@@ -137,10 +158,34 @@ export function WinnersList({ winners, setWinners, isLoggedUserWinner, currentRa
             title={'Entendido'}
             color={theme.colors.black}
             background={theme.colors.green_500}
-            onPress={() => handleModalButtonPress('ranking')}
+            onPress={() => handleModalButtonPress('success')}
           />
         }
         playSong={false}
+      />
+
+      <Modal
+        isVisible={isFailModalVisible}
+        type={'crying'}
+        title={'Perda de Ranking!'}
+        body={
+          <>
+            <SvgUri uri={getImage('rankings', currentRanking.image)} width={100} height={100} />
+            <C.RewardMessage>
+              <C.Text>Puxa vida, parece que você desceu para o ranking:</C.Text>
+              <C.Reward>{currentRanking.name}</C.Reward>
+            </C.RewardMessage>
+          </>
+        }
+        footer={
+          <Button
+            title={'Entendido'}
+            color={theme.colors.black}
+            background={theme.colors.green_500}
+            onPress={() => handleModalButtonPress('fail')}
+          />
+        }
+        playSong={true}
       />
     </C.Container>
   );

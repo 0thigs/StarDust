@@ -41,7 +41,7 @@ export function UsersList({ users, userId, initialPosition = 0 }) {
         );
       }}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ padding: 24 }}
+      contentContainerStyle={{ padding: 12 }}
     />
   );
 }

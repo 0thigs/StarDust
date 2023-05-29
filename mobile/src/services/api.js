@@ -19,7 +19,11 @@ export default {
   },
 
   getUserByEmail: async email => {
-    const { data, error } = await supabase.from('users').select('email').eq('email', email).limit(1);
+    const { data, error } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .limit(1);
     if (error) {
       throw new Error(error.message);
     }
@@ -326,8 +330,11 @@ export default {
     return data;
   },
 
-  getWinners: async () => {
-    const { data, error } = await supabase.from('winners').select('*');
+  getWinners: async lastWeekRankingId => {
+    const { data, error } = await supabase
+      .from('winners')
+      .select('*')
+      .eq('ranking_id', lastWeekRankingId);
     if (error) {
       throw new Error(error.message);
     }
