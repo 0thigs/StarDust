@@ -18,7 +18,8 @@
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug"
       },
       "ios": {
         "resourceClass": "m-medium"
