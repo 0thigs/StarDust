@@ -4,37 +4,35 @@
   },
   "build": {
     "development": {
+      "developmentClient": true,
       "distribution": "internal",
-      "android": {
-        "gradleCommand": ":app:assembleDebug",
-        "buildType": "apk"
+      "env": {
+        "SUPABASE_URL": "https://aukqejqsiqsqowafpppb.supabase.co",
+        "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a3FlanFzaXFzcW93YWZwcHBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkxNjM4NTAsImV4cCI6MTk4NDczOTg1MH0.i4vEA-UsuSuTIKgxQv7Pd_afDJVQa254Q3mm7MCgV_Q",
+        "CDN": "https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images"
       },
       "ios": {
-        "buildConfiguration": "Debug",
-        "resourceClass": "m1-medium"
+        "resourceClass": "m-medium"
       }
     },
     "preview": {
       "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
-    "preview2": {
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk"
+      },
+      "ios": {
+        "resourceClass": "m-medium"
       }
     },
-    "preview3": {
-      "developmentClient": true
-    },
+
     "production": {
       "ios": {
-        "resourceClass": "m1-medium"
+        "resourceClass": "m-medium"
       },
       "env": {
         "SUPABASE_URL": "https://aukqejqsiqsqowafpppb.supabase.co",
-        "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a3FlanFzaXFzcW93YWZwcHBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkxNjM4NTAsImV4cCI6MTk4NDczOTg1MH0.i4vEA-UsuSuTIKgxQv7Pd_afDJVQa254Q3mm7MCgV_Q"
+        "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a3FlanFzaXFzcW93YWZwcHBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkxNjM4NTAsImV4cCI6MTk4NDczOTg1MH0.i4vEA-UsuSuTIKgxQv7Pd_afDJVQa254Q3mm7MCgV_Q",
+        "CDN": "https://aukqejqsiqsqowafpppb.supabase.co/storage/v1/object/public/images"
       }
     }
   },
