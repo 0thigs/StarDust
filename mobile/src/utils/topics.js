@@ -888,4 +888,689 @@ para cada numero em numeros {
       },
     ],
   },
+  {
+    title: 'Vetores',
+    texts: [
+      {
+        type: 'default',
+        title: 'Vetores',
+        body: 'Um vetor é uma estrutura de dados que permite armazenar vários valores em uma única variável.',
+      },
+      {
+        type: 'list',
+        title: 'Declaração de vetor',
+        body: 'Para declarar um vetor é preciso usar colchetes [] e separar os elementos por vírgulas',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+var frutas = ['maçã', 'banana', 'laranja'];
+var misto = [10, 'texto', verdadeiro];`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Acessando elementos',
+        body: 'É possível acessar elementos individuais de um vetor usando colchetes [] e fornecendo o índice do elemento desejado.',
+      },
+      {
+        type: 'default',
+        body: 'O índice de um vetor se trata do número que corresponde a posição em que o elemento se encontra no vetor, porém sempre começando do número 0, ou seja, para acessar o primeiro elemento é preciso usar índice 0, o segundo, índice 1, o terceiro, índice 2 e assim por diante.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+escreva(numeros[0]);
+// Resultado: 1
+escreva(numeros[2]); 
+// Resultado: 3
+        `,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Caso seja colocado um número negativo como índice, a posição dos elementos será tratada de forma invertida, ou seja, também é possível acessar o último elemento usando índice -1, o penúltimo, -2 e assim por diante.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+escreva(numeros[-1]);
+// Resultado: 5
+escreva(numeros[-2]); 
+// Resultado: 4
+        `,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Substituindo elementos',
+        body: 'Pode-se alterar o valor de um elemento de um vetor atribuindo um novo valor ao índice correspondente',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros[1] = 10;
+        
+escreva(numeros);
+// Resultado: [1, 10, 3, 4, 5]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Métodos para vetor',
+        body: 'É possível manipular vetores utilizando os métodos de vetor, que já vem incorporados na linguagem e fornecem funcionalidades úteis para adicionar, remover, ou copiar elementos de qualquer vetor criado.',
+      },
+      {
+        type: 'list',
+        title: 'adicionar()',
+        body: 'Adiciona um ou mais elementos ao final de um vetor.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3];
+
+numeros.adicionar(4, 5);
+
+escreva(numeros);
+        
+// Resultado: [1, 2, 3, 4, 5]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'remover()',
+        body: 'Remove um elemento de um vetor. O item a ser removido deve ser especificado como argumento do método, ou seja, entre seus parênteses.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.remover(3);
+
+escreva(numeros); 
+// Resultado: [1, 2, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Se nenhum elemento for passado como argumento, o último item do vetor será removido',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.remover();
+
+escreva(numeros); 
+// Resultado: [1, 2, 3, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'removerUltimo()',
+        body: 'Remove o último elemento de um vetor',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.removerUltimo();
+
+escreva(numeros); 
+// Resultado: [1, 2, 3, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'removerPrimeiro()',
+        body: 'Remove o primeiro elemento de um vetor',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.removerPrimeiro();
+
+escreva(numeros); 
+// Resultado: [2, 3, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'tamanho()',
+        body: 'Retorna quantidade de elementos presentes em um vetor',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var quantidade = numeros.tamanho();
+
+escreva(quantidade);
+// Resultado: 5
+        `,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'concatenar()',
+        body: 'Combina dois ou mais vetores em um novo vetor.',
+      },
+      {
+        type: 'code',
+        body: `var numeros1 = [1, 2, 3];
+var numeros2 = [4, 5, 6];
+
+var numerosConcatenados = numeros1.concatenar(numeros2);
+
+escreva(numerosConcatenados); 
+// Resultado: [1, 2, 3, 4, 5, 6]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'fatiar()',
+        body: 'Retorna uma cópia de uma parte do vetor, especificada por um índice inicial (obrigatório) e um índice final (opcional).',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var subvetor = numeros.fatiar(1, 4);
+
+escreva(subvetor);
+// Resultado: [2, 3, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Se o índice final não for especificado, a cópia começará do índice inicial terminando no último elemento do vetor.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var subvetor = numeros.fatiar(1);
+
+escreva(subvetor);
+// Resultado: [2, 3, 4, 5]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'encaixar()',
+        body: 'Permite remover, substituir ou adicionar elementos em posições específicas. Ele modifica o vetor original e retorna um novo vetor com os elementos removidos, se houver.',
+      },
+      {
+        type: 'default',
+        body: 'Ele possui três argumentos: o primeiro (obrigatório) é o índice inicial no qual a operação do "encaixar()" deve começar.',
+      },
+      {
+        type: 'default',
+        body: 'O segundo (opcional) é a quantidade de itens que vão ser removidos do vetor a partir do índice inicial.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.encaixar(1, 3);
+
+escreva(numeros);
+// Resultado: [1, 5]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'É possível pegar esses elementos revomidos por meio do retorno do "encaixar()"',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var removidos = numeros.encaixar(1, 3);
+
+escreva(numeros);
+// Resultado: [1, 5]
+escreva(removidos);
+// Resultado: [2, 3, 4]
+`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Do terceiro argumento adiante (opcional) é definido os elementos que serão adicionados no vetor a partir do ídice inicial.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.encaixar(1, 3, "texto1", "texto2");
+
+escreva(numeros);
+// Resultado: [1, "texto1", "texto2", 5]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'inclui()',
+        body: 'Verifica se um elemento está presente no vetor, retornando um valor lógico.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var estaPresente = numeros.inclui(3);
+
+escreva(estaPresente);
+// Resultado: verdadeiro`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'inverter()',
+        body: 'Inverte a ordem dos elementos de um vetor',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+numeros.inverter();
+
+escreva(vetorInvertido);
+// Resultado: [5, 4, 3, 2, 1]`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'ordenar()',
+        body: 'Cria um novo vetor com os números do vetor original em ordem crescente.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var vetorOrdenado = numeros.ordenar();
+
+escreva(vetorInvertido);
+// Resultado: [5, 4, 3, 2, 1]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Caso o vetor contenha textos, a ordenação será por ordem alfabética.',
+      },
+      {
+        type: 'code',
+        body: `var nomes = ["Ana", "Carlos", "Erika", "Daniel", "Bianca"];
+
+nomes.ordenar();
+
+escreva(nomes); 
+// Resultado: ["Ana", "Bianca", "Carlos", "Daniel", "Erika"]
+        `,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Se o vetor pussuir números e textos nenhum tipo de ordenação ocorrerá.',
+      },
+      {
+        type: 'code',
+        body: `var elementos = ["Zé", 5, "Erika", 7, "Bianca"];
+
+elementos.ordenar();
+
+escreva(elementos); 
+// Resultado: ["Zé", 5, "Erika", 7, "Bianca"]
+        `,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'somar()',
+        body: 'Retorna a soma de um vetor de números.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var soma = numeros.somar();
+
+escreva(soma);
+// Resultado: 15`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Métodos para textos',
+        body: 'Textos também podem ser tratados como vetores.',
+      },
+      {
+        type: 'code',
+        body: `var texto = "abc";
+
+escreva(texto[0]);
+// Resultado: a`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Logo, é possível usar alguns métodos de vetor em textos, como "tamanho()", "inverter()" e "concatenar()" e "inclui()".',
+      },
+      {
+        type: 'code',
+        body: `var texto = "abc";
+
+escreva(texto.tamanho());
+// Resultado: 3
+
+escreva(texto.inverter());
+// Resultado: cba
+
+escreva(texto.concatenar("def"));
+// Resultado: abcdef
+
+escreva(texto.inclui("z"));
+// Resultado: falso`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Contudo, há métodos próprios para manipular textos:',
+      },
+      {
+        type: 'list',
+        title: 'aparar()',
+        body: '',
+      },
+    ],
+  },
+  {
+    title: 'Funções',
+    texts: [
+      {
+        type: 'default',
+        title: 'Funções',
+        body: 'Funções são blocos de código que podem ou não devolver um valor ao final de sua execução.',
+      },
+      {
+        type: 'default',
+        title: 'Funções',
+        body: 'Funções podem ser identificadas por um nome ou não.',
+      },
+      {
+        type: 'list',
+        title: 'Função com nome',
+        body: 'Funções com nome podem ser criadas usando a palavra-chave funcao (ou função), seguida de um nome de função, e uma lista de parâmetros dentro de parênteses, sendo cada elemento separado por vírgula. Além disso, cada função tem o seu bloco de código, que é delimitado entre chaves.',
+      },
+      {
+        type: 'code',
+        body: `funcao principal() {
+    escreva("sim!");
+}
+          
+principal();`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'As funções podem receber valores de entrada, que são chamadas parâmetros. Os parâmetros são listados entre parênteses na definição da função. Quando uma função é chamada, também é possível fornecer os valores de entrada, que são chamados de argumentos',
+      },
+      {
+        type: 'code',
+        body: `funcao saudacao(nome) {
+    escreva("Olá, " + nome + "! Seja bem-vindo!");
+}
+          
+saudacao("João");
+// Resultado: Olá, João! Seja bem-vindo!`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Funções',
+        body: 'Uma função pode retornar um valor usando a palavra-chave "retorna". O valor de retorno pode ser usado em outras partes do código.',
+      },
+      {
+        type: 'code',
+        body: `funcao soma(a, b) {
+    retorna a + b;
+}
+          
+var resultado = soma(3, 4);
+console.log(resultado);
+// Resultado: 7`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Funções',
+        body: 'Funções com "retorna" podem ser usadas como qualquer outra variável dentro do código.',
+      },
+      {
+        type: 'code',
+        body: `funcao exibirNome(nome) {
+    retorna nome;
+}
+          
+escreva("Olá, " + exibirNome() + "! Seja bem-vindo!");`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Escopo de variáveis',
+        body: 'As variáveis declaradas dentro de uma função são chamadas de variáveis locais e só podem ser acessadas dentro da própria função.',
+      },
+      {
+        type: 'default',
+        body: 'Enquanto as variáveis declaradas fora de uma função são chamadas de variáveis globais e podem ser acessadas em qualquer parte do código.',
+      },
+      {
+        type: 'code',
+        body: `var global = "Variável global";
+
+funcao exemplo() {
+    var local = "Variável local";
+    escreva(local); // Resultado: Variável local
+    escreva(global); // Resultado: Variável global
+}
+        
+exemplo();
+escreva(local); // Resultado: Erro`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Função anônima',
+        body: 'É possível criar funções sem um nome especificado. São usadas normalmente como variáveis em outras funções que peçam como argumento de outra função. Porém, uma das maneiras de chamar uma função desse tipo, é associar a função com um variável.',
+      },
+      {
+        type: 'code',
+        body: `var saudacao = funcao() {
+    escreva("Olá, seja bem-vindo!");
+};
+escreva(saudacao());
+// Resultado: Olá, seja bem-vindo!`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Funções',
+        body: 'Como dito, as funções anônimas são frequentemente usadas como argumentos em outras funções, especialmente em funções de ordem superior, como mapear(), filtrarPor() etc.',
+      },
+      {
+        type: 'code',
+        body: `var funcaoParaMapear = funcao(a) { 
+    retorna a * 2; 
+};
+          
+escreva(mapear([5, 3], funcaoParaMapear));
+// Resultado: 10, 6`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Funções nativas',
+        body: 'Funções nativas são funções incorporadas na linguagem que fornecem funcionalidades pré-definidas para realizar tarefas específicas.',
+      },
+      {
+        type: 'default',
+        body: 'Essas funções estão disponíveis globalmente e podem ser usadas em qualquer parte do código sem a necessidade de definição adicional. As funções nativas mais famosas são "escreva()" e "leia()',
+      },
+      {
+        type: 'code',
+        body: `
+var mensagem= leia();
+escreva(mensagem);`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'aleatorio()',
+        body: 'Retorna um número real aleatório entre 0 e 1.',
+      },
+      {
+        type: 'code',
+        body: `var numeroAleatorio = aleatorio();
+
+escreva(numeroAleatorio);
+// 0.8540051495195808`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'aleatorioEntre()',
+        body: 'Retorna um número inteiro aleatório entre os valores passados para a função. O primeiro parâmetro é o número mínimo e o segundo é o máximo. O valor gerado aleatoriamente nunca será igual ao número máximo passado para a função: sempre será um a menos que o máximo.',
+      },
+      {
+        type: 'code',
+        body: `var numeroAleatorio = aleatorioEntre(1, 9);
+escreva(numeroAleatorio);
+// Resultado: um valor entre 1 e 8.`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Funções de conversão',
+        body: 'São funções que permitem converter valores de um tipo de dado para outro tipo',
+      },
+      {
+        type: 'default',
+        title: 'inteiro()',
+        body: 'Converte um número flutuante ou texto, que não apresente letras, em um número inteiro.',
+      },
+      {
+        type: 'code',
+        body: `
+var testeTexto = "111";
+
+escreva(111 + inteiro(testeTexto));
+// Resultado: 222`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'real()',
+        body: 'Converte um número inteiro ou texto, que não apresente letras, em um número flutuante.',
+      },
+      {
+        type: 'code',
+        body: `
+var testeTexto = "504.69";
+
+escreva(0.01 + real(testeTexto));
+// Resultado: 504.7`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'texto()',
+        body: 'Transforma números flutuantes ou inteiros em texto.',
+      },
+      {
+        type: 'code',
+        body: `
+var testeNumero = 123;
+
+escreva("123" + texto(testeNumero));
+// Resultado: 123123`,
+        isRunnable: false,
+      },
+      {
+        type: 'list',
+        title: 'Funções de ordem superior',
+        body: 'Funções de ordem superior ou de alta ordem são funções que podem receber outras funções como argumentos e/ou retornar funções como resultado',
+      },
+      {
+        type: 'default',
+        title: 'mapear()',
+        body: 'Cria um novo vetor a partir uma função que é executada em cada elemento do vetor original.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var numerosDobrados = numeros.map(funcao(numero) {
+    returna numero * 2;
+});
+
+escreva(numerosDobrados);
+// Resultado: [2, 4, 6, 8, 10]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        body: 'Quando se trata de usar uma função de alta ordem como "mapear()", é possível optar por passar uma função anônima ou o nome de uma função como argumento. Ambas as abordagens são válidas e funcionam da mesma forma.',
+      },
+      {
+        type: 'code',
+        body: `var vetor = [1, 2, 3, 4, 5];
+
+var fn = funcao(valor){
+    retorna valor * 2;
+};
+
+escreva(mapear(vetor, fn));
+// Resultado: [2, 4, 6, 8, 10]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'filtrarPor()',
+        body: 'Cria um novo vetor com todos os elementos que passam por um teste (função de filtragem).',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [1, 2, 3, 4, 5];
+
+var numerosPares = numeros.filtrarPor(function(numero) {
+    retorna numero % 2 === 0;
+});
+
+escreva(numerosPares);
+// Resultado: [2, 4]`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'ordenar()',
+        body: 'Ordena os elementos de um vetor com base em uma função de comparação.',
+      },
+      {
+        type: 'code',
+        body: `var numeros = [5, 2, 8, 1, 4];
+
+numeros.ordenar(funcao(a, b) {
+    retorna a - b;
+});
+
+escreva(numeros); 
+// Resultado: [1, 2, 4, 5, 8]`,
+        isRunnable: false,
+      },
+    ],
+  },
 ];
