@@ -107,11 +107,11 @@ export function Ranking() {
     }, [currentRanking, rankings])
   );
 
-  useEffect(() => {
-    if (daysToGo !== 1) return;
-    const timer = setInterval(() => setFinalTime(getFinalTime()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+//   useEffect(() => {
+//     if (daysToGo !== 1) return;
+//     const timer = setInterval(() => setFinalTime(getFinalTime()), 1000);
+//     return () => clearInterval(timer);
+//   }, []);
 
   return (
     <C.Container isLoading={isLoading}>
@@ -150,7 +150,8 @@ export function Ranking() {
             />
           </C.Badges>
           <C.Warning>Os 5 primeiros avançam para o próximo ranking</C.Warning>
-          <C.Days>{daysToGo === 1 ? finalTime : `${daysToGo} dias`}</C.Days>
+          {/* <C.Days>{daysToGo === 1 ? finalTime : `${daysToGo} dias`}</C.Days> */}
+          <C.Days>{daysToGo + (daysToGo === 1 ? ' dia' : ' dias')}</C.Days>
           <UsersList users={users} userId={loggedUser.id} />
         </>
       )}
