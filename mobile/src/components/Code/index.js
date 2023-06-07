@@ -9,6 +9,7 @@ import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import RunningErrorCodeSound from '../../assets/sounds/crying-sound.wav';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
+import { CodeEditor, CodeEditorSyntaxStyles } from '../CodeEditor';
 
 export function Code({ code, userCode, handleUserCode }) {
   //   const [currentCode, setCurrentCode] = useState(code);
@@ -47,6 +48,20 @@ export function Code({ code, userCode, handleUserCode }) {
     <C.Container>
       <View>
         <Editor value={code} isReadOnly={false} onChange={handleCodeChange} />
+        {/* <CodeEditor
+          style={{
+            fontSize: 12,
+            inputLineHeight: 20,
+            highlighterLineHeight: 20,
+          }}
+          language={'javascript'}
+          showLineNumbers
+          autoFocus={false}
+          onChange={handleCodeChange}
+          initialValue={code}
+          readOnly={false}
+          syntaxStyle={CodeEditorSyntaxStyles.tomorrowNightBright}
+        /> */}
       </View>
 
       <BottomSheet
