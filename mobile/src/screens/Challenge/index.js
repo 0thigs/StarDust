@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-//   const challengeId = route.params.id;
-    const challengeId = '3b8894e7-2616-4652-9165-45f9a3dad2f0';
+  //   const challengeId = route.params.id;
+  const challengeId = '3b8894e7-2616-4652-9165-45f9a3dad2f0';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -51,6 +51,7 @@ export function Challenge({ route }) {
   const [slides, setSlides] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userOutputs, setUserOutputs] = useState([]);
+  const [output, setOutput] = useState([]);
 
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
@@ -78,12 +79,17 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
-    //   console.error(error);
-      Toast.error(error.includes('null') ? 'código inválido' : error + `\nLinha: ${errorLine.current}`);
+      //   console.error(error);
+      Toast.error(
+        error.includes('null')
+          ? 'código inválido'
+          : error + (errorLine.current ? `\nLinha: ${errorLine.current}` : '')
+      );
     }
   }
 
   function addUserOutput(userOutput) {
+    console.log({ userOutput });
     userOutputContent.current = userOutput;
   }
 
@@ -111,7 +117,7 @@ export function Challenge({ route }) {
   }
 
   function handleResult(result) {
-    if (!result) return;
+    if (!result || result.includes('null')) return;
     const userResult = result.includes('{') ? JSON.parse(result) : result;
     setUserOutputs(currentUserOutputs => {
       return [
@@ -125,7 +131,7 @@ export function Challenge({ route }) {
   async function verifyCase({ input }) {
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-   
+
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
@@ -134,13 +140,19 @@ export function Challenge({ route }) {
         if (error instanceof Error) throw error;
         throw error.erroInterno;
       }
-      if (erros.length) return;
 
       if (userOutputContent.current && !function_name) {
         setUserOutputs(currentUserOutputs => {
           return [...currentUserOutputs, userOutputContent.current];
         });
         return;
+      } else if (userOutputContent.current) {
+        setOutput([userOutputContent.current]);
+      }
+
+      if (resultado[0].includes('null')) {
+        errorLine.current = null;
+        throw new Error('Retorno de função vazio');
       }
 
       handleResult(resultado.slice(-1)[0]);
@@ -179,6 +191,7 @@ export function Challenge({ route }) {
             handleUserCode={handleUserCode}
             userCode={userCode}
             isRunning={isRunning}
+            output={output}
           />
         ),
       },

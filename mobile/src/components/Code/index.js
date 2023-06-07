@@ -6,17 +6,17 @@ import { Loading } from '../Loading';
 // import { keys } from '../../utils/keys';
 import { default as BottomSheet } from '@gorhom/bottom-sheet';
 import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
-import RunningErrorCodeSound from '../../assets/sounds/crying-sound.wav';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
-import { CodeEditor, CodeEditorSyntaxStyles } from '../CodeEditor';
+import { Output } from '../Output';
 
-export function Code({ code, userCode, handleUserCode }) {
+export function Code({ code, userCode, handleUserCode, output }) {
   //   const [currentCode, setCurrentCode] = useState(code);
   const [isRunning, setIsRunning] = useState(false);
   const [bottomSheetHeight, setBottomSheetHeight] = useState(100);
   const soundRef = useRef(null);
   const bottomSheetRef = useRef(null);
+  const outputRef = useRef(null);
 
   function handleCodeChange(code) {
     userCode.current = code;
@@ -43,6 +43,10 @@ export function Code({ code, userCode, handleUserCode }) {
     Keyboard.addListener('keyboardDidShow', getBottomSheetHeight);
     return () => Keyboard.removeAllListeners('keyboardDidShow');
   }, []);
+
+  useEffect(() => {
+    outputRef.current.collapse();
+  }, [output]);
 
   return (
     <C.Container>
@@ -89,6 +93,8 @@ export function Code({ code, userCode, handleUserCode }) {
           </C.Container>
         }
       />
+
+      <Output bottomSheetRef={outputRef} result={output} />
 
       <Sound ref={soundRef} soundFile={RunningCodeSound} />
     </C.Container>
