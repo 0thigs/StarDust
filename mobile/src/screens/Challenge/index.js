@@ -32,8 +32,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  const challengeId = route.params.id;
-  //   const challengeId = '60a86d70-7888-4f8b-ad8d-348f91d9bdd3';
+//   const challengeId = route.params.id;
+    const challengeId = '3b8894e7-2616-4652-9165-45f9a3dad2f0';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -125,7 +125,7 @@ export function Challenge({ route }) {
   async function verifyCase({ input }) {
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-    
+   
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {

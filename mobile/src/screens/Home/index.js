@@ -76,10 +76,10 @@ export function Home() {
   }
 
   useEffect(() => {
-    if (planets.length && isBackgroundLoaded) {
+    if (planets.length) {
       setTimeout(() => setIsEndTransition(true), 1000);
     }
-  }, [planets, isBackgroundLoaded]);
+  }, [planets]);
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {

@@ -1329,6 +1329,70 @@ Resultado: [cevada, tamarindo]`,
   },
   {
     starId: null,
+    title: 'Verificando número cósmico',
+    texts: [
+      {
+        type: 'default',
+        body: 'Em uma galáxia distante, existem criaturas místicas que residem em diferentes planetas. Cada criatura é identificada por um número único que representa sua essência cósmica.',
+      },
+      {
+        type: 'default',
+        body: 'É fornecido a você uma função chamada "verificarNumero", que receberá um número cósmico como parâmetro.',
+      },
+      {
+        type: 'list',
+        title: 'Tarefa',
+        body: 'Sua tarefa é retornar verdadeiro se o número for menor ou igual a zero, e falso caso contrário.',
+      },
+      {
+        type: 'default',
+        body: 'Aqui está um exemplo para entender o desafio.',
+      },
+      {
+        type: 'code',
+        body: `
+Entrada: 5
+Resultado: falso
+
+Entrada: 0
+Resultado: verdadeiro
+
+Entrada: -2
+Resultado: verdadeiro`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Você terá que retornar um número, então não esqueça de utilizar a instrução "retorna" dentro da função.',
+      },
+    ],
+    function: 'verificarNumero',
+    testCases: [
+      {
+        input: [0],
+        expectedOutput: 'verdadeiro',
+        isLocked: false,
+      },
+      {
+        input: [10],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+      {
+        input: [-5.5],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+    ],
+
+    code: `funcao converterObjetosNavesEmVetores(naves) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
     title: 'O Castelo',
     texts: [
       {
