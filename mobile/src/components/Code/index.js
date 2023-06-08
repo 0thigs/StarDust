@@ -26,7 +26,7 @@ export function Code({ code, userCode, handleUserCode, output }) {
     setIsRunning(true);
     try {
       await handleUserCode();
-      soundRef.current.play();
+      await soundRef.current.play();
     } catch (error) {
       console.error(error);
     } finally {

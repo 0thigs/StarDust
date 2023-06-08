@@ -56,7 +56,7 @@ export const SliderButton = styled.TouchableOpacity`
   justify-content: center;
   position: absolute;
   top: 18%;
-  left: 5.8%;
+  left: 5.7%;
 `;
 
 export const End = styled.View`

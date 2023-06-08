@@ -22,6 +22,7 @@ export const StarButton = styled.TouchableOpacity`
   align-items: center;
   padding-left: 4px;
   opacity: ${({ isUnlocked }) => (isUnlocked ? 0.5 : 1)};
+  margin-top: 12px;
 `;
 
 export const Rocket = styled(Animated.View)``;
@@ -45,6 +46,7 @@ export const StarSign = styled.View`
   border-radius: 10px;
   padding: 16px 12px;
   margin-left: 4px;
+  margin-top: -12px;
   max-width: 180px;
 `;
 

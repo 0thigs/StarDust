@@ -77,7 +77,8 @@ export function Home() {
 
   useEffect(() => {
     if (planets.length) {
-      setTimeout(() => setIsEndTransition(true), 1000);
+      console.log('oi');
+      setTimeout(() => setIsEndTransition(true), 2000);
     }
   }, [planets]);
 
@@ -135,7 +136,6 @@ export function Home() {
           </Animated.View>
         }
       />
-      {/* )} */}
     </>
   );
 }

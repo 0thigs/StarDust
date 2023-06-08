@@ -53,13 +53,11 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
   }
 
   useEffect(() => {
-    console.log(userOutput);
     if (userOutput && !isLocked) {
       setIsOpen(true);
       rotateButton();
     }
   }, [userOutput]);
-
 
   return (
     <C.Container ref={containerRef} transition={transition} isLocked={isLocked}>
@@ -89,14 +87,18 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
           <C.Put>
             <C.Label>Entrada</C.Label>
             <C.Value isInput={true}>
-              {!input.length ? (
+              {!input.length > 0 ? (
                 <C.ValueText>Sem entrada</C.ValueText>
               ) : (
                 input.map((input, index, inputArray) => {
                   const isLastInput = index === inputArray.length - 1;
                   return (
                     <C.ValueText key={input}>
-                      {!input ? 'Sem entrada' : Array.isArray(input) ? formatArray(input) : input}
+                      {!input.toString()
+                        ? 'Sem entrada'
+                        : Array.isArray(input)
+                        ? formatArray(input)
+                        : input}
                       {!isLastInput && ', '}
                     </C.ValueText>
                   );
@@ -110,9 +112,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
               <C.ValueText from={'user'}>
                 {Array.isArray(userOutput)
                   ? formatArray(userOutput)
-                  : userOutput === 0
-                  ? 0
-                  : userOutput
+                  : Boolean(String(userOutput))
                   ? userOutput
                   : 'Sem resultado'}
               </C.ValueText>

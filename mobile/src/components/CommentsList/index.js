@@ -94,7 +94,7 @@ export function CommentsList({ challengeId, bottomSheetRef }) {
       children={
         <C.Container>
           <C.Header>
-            <C.Heading>{comments.length} Comentários</C.Heading>
+            <C.Heading>{comments.length} Comentário{comments.length === 1 ? '' : 's'}</C.Heading>
             <C.SortWrapper>
               <PopoverMenu
                 buttons={popoverMenuSortButtons}

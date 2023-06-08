@@ -3,7 +3,7 @@ export const slides = [
     title: 'Aprenda viajando pelo espaço!',
     image: require('../assets/IntroAssets/achievements-slide.jpeg'),
     description:
-      'Nosso grande objetivo é permitir que qualquer um aprenda lógica de programação por meio de uma didática divertida, explorando cada um dos mundos espaço a fora.',
+      'Nosso grande objetivo é permitir que qualquer um aprenda lógica de programação por meio de uma didática divertida, explorando cada diferentes mundos espaço a fora.',
   },
   {
     title: 'Conquiste tudo!',

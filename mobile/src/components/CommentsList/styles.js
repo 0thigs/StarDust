@@ -18,6 +18,7 @@ export const Heading = styled.Text`
   align-self: center;
   text-align: center;
   width: 80%;
+  margin-top: 12px;
 `;
 
 export const SortWrapper = styled.View`

@@ -162,10 +162,11 @@ export function Challenge({ route }) {
   }
 
   async function handleUserCode() {
+    setIsRunning(true)
     setUserOutputs([]);
 
     for (const testCase of test_cases) {
-      await verifyCase(testCase);
+       verifyCase(testCase);
     }
     setIsRunning(false);
   }

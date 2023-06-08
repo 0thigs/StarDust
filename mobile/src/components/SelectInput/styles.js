@@ -13,6 +13,7 @@ export const Select = styled.TouchableOpacity`
   border: 1px solid ${({ theme }) => theme.colors.gray_700};
   border-radius: 4px;
   padding: 4px;
+  padding-left: 8px;
 `;
 
 export const Label = styled.Text`
