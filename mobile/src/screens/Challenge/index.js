@@ -33,7 +33,7 @@ const earningsByDifficulty = {
 
 export function Challenge({ route }) {
   //   const challengeId = route.params.id;
-  const challengeId = '3b8894e7-2616-4652-9165-45f9a3dad2f0';
+  const challengeId = 'bf061176-cc77-4c56-9cdd-4c708c63941a';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -79,7 +79,7 @@ export function Challenge({ route }) {
 
   function handleError(error) {
     if (error) {
-      //   console.error(error);
+      console.error(error);
       Toast.error(
         error.includes('null')
           ? 'código inválido'
@@ -129,6 +129,7 @@ export function Challenge({ route }) {
   }
 
   async function verifyCase({ input }) {
+    setIsRunning(true);
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
 
@@ -158,17 +159,17 @@ export function Challenge({ route }) {
       handleResult(resultado.slice(-1)[0]);
     } catch (error) {
       handleError(error.message);
+    } finally {
+      setIsRunning(false);
     }
   }
 
   async function handleUserCode() {
-    setIsRunning(true)
     setUserOutputs([]);
 
     for (const testCase of test_cases) {
-       verifyCase(testCase);
+      verifyCase(testCase);
     }
-    setIsRunning(false);
   }
 
   useFocusEffect(

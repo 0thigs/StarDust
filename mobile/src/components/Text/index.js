@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';

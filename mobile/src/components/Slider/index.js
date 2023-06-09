@@ -35,6 +35,7 @@ function SliderComponent({
       ref={sliderRef}
       data={slides}
       keyExtractor={slide => slide.id}
+      keyboardShouldPersistTaps={'always'}
       renderItem={renderItem}
       horizontal
       showsHorizontalScrollIndicator={false}

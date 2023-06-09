@@ -8,7 +8,13 @@ export function Problem({ title, texts, goToCode }) {
     <C.Container showsVerticalScrollIndicator={false}>
       <C.Title>{title}</C.Title>
       {texts.map(({ type, title, body }, index) => (
-        <Text key={`text-${index}`} type={type} title={title} body={body} isRendered={false} />
+        <Text
+          key={`text-${index}`}
+          type={type}
+          title={title}
+          body={body}
+          isRendered={texts.length > 6}
+        />
       ))}
       <C.Button onPress={goToCode}>
         <ArrowRight color={theme.colors.white} width={32} />

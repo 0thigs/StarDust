@@ -1,3 +1,4 @@
+import { css } from 'styled-components';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -8,18 +9,23 @@ export const Container = styled.View`
 
 export const CodeButtons = styled.View`
   position: absolute;
-  right: 0;
+  flex-direction: row;
   background-color: ${({ theme }) => theme.colors.gray_900};
-  border: 0.6px solid ${({ theme }) => theme.colors.green_700};
-  width: 120px;
+  border: 0.6px solid transparent;
+  border-top-color: ${({ theme }) => theme.colors.green_700};
+  width: 100%;
+  height: 52px;
+  bottom: 0;
+  justify-content: center;
 `;
 
-export const KeysList = styled.FlatList``;
+export const KeysList = styled.ScrollView``;
 
 export const CodeButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   padding: 8px;
+  flex-direction: row;
 `;
 
 export const Title = styled.Text`

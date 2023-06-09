@@ -17,6 +17,7 @@ export function CodeEditor(props) {
     syntaxStyle = CodeEditorSyntaxStyles.atomOneDark,
     initialValue = '',
     onChange,
+    onSelectionChange,
     onKeyPress,
     showLineNumbers = false,
     readOnly = false,
@@ -31,6 +32,7 @@ export function CodeEditor(props) {
     marginTop = undefined,
     marginBottom = undefined,
     inputLineHeight = undefined,
+    currentValue,
     inputColor = 'rgba(0,0,0,0)',
     ...addedStyle
   } = style || {};
@@ -46,17 +48,29 @@ export function CodeEditor(props) {
   const inputRef = useRef(null);
   const inputSelection = useRef({ start: 0, end: 0 });
 
-  // Apenas quando números de linhas estão visiveis
+  // Apenas quando os números de linhas estão visiveis
   const lineNumbersPadding = showLineNumbers ? 1.75 * fontSize : undefined;
 
   // Sincroniza o forwardedRef com o inputRef
-  useImperativeHandle(forwardedRef, () => inputRef.current, [inputRef]);
+  useImperativeHandle(
+    forwardedRef,
+    () => {
+      return { textInput: inputRef.current, setValue, moveCursor };
+    },
+    [inputRef]
+  );
 
   useEffect(() => {
     if (onChange) {
       onChange(value);
     }
   }, [onChange, value]);
+
+  //   useEffect(() => {
+  //     if (onSelectionChange) {
+  //       onSelectionChange(inputSelection.current);
+  //     }
+  //   }, [onSelectionChange, handleSelectionChange, inputSelection]);
 
   // Valores negativos movem o cursor para a esquerda
   const moveCursor = (current, amount) => {
@@ -67,6 +81,7 @@ export function CodeEditor(props) {
         end: newPosition,
       },
     });
+
     return newPosition;
   };
 
@@ -87,7 +102,7 @@ export function CodeEditor(props) {
         : indentSize;
       indentation += '\n' + Indentation.createIndentString(addedIndentionSize);
       // não atualize a posição do cursor local para inserir todas as novas mudanças em uma chamada de adição
-      moveCursor(cursorPosition, -addedIndentionSize);
+      //   moveCursor(cursorPosition, -addedIndentionSize);
     }
 
     return Strings.insertStringAt(value, cursorPosition, indentation);
@@ -100,6 +115,7 @@ export function CodeEditor(props) {
   };
 
   const handleChangeText = text => {
+    // if (inputSelection.current) moveCursor(inputSelection.current.start, 1);
     setValue(Strings.convertTabsToSpaces(text));
   };
 
@@ -121,6 +137,7 @@ export function CodeEditor(props) {
         if (Braces.isOpenBrace(key)) {
           setTimeout(() => {
             setValue(curr => addClosingBrace(curr, key));
+            addClosingBrace(value, key);
           }, 10);
         }
         break;
@@ -132,6 +149,10 @@ export function CodeEditor(props) {
 
   const handleSelectionChange = e => {
     inputSelection.current = e.nativeEvent.selection;
+
+    if (onSelectionChange) {
+      onSelectionChange(inputSelection.current);
+    }
   };
 
   return (
@@ -164,6 +185,8 @@ export function CodeEditor(props) {
         onChangeText={handleChangeText}
         onScroll={handleScroll}
         onKeyPress={handleKeyPress}
+        onFocus={handleSelectionChange}
+        onBlur={handleSelectionChange}
         onSelectionChange={handleSelectionChange}
         autoCapitalize="none"
         autoComplete="off"

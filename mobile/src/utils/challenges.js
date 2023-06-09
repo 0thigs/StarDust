@@ -1252,6 +1252,87 @@ Resultado: [cevada, tamarindo]`,
       {
         type: 'default',
         title: null,
+        body: 'Em uma galáxia distante, em meio a várias raças extraterrestres, há um animal escondido entre elas',
+      },
+      {
+        type: 'default',
+        body: 'Os alienígenas possuem nomes esquisitos e escritos em letras maiúsculas, como "YHJR" ou "WSDFKK"',
+      },
+      {
+        type: 'default',
+        body: 'Já os nomes de animais terrestres, como gato, vaca, cachorro etc, são escritos em letras minúsculas.',
+      },
+      {
+        type: 'default',
+        body: 'Contudo, os nomes desses seres estão embaralhados em um texto gigante, como "UgUNFYGaFYFYGtNUoH"',
+      },
+      {
+        type: 'list',
+        title: 'Desafio:',
+        body: 'Sua tarefa é retornar o nome do animal terrestre dessa sopa de letras',
+      },
+      {
+        type: 'default',
+        body: 'Veja o exemplo para entender melhor:',
+      },
+      {
+        type: 'code',
+        body: `Entrada: "UgUNFYGaFYFYGtNUoH"
+Resultado: "gato"
+
+Entrada: "bEEFGBvFBRrHaUHlcNFYaYr"
+Resultado: "vaca"
+
+Entrada: "YFcaHUFBbczFBYhFBYLloGBYEFGBMENTrro"
+Resultado: "cachorro"`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Note que apesar do nome do animal está espalhado entra várias letras, a ordem das letras que compõem o nome do animal permanece na ordem correta.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se: as letras do nome do animal estão em minúscula, mas as demais em maiúscula.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["RrTEaOMTtPBoAPC"],
+        expectedOutput: 'rato',
+        isLocked: false,
+      },
+      {
+        input: ["KPserFCVBMpenTLteDA"],
+        expectedOutput: 'serpente',
+        isLocked: false,
+      },
+      {
+        input: ["caYWDYUOvaQWEvPaOLlo"],
+        expectedOutput: 'cavalo',
+        isLocked: true,
+      },
+      {
+        input: ["RTTTUAforUWWmiASgPPPa"],
+        expectedOutput: 'formiga',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao procurarAnimal(letras) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Removendo sapos',
+    texts: [
+      {
+        type: 'default',
+        title: null,
         body: 'Enfim, são e salvos em nosso foguete. Está com fome?',
       },
       {
@@ -1323,6 +1404,166 @@ Resultado: [cevada, tamarindo]`,
 
     code: `funcao converterObjetosNavesEmVetores(naves) {
     
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: 'Removendo sapos',
+    texts: [
+      {
+        type: 'default',
+        title: null,
+        body: 'Em uma galáxia distante, em meio a várias raças extraterrestres, há um animal escondido entre elas',
+      },
+      {
+        type: 'default',
+        body: 'Os alienígenas possuem nomes esquisitos e escritos em letras maiúsculas, como "YHJR" ou "WSDFKK"',
+      },
+      {
+        type: 'default',
+        body: 'Já os nomes de animais terrestres, como gato, vaca, cachorro etc, são escritos em letras minúsculas.',
+      },
+      {
+        type: 'default',
+        body: 'Contudo, os nomes desses seres estão embaralhados em um texto gigante, como "UgUNFYGaFYFYGtNUoH"',
+      },
+      {
+        type: 'list',
+        title: 'Desafio:',
+        body: 'Sua tarefa é retornar o nome do animal terrestre dessa sopa de letras',
+      },
+      {
+        type: 'default',
+        body: 'Veja o exemplo para entender melhor:',
+      },
+      {
+        type: 'code',
+        body: `Entrada: "UgUNFYGaFYFYGtNUoH"
+Resultado: "gato"
+
+Entrada: "bEEFGBvFBRrHaUHlcNFYaYr"
+Resultado: "vaca"
+
+Entrada: "YFcaHUFBbczFBYhFBYLloGBYEFGBMENTrro"
+Resultado: "cachorro"`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Note que apesar do nome do animal está espalhado entra várias letras, a ordem das letras que compõem o nome do animal permanece na ordem correta.',
+      },
+      {
+        type: 'alert',
+        body: 'Lembre-se: as letras do nome do animal estão em minúscula, mas as demais em maiúscula.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["RrTEaOMTtPBoAPC"],
+        expectedOutput: 'rato',
+        isLocked: false,
+      },
+      {
+        input: ["KPserFCVBMpenTLteDA"],
+        expectedOutput: 'serpente',
+        isLocked: false,
+      },
+      {
+        input: ["caYWDYUOvaQWEvPaOLlo"],
+        expectedOutput: 'cavalo',
+        isLocked: true,
+      },
+      {
+        input: ["RTTTUAforUWWmiASgPPPa"],
+        expectedOutput: 'formiga',
+        isLocked: true,
+      },
+    ],
+
+    code: `funcao procurarAnimal(letras) {
+    
+}`,
+    difficulty: 'easy',
+    categories: ['básico', 'geometria', 'matemática', 'números'],
+  },
+  {
+    starId: null,
+    title: '',
+    texts: [
+      {
+        type: 'default',
+        body: 'Em uma nave espacial, a tripulação está tentando enviar mensagens importantes para outras espaçonaves.',
+      },
+      {
+        type: 'default',
+        body: 'No entanto, o teclado principal da nave está com defeito e algumas teclas não estão funcionando corretamente. Isso dificulta a digitação correta das mensagens.Por exemplo, ao digitar "Olá, mundo", a mensagem pode ser enviada como "Oxá, zundo"',
+      },
+      {
+        type: 'list',
+        body: 'Sua tarefa é identificar quais teclas estão quebradas, ou seja, as teclas que foram digitadas incorretamente devido ao defeito do teclado.',
+      },
+      {
+        type: 'default',
+        body: 'Você receberá uma função chamada "identificarTeclas" recebendo dois parâmetros: a frase correta e a incorreta.',
+      },
+      {
+        type: 'default',
+        body: 'Você deve retornar um vetor contendo as letras que são diferentes entre os duas frases',
+      },
+      {
+        type: 'code',
+        body: `Entrada: 'missão em progresso', 'Millão em progrello'
+Saída: ['s']
+
+Entrada: 'alien encontrado', 'Alien enzongrado'
+Saída: ['c', 't']
+
+Entrada: 'exploração bem-sucedida', 'Excloração fem-xucedida'
+Saída: ['p', 'b', 's']
+`,
+        isRunnable: false,
+      },
+      {
+        type: 'alert',
+        body: 'Note que no primeiro exemplo o vetor de resultado tem apenas a letra "s" e não quatro letras "s". Isso porque você deve identificar apenas uma tecla quebrada por frase, ou seja, o vetor retornado não pode conter letras repetidas',
+      },
+      {
+        type: 'alert',
+        body: 'Isso porque você deve identificar apenas uma tecla quebrada por frase, ou seja, o vetor retornado não pode conter letras repetidas',
+      },
+      {
+        type: 'alert',
+        body: 'Todas as frases passadas para você estarão em letras minúsculas.',
+      },
+      {
+        type: 'alert',
+        body: 'A ordem das letras do vetor a ser retornado deve corresponder com a ordem em que elas são encontradas na frase correta.',
+      },
+    ],
+    function: null,
+    testCases: [
+      {
+        input: ["'laser ativado'", "'baser ativago'"],
+        expectedOutput: ['l', 'd'],
+        isLocked: false,
+      },
+      {
+        input: ["'energia está completa'", "'enerbiu está completu'"],
+        expectedOutput: ['g', 'a'],
+        isLocked: false,
+      },
+      {
+        input: ["'sistema comprometido'", "'sisdemo bompromedido'"],
+        expectedOutput: ['t', 'a', 'c'],
+        isLocked: false,
+      },
+    ],
+
+    code: `funcao identificarTeclas(fraseCorreta, fraseIconrreta) {
+
 }`,
     difficulty: 'easy',
     categories: ['básico', 'geometria', 'matemática', 'números'],

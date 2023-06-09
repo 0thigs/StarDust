@@ -3,45 +3,52 @@ import { View, Keyboard } from 'react-native';
 import { Editor } from '../Editor';
 import { Sound } from '../Sound';
 import { Loading } from '../Loading';
-// import { keys } from '../../utils/keys';
+import { keys } from '../../utils/keys';
 import { default as BottomSheet } from '@gorhom/bottom-sheet';
 import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 import { Output } from '../Output';
+import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
+import { Play } from 'react-native-feather';
 
-export function Code({ code, userCode, handleUserCode, output }) {
-  //   const [currentCode, setCurrentCode] = useState(code);
-  const [isRunning, setIsRunning] = useState(false);
-  const [bottomSheetHeight, setBottomSheetHeight] = useState(100);
+export function Code({ code, userCode, handleUserCode, isRunning, output }) {
+  const [isKeysVisible, setIsKeysVisible] = useState(false);
+  const cursorPosition = useRef(0);
   const soundRef = useRef(null);
-  const bottomSheetRef = useRef(null);
+  const editorRef = useRef(null);
   const outputRef = useRef(null);
 
   function handleCodeChange(code) {
     userCode.current = code;
   }
 
-  async function handleRunPress() {
-    setIsRunning(true);
-    try {
-      await handleUserCode();
-      await soundRef.current.play();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsRunning(false);
-    }
+  function handleCodeSelectionChange(selection) {
+    cursorPosition.current = selection?.start;
   }
 
-  function getBottomSheetHeight(event) {
-    const { height } = event.endCoordinates;
-    setBottomSheetHeight(height / 4);
+  async function handleRunPress() {
+    soundRef.current.play();
+    handleUserCode();
+  }
+
+  function handleKeyPress(key) {
+    const updatedValue =
+      userCode.current.slice(0, cursorPosition.current) +
+      key +
+      ' ' +
+      userCode.current.slice(cursorPosition.current);
+    editorRef.current.setValue(updatedValue);
+    userCode.current = updatedValue;
   }
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', getBottomSheetHeight);
-    return () => Keyboard.removeAllListeners('keyboardDidShow');
+    Keyboard.addListener('keyboardDidShow', () => setIsKeysVisible(true));
+    Keyboard.addListener('keyboardDidHide', () => setIsKeysVisible(false));
+    return () => {
+      Keyboard.removeAllListeners('keyboardDidShow');
+      Keyboard.removeAllListeners('keyboardDidHide');
+    };
   }, []);
 
   useEffect(() => {
@@ -51,48 +58,35 @@ export function Code({ code, userCode, handleUserCode, output }) {
   return (
     <C.Container>
       <View>
-        <Editor value={code} isReadOnly={false} onChange={handleCodeChange} />
-        {/* <CodeEditor
-          style={{
-            fontSize: 12,
-            inputLineHeight: 20,
-            highlighterLineHeight: 20,
-          }}
-          language={'javascript'}
-          showLineNumbers
-          autoFocus={false}
+        <Editor
+          editorRef={editorRef}
+          value={code}
+          isReadOnly={false}
           onChange={handleCodeChange}
-          initialValue={code}
-          readOnly={false}
-          syntaxStyle={CodeEditorSyntaxStyles.tomorrowNightBright}
-        /> */}
+          onSelectionChange={handleCodeSelectionChange}
+        />
       </View>
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        snapPoints={['10%', bottomSheetHeight]}
-        index={1}
-        backgroundStyle={{ backgroundColor: theme.colors.black }}
-        enableContentPanningGesture={false}
-        keyboardBehavior={'extend'}
-        children={
-          <C.Container>
-            {/* <C.KeysList
-            data={keys}
-            keyExtractor={key => key}
-            renderItem={({ item: key }) => (
-              <C.CodeButton onPress={handleKeyPress}>
+      <C.CodeButtons>
+        {isKeysVisible && (
+          <GestureHandlerScrollView keyboardShouldPersistTaps={'always'} horizontal>
+            {keys.map(key => (
+              <C.CodeButton key={key} onPress={() => handleKeyPress(key)}>
                 <C.Title>{key}</C.Title>
               </C.CodeButton>
-            )}
-            horizontal
-          /> */}
-            <C.CodeButton onPress={handleRunPress}>
-              {isRunning ? <Loading /> : <C.Title isRunButton={true}>executar</C.Title>}
-            </C.CodeButton>
-          </C.Container>
-        }
-      />
+            ))}
+          </GestureHandlerScrollView>
+        )}
+
+        <C.CodeButton isRunningButton={true} style={{ width: 140 }} onPress={handleRunPress}>
+          <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>
+          <Play
+            color={theme.colors.green_500}
+            width={16}
+            style={{ marginBottom: 4, marginLeft: 4 }}
+          />
+        </C.CodeButton>
+      </C.CodeButtons>
 
       <Output bottomSheetRef={outputRef} result={output} />
 
