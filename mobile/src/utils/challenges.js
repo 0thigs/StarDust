@@ -1432,7 +1432,7 @@ Resultado: [cevada, tamarindo]`,
       {
         type: 'list',
         title: 'Desafio:',
-        body: 'Sua tarefa é retornar o nome do animal terrestre dessa sopa de letras',
+        body: 'Sua tarefa é identificar o nome do animal terrestre nessa sopa de letras',
       },
       {
         type: 'default',
@@ -1452,7 +1452,7 @@ Resultado: "cachorro"`,
       },
       {
         type: 'alert',
-        body: 'Note que apesar do nome do animal está espalhado entra várias letras, a ordem das letras que compõem o nome do animal permanece na ordem correta.',
+        body: 'Note que apesar do nome do animal está espalhado entra várias letras, a ordem das letras que compõem o nome do animal permanece correto.',
       },
       {
         type: 'alert',

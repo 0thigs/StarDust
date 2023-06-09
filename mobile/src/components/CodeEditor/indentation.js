@@ -4,9 +4,9 @@ export const INDENT_SIZE = 2; // Ideal para telas menores
 export const INDENT_SYMBOL = ' '; // Espaço de um tab
 
 /**
- * Retorna o tamanho da identação size uma dada linha de código.
+ * Retorna o tamanho da identação de uma dada linha de código.
  * @param line linha de código
- * @returns número.
+ * @returns number.
  */
 export const getIndentSize = (line) => {
     for (let i = 0; i < line.length; i++) {
@@ -14,7 +14,6 @@ export const getIndentSize = (line) => {
             const trimmed = line.trimEnd();
             const lastChar = trimmed.substring(trimmed.length - 1);
             // Identação extra se dentro de um colchetes
-            // Inclues colon for python.
             // Inclui vírgula se for código python
             const addedIndent =
                 Braces.isOpenBrace(lastChar, true) || lastChar === ':' ? INDENT_SIZE : 0;
@@ -25,7 +24,6 @@ export const getIndentSize = (line) => {
 };
 
 /**
- * Analyses the lines of code (from end to start) and finds
  * Analiza as linhas do código (do fim ao começo) e encontra
  * o melhor tamanho de identação para a nova linha 
  * @param lines A linhas de código a serem analisadas

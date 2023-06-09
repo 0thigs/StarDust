@@ -103,8 +103,8 @@ export function CodeEditor(props) {
       // não atualize a posição do cursor local para inserir todas as novas mudanças em uma chamada de adição
       //   moveCursor(cursorPosition, -addedIndentionSize);
     }
-
-    return Strings.insertStringAt(value, cursorPosition, indentation);
+    moveCursor(cursorPosition, indentSize + 1)
+    return Strings.insertStringAt(value, cursorPosition + 1, indentation);
   };
 
   const addClosingBrace = (val, key) => {

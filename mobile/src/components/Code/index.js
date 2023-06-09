@@ -28,9 +28,9 @@ export function Code({ code, userCode, handleUserCode, output }) {
   }
 
   async function handleRunPress() {
-    setIsRunning(true)
+    setIsRunning(true);
     await Promise.all([soundRef.current.play(), handleUserCode()]);
-    setIsRunning(false)
+    setIsRunning(false);
   }
 
   function handleKeyPress(key) {
@@ -121,7 +121,11 @@ export function Code({ code, userCode, handleUserCode, output }) {
         )}
 
         <C.CodeButton isRunningButton={true} style={{ width: 140 }} onPress={handleRunPress}>
-         {isRunning ? <Loading /> : <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>}
+          {isRunning ? (
+            <Loading />
+          ) : (
+            <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>
+          )}
           <Play
             color={theme.colors.green_500}
             width={16}
