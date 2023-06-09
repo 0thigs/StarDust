@@ -7,11 +7,9 @@ import { Result } from '../../components/Result';
 import { Slider } from '../../components/Slider';
 import { End } from '../../components/End';
 import { TransitionScreenAnimation } from '../../components/TransitionScreenAnimation';
-
 import { execute } from '../../libs/delegua.mjs';
 import { Toast } from 'toastify-react-native';
-
-import { log, useSharedValue } from 'react-native-reanimated';
+import { useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
 import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
@@ -32,8 +30,8 @@ const earningsByDifficulty = {
 };
 
 export function Challenge({ route }) {
-  //   const challengeId = route.params.id;
-  const challengeId = 'f7b6b796-ed28-4201-be61-66b6b561edbe';
+    const challengeId = route.params.id;
+//   const challengeId = 'f7b6b796-ed28-4201-be61-66b6b561edbe';
   const { loggedUser } = useAuth();
   const { challenge, addUserCompletedChallenges } = useChallenge(challengeId, loggedUser.id);
   const {
@@ -52,7 +50,6 @@ export function Challenge({ route }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userOutputs, setUserOutputs] = useState([]);
   const [output, setOutput] = useState([]);
-
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
@@ -117,8 +114,6 @@ export function Challenge({ route }) {
   }
 
   function handleResult(result) {
-    console.log(result);
-    return
     if (!result || result.includes('null')) return;
     const userResult = result.includes('{') ? JSON.parse(result) : result;
     setUserOutputs(currentUserOutputs => {
@@ -134,9 +129,10 @@ export function Challenge({ route }) {
     setIsRunning(true);
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-  
+
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
+
       if (erros.length) {
         const error = erros[0];
         errorLine.current = error.linha;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';
@@ -20,6 +20,15 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
   function handleCodeButtonPress(body) {
     navigation.navigate('Playground', { id: null, code: body });
   }
+
+  function getCodeHeigth(code) {
+    const lines = code.split('\n').length;
+    return lines * 28;
+  }
+
+  const codeHeigth = useMemo(() => {
+    if (type === 'code') return getCodeHeigth(body);
+  }, []);
 
   async function handleSpeechButton(text) {
     if (await Speech.isSpeakingAsync()) {
@@ -47,7 +56,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
             </C.CodeButton>
           )}
 
-          <C.Code>
+          <C.Code horizontal style={{ height: codeHeigth }}>
             <Editor value={body} />
           </C.Code>
         </>

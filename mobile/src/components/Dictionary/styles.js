@@ -19,7 +19,9 @@ export const Title = styled.Text`
   font-size: 16px;
 `;
 
-export const Exit = styled.TouchableOpacity``;
+export const Exit = styled.TouchableOpacity`
+padding: 8px;
+`;
 
 export const TopicsList = styled.FlatList.attrs({
   contentContainerStyle: {
@@ -57,5 +59,5 @@ export const TextsContainer = styled.View`
 export const Texts = styled.FlatList``;
 
 export const Back = styled.TouchableOpacity`
-  margin-bottom: 8px;
+  padding: 8px;
 `;

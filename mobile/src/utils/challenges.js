@@ -1472,7 +1472,7 @@ Resultado: "cachorro"`,
         isLocked: false,
       },
       {
-        input: ["'caYWDYUOvaQWEvPaOLlo'"],
+        input: ["'caYWDYUOvaQWEPOlLo'"],
         expectedOutput: 'cavalo',
         isLocked: true,
       },

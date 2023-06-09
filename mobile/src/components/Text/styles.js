@@ -18,8 +18,8 @@ export const Title = styled.Text`
 
 export const Code = styled.ScrollView`
   border-radius: 10px;
-  width: 100%;
   position: relative;
+  width: 100%;
 `;
 
 const DefaultContainer = css`

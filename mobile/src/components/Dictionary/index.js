@@ -70,7 +70,7 @@ export function Dictionary({ isVisible, setIsVisible, topicId }) {
       <C.Content>
         <C.Header>
           <C.Title>{title}</C.Title>
-          <C.Exit onPress={() => setIsVisible(false)}>
+          <C.Exit onPress={() => setIsVisible(false)} activeOpacity={0.7}>
             <X color={theme.colors.red_700} />
           </C.Exit>
         </C.Header>
