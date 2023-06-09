@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useImperativeHandle } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, Platform } from 'react-native';
 import * as Braces from './braces';
 
 import * as Indentation from './indentation.js';
@@ -66,12 +66,6 @@ export function CodeEditor(props) {
     }
   }, [onChange, value]);
 
-  //   useEffect(() => {
-  //     if (onSelectionChange) {
-  //       onSelectionChange(inputSelection.current);
-  //     }
-  //   }, [onSelectionChange, handleSelectionChange, inputSelection]);
-
   // Valores negativos movem o cursor para a esquerda
   const moveCursor = (current, amount) => {
     const newPosition = current + amount;
@@ -82,6 +76,11 @@ export function CodeEditor(props) {
       },
     });
 
+    if (Platform.OS === 'android') {
+      setTimeout(() => {
+        inputRef.current?.setNativeProps({ selection: { start: 0 } });
+      }, 20);
+    }
     return newPosition;
   };
 
@@ -110,13 +109,13 @@ export function CodeEditor(props) {
 
   const addClosingBrace = (val, key) => {
     let cursorPosition = inputSelection.current.start;
-    cursorPosition = moveCursor(cursorPosition, -1);
+    cursorPosition = moveCursor(cursorPosition, 0);
     return Strings.insertStringAt(val, cursorPosition, Braces.getCloseBrace(key));
   };
 
   const handleChangeText = text => {
-    // if (inputSelection.current) moveCursor(inputSelection.current.start, 1);
     setValue(Strings.convertTabsToSpaces(text));
+    
   };
 
   const handleScroll = e => {
@@ -195,7 +194,7 @@ export function CodeEditor(props) {
         keyboardType="ascii-capable"
         editable={!readOnly}
         testID={`${testID}-text-input`}
-        // ref={inputRef}
+        ref={inputRef}
         multiline
       />
     </View>

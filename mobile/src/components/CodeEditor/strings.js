@@ -17,5 +17,5 @@ export const convertTabsToSpaces = str => {
  * @returns string
  */
 export const insertStringAt = (str, position, strToInsert) => {
-  return str.substring(0, position + 1) + strToInsert + str.substring(position + 1);
+  return str.substring(0, position) + strToInsert + str.substring(position);
 };

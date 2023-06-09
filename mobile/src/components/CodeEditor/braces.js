@@ -2,18 +2,17 @@ const braces = new Map([
   ['{', '}'],
   ['(', ')'],
   ['[', ']'],
-  ['<', '>'],
   ['"', '"'],
   ["'", "'"],
   ['`', '`'],
 ]);
 
-const regularBraces = new Set(['{', '(', '[', '<']);
+const regularBraces = new Set(['{', '(', '[']);
 
 /**
  * Verifica se a string é um símbolo de agrupamento (parênteses, colchetes ou chaves)
  * @param str Símbolo a ser analisado
- * @param onlyRegularBraces Retorna true apenas para os caracteres `{`, `(`, `[`, or `<`.
+ * @param onlyRegularBraces true apenas para os caracteres `{`, `(`, `[`, or `<`.
  * @returns boolean
  */
 export const isOpenBrace = (str, onlyRegularBraces = false) => {

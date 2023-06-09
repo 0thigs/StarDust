@@ -4,16 +4,16 @@ import { Editor } from '../Editor';
 import { Sound } from '../Sound';
 import { Loading } from '../Loading';
 import { keys } from '../../utils/keys';
-import { default as BottomSheet } from '@gorhom/bottom-sheet';
-import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
-import theme from '../../global/styles/theme';
-import * as C from './styles';
 import { Output } from '../Output';
-import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
 import { Play } from 'react-native-feather';
+import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
+import theme from '../../global/styles/theme';
+import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
+import * as C from './styles';
 
-export function Code({ code, userCode, handleUserCode, isRunning, output }) {
+export function Code({ code, userCode, handleUserCode, output }) {
   const [isKeysVisible, setIsKeysVisible] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   const cursorPosition = useRef(0);
   const soundRef = useRef(null);
   const editorRef = useRef(null);
@@ -28,16 +28,58 @@ export function Code({ code, userCode, handleUserCode, isRunning, output }) {
   }
 
   async function handleRunPress() {
-    soundRef.current.play();
-    handleUserCode();
+    setIsRunning(true)
+    await Promise.all([soundRef.current.play(), handleUserCode()]);
+    setIsRunning(false)
   }
 
   function handleKeyPress(key) {
-    const updatedValue =
-      userCode.current.slice(0, cursorPosition.current) +
-      key +
-      ' ' +
-      userCode.current.slice(cursorPosition.current);
+    let updatedValue = '';
+    switch (key) {
+      case 'TAB':
+        updatedValue = updatedValue =
+          userCode.current.slice(0, cursorPosition.current) +
+          '  ' +
+          userCode.current.slice(cursorPosition.current);
+        editorRef.current.moveCursor(cursorPosition.current, 2);
+        break;
+      case '(':
+      case '[':
+      case '{':
+        const closeKey = keys.find((_, index) => index === keys.indexOf(key) + 1);
+
+        userCode.current =
+          userCode.current.slice(0, cursorPosition.current) +
+          closeKey +
+          userCode.current.slice(cursorPosition.current);
+        editorRef.current.moveCursor(cursorPosition.current, 1);
+
+        updatedValue =
+          userCode.current.slice(0, cursorPosition.current) +
+          key +
+          userCode.current.slice(cursorPosition.current);
+        break;
+      case '"':
+      case "'":
+        userCode.current =
+          userCode.current.slice(0, cursorPosition.current) +
+          key +
+          userCode.current.slice(cursorPosition.current);
+        editorRef.current.moveCursor(cursorPosition.current, 1);
+
+        updatedValue =
+          userCode.current.slice(0, cursorPosition.current) +
+          key +
+          userCode.current.slice(cursorPosition.current);
+        break;
+      default:
+        updatedValue =
+          userCode.current.slice(0, cursorPosition.current) +
+          key +
+          userCode.current.slice(cursorPosition.current);
+        editorRef.current.moveCursor(cursorPosition.current, 1);
+    }
+
     editorRef.current.setValue(updatedValue);
     userCode.current = updatedValue;
   }
@@ -79,7 +121,7 @@ export function Code({ code, userCode, handleUserCode, isRunning, output }) {
         )}
 
         <C.CodeButton isRunningButton={true} style={{ width: 140 }} onPress={handleRunPress}>
-          <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>
+         {isRunning ? <Loading /> : <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>}
           <Play
             color={theme.colors.green_500}
             width={16}
