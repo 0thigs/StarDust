@@ -79,7 +79,7 @@ export function CodeEditor(props) {
     if (Platform.OS === 'android') {
       setTimeout(() => {
         inputRef.current?.setNativeProps({ selection: { start: 0 } });
-      }, 20);
+      }, 10);
     }
     return newPosition;
   };

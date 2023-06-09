@@ -1462,22 +1462,22 @@ Resultado: "cachorro"`,
     function: null,
     testCases: [
       {
-        input: ["RrTEaOMTtPBoAPC"],
+        input: ["'RrTEaOMTtPBoAPC'"],
         expectedOutput: 'rato',
         isLocked: false,
       },
       {
-        input: ["KPserFCVBMpenTLteDA"],
+        input: ["'KPserFCVBMpenTLteDA'"],
         expectedOutput: 'serpente',
         isLocked: false,
       },
       {
-        input: ["caYWDYUOvaQWEvPaOLlo"],
+        input: ["'caYWDYUOvaQWEvPaOLlo'"],
         expectedOutput: 'cavalo',
         isLocked: true,
       },
       {
-        input: ["RTTTUAforUWWmiASgPPPa"],
+        input: ["'RTTTUAforUWWmiASgPPPa'"],
         expectedOutput: 'formiga',
         isLocked: true,
       },

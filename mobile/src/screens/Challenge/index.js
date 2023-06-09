@@ -11,7 +11,7 @@ import { TransitionScreenAnimation } from '../../components/TransitionScreenAnim
 import { execute } from '../../libs/delegua.mjs';
 import { Toast } from 'toastify-react-native';
 
-import { useSharedValue } from 'react-native-reanimated';
+import { log, useSharedValue } from 'react-native-reanimated';
 import { useChallenge } from '../../hooks/useChallenge';
 import { useAuth } from '../../hooks/useAuth';
 import * as C from './styles';
@@ -117,6 +117,8 @@ export function Challenge({ route }) {
   }
 
   function handleResult(result) {
+    console.log(result);
+    return
     if (!result || result.includes('null')) return;
     const userResult = result.includes('{') ? JSON.parse(result) : result;
     setUserOutputs(currentUserOutputs => {
@@ -132,7 +134,7 @@ export function Challenge({ route }) {
     setIsRunning(true);
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-
+  
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
       if (erros.length) {
