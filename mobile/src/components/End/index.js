@@ -95,6 +95,7 @@ export function End({
 
       if (nextStar && !nextStar.isUnlocked) {
         await addUnlockedStar(nextStar.id);
+        console.log(nextStar.isUnlocked);
         updatedUnlockedStars++;
       }
 

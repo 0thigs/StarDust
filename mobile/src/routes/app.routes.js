@@ -20,8 +20,8 @@ export function AppRoutes() {
       }}
     >
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
-      <Stack.Screen name="Challenge" component={Challenge} />
       <Stack.Screen name="Lesson" component={Lesson} />
+      <Stack.Screen name="Challenge" component={Challenge} />
       <Stack.Screen name="Codes" component={Codes} />
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Intro" component={Intro} />

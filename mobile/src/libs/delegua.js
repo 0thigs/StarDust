@@ -1,7 +1,7 @@
 const delegua = require('@designliquido/delegua');
 
 function teste(oi) {
-  console.log(oi);
+  
 }
 
 async function execute(code, callback) {

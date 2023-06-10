@@ -6,16 +6,32 @@ export const challenges = [
     texts: [
       {
         type: 'default',
-        body: 'Parece que finalmente você encontrou um planeta à vista! Para veriifcar se há vida inteligente, você pode enviar uma mensagem dizendo: "Olá, mundo!". Para fazer isso você deve escrever um programa que receba essa mensagem e a escreva, sendo a entrada e saída de dados respectivamente, veja o exemplo',
+        body: 'Parece que finalmente você encontrou um planeta à vista!',
+      },
+      {
+        type: 'default',
+        body: 'Para verifcar se há vida inteligente, você pode enviar uma mensagem dizendo: "Olá, mundo!".',
+      },
+      {
+        type: 'default',
+        body: 'Para fazer isso você deve fazer um programa na aba de código que receba essa mensagem e a escreva, sendo a entrada e saída de dados respectivamente.',
+      },
+      {
+        type: 'default',
+        body: 'Veja o exemplo para entender melhor:',
       },
       {
         type: 'code',
         body: `Entrada: "Olá, mundo!"
-Saida: "Olá, mundo!"`,
+Saída: "Olá, mundo!"`,
+      },
+      {
+        type: 'list',
+        body: 'Se o resultado do seu código passar no teste de caso na aba de resultado, você conclui o desafio 🎉.',
       },
       {
         type: 'alert',
-        body: 'Lembre-se de manter o comando leia( ) para capturar os dados de entrada',
+        body: 'Lembre-se de manter o comando leia( ) no programa para capturar os dados de entrada.',
       },
     ],
     testCases: [
@@ -27,7 +43,10 @@ Saida: "Olá, mundo!"`,
     ],
 
     code: `
-var mensagem = leia()`,
+var mensagem = leia()
+
+// Escreva seu código aqui embaixo
+`,
     difficulty: 'easy',
     categories: ['básico'],
   },

@@ -77,14 +77,13 @@ export function Home() {
 
   useEffect(() => {
     if (planets.length) {
-      console.log('oi');
       setTimeout(() => setIsEndTransition(true), 2000);
     }
   }, [planets]);
 
   useEffect(() => {
     if (lastUnlockedStarYPosition) {
-      scrollToLastUnlockedStar(false);
+      scrollToLastUnlockedStar();
     }
   }, [lastUnlockedStarYPosition, planets, isEndTrasition]);
 

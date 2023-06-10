@@ -9,8 +9,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
-  border-color: transparent;
-  border-bottom-color: ${props => props.theme.colors.green_500};
+  border-bottom-color: ${({ theme }) => theme.colors.green_500};
   margin-top: 12px;
   z-index: 10;
 `;
@@ -19,8 +18,6 @@ export const Info = styled.View`
   width: 70%;
   padding: 4px;
   margin-left: 8px;
-  border-bottom-width: ${StyleSheet.hairlineWidth}px;
-  border-top-color: ${props => props.theme.colors.green_500};
 `;
 
 export const Name = styled.Text`
@@ -44,12 +41,14 @@ export const ProgressBar = styled.View`
   width: 70%;
   height: 4px;
   background-color: ${({ theme }) => theme.colors.gray_500};
+  border-radius: 8px;
 `;
 
 export const Bar = styled.View`
   width: ${({ barWidth }) => barWidth};
   height: 4px;
   background-color: ${({ theme }) => theme.colors.green_500};
+  border-radius: 8px;
 `;
 
 export const ProgressBarrequiredAmount = styled.Text`

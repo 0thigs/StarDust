@@ -46,7 +46,7 @@ export function DropZone({
         width,
         itemId: null,
       };
-      updateZone(zone);
+      setTimeout(() => updateZone(zone), 20);
     });
   }, [linesWidth]);
 
@@ -66,7 +66,7 @@ export function DropZone({
       if (canRegisterZone) {
         zones.current = [...zones.current, zone];
       } else {
-        updateZone(zone);
+        setTimeout(() => updateZone(zone), 20);
       }
     });
   }

@@ -54,6 +54,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
   }
 
   useEffect(() => {
+    if (reorderedOptions.length) return;
     reorderItems(options, setReorderedOptions);
   }, []);
 

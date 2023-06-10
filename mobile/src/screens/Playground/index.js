@@ -18,7 +18,7 @@ export function Playground({ route }) {
   const [output, setOutput] = useState([]);
   const [isPromptVisible, setisPromptVisible] = useState(false);
   const [promptTitle, setPromptTitle] = useState('');
-  const [codeWithPrompt, setCodeWithPrompt] = useState('');
+  const [codeWithInput, setCodeWithInput] = useState('');
   const input = useRef('');
   const userCode = useRef('');
   const promptRef = useRef(null);
@@ -51,7 +51,7 @@ export function Playground({ route }) {
   }
 
   function onPromptConfirm() {
-    formatCode(codeWithPrompt, input.current);
+    formatCode(codeWithInput, input.current);
   }
 
   function onPromptCancel() {
@@ -68,6 +68,10 @@ export function Playground({ route }) {
     return promptTitle;
   }
 
+  function formatCode(code) {
+
+  }
+
   function hasInput(code) {
     const regex = /(leia\(.*\))/;
     const inputParam = code.match(regex);
@@ -78,8 +82,9 @@ export function Playground({ route }) {
 
   async function handleUserCode() {
     const code = userCode.current;
+
     if (hasInput(code)) {
-      setCodeWithPrompt(code);
+      setCodeWithInput(code);
       setisPromptVisible(true);
       return;
     }

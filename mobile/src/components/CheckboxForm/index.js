@@ -68,6 +68,7 @@ export function CheckboxForm({ stem, options, correctOptions, code, index }) {
   }
 
   useEffect(() => {
+    if (reorderedOptions.length) return;
     reorderItems(options, setReorderedOptions);
   }, [options]);
 

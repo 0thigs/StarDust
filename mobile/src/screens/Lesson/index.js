@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { usePlanet } from '../../hooks/usePlanet';
-
 import { Theory } from '../../components/Theory';
 import { Quiz } from '../../components/Quiz';
 import { End } from '../../components/End';
@@ -10,7 +9,7 @@ import * as C from './styles';
 
 export function Lesson({ route }) {
   const starId = route?.params.id;
-//   const starId = '99f67920-afc1-494c-a076-8b7bf6eb90b6';
+//   const starId = '05a206ae-69f0-4263-87a5-1dd0018d15d8';
   const { planets, getCurrentStar } = usePlanet();
   const [star, setStar] = useState(null);
   const [state, dispatch] = useLesson();

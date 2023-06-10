@@ -107,7 +107,6 @@ export const theories = [
     texts: [
       {
         type: 'default',
-        title: 'Introdução',
         body: 'Agora que você finalmente está no espaço, imagino que você queira explorar novos planetas e talvez encontrar vidas alienígenas.',
       },
       {
@@ -326,7 +325,14 @@ var numero999`,
       {
         type: 'code',
         body: `// Nada de fazer isso ❌
-var minha variavel`,
+var minha variavel
+
+// Você pode separar usando sublinhado ✅
+var minha_variavel
+
+// Ou juntar a segunda palavra 
+// colocando a primeira letra em maiúscula ✅
+var minhaVariavel`,
         isRunnable: false,
       },
       {
@@ -369,7 +375,7 @@ var hwrufh = "Paz mundial!"`,
       {
         type: 'default',
         title: null,
-        body: 'Parece que sua mensagem foi enviada para planeta que você encontrou, mas você não obteve nenhuma resposta :(',
+        body: 'Parece que sua mensagem foi enviada com sucesso para o planeta que você encontrou, mas você não obteve nenhuma resposta :(',
       },
       {
         type: 'default',
@@ -379,68 +385,89 @@ var hwrufh = "Paz mundial!"`,
       {
         type: 'default',
         title: 'Pera aí, tipo de dado?',
-        body: 'Isso mesmo! Em programação podemos usar vários tipos de dados diferentes, sendo os mais básicos os do tipo de texto, número e lógico.',
+        body: 'Isso mesmo! Em programação podemos usar vários tipos de dados diferentes. Os mais básicos são tipo de texto, número e lógico.',
       },
       {
         type: 'alert',
-        body: 'Por agora, vamos falar sobre o tipo de texto, que é o que nós mais usamos até agora.',
+        body: 'Por enquanto, vamos falar sobre o tipo texto, que é o único que usamos até agora.',
+      },
+      {
+        type: 'list',
+        title: 'Tipo texto',
+        body: 'O tipo de texto é utilizado para representar valores que são texto, dã! Eles podem ser compostos por uma ou mais letras, como também números ou símbolos.',
       },
       {
         type: 'default',
-        title: null,
-        body: 'Então, o tipo de texto é utilizado para representar valores que são texto, dã! Eles podem ser compostos por uma ou mais letras, como também números ou símbolos.',
-      },
-      {
-        type: 'default',
-        title: 'Declaração de dado do tipo texto',
-        body: 'Para fazer com que o programa entenda que uma informação é do tipo texto, basta colocá-lo entre aspas, podendo ser simples (\'\') ou duplas ("") assim como nós já fizemos antes:',
+        body: 'Para fazer com que o programa entenda que uma informação é do tipo texto, basta colocá-la entre aspas, podendo ser simples (\' \') ou duplas (" ") assim como nós já fizemos antes.',
       },
       {
         type: 'code',
-        body: `var mensagem = "Olá, mundo!"`,
+        body: `var mensagem = "Olá, mundo!"
+var nome = 'Kauê Cabess'
+var numero  = "250"
+var simbolos = '$@%&'`,
       },
       {
-        type: 'default',
-        title: 'Tá mas e o que mais?',
-        body: 'Além disso, é possível unir textos por meio do operador +, ação que chamamos de concatenação:',
+        type: 'list',
+        title: 'Concatenação de textos',
+        body: 'Além disso, é possível unir textos usando o operador de adição (+), ação que chamamos de concatenação.',
       },
       {
         type: 'code',
         body: `escreva('Eu encontrei um ' + 'planeta')
   
-  Resultado: Eu encontrei um planeta
-              `,
+// Resultado: Eu encontrei um planeta`,
+        isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Você também pode concatenar conteúdos de texto que estão em variáveis. Veja o exemplo',
-      },
-      {
-        type: 'code',
-        body: `var nomePlaneta = "Datathon"
-  escreva('Eu encontrei um' + 'planeta' + ' e ele se chama ' + nomePlaneta)
-  
-  Resultado: Eu encontrei um planeta e ele se chama Datahon`,
-      },
-      {
-        type: 'default',
-        title: null,
-        body: 'Você também pode usar o que chamamos de interpolação, que é quando um texto possui em seu conteúdo algo como ${minha_variavel}, e se minha_variável foi definida anteriormente, o novo texto terá o valor de minha_variavel.',
+        body: 'Você também pode concatenar textos que estão em variáveis.',
       },
       {
         type: 'code',
         body: `var nomePlaneta = "Datahon"
-  escreva("esse planeta \$\{nomePlaneta\} não parece ser amigável")
+escreva('Eu encontrei um ' + 'planeta' + ' e ele se chama ' + nomePlaneta)
   
-  Resultado: Esse planeta Datahon não parece ser amigável`,
-      },
-      {
-        type: 'alert',
-        body: 'Observe que para interpolar uma variável ela precisa estar em ${} senão não irá funcionar!',
+// Resultado: Eu encontrei um planeta e ele se chama Datahon`,
+        isRunnable: true,
       },
       {
         type: 'list',
-        body: 'Agora que você conchece mais sobre o tipo texto, que tal reforçar isso com algumas questões?',
+        title: 'Interpolação',
+        body: 'Você também pode usar o que chamamos de interpolação. Em vez de inserir a variável em um texto usando operador de adição, você pode colocar essa variável entre ${ }',
+      },
+      {
+        type: 'code',
+        body: `var nomePlaneta = "Datahon"
+escreva("esse planeta \$\{nomePlaneta\} não parece ser amigável")
+  
+ // Resultado: Esse planeta Datahon não parece ser amigável`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        body: 'Cuidado, se você usar aspas duplas dentro de aspas duplas, não vai dar muito certo.',
+      },
+      {
+        type: 'code',
+        body: `escreva("Essa mensagem foi "estranha"")
+  
+// Resultado: Código inválido`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        body: 'A solução para essa situação é escrever aspas simples dentro de aspas duplas ou vice-versa.',
+      },
+      {
+        type: 'code',
+        body: `escreva("Essa mensagem foi 'estranha'");
+escreva('Também "acho"');`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        body: 'Agora que você conhece mais sobre o tipo texto, que tal reforçar isso com algumas questões?',
       },
     ],
   },
