@@ -24,8 +24,6 @@ export function Playground({ route }) {
   const promptRef = useRef(null);
   const bottomSheetRef = useRef(null);
   const errorLine = useRef(0);
-  const leiasData = useRef([]);
-  const leiaRegex = /(leia\(.*\))/;
 
   function handleError(error) {
     if (error) {
@@ -38,11 +36,11 @@ export function Playground({ route }) {
   function handleOutput(output) {
     setOutput(currentOutput => [...currentOutput, output]);
     if (!output) setOutput('Sem resultado');
-    bottomSheetRef.current.collapse();
   }
 
   async function formatCode(code, input) {
-    const match = code.match(leiaRegex);
+    const regex = /(leia\(.*\))/;
+    const match = code.match(regex);
     userCode.current = code.replace(match[0], isNaN(input) ? "'" + input + "'" : input);
     input = '';
     promptRef.current.clear();
@@ -60,16 +58,30 @@ export function Playground({ route }) {
 
   function getPromptTitle(inputParam) {
     if (!inputParam) return;
-    const inputParamRegex = /\".*\"/;
-    const match = inputParam.match(inputParamRegex);
+    const regex = /["'].*["']/;
+    const match = inputParam.match(regex);
 
     if (!match) return '';
     const promptTitle = match[0].slice(1).slice(0, -1);
     return promptTitle;
   }
 
-  function formatCode(code) {
+  function getPrintContent(print) {
+    const regex = /(?<=\().+?(?=\))/;
+    const content = print.match(regex)[0];
+    return `escreva(tipo de ${content});`;
+  }
 
+  function addPrintType(code) {
+    const regex = /(escreva\(.+\))/g;
+    if (!regex.test(code)) return code;
+
+    const newCode = code.replace(regex, print => {
+      console.log(getPrintContent(print));
+      return getPrintContent(print) + print;
+    });
+
+    return newCode;
   }
 
   function hasInput(code) {
@@ -81,7 +93,7 @@ export function Playground({ route }) {
   }
 
   async function handleUserCode() {
-    const code = userCode.current;
+    const code = addPrintType(userCode.current);
 
     if (hasInput(code)) {
       setCodeWithInput(code);
@@ -99,8 +111,11 @@ export function Playground({ route }) {
         bottomSheetRef.current.close();
         throw error.erroInterno;
       }
+      
+      bottomSheetRef.current.collapse();
     } catch (error) {
       handleError(error.message);
+    } finally {
     }
   }
 
@@ -108,7 +123,6 @@ export function Playground({ route }) {
     setCodeTitle(codeId ? title : 'Playground');
     setInitialCode(codeId ? code : route.params?.code);
   }, [code]);
-
 
   return (
     <C.Container>

@@ -1,9 +1,31 @@
-import * as C from './styles';
+import { useRef, useEffect, useState } from 'react';
 import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useEffect } from 'react';
+import * as C from './styles';
 
 export function Output({ bottomSheetRef, result }) {
+  const [outputs, setOutputs] = useState([]);
+  const types = useRef([]);
+
+  function formatOutput(output, index) {
+    switch (types.current[index].trim()) {
+      case 'texto':
+        return '"' + output + '"';
+      case 'vetor':
+        return '[ ' + output.split(',').join(', ') + ' ]';
+      default:
+        return output;
+    }
+  }
+
+  useEffect(() => {
+    if (!result || !result.length) return;
+    console.log({result});
+    types.current = result.filter((_, index) => index % 2 === 0);
+    const outputs = result.filter((_, index) => index % 2 !== 0);
+    setOutputs(outputs.map((output, index) => formatOutput(output.trim(), index)));
+  }, [result]);
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -17,10 +39,8 @@ export function Output({ bottomSheetRef, result }) {
             <C.Heading>Resultado</C.Heading>
           </C.Header>
           <C.Content>
-            {result?.map((result, index) => (
-              <C.Result key={`result-${index}`}>
-                {result.includes(',') ? result.trim().split(',').join(', ') : result.trim()}
-              </C.Result>
+            {outputs.map((output, index) => (
+              <C.Result key={`result-${index}`}>{output}</C.Result>
             ))}
           </C.Content>
         </>

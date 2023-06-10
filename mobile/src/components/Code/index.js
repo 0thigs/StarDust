@@ -4,7 +4,6 @@ import { Editor } from '../Editor';
 import { Sound } from '../Sound';
 import { Loading } from '../Loading';
 import { keys } from '../../utils/keys';
-import { Output } from '../Output';
 import { Play } from 'react-native-feather';
 import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
 import theme from '../../global/styles/theme';
@@ -17,7 +16,6 @@ export function Code({ code, userCode, handleUserCode, output }) {
   const cursorPosition = useRef(0);
   const soundRef = useRef(null);
   const editorRef = useRef(null);
-  const outputRef = useRef(null);
 
   function handleCodeChange(code) {
     userCode.current = code;
@@ -93,10 +91,6 @@ export function Code({ code, userCode, handleUserCode, output }) {
     };
   }, []);
 
-  useEffect(() => {
-    outputRef.current.collapse();
-  }, [output]);
-
   return (
     <C.Container>
       <View>
@@ -124,17 +118,17 @@ export function Code({ code, userCode, handleUserCode, output }) {
           {isRunning ? (
             <Loading />
           ) : (
-            <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>
+            <>
+              <C.Title style={{ color: theme.colors.green_500 }}>EXECUTAR</C.Title>
+              <Play
+                color={theme.colors.green_500}
+                width={16}
+                style={{ marginBottom: 4, marginLeft: 4 }}
+              />
+            </>
           )}
-          <Play
-            color={theme.colors.green_500}
-            width={16}
-            style={{ marginBottom: 4, marginLeft: 4 }}
-          />
         </C.CodeButton>
       </C.CodeButtons>
-
-      <Output bottomSheetRef={outputRef} result={output} />
 
       <Sound ref={soundRef} soundFile={RunningCodeSound} />
     </C.Container>
