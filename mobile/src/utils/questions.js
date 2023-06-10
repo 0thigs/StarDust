@@ -82,38 +82,38 @@ export const questions = [
     ],
     answer: 'escreva("que horas são")',
   },
-  {
-    starId: 3,
-    type: 'checkbox',
-    stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
-    options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
-    correctOptions: ['_idade', 'altura_em_cm'],
-  },
+  //   {
+  //     starId: 3,
+  //     type: 'checkbox',
+  //     stem: 'quais dos itens abaixo pode ser um nome válido de variável?',
+  //     options: ['_idade', '4mor', 'altura_em_cm', 'peso em kg'],
+  //     correctOptions: ['_idade', 'altura_em_cm'],
+  //   },
   {
     starId: 2,
     type: 'open',
     stem: 'O nome do comando para um programa receber informações é',
-    answer: 'leia',
+    answer: ['leia()', 'leia'],
   },
-  //   {
-  //     starId: 2,
-  //     type: 'drag-and-drop-list',
-  //     stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
-  //     items: [
-  //       {
-  //         id: 1,
-  //         label: 'var quantidade',
-  //       },
-  //       {
-  //         id: 2,
-  //         label: 'quantidade = leia()',
-  //       },
-  //       {
-  //         id: 3,
-  //         label: 'escreva(quantidade)',
-  //       },
-  //     ],
-  //   },
+  {
+    starId: 2,
+    type: 'drag-and-drop-list',
+    stem: 'Reordene o programa para que ele exiba a atual quantidade de sumprimentos',
+    items: [
+      {
+        id: 1,
+        label: 'var quantidade',
+      },
+      {
+        id: 2,
+        label: 'quantidade = leia()',
+      },
+      {
+        id: 3,
+        label: 'escreva(quantidade)',
+      },
+    ],
+  },
   {
     starId: 11,
     type: 'drag-and-drop-list',
@@ -136,47 +136,6 @@ export const questions = [
         label: '}',
       },
     ],
-  },
-  {
-    starId: 11,
-    type: 'drag-and-drop-click',
-    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
-    lines: [
-      {
-        id: 1,
-        texts: ['se ( ', 'dropZone', ' ) {'],
-        indentLevel: 0,
-      },
-      {
-        id: 2,
-        texts: ['escreva(verdadeiro);'],
-        indentLevel: 1,
-      },
-      {
-        id: 3,
-        texts: ['}'],
-        indentLevel: 0,
-      },
-    ],
-    dropItems: [
-      {
-        id: 1,
-        label: 'falso',
-      },
-      {
-        id: 2,
-        label: '1 > 2',
-      },
-      {
-        id: 3,
-        label: '!falso',
-      },
-      {
-        id: 4,
-        label: '!verdadeiro',
-      },
-    ],
-    correctItemsIdsSequence: [3],
   },
   {
     starId: 2,
@@ -242,7 +201,7 @@ export const questions = [
   {
     starId: 3,
     type: 'drag-and-drop-click',
-    stem: 'Clique nos elementos abaixo para completar o algoritmo',
+    stem: 'Clique nos elementos abaixo para completar o algoritmo.',
     lines: [
       {
         id: 1,
@@ -288,18 +247,18 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     starId: 3,
     type: 'open',
     stem: 'O nome do comando para declarar variáveis é',
-    answer: 'var',
+    answer: ['var'],
   },
   {
     starId: 5,
     type: 'open',
-    stem: 'Se eu tenho um texto com aspas duplas, só inserir nele que tipo de aspas?',
+    stem: 'Se eu tenho um texto com aspas duplas, só é permitido inserir nele que tipo de aspas?',
     answer: ['aspas simples', 'simples'],
   },
   {
     starId: 5,
     type: 'checkbox',
-    stem: 'quais dos valores abaixo pode ser um tipo de texto válido?',
+    stem: 'Quais dos valores abaixo pode ser um tipo de texto válido?',
     options: ['letra', '"não é um texto"', '"100"', '2.5'],
     correctOptions: ['"não é um texto"', '"100"'],
   },
@@ -307,7 +266,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
     starId: 5,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código?',
-    code: `var cor = "vermelho"
+    code: `var cor = "vermelha"
 var nome = "Datahon"
 var nome = "Planeta " + nome
 
@@ -359,7 +318,7 @@ escreva(nome, " tem a cor ", cor)`,
   {
     starId: 5,
     type: 'drag-and-drop-click',
-    stem: 'Concatene os textos da maneira apropriada.',
+    stem: 'Faça a interpolação de textos da maneira apropriada.',
     lines: [
       {
         id: 1,
@@ -368,7 +327,7 @@ escreva(nome, " tem a cor ", cor)`,
       },
       {
         id: 2,
-        texts: ['escreva(`a mensagem ', 'dropZone', ' não foi entendida`)'],
+        texts: ['escreva("a mensagem ', 'dropZone', ' não foi entendida")'],
         indentLevel: 0,
       },
     ],
@@ -395,7 +354,7 @@ escreva(nome, " tem a cor ", cor)`,
   {
     starId: 6,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que combustivel total seja igual 75.',
+    stem: 'Complete o código para que combustivel total seja igual a 75.',
     lines: [
       {
         id: 1,
@@ -404,12 +363,12 @@ escreva(nome, " tem a cor ", cor)`,
       },
       {
         id: 2,
-        texts: ['var combustivelTotal', 'dropZone', 'combustivelAtual ', 'dropZone'],
+        texts: ['var combustivelTotal = ', 'combustivelAtual ', 'dropZone'],
         indentLevel: 0,
       },
       {
         id: 3,
-        texts: ['escreva(`o foguete tem  ${combustivelTotal} de combustível no total'],
+        texts: ['escreva("o foguete tem  ${combustivelTotal} de combustível no total")'],
         indentLevel: 0,
       },
     ],
@@ -436,7 +395,7 @@ escreva(nome, " tem a cor ", cor)`,
   {
     starId: 6,
     type: 'checkbox',
-    stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números',
+    stem: 'Quais dos seguintes tipos de dados podem ser usados para armazenar números?',
     options: ['Inteiro', 'Real', 'Texto', 'Lógico'],
     correctOptions: ['Inteiro', 'Real'],
   },
@@ -450,14 +409,14 @@ escreva(nome, " tem a cor ", cor)`,
   {
     starId: 6,
     type: 'selection',
-    stem: 'Qual será o tipo do resultado de 5 ÷ 2',
+    stem: 'Qual será o tipo de dado do resultado de 5 ÷ 2?',
     options: ['inteiro', '2.5', 'real', 'texto'],
     answer: 'real',
   },
   {
     starId: 6,
     type: 'selection',
-    stem: 'Qual será o valor de distancia do seguinte código',
+    stem: 'Qual será o valor da variável distancia no seguinte código:',
     code: `var distancia = 2500 + "1000"
 var mensagem =  "A nave está a " + distancia + " anos-luz da Terra."
 escreva(mensagem)`,
@@ -468,19 +427,19 @@ escreva(mensagem)`,
     starId: 7,
     type: 'open',
     stem: 'Qual seria o valor lógico para a pergunta "10 é maior que 5?"',
-    answer: 'verdadeiro',
+    answer: ['verdadeiro'],
   },
   {
     starId: 7,
     type: 'selection',
-    stem: 'Qual o valor padrão de uma variável do tipo lógico',
+    stem: 'Qual é o valor padrão de uma variável sem valor atribuído a ela?',
     options: ['falso', 'verdadeiro', 'nulo', 'falso e nulo'],
-    answer: 'falso',
+    answer: 'nulo',
   },
   {
     starId: 7,
     type: 'checkbox',
-    stem: 'Quais os valores possíveis para uma variável do tipo lógico',
+    stem: 'Quais os valores possíveis para uma variável do tipo lógico?',
     options: ['falso', 'verdadeiro', 'nulo', '"verdadeiro"'],
     correctOptions: ['falso', 'verdadeiro'],
   },
@@ -488,24 +447,22 @@ escreva(mensagem)`,
     starId: 7,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código?',
-    code: `
-var
-  vaga: logico  
-inicio
-    vaga <- verdadeiro
-    vaga <- falso
+    code: `var resposta = verdadeiro
+var resposta = falso
 
-    escreva("Tem vaga hoje? ")
-    escreva(vaga)
-fimalgoritmo
-    `,
-    options: ['Tem vaga hoje? falso', 'Tem vaga hoje? verdadeiro', 'falso', 'verdadeiro'],
-    answer: 'Tem vaga hoje? falso',
+escreva("Vai chover asteroide hoje? " + resposta)`,
+    options: [
+      'Vai chover asteroide hoje? falso',
+      'Vai chover asteroide hoje? verdadeiro',
+      'falso',
+      'verdadeiro',
+    ],
+    answer: 'Vai chover asteroide hoje? falso',
   },
   {
     starId: 7,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que a resposta seja coerente com a afirmação',
+    stem: 'Complete o código para que a resposta seja coerente com a afirmação.',
     lines: [
       {
         id: 1,
@@ -519,7 +476,7 @@ fimalgoritmo
       },
       {
         id: 3,
-        texts: ['escreva( ', 'dropZone', ' )'],
+        texts: ['escreva(', 'dropZone', ')'],
         indentLevel: 0,
       },
     ],

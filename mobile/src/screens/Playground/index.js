@@ -67,9 +67,7 @@ export function Playground({ route }) {
   }
 
   function getPrintContent(print) {
-    const regex = /(?<=\().+?(?=\))/;
-    const content = print.match(regex)[0];
-    return `escreva(tipo de ${content});`;
+    return print.replace(/escreva\((.*?)\)/, 'escreva(tipo de $1)');
   }
 
   function addPrintType(code) {
@@ -77,7 +75,6 @@ export function Playground({ route }) {
     if (!regex.test(code)) return code;
 
     const newCode = code.replace(regex, print => {
-      console.log(getPrintContent(print));
       return getPrintContent(print) + print;
     });
 
@@ -111,7 +108,7 @@ export function Playground({ route }) {
         bottomSheetRef.current.close();
         throw error.erroInterno;
       }
-      
+
       bottomSheetRef.current.collapse();
     } catch (error) {
       handleError(error.message);

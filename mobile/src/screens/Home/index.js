@@ -85,7 +85,7 @@ export function Home() {
     if (lastUnlockedStarYPosition) {
       scrollToLastUnlockedStar();
     }
-  }, [lastUnlockedStarYPosition, planets, isEndTrasition]);
+  }, [lastUnlockedStarYPosition]);
 
   return (
     <>
@@ -105,7 +105,7 @@ export function Home() {
         <C.Background
           source={BackgroundSpace}
           resizeMode="repeat"
-        //   onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
+          //   onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
         >
           {planets.map(({ id, name, icon, image, stars }) => (
             <Planet

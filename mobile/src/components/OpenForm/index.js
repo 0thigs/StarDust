@@ -29,7 +29,8 @@ export function OpenForm({ stem, answer, code, index }) {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
-    if (userAnswer.trim().toLowerCase() === answer.trim().toLowerCase()) {
+    const _answer = !Array.isArray(answer) ? [answer] : answer;
+    if (_answer.includes(userAnswer.trim().toLowerCase())) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) dispatch({ type: 'changeQuestion' });
@@ -65,7 +66,9 @@ export function OpenForm({ stem, answer, code, index }) {
         <>
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
           {code && (
-            <QuestionCode height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 24)}>
+            <QuestionCode
+              height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 24)}
+            >
               <Editor value={code} />
             </QuestionCode>
           )}

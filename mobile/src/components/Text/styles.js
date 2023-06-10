@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { css } from 'styled-components';
+import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
 import * as Animatable from 'react-native-animatable';
 
 export const Container = styled(Animatable.View)`
@@ -16,7 +17,7 @@ export const Title = styled.Text`
   align-self: flex-start;
 `;
 
-export const Code = styled.ScrollView`
+export const Code = styled(GestureHandlerScrollView)`
   width: 100%;
   border-radius: 10px;
   position: relative;
@@ -25,8 +26,8 @@ export const Code = styled.ScrollView`
 export const CodeButton = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.blue_700};
   border: 0.4px ${({ theme }) => theme.colors.green_700};
-  border-radius: 8px;
-  padding: 4px;
+  border-radius: 4px;
+  padding: 2px;
   position: absolute;
   left: 8px;
   bottom: 8px;

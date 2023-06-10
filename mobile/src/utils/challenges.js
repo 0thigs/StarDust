@@ -57,30 +57,32 @@ var mensagem = leia()
     texts: [
       {
         type: 'default',
-        body: 'Parece que permitiram você adentrar no planeta Datahon! Entretanto, é melhor fazer uma análise do ambiente antes de fazer um pouso seguro, o que o seu foguete já fez de antemão, retornando para você dados do planeta como nome, idade, temperatura e se tem ar respirável.',
+        body: 'Parece que permitiram você adentrar no planeta Datahon! Entretanto, é melhor fazer uma análise do ambiente antes de fazer um pouso seguro, o que o seu foguete já fez de antemão, retornando para você dados do planeta como nome, temperatura e se tem ar respirável.',
       },
       {
-        type: 'default',
-        body: 'Sua missão é escrever qual o tipo de dado de cada um na ordem em que são declarados, veja um exemplo',
+        type: 'list',
+        body: 'Sua missão é escrever qual o tipo de dado de cada um na ordem em que são declarados, veja um exemplo:',
       },
       {
         type: 'code',
         body: `var nomeEstrela = "Proxima Centauri"
-var temCorAmarela = verdadeiro
+var temperatura = 100
+var temCorAmarela = falso
 
-escreva("tipo nomeEstrela: " + "texto" + ", tipo nomeEstrela: lógico")
+escreva(\${nomeEstrela}: texto, \${temperatura}: numero, \${temCorAmarela}: falso")
 
-saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
+Resultado: 
+Proxima Centauri: texto, 100: número, falso: lógico`,
       },
       {
         type: 'alert',
-        body: 'Dica: você pode colocar o nome dos tipos em variáveis e concatená-las com os textos, mas lembre-se de respeitar as vírgulas e os espaços',
+        body: 'Dica: você pode colocar o nome dos tipos em variáveis e concatená-las com os textos usando interpolação ou operador de adição.',
       },
     ],
     testCases: [
       {
         input: null,
-        expectedOutput: `tipo nome: texto, tipo temperatura: número, tipo temOxigênio: lógico`,
+        expectedOutput: `Datahon: texto, 53.5: número, falso: lógico`,
         isLocked: false,
       },
     ],
@@ -88,11 +90,7 @@ saida: tipo nomeEstrela: texto, tipo temCorAmarela: lógico`,
     code: `
 var nome = "Datahon"
 var temperatura = 53.5
-var temOxigenio = falso
-
-var tipoNome
-var tipoTemperatura
-var tipoOxigenio
+var temOxigenio = verdadeiro
 
 escreva()`,
     difficulty: 'easy',

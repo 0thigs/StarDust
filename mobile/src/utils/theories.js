@@ -477,15 +477,15 @@ escreva('Também "acho"');`,
       {
         type: 'default',
         title: null,
-        body: 'Muito bom, já que eles não entendem mensagem do tipo texto, só resta tentar com o tipo numérico.',
+        body: 'Muito bom, já que eles não entendem mensagem do tipo texto, vamos tentar com o tipo número.',
       },
       {
-        type: 'default',
-        title: 'Tipo inteiro',
-        body: 'Os números em um programa podem ser inteiros e reais. Primeiramente, vamos falar sobre o tipo inteiro. Ele diz respeito aos números sem parte decimal ou fracionária, como -5, 0, 1, 2, 3, entre outros.',
+        type: 'list',
+        title: 'Inteiros',
+        body: 'Os números em um programa podem ser inteiros ou reais. Primeiramente, vamos falar sobre o tipo inteiro. Ele diz respeito aos números sem parte decimal, como -5, 0, 1, 2, 3 etc.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Declarando inteiros',
         body: 'Podemos declarar uma variável com um tipo número inteiro dessa forma:',
       },
@@ -495,59 +495,81 @@ escreva('Também "acho"');`,
       },
       {
         type: 'alert',
-        body: 'Perceba que diferentemente do tipo texto, é preciso que o valor numérico não esteja entre aspas.',
+        body: 'Perceba que diferentemente do tipo texto, é necessário que o valor numérico não esteja entre aspas.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Reais',
-        body: 'Além dos inteiro há os números reais, também conhecidos como números de ponto flutuante, que nada mais são do que números com parte decimal, veja:',
+        body: 'Além dos inteiro há os números reais - também conhecidos como números de ponto flutuante - que nada mais são do que números com parte decimal, veja:',
       },
       {
         type: 'code',
         body: `var serie = 8.5`,
       },
       {
-        type: 'default',
-        title: 'Números e textos',
-        body: 'Cuidado ao tentar concatenar números e textos que são números, acontece algo não tão surpreendente: número se torna um texto e acaba sendo juntado com número que já era texto, mas não havendo uma soma.',
+        type: 'alert',
+        body: 'Em um programa devemos escrever os números reais sempre com ponto e não com vírgula.',
       },
       {
         type: 'code',
         body: `
-  var identificador = "2370"
-  var serie = 8.5
-  escreva("o RG do meu foguete é " + identificador + 70)
-  
-  resultado: o RG do meu foguete é 237070
-     `,
+// Isso não existe ❌
+var numero = 8,5`,
+        isRunnable: true,
+      },
+      {
+        type: 'list',
+        title: 'Números e textos',
+        body: 'Cuidado ao tentar concatenar números e textos que são numéricos, acontece algo não tão surpreendente: o número se torna um texto e acaba sendo juntado com número que já era um texto.',
+      },
+      {
+        type: 'code',
+        body: `var RG = "2370" + 30
+escreva("o RG do meu foguete é " + RG)
+
+// Resultado: o RG do meu foguete é 237030`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Perceba que que deu 23708.5 ao invés de 2378.5, justamente porque o número foi convertido para texto para aí sim ser concatenado com outro texto.',
+        body: 'Perceba que que deu 237030 em vez de 2400, justamente porque o número 30 foi convertido para texto e depois foi concatenado com o texto "2370".',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Conversão de números',
-        body: 'Também é possível converter um número inteiro para real, basta que o resultado de uma operação com um inteiro (uma divisão, por exemplo) resulte em um tipo real. O contrário também é possível.',
+        body: 'Também é possível converter um número inteiro para real, basta que o resultado de uma operação com um inteiro (uma divisão, por exemplo) resulte em um tipo real.',
       },
       {
         type: 'code',
         body: `
-  var codigo = 467 / 2
-  escreva("Enviar código: ", codigo)
+var codigo = 467 / 2
+escreva("Enviar código: ", codigo)
   
-  resultado: Enviar código: 233.5
-     `,
+// Resultado: Enviar código: 233.5`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        body: 'O contrário também é possível.',
+      },
+      {
+        type: 'code',
+        body: `
+  var numero = 0.5 + 0.5
+  escreva("Olhe esse número: ", numero)
+  
+// Resultado: Olhe esse número: 1`,
+        isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Contudo, vamos falar sobre operações aritméticas mais tarde para não estragar a surpresa.)',
+        body: 'Contudo, vamos falar sobre operações aritméticas mais tarde para não estragar a surpresa.',
       },
 
       {
         type: 'list',
-        body: 'Agora vamos testar o que você aprendeu sobre tipos numéricos!',
+        body: 'Por enquanto vamos testar o que você aprendeu sobre o tipo número!',
       },
     ],
   },
@@ -557,73 +579,74 @@ escreva('Também "acho"');`,
       {
         type: 'default',
         title: null,
-        body: 'Parece que sua mensagem foi enviada e finalmente foi entendida 🎉! Contudo, eles enviaram uma resposta e é do tipo diferente do que já foi visto antes.',
-      },
-      {
-        type: 'default',
-        title: 'E qual é?',
-        body: 'Tipo lógico que não são nada mais do que valores que armazenam uma única opção entre apenas duas possibilidades possíveis: verdadeiro ou falso.',
-      },
-      {
-        type: 'default',
-        title: 'Declaração do tipo lógico',
-        body: 'Para declarar um tipo de dado lógico, basta atribuir um valor verdadeiro ou um valor falso logo depois da variável:',
-      },
-      {
-        type: 'code',
-        body: `
-  var respostaEnviada = verdadeiro
-  var eInimigo = falso
-              `,
-      },
-      {
-        type: 'default',
-        title: 'Declaração do tipo lógico',
-        body: 'No exemplo acima, a primeira variável indica se a resposta foi enviada (verdadeiro) ou não foi envidada (false). A segunda variável indica se quem enviou é amigo (verdadeiro) ou inimigo (falso):',
-      },
-      {
-        type: 'alert',
-        body: 'Perceba que o nome dessas variáveis são compostas por palavras diferentes, mas sem ser separadas por espaço. ',
-      },
-      {
-        type: 'alert',
-        body: 'Até aí tudo bem, mas veja que todas as palavras estão em maiúsculas exceto a primeira. Esse padrão se chama camelCase por lembrar as costas de um camelo e é bem comum na hora de escrever nomes de variáveis.',
-      },
-      {
-        type: 'alert',
-        body: 'Usando dados lógicos, é possível usar esse valores para trabalhar com os operadores lógicos, como "e" e "ou", como também com estruturas condicionais, mas vamos deixar isso para outra hora.',
-      },
-      {
-        type: 'default',
-        title: 'O que eu faço com essa resposta enviada?',
-        body: 'O planeta proíbe a entrada de pessoas com armas, então é bom deixar claro que você não tem nenhuma:',
-      },
-      {
-        type: 'code',
-        body: `
-  var armas = nulo
-          `,
-      },
-      {
-        type: 'default',
-        title: 'O que diabos é esse nulo?',
-        body: 'Esqueci de dizer, mas existe um tipo de dado especial chamado nulo que basicamente quer dizer que a variável não tem nenhum valor. Isso quer dizer também que nulo é atribuído automaticamente a uma variável quando ela é declarada sem um valor atribuído a ela.',
-      },
-      {
-        type: 'code',
-        body: `var espaco
-  escreva(espaco)
-  
-//  Resultado: nulo`,
-      },
-      {
-        type: 'alert',
-        body: 'Mais para frente veremos que nulo pode ser usado como um valor falso.',
+        body: 'Parece que sua mensagem foi enviada e finalmente foi entendida 🎉!',
       },
       {
         type: 'default',
         title: null,
-        body: 'Agora que você aprendeu um pouco mais sobre valores lógicos que tal praticar um pouco mais?',
+        body: 'Eles enviaram uma resposta, contudo a mensagem de resposta é do tipo diferente do que já vimos antes.',
+      },
+      {
+        type: 'default',
+        title: 'E qual é?',
+        body: 'Tipo lógico que são nada mais do que valores que armazenam uma única opção entre apenas duas possibilidades possíveis: verdadeiro ou falso.',
+      },
+      {
+        type: 'list',
+        title: 'Declaração do tipo lógico',
+        body: 'Para declarar um tipo de dado lógico, basta atribuir um valor verdadeiro ou um valor falso a uma variável.',
+      },
+      {
+        type: 'code',
+        body: `
+var respostaEnviada = verdadeiro
+var inimigo = falso`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'Declaração do tipo lógico',
+        body: 'No exemplo acima, a primeira variável indica se a resposta foi enviada (verdadeiro) ou não foi envidada (falso). A segunda variável indica se quem enviou é amigo (verdadeiro) ou inimigo (falso):',
+      },
+      {
+        type: 'alert',
+        body: 'Não confuda. Nesse caso, verdadeiro ou falso não são escritos entre aspas porque eles não são do tipo texto, mas sim lógico.',
+      },
+      {
+        type: 'default',
+        title: 'Mas o que eu faço com essa resposta enviada?',
+        body: 'O planeta proíbe a entrada de pessoas com armas, então é bom deixar claro que você não tem nenhuma:',
+      },
+      {
+        type: 'code',
+        body: `var armas = nulo`,
+        isRunnable: false,
+      },
+      {
+        type: 'default',
+        title: 'O que raios é esse nulo?',
+        body: 'Esqueci de dizer, mas existe um tipo de dado especial chamado nulo que basicamente quer dizer que a variável não tem nenhum valor.',
+      },
+      {
+        type: 'default',
+        body: 'Isso quer dizer também que nulo é atribuído automaticamente a uma variável quando ela é criada sem nunhum valor atribuído a ela.',
+      },
+      {
+        type: 'code',
+        body: `var espaco
+escreva(espaco)
+  
+//  Resultado: nulo`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        title: 'Tem mais?',
+        body: 'Não. Um valor lógico só pode ser verdadeiro ou falso. Você verá mais para frente que o nulo pode ser considerado como valor falso também.',
+      },
+      {
+        type: 'list',
+        body: 'Agora que você aprendeu um pouco mais sobre valores lógicos que tal praticar isso?',
       },
     ],
   },
@@ -638,17 +661,17 @@ escreva('Também "acho"');`,
       {
         type: 'default',
         title: 'E qual seria?',
-        body: 'Você precisa verificar o custo vida, pois não dá para viver em um planeta sem analisar os gastos né?',
+        body: 'Você precisa verificar o custo de vida, pois não dá para viver em um planeta sem analisar os gastos né?',
       },
       {
         type: 'default',
         title: 'E como faço isso?',
-        body: 'Por sorte seu foguete é equipado com tecnologia de ponta que faz cálculos usando operadores aritméticos.',
+        body: 'Por sorte seu foguete é equipado com tecnologia de ponta, que faz cálculos usando operadores aritméticos.',
       },
       {
         type: 'default',
         title: 'Pera aí, operadores aritméticos? Tipo somar e subtrair?',
-        body: 'Sim!! não só aritméticos, mas também lógicos e relacionais!',
+        body: 'Sim! não só aritméticos, mas também lógicos e relacionais!',
       },
       {
         type: 'alert',
@@ -660,7 +683,7 @@ escreva('Também "acho"');`,
         body: 'Por exemplo, já é uma boa hora de reabastecer o foguete com combustível, ou seja, precisamos adicionar combustível atual com combustível novo.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Adição (+)',
         body: 'E para isso nós usamos o operador "+" de adição, o mesmo usado para concatenar textos.',
       },
@@ -670,15 +693,23 @@ escreva('Também "acho"');`,
 var combustivel = 100;
 var combustivelAtual = 200;
 var totalCombustivel = combustivel + combustivelAtual;
-escreva("A nave agora tem " + totalCombustivel + "  galões de combustível");
+escreva("A nave agora tem " + totalCombustivel + " galões de combustível");
 
 // Resultado: A nave agora tem 300 galões de combustível.`,
         isRunnable: true,
       },
       {
-        type: 'default',
+        type: 'alert',
+        body: 'Percebeu que eu foi colocado um ponto e vírgula no final de cada linha? Isso é totalmente opcional (com ou sem ele o código funcionaria da mesma forma)!',
+      },
+      {
+        type: 'alert',
+        body: 'Porém, na hora de você escrever um programa e escolher usar ponto e vírgula, você deve continuar colocando em todas linhas para manter seu código padronizado.',
+      },
+      {
+        type: 'list',
         title: 'Subtração (-)',
-        body: 'Além de reabastecer, o próprio foquete consegue calcular o quanto de supriementos vc já consumiu até agora, utilizando simplesmente o operador de subtração "-".',
+        body: 'Além de reabastecer, o próprio foguete consegue calcular o quanto de suprimentos você já consumiu até agora, utilizando simplesmente o operador de subtração "-".',
       },
       {
         type: 'code',
@@ -686,29 +717,27 @@ escreva("A nave agora tem " + totalCombustivel + "  galões de combustível");
 var suprimentosConsumidos = 250;
 var suprimentosAtual = 300;
 var suprimentosRestante = suprimentosAtual - suprimentosConsumidos;
-escreva("Você possui " + suprimentosRestante " suprimentos");
+escreva("Você possui " + suprimentosRestante + " suprimentos");
 
 // Resultado: Você possui 50 suprimentos`,
         isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Parece que você não tem muitos suprimentos agora não é mesmo?',
+        body: 'Parece que você não tem muitos suprimentos agora, não é mesmo?',
       },
       {
         type: 'default',
-        title: 'Nem tudo está perdido.',
-        body: 'Por sua sorte (de novo) seu foguete está preparado com uma máquina de produzir suprimentos.',
+        body: 'Nem tudo está perdido! Por sua sorte (de novo) seu foguete está preparado com uma máquina de produzir suprimentos.',
       },
       {
         type: 'default',
-        title: 'Mas nem tudo são flores',
-        body: 'A máquina de fazer suprimentos produz apenas 1 suprimento por dia. Logo, para fazer o cálculo da quantidade de suprimentos que você teria em um mês é necessário fazer uma operação de multiplicação.',
+        body: 'Mas nem tudo são flores! A máquina de fazer suprimentos produz apenas 1 suprimento por dia. Logo, para fazer o cálculo da quantidade de suprimentos que você teria em um mês é necessário fazer uma operação de multiplicação.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Multiplicação (*)',
-        body: 'Você não leu errado. Para fazer um cálculo de multiplicação, usamos o operador "*" em vez de "x"',
+        body: 'Você não leu errado. Para fazer um cálculo de multiplicação, usamos o operador "*" em vez de "x".',
       },
       {
         type: 'code',
@@ -718,16 +747,20 @@ var diasMes = 30;
 var suprimentosMes = suprimento * diasMes;
 escreva("Em um mês você terá " + suprimentosMes + " suprimentos");
 
-//  Resultado: Em um mês você terá 30 suprimentos`,
+// Resultado: Em um mês você terá 30 suprimentos`,
         isRunnable: true,
       },
       {
         type: 'default',
         title: 'Será que é o suficiente?',
-        body: 'Parece muito para você? Ok, mas agora é necessário calcular a quantidade de suprimentos que você consome por mês. Normalmente, vejo que seu consumo é 90 suprimentos ao mês, então basta dividir 90 por 30.',
+        body: 'Parece muito para você? Ok, mas agora é necessário calcular a quantidade de suprimentos que você consome por mês.',
       },
       {
         type: 'default',
+        body: 'Normalmente, vejo que seu consumo é de 90 suprimentos ao mês, então basta dividir 90 por 30.',
+      },
+      {
+        type: 'list',
         title: 'Divisão (/)',
         body: 'Aí temos mais uma caso diferenciado: em vez de usar o operador "÷" que você provavelmente já se acustumou a utilizar, é necessário usar a barra "/". Veja o exemplo:',
       },
@@ -737,14 +770,14 @@ escreva("Em um mês você terá " + suprimentosMes + " suprimentos");
 var suprimentosMes = 90;
 var diasMes = 30;
 var suprimentosDia = suprimentosMes / diasMes;
-escreva("Você consome " + suprimentosDia + " por dia");
+escreva("Você consome " + suprimentosDia + " suprimentos por dia");
 
 //  Resultado: Você consome 3 suprimentos por dia`,
         isRunnable: true,
       },
       {
         type: 'default',
-        body: 'Obviamente, você também pode usar múltiplos operadores, diferentes ou não, ao mesmo tempo em uma única linha.',
+        body: 'Obviamente, você também pode usar vários operadores, diferentes ou não, ao mesmo tempo em uma única linha.',
       },
       {
         type: 'alert',
@@ -794,7 +827,7 @@ escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos');
       },
       {
         type: 'alert',
-        body: 'Não é preciso ser o mestre da matemática pra perceber que você não terá quantides de suprimento para sobreviver nesse planeta, não é mesmo?',
+        body: 'Não é preciso ser o mestre da matemática pra perceber que você não terá a quantidade de suprimento para sobreviver nesse planeta, não é mesmo?',
       },
       {
         type: 'default',
@@ -804,7 +837,7 @@ escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos');
       {
         type: 'default',
         title: null,
-        body: 'Porém, ainda há questão de quanto de energia existe disponível para os dois motores presentes no foguete, pois por algum motivo a proporção não está igual.',
+        body: 'Porém, ainda há a questão de quanto de energia existe disponível para os dois motores presentes no foguete, pois por algum motivo a proporção não está igual.',
       },
       {
         type: 'default',
@@ -834,7 +867,7 @@ escreva('o resto é igual a ' + resto);
       {
         type: 'default',
         title: 'Explicação',
-        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores 😢.',
+        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores porque tem um a mais 😢.',
       },
     ],
   },

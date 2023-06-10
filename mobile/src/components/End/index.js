@@ -136,9 +136,10 @@ export function End({
   }
 
   function getCoins() {
+    console.log({ isCompleted });
     let maxCoins = isCompleted ? 5 : 10;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxCoins -= !isCompleted ? 5 : 2;
+      maxCoins -= isCompleted ? 1 : 2;
     }
     return maxCoins;
   }
@@ -146,7 +147,7 @@ export function End({
     console.log({ isCompleted });
     let maxXp = isCompleted ? 10 : 20;
     for (let i = 0; i < state.wrongsCount; i++) {
-      maxXp -= isCompleted ? 1 : 2;
+      maxXp -= isCompleted ? 2 : 5;
     }
     return maxXp;
   }

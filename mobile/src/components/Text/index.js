@@ -51,15 +51,12 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
         <>
           <C.Title>Exemplo</C.Title>
           {isRunnable && (
-            <C.CodeButton onPress={() => handleCodeButtonPress(body)}>
+            <C.CodeButton onPress={() => handleCodeButtonPress(body)} activeOpacity={0.7}>
               <C.CodeButtonTitle>Executar</C.CodeButtonTitle>
             </C.CodeButton>
           )}
 
-          <C.Code
-            horizontal
-            style={{ height: codeHeigth }}
-          >
+          <C.Code horizontal keyboardShouldPersistTaps={'always'} style={{ height: codeHeigth }}>
             <Editor value={body} />
           </C.Code>
         </>
