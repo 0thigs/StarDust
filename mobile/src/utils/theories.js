@@ -410,7 +410,7 @@ var simbolos = '$@%&'`,
       {
         type: 'list',
         title: 'Concatenação de textos',
-        body: 'Além disso, é possível unir textos usando o operador de adição (+), ação que chamamos de concatenação.',
+        body: 'Além disso, é possível unir textos usando o operador de adição (+), ato que chamamos de concatenação.',
       },
       {
         type: 'code',
@@ -439,14 +439,14 @@ escreva('Eu encontrei um ' + 'planeta' + ' e ele se chama ' + nomePlaneta)
       {
         type: 'code',
         body: `var nomePlaneta = "Datahon"
-escreva("esse planeta \$\{nomePlaneta\} não parece ser amigável")
+escreva("Esse planeta \$\{nomePlaneta\} não parece ser amigável")
   
  // Resultado: Esse planeta Datahon não parece ser amigável`,
         isRunnable: true,
       },
       {
         type: 'default',
-        body: 'Cuidado, se você usar aspas duplas dentro de aspas duplas, não vai dar muito certo.',
+        body: 'Cuidado, se você usar aspas duplas dentro de outras aspas duplas, não vai dar muito certo.',
       },
       {
         type: 'code',

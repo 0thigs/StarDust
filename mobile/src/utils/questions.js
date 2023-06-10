@@ -10,7 +10,7 @@ export const questions = [
     starId: 1,
     type: 'open',
     stem: 'O nome que se pode dar a uma sequencia lógica de instruções qualquer é',
-    answer: 'algoritmo',
+    answer: ['algoritmo'],
   },
   {
     starId: 1,
@@ -218,7 +218,7 @@ export const questions = [
     starId: 2,
     type: 'open',
     stem: 'O nome do comando para um programa mostrar informações é',
-    answer: 'escreva',
+    answer: ['escreva', 'escreva()'],
   },
   {
     starId: 3,
@@ -293,26 +293,25 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 5,
     type: 'open',
-    stem: 'O nome que se dá para o ato de juntar textos em um programa é',
-    answer: 'concatenação',
+    stem: 'Se eu tenho um texto com aspas duplas, só inserir nele que tipo de aspas?',
+    answer: ['aspas simples', 'simples'],
   },
   {
     starId: 5,
     type: 'checkbox',
-    stem: 'quais dos valores abaixo pode ser um tipo de texto válido',
+    stem: 'quais dos valores abaixo pode ser um tipo de texto válido?',
     options: ['letra', '"não é um texto"', '"100"', '2.5'],
     correctOptions: ['"não é um texto"', '"100"'],
   },
   {
     starId: 5,
     type: 'selection',
-    stem: 'Qual será a saída do seguinte código',
-    code: `
-      var cor = "vermelho"
-      var nome = "Datahon"
-      var nome = "Planeta " + nome
+    stem: 'Qual será o resultado do seguinte código?',
+    code: `var cor = "vermelho"
+var nome = "Datahon"
+var nome = "Planeta " + nome
 
-      escreva(nome, " tem a cor ", cor)`,
+escreva(nome, " tem a cor ", cor)`,
     options: [
       'Planeta Datahon tem a cor vermelha',
       'Planeta Datahon tem a cor azul',
@@ -324,7 +323,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 5,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que ele escreva a data correta',
+    stem: 'Complete o código para que ele escreva a data.',
     lines: [
       {
         id: 1,
@@ -333,7 +332,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
       },
       {
         id: 2,
-        texts: ['escreva("mensagem enviada em "', 'dropZone', '" obrigado)'],
+        texts: ['escreva("mensagem enviada em "', 'dropZone', '", de nada)'],
         indentLevel: 0,
       },
     ],
@@ -360,7 +359,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 5,
     type: 'drag-and-drop-click',
-    stem: 'Concatene os textos da maneira apropriada',
+    stem: 'Concatene os textos da maneira apropriada.',
     lines: [
       {
         id: 1,
@@ -396,7 +395,7 @@ escreva("planeta encontrado: ", nomePlaneta)`,
   {
     starId: 6,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que combustivel total seja igual 75',
+    stem: 'Complete o código para que combustivel total seja igual 75.',
     lines: [
       {
         id: 1,
@@ -3534,7 +3533,7 @@ escreva(retornarSaudacao("John"));`,
       },
       {
         id: 2,
-        texts: ['funcao verificarImpar(', 'dropZone' ,') {'],
+        texts: ['funcao verificarImpar(', 'dropZone', ') {'],
         indentLevel: 0,
       },
       {
