@@ -233,11 +233,7 @@ export function CustomDrawer() {
                     description={description}
                     icon={icon}
                     requiredAmount={required_amount}
-                    currentAmount={
-                      metricsExceptions.includes(metric)
-                        ? loggedUser[metric] - 1
-                        : loggedUser[metric]
-                    }
+                    currentAmount={loggedUser[metric]}
                     isUnlocked={true}
                   />
                 </C.AchievementContainer>

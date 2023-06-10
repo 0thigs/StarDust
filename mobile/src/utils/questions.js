@@ -2,9 +2,9 @@ export const questions = [
   {
     starId: 1,
     type: 'selection',
-    stem: 'Dentro das opções que NÃO se enquadra na hora de fazer um algoritmo é',
-    options: ['raciocínio lógico', 'aleatoriedade', 'análise', 'encadeamento de passos'],
-    answer: 'aleatoriedade',
+    stem: 'Dentre as opções a seguir, qual NÃO se enquadra na hora de escrever um algoritmo?',
+    options: ['raciocínio lógico', 'desordem', 'análise', 'encadeamento de passos'],
+    answer: 'desordem',
   },
   {
     starId: 1,
@@ -27,7 +27,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Ordene a sequência correta de se vestir um traje espacial (Pressione e segure item)',
+    stem: 'Ordene a sequência correta de se vestir um traje espacial (Pressione e segure o item)',
     items: [
       {
         id: 1,
@@ -50,7 +50,7 @@ export const questions = [
   {
     starId: 1,
     type: 'drag-and-drop-list',
-    stem: 'Ordene a sequência correta de se ligar um foguete (Pressione e segure item)',
+    stem: 'Ordene a sequência correta de se ligar um foguete (Pressione e segure o item)',
     items: [
       {
         id: 1,

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import * as C from './styles';
 
 import { Star } from '../Star';
@@ -12,14 +12,13 @@ import {
 import { SvgUri } from 'react-native-svg';
 import { getImage } from '../../utils/getImage';
 
-export function Planet({ name, image, icon, stars, lastUnlockedStarId }) {
+function PlanetComponent({ name, image, icon, stars, lastUnlockedStarId }) {
   const PlanetSignPosition = useSharedValue(-5);
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: PlanetSignPosition.value }],
     };
   });
-
 
   useEffect(() => {
     PlanetSignPosition.value = withDelay(
@@ -53,3 +52,5 @@ export function Planet({ name, image, icon, stars, lastUnlockedStarId }) {
     </C.Container>
   );
 }
+
+export const Planet = memo(PlanetComponent);

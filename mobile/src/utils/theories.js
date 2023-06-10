@@ -29,12 +29,21 @@ export const theories = [
       },
       {
         type: 'alert',
+        body: 'Para tanto, você precisa pensar de forma lógica e organizada para criar uma sequência de passos que resolva esse problema.',
+      },
+      {
+        type: 'alert',
         body: 'A lógica de programação é semelhante a isso, mas em vez de solucionar a questão de como fazer uma exploração espacial, você está resolvendo um problema em um programa de computador. Para tanto, você precisa pensar de forma lógica e organizada para criar uma sequência de passos que resolva esse problema.',
       },
       {
         type: 'default',
         title: 'Aí que entra os algoritmos',
         body: 'Um algoritmo é como um roteiro para um programa de computador. Ele é uma sequência de passos que o programa deve seguir para alcançar um objetivo específico. Como aspirante a explorador espacial, você pode pensar em um algoritmo como uma lista de tarefas que você precisa para resolver o primeiro problema que você se depara.',
+      },
+      {
+        type: 'default',
+        title: 'Aí que entra os algoritmos',
+        body: 'Como aspirante a explorador espacial, você pode pensar em um algoritmo como uma lista de tarefas que você precisa ter para resolver um problema que você se depara.',
       },
       {
         type: 'default',
@@ -45,29 +54,33 @@ export const theories = [
         type: 'code',
         body: `algoritmo arrumar um foguete
     
-    Inicio
+  Inicio
   
-  Invadir um centro espacial;
-  Encontrar um foguete;
-  Entrar no foguete enquanto ninguém estiver olhando;
-  Conferir se não há combustível suficiente;
-  Conferir a quantidade de suprimentos;
-  Conferir quantidade de oxigênio;
-  Se não tiver = sair e roubar mais
-  senao ligar o foguete;
-  Esperar foquete entrar em órbita;
-  Relaxar e curtir a viagem;
+    Invadir um centro espacial;
+    Encontrar um foguete;
+    Entrar no foguete enquanto ninguém estiver olhando;
+    Conferir se não há combustível suficiente;
+    Conferir a quantidade de suprimentos;
+    Conferir quantidade de oxigênio;
+    Se não tiver = sair e roubar mais
+    senao ligar o foguete;
+    Esperar foquete entrar em órbita;
+    Relaxar e curtir a viagem;
     
-    Fim`,
+  Fim`,
       },
       {
         type: 'default',
         title: 'Mas é só isso?',
-        body: 'Obviamente, há várias formas de chegar nesse mesmo resultado, como também pode existir mais passos antes de outros passos. Contudo, o objetivo sempre vai ser esse: pensar logicamente para estipular uma sequência de passos para a resolução de um problema, o que damos o nome de lógica de programação dentro do contexto da computação, enquanto a sequência em si desses eventos, damos o nome de algoritmo.',
+        body: 'Obviamente, há várias formas de chegar nesse mesmo resultado, como também pode existir mais passos antes de outros passos.',
+      },
+      {
+        type: 'default',
+        body: 'Contudo, o objetivo sempre vai ser esse: pensar logicamente para estipular uma sequência de passos para a resolução de um problema, o que damos o nome de lógica de programação dentro do contexto da computação, enquanto a sequência em si desses eventos, damos o nome de algoritmo.',
       },
       {
         type: 'alert',
-        body: 'A diferença é que qualquer sequência lógica de passos pode ser considerado um algoritmo, como uma receita de bolo ou um assalto a um centro espacial. Já em programação, os algoritmos são escritos para criar programas, mas sempre obedecendo uma série de regras estabelecidas por cada linguagem de programação, o que é o que a gente chama de sintaxe.',
+        body: 'A diferença é que qualquer sequência lógica de passos pode ser considerado um algoritmo, como uma receita de bolo ou um assalto a um centro espacial. Já em programação, os algoritmos são escritos para criar programas, mas sempre obedecendo uma série de regras estabelecidas por cada linguagem de programação, que é o que a gente chama de sintaxe.',
       },
       {
         type: 'default',
@@ -78,6 +91,10 @@ export const theories = [
         type: 'default',
         title: 'Como funciona a Lógica de Programação na prática?',
         body: 'Como você já percebeu, a Lógica de Programação funciona através de algoritmos, ou seja, por meio de passos lógicos e bem definidos que deve ser seguidos para resolver um problema. Esses passos são escritos em um código que é interpretado pelo computador para que ele possa executar a tarefa desejada.',
+      },
+      {
+        type: 'default',
+        body: 'Esses passos são escritos em um código que é interpretado pelo computador para que ele possa executar a tarefa desejada.',
       },
       {
         type: 'list',
@@ -91,16 +108,15 @@ export const theories = [
       {
         type: 'default',
         title: 'Introdução',
-        body: 'Agora que você finalmente está no espaço, imagino que você queira explorar novos planetas e talvez econtrar novas vidas alienígenas.',
+        body: 'Agora que você finalmente está no espaço, imagino que você queira explorar novos planetas e talvez encontrar vidas alienígenas.',
       },
       {
         type: 'default',
-        title: 'Introdução',
-        body: 'Para isso você vai ter que instruir seu foguete escrevendo códigos.',
+        body: 'Para isso você vai ter que instruir seu foguete, escrevendo códigos.',
       },
       {
         type: 'alert',
-        body: 'Uma linguagem de programação normalmente possui uma sintaxe própria, que é o conjunto de regras que determina quais combinações de símbolos e palavras-chaves podem ser utilizadas para fazer com que o programa faça algo.',
+        body: 'Uma linguagem de programação normalmente possui uma sintaxe própria, que é o conjunto de regras e comandos que definem o que o programa deve fazer.',
       },
       {
         type: 'default',
@@ -110,36 +126,42 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, para fazer com que o foguete imprima no painel: "explorar o espaço é legal", basta fazer isso',
+        body: 'Por exemplo, para fazer com que o foguete imprima no painel: "explorar o espaço é legal", basta usar o comando chamado "escreva()", colocando a mensagem entre seus parênteses:',
       },
       {
         type: 'code',
         body: `escreva("explorar o espaço é legal")
   
-  saida: explorar o espaço é legal`,
+// Resultado: explorar o espaço é legal`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Simples e fácil, mas caso você queria que o foguete leia e receba informações suas, você pode usar o comando leia:',
+        body: 'Simples e fácil, mas caso você queria que o foguete receba e leia informações suas (o que chamamos de entrada de dados), você pode usar o comando "leia()"',
       },
       {
         type: 'code',
-        body: `var seuNome = leia()`,
+        body: `
+var seuNome = leia()`,
       },
       {
         type: 'default',
-        title: 'O que diabos é var?',
-        body: 'Para receber dados, naturalmente você tem que colocar em algum lugar, que no caso sempre vai ser em algo que chamamos de variável.',
+        title: 'O que diachos é var?',
+        body: 'Para receber dados, naturalmente você tem que colocar em algum lugar, que no caso de um programa sempre vai ser em algo que chamamos de variável.',
       },
       {
         type: 'default',
-        title: 'Mas o que diabos são variáveis?',
-        body: 'variáveis nada mais são do que espaços na memória de um programa, onde você pode armazenar um tipo de dado, elas tem esse nome porque elas podem variar, ou seja, receber outros valores no decorrer do programa.',
+        title: 'Mas o que raios são variáveis?',
+        body: 'Variáveis nada mais são do que espaços na memória de um programa, onde você pode armazenar qualquer tipo de dado.',
+      },
+      {
+        type: 'default',
+        body: 'Elas tem esse nome porque elas podem variar de valor, ou seja, receber outros valores no decorrer do programa.',
       },
       {
         type: 'alert',
-        body: 'Você não precisa entender tudo de variáveis agora, pois usaremos elas mais para frente.',
+        body: 'Você não precisa entender tudo de variáveis agora, pois usaremos melhor elas mais para frente.',
       },
       {
         type: 'default',
@@ -148,36 +170,49 @@ export const theories = [
       },
       {
         type: 'code',
-        body: `var seuNome = leia()
-  escreva(seuNome)
-  
-  entrada: "João"
-  saida: "João"`,
+        body: `var seuNome = leia("Insira seu nome: ")
+escreva(seuNome)
+
+// Entrada: Seu Nome
+// Resultado: Seu Nome`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Legal, mas na hora de escrever um código consistente, você precisa tomar alguns cuidados:',
+        body: 'Legal, mas na hora de escrever um código consistente em sem erros, você precisa tomar alguns cuidados:',
       },
       {
         type: 'list',
-        body: '1 - É preciso respeitar sempre a sintaxe definida pela linguagem, por exemplo, caso você tivesse colocado EXIBA ao invés de ESCREVA, deixado de usar os parênteses ou as aspas para exibir textos, o código daria erro. ',
+        body: '1 - É preciso respeitar sempre a sintaxe definida pela linguagem, por exemplo, caso você tivesse colocado EXIBA em vez de ESCREVA, deixado de usar os parênteses ou as aspas para escrever os textos de mensagem, o código daria erro.',
       },
       {
         type: 'list',
-        body: '2 - Você deve entender a função, quando e porquê usar cada comando, por exemplo, para escrever dados externos na tela, eu preciso usar o comando leia, pois ele tem a serve para ler informações que vem de fora do programa, para aí então usar o comando escreva.',
+        body: '2 - Você deve entender o objetivo, quando e porquê usar cada comando, por exemplo, para exibir dados que serão inseridos no programa, eu preciso usar primeiro o comando "leia()" porque ele serve para ler informações que vem de fora do programa. Depois devo usar o comando "escreva()" para exibir esses dados.',
       },
       {
         type: 'list',
-        body: '3 - É crucial compreender que o fluxo de um programa é sempre de cima para baixo, ou seja, não faz sentido eu tentat ler uma informação com leia depois de exibi-la na tela com escreva',
+        body: '3 - É crucial compreender que o fluxo de um programa é sempre de cima para baixo, ou seja, não faria sentido eu tentar ler uma informação com "leia()" depois de ter tentado exibi-la na tela com "escreva()".',
+      },
+      {
+        type: 'code',
+        body: `
+// Código completamente sem cabimento 🤨
+escreva(seuNome)
+var seuNome = leia()`,
+        isRunnable: true,
+      },
+      {
+        type: 'default',
+        body: 'Ah.. Essas duas barras na linha 2 servem para dizer ao programa ignorar uma determinada linha na hora de execução. Dessa forma você pode escrever qualquer coisa e nenhum erro acontecerá.',
       },
       {
         type: 'alert',
-        body: 'leia e escreva são considerados comandos de entrada e saída respectivamente, justamente porque com o leia você está entrando com dados, enquanto com o escreva você está fazendo dados saírem para serem exibidos digamos assim.',
+        body: 'leia e escreva são considerados comandos de entrada e saída respectivamente. Podemos dizer que com o "leia()" você está entrando com dados, enquanto com o "escreva()" você está fazendo dados saírem para serem exibidos.',
       },
       {
         type: 'list',
-        body: 'Agora que você um pouco mais sobre programas e pseudocódigos tá na hora revisar tudo isso, preparado(a)?.',
+        body: 'Agora que você sabe um pouco mais está na hora revisar tudo isso, preparado(a)?.',
       },
     ],
   },
@@ -187,12 +222,12 @@ export const theories = [
       {
         type: 'default',
         title: null,
-        body: 'Ok, parace que você não encontrou nenhum nada de interessante no espaço ainda, justamente porque seu foguete não sabe quem o está pilotando.',
+        body: 'Ok, parace que você não encontrou nada de interessante no espaço ainda, justamente porque seu foguete não sabe quem o está pilotando.',
       },
       {
         type: 'default',
         title: 'E agora?',
-        body: 'Para resolver esse problema você tem que escrever um programa que exiba seu nome para ele, e para isso você terá que usar os comandos leia e escreva explicados anteriormente.',
+        body: 'Para resolver esse problema você tem que escrever um programa que exiba suas informações para ele, e para isso você terá que usar os comandos "leia()" e "escreva()" explicados anteriormente.',
       },
       {
         type: 'default',
@@ -201,13 +236,13 @@ export const theories = [
       },
       {
         type: 'default',
-        title: 'Explica o que são variáveis logo!',
+        title: 'O que são variáveis mesmo?',
         body: 'Variáveis são espaços reservados na memória de um programa para algum tipo de dado, pronto.',
       },
       {
         type: 'default',
         title: 'Como usar essa tais de variáveis?',
-        body: 'Para usá-las de fato é necessário declarar elas para o programa que ela existe, escrevendo o comando var, seguido do nome da variável que você deseja que ela tenha, exemplo:',
+        body: 'Para usá-las de fato é necessário fazer o que chamamos de declarar uma variável, escrevendo o comando var, seguido do nome da variável que você deseja que ela tenha, exemplo:',
       },
       {
         type: 'code',
@@ -221,7 +256,7 @@ export const theories = [
       {
         type: 'code',
         body: `var nome = "Kauê Cabess"
-  var idade = 90`,
+var idade = 90`,
       },
       {
         type: 'default',
@@ -230,17 +265,18 @@ export const theories = [
       },
       {
         type: 'alert',
-        body: 'Além disso, você também pode atribuir o valor de uma variável a outra, utilizando o seguinte formato:.',
+        body: 'Além disso, você também pode atribuir o valor de uma variável a outra.',
       },
       {
         type: 'code',
         body: `
-  var nome = "Kauê Cabess"
-  var nomeCompleto = nome
+var nome = "Kauê Cabess"
+var nomeCompleto = nome
+
+escreva(nomeCompleto)
   
-  escreva(nomeCompleto)
-  
-  saida: Kauê Cabess`,
+// Resultado: Kauê Cabess`,
+        isRunnable: true,
       },
       {
         type: 'default',
@@ -249,49 +285,79 @@ export const theories = [
       },
       {
         type: 'code',
-        body: `var nome = leia()
-  var idade = leia()
-  var nomeCompleto = nome
-  
-  escreva("seu nome completo é ", nomeCompleto)
-  escreva("e sua idade é ", idade)
-  
-  entrada: (Fernanda, 90)
-  saida: seu nome completo é Fernanda e sua idade é 90`,
+        body: `var nome = leia("Digite seu nome:")
+var idade = leia("Digite seu sua idade:")
+var nomeCompleto = nome
+
+escreva("seu nome completo é", nomeCompleto)
+escreva("e sua idade é", idade)
+
+// Veja o resultado pressionando o botão de executar`,
+        isRunnable: true,
       },
       {
         type: 'alert',
-        body: 'Dica: você também fazer com que o programa escreva um texto e o conteúdo de uma variável ao mesmo tempo, basta separá-los entre vírgulas, assim como mostrado no exemplo acima.',
+        body: 'Dica: você também pode fazer com que o programa escreva um texto e o conteúdo de uma variável ao mesmo tempo, basta separá-los entre vírgulas, assim como mostrado no exemplo acima.',
       },
       {
         type: 'default',
         title: 'Regras para nomes de variáveis',
-        body: 'Ao nomear suas variáveis, é importante seguir algumas regras básicas:',
+        body: 'Ao criar o nome de suas variáveis, é importante seguir algumas regras:',
       },
       {
         type: 'list',
         body: '1 - O nome da variável deve iniciar com uma letra ou sublinhado (_).',
       },
       {
+        type: 'code',
+        body: `
+// Nada de iniciar nome de variaveis com números ❌
+var 15Cavalos
+
+// Mas o nome pode conter números
+// desde que não seja o primeiro caractere ✅
+var numero999`,
+        isRunnable: false,
+      },
+      {
         type: 'list',
         body: '2 - O nome da variável não pode conter espaços.',
+      },
+      {
+        type: 'code',
+        body: `// Nada de fazer isso ❌
+var minha variavel`,
+        isRunnable: false,
       },
       {
         type: 'list',
         body: '3 - O nome da variável não pode ser uma palavra reservada da liguagem, ou seja, um nome de um comando por exemplo.',
       },
       {
+        type: 'code',
+        body: `var leia // ❌
+var escreva // ❌
+var var // ❌`,
+        isRunnable: false,
+      },
+      {
         type: 'list',
         body: '4 - O nome da variável deve ser descritivo e fácil de entender.',
       },
       {
-        type: 'default',
-        title: 'Concluindo',
-        body: 'A atribuição de variáveis é uma parte fundamental da programação, pois permite armazenar valores e acessá-los ao longo do código. Ao seguir as regras e a sintaxe corretas, você poderá atribuir valores a suas variáveis sem problemas em programas futuros.',
+        type: 'code',
+        body: `
+// WHAT⁉ 
+var hwrufh = "Paz mundial!"`,
+        isRunnable: false,
       },
       {
         type: 'default',
-        title: null,
+        title: 'Entendi',
+        body: 'A atribuição de variáveis é uma parte fundamental da programação, pois permite armazenar valores e acessá-los ao longo do código. Ao seguir as regras e a sintaxe corretas, você poderá atribuir valores a suas variáveis sem problemas em programas futuros.',
+      },
+      {
+        type: 'list',
         body: 'Agora que você aprendeu mais um pouco, que tal praticar tudo o que já vimos até agora?',
       },
     ],

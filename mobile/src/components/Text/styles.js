@@ -17,14 +17,9 @@ export const Title = styled.Text`
 `;
 
 export const Code = styled.ScrollView`
+  width: 100%;
   border-radius: 10px;
   position: relative;
-  width: 100%;
-`;
-
-const DefaultContainer = css`
-  background-color: ${({ theme }) => theme.colors.purple_700};
-  width: 100%;
 `;
 
 export const CodeButton = styled.TouchableOpacity`
@@ -33,9 +28,14 @@ export const CodeButton = styled.TouchableOpacity`
   border-radius: 8px;
   padding: 4px;
   position: absolute;
-  right: 0;
+  left: 8px;
   bottom: 8px;
   z-index: 5;
+`;
+
+const DefaultContainer = css`
+  background-color: ${({ theme }) => theme.colors.purple_700};
+  width: 100%;
 `;
 
 export const CodeButtonTitle = styled.Text`

@@ -18,11 +18,13 @@ export function Playground({ route }) {
   const [output, setOutput] = useState([]);
   const [isPromptVisible, setisPromptVisible] = useState(false);
   const [promptTitle, setPromptTitle] = useState('');
+  const [codeWithPrompt, setCodeWithPrompt] = useState('');
   const input = useRef('');
   const userCode = useRef('');
   const promptRef = useRef(null);
   const bottomSheetRef = useRef(null);
   const errorLine = useRef(0);
+  const leiasData = useRef([]);
   const leiaRegex = /(leia\(.*\))/;
 
   function handleError(error) {
@@ -39,20 +41,17 @@ export function Playground({ route }) {
     bottomSheetRef.current.collapse();
   }
 
-  function formatCode(code, inputValue) {
+  async function formatCode(code, input) {
     const match = code.match(leiaRegex);
-    userCode.current = code.replace(
-      match[0],
-      isNaN(inputValue) ? "'" + inputValue + "'" : inputValue
-    );
-    input.current = '';
+    userCode.current = code.replace(match[0], isNaN(input) ? "'" + input + "'" : input);
+    input = '';
     promptRef.current.clear();
     setisPromptVisible(false);
-    handleUserCode();
+    handleUserCode(userCode.current);
   }
 
   function onPromptConfirm() {
-    formatCode(userCode.current, input.current);
+    formatCode(codeWithPrompt, input.current);
   }
 
   function onPromptCancel() {
@@ -79,8 +78,8 @@ export function Playground({ route }) {
 
   async function handleUserCode() {
     const code = userCode.current;
-
     if (hasInput(code)) {
+      setCodeWithPrompt(code);
       setisPromptVisible(true);
       return;
     }
@@ -104,6 +103,7 @@ export function Playground({ route }) {
     setCodeTitle(codeId ? title : 'Playground');
     setInitialCode(codeId ? code : route.params?.code);
   }, [code]);
+
 
   return (
     <C.Container>

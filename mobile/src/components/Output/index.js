@@ -1,6 +1,7 @@
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useEffect } from 'react';
 
 export function Output({ bottomSheetRef, result }) {
   return (
@@ -16,11 +17,9 @@ export function Output({ bottomSheetRef, result }) {
             <C.Heading>Resultado</C.Heading>
           </C.Header>
           <C.Content>
-            {result.map((result, index) => (
+            {result?.map((result, index) => (
               <C.Result key={`result-${index}`}>
-                {result.includes(',')
-                  ? result.split(',').join(', ')
-                  : result}
+                {result.includes(',') ? result.trim().split(',').join(', ') : result.trim()}
               </C.Result>
             ))}
           </C.Content>

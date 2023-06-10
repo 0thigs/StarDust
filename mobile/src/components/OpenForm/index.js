@@ -73,6 +73,7 @@ export function OpenForm({ stem, answer, code, index }) {
             value={userAnswer}
             onChangeText={setUserAnswer}
             isAnswerWrong={isAnswerVerified && isAnswerWrong}
+            autoCapitalize={'none'}
           />
         </>
       )}

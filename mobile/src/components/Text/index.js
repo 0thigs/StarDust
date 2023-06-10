@@ -23,7 +23,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
 
   function getCodeHeigth(code) {
     const lines = code.split('\n').length;
-    return lines * 28;
+    return lines * 28 + (isRunnable ? 64 : 12);
   }
 
   const codeHeigth = useMemo(() => {
@@ -56,7 +56,10 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
             </C.CodeButton>
           )}
 
-          <C.Code horizontal style={{ height: codeHeigth }}>
+          <C.Code
+            horizontal
+            style={{ height: codeHeigth }}
+          >
             <Editor value={body} />
           </C.Code>
         </>
@@ -71,7 +74,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
           </C.SpeechButton>
           <C.Text type={type}>
             {!isRendered ? (
-              <TypeWriter typing={1} maxDelay={10}>
+              <TypeWriter typing={1} maxDelay={5}>
                 {body}
               </TypeWriter>
             ) : (

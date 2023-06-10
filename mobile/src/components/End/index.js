@@ -83,9 +83,8 @@ export function End({
       }
 
       let completedPlanets = loggedUser.completed_planets;
-      const isCurrentStarUnlocked = getCurrentStar(starId).isUnlocked;
-      let updatedUnlockedStars = loggedUser.unlocked_stars + isCurrentStarUnlocked ? 1 : 0;
       let nextStar = getNextStar(starId);
+      let updatedUnlockedStars = loggedUser.unlocked_stars;
 
       if (!nextStar) {
         const currentPlanet = getCurrentPlanet(starId);
@@ -96,6 +95,7 @@ export function End({
 
       if (nextStar && !nextStar.isUnlocked) {
         await addUnlockedStar(nextStar.id);
+        updatedUnlockedStars++;
       }
 
       return {

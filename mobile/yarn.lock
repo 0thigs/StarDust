@@ -1481,6 +1481,11 @@
     "find-up" "^5.0.0"
     "js-yaml" "^4.1.0"
 
+"@fanchenbao/react-native-scroll-indicator@^0.2.1":
+  "integrity" "sha512-lg953d2xzvYn9wcI9UmFMEf7vY3tuiG3wBZoSOrmcpoqPqBPCOR6tGJHKnABCVBGC5p4Gjx4Be1uHSt184A8hg=="
+  "resolved" "https://registry.npmjs.org/@fanchenbao/react-native-scroll-indicator/-/react-native-scroll-indicator-0.2.1.tgz"
+  "version" "0.2.1"
+
 "@gar/promisify@^1.0.1":
   "integrity" "sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw=="
   "resolved" "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz"

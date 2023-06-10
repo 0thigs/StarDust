@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Alert, BackHandler } from 'react-native';
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -43,9 +44,25 @@ export function LessonHeader() {
     dispatch({ type: 'resetState' });
   }
 
+ async function handleHardwareBackPress(event) {
+    if (await Speech.isSpeakingAsync()) {
+        Speech.stop();
+      }
+
+      event.preventDefault();
+      setIsModalVisible(true);
+  }
+
   useEffect(() => {
     barWidth.value = withTiming(currentWidth, { duration: 500 });
   }, [currentWidth]);
+
+  useEffect(() => {
+    console.log({ isModalVisible });
+
+    navigation.addListener('beforeRemove', event => handleHardwareBackPress(event, true));
+    navigation.removeListener('beforeRemove', handleHardwareBackPress);
+  }, []);
 
   return (
     <C.Container>

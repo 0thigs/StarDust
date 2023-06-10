@@ -83,7 +83,7 @@ export function DragAndDropListForm({ index, stem, items }) {
     const { isActive } = useOnCellActiveAnimation();
     return (
       <ShadowDecorator>
-        <C.ItemContainer onLongPress={drag} disabled={isAnswerVerified}>
+        <C.ItemContainer onLongPress={drag} disabled={isAnswerVerified} delayLongPress={1} activeOpacity={0.7}>
           <C.Item style={ItemAnimatedStyle} isActive={isActive}>
             <C.Label
               isAnswerWrong={isAnswerVerified && isAnswerWrong}

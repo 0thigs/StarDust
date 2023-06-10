@@ -147,7 +147,7 @@ export function PlaygroundHeader({
       <PopoverMenu
         ref={popoverMenuRef}
         buttons={popoverMenuButtons}
-        icon={<MoreVertical width={25} height={25} color={theme.colors.green_500} />}
+        icon={<MoreVertical width={28} height={28} color={theme.colors.green_500} />}
       />
 
       <RangeInput isVisible={isRangeInputVisible} setIsVisible={setIsRangeInputVisible} />

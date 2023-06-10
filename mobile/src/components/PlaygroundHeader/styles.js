@@ -4,7 +4,7 @@ export const Container = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.green_900};
   flex-direction: row;
-  padding: 16px 0 8px;
+  padding: 40px 4px 8px;
 `;
 
 export const Title = styled.Text`
@@ -15,5 +15,5 @@ export const Title = styled.Text`
 `;
 
 export const HeaderButton = styled.TouchableOpacity`
-  padding: 4px 8px;
+  padding: 8px;
 `;
