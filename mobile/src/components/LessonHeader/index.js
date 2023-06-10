@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Alert, BackHandler } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -24,6 +23,7 @@ export function LessonHeader() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
+  const navigationAction = useRef(null);
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
   const barWidth = useSharedValue(currentWidth);
 
@@ -38,19 +38,14 @@ export function LessonHeader() {
       Speech.stop();
     }
 
-    navigation.reset({
-      routes: [{ name: 'DrawerRoutes' }],
-    });
     dispatch({ type: 'resetState' });
+    navigation.dispatch(navigationAction.current)
   }
 
- async function handleHardwareBackPress(event) {
-    if (await Speech.isSpeakingAsync()) {
-        Speech.stop();
-      }
-
-      event.preventDefault();
-      setIsModalVisible(true);
+   function handleHardwareBackPress(event) {
+    event.preventDefault();
+    setIsModalVisible(true);
+    navigationAction.current = event.data.action;
   }
 
   useEffect(() => {
@@ -58,17 +53,15 @@ export function LessonHeader() {
   }, [currentWidth]);
 
   useEffect(() => {
-    console.log({ isModalVisible });
-
-    navigation.addListener('beforeRemove', event => handleHardwareBackPress(event, true));
-    navigation.removeListener('beforeRemove', handleHardwareBackPress);
+    navigation.addListener('beforeRemove', handleHardwareBackPress);
+    return () => navigation.removeListener('beforeRemove', handleHardwareBackPress);
   }, []);
 
   return (
     <C.Container>
       {/* {isLoading && <Loading isAnimation={true} />} */}
       <C.Main>
-        <C.CloseButton onPress={() => setIsModalVisible(true)}>
+        <C.CloseButton onPress={navigation.goBack}>
           <Icon.X color={theme.colors.red_700} width={28} height={28} />
         </C.CloseButton>
         <C.Lives>
