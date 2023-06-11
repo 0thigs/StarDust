@@ -91,7 +91,7 @@ export const InputContainer = styled.View`
 export const Loader = styled.View`
   position: absolute;
   right: 12px;
-  top: 72px;
+  top: 64px;
 `;
 
 export const ErrorMessage = styled.Text`

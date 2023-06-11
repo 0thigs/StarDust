@@ -43,9 +43,11 @@ export function Avatar({
 
     const updatedCoins = loggedUser.coins - price;
     try {
-      await addUserAcquiredAvatar(id);
-      await updateLoggedUser({ coins: updatedCoins });
-      selectAvatar();
+      await Promise.all([
+        addUserAcquiredAvatar(id),
+        updateLoggedUser({ coins: updatedCoins }),
+        selectAvatar(),
+      ]);
       updateLoggedUser({ coins: updatedCoins });
       setModalType('earning');
       setIsModalOpen(true);
@@ -74,6 +76,7 @@ export function Avatar({
       await selectAvatar();
       return;
     }
+
     buyAvatar();
   }
 
@@ -134,7 +137,7 @@ export function Avatar({
                 size={350}
                 isAbsolute={true}
                 top={-15}
-                left={-12}
+                left={-14}
               />
               <C.AcquiredAvatarImage source={{ uri: getImage('avatars', image) }} />
               <C.Name>{name}</C.Name>

@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@designliquido/delegua": "^0.21.9",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo-google-fonts/roboto": "^0.2.2",
     "@fanchenbao/react-native-scroll-indicator": "^0.2.1",

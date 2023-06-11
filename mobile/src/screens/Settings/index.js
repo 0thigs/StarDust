@@ -69,24 +69,18 @@ export function Settings({ navigation: { goBack } }) {
     setIsLoading(true);
     try {
       if (name !== loggedUser.name) {
-        const result = await updateLoggedUser({ name });
-        if (result instanceof Error) {
-          handleUpdateNameError(result);
-          return;
-        }
+        await updateLoggedUser({ name });
       }
 
       if (email !== loggedUser.email) {
-        const result = await updateUserEmail(email);
-        if (result instanceof Error) {
-          handleUpdateEmailError(result);
-          return;
-        }
+        await updateUserEmail(email);
       }
 
       Toast.success('Dados atualizados com sucesso');
     } catch (error) {
       console.error(error.message);
+      if (error.message.includes('name')) handleUpdateNameError(error);
+      if (error.message.includes('email')) handleUpdateEmailError(error);
     } finally {
       setIsLoading(false);
     }

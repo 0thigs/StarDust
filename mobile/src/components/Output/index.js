@@ -10,7 +10,7 @@ export function Output({ bottomSheetRef, result }) {
   function formatOutput(output, index) {
     switch (types.current[index].trim()) {
       case 'texto':
-        return '"' + output + '"';
+        return "'" + output + "'";
       case 'vetor':
         return '[ ' + output.split(',').join(', ') + ' ]';
       default:

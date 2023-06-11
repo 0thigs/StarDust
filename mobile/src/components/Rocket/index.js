@@ -43,9 +43,11 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
     const updatedCoins = loggedUser.coins - price;
     const updatedAcquiredRockets = loggedUser.acquired_rockets + 1;
     try {
-      await updateLoggedUser({ coins: updatedCoins, acquired_rockets: updatedAcquiredRockets });
-      await addUserAcquiredRocket(id);
-      selectRocket();
+      await Promise.all([
+        updateLoggedUser({ coins: updatedCoins, acquired_rockets: updatedAcquiredRockets }),
+        addUserAcquiredRocket(id),
+        selectRocket(),
+      ]);
       setModalType('earning');
       setIsModalOpen(true);
     } catch (error) {
@@ -130,7 +132,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
                 size={220}
                 isAbsolute={true}
                 top={-15}
-                left={-8}
+                left={-10}
               />
               <SvgUri uri={getImage('rockets', image)} width={100} height={100} />
               <C.Name>{name}</C.Name>

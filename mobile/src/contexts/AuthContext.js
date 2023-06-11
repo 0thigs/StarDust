@@ -122,7 +122,7 @@ export function AuthProvider({ children }) {
   async function resetPassword(email) {
     const user = await api.getUserByEmail(email);
     if (!user) {
-      throw new Error("Usuário não encontrado");
+      throw new Error('Usuário não encontrado');
     }
     const { success, error } = await supabase.auth.resetPasswordForEmail(email);
 
@@ -133,7 +133,7 @@ export function AuthProvider({ children }) {
   }
 
   async function refreshSession(access_token, refresh_token) {
-    global.Buffer = require('buffer').Buffer; // bug fix
+    global.Buffer = require('buffer').Buffer; // Buffer bug fix
     const {
       data: { session },
       error,
@@ -178,6 +178,7 @@ export function AuthProvider({ children }) {
       setLoggedUser(currentData => ({ ...currentData, ...newData }));
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 

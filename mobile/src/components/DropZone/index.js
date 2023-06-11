@@ -33,7 +33,7 @@ export function DropZone({
 
   useEffect(() => {
     if (targetZone && id === targetZone.id && targetZone.width !== zoneWidth.value) {
-      zoneWidth.value = withTiming(targetZone.width, { duration: 300 });
+      zoneWidth.value = withTiming(targetZone.width, { duration: 330 });
     }
   }, [targetZone]);
 

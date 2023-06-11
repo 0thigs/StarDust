@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useRocket } from '../../hooks/useRocket';
 import { useRanking } from '../../hooks/useRanking';
-import { useAvatar } from '../../hooks/useAvatar';
 import { useNavigation } from '@react-navigation/core';
 
 import { ArrowLeft, Edit } from 'react-native-feather';
@@ -41,12 +40,6 @@ export function ProfileStatus({
     setIsSelectAvatarVisible(true);
   }
 
-  useEffect(() => {
-    if (isFromLoggedUser && isSelectAvatarVisible) {
-      setIsSelectAvatarVisible(false);
-    }
-  }, [loggedUser.avatar_id]);
-
   return (
     <C.Container>
       {isFromLoggedUser ? (
@@ -68,10 +61,7 @@ export function ProfileStatus({
       </C.AvatarButton>
 
       {isFromLoggedUser && (
-        <SelectAvatar
-          isVisible={isSelectAvatarVisible}
-          setIsVisible={setIsSelectAvatarVisible}
-        />
+        <SelectAvatar isVisible={isSelectAvatarVisible} setIsVisible={setIsSelectAvatarVisible} />
       )}
 
       <C.Name>{name}</C.Name>

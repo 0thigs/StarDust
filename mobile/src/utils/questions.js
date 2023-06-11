@@ -831,13 +831,13 @@ escreva(saiuDoPlaneta)
     starId: 11,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código:',
-    code: `var planetaCor = "bege";
-var temAtmosferaBoa = 2022 > 2023;
+    code: `var planetaCor = "bege"
+var temAtmosferaBoa = 2022 > 2023
 
 se (temAtmosferaBoa) {
-     planetaCor = "marrom";
+    planetaCor = "marrom"
 }
-escreva(planetaCor);
+escreva(planetaCor)
     `,
     options: ['bege', 'marrom', 'preto', 'indefinido'],
     answer: 'bege',
@@ -854,12 +854,12 @@ escreva(planetaCor);
       },
       {
         id: 2,
-        texts: ['se (planetaDiametro ', 'dropZone', ' 15000) {'],
+        texts: ['se (planetaDiametro ', 'dropZone', ' 1500) {'],
         indentLevel: 1,
       },
       {
         id: 3,
-        texts: ['escreva("planeta ', 'dropZone', ' ");'],
+        texts: ['escreva("planeta ', 'dropZone', ' ")'],
         indentLevel: 1,
       },
       {
@@ -933,16 +933,15 @@ escreva(planetaCor);
     starId: 11,
     type: 'selection',
     stem: 'Qual será o resultado do seguinte código:',
-    code: `var planetaPopulacao = 1000 * 1000;
-var temAtmosferaBoa = 2022 > 2023;
-var status = "pouca gente";
+    code: `var planetaPopulacao = 1000 * 1000
+var temAtmosferaBoa = 2022 > 2023
+var status = "pouca gente"
 
 se (planetaPopulacao > 1000) {
     var status = "muita gente"
 }
-escreva(status);
-    `,
-    options: ['pouca gente', 'muita gente', 'gente', 'indefinido'],
+escreva(status)`,
+    options: ['pouca gente', 'muita gente', 'gente', 'variável indefinida'],
     answer: 'pouca gente',
   },
   {
@@ -1060,11 +1059,11 @@ escreva(status);
       },
       {
         id: 3,
-        label: '0',
+        label: '4',
       },
       {
         id: 4,
-        label: '-8',
+        label: '8',
       },
     ],
     correctItemsIdsSequence: [2, 3],
@@ -1116,7 +1115,7 @@ se (radiacao > 500) {
   {
     starId: 12,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que a variavel qualOSentidoDaVida seja igual a "42"',
+    stem: 'Complete o código para que a variavel qualOSentidoDaVida seja igual a 42',
     lines: [
       {
         id: 1,
@@ -1148,7 +1147,7 @@ se (radiacao > 500) {
         label: '*=',
       },
       {
-        id: 3,
+        id: 4,
         label: '/=',
       },
     ],

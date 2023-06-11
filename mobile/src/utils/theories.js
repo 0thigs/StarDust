@@ -1164,7 +1164,7 @@ escreva(turbinasGirando e combAtual > combMin);
       },
       {
         type: 'code',
-        body: `escreva(falso e falso)    
+        body: `escreva(falso e falso); 
 //  Resultado: falso`,
         isRunnable: true,
       },
@@ -1245,7 +1245,7 @@ escreva(comb == "Etherium" ou comb == "Plasmatron");
         body: `
 var motor1Funcionando = verdadeiro;
 var motor2Funcionando = verdadeiro;
-var tudoOk = !motor1Funcionando e motor2Funcionando
+var tudoOk = !motor1Funcionando e motor2Funcionando;
 escreva(tudoOk);
     
 //  Resultado: falso`,
@@ -1289,7 +1289,7 @@ escreva(!falso);
         body: `
 var motor1Funcionando = verdadeiro;
 var motor2Funcionando = verdadeiro;
-var tudoOk = motor1Funcionando e motor2Funcionando
+var tudoOk = motor1Funcionando e motor2Funcionando;
 escreva(tudoOk);
     
 //  Resultado: verdadeiro`,
@@ -1321,7 +1321,7 @@ escreva(tudoOk);
       },
       {
         type: 'alert',
-        body: 'Há 3 maneiras de criar uma instrução condicional:\n 1 - se\n 2 - senão\n 3 - senão se.\n Por enquanto, vamos começar pelo básico.',
+        body: 'Há 3 maneiras de criar uma instrução condicional:\n 1 - se\n 2 - senão\n 3 - senão se\n Por enquanto, vamos começar pelo básico.',
       },
       {
         type: 'list',
@@ -1334,7 +1334,7 @@ escreva(tudoOk);
 var planetaAmigavel = verdadeiro;
 
 se (planetaAmigavel) {
-    escreva(planetaAmigavel)
+    escreva(planetaAmigavel);
 }
     
 //  Resultado: verdadeiro`,
@@ -1348,12 +1348,12 @@ se (planetaAmigavel) {
       {
         type: 'default',
         title: 'Mas se não for?',
-        body: 'Simples: o programa ignora tudo que está entre chaves do se e executa todo o resto do código após ele.',
+        body: 'Simples: o programa ignora tudo que está entre chaves do "se" e executa todo o resto de código após ele.',
       },
       {
         type: 'code',
         body: `
-var souBonito = falso;
+var souBonito = falso
 
 se (souBonito) {
     escreva(souBonito)
@@ -1365,12 +1365,12 @@ se (souBonito) {
       {
         type: 'default',
         title: 'Só isso?',
-        body: 'Nós podemos usar tudo que vimos anteriormente que conseguem resultar em valores lógicos dentro da condição do se.',
+        body: 'Nós podemos usar tudo que vimos anteriormente que consegue resultar em valores lógicos dentro da condição do se.',
       },
       {
         type: 'code',
         body: `
-var poder = 8000 * 1000;
+var poder = 8000 * 1000
 
 se (poder > 8000) {
     escreva('Seu poder é mais de 8 mil!')
@@ -1378,6 +1378,24 @@ se (poder > 8000) {
     
 //  Resultado: Seu poder é mais de 8 mil!`,
         isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Cuidado com o ponto e vírgula! Se você colocar depois da primeira chave do "se" o código vai dar erro".',
+      },
+      {
+        type: 'code',
+        body: `
+var poder = 8000 * 1000;
+
+se (poder > 8000) {; // Não coloque aqui ❌
+    escreva('Seu poder é mais de 8 mil!');
+}`,
+        isRunnable: true,
+      },
+      {
+        type: 'alert',
+        body: 'Para não confundir vamos usar sem ponto e vírgula daqui em diante.',
       },
       {
         type: 'default',
@@ -1396,13 +1414,12 @@ se (poder > 8000) {
       },
       {
         type: 'default',
-        title: 'Como assim?',
-        body: 'As variáveis globais são aquelas que são declaradas fora de qualquer tipo de instrução (se, para, funcao e por aí vai).',
+        body: 'As variáveis globais são aquelas que são declaradas fora de qualquer tipo de instrução (se, para, função e por aí vai).',
       },
       {
         type: 'default',
         title: 'Como assim? Para? Função?',
-        body: 'No momento se concentre apenas a na instrução "se" que estamos estudando agora.',
+        body: 'No momento se concentre apenas na instrução "se" que estamos aprendendo agora.',
       },
       {
         type: 'default',
@@ -1412,19 +1429,15 @@ se (poder > 8000) {
       {
         type: 'code',
         body: `
-var planetaAmigavel = verdadeiro; /* variável global */
+var planetaAmigavel = verdadeiro// variável global
 
 se (verdadeiro) {
-    var planetaNome = "Ifthenia"; /* variável local */
-    }
+    var planetaNome = "Ifthenia"// variável local
+}
     
-    escreva(planetaNome);
-//  Resultado: ERRO: Variável não definida: 'planetaNome'`,
+escreva(planetaNome)
+//  Resultado: Variável não definida: 'planetaNome'`,
         isRunnable: true,
-      },
-      {
-        type: 'alert',
-        body: 'O "/* */" é outra forma de colar comentários dentro do código',
       },
       {
         type: 'default',
@@ -1439,13 +1452,14 @@ se (verdadeiro) {
       {
         type: 'code',
         body: `
-var planetaAmigavel = verdadeiro; /* variável global */
-var planetaNome = "Ifthenia"; /* variável global */
+var planetaAmigavel = verdadeiro// variável global
+var planetaNome = "Ifthenia"// variável global
 
 se (verdadeiro) {
 }
-escreva(planetaNome);
-escreva(planetaAmigavel);
+
+escreva(planetaNome)
+escreva(planetaAmigavel)
     
 //  Resultado: Ifthenia verdadeiro`,
         isRunnable: true,
@@ -1453,7 +1467,7 @@ escreva(planetaAmigavel);
       {
         type: 'default',
         title: 'Humm...',
-        body: 'É como se os escopos fossem dois universos paralelos: Pode haver uma variável local com o mesmo nome de uma global, porém elas ainda vão ser comportar de maneira diferente.',
+        body: 'É como se os escopos fossem dois universos paralelos: Pode haver uma variável local com o mesmo nome de uma global, porém elas ainda vão ser diferentes entre si.',
       },
       {
         type: 'code',
@@ -1492,7 +1506,7 @@ escreva(planetaNome);
         type: 'code',
         body: `
 var velFoguete = 50;
-var gravidade = 11;
+var gravidade = 9.8;
 
 se (gravidade > 10) {
   velFoguete -= 20;
@@ -1503,7 +1517,7 @@ se (gravidade < 10) {
 }
  
 escreva(velFoguete);
-// Resultado: 30`,
+// Resultado: 70`,
         isRunnable: true,
       },
       {
@@ -1512,17 +1526,40 @@ escreva(velFoguete);
       },
       {
         type: 'alert',
-        body: 'Esse operador especial é chamado de operador de atribuição aritmética, ou seja, ele pode ser usado para fazer qualquer uma das quatros operações aritméticas (+=, -=, *=, /=)',
+        body: 'Esse operador especial é chamado de operador de atribuição aritmética, ou seja, ele pode ser usado para fazer qualquer uma das quatros operações aritméticas:\n(+=, -=, *=, /=)',
+      },
+      {
+        type: 'code',
+        body: `var numero = 100
+numero += 5
+escreva(numero)
+// 105 
+
+var numero = 100
+numero -= 5
+escreva(numero)
+// 95
+
+var numero = 100
+numero *= 5
+escreva(numero)
+// 500
+
+var numero = 100
+numero /= 5
+escreva(numero)
+// 20`,
+        isRunnable: true,
       },
       {
         type: 'default',
         title: null,
-        body: 'Voltando ao código, você pode achar ele cumpre o seu papel perfeitamente, o que de fato é verdade.',
+        body: 'Voltando ao código do foguete, você pode achar ele que cumpre o seu papel perfeitamente, o que de fato é verdade.',
       },
       {
         type: 'default',
         title: 'Mas, então?',
-        body: 'Acontece que geralmente após terminar a escrita um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais eficiente e limpo.',
+        body: 'Acontece que geralmente após terminar a escrita de um código, haverá sempre a oportunidade de melhorá-lo, tornando-o mais eficiente e limpo, processo de refatoração',
       },
       {
         type: 'default',
@@ -1532,16 +1569,16 @@ escreva(velFoguete);
       {
         type: 'code',
         body: `
-var velFoguete = 50;
-var gravidade = 11;
+var velFoguete = 50
+var gravidade = 9.8
 
 se (gravidade > 10) {
-  velFoguete -= 20;
+    velFoguete -= 20
 } senao {
-  velFoguete += 20;
+    velFoguete += 20
 }
 
-escreva(velFoguete);
+escreva(velFoguete)
 // Resultado: 70
 `,
         isRunnable: true,
@@ -1549,7 +1586,7 @@ escreva(velFoguete);
       {
         type: 'list',
         title: null,
-        body: 'Como o nome implica, caso a primeira condição não seja verdadeira, apenas o código contido em senao é executado.',
+        body: 'Como o nome implica, caso a primeira condição não seja verdadeira, apenas o código contido no bloco senao é executado.',
       },
       {
         type: 'list',
@@ -1564,25 +1601,25 @@ escreva(velFoguete);
       {
         type: 'default',
         title: 'Como?',
-        body: 'Basta checar se a atmosfera tem níveis de oxigênio adequado e se têm ausência de gases tóxicos',
+        body: 'Basta checar se a atmosfera tem nível de oxigênio adequado e se têm ausência de gases tóxicos',
       },
       {
         type: 'code',
         body: `
-var oxigenioLevel = 20; /* nível de oxigênio */
-var nitrogenioLevel = 78; /* nível de nitrogênio */
-var outrosGasesLevel = 2; /* níveis de outros gases */
+var oxigenio = 20 /* nível de oxigênio */
+var nitrogenio = 78 /* nível de nitrogênio */
+var outrosGases = 2 /* nível de outros gases */
 
 se (
-    oxigenioLevel >= 19 e 
-    oxigenioLevel <= 23 e 
-    nitrogenioLevel >= 75 e 
-    nitrogenioLevel <= 81 e 
-    outrosGasesLevel <= 5
+    oxigenio >= 19 e 
+    oxigenio <= 23 e 
+    nitrogenio >= 75 e 
+    nitrogenio <= 81 e 
+    outrosGases <= 5
     ) {
-  escreva("A atmosfera é respirável!");
+  escreva("A atmosfera é respirável!")
 } senao {
-  escreva("A atmosfera não é respirável!");
+  escreva("A atmosfera não é respirável!")
 }
 
 // Resultado: A atmosfera é repirável!`,
@@ -1638,11 +1675,11 @@ se (
 var idioma = 'Vortaxiano'
 
 se (idioma = 'Xanxiriano') {
-  escreva("Traduzir de Xanxiriano");
+  escreva("Traduzir de Xanxiriano")
 } senao se (idioma = 'Krynnishiano') {
-  escreva("Traduzir de Krynnishiano");
+  escreva("Traduzir de Krynnishiano")
 } senao {
-  escreva("Traduzir de outro idioma");
+  escreva("Traduzir de outro idioma")
 }
 
 // Resultado: Traduzir de outro idioma`,
@@ -1651,7 +1688,7 @@ se (idioma = 'Xanxiriano') {
       {
         type: 'default',
         title: null,
-        body: 'Perceba que o senao se funciona como um se normal, exigindo que passemos uma condição, que caso seja verdadeira, seu bloco de código será executado em vez o do senao.',
+        body: 'Perceba que o "senao se" funciona como um "se" normal, exigindo que passemos uma condição, que caso seja verdadeira, seu bloco de código será executado em vez do bloco "senao".',
       },
       {
         type: 'default',
@@ -1671,20 +1708,20 @@ se (idioma = 'Xanxiriano') {
       {
         type: 'code',
         body: `
-var senha = 9713;
+var senha = 9713
 
 se (senha = 2222) {
-  escreva("Abrir cozinha");
+  escreva("Abrir cozinha")
 } senao se (senha = 4567) {
-  escreva("Abrir banheiro");
+  escreva("Abrir banheiro")
 } senao se (senha = 7568) {
-  escreva("Abrir quarto de dormir");
+  escreva("Abrir quarto de dormir")
 } senao se (senha = 5781) {
-  escreva("Abrir sala de controle");
+  escreva("Abrir sala de controle")
 }
 ...
 } senao
-  escreva("Senha não existe");
+  escreva("Senha não existe")
 }`,
         isRunnable: false,
       },
@@ -1701,7 +1738,7 @@ se (senha = 2222) {
       {
         type: 'default',
         title: null,
-        body: 'Por exemplo, você pode quere desconfiar se os alienígenas lá fora são verdadeiramente amigáveis',
+        body: 'Por exemplo, você pode querer desconfiar se os alienígenas lá fora são verdadeiramente amigáveis',
       },
       {
         type: 'default',
@@ -1730,7 +1767,11 @@ se (povoAmigavel == falso) {
       {
         type: 'default',
         title: null,
-        body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não. Caso seja de fato executado, o computador sai do se e depois executa tudo que está fora dele.',
+        body: 'Lembre-se: caso a condição de um se (se, senão ou senão se) for verdadeiro, todo o bloco de código presente nele será executado, sejam outras estruturas condicionais ou não. Caso seja de fato executado, o programa sai do se e depois executa tudo que está fora dele.',
+      },
+      {
+        type: 'default',
+        body: 'Agora sim podemos sair para conversar com esses seres. Mas não antes de praticar o "senao-se"',
       },
     ],
   },

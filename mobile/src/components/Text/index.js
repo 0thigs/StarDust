@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState, useMemo, memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';
@@ -11,7 +11,7 @@ import * as C from './styles';
 import * as Speech from 'expo-speech';
 const iconSize = 25;
 
-export function Text({ type, title, body, isRendered, isRunnable }) {
+function TextComponent({ type, title, body, isRendered, isRunnable }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const navigation = useNavigation();
   const iconColor =
@@ -23,7 +23,7 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
 
   function getCodeHeigth(code) {
     const lines = code.split('\n').length;
-    return lines * 28 + (isRunnable ? 64 : 12);
+    return lines * (lines > 10 ? 22 : 28) + (isRunnable ? 64 : 12);
   }
 
   const codeHeigth = useMemo(() => {
@@ -83,3 +83,5 @@ export function Text({ type, title, body, isRendered, isRunnable }) {
     </C.Container>
   );
 }
+
+export const Text = memo(TextComponent)

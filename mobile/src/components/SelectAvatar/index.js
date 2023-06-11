@@ -6,12 +6,12 @@ import * as C from './styles';
 import theme from '../../global/styles/theme';
 
 export function SelectAvatar({ isVisible, setIsVisible }) {
-  const { avatars } = useAvatar();
+  const { avatars, addUserAcquiredAvatar } = useAvatar();
 
   return (
     <Modal isVisible={isVisible} animationIn={'slideInUp'} animationOut={'bounceOut'}>
       <C.Content>
-        <AvatarsList avatars={avatars} />
+        <AvatarsList avatars={avatars} addUserAcquiredAvatar={addUserAcquiredAvatar} />
         <Button
           title={'Ok'}
           color={theme.colors.black}
