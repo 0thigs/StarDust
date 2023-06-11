@@ -13,7 +13,7 @@ export function Problem({ title, texts, goToCode }) {
           type={type}
           title={title}
           body={body}
-          isRendered={texts.length > 6}
+          isRendered={true}
         />
       ))}
       <C.Button onPress={goToCode}>

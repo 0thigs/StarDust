@@ -16,16 +16,16 @@ import * as C from './styles';
 
 const earningsByDifficulty = {
   easy: {
-    coins: 20,
-    xp: 10,
-  },
-  medium: {
-    coins: 30,
+    coins: 10,
     xp: 20,
   },
-  hard: {
-    coins: 40,
+  medium: {
+    coins: 20,
     xp: 30,
+  },
+  hard: {
+    coins: 30,
+    xp: 40,
   },
 };
 

@@ -1835,7 +1835,7 @@ Resultado: [1, "princesa"]`,
         body: 'Plimp: se tiver 6 olhos e cor marrom',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'O que fazer?',
         body: 'O seu desafio é escrever um programa que escreva o nome da raça de acordo com esses dados. Se não não se encaixarem em nenhuma das raças conhecidas, o programa deve escrever "desconhecido".',
       },
@@ -1848,15 +1848,22 @@ Entrada: 2, "laranja"
 Resultado: Blonk
 
 Entrada: 6, "marrom"
-Resultado: Plimp`,
+Resultado: Plimp
+
+Entrada: 1, "branco"
+Resultado: desconhecido`,
       },
       {
         type: 'alert',
-        body: 'Você resolver esse desafio usando tanto estrutura "se senao se e senao", quanto "escolha caso"',
+        body: 'Note que se a quantidade de olhos e cor não corresponder a nenhuma dessa raças, o resultado será desconhecido!',
       },
       {
         type: 'alert',
-        body: 'Não remova os comando leia() do programa',
+        body: 'Qual será a melhor estrutua para resolver esse desafio: "se senao se e senao" ou "escolha caso"? 🤔',
+      },
+      {
+        type: 'alert',
+        body: 'Não remova nenhum comando leia() do programa!',
       },
     ],
     function: null,

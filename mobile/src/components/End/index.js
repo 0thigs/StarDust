@@ -22,6 +22,7 @@ import StreakAnimation from '../../assets/animations/streak-animation.json';
 import * as C from './styles';
 import theme from '../../global/styles/theme';
 import dayjs from 'dayjs';
+import { Loading } from '../Loading';
 const iconSize = 25;
 
 export function End({
@@ -43,6 +44,7 @@ export function End({
   const [accurance, setAccurance] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isPreLoading, setIsPreLoading] = useState(true);
   const [isStreakVisible, setIsStreakVisible] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
   const starsRef = useRef(null);
@@ -113,6 +115,8 @@ export function End({
   }
 
   async function updateUserData() {
+    setIsLoading(true);
+
     try {
       const newData = await getUpdatedData();
       await updateLoggedUser(newData);
@@ -194,15 +198,15 @@ export function End({
       setTime(convertSecondsToTime(state.secondsCount));
       setAccurance(getAccurance());
     }
-
-    setStarsAnimation();
-    soundRef.current.play();
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
     if (!planets.length) return;
-    setTimeout(() => updateUserData(), 750);
+    setTimeout(async () => {
+     await updateUserData();
+    }, 750);
+    setStarsAnimation();
+    soundRef.current.play();
   }, [planets]);
 
   return (

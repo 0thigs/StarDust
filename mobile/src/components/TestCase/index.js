@@ -98,7 +98,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
                         ? 'Sem entrada'
                         : Array.isArray(input)
                         ? formatArray(input)
-                        : input}
+                        : input.toString().replace(/^["']|["']$/g, '')}
                       {!isLastInput && ', '}
                     </C.ValueText>
                   );

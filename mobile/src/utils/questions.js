@@ -1352,7 +1352,7 @@ escolha (planeta) {
     starId: 14,
     type: 'open',
     stem: 'Qual o nome do bloco do "escolha caso" que sempre será executado quando o valor de escolha não conrresponder a nenhum caso?',
-    answer: 'padrao',
+    answer: ['padrao'],
   },
   {
     starId: 14,
@@ -1360,15 +1360,15 @@ escolha (planeta) {
     stem: 'Quail o valor possível para variável nave, de modo que resulte em "Nave desconhecida"?',
     code: `escolha (nave) {
     caso 'X-wing':
-        escreva("Nave de combate usada pela Aliança Rebelde"); 
+        escreva("Nave de combate usada pela Aliança Rebelde")
     caso 'TIE Fighter': 
-        escreva("Nave de combate usada pelo Império Galáctico"); 
+        escreva("Nave de combate usada pelo Império Galáctico")
     caso 'Millennium Falcon': 
-        escreva("Nave lendária pilotada por dois vagabundos famosos");
+        escreva("Nave lendária pilotada por dois vagabundos famosos")
     padrao:
-        escreva("Nave desconhecida");
+        escreva("Nave desconhecida")
 }`,
-    options: ['X-wing', 'TIE Fighter', 'Verão', 'Star Destroyer'],
+    options: ['X-wing', 'TIE Fighter', 'Millennium Falcon', 'Star Destroyer'],
     answer: 'Star Destroyer',
   },
   {
