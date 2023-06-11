@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { minZoneWidth } from '../DragAndDropListForm/styles';
+// import { minZoneWidth } from '../DragAndDropListForm/styles';
 import * as C from '../DragAndDropClickForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
@@ -46,7 +46,7 @@ export function DropZone({
         width,
         itemId: null,
       };
-      setTimeout(() => updateZone(zone), 20);
+      updateZone(zone);
     });
   }, [linesWidth]);
 
@@ -64,9 +64,9 @@ export function DropZone({
         itemId: null,
       };
       if (canRegisterZone) {
-        zones.current = [...zones.current, zone];
+        setTimeout(() => zones.current = [...zones.current, zone], 20);
       } else {
-        setTimeout(() => updateZone(zone), 20);
+        updateZone(zone);
       }
     });
   }

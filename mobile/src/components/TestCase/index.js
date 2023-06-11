@@ -93,7 +93,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
                 input.map((input, index, inputArray) => {
                   const isLastInput = index === inputArray.length - 1;
                   return (
-                    <C.ValueText key={input}>
+                    <C.ValueText key={`${input}-${index}`}>
                       {!input.toString()
                         ? 'Sem entrada'
                         : Array.isArray(input)

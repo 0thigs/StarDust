@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { usePlanet } from '../../hooks/usePlanet';
 import { Theory } from '../../components/Theory';
@@ -9,9 +9,10 @@ import * as C from './styles';
 
 export function Lesson({ route }) {
   const starId = route?.params.id;
-//   const starId = '05a206ae-69f0-4263-87a5-1dd0018d15d8';
-  const { planets, getCurrentStar } = usePlanet();
+  //   const starId = '05a206ae-69f0-4263-87a5-1dd0018d15d8';
+  const { planets, getCurrentStar, getNextStar } = usePlanet();
   const [star, setStar] = useState(null);
+  const nextStar = useRef(null);
   const [state, dispatch] = useLesson();
   const [isEndTrasition, setIsEndTransition] = useState(false);
 
@@ -24,6 +25,7 @@ export function Lesson({ route }) {
     if (!planets.length) return;
     const star = getCurrentStar(starId);
     setStar(star);
+    nextStar.current = getNextStar(starId);
     dispatch({ type: 'setQuestions', payload: star.questions });
   }, [planets]);
 
@@ -39,7 +41,7 @@ export function Lesson({ route }) {
             <End
               starId={star.id}
               isChallenge={false}
-              isCompleted={star.isUnlocked}
+              isCompleted={nextStar.current.isUnlocked}
               challengeId={null}
               challengeSeconds={null}
               challengeCoins={null}

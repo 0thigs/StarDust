@@ -76,16 +76,18 @@ export function Home() {
   }
 
   useEffect(() => {
+    console.log({lastUnlockedStarId});
+
     if (planets.length) {
       setTimeout(() => setIsEndTransition(true), 2000);
     }
   }, [planets]);
 
   useEffect(() => {
-    if (lastUnlockedStarYPosition) {
+    if (planets.length && lastUnlockedStarYPosition) {
       scrollToLastUnlockedStar();
     }
-  }, [lastUnlockedStarYPosition]);
+  }, [lastUnlockedStarYPosition, planets]);
 
   return (
     <>

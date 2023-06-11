@@ -503,7 +503,7 @@ escreva("Vai chover asteroide hoje? " + resposta)`,
   {
     starId: 8,
     type: 'checkbox',
-    stem: 'Marque as opções que são operadores válidos para um programa',
+    stem: 'Marque as opções que são operadores válidos para um programa.',
     options: ['/', '+', '÷', 'x'],
     correctOptions: ['/', '+'],
   },
@@ -524,7 +524,7 @@ escreva("Vai chover asteroide hoje? " + resposta)`,
   {
     starId: 8,
     type: 'drag-and-drop-click',
-    stem: 'Complete a linha com os operadores para que o resultado seja igual a 20',
+    stem: 'Complete a linha com os operadores, de modo que o resultado seja igual a 20.',
     lines: [
       {
         id: 1,
@@ -594,7 +594,7 @@ escreva("Vai chover asteroide hoje? " + resposta)`,
   {
     starId: 9,
     type: 'selection',
-    stem: 'Qual será o resultado do seguinte código:',
+    stem: 'Qual será o resultado do seguinte código?',
     code: `
 var altitudeAtual = 2000;
 var altitudeSegura = 1500;
@@ -609,7 +609,7 @@ escreva(altitudeSegura < altitudeAtual)
     starId: 9,
     type: 'open',
     stem: 'Qual símbolo você usuaria para verificar se 9 é maior ou igual a 7?',
-    answer: '>=',
+    answer: ['>='],
   },
   {
     starId: 9,
@@ -703,7 +703,7 @@ escreva(altitudeSegura < altitudeAtual)
   {
     starId: 10,
     type: 'selection',
-    stem: 'Qual será o resultado do seguinte código? (Se for muito grande, você pode scrollar o código para baixo):',
+    stem: 'Qual será o resultado do seguinte código?',
     code: `var atmosfera = 7000;
 var altituteAtual = 4000;
 var fogueteDecolou = verdadeiro;
@@ -716,7 +716,7 @@ escreva(saiuDoPlaneta)
   {
     starId: 10,
     type: 'drag-and-drop-click',
-    stem: 'Complete a linha com os operadores para que o resultado seja igual a VERDADEIRO',
+    stem: 'Complete a linha com o operador para que o resultado seja igual a VERDADEIRO.',
     lines: [
       {
         id: 1,
@@ -730,7 +730,7 @@ escreva(saiuDoPlaneta)
       },
       {
         id: 3,
-        texts: ['escreva (', 'temOxigenio ', 'dropZone', ' temComida)'],
+        texts: ['escreva(', 'temOxigenio ', 'dropZone', ' temComida)'],
         indentLevel: 0,
       },
     ],
@@ -753,7 +753,7 @@ escreva(saiuDoPlaneta)
   {
     starId: 10,
     type: 'drag-and-drop-click',
-    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO',
+    stem: 'Complete o código para que o resultado seja igual a VERDADEIRO.',
     lines: [
       {
         id: 1,
@@ -789,18 +789,18 @@ escreva(saiuDoPlaneta)
         label: '3700',
       },
     ],
-    correctItemsIdsSequence: [4, 2],
+    correctItemsIdsSequence: [1, 2],
   },
   {
     starId: 10,
     type: 'open',
     stem: 'Qual o símbolo usado para inverter valores lógicos?',
-    answer: '!',
+    answer: ['!'],
   },
   {
     starId: 10,
     type: 'checkbox',
-    stem: 'Marque as opções que são operadores lógicos',
+    stem: 'Marque as opções que são operadores lógicos.',
     options: ['>', 'e', '!', 'ou'],
     correctOptions: ['e', '!', 'ou'],
   },

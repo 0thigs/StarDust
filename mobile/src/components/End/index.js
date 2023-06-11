@@ -34,7 +34,7 @@ export function End({
   addUserCompletedChallenges,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
-  const { planets, getCurrentPlanet, getCurrentStar, getNextStar, addUnlockedStar } = usePlanet();
+  const { planets, getCurrentPlanet, getNextStar, addUnlockedStar } = usePlanet();
   const [state, dispatch] = useLesson();
   const [coins, setCoins] = useState(0);
   const [xp, setXp] = useState(0);
@@ -136,7 +136,6 @@ export function End({
   }
 
   function getCoins() {
-    console.log({ isCompleted });
     let maxCoins = isCompleted ? 5 : 10;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxCoins -= isCompleted ? 1 : 2;
@@ -144,7 +143,6 @@ export function End({
     return maxCoins;
   }
   function getXp() {
-    console.log({ isCompleted });
     let maxXp = isCompleted ? 10 : 20;
     for (let i = 0; i < state.wrongsCount; i++) {
       maxXp -= isCompleted ? 2 : 5;
@@ -161,7 +159,6 @@ export function End({
   function handleButtonClick() {
     const todayIndex = dayjs().day();
     const today = loggedUser.week_status[todayIndex];
-    console.log(today === 'todo');
 
     if (isFirstClick) {
       setIsModalVisible(true);

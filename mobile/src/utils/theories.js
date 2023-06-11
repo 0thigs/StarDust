@@ -498,6 +498,14 @@ escreva('Também "acho"');`,
         body: 'Perceba que diferentemente do tipo texto, é necessário que o valor numérico não esteja entre aspas.',
       },
       {
+        type: 'default',
+        body: 'Números negativos também são permitidos.',
+      },
+      {
+        type: 'code',
+        body: `var negativo = -999`,
+      },
+      {
         type: 'list',
         title: 'Reais',
         body: 'Além dos inteiro há os números reais - também conhecidos como números de ponto flutuante - que nada mais são do que números com parte decimal, veja:',
@@ -850,24 +858,24 @@ escreva('no final do mês você terá ' + consumoTotal + ' de suprimentos');
         body: 'No momento atual há disponível 10125 de energia. Para saber se é possível distribuir a energia igualmente para os dois motores, basta verificar se esse número é divisível por 2.',
       },
       {
-        type: 'default',
+        type: 'list',
         title: 'Módulo (%)',
-        body: 'Para isso, podemos usar um operador especial chamado "módulo", que serve para calcular ao resto da divisão entre 2 números usando o símbolo de porcentagem (%).',
+        body: 'Para isso, podemos usar um operador especial chamado "módulo", que serve para calcular o resto da divisão entre 2 números usando o símbolo de porcentagem (%).',
       },
       {
         type: 'code',
         body: `
 var energiaAtual = 10125;
 var resto = 10125 % 2;
-escreva('o resto é igual a ' + resto);
+escreva('O resto da divisão de 10125 por 2 é igual a ' + resto);
 
-//  Resultado: o resto é igual a 1`,
+//  Resultado: O resto da divisão de 10125 por 2 é igual a 1`,
         isRunnable: true,
       },
       {
         type: 'default',
-        title: 'Explicação',
-        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores porque tem um a mais 😢.',
+        title: 'Não sei se entendi',
+        body: '10125 dividido por 2 é igual 5062 e sobra 1, ou seja, a proporção não será igual para os dois motores porque um motor tem um a mais 😢.',
       },
     ],
   },
@@ -897,7 +905,7 @@ escreva('o resto é igual a ' + resto);
       {
         type: 'list',
         title: 'Operador de maior que (>)',
-        body: 'Por exemplo, caso queira verificar se um número é maior que outro, você pode utilizar o operador "maior que" representado pelo símbolo ">", como você deve saber.',
+        body: 'Por exemplo, caso queira verificar se um número é maior que outro, você pode utilizar o operador "maior que" representado pelo símbolo ">".',
       },
       {
         type: 'code',
@@ -926,7 +934,7 @@ escreva(combAtual > combExigido);
       {
         type: 'list',
         title: 'Operador de menor que (<)',
-        body: 'Por exemplo, se quisermos fazer a mesma comparação anterior, só que verificando se a quantidade de combustível necessária é menor que a atual, teríamos que o operador "menor que" (<).',
+        body: 'Por exemplo, se quiséssemos fazer a mesma comparação anterior, só que verificando se a quantidade de combustível necessária é menor que a atual, teríamos que usar o operador "menor que" (<).',
       },
       {
         type: 'code',
@@ -946,12 +954,12 @@ escreva(combAtual < combExigido);
       {
         type: 'default',
         title: null,
-        body: 'Começamos a decolar! Entretanto, é preciso checar se a velocidade atual do foguete é igual ou pelo menos superior que a velocidade de decolagem necessária para sair da atmosfera.',
+        body: 'Enfim, começamos a decolar! Entretanto, é preciso checar se a velocidade atual do foguete é igual ou pelo menos superior que a velocidade de decolagem necessária para sair da atmosfera.',
       },
       {
         type: 'default',
         title: null,
-        body: 'Para fazer isso não dá para usar operador ">" porque ele só verifica se é maior ou não.',
+        body: 'Para fazer isso não dá para usar operador ">" porque ele só verifica se um valor é maior ou não.',
       },
       {
         type: 'default',
@@ -975,7 +983,7 @@ escreva(velAtual >= velExigida);
       },
       {
         type: 'list',
-        title: 'Operador menor ou igual a (>=)',
+        title: 'Operador menor ou igual a (<=)',
         body: 'Se o caso fosse checar se um valor é menor ou igual a outro, utilizaríamos o "<=".',
       },
       {
@@ -994,10 +1002,6 @@ escreva(velAtual <= velExigida);
         body: 'Perceba que o resultado é mesmo que usar o ">=", pois ambos os operadores checam se é verdadeiro uma de duas condições (se é maior/menor ou igual).',
       },
       {
-        type: 'alert',
-        body: 'Note também que a gente está usando apenas números para fazer as comparações. Caso usássemos outro tipo de dado, o programa daria erro.',
-      },
-      {
         type: 'default',
         title: null,
         body: 'Beleza, mas ainda há outros questões a serem conferidas.',
@@ -1010,19 +1014,19 @@ escreva(velAtual <= velExigida);
       {
         type: 'default',
         title: 'Sim!',
-        body: 'Então, é possível fazer isso agora usando o operador de igual, porém não o sinal "=", visto que esse serve para atribuir valores a variáveis.',
+        body: 'Então, é possível fazer isso agora usando o operador de igual, porém não o sinal "=", visto que este serve apenas para atribuir valores a variáveis.',
       },
       {
         type: 'list',
         title: 'Operador de igual (==)',
-        body: 'Para verificar se um valor é igual a outro, a gente usa o símbolo de "==", justamente para diferenciar do operador de "=".',
+        body: 'Para verificar se um valor é igual a outro, a gente utiliza o símbolo de "==", justamente para diferenciar do operador de "=".',
       },
       {
         type: 'code',
         body: `
-var energiaMoto1 = 501;
-var energiaMoto2 = 500;
-escreva(energiaMoto1 == energiaMoto2);
+var energiaMotor1 = 501;
+var energiaMotor2 = 500;
+escreva(energiaMotor1 == energiaMotor2);
 
 //  Resultado: falso`,
         isRunnable: true,
@@ -1035,19 +1039,19 @@ escreva(energiaMoto1 == energiaMoto2);
       {
         type: 'default',
         title: null,
-        body: 'O resultado seria verdadeiro se estivéssemos verificando se as quantidades são diferentes.',
+        body: 'O resultado seria verdadeiro se estivéssemos verificando se as quantidades são diferentes entre si.',
       },
       {
         type: 'list',
         title: 'Operador de diferente (!=)',
-        body: 'Para fazer isso, basta usar o operador de "!=", que checa se dois valores são diferentes.',
+        body: 'Para fazer isso, basta usar o operador de "!=", que checa se dois valores são diferentes entre si.',
       },
       {
         type: 'code',
         body: `
-var energiaMoto1 = 501;
-var energiaMoto2 = 500;
-escreva(energiaMoto1 != energiaMoto2);
+var energiaMotor1 = 501;
+var energiaMotor2 = 500;
+escreva(energiaMotor1 != energiaMotor2);
 
 //  Resultado: verdadeiro`,
         isRunnable: true,
@@ -1055,12 +1059,12 @@ escreva(energiaMoto1 != energiaMoto2);
       {
         type: 'default',
         title: null,
-        body: 'Agora o resultado é verdadeiro, justamente porque ambos não são iguais.',
+        body: 'Agora o resultado é verdadeiro porque os valores não são iguais entre si.',
       },
       {
         type: 'default',
         title: 'Se é verdadeiro, então está de boa?',
-        body: 'NÃO! Independentemente se é verdadeiro ou não, ainda estamos em uma fria porque o foguete tem chances de explodir já que as quantidades de energia estão diferentes 😢.',
+        body: 'NÃO! Independentemente se é verdadeiro ou não, ainda estamos em uma fria porque o foguete tem chances de explodir, já que as quantidades de energia estão diferentes entre si 😢.',
       },
     ],
   },
@@ -1075,17 +1079,17 @@ escreva(energiaMoto1 != energiaMoto2);
       {
         type: 'default',
         title: null,
-        body: 'Estamos no compartimento dos motores, e agora devemos verificar o funcionamento de um por vez.',
+        body: 'Estamos no compartimento dos motores, e agora devemos verificar o funcionamento de um motor por vez.',
       },
       {
         type: 'default',
         title: 'E como fazer isso?',
-        body: 'Cada motor possui duas turbinas e elas devem estar girando ao mesmo tempo para ele funcionar corretamente.',
+        body: 'Cada motor possui duas turbinas e elas devem estar girando ao mesmo tempo para o motor funcionar corretamente.',
       },
       {
         type: 'default',
         title: 'E... Como fazer isso?',
-        body: 'Para conferir se tanto um, quanto o outro estão girando, você pode conferir usando um operador lógico.',
+        body: 'Para conferir se tanto um, quanto o outro está girando, você pode usar um operador lógico.',
       },
       {
         type: 'default',
@@ -1110,7 +1114,7 @@ escreva(girandoTurbina1 e girandoTurbina2);
       {
         type: 'default',
         title: null,
-        body: 'O resultado é falso, pois apenas a turbina 1 está girando e para que resultasse em verdadeiro, ambos os valores deveriam ser igual a verdadeiro.',
+        body: 'O resultado é falso, pois apenas a turbina 1 está girando e para que o código resultasse em verdadeiro, ambos os valores deveriam ser igual a verdadeiro.',
       },
       {
         type: 'default',
@@ -1131,12 +1135,12 @@ escreva(turbinasGirando);
       {
         type: 'default',
         title: 'Mas é possível isso?',
-        body: 'Sim! Lembre-se que esses operadores comparam valores do tipo lógico, então qualquer expressão que resulta em um valor lógico pode ser utilizado para comparar outro valor.',
+        body: 'Sim! Lembre-se que esses operadores comparam valores do tipo lógico, então qualquer expressão que resulta em um valor lógico pode ser utilizado para comparar com outro valor.',
       },
       {
         type: 'default',
         title: 'Explica mais',
-        body: 'Por exemplo, você pode testar se o nível de combustível atual está acima do mínimo para o funcionamento, ou seja combAtual > combMin.',
+        body: 'Por exemplo, você pode testar se o nível de combustível atual está acima do nível mínimo para o funcionamento, ou seja combAtual > combMin.',
       },
       {
         type: 'code',
@@ -1151,18 +1155,27 @@ escreva(turbinasGirando e combAtual > combMin);
       },
       {
         type: 'default',
-        title: 'Explicação',
-        body: 'Como turbinasGirando é verdadeiro, assim como combAtual > combMin resulta em verdadeiro, então o resultado final é verdadeiro.',
+        title: 'Hmm...',
+        body: 'Como turbinasGirando é verdadeiro, assim como combAtual > combMin resulta em verdadeiro, então o resultado final também é verdadeiro.',
+      },
+      {
+        type: 'alert',
+        body: 'Nem tente achar que falso com falso resulta em verdadeiro! Isso aqui não é matemática, é puramente lógica.',
+      },
+      {
+        type: 'code',
+        body: `escreva(falso e falso)    
+//  Resultado: falso`,
+        isRunnable: true,
       },
       {
         type: 'default',
-        title: null,
-        body: 'Beleza! O motor 1 está funcionado corretamente. Agora resta verificar o motor 2',
+        body: 'Beleza! O motor 1 está funcionado corretamente. Agora resta verificar o motor 2.',
       },
       {
         type: 'default',
         title: 'O segundo também está funcionando',
-        body: 'É... Parece que as turbinas do motor 2 estão girando. Então, pode haver um problema no tipo de combustível que está sendo consumido pelo motor',
+        body: 'É... Parece que as turbinas do motor 2 estão girando. Então, pode haver um problema no tipo de combustível que está sendo consumido pelo motor.',
       },
       {
         type: 'default',

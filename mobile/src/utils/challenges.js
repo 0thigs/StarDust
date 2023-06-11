@@ -372,34 +372,49 @@ function conteNavesBumerangues(numeros) {
       },
       {
         type: 'default',
-        body: 'Porém, há três asteroides gigantes em sua direção.',
+        body: 'Porém, há três asteroides gigantes vindo em sua direção.',
       },
       {
-        type: 'Que??',
-        body: 'Seu dever é testar se o escudo protetor do foguete esteja ativo (valor verdadeiro) e que a resistência (valor 700) dele seja maior que a soma das forças dos três asteroides (A, B, C).',
+        type: 'list',
+        title: 'Que??',
+        body: 'Seu dever é testar se o escudo protetor do foguete está ativo (valor verdadeiro) e que a resistência (valor 700) é maior que a soma das forças dos três asteroides (A, B, C).',
       },
       {
         type: 'code',
         body: `
 Entrada: 100, 200, 300, verdadeiro
 Resultado: verdadeiro
-Explicacao: a soma das forças dá 600 e a resistencia é 700. Como o escudo está ativo (verdadeiro) e essa soma é menor que 700, logo o resultado é verdadeiro
+// Explicação:
+// a soma das forças dá 600
+// e a resistencia é 700.
+// Como o escudo está ativo (verdadeiro)
+// e essa soma é menor que 700, 
+// logo o resultado é verdadeiro
 
 Entrada: 500, 500, 500, verdadeiro
 Resultado: falso
-Explicacao: soma é 1500 e a resitência é 700, logo o resultado já é falso
+// Explicação:
+// a soma é 1500 e a resitência é 700, 
+// logo o resultado já é falso
 
 Entrada: 50, 100, 150, falso
 Resultado: falso
-Explicacao: soma é 300 e a resitência é 700, porém o escudo não está ativo, então o resultado é falso`,
+// Explicação: 
+// a soma é 300 e a resitência é 700,
+// porém o escudo não está ativo,
+// então o resultado é falso`,
       },
       {
         type: 'alert',
-        body: 'Dica: coloque a soma das forças em uma variável soma e depois compare se ela é maior ou não que a resistência.',
+        body: 'Dica: coloque a soma das forças em uma variável chamada soma e depois compare se ela é maior ou não que a resistência.',
       },
       {
         type: 'alert',
         body: 'Não se esqueça de comparar também se o escudo está ativo.',
+      },
+      {
+        type: 'alert',
+        body: 'O comando "leia()" é super importante para resolver o desafio. Então, por favor, não remova nenhum comando "leia()".',
       },
     ],
     function: null,
@@ -415,7 +430,7 @@ Explicacao: soma é 300 e a resitência é 700, porém o escudo não está ativo
         isLocked: false,
       },
       {
-        input: [100, 500, 100, 'verdadeiro'],
+        input: [100, 500, 100, 'falso'],
         expectedOutput: 'falso',
         isLocked: false,
       },

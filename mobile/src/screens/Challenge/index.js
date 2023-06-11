@@ -86,6 +86,7 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
+    console.log({userOutput});
     userOutputContent.current = userOutput;
   }
 
@@ -128,7 +129,6 @@ export function Challenge({ route }) {
     setIsRunning(true);
     userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
-    console.log(code);
 
     try {
       const { erros, resultado } = await execute(code, addUserOutput);
@@ -142,6 +142,8 @@ export function Challenge({ route }) {
 
       if (userOutputContent.current && !function_name) {
         setUserOutputs(currentUserOutputs => {
+          console.log(userOutputContent.current);
+
           return [...currentUserOutputs, userOutputContent.current];
         });
         return;

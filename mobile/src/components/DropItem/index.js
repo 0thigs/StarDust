@@ -119,7 +119,6 @@ export function DropItem({
     itemRef?.current.measure((x, y, width, height, pageX, pageY) => {
       initialPosition.x.value = pageX;
       initialPosition.y.value = pageY;
-      console.log(width);
       setItemWidth(width);
     });
   }, [isFirstRendering]);
