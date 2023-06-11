@@ -41,7 +41,7 @@ export function PlaygroundHeader({
   async function copyCodeToClipboard() {
     try {
       await Clipboard.setStringAsync(code.current);
-      Toast.success('Código copiado')
+      Toast.success('Código copiado');
     } catch (error) {
       console.error(error);
       Toast.error('Não foi possível copiar o código');
@@ -107,7 +107,10 @@ export function PlaygroundHeader({
         title: 'Dark Mode',
         isToggle: true,
         value: isDarkMode,
-        action: () => setIsDarkMode(!isDarkMode),
+        action: () => {
+          console.log(isDarkMode);
+          setIsDarkMode(!isDarkMode);
+        },
       },
       {
         title: 'Font Size',
@@ -134,7 +137,7 @@ export function PlaygroundHeader({
     }
 
     setPopoverMenuButtons(popoverMenuButtons);
-  }, [codeId]);
+  }, [codeId, isDarkMode]);
 
   return (
     <C.Container>

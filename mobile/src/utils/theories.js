@@ -1321,12 +1321,12 @@ escreva(tudoOk);
       },
       {
         type: 'alert',
-        body: 'Há 3 maneiras de criar uma instrução condicional:\n 1 - se\n 2 - senão\n 3 - senão se.\n Por enquanto, vamos começar pelo básico',
+        body: 'Há 3 maneiras de criar uma instrução condicional:\n 1 - se\n 2 - senão\n 3 - senão se.\n Por enquanto, vamos começar pelo básico.',
       },
       {
         type: 'list',
         title: 'Estrutura condicional simples (se)',
-        body: 'A forma mais básica é escrever "se" e depois a condição que deve ser verificada entre parênteses. Em seguida você abre e fecha chaves ({}) e coloca o código que você deseja que seja executado.',
+        body: 'A forma mais básica é escrever "se" e depois a condição que deve ser verificada entre parênteses. Em seguida você abre e fecha chaves { } e coloca o código que você deseja que seja executado.',
       },
       {
         type: 'code',

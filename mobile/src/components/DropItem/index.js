@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as C from '../DragAndDropClickForm/styles';
 import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-const animationDuration = 350;
+const animationDuration = 300;
 
 export function DropItem({
   id,
