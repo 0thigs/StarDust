@@ -425,7 +425,12 @@ Resultado: falso
         isLocked: false,
       },
       {
-        input: [300, 400, 800, 'falso'],
+        input: [300, 400, 800, 'verdadeiro'],
+        expectedOutput: 'falso',
+        isLocked: false,
+      },
+      {
+        input: [50, 200, 200, 'falso'],
         expectedOutput: 'falso',
         isLocked: false,
       },

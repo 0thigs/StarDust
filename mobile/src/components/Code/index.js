@@ -10,7 +10,7 @@ import theme from '../../global/styles/theme';
 import RunningCodeSound from '../../assets/sounds/running-code-sound.wav';
 import * as C from './styles';
 
-export function Code({ code, userCode, handleUserCode, output }) {
+export function Code({ code, userCode, handleUserCode }) {
   const [isKeysVisible, setIsKeysVisible] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const cursorPosition = useRef(0);
@@ -27,8 +27,12 @@ export function Code({ code, userCode, handleUserCode, output }) {
 
   async function handleRunPress() {
     setIsRunning(true);
-    await Promise.all([soundRef.current.play(), handleUserCode()]);
-    setIsRunning(false);
+    try {
+      await Promise.all([handleUserCode(), soundRef.current.play()]);
+    } catch (error) {
+    } finally {
+      setIsRunning(false);
+    }
   }
 
   function handleKeyPress(key) {

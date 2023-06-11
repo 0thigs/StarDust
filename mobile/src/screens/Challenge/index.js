@@ -53,12 +53,11 @@ export function Challenge({ route }) {
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
+  console.log({ isRunning });
 
   const sliderRef = useRef(null);
   const seconds = useRef(0);
   const userCode = useRef('');
-  const userOutputContent = useRef([]);
-  const isOutputArray = useRef([]);
   const errorLine = useRef(0);
 
   const CurrentIndicatorPositionX = useSharedValue(0);
@@ -86,8 +85,11 @@ export function Challenge({ route }) {
   }
 
   function addUserOutput(userOutput) {
-    console.log({userOutput});
-    userOutputContent.current = userOutput;
+    if (userOutput && !function_name) {
+      setUserOutputs(currentUserOutputs => {
+        return [...currentUserOutputs, userOutput];
+      });
+    }
   }
 
   function formatCode(code, inputValues) {
@@ -122,31 +124,21 @@ export function Challenge({ route }) {
         userResult.valor || userResult.valor === 0 ? userResult.valor : userResult,
       ];
     });
-    isOutputArray.current.push(!!userResult.valor);
   }
 
   async function verifyCase({ input }) {
-    setIsRunning(true);
-    userOutputContent.current = '';
     const code = formatCode(userCode.current, input);
 
     try {
-      const { erros, resultado } = await execute(code, addUserOutput);
+      const { erros, resultado } = await execute(code, userOutput => {
+        addUserOutput(userOutput);
+      });
 
       if (erros.length) {
         const error = erros[0];
         errorLine.current = error.linha;
         if (error instanceof Error) throw error;
         throw error.erroInterno;
-      }
-
-      if (userOutputContent.current && !function_name) {
-        setUserOutputs(currentUserOutputs => {
-          console.log(userOutputContent.current);
-
-          return [...currentUserOutputs, userOutputContent.current];
-        });
-        return;
       }
 
       if (!resultado.length) {
@@ -161,16 +153,15 @@ export function Challenge({ route }) {
       handleResult(resultado.slice(-1)[0]);
     } catch (error) {
       handleError(error.message);
-    } finally {
-      setIsRunning(false);
     }
   }
 
   async function handleUserCode() {
     setUserOutputs([]);
+    setIsRunning(true);
 
     for (const testCase of test_cases) {
-      verifyCase(testCase);
+      await verifyCase(testCase);
     }
   }
 
@@ -207,7 +198,6 @@ export function Challenge({ route }) {
             setIsEnd={setIsEnd}
             testCases={test_cases}
             userOutputs={userOutputs}
-            isOutputArray={isOutputArray}
             goToCode={goToCode}
           />
         ),
