@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
-import * as Animatable from 'react-native-animatable';
 
-export const Container = styled(Animatable.View)`
+export const Container = styled.View`
   align-items: center;
 `;
 

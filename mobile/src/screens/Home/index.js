@@ -10,7 +10,6 @@ import { FabButton } from '../../components/FabButton';
 import { Meteor } from '../../components/Meteor';
 
 import BackgroundSpace from '../../assets/HomeAssets/background.png';
-
 import theme from '../../global/styles/theme';
 import * as Icon from 'react-native-feather';
 import * as C from './styles';
@@ -75,10 +74,8 @@ export function Home() {
   }
 
   useEffect(() => {
-    console.log({ lastUnlockedStarId });
-
     if (planets.length) {
-      setTimeout(() => setIsEndTransition(true), 2000);
+      setTimeout(() => setIsEndTransition(true), 3000);
     }
   }, [planets]);
 
@@ -103,7 +100,7 @@ export function Home() {
         }}
       >
         {!isEndTrasition && <TransitionScreenAnimation />}
-        <C.Background source={BackgroundSpace} resizeMode="repeat" fadeDuration={15}>
+        <C.Background source={BackgroundSpace} resizeMode="repeat">
           {planets.map(({ id, name, icon, image, stars }) => (
             <Planet
               key={id}

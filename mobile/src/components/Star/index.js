@@ -89,7 +89,6 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
 
   return (
     <C.Container
-      animation={'bounceIn'}
       onLayout={event => {
         if (isLastUnlockedStar) {
           event.target.measure((x, y, width, height, pageX, pageY) => {
