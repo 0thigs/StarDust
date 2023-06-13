@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigation } from '@react-navigation/core';
+import { useCallback, useEffect, useRef } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/core';
 import { useScroll } from '../../hooks/useScroll';
 
 import LockedStar from '../../assets/StarAssets/locked-star.svg';
@@ -29,7 +29,8 @@ const delay = 300;
 export const starHeight = 100;
 
 export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlockedStar }) {
-  const { rocket, setLastUnlockedStarYPosition } = useScroll();
+  const { rocket, lastUnlockedStarYPosition } = useScroll();
+  const starRef = useRef(null);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const navigation = useNavigation();
@@ -87,12 +88,24 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
     return () => clearTimeout(timer);
   }, []);
 
+//   useFocusEffect(
+//     useCallback(() => {
+//       console.log(isLastUnlockedStar);
+//       if (isLastUnlockedStar) {
+//         starRef?.current.measure(
+//           (x, y, width, height, pageX, pageY) => (lastUnlockedStarYPosition.current = pageY)
+//         );
+//       }
+//     }, [])
+//   );
+
   return (
     <C.Container
+      ref={starRef}
       onLayout={event => {
         if (isLastUnlockedStar) {
           event.target.measure((x, y, width, height, pageX, pageY) => {
-            setLastUnlockedStarYPosition(pageY);
+            lastUnlockedStarYPosition.current = pageY;
           });
         }
       }}

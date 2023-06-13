@@ -11,14 +11,14 @@ const AVATAR_MARGIN_BETWEEN = 8;
 
 export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
   const { loggedUser } = useAuth();
+  const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const avatarsListRef = useRef(null);
-  const selectedAvatarIndex = useRef(0);
-  const index = useRef(0);
-  const isFirstItem = index.current === 0;
-  const isLastItem = index.current === avatars.length - 1;
+  const isFirstItem = currentIndex === 0;
+  const isLastItem = currentIndex === avatars.length - 1;
 
   const onViewableItemsChanged = useRef(({ viewableItems }) => {
-    index.current = viewableItems[0].index;
+    setCurrentIndex(viewableItems[0].index);
   });
   const viewabilityConfig = { viewAreaCoveragePercentThreshold: 40, waitForInteraction: true };
 
@@ -31,27 +31,27 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
   }
 
   function handleNavButtonPress(action) {
-    let currentIndex = index.current;
+    let index = currentIndex;
     if (action === 'prev') {
       if (isFirstItem) return;
-      currentIndex--;
+      index--;
     } else {
       if (isLastItem) return;
-      currentIndex++;
+      index++;
     }
-    scrollTo(currentIndex);
-    index.current = currentIndex;
+    scrollTo(index);
+    setCurrentIndex(index);
   }
 
   function scrollToCurrentAvatar() {
     const selectedAvatarIndex = avatars.findIndex(avatar => avatar.id === loggedUser.avatar_id);
-    selectedAvatarIndex.current = selectedAvatarIndex;
-    index.current = selectedAvatarIndex;
+    setSelectedAvatarIndex(selectedAvatarIndex);
+    setCurrentIndex(selectedAvatarIndex);
     scrollTo(selectedAvatarIndex);
   }
 
   const renderItem = useCallback(({ item: { id, name, image, price, isAcquired }, index }) => {
-    const isSelected = index === selectedAvatarIndex.current;
+    const isSelected = index === selectedAvatarIndex;
     const isFirstItem = index === 0;
     const isBuyable = loggedUser.coins >= price;
     return (
@@ -80,11 +80,12 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         ref={avatarsListRef}
         data={avatars}
         keyExtractor={avatar => avatar.id}
-        initialScrollIndex={index.current}
+        initialScrollIndex={currentIndex}
         renderItem={renderItem}
         horizontal
         scrollEventThrottle={32}
-        snapToInterval={2}
+        maxToRenderPerBatch={64}
+        initialNumToRender={3}
         viewabilityConfig={viewabilityConfig}
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}

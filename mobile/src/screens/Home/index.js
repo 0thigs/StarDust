@@ -53,7 +53,7 @@ export function Home() {
     scrollRef.current.scrollTo({
       animated,
       x: 0,
-      y: lastUnlockedStarYPosition - dimensions.height / 2,
+      y: lastUnlockedStarYPosition.current - dimensions.height / 2,
     });
   }
 
@@ -62,9 +62,9 @@ export function Home() {
     setCurrentYOffset(contentOffset.y);
 
     const isLastUnlockedStarAboveLayout =
-      (lastUnlockedStarYPosition - contentOffset.y).toFixed(0) > layoutMeasurement.height;
+      (lastUnlockedStarYPosition.current - contentOffset.y).toFixed(0) > layoutMeasurement.height;
     const isLastUnlockedStarBellowLayout =
-      (lastUnlockedStarYPosition + starHeight - contentOffset.y).toFixed(0) < 0;
+      (lastUnlockedStarYPosition.current + starHeight - contentOffset.y).toFixed(0) < 0;
 
     isFabIconRotation.value = isLastUnlockedStarAboveLayout;
     isFabButtonVisible.value = withTiming(
@@ -80,10 +80,10 @@ export function Home() {
   }, [planets]);
 
   useEffect(() => {
-    if (planets.length && lastUnlockedStarYPosition) {
-      scrollToLastUnlockedStar();
+    if (planets.length && lastUnlockedStarYPosition.current) {
+      setTimeout(scrollToLastUnlockedStar, 15);
     }
-  }, [lastUnlockedStarYPosition, planets]);
+  }, [lastUnlockedStarYPosition.current, planets]);
 
   return (
     <>

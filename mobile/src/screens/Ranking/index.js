@@ -107,11 +107,11 @@ export function Ranking() {
     }, [currentRanking, rankings])
   );
 
-//   useEffect(() => {
-//     if (daysToGo !== 1) return;
-//     const timer = setInterval(() => setFinalTime(getFinalTime()), 1000);
-//     return () => clearInterval(timer);
-//   }, []);
+  //   useEffect(() => {
+  //     if (daysToGo !== 1) return;
+  //     const timer = setInterval(() => setFinalTime(getFinalTime()), 1000);
+  //     return () => clearInterval(timer);
+  //   }, []);
 
   return (
     <C.Container isLoading={isLoading}>

@@ -14,7 +14,7 @@ const Container = styled.View`
       justify-content: center;
       z-index: 15;
       width: ${width}px;
-      height: ${height - (hasScroll ? animationSize * 1.4 : -50)}px;
+      height: ${height - (hasScroll ? animationSize * 1.4 : -25)}px;
     `}
 `;
 
