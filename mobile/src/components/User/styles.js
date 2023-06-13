@@ -18,6 +18,7 @@ export const Position = styled.Text`
   width: 28px;
   text-align: center;
   padding-left: 8px;
+  margin-right: 8px;
 `;
 
 export const Avatar = styled.Image`

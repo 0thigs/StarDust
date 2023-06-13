@@ -5,8 +5,10 @@ export const Container = styled.ScrollView.attrs({
 })``;
 
 export const Background = styled.ImageBackground`
+  flex: 1;
   padding-top: 32px;
   width: 100%;
+  height: 100%;
   align-items: center;
 `;
 

@@ -1,6 +1,6 @@
 import { useEffect, memo } from 'react';
-import * as C from './styles';
-
+import { useImageUri } from '../../hooks/useImageUri';
+import { SvgUri } from 'react-native-svg';
 import { Star } from '../Star';
 import {
   useAnimatedStyle,
@@ -9,10 +9,11 @@ import {
   withTiming,
   withDelay,
 } from 'react-native-reanimated';
-import { SvgUri } from 'react-native-svg';
-import { getImage } from '../../utils/getImage';
+import * as C from './styles';
 
 function PlanetComponent({ name, image, icon, stars, lastUnlockedStarId }) {
+  const { imageUri: planetImageUri } = useImageUri('planets', image);
+  const { imageUri: planetIconUri } = useImageUri('planets', icon);
   const PlanetSignPosition = useSharedValue(-5);
   const PlanetSignAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -30,9 +31,9 @@ function PlanetComponent({ name, image, icon, stars, lastUnlockedStarId }) {
   return (
     <C.Container>
       <C.PlanetInfo>
-        <SvgUri uri={getImage('planets', image)} width={100} height={100} />
+        <SvgUri uri={planetImageUri} width={100} height={100} />
         <C.PlanetSign style={PlanetSignAnimatedStyle}>
-          <SvgUri uri={getImage('planets', icon)} />
+          <SvgUri uri={planetIconUri} />
           <C.PlanetName>{name}</C.PlanetName>
         </C.PlanetSign>
       </C.PlanetInfo>

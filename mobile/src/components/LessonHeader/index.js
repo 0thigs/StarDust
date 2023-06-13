@@ -10,18 +10,16 @@ import * as C from './styles';
 import * as Speech from 'expo-speech';
 import theme from '../../global/styles/theme';
 import { SvgUri } from 'react-native-svg';
-import { getImage } from '../../utils/getImage';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { useRocket } from '../../hooks/useRocket';
-import { Loading } from '../Loading';
 
 export function LessonHeader() {
   const { loggedUser } = useAuth();
   const { rocket } = useRocket(loggedUser.rocket_id);
+  const { rocketUri } = useRocket('rockets', rocket?.image);
   const [state, dispatch] = useLesson();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const navigationAction = useRef(null);
   const currentWidth = (state.currentQuestion / state.questions.length) * 100;
@@ -39,10 +37,10 @@ export function LessonHeader() {
     }
 
     dispatch({ type: 'resetState' });
-    navigation.dispatch(navigationAction.current)
+    navigation.dispatch(navigationAction.current);
   }
 
-   function handleHardwareBackPress(event) {
+  function handleHardwareBackPress(event) {
     event.preventDefault();
     setIsModalVisible(true);
     navigationAction.current = event.data.action;
@@ -73,13 +71,12 @@ export function LessonHeader() {
         <C.Bar style={barAnimatedStyle} />
         {rocket && (
           <SvgUri
-            uri={getImage('rockets', rocket.image)}
+            uri={rocketUri}
             width={50}
             height={50}
             style={{
               transform: [{ rotate: '90deg' }, { translateX: -15 }, { translateY: 15 }],
             }}
-            onLoad={() => setIsLoading(false)}
           />
         )}
       </C.ProgressBar>

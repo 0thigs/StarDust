@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useImageUri } from '../../hooks/useImageUri';
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
 import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
@@ -11,13 +12,13 @@ import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
 import { SvgUri } from 'react-native-svg';
-import { getImage } from '../../utils/getImage';
 
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
 export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRocket }) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const { imageUri } = useImageUri('rockets', image);
   const [isSelected, setIsSelected] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,7 +97,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
           </C.Price>
         )}
         <C.ImageContainer style={isSelected ? RocketAnimatedStyle : null}>
-          <SvgUri uri={getImage('rockets', image)} width={125} height={125} />
+          <SvgUri uri={imageUri} width={125} height={125} />
         </C.ImageContainer>
       </C.Background>
       <C.Info>
@@ -134,7 +135,7 @@ export function Rocket({ id, name, image, price, isAcquired, addUserAcquiredRock
                 top={-15}
                 left={-10}
               />
-              <SvgUri uri={getImage('rockets', image)} width={100} height={100} />
+              <SvgUri uri={imageUri} width={100} height={100} />
               <C.Name>{name}</C.Name>
             </C.AcquiredRocket>
           )

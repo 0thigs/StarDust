@@ -54,6 +54,7 @@ buck-out/
 .expo/
 web-build/
 dist/
+eas.json
 
 # Source 
 .env.local

@@ -72,7 +72,6 @@ export const useComment = challengeId => {
       );
       await api.updateComment(commentId, prop, payload);
       if (prop === 'likes') {
-        console.log(isLiked);
         isLiked
           ? await api.deleteLikedComment(commentId, loggedUser.id)
           : await api.addLikedComment(commentId, loggedUser.id);

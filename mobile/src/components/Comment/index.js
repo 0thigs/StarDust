@@ -99,10 +99,9 @@ export function Comment({
   async function fetchAuthor(author_id) {
     try {
       const author = await api.getAuthor(author_id);
-      console.log(author.avatar_id);
       setAuthor(author);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

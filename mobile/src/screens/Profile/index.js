@@ -18,8 +18,8 @@ import api from '../../services/api';
 import theme from '../../global/styles/theme';
 
 export function Profile() {
-  const { loggedUser } = useAuth();
   const route = useRoute();
+  const { loggedUser } = useAuth();
   const { userId } = route.params;
   const { fetchAchievements } = useAchievement();
   const [unlockedAchievements, setUnlockedAchievements] = useState([]);

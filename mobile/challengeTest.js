@@ -106,7 +106,6 @@ export function Ranking() {
 
   useEffect(() => {
     if (!user.didShowWinning) {
-      console.log(users);
       setWinners(() => {
         let winners = [];
         users.slice(0, 3).forEach(user => {

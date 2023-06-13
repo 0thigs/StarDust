@@ -1,11 +1,10 @@
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import Animated from 'react-native-reanimated';
-
+const screenWidth = Dimensions.get('screen').width;
 const screenHorizontalPadding = 24;
 const rockteMarginBetween = 4;
-const rocketWidth =
-  411 / 2 - 24 - 8;
+const rocketWidth = screenWidth / 2 - screenHorizontalPadding - rockteMarginBetween;
 
 export const Container = styled.SafeAreaView`
   width: ${rocketWidth}px;

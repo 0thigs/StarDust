@@ -98,7 +98,7 @@ export function Settings({ navigation: { goBack } }) {
         routes: [{ name: 'SignIn' }],
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       Toast.error('Falha ao tentar sair da conta');
     }
   }

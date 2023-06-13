@@ -1449,7 +1449,7 @@ saudacao("João");
 }
             
 var resultado = soma(3, 4);
-console.log(resultado);
+escreva(resultado);
 // Resultado: 7`,
         isRunnable: false,
       },

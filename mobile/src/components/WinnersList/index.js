@@ -8,7 +8,6 @@ import { Winner } from '../Winner';
 import { Sound } from '../Sound';
 import { Modal } from '../Modal';
 import { User } from '../User';
-import { getImage } from '../../utils/getImage';
 
 import RewardLight from '../../assets/animations/reward-light-animation.json';
 import EarningSound from '../../assets/sounds/earning-sound.wav';
@@ -26,6 +25,7 @@ export function WinnersList({
     loggedUser: { last_position, name, avatar_id, coins, is_loser },
     updateLoggedUser,
   } = useAuth();
+  const { imageUri: rankingUri } = useImageUri('rankings', currentRanking.image);
   const [isRewardModalVisible, setIsRewardModalVisible] = useState(false);
   const [isFailModalVisible, setIsFailModalVisible] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
@@ -145,7 +145,7 @@ export function WinnersList({
               top={-15}
               left={13}
             />
-            <SvgUri uri={getImage('rankings', currentRanking.image)} width={100} height={100} />
+            <SvgUri uri={rankingUri} width={100} height={100} />
             <C.RewardMessage>
               <C.Text>Parabéns! Você acaba de chegar no ranking:</C.Text>
               <C.Reward>{currentRanking.name}</C.Reward>
@@ -169,7 +169,7 @@ export function WinnersList({
         title={'Perda de Ranking!'}
         body={
           <>
-            <SvgUri uri={getImage('rankings', currentRanking.image)} width={100} height={100} />
+            <SvgUri uri={rankingUri} width={100} height={100} />
             <C.RewardMessage>
               <C.Text>Puxa vida, parece que você desceu para o ranking:</C.Text>
               <C.Reward>{currentRanking.name}</C.Reward>

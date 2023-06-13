@@ -25,7 +25,6 @@ export function Home() {
   const { planets, lastUnlockedStarId } = usePlanet();
   const { lastUnlockedStarYPosition } = useScroll();
   const [isEndTrasition, setIsEndTransition] = useState(false);
-  const [isBackgroundLoaded, setIsBackgroundLoaded] = useState(false);
   const [currentYOffset, setCurrentYOffset] = useState(0);
   const visibleContentHeight = useRef(0);
   const scrollRef = useRef(null);
@@ -76,7 +75,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    console.log({lastUnlockedStarId});
+    console.log({ lastUnlockedStarId });
 
     if (planets.length) {
       setTimeout(() => setIsEndTransition(true), 2000);
@@ -104,11 +103,7 @@ export function Home() {
         }}
       >
         {!isEndTrasition && <TransitionScreenAnimation />}
-        <C.Background
-          source={BackgroundSpace}
-          resizeMode="repeat"
-          //   onLoad={() => (planets.length ? setIsBackgroundLoaded(true) : null)}
-        >
+        <C.Background source={BackgroundSpace} resizeMode="repeat" fadeDuration={15}>
           {planets.map(({ id, name, icon, image, stars }) => (
             <Planet
               key={id}

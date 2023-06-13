@@ -3,10 +3,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { useRocket } from '../../hooks/useRocket';
 import { useRanking } from '../../hooks/useRanking';
 import { useNavigation } from '@react-navigation/core';
+import { useImageUri } from '../../hooks/useImageUri';
 
 import { ArrowLeft, Edit } from 'react-native-feather';
 import { SvgUri } from 'react-native-svg';
-import { getImage } from '../../utils/getImage';
 import { UserAvatar } from '../UserAvatar';
 import { SelectAvatar } from '../SelectAvatar';
 
@@ -22,6 +22,8 @@ export function ProfileStatus({
   const { loggedUser } = useAuth();
   const { rocket } = useRocket(rocket_id);
   const { ranking } = useRanking(ranking_id);
+  const { imageUri: rankingImageUri } = useImageUri('rankings', ranking?.image);
+  const { imageUri: rocketImageUri } = useImageUri('rockets', rocket?.image);
   const [isSelectAvatarVisible, setIsSelectAvatarVisible] = useState(false);
   const navigation = useNavigation();
   const createdAt = dayjs(created_at).format('DD MMMM [de] YYYY');
@@ -43,12 +45,12 @@ export function ProfileStatus({
   return (
     <C.Container>
       {isFromLoggedUser ? (
-        <C.ProfileButton activeOpacity={0.7} onPress={handleSettingsButton}>
+        <C.ProfileButton onPress={handleSettingsButton} activeOpacity={0.7}>
           <SettingsIcon width={35} height={35} />
         </C.ProfileButton>
       ) : (
-        <C.ProfileButton onPress={handleBackButton}>
-          <ArrowLeft color={theme.colors.green_300} width={35} height={35}></ArrowLeft>
+        <C.ProfileButton onPress={handleBackButton} activeOpacity={0.7}>
+          <ArrowLeft color={theme.colors.green_300} width={32} height={32}></ArrowLeft>
         </C.ProfileButton>
       )}
       <C.AvatarButton onPress={handleAvatarButton}>
@@ -73,13 +75,13 @@ export function ProfileStatus({
         <C.StatusContainer>
           <C.Status>
             <C.Title>Ranking atual</C.Title>
-            <SvgUri uri={getImage('rankings', ranking.image)} width={60} height={60} />
+            <SvgUri uri={rankingImageUri} width={60} height={60} />
             <C.StatusName>{ranking.name}</C.StatusName>
           </C.Status>
           <C.Status>
             <C.Title>Foguete atual</C.Title>
             <SvgUri
-              uri={getImage('rockets', rocket.image)}
+              uri={rocketImageUri}
               width={60}
               height={60}
               style={{

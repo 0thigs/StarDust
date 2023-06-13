@@ -10,7 +10,7 @@ export const useRanking = (rankingId, canGetAllRankings) => {
       const ranking = await api.getRanking(rankingId);
       setRanking(ranking);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -19,7 +19,7 @@ export const useRanking = (rankingId, canGetAllRankings) => {
       const rankings = await api.getRankings();
       setRankings(rankings);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

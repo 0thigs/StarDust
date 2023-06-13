@@ -1,16 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-
-import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
-import RewardLight from '../../assets/animations/reward-light-animation.json';
-
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { Animation } from '../Animation';
 import { Sound } from '../Sound';
-import { getImage } from '../../utils/getImage';
+import { useImageUri } from '../../hooks/useImageUri';
 import { Lock } from 'react-native-feather';
-
+import CoinIcon from '../../assets/GlobalAssets/coin-icon.svg';
+import RewardLight from '../../assets/animations/reward-light-animation.json';
 import theme from '../../global/styles/theme';
 import * as C from './styles';
 
@@ -26,10 +23,12 @@ export function Avatar({
   width,
 }) {
   const { loggedUser, updateLoggedUser } = useAuth();
+  const { imageUri } = useImageUri('avatars', image);
   const [isSelected, setIsSelected] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('denying');
+
   const soundRef = useRef();
 
   async function buyAvatar() {
@@ -110,7 +109,7 @@ export function Avatar({
         />
       </C.Info>
 
-      <C.Image source={{ uri: getImage('avatars', image) }} />
+      {imageUri && <C.Image source={{ uri: imageUri }} fadeDuration={100} />}
       {!isAcquired && price > 0 && (
         <C.Icon>
           <Lock width={50} color={theme.colors.gray_900} />
@@ -139,7 +138,7 @@ export function Avatar({
                 top={-15}
                 left={-14}
               />
-              <C.AcquiredAvatarImage source={{ uri: getImage('avatars', image) }} />
+              <C.AcquiredAvatarImage source={{ uri: imageUri }} />
               <C.Name>{name}</C.Name>
             </C.AcquiredAvatar>
           )

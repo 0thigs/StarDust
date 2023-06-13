@@ -1,11 +1,12 @@
 import { useAvatar } from '../../hooks/useAvatar';
+import { useImageUri } from '../../hooks/useImageUri';
 import { useNavigation } from '@react-navigation/core';
-import { getImage } from '../../utils/getImage';
 
 import FirstPlaceIcon from '../../assets/RankingAssets/first-place.svg';
 import SecondPlaceIcon from '../../assets/RankingAssets/second-place.svg';
 import ThirdPlaceIcon from '../../assets/RankingAssets/third-place.svg';
 import * as C from './styles';
+import { UserAvatar } from '../UserAvatar';
 
 const podium = [
   {
@@ -23,7 +24,6 @@ const podium = [
 ];
 
 export function User({ position, id, name, avatar_id, xp, isLoggedUser, lastPositions }) {
-  const { avatar } = useAvatar(avatar_id);
   const navigation = useNavigation();
   const isInPodium = position <= 3;
   const isInSafeArea = position <= 5;
@@ -41,7 +41,7 @@ export function User({ position, id, name, avatar_id, xp, isLoggedUser, lastPosi
       <C.Position color={isInSafeArea ? 'green_700' : isInDangerArea ? 'red_700' : 'gray_700'}>
         {isInPodium ? <Icon /> : position}
       </C.Position>
-      <C.Avatar source={{ uri: getImage('avatars', avatar) }} />
+      <UserAvatar avatarId={avatar_id} size={50} />
       <C.Name isLoggedUser={isLoggedUser}>{name}</C.Name>
       <C.Xp>{xp} XP</C.Xp>
     </C.Container>

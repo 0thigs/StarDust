@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useImageUri } from '../../hooks/useImageUri';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
 import { Animation } from '../Animation';
 
 import { SvgUri } from 'react-native-svg';
-import { getImage } from '../../utils/getImage';
 import { Toast } from 'toastify-react-native';
 import Lock from '../../assets/AchievementAssets/lock.svg';
 import Lazy from '../../assets/animations/lazy-animation.json';
@@ -29,6 +29,7 @@ export function Achievement({
     loggedUser: { coins },
     updateLoggedUser,
   } = useAuth();
+  const { imageUri: iconUri } = useImageUri('achievements', icon);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [rescuedAchievementName, setRescuedAchievementName] = useState('');
   const [isIconLoadEnd, setIsIconLoadEnd] = useState(false);
@@ -62,7 +63,7 @@ export function Achievement({
       {isUnlocked ? (
         <>
           <SvgUri
-            uri={getImage('achievements', icon)}
+            uri={iconUri}
             width={isIconLoadEnd ? 45 : 0}
             onLoad={() => setIsIconLoadEnd(true)}
           />

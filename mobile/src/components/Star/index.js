@@ -30,7 +30,6 @@ export const starHeight = 100;
 
 export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlockedStar }) {
   const { rocket, setLastUnlockedStarYPosition } = useScroll();
-  const [isLoading, setIsloading] = useState(false);
   const starAnimation = useRef(null);
   const starSound = useRef(null);
   const navigation = useNavigation();
@@ -59,10 +58,8 @@ export function Star({ id, name, number, isUnlocked, isChallenge, isLastUnlocked
   function handleStarPress() {
     starAnimation.current.play(10, 50);
     starSound.current.play();
-    setIsloading(true);
     setTimeout(() => {
       handleStarNavigation();
-      setIsloading(false);
     }, 15);
   }
 

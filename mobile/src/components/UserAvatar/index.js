@@ -1,7 +1,8 @@
 import { useAvatar } from '../../hooks/useAvatar';
-import { getImage } from '../../utils/getImage';
+import { useImageUri } from '../../hooks/useImageUri';
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import { Loading } from '../Loading';
 
 const Avatar = styled.Image`
   width: ${({ size }) => size}px;
@@ -14,5 +15,6 @@ const Avatar = styled.Image`
 
 export function UserAvatar({ avatarId, size }) {
   const { avatar } = useAvatar(avatarId);
-  return <Avatar source={{ uri: getImage('avatars', avatar) }} size={size} />;
+  const { imageUri } = useImageUri('avatars', avatar);
+  return imageUri ? <Avatar source={{ uri: imageUri }} size={size} /> : <Loading />;
 }
