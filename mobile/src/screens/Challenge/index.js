@@ -53,7 +53,6 @@ export function Challenge({ route }) {
   const [isEnd, setIsEnd] = useState(false);
   const [isEndTrasition, setIsEndTransition] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
-  console.log({ isRunning });
 
   const sliderRef = useRef(null);
   const seconds = useRef(0);
@@ -131,6 +130,7 @@ export function Challenge({ route }) {
 
     try {
       const { erros, resultado } = await execute(code, userOutput => {
+        console.log(input, userOutput);
         addUserOutput(userOutput);
       });
 
@@ -141,7 +141,7 @@ export function Challenge({ route }) {
         throw error.erroInterno;
       }
 
-      if (!resultado.length) {
+      if (!resultado.length || !function_name) {
         return;
       }
 

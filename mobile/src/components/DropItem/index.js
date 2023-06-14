@@ -73,7 +73,8 @@ export function DropItem({
   }
 
   function addItemInZone() {
-    for (const zone of zones.current) {
+    const sortedZones =  [...zones.current].sort((a, b) => a.id - b.id)
+    for (const zone of sortedZones) {
       if (!zone.itemId) {
         currentPosition.x.value =
           zone.x - initialPosition.x.value - C.itemPadding - C.itemBorderWidth * 2;

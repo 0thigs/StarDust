@@ -75,7 +75,7 @@ export function Home() {
 
   useEffect(() => {
     if (planets.length) {
-      setTimeout(() => setIsEndTransition(true), 3000);
+      setTimeout(() => setIsEndTransition(true), 3500);
     }
   }, [planets]);
 

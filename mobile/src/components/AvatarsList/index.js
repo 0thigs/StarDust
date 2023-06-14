@@ -85,7 +85,8 @@ export function AvatarsList({ avatars, addUserAcquiredAvatar }) {
         horizontal
         scrollEventThrottle={32}
         maxToRenderPerBatch={64}
-        initialNumToRender={3}
+        updateCellsBatchingPeriod={64}
+        initialNumToRender={4}
         viewabilityConfig={viewabilityConfig}
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged.current}
