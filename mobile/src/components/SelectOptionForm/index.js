@@ -80,7 +80,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
           <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
           {code && (
             <QuestionCode
-              height={code.split('\n').length * (code.split('\n').length > 10 ? 20 : 27)}
+              height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 32)}
             >
               <Editor value={code} />
             </QuestionCode>

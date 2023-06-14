@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { useAuth } from '../../hooks/useAuth';
+import { useRocket } from '../../hooks/useRocket';
+import { useImageUri } from '../../hooks/useImageUri';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,12 +14,11 @@ import theme from '../../global/styles/theme';
 import { SvgUri } from 'react-native-svg';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
-import { useRocket } from '../../hooks/useRocket';
 
 export function LessonHeader() {
   const { loggedUser } = useAuth();
   const { rocket } = useRocket(loggedUser.rocket_id);
-  const { rocketUri } = useRocket('rockets', rocket?.image);
+  const { imageUri } = useImageUri('rockets', rocket?.image);
   const [state, dispatch] = useLesson();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
@@ -57,7 +58,6 @@ export function LessonHeader() {
 
   return (
     <C.Container>
-      {/* {isLoading && <Loading isAnimation={true} />} */}
       <C.Main>
         <C.CloseButton onPress={navigation.goBack}>
           <Icon.X color={theme.colors.red_700} width={28} height={28} />
@@ -71,7 +71,7 @@ export function LessonHeader() {
         <C.Bar style={barAnimatedStyle} />
         {rocket && (
           <SvgUri
-            uri={rocketUri}
+            uri={imageUri}
             width={50}
             height={50}
             style={{

@@ -24,7 +24,6 @@ export function Output({ bottomSheetRef, result }) {
 
     types.current = result.filter((_, index) => index % 2 === 0);
     const outputs = result.filter((_, index) => index % 2 !== 0);
-    console.log(outputs);
 
     setOutputs(outputs.map((output, index) => formatOutput(output.trim(), index)));
   }, [result]);
