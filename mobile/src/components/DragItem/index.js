@@ -4,7 +4,7 @@ import { minZoneWidth } from '../DragAndDropListForm/styles';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 const animationDuration = 330;
 
-export function DropItem({
+export function DragItem({
   id,
   label,
   zones,
@@ -126,7 +126,7 @@ export function DropItem({
 
   return (
     <C.ItemContainer>
-      <C.DropItem
+      <C.DragItem
         ref={itemRef}
         key={id}
         activeOpacity={0.7}
@@ -138,7 +138,7 @@ export function DropItem({
         <C.Label isItemInZone={isItemInZone} isAnswerWrong={isAnswerWrong}>
           {label}
         </C.Label>
-      </C.DropItem>
+      </C.DragItem>
       {isItemInZone && <C.Placeholder itemWidth={itemWidth} />}
     </C.ItemContainer>
   );

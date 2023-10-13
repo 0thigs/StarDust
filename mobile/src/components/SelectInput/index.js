@@ -26,17 +26,17 @@ export function SelectInput({
     return word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  function filterCategories() {
-    if (!searchText) {
-      return categories;
-    }
+    function filterCategories() {
+        if (!searchText) {
+        return categories;
+        }
 
-    return categories.filter(category =>
-      removeAccentuation(category.name.toLowerCase()).includes(
-        removeAccentuation(searchText.toLowerCase())
-      )
-    );
-  }
+        return categories.filter(category =>
+        removeAccentuation(category.name.toLowerCase()).includes(
+            removeAccentuation(searchText.toLowerCase())
+        )
+        );
+    }
 
   async function getCategories() {
     try {

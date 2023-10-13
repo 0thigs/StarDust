@@ -12,6 +12,7 @@
     "@designliquido/delegua": "^0.21.11",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo-google-fonts/roboto": "^0.2.2",
+    "@expo-google-fonts/roboto-mono": "^0.2.3",
     "@fanchenbao/react-native-scroll-indicator": "^0.2.1",
     "@gorhom/bottom-sheet": "^4.4.5",
     "@hookform/resolvers": "^2.9.10",
@@ -73,10 +74,11 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-native": "^4.0.0",
-    "prettier": "^2.8.2",
+    "prettier": "^3.0.0",
     "react-native-svg-transformer": "^1.0.0"
   },
   "private": true

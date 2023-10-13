@@ -55,7 +55,9 @@ export function Theory({ title, allTexts }) {
     setIsLoading(false);
   }, []);
 
-  useEffect(() => {}, [texts]);
+  useEffect(() => {
+    console.log({texts});
+  }, [texts]);
 
   return (
     <C.Container>
@@ -71,12 +73,12 @@ export function Theory({ title, allTexts }) {
             onScroll={event => handleScroll(event.nativeEvent)}
             onContentSizeChange={isScrollToEnd && scrollToEnd}
           >
-            {texts.map(({ type, title, body, isRendered, isRunnable }, index) => (
+            {texts.map(({ type, title, content, isRendered, isRunnable }, index) => (
               <Text
                 key={`text-${index}`}
                 type={type}
                 title={title}
-                body={body}
+                content={content}
                 isRendered={isRendered}
                 isRunnable={isRunnable}
                 index={index}
@@ -109,7 +111,7 @@ export function Theory({ title, allTexts }) {
         isVisible={isModalVisible}
         type={'asking'}
         title={'Bora praticar o que você aprendeu?'}
-        body={null}
+        content={null}
         footer={
           <Button
             title={'Praticar'}

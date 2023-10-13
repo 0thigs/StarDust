@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Content = styled.ScrollView``;
 
-export const QuestionStem = styled(Animatable.Text)`
+export const QuestionTitle = styled(Animatable.Text)`
   color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.regular};
   max-width: ${lessonContainerWidth};

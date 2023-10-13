@@ -21,7 +21,7 @@ export const Lines = styled(Animated.View)`
 export const Line = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-left: ${({ indentLevel }) => defaultIdent * indentLevel}px;
+  margin-left: ${({ indentation }) => defaultIdent * indentation}px;
   margin-bottom: 4px;
   align-self: flex-start;
   margin-bottom: 8px;
@@ -43,7 +43,7 @@ export const DropZone = styled(Animated.View)`
   margin: 0 8px 0;
 `;
 
-export const DropItems = styled.View`
+export const DragItems = styled.View`
   margin-top: 32px;
   flex-direction: row;
   flex-wrap: wrap;
@@ -56,7 +56,7 @@ export const ItemContainer = styled.View`
   position: relative;
 `;
 
-export const DropItem = styled(Animated.View)`
+export const DragItem = styled(Animated.View)`
   margin-left: 12px;
   margin-bottom: 12px;
   min-width: 40px;

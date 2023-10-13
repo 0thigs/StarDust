@@ -26,8 +26,8 @@ export function Profile() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
-  const isFromLoggedUser = userId === loggedUser.id;
   const contentScrollRef = useRef(null);
+  const isFromLoggedUser = userId === loggedUser.id;
 
   async function setProfileData() {
     try {

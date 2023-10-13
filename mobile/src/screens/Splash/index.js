@@ -26,7 +26,16 @@ export function Splash() {
   return (
     <C.Container>
       {isRocketLauched ? (
-        <Animation source={Rocket} autoPlay={true} loop={false} size={350} />
+        <>
+          <Animation
+            source={Rocket}
+            autoPlay={true}
+            loop={true}
+            duration={3300}
+            size={400}
+            renderMode={'cover'}
+          />
+        </>
       ) : (
         <>
           <C.Title animation={'fadeInDown'}>

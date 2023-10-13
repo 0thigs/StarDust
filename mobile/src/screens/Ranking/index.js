@@ -28,6 +28,8 @@ export function Ranking() {
   const lastRankingPosition = rankings.length;
   const isLoggedUserWinner = !!loggedUser.last_position && loggedUser.last_position <= 5;
 
+  console.log(winners);
+
   function scrollToCurrentRanking() {
     badgesListRef.current?.scrollToIndex({
       index: currentRankingIndex,
@@ -87,11 +89,11 @@ export function Ranking() {
     } catch (error) {
       console.error(error);
     } finally {
-      if (loggedUser.did_update_ranking) {
+      if (true) {
         showWinners();
+        setTimeout(() => setIsloading(false), 2000);
         return;
       }
-      setTimeout(() => setIsloading(false), 2000);
     }
   }
 

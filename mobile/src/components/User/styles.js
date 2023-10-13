@@ -33,6 +33,7 @@ export const Name = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme, isLoggedUser }) => theme.colors[isLoggedUser ? 'green_300' : 'gray_500']};
   margin: 0 auto;
+  flex-shrink: 1;
 `;
 
 export const Xp = styled.Text`

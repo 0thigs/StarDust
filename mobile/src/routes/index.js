@@ -34,7 +34,6 @@ export function Routes() {
     try {
       await setUserInSession();
     } catch (error) {
-      console.log(error);
     }
   }
 

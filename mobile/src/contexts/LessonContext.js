@@ -156,7 +156,7 @@ const _questions = [
 ];
 
 const initialState = {
-  currentStage: stages[0],
+  currentStage: stages[1],
   questions: [],
   currentQuestion: 0,
   wrongsCount: 0,
@@ -189,12 +189,12 @@ const LessonReducer = (state, action) => {
       };
     case 'setQuestions':
       const questions = action.payload;
-      const reorderedQuestions = questions.sort(() => {
-        return Math.random() - 0.5;
-      });
+    //   const reorderedQuestions = questions.sort(() => {
+    //     return Math.random() - 0.5;
+    //   });
       return {
         ...state,
-        questions: reorderedQuestions,
+        questions,
       };
     case 'incrementWrongsCount':
       return {
@@ -224,7 +224,7 @@ const LessonReducer = (state, action) => {
     case 'resetState':
       return initialState;
     default:
-      return state;
+    return state;
   }
 };
 

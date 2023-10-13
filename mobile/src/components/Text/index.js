@@ -1,4 +1,4 @@
-import { useState, useMemo, memo } from 'react';
+import { useState, useMemo, memo, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Volume2, VolumeX } from 'react-native-feather';
 import { Editor } from '../Editor';
@@ -11,14 +11,14 @@ import * as C from './styles';
 import * as Speech from 'expo-speech';
 const iconSize = 25;
 
-function TextComponent({ type, title, body, isRendered, isRunnable }) {
+function TextComponent({ type, title, content, isRendered, isRunnable }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const navigation = useNavigation();
   const iconColor =
     theme.colors[type === 'default' ? 'white' : type === 'alert' ? 'black' : 'blue_300'];
 
-  function handleCodeButtonPress(body) {
-    navigation.navigate('Playground', { id: null, code: body });
+  function handleCodeButtonPress(content) {
+    navigation.navigate('Playground', { id: null, code: content });
   }
 
   function getCodeHeigth(code) {
@@ -27,7 +27,7 @@ function TextComponent({ type, title, body, isRendered, isRunnable }) {
   }
 
   const codeHeigth = useMemo(() => {
-    if (type === 'code') return getCodeHeigth(body);
+    if (type === 'code') return getCodeHeigth(content);
   }, []);
 
   async function handleSpeechButton(text) {
@@ -51,18 +51,18 @@ function TextComponent({ type, title, body, isRendered, isRunnable }) {
         <>
           <C.Title>Exemplo</C.Title>
           {isRunnable && (
-            <C.CodeButton onPress={() => handleCodeButtonPress(body)} activeOpacity={0.7}>
+            <C.CodeButton onPress={() => handleCodeButtonPress(content)} activeOpacity={0.7}>
               <C.CodeButtonTitle>Executar</C.CodeButtonTitle>
             </C.CodeButton>
           )}
 
           <C.Code horizontal keyboardShouldPersistTaps={'always'} style={{ height: codeHeigth }}>
-            <Editor value={body} />
+            <Editor value={content} />
           </C.Code>
         </>
-      ) : (
-        <C.Body type={type}>
-          <C.SpeechButton onPress={() => handleSpeechButton(body)}>
+      ) : type !== 'image' ? (
+        <C.Content type={type}>
+          <C.SpeechButton onPress={() => handleSpeechButton(content)}>
             {isSpeaking ? (
               <VolumeX width={iconSize} height={iconSize} color={iconColor} />
             ) : (
@@ -72,14 +72,14 @@ function TextComponent({ type, title, body, isRendered, isRunnable }) {
           <C.Text type={type}>
             {!isRendered ? (
               <TypeWriter typing={1} maxDelay={5}>
-                {body}
+                {content}
               </TypeWriter>
             ) : (
-              body
+              content
             )}
           </C.Text>
-        </C.Body>
-      )}
+        </C.Content>
+      ) : null}
     </C.Container>
   );
 }

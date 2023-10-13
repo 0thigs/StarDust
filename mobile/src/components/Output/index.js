@@ -5,7 +5,17 @@ import * as C from './styles';
 
 export function Output({ bottomSheetRef, result }) {
   const [outputs, setOutputs] = useState([]);
-  const types = useRef([]);
+  const types = useRef([])
+
+  function getPromptTitle(inputParam) {
+    if (!inputParam) return;
+    const regex = /["'].*["']/;
+    const match = inputParam.match(regex);
+
+    if (!match) return '';
+    const promptTitle = match[0].slice(1).slice(0, -1);
+    return promptTitle;
+  }
 
   function formatOutput(output, index) {
     switch (types.current[index].trim()) {
@@ -23,7 +33,7 @@ export function Output({ bottomSheetRef, result }) {
     if (!result || !result.length) return;
 
     types.current = result.filter((_, index) => index % 2 === 0);
-    const outputs = result.filter((_, index) => index % 2 !== 0);
+    const outputs = result.filter((_, index) => index % 2 !== 0)
 
     setOutputs(outputs.map((output, index) => formatOutput(output.trim(), index)));
   }, [result]);

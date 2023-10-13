@@ -108,6 +108,7 @@ export function End({
         unlocked_stars: updatedUnlockedStars,
         completed_planets: completedPlanets,
       };
+      
     } catch (error) {
       console.error(error);
     }
@@ -145,6 +146,7 @@ export function End({
     }
     return maxCoins;
   }
+  
   function getXp() {
     let maxXp = isCompleted ? 10 : 20;
     for (let i = 0; i < state.wrongsCount; i++) {
@@ -160,8 +162,8 @@ export function End({
   }
 
   function handleButtonClick() {
-    const todayIndex = dayjs().day();
-    const today = loggedUser.week_status[todayIndex];
+    const todayIndex = dayjs().day()
+    const today = loggedUser.week_status[todayIndex]
 
     if (isFirstClick) {
       setIsModalVisible(true);

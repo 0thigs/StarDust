@@ -5,6 +5,22 @@ export const Container = styled.View`
   width: 100%;
 `;
 
+export const Line = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+export const Text = styled.Text`
+  gap: 2px;
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.code};
+`
+
 export const Input = styled.TextInput`
   background-color: ${({ theme }) => theme.colors.background};
   border-bottom-width: 1px;

@@ -22,7 +22,8 @@ export const Item = styled(Animated.View)`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 48px;
+  flex-shrink: 1;
+  min-height: 48px;
   width: 350px;
   padding: 0 12px;
   margin-bottom: 8px;

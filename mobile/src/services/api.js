@@ -179,6 +179,7 @@ export default {
     }
     return success;
   },
+  
 
   getRanking: async rankingId => {
     const { data, error } = await supabase.from('rankings').select('*').eq('id', rankingId);
@@ -194,6 +195,17 @@ export default {
       .from('rankings')
       .select('*')
       .order('position', { ascending: true });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  },
+
+  getQuestions: async (starId) => {
+    const { data, error } = await supabase
+      .from('questions')
+      .select('*').eq('star_id', starId)
+      .order('order', { ascending: false });
     if (error) {
       throw new Error(error.message);
     }
@@ -240,7 +252,7 @@ export default {
     }
     return success;
   },
-
+  
   getAvatars: async () => {
     const { data, error } = await supabase
       .from('avatars')
@@ -281,7 +293,7 @@ export default {
     return data;
   },
 
-  getChallengeCategories: async challengeId => {
+  getChallengeCategories: async () => {
     const { data, error } = await supabase
       .from('challenges_categories')
       .select('challenge_id, category_id');

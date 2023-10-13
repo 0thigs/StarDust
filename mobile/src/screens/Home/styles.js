@@ -10,6 +10,7 @@ export const Background = styled.ImageBackground`
   width: 100%;
   height: 100%;
   align-items: center;
+  background-color: #033045;
 `;
 
 // export const Background = styled.View`

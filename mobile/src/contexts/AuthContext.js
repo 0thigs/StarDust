@@ -78,6 +78,7 @@ export function AuthProvider({ children }) {
       name,
       email,
     };
+    
     try {
       await api.addUser(newUser);
       const signedUser = await api.getUser(user.id);

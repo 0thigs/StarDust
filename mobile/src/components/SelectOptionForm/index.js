@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useLesson } from '../../hooks/useLesson';
 import { reorderItems } from '../../utils/reorderItems';
 import { Editor } from '../Editor';
-import { QuestionStem, QuestionCode } from '../Quiz/styles';
+import { QuestionTitle, QuestionCode } from '../Quiz/styles';
 import * as C from './styles';
 const delay = 500;
 
-export function SelectOptionForm({ stem, code, options, answer, index }) {
+export function SelectOptionForm({ title, code, options, answer, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [reorderedOptions, setReorderedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
@@ -32,7 +32,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
     setIsAnswerVerified(!isAnswerVerified);
     resetAnswer();
 
-    if (selectedOption === answer) {
+    if (selectedOption.toLowerCase().trim() === answer.toLowerCase().trim()) {
       setIsAnswerWrong(false);
 
       if (isAnswerVerified) {
@@ -77,7 +77,7 @@ export function SelectOptionForm({ stem, code, options, answer, index }) {
     <C.Container>
       {isCurrentQuestion && (
         <>
-          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <QuestionTitle animation={'fadeInDown'}>{title}</QuestionTitle>
           {code && (
             <QuestionCode
               height={code.split('\n').length * (code.split('\n').length > 10 ? 22 : 32)}

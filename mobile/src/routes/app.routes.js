@@ -22,12 +22,12 @@ export function AppRoutes() {
       <Stack.Screen name="DrawerRoutes" component={DrawerRoutes} />
       <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Challenge" component={Challenge} />
+      <Stack.Screen name="Playground" component={Playground} />
       <Stack.Screen name="Codes" component={Codes} />
-      <Stack.Screen name="Splash" component={Splash} />
-      <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="change_password" component={ChangePassword} />
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Playground" component={Playground} />
+      <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Screen name="Splash" component={Splash} />
     </Stack.Navigator>
   );
 }

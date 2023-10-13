@@ -90,17 +90,18 @@ export function Playground({ route }) {
   }
 
   async function handleUserCode() {
-    const code = addPrintType(userCode.current);
 
-    if (hasInput(code)) {
-      setCodeWithInput(code);
-      setisPromptVisible(true);
-      return;
-    }
+    if (hasInput(userCode.current)) {
+        setCodeWithInput(userCode.current);
+        setisPromptVisible(true);
+        return;
+      }
+
+    const code = addPrintType(userCode.current)
 
     try {
       setOutput([]);
-      const { erros } = await execute(code, handleOutput);
+      const { erros } = await execute(code, handleOutput)
       if (erros.length) {
         const error = erros[0];
         errorLine.current = error.linha;

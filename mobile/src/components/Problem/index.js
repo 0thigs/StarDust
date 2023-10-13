@@ -7,12 +7,12 @@ export function Problem({ title, texts, goToCode }) {
   return (
     <C.Container showsVerticalScrollIndicator={false}>
       <C.Title>{title}</C.Title>
-      {texts.map(({ type, title, body }, index) => (
+      {texts.map(({ type, title, content }, index) => (
         <Text
           key={`text-${index}`}
           type={type}
           title={title}
-          body={body}
+          content={content}
           isRendered={true}
         />
       ))}

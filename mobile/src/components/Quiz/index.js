@@ -30,16 +30,18 @@ export function Quiz() {
   }
 
   function getForms(question, index) {
-    switch (question.type) {
+    const currentQuestion = question.content
+
+    switch (currentQuestion.type) {
       case 'selection':
         return {
           id: index,
           component: (
             <SelectOptionForm
-              stem={question.stem}
-              code={question.code}
-              options={question.options}
-              answer={question.answer}
+              title={currentQuestion.title}
+              code={currentQuestion.code}
+              options={currentQuestion.options}
+              answer={currentQuestion.answer}
               index={index}
             />
           ),
@@ -48,7 +50,13 @@ export function Quiz() {
         return {
           id: index,
           component: (
-            <OpenForm stem={question.stem} answer={question.answer} code={question.code} index={index} />
+            <OpenForm 
+              title={currentQuestion.title} 
+              answers={currentQuestion.answers} 
+              code={currentQuestion.code} 
+              lines={currentQuestion.lines} 
+              index={index} 
+            />
           ),
         };
       case 'checkbox':
@@ -56,10 +64,10 @@ export function Quiz() {
           id: index,
           component: (
             <CheckboxForm
-              stem={question.stem}
-              options={question.options}
-              correctOptions={question.correctOptions}
-              code={question.code}
+              title={currentQuestion.title}
+              options={currentQuestion.options}
+              correctOptions={currentQuestion.correctOptions}
+              code={currentQuestion.code}
               index={index}
             />
           ),
@@ -69,22 +77,21 @@ export function Quiz() {
           id: index,
           component: (
             <DragAndDropListForm
-              stem={question.stem}
-              items={question.items}
-              correctItemsIdsSequence={question.correctItemsIdsSequence}
+              title={currentQuestion.title}
+              items={currentQuestion.items}
               index={index}
             />
           ),
         };
-      case 'drag-and-drop-click':
+      case 'drag-and-drop':
         return {
           id: index,
           component: (
             <DragAndDropClickForm
-              stem={question.stem}
-              lines={question.lines}
-              dropItems={question.dropItems}
-              correctItemsIdsSequence={question.correctItemsIdsSequence}
+              title={currentQuestion.title}
+              lines={currentQuestion.lines}
+              dragItems={currentQuestion.dragItems}
+              correctDragItemsIdsSequence={currentQuestion.correctDragItemsIdsSequence}
               index={index}
             />
           ),

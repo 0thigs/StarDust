@@ -46,7 +46,7 @@ export const CodeButtonTitle = styled.Text`
   padding: 2px;
 `;
 
-const ListContainer = css`
+const QuoteContainer = css`
   background-color: ${({ theme }) => theme.colors.blue_700};
   border-left-width: 2px;
   border-left-color: ${({ theme }) => theme.colors.blue_300};
@@ -59,11 +59,11 @@ const AlertContainer = css`
   margin-left: 18px;
 `;
 
-export const Body = styled.View`
+export const Content = styled.View`
   border-radius: 8px;
   padding: 16px;
   ${({ type }) => type === 'default' && DefaultContainer}
-  ${({ type }) => type === 'list' && ListContainer}
+  ${({ type }) => type === 'quote' && QuoteContainer}
   ${({ type }) => type === 'alert' && AlertContainer}
 `;
 
@@ -71,7 +71,7 @@ export const Text = styled.Text`
   font-size: 14px;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme, type }) =>
-    theme.colors[type === 'alert' ? 'black' : type === 'list' ? 'blue_300' : 'white']};
+    theme.colors[type === 'alert' ? 'black' : type === 'quote' ? 'blue_300' : 'white']};
   letter-spacing: 0.8px;
   line-height: 18px;
 `;

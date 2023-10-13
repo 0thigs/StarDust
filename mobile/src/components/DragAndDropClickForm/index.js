@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import * as C from './styles';
 import { useLesson } from '../../hooks/useLesson';
-import { DropItem } from '../DropItem';
+import { DragItem } from '../DragItem';
 import { DropZone } from '../DropZone';
 import { compareSenquences } from '../../utils/compareSenquences';
 import { reorderItems } from '../../utils/reorderItems';
-import { QuestionStem } from '../Quiz/styles';
+import { QuestionTitle } from '../Quiz/styles';
 
-export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSequence, index }) {
+export function DragAndDropClickForm({ title, lines, dragItems, correctDragItemsIdsSequence, index }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
@@ -36,10 +36,10 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   function handleVerifyAnswer() {
     setIsAnswerVerified(!isAnswerVerified);
 
-    const userItemsIdsSequence = zones.current.map(zone => zone.itemId);
+    const userItemsIdsSequence = zones.current.map(zone => zone.itemId)
     const areTheTwoSequencesEqual = compareSenquences(
       userItemsIdsSequence,
-      correctItemsIdsSequence
+      correctDragItemsIdsSequence
     );
 
     if (areTheTwoSequencesEqual) {
@@ -79,8 +79,10 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
   }, [zones.current]);
 
   useEffect(() => {
-    reorderItems(dropItems, setReorderedItems);
+    reorderItems(dragItems, setReorderedItems);
   }, []);
+
+  console.log(zones.current);
 
   useEffect(() => {
     if (isCurrentQuestion) {
@@ -95,12 +97,12 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
     <C.Container>
       {isCurrentQuestion && (
         <>
-          <QuestionStem>{stem}</QuestionStem>
+          <QuestionTitle>{title}</QuestionTitle>
           <C.Lines>
-            {lines.map(({ id, texts, indentLevel }) => (
+            {lines.map(({ id, texts, indentation }) => (
               <C.Line
                 key={id}
-                indentLevel={indentLevel}
+                indentation={indentation}
                 onLayout={event => registerLineWidth(event, id)}
               >
                 {texts.map((text, index) => (
@@ -124,9 +126,9 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
             ))}
           </C.Lines>
 
-          <C.DropItems>
+          <C.DragItems>
             {reorderedItems.map(({ id, label }) => (
-              <DropItem
+              <DragItem
                 key={id}
                 id={id}
                 label={label}
@@ -140,7 +142,7 @@ export function DragAndDropClickForm({ stem, lines, dropItems, correctItemsIdsSe
                 isAnswerWrong={isAnswerWrong && isAnswerVerified}
               />
             ))}
-          </C.DropItems>
+          </C.DragItems>
         </>
       )}
     </C.Container>

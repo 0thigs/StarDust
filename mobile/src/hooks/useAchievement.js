@@ -32,10 +32,10 @@ export function useAchievement(userId, canGetNewUnlockedAchievements) {
   function verifyAchievement(achievement, userUnlockedAchievements, userRescuableAchievements) {
     const isUnlocked = userUnlockedAchievements.some(
       unlockedAchievement => unlockedAchievement.achievement_id === achievement.id
-    );
+    )
     const isRescuable = userRescuableAchievements.some(
       rescuableachievement => rescuableachievement.achievement_id === achievement.id
-    );
+    )
     return { ...achievement, isUnlocked, isRescuable };
   }
 

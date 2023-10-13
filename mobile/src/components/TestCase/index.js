@@ -122,7 +122,7 @@ export function TestCase({ number, input, expectedOutput, userOutput, isCorrect,
             <C.Label>Resultado esperado</C.Label>
             <C.Value>
               <C.ValueText>
-                {Array.isArray(expectedOutput) ? formatArray(expectedOutput) : expectedOutput}
+                {Array.isArray(3) ? formatArray(expectedOutput) : expectedOutput}
               </C.ValueText>
             </C.Value>
           </C.Put>

@@ -40,7 +40,6 @@ export function CustomTabBar({ state, navigation }) {
   const { loggedUser } = useAuth();
 
   function goTo(screenName) {
-    console.log('goTo')
     navigation.navigate(screenName, {
       userId: screenName === 'Profile' ? loggedUser.id : null,
     });

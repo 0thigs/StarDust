@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useImageUri } from '../../hooks/useImageUri';
 
 import { SvgUri } from 'react-native-svg';
 import { Animation } from '../Animation';

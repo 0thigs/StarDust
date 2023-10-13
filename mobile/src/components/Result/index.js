@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { TestCase } from '../TestCase';
 import { VerificationButton } from '../VerificationButton';
 import { CommentsList } from '../CommentsList';
-import * as C from './styles';
 import { compareSenquences } from '../../utils/compareSenquences';
+import * as C from './styles';
 
 export function Result({ challengeId, testCases, userOutputs, setIsEnd, goToCode }) {
   const [results, setResults] = useState([]);

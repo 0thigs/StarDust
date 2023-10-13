@@ -42,7 +42,7 @@ export function User({ position, id, name, avatar_id, xp, isLoggedUser, lastPosi
         {isInPodium ? <Icon /> : position}
       </C.Position>
       <UserAvatar avatarId={avatar_id} size={50} />
-      <C.Name isLoggedUser={isLoggedUser}>{name}</C.Name>
+      <C.Name isLoggedUser={isLoggedUser} numberOfLines={1} ellipsizeMode="tail">{name}</C.Name>
       <C.Xp>{xp} XP</C.Xp>
     </C.Container>
   );

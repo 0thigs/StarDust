@@ -12,11 +12,11 @@ import DraggableFlatList, {
   ShadowDecorator,
   useOnCellActiveAnimation,
 } from 'react-native-draggable-flatlist';
-import { QuestionStem } from '../Quiz/styles';
+import { QuestionTitle } from '../Quiz/styles';
 import { List } from 'react-native-feather';
 import theme from '../../global/styles/theme';
 
-export function DragAndDropListForm({ index, stem, items }) {
+export function DragAndDropListForm({ index, title, items }) {
   const [{ isAnswerVerified, isAnswerWrong, currentQuestion }, dispatch] = useLesson();
   const [isWrongCountAlreadyIncremented, setIsWrongCountAlreadyIncremented] = useState(false);
   const [reorderedItems, setReorderedItems] = useState([]);
@@ -127,7 +127,7 @@ export function DragAndDropListForm({ index, stem, items }) {
     <C.Container>
       {isCurrentQuestion && (
         <>
-          <QuestionStem animation={'fadeInDown'}>{stem}</QuestionStem>
+          <QuestionTitle animation={'fadeInDown'}>{title}</QuestionTitle>
           <GestureHandlerRootView>
             <DraggableFlatList
               data={reorderedItems}
